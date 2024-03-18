@@ -60,8 +60,8 @@ public final class Keys
     }
     
     public static final KeyMapping
-        PULL_TRIGGER = Minecraft.getInstance().options.keyAttack,
-        AIM_HOLD = Minecraft.getInstance().options.keyUse,
+        PULL_TRIGGER = new TacKeyBuilder( "key.tac.shoot" ).withKeyboardKey( InputConstants.MOUSE_BUTTON_LEFT ).buildAndRegis(),
+        AIM_HOLD = new TacKeyBuilder( "key.tac.ads" ).withKeyboardKey( InputConstants.MOUSE_BUTTON_RIGHT ).buildAndRegis(),
         AIM_TOGGLE = AIM_HOLD;
     
     public static final TacKeyMapping
@@ -71,7 +71,7 @@ public final class Keys
         FIRE_SELECT = new TacKeyBuilder( "key.tac.fireSelect" ).withKeyboardKey( InputConstants.KEY_G ).buildAndRegis(),
         INSPECT = new TacKeyBuilder( "key.tac.inspect" ).withKeyboardKey( InputConstants.KEY_H ).buildAndRegis(),
         SIGHT_SWITCH = new TacKeyBuilder( "key.tac.sight_switch" ).withKeyboardKey( InputConstants.KEY_V ).buildAndRegis(),
-        ACTIVATE_SIDE_RAIL = new TacKeyBuilder( "key.tac.activeSideRail" ).withKeyboardKey( InputConstants.KEY_B ).buildAndRegis(),
+        ACTIVATE_SIDE_RAIL = new TacKeyBuilder( "key.tac.activateSideRail" ).withKeyboardKey( InputConstants.KEY_B ).buildAndRegis(),
         EQUIP_ARMOR = new TacKeyBuilder("key.tac.equipArmor").withKeyboardKey( InputConstants.KEY_O).buildAndRegis(),
         OPEN_ARMOR_AMMO_PACK = new TacKeyBuilder("key.tac.openArmorAmmoPack").withKeyboardKey( InputConstants.KEY_B).buildAndRegis(),
         
@@ -144,7 +144,7 @@ public final class Keys
         return true;
     }
   
-    public static final TacKeyMapping MORE_INFO_HOLD = new TacKeyBuilder( "key.tac.more_info_hold" )
+    public static final TacKeyMapping MORE_INFO_HOLD = new TacKeyBuilder( "key.tac.moreInfoHold" )
             .withKeyboardKey( InputConstants.KEY_LSHIFT )
             .withConflictContext( KeyConflictContext.GUI )
             .buildAndRegis();

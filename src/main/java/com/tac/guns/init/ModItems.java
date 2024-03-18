@@ -2,6 +2,7 @@ package com.tac.guns.init;
 
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
+import com.tac.guns.client.render.armor.models.MediumArmor;
 import com.tac.guns.common.GunModifiers;
 import com.tac.guns.item.*;
 import com.tac.guns.item.transition.*;
@@ -225,7 +226,11 @@ public class ModItems
    //public static final RegistryObject<Item> LIGHT_GRENADE = REGISTER.register("light_grenade", () ->  new GrenadeItem(new Item.Properties()tab(GunMod.GROUP), 20 * 4, 1.1f));
 
     /* Misc */
-    //public static final RegistryObject<Item> ARMOR_TEST = REGISTER.register("armor_test", () -> new ArmorRigItem(new MediumArmor(), 9, new Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ARMOR_R1 = REGISTER.register("armor_r1", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ARMOR_R2 = REGISTER.register("armor_r2", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ARMOR_R3 = REGISTER.register("armor_r3", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ARMOR_R4 = REGISTER.register("armor_r4", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ARMOR_R5 = REGISTER.register("armor_r5", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     //public static final RegistryObject<Item> ARMOR_REPAIR_PLATE_TEST = REGISTER.register("armor_plate_test", () -> new ArmorPlateItem(new Item.Properties().maxStackSize(4)tab(GunMod.GROUP)));
     
     public static final RegistryObject<Item> LIGHT_ARMOR = REGISTER.register("light_armor", () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));

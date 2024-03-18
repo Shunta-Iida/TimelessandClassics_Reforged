@@ -42,14 +42,12 @@ public class FlashlightHandler {
 
             final Minecraft mc = Minecraft.getInstance();
             final Player player = mc.player;
-            if (
-                    player != null
-                            && player.getMainHandItem().getItem() instanceof GunItem
-                            && Gun.getAttachment(
+            if (player != null
+                    && player.getMainHandItem().getItem() instanceof GunItem
+                    && Gun.getAttachment(
                             IAttachment.Type.SIDE_RAIL,
-                            player.getMainHandItem()
-                    ) != null
-            ) this.active = !active;
+                            player.getMainHandItem()) != null)
+                this.active = !active;
         });
     }
 
@@ -73,7 +71,8 @@ public class FlashlightHandler {
             return;
 
         if (NetworkGunManager.get() != null && NetworkGunManager.get().StackIds != null) {
-            if (player.getMainHandItem().getItem() instanceof TimelessGunItem && player.getMainHandItem().getTag() != null) {
+            if (player.getMainHandItem().getItem() instanceof TimelessGunItem
+                    && player.getMainHandItem().getTag() != null) {
                 if (!player.getMainHandItem().getTag().contains("ID")) {
                     UUID id;
                     while (true) {
@@ -88,91 +87,100 @@ public class FlashlightHandler {
             }
         }
 
-        if (event.phase == Phase.START && (player.getMainHandItem() != null && this.active && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, player.getMainHandItem()) != null)) {
-            PacketHandler.getPlayChannel().sendToServer(new MessageLightChange(new int[]{32}));//(new int[]{2,32}));
-            //PacketHandler.getPlayChannel().sendToServer(new MessageLightChange(6));
-            /*int lightNumber = 32 / 5;
-            int lightRange = 32;
+        if (event.phase == Phase.START && (player.getMainHandItem() != null && this.active
+                && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, player.getMainHandItem()) != null)) {
+            PacketHandler.getPlayChannel().sendToServer(new MessageLightChange(new int[] { 32 }));// (new int[]{2,32}));
+            // PacketHandler.getPlayChannel().sendToServer(new MessageLightChange(6));
+            /*
+             * int lightNumber = 32 / 5;
+             * int lightRange = 32;
+             * 
+             * for(int i = 0; i < lightNumber; ++i) {
+             * lightRange -= 5;
+             * PacketHandler.getPlayChannel().sendToServer(new
+             * MessageLightChange(lightRange));
+             * }
+             */
 
-            for(int i = 0; i < lightNumber; ++i) {
-                lightRange -= 5;
-                PacketHandler.getPlayChannel().sendToServer(new MessageLightChange(lightRange));
-            }*/
-
-        }/*PlayerEntity player = event.player;
-        if (event.phase == Phase.START && (player.getHeldItemMainhand() != null && this.active && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, player.getHeldItemMainhand()) != null))
-        {
+        }
+        if (event.phase == Phase.START && (player.getHeldItemMainhand() != null && this.active
+                && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, player.getHeldItemMainhand()) != null)) {
             this.createLight(player, 32);
             int lightNumber = 32 / 5;
             int lightRange = 32;
 
-            for(int i = 1; i < lightNumber; ++i) {
+            for (int i = 1; i < lightNumber; ++i) {
                 lightRange -= 5;
                 this.createLight(player, lightRange);
             }
-        }*/
-    }
-
-/*
-    private void createLight(PlayerEntity player, int lookingRange) {
-        if(player.getHeldItemMainhand().getItem() instanceof GunItem)
-        {
-            if(Gun.getAttachment(IAttachment.Type.SIDE_RAIL,player.getHeldItemMainhand()) != null) {
-                IWorld world = player.world;
-                TileEntity tile = null;
-                int x = this.lookingAt(player, lookingRange).getX();
-                int y = this.lookingAt(player, lookingRange).getY();
-                int z = this.lookingAt(player, lookingRange).getZ();
-                */
-/*int x = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getX());
-                int y = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getY());
-                int z = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getZ());*//*
-
-                boolean createLight = false;
-
-                for (int i = 0; i < 5; ++i) {
-                    tile = world.getTileEntity(new BlockPos(x, y, z));
-                    if (tile instanceof FlashLightSource) {
-                        createLight = true;
-                        break;
-                    }
-
-                    if (!world.isAirBlock(new BlockPos(x, y, z))) {
-                        int pX = (int) player.getPositionVec().getX();
-                        int pY = (int) player.getPositionVec().getY();
-                        int pZ = (int) player.getPositionVec().getZ();
-                        if (pX > x) {
-                            ++x;
-                        } else if (pX < x) {
-                            --x;
-                        }
-                        if (pY > y) {
-                            ++y;
-                        } else if (pY < y) {
-                            --y;
-                        }
-                        if (pZ > z) {
-                            ++z;
-                        } else if (pZ < z) {
-                            --z;
-                        }
-                    } else if (world.isAirBlock(new BlockPos(x, y, z))) {
-                        createLight = true;
-                        break;
-                    }
-                }
-
-                if (createLight) {
-                    tile = world.getTileEntity(new BlockPos(x, y, z));
-                    if (tile instanceof FlashLightSource) {
-                        ((FlashLightSource) tile).ticks = 0;
-                    } else if (world.getBlockState(new BlockPos(x, y, z)).getBlock() != ModBlocks.FLASHLIGHT_BLOCK.get()) { //
-                        world.setBlockState(new BlockPos(x, y, z), (ModBlocks.FLASHLIGHT_BLOCK.get()).getDefaultState(), 1);
-                    }
-                }
-            }
         }
     }
-*/
+
+    /*
+     * private void createLight(PlayerEntity player, int lookingRange) {
+     * if(player.getHeldItemMainhand().getItem() instanceof GunItem)
+     * {
+     * if(Gun.getAttachment(IAttachment.Type.SIDE_RAIL,player.getHeldItemMainhand())
+     * != null) {
+     * IWorld world = player.world;
+     * TileEntity tile = null;
+     * int x = this.lookingAt(player, lookingRange).getX();
+     * int y = this.lookingAt(player, lookingRange).getY();
+     * int z = this.lookingAt(player, lookingRange).getZ();
+     */
+    /*
+     * int x = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getX());
+     * int y = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getY());
+     * int z = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getZ());
+     *//*
+        * 
+        * boolean createLight = false;
+        * 
+        * for (int i = 0; i < 5; ++i) {
+        * tile = world.getTileEntity(new BlockPos(x, y, z));
+        * if (tile instanceof FlashLightSource) {
+        * createLight = true;
+        * break;
+        * }
+        * 
+        * if (!world.isAirBlock(new BlockPos(x, y, z))) {
+        * int pX = (int) player.getPositionVec().getX();
+        * int pY = (int) player.getPositionVec().getY();
+        * int pZ = (int) player.getPositionVec().getZ();
+        * if (pX > x) {
+        * ++x;
+        * } else if (pX < x) {
+        * --x;
+        * }
+        * if (pY > y) {
+        * ++y;
+        * } else if (pY < y) {
+        * --y;
+        * }
+        * if (pZ > z) {
+        * ++z;
+        * } else if (pZ < z) {
+        * --z;
+        * }
+        * } else if (world.isAirBlock(new BlockPos(x, y, z))) {
+        * createLight = true;
+        * break;
+        * }
+        * }
+        * 
+        * if (createLight) {
+        * tile = world.getTileEntity(new BlockPos(x, y, z));
+        * if (tile instanceof FlashLightSource) {
+        * ((FlashLightSource) tile).ticks = 0;
+        * } else if (world.getBlockState(new BlockPos(x, y, z)).getBlock() !=
+        * ModBlocks.FLASHLIGHT_BLOCK.get()) { //
+        * world.setBlockState(new BlockPos(x, y, z),
+        * (ModBlocks.FLASHLIGHT_BLOCK.get()).getDefaultState(), 1);
+        * }
+        * }
+        * }
+        * }
+        * }
+        */
 
 }
