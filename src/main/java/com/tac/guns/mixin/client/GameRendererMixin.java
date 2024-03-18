@@ -9,10 +9,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GameRenderer.class)
-public class GameRendererMixin
-{
+public class GameRendererMixin {
     @Inject(method = "getFov", at = @At("HEAD"))
-    public void getIsRenderHand(Camera p_109142_, float p_109143_, boolean p_109144_, CallbackInfoReturnable<Double> cir){
+    public void getIsRenderHand(Camera p_109142_, float p_109143_, boolean p_109144_,
+            CallbackInfoReturnable<Double> cir) {
         AimingHandler.get().isRenderingHand = !p_109144_;
     }
 }

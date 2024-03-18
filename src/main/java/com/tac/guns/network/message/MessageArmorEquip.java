@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 
 public class MessageArmorEquip extends PlayMessage<MessageArmorEquip> {
     @Override
-    public void encode(MessageArmorEquip messageArmorEquip, FriendlyByteBuf friendlyByteBuf) {}
+    public void encode(MessageArmorEquip messageArmorEquip, FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public MessageArmorEquip decode(FriendlyByteBuf friendlyByteBuf) {
@@ -22,13 +23,11 @@ public class MessageArmorEquip extends PlayMessage<MessageArmorEquip> {
 
     @Override
     public void handle(MessageArmorEquip messageArmorEquip, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() ->
-        {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null && !player.isSpectator())
-            {
+            if (player != null && !player.isSpectator()) {
                 ItemStack newRig = player.getMainHandItem();
-                if(newRig.getItem() instanceof ArmorRigItem) {
+                if (newRig.getItem() instanceof ArmorRigItem) {
                     ItemStack oldRig = ((PlayerWithSynData) player).getRig();
                     ((PlayerWithSynData) player).setRig(newRig);
                     player.setItemInHand(InteractionHand.MAIN_HAND, oldRig);

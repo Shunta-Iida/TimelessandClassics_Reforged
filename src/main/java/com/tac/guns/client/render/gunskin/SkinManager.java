@@ -28,12 +28,16 @@ import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT)
 public class SkinManager {
-    private static Map<ResourceLocation, Map<ResourceLocation, GunSkin>> skins = new HashMap<>();  //gunItemRegistryName -> (skinName -> GunSkin)
-    private static Map<ResourceLocation, DefaultSkin> defaultSkins = new HashMap<>();        //gunItemRegistryName -> DefaultSkin
+    private static Map<ResourceLocation, Map<ResourceLocation, GunSkin>> skins = new HashMap<>(); // gunItemRegistryName
+                                                                                                  // -> (skinName ->
+                                                                                                  // GunSkin)
+    private static Map<ResourceLocation, DefaultSkin> defaultSkins = new HashMap<>(); // gunItemRegistryName ->
+                                                                                      // DefaultSkin
 
     static {
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
-        ((ReloadableResourceManager) manager).registerReloadListener((ResourceManagerReloadListener) resourceManager -> SkinManager.cleanCache());
+        ((ReloadableResourceManager) manager)
+                .registerReloadListener((ResourceManagerReloadListener) resourceManager -> SkinManager.cleanCache());
     }
 
     public static void reload() {
@@ -54,7 +58,7 @@ public class SkinManager {
     }
 
     private static void init() {
-        //get skin configs from all namespace
+        // get skin configs from all namespace
         Set<String> nameSpaces = Minecraft.getInstance().getResourceManager().getNamespaces();
         for (String nameSpace : nameSpaces) {
             ResourceLocation loc = new ResourceLocation(nameSpace, "models/gunskin/skin.json");
@@ -78,10 +82,11 @@ public class SkinManager {
         String nameSpace = resource.getLocation().getNamespace();
 
         for (Map.Entry<String, JsonElement> e : json.entrySet()) {
-            //gun
+            // gun
             String gun = e.getKey();
             SkinLoader loader = SkinLoader.getSkinLoader(gun);
-            if (loader == null) continue;
+            if (loader == null)
+                continue;
             JsonObject skins = e.getValue().getAsJsonObject();
 
             for (Map.Entry<String, JsonElement> s : skins.entrySet()) {
@@ -97,7 +102,8 @@ public class SkinManager {
                         GunMod.LOGGER.warn("Failed to load skins of {} named {}: invalid name.", gun, skinName);
                         continue;
                     } else if (!defaultSkins.containsKey(loader.getGunRegistryName())) {
-                        GunMod.LOGGER.warn("Failed to load skins of {} named {}: default skin no loaded.", gun, skinName);
+                        GunMod.LOGGER.warn("Failed to load skins of {} named {}: default skin no loaded.", gun,
+                                skinName);
                         continue;
                     }
 
@@ -129,7 +135,7 @@ public class SkinManager {
                         if (registerTextureOnlySkin(loader, skinLoc, textures)) {
                             GunMod.LOGGER.info("Loaded texture-only gun skin of {} named {}", gun, skinName);
                         }
-                    }else if("common_texture".equals(skinType)){
+                    } else if ("common_texture".equals(skinType)) {
                         JsonObject modelObject = skinObject.get("textures").getAsJsonObject();
 
                         List<Pair<String, ResourceLocation>> textures = new ArrayList<>();
@@ -141,35 +147,35 @@ public class SkinManager {
                             }
                         }
                         ResourceLocation icon = null;
-                        if(skinObject.get("icon")!=null){
+                        if (skinObject.get("icon") != null) {
                             icon = ResourceLocation.tryParse(skinObject.get("icon").getAsString());
                         }
                         ResourceLocation miniIcon = null;
-                        if(skinObject.get("mini_icon")!=null){
+                        if (skinObject.get("mini_icon") != null) {
                             miniIcon = ResourceLocation.tryParse(skinObject.get("mini_icon").getAsString());
                         }
 
-                        int cnt = registerCommonSkins(loader,textures,icon,miniIcon);
+                        int cnt = registerCommonSkins(loader, textures, icon, miniIcon);
                         GunMod.LOGGER.info("Loaded common gun skins of {}, total: {}", gun, cnt);
                         continue;
-                    }else {
+                    } else {
                         GunMod.LOGGER.warn("Failed to load skins of {} named {}: unknown type.", gun, skinName);
                         continue;
                     }
 
-                    if(skinObject.get("icon")!=null){
+                    if (skinObject.get("icon") != null) {
                         ResourceLocation rl = ResourceLocation.tryParse(skinObject.get("icon").getAsString());
-                        GunSkin skin = getSkin(loader.getGunRegistryName(),skinLoc);
-                        if(skin!=null && rl!=null){
-                            loader.loadSkinIcon(skin,rl);
+                        GunSkin skin = getSkin(loader.getGunRegistryName(), skinLoc);
+                        if (skin != null && rl != null) {
+                            loader.loadSkinIcon(skin, rl);
                         }
                     }
 
-                    if(skinObject.get("mini_icon")!=null){
+                    if (skinObject.get("mini_icon") != null) {
                         ResourceLocation rl = ResourceLocation.tryParse(skinObject.get("mini_icon").getAsString());
-                        GunSkin skin = getSkin(loader.getGunRegistryName(),skinLoc);
-                        if(skin!=null && rl!=null){
-                            loader.loadSkinMiniIcon(skin,rl);
+                        GunSkin skin = getSkin(loader.getGunRegistryName(), skinLoc);
+                        if (skin != null && rl != null) {
+                            loader.loadSkinMiniIcon(skin, rl);
                         }
                     }
 
@@ -181,6 +187,7 @@ public class SkinManager {
         reader.close();
         stream.close();
     }
+
     public static void loadDefaultSkins() {
         SkinLoaders.init();
         for (SkinLoader loader : SkinLoader.skinLoaders.values()) {
@@ -188,7 +195,7 @@ public class SkinManager {
         }
     }
 
-    public static void loadDefaultSkin(ResourceLocation gunItemRegistryName, DefaultSkin skin){
+    public static void loadDefaultSkin(ResourceLocation gunItemRegistryName, DefaultSkin skin) {
         defaultSkins.put(gunItemRegistryName, skin);
     }
 
@@ -196,28 +203,27 @@ public class SkinManager {
      * Try to load preset dyed skins for a gun.
      */
     private static int registerCommonSkins(SkinLoader loader, List<Pair<String, ResourceLocation>> textures,
-                                           ResourceLocation icon, ResourceLocation mini_icon){
+            ResourceLocation icon, ResourceLocation mini_icon) {
         String[] skinList = {
                 "black", "blue", "brown", "dark_blue", "dark_green",
                 "gray", "green", "jade", "light_gray", "magenta",
                 "orange", "pink", "purple", "red", "sand", "white"
         };
         int cnt = 0;
-        for(String color : skinList){
-            ResourceLocation rl = new ResourceLocation("tac:"+color);
-            List<Pair<String, ResourceLocation>> skinTextures =
-                    textures.stream().map(
-                            (p)-> new Pair<>(p.getFirst(),ResourceLocation.tryParse(p.getSecond()+"_"+color))
-                    ).collect(Collectors.toList());
-            if(registerTextureOnlySkin(loader,rl,skinTextures)){
+        for (String color : skinList) {
+            ResourceLocation rl = new ResourceLocation("tac:" + color);
+            List<Pair<String, ResourceLocation>> skinTextures = textures.stream().map(
+                    (p) -> new Pair<>(p.getFirst(), ResourceLocation.tryParse(p.getSecond() + "_" + color)))
+                    .collect(Collectors.toList());
+            if (registerTextureOnlySkin(loader, rl, skinTextures)) {
                 cnt++;
-                GunSkin gunSkin = getSkin(loader.getGunRegistryName(),rl);
-                if(gunSkin!=null){
-                    if(icon!=null){
-                        loader.loadSkinIcon(gunSkin,icon);
+                GunSkin gunSkin = getSkin(loader.getGunRegistryName(), rl);
+                if (gunSkin != null) {
+                    if (icon != null) {
+                        loader.loadSkinIcon(gunSkin, icon);
                     }
-                    if(mini_icon!=null){
-                        loader.loadSkinMiniIcon(gunSkin,mini_icon);
+                    if (mini_icon != null) {
+                        loader.loadSkinMiniIcon(gunSkin, mini_icon);
                     }
                 }
 
@@ -226,20 +232,24 @@ public class SkinManager {
         return cnt;
     }
 
-    private static boolean registerCustomSkin(SkinLoader loader, ResourceLocation skinLocation, Map<String, String> models) {
+    private static boolean registerCustomSkin(SkinLoader loader, ResourceLocation skinLocation,
+            Map<String, String> models) {
         GunSkin skin = loader.loadCustomSkin(skinLocation, models);
 
         if (skin != null) {
             skins.putIfAbsent(loader.getGunRegistryName(), new HashMap<>());
             skins.get(loader.getGunRegistryName()).put(skinLocation, skin);
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
-    private static boolean registerTextureOnlySkin(SkinLoader loader, ResourceLocation skinLocation, List<Pair<String, ResourceLocation>> textures) {
-        for(Pair<String, ResourceLocation> p : textures){
-            ResourceLocation tl = ResourceLocation.tryParse(p.getSecond().getNamespace()+":textures/"+p.getSecond().getPath()+".png");
-            if(tl == null || !Minecraft.getInstance().getResourceManager().hasResource(tl)) {
+    private static boolean registerTextureOnlySkin(SkinLoader loader, ResourceLocation skinLocation,
+            List<Pair<String, ResourceLocation>> textures) {
+        for (Pair<String, ResourceLocation> p : textures) {
+            ResourceLocation tl = ResourceLocation
+                    .tryParse(p.getSecond().getNamespace() + ":textures/" + p.getSecond().getPath() + ".png");
+            if (tl == null || !Minecraft.getInstance().getResourceManager().hasResource(tl)) {
                 return false;
             }
         }
@@ -249,12 +259,15 @@ public class SkinManager {
             skins.putIfAbsent(loader.getGunRegistryName(), new HashMap<>());
             skins.get(loader.getGunRegistryName()).put(skinLocation, skin);
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     public static @Nullable GunSkin getSkin(ResourceLocation gunItemRegistryName, ResourceLocation skinLocation) {
-        if (skinLocation != null && skins.containsKey(gunItemRegistryName)) return skins.get(gunItemRegistryName).get(skinLocation);
-        else return null;
+        if (skinLocation != null && skins.containsKey(gunItemRegistryName))
+            return skins.get(gunItemRegistryName).get(skinLocation);
+        else
+            return null;
     }
 
     public static @Nonnull GunSkin getSkin(ItemStack stack) {
@@ -272,7 +285,8 @@ public class SkinManager {
     }
 
     public static DefaultSkin getDefaultSkin(ResourceLocation gunItemRegistryName) {
-        if(gunItemRegistryName==null)return null;
+        if (gunItemRegistryName == null)
+            return null;
         return defaultSkins.get(gunItemRegistryName);
     }
 }

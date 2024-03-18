@@ -23,18 +23,14 @@ public class LivingEntityMixin {
     }
 
     @ModifyArg(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V"), index = 0)
-    private double modifyApplyKnockbackArgs(double original)
-    {
-        if(this.source instanceof DamageSourceProjectile)
-        {
-            if(!Config.COMMON.gameplay.enableKnockback.get())
-            {
+    private double modifyApplyKnockbackArgs(double original) {
+        if (this.source instanceof DamageSourceProjectile) {
+            if (!Config.COMMON.gameplay.enableKnockback.get()) {
                 return 0;
             }
 
             double strength = Config.COMMON.gameplay.knockbackStrength.get();
-            if(strength > 0)
-            {
+            if (strength > 0) {
                 return strength;
             }
         }

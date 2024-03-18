@@ -12,8 +12,7 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitBlock>
-{
+public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitBlock> {
     private double x;
     private double y;
     private double z;
@@ -47,8 +46,7 @@ public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitB
                 buffer.readDouble(),
                 buffer.readDouble(),
                 buffer.readBlockPos(),
-                buffer.readEnum(Direction.class)
-        );
+                buffer.readEnum(Direction.class));
     }
 
     @Override

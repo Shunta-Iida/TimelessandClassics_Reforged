@@ -32,8 +32,7 @@ import java.util.Map;
 /**
  * Interface for a primitive that is part of a mesh
  */
-public interface MeshPrimitiveModel
-{
+public interface MeshPrimitiveModel {
     /**
      * Returns an unmodifiable view on the mapping from attribute names to
      * the {@link AccessorModel} instances for the attribute data
@@ -41,23 +40,23 @@ public interface MeshPrimitiveModel
      * @return The attributes mapping
      */
     Map<String, AccessorModel> getAttributes();
-    
+
     /**
      * Return an {@link AccessorModel} for the indices, or <code>null</code>
      * if this primitive describes non-indexed geometry
      * 
-     * @return The indices 
+     * @return The indices
      */
     AccessorModel getIndices();
-    
+
     /**
      * Returns the rendering mode, as a (GL) constant, standing for
      * <code>GL_POINTS</code>, <code>GL_TRIANGLES</code> etc.
-     *  
+     * 
      * @return The rendering mode
      */
     int getMode();
-    
+
     /**
      * Returns the {@link MaterialModel} that should be used for rendering
      * this mesh primitive
@@ -65,7 +64,7 @@ public interface MeshPrimitiveModel
      * @return The {@link MaterialModel}
      */
     MaterialModel getMaterialModel();
-    
+
     /**
      * Returns an unmodifiable view on the list of morph targets. Each element
      * of this list will be an unmodifiable map. Each map maps the attribute

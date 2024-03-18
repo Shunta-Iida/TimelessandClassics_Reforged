@@ -11,42 +11,40 @@ package de.javagl.jgltf.impl.v1;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * A shader program, including its vertex and fragment shader, and names 
- * of vertex shader attributes. 
+ * A shader program, including its vertex and fragment shader, and names
+ * of vertex shader attributes.
  * 
- * Auto-generated for program.schema.json 
+ * Auto-generated for program.schema.json
  * 
  */
 public class Program
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * Names of GLSL vertex shader attributes. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of GLSL vertex shader attributes. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> attributes;
     /**
-     * The ID of the fragment shader. (required) 
+     * The ID of the fragment shader. (required)
      * 
      */
     private String fragmentShader;
     /**
-     * The ID of the vertex shader. (required) 
+     * The ID of the vertex shader. (required)
      * 
      */
     private String vertexShader;
 
     /**
-     * Names of GLSL vertex shader attributes. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of GLSL vertex shader attributes. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param attributes The attributes to set
      * 
@@ -54,16 +52,16 @@ public class Program
     public void setAttributes(List<String> attributes) {
         if (attributes == null) {
             this.attributes = attributes;
-            return ;
+            return;
         }
         this.attributes = attributes;
     }
 
     /**
-     * Names of GLSL vertex shader attributes. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of GLSL vertex shader attributes. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The attributes
      * 
@@ -73,9 +71,9 @@ public class Program
     }
 
     /**
-     * Add the given attributes. The attributes of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given attributes. The attributes of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -87,7 +85,7 @@ public class Program
         }
         List<String> oldList = this.attributes;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -95,11 +93,11 @@ public class Program
     }
 
     /**
-     * Remove the given attributes. The attributes of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given attributes. The attributes of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -111,7 +109,7 @@ public class Program
         }
         List<String> oldList = this.attributes;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -123,8 +121,9 @@ public class Program
     }
 
     /**
-     * Returns the default value of the attributes<br> 
-     * @see #getAttributes 
+     * Returns the default value of the attributes<br>
+     * 
+     * @see #getAttributes
      * 
      * @return The default attributes
      * 
@@ -134,7 +133,7 @@ public class Program
     }
 
     /**
-     * The ID of the fragment shader. (required) 
+     * The ID of the fragment shader. (required)
      * 
      * @param fragmentShader The fragmentShader to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -142,13 +141,14 @@ public class Program
      */
     public void setFragmentShader(String fragmentShader) {
         if (fragmentShader == null) {
-            throw new NullPointerException((("Invalid value for fragmentShader: "+ fragmentShader)+", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for fragmentShader: " + fragmentShader) + ", may not be null"));
         }
         this.fragmentShader = fragmentShader;
     }
 
     /**
-     * The ID of the fragment shader. (required) 
+     * The ID of the fragment shader. (required)
      * 
      * @return The fragmentShader
      * 
@@ -158,7 +158,7 @@ public class Program
     }
 
     /**
-     * The ID of the vertex shader. (required) 
+     * The ID of the vertex shader. (required)
      * 
      * @param vertexShader The vertexShader to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -166,13 +166,13 @@ public class Program
      */
     public void setVertexShader(String vertexShader) {
         if (vertexShader == null) {
-            throw new NullPointerException((("Invalid value for vertexShader: "+ vertexShader)+", may not be null"));
+            throw new NullPointerException((("Invalid value for vertexShader: " + vertexShader) + ", may not be null"));
         }
         this.vertexShader = vertexShader;
     }
 
     /**
-     * The ID of the vertex shader. (required) 
+     * The ID of the vertex shader. (required)
      * 
      * @return The vertexShader
      * 

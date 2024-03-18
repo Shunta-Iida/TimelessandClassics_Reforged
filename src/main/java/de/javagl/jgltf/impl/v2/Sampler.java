@@ -8,68 +8,66 @@
 
 package de.javagl.jgltf.impl.v2;
 
-
-
 /**
- * Texture sampler properties for filtering and wrapping modes. 
+ * Texture sampler properties for filtering and wrapping modes.
  * 
- * Auto-generated for sampler.schema.json 
+ * Auto-generated for sampler.schema.json
  * 
  */
 public class Sampler
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * Magnification filter. (optional)<br> 
-     * Valid values: [9728, 9729] 
+     * Magnification filter. (optional)<br>
+     * Valid values: [9728, 9729]
      * 
      */
     private Integer magFilter;
     /**
-     * Minification filter. (optional)<br> 
-     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987] 
+     * Minification filter. (optional)<br>
+     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987]
      * 
      */
     private Integer minFilter;
     /**
-     * S (U) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * S (U) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      */
     private Integer wrapS;
     /**
-     * T (V) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * T (V) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      */
     private Integer wrapT;
 
     /**
-     * Magnification filter. (optional)<br> 
-     * Valid values: [9728, 9729] 
+     * Magnification filter. (optional)<br>
+     * Valid values: [9728, 9729]
      * 
      * @param magFilter The magFilter to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMagFilter(Integer magFilter) {
         if (magFilter == null) {
             this.magFilter = magFilter;
-            return ;
+            return;
         }
-        if ((magFilter!= 9728)&&(magFilter!= 9729)) {
-            throw new IllegalArgumentException((("Invalid value for magFilter: "+ magFilter)+", valid: [9728, 9729]"));
+        if ((magFilter != 9728) && (magFilter != 9729)) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for magFilter: " + magFilter) + ", valid: [9728, 9729]"));
         }
         this.magFilter = magFilter;
     }
 
     /**
-     * Magnification filter. (optional)<br> 
-     * Valid values: [9728, 9729] 
+     * Magnification filter. (optional)<br>
+     * Valid values: [9728, 9729]
      * 
      * @return The magFilter
      * 
@@ -79,28 +77,30 @@ public class Sampler
     }
 
     /**
-     * Minification filter. (optional)<br> 
-     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987] 
+     * Minification filter. (optional)<br>
+     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987]
      * 
      * @param minFilter The minFilter to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMinFilter(Integer minFilter) {
         if (minFilter == null) {
             this.minFilter = minFilter;
-            return ;
+            return;
         }
-        if ((((((minFilter!= 9728)&&(minFilter!= 9729))&&(minFilter!= 9984))&&(minFilter!= 9985))&&(minFilter!= 9986))&&(minFilter!= 9987)) {
-            throw new IllegalArgumentException((("Invalid value for minFilter: "+ minFilter)+", valid: [9728, 9729, 9984, 9985, 9986, 9987]"));
+        if ((((((minFilter != 9728) && (minFilter != 9729)) && (minFilter != 9984)) && (minFilter != 9985))
+                && (minFilter != 9986)) && (minFilter != 9987)) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for minFilter: " + minFilter) + ", valid: [9728, 9729, 9984, 9985, 9986, 9987]"));
         }
         this.minFilter = minFilter;
     }
 
     /**
-     * Minification filter. (optional)<br> 
-     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987] 
+     * Minification filter. (optional)<br>
+     * Valid values: [9728, 9729, 9984, 9985, 9986, 9987]
      * 
      * @return The minFilter
      * 
@@ -110,30 +110,31 @@ public class Sampler
     }
 
     /**
-     * S (U) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * S (U) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      * @param wrapS The wrapS to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setWrapS(Integer wrapS) {
         if (wrapS == null) {
             this.wrapS = wrapS;
-            return ;
+            return;
         }
-        if (((wrapS!= 33071)&&(wrapS!= 33648))&&(wrapS!= 10497)) {
-            throw new IllegalArgumentException((("Invalid value for wrapS: "+ wrapS)+", valid: [33071, 33648, 10497]"));
+        if (((wrapS != 33071) && (wrapS != 33648)) && (wrapS != 10497)) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for wrapS: " + wrapS) + ", valid: [33071, 33648, 10497]"));
         }
         this.wrapS = wrapS;
     }
 
     /**
-     * S (U) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * S (U) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      * @return The wrapS
      * 
@@ -143,41 +144,43 @@ public class Sampler
     }
 
     /**
-     * Returns the default value of the wrapS<br> 
-     * @see #getWrapS 
+     * Returns the default value of the wrapS<br>
+     * 
+     * @see #getWrapS
      * 
      * @return The default wrapS
      * 
      */
     public Integer defaultWrapS() {
-        return  10497;
+        return 10497;
     }
 
     /**
-     * T (V) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * T (V) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      * @param wrapT The wrapT to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setWrapT(Integer wrapT) {
         if (wrapT == null) {
             this.wrapT = wrapT;
-            return ;
+            return;
         }
-        if (((wrapT!= 33071)&&(wrapT!= 33648))&&(wrapT!= 10497)) {
-            throw new IllegalArgumentException((("Invalid value for wrapT: "+ wrapT)+", valid: [33071, 33648, 10497]"));
+        if (((wrapT != 33071) && (wrapT != 33648)) && (wrapT != 10497)) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for wrapT: " + wrapT) + ", valid: [33071, 33648, 10497]"));
         }
         this.wrapT = wrapT;
     }
 
     /**
-     * T (V) wrapping mode. (optional)<br> 
-     * Default: 10497<br> 
-     * Valid values: [33071, 33648, 10497] 
+     * T (V) wrapping mode. (optional)<br>
+     * Default: 10497<br>
+     * Valid values: [33071, 33648, 10497]
      * 
      * @return The wrapT
      * 
@@ -187,14 +190,15 @@ public class Sampler
     }
 
     /**
-     * Returns the default value of the wrapT<br> 
-     * @see #getWrapT 
+     * Returns the default value of the wrapT<br>
+     * 
+     * @see #getWrapT
      * 
      * @return The default wrapT
      * 
      */
     public Integer defaultWrapT() {
-        return  10497;
+        return 10497;
     }
 
 }

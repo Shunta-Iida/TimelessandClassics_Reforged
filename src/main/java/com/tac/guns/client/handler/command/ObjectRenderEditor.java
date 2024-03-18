@@ -19,47 +19,54 @@ import java.util.HashMap;
 
 import static com.tac.guns.GunMod.LOGGER;
 
-public class ObjectRenderEditor
-{
+public class ObjectRenderEditor {
     private static ObjectRenderEditor instance;
 
-    public static ObjectRenderEditor get()
-    {
-        if(instance == null)
-        {
+    public static ObjectRenderEditor get() {
+        if (instance == null) {
             instance = new ObjectRenderEditor();
         }
         return instance;
     }
 
-    private ObjectRenderEditor() {}
+    private ObjectRenderEditor() {
+    }
 
     public int currElement = 0;
     private HashMap<Integer, RENDER_Element> elements = new HashMap<>();
 
-    public RENDER_Element GetFromElements(int index)
-    {
+    public RENDER_Element GetFromElements(int index) {
         return this.elements.get(index);
     }
 
-    public static class RENDER_Element
-    {
+    public static class RENDER_Element {
         private float xMod = 0;
         private float yMod = 0;
         private float zMod = 0;
         private float sizeMod = 0;
 
-        public RENDER_Element(float x, float y, float z, float sizeX)
-        {
+        public RENDER_Element(float x, float y, float z, float sizeX) {
             this.xMod = x;
             this.zMod = z;
             this.yMod = y;
             this.sizeMod = sizeX;
         }
-        public float getxMod() {return xMod;}
-        public float getyMod() {return yMod;}
-        public float getzMod() {return zMod;}
-        public float getSizeMod() {return sizeMod;}
+
+        public float getxMod() {
+            return xMod;
+        }
+
+        public float getyMod() {
+            return yMod;
+        }
+
+        public float getzMod() {
+            return zMod;
+        }
+
+        public float getSizeMod() {
+            return sizeMod;
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -70,58 +77,41 @@ public class ObjectRenderEditor
             return;
         if (!Config.COMMON.development.enableTDev.get() && CommandsHandler.get().getCatCurrentIndex() == 4)
             return;
-        if(event.getKey() == GLFW.GLFW_KEY_1)
-        {
+        if (event.getKey() == GLFW.GLFW_KEY_1) {
             this.currElement = 1;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_2)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_2) {
             this.currElement = 2;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_3)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_3) {
             this.currElement = 3;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_4)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_4) {
             this.currElement = 4;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_5)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_5) {
             this.currElement = 5;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_6)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_6) {
             this.currElement = 6;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_7)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_7) {
             this.currElement = 7;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_8)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_8) {
             this.currElement = 8;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
-        }
-        else if(event.getKey() == GLFW.GLFW_KEY_9)
-        {
+        } else if (event.getKey() == GLFW.GLFW_KEY_9) {
             this.currElement = 9;
-            //event.setCanceled(true);
+            // event.setCanceled(true);
             return;
         }
 
@@ -135,67 +125,67 @@ public class ObjectRenderEditor
         boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
         boolean isPeriodDown = Keys.SIZE_OPT.isDown();
 
-        RENDER_Element element = this.elements.size() == 0 || !this.elements.containsKey(this.currElement) ? new RENDER_Element(0, 0,0, 0) : this.elements.get(this.currElement);
+        RENDER_Element element = this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
+                ? new RENDER_Element(0, 0, 0, 0)
+                : this.elements.get(this.currElement);
         float xMod = element.xMod;
         float yMod = element.yMod;
         float zMod = element.zMod;
         float sizeMod = element.sizeMod;
         float stepModifier = 1;
-        /*if(isShiftDown)
-            stepModifier*=10;*/
-        if(isShiftDown)
-            stepModifier/=10;
+        /*
+         * if(isShiftDown)
+         * stepModifier*=10;
+         */
+        if (isShiftDown)
+            stepModifier /= 10;
 
         if (isPeriodDown && isUp) {
-            sizeMod += 0.05*stepModifier;
-        }
-        else if (isPeriodDown && isDown) {
-            sizeMod -= 0.05*stepModifier;
-        }
-        else if (isControlDown && isUp) {
-            zMod += 0.05*stepModifier;
-        }
-        else if (isControlDown && isDown) {
-            zMod -= 0.05*stepModifier;
-        }
-        else if (isLeft) {
-            xMod -= 0.05*stepModifier;
-        }
-        else if (isRight) {
-            xMod += 0.05*stepModifier;
-        }
-        else if (isUp) {
-            yMod += 0.05*stepModifier;
-        }
-        else if (isDown) {
-            yMod -= 0.05*stepModifier;
+            sizeMod += 0.05 * stepModifier;
+        } else if (isPeriodDown && isDown) {
+            sizeMod -= 0.05 * stepModifier;
+        } else if (isControlDown && isUp) {
+            zMod += 0.05 * stepModifier;
+        } else if (isControlDown && isDown) {
+            zMod -= 0.05 * stepModifier;
+        } else if (isLeft) {
+            xMod -= 0.05 * stepModifier;
+        } else if (isRight) {
+            xMod += 0.05 * stepModifier;
+        } else if (isUp) {
+            yMod += 0.05 * stepModifier;
+        } else if (isDown) {
+            yMod -= 0.05 * stepModifier;
         }
 
-        this.elements.put(this.currElement, new RENDER_Element(xMod,yMod,zMod,sizeMod));
+        this.elements.put(this.currElement, new RENDER_Element(xMod, yMod, zMod, sizeMod));
     }
+
     public void exportData() {
-        this.elements.forEach((name, data) ->
-        {
-            if(this.elements.get(name) == null) {LOGGER.log(Level.ERROR, "OBJ_RENDER EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN."); return;}
-            GsonBuilder gsonB = new GsonBuilder().setLenient().addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();
+        this.elements.forEach((name, data) -> {
+            if (this.elements.get(name) == null) {
+                LOGGER.log(Level.ERROR, "OBJ_RENDER EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
+                return;
+            }
+            GsonBuilder gsonB = new GsonBuilder().setLenient().addSerializationExclusionStrategy(Gun.strategy)
+                    .setPrettyPrinting();
 
             String jsonString = gsonB.create().toJson(data);
-            this.writeExport(jsonString, "OBJ_RENDER"+name);
+            this.writeExport(jsonString, "OBJ_RENDER" + name);
         });
     }
+
     private void writeExport(String jsonString, String name) {
-        try
-        {
-            File dir = new File(Config.COMMON.development.TDevPath.get()+"\\tac_export\\");
+        try {
+            File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter = new FileWriter (dir.getAbsolutePath() +"\\"+ name + "_export.json");
+            FileWriter dataWriter = new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO, "OBJ_RENDER EDITOR EXPORTED FILE ( "+name + "export.txt ). BE PROUD!");
-        }
-        catch (IOException e)
-        {
-            LOGGER.log(Level.ERROR, "OBJ_RENDER EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");
+            LOGGER.log(Level.INFO, "OBJ_RENDER EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR,
+                    "OBJ_RENDER EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");
         }
     }
 }

@@ -2,7 +2,9 @@
   "general": {
     "auto": false,
     "rate": 200,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:two_handed_mosin",
     "recoilAngle": 8.75,
     "horizontalRecoilAngle": 6.75,
@@ -12,7 +14,6 @@
     "weaponRecoilOffset": 0.625,
     "cameraRecoilModifier": 1.375,
     "weightKilo": 15.0,
-
     "spread": 2,
     "firstShotSpread": 0.025,
     "hipFireInaccuracy": 10,
@@ -25,7 +26,11 @@
     "maxAmmo": 5,
     "reloadMagTimer": 74,
     "additionalReloadEmptyMagTimer": 22,
-    "maxAdditionalAmmoPerOC": [2, 3, 5],
+    "maxAdditionalAmmoPerOC": [
+      2,
+      3,
+      5
+    ],
     "preReloadPauseTicks": 0
   },
   "projectile": {
@@ -61,10 +66,9 @@
       "zOffset": -46.10,
       "size": 3,
       "trailAdjust": 3
-
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": 2,
       "xOffset": 0,
       "zOffset": -3,

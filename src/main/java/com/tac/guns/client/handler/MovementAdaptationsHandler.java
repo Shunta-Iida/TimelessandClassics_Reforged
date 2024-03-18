@@ -12,8 +12,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class MovementAdaptationsHandler
-{
+public class MovementAdaptationsHandler {
     private static MovementAdaptationsHandler instance;
 
     public boolean isReadyToUpdate() {
@@ -60,45 +59,50 @@ public class MovementAdaptationsHandler
 
     private float movement = 0.0F;
 
-    //private Byte previousGun;
+    // private Byte previousGun;
 
     public static MovementAdaptationsHandler get() {
         return instance == null ? instance = new MovementAdaptationsHandler() : instance;
     }
-    private MovementAdaptationsHandler() { }
+
+    private MovementAdaptationsHandler() {
+    }
 
     @SubscribeEvent(priority = EventPriority.LOW)
-    public void onFovUpdate(FOVModifierEvent event)
-    {
+    public void onFovUpdate(FOVModifierEvent event) {
         Minecraft mc = Minecraft.getInstance();
-        if(mc.player != null && !mc.player.getMainHandItem().isEmpty() && mc.options.getCameraType() == CameraType.FIRST_PERSON && mc.options.fovEffectScale > 0)
-        {
+        if (mc.player != null && !mc.player.getMainHandItem().isEmpty()
+                && mc.options.getCameraType() == CameraType.FIRST_PERSON && mc.options.fovEffectScale > 0) {
             ItemStack heldItem = mc.player.getMainHandItem();
-            if(heldItem.getItem() instanceof TimelessGunItem)
-            {
-                if(event.getEntity().isSprinting())
+            if (heldItem.getItem() instanceof TimelessGunItem) {
+                if (event.getEntity().isSprinting())
                     event.setNewfov(1.135f);
                 else
                     event.setNewfov(1f);
             }
         }
     }
-    @SubscribeEvent(priority=EventPriority.LOWEST)
-    public void onJump(LivingEvent.LivingJumpEvent event)
-    {
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onJump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntityLiving().getMainHandItem().getItem() instanceof TimelessGunItem))
             return;
-        if(speed < 0.0875f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x()/2.25,event.getEntityLiving().getDeltaMovement().y()/1.125,event.getEntityLiving().getDeltaMovement().z()/2.25);
-        else if(speed < 0.9f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x()/1.75,event.getEntityLiving().getDeltaMovement().y(),event.getEntityLiving().getDeltaMovement().z()/1.75);
-        else if(speed < 0.95f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x()/1.25,event.getEntityLiving().getDeltaMovement().y(),event.getEntityLiving().getDeltaMovement().z()/1.25);
+        if (speed < 0.0875f)
+            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 2.25,
+                    event.getEntityLiving().getDeltaMovement().y() / 1.125,
+                    event.getEntityLiving().getDeltaMovement().z() / 2.25);
+        else if (speed < 0.9f)
+            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 1.75,
+                    event.getEntityLiving().getDeltaMovement().y(),
+                    event.getEntityLiving().getDeltaMovement().z() / 1.75);
+        else if (speed < 0.95f)
+            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 1.25,
+                    event.getEntityLiving().getDeltaMovement().y(),
+                    event.getEntityLiving().getDeltaMovement().z() / 1.25);
     }
 
-    @SubscribeEvent//(priority = EventPriority.HIGH)
-    public void movementUpdate(TickEvent.ClientTickEvent event)
-    {
+    @SubscribeEvent // (priority = EventPriority.HIGH)
+    public void movementUpdate(TickEvent.ClientTickEvent event) {
         if (Minecraft.getInstance().player == null) {
             return;
         }

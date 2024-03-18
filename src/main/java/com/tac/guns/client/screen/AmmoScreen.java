@@ -10,8 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
-public class AmmoScreen<T extends AbstractContainerMenu & IRigContainer> extends AbstractContainerScreen<T> implements MenuAccess<T> {
-    private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
+public class AmmoScreen<T extends AbstractContainerMenu & IRigContainer> extends AbstractContainerScreen<T>
+        implements MenuAccess<T> {
+    private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(
+            "textures/gui/container/generic_54.png");
     private final int rows;
 
     public AmmoScreen(T container, Inventory playerInventory, Component title) {
@@ -35,7 +37,9 @@ public class AmmoScreen<T extends AbstractContainerMenu & IRigContainer> extends
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
 
-        // Draw for ammo pack, current issue is the number of slots not being drawn correctly, we can't cut this off either due to the background, get design team to create alternative off generic_54.png baseline
+        // Draw for ammo pack, current issue is the number of slots not being drawn
+        // correctly, we can't cut this off either due to the background, get design
+        // team to create alternative off generic_54.png baseline
         this.blit(matrixStack, i, j, 0, 0, this.imageWidth, (this.rows) * 18 + 17);
         this.blit(matrixStack, i, j + (this.rows) * 18 + 17, 0, 126, this.imageWidth, 96);
     }

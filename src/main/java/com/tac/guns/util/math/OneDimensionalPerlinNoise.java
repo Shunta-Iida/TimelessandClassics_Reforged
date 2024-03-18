@@ -20,37 +20,41 @@ public class OneDimensionalPerlinNoise {
 
     private boolean reverse = false;
 
-    public OneDimensionalPerlinNoise(float rangeDown, float rangeUp, long periodMs){
+    public OneDimensionalPerlinNoise(float rangeDown, float rangeUp, long periodMs) {
         this.rangeDown = rangeDown;
         this.rangeUp = rangeUp;
         this.periodMs = periodMs;
         prevNum = random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
         num = random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
-        if(reverse && prevNum * num > 0) num = -num;
+        if (reverse && prevNum * num > 0)
+            num = -num;
     }
 
-    public void setReverse(boolean reverse) {this.reverse = reverse;}
+    public void setReverse(boolean reverse) {
+        this.reverse = reverse;
+    }
 
-    public static double Ease_Interpolate(double x)
-    {
+    public static double Ease_Interpolate(double x) {
         return (3 * Math.pow(x, 2) - 2 * Math.pow(x, 3));
     }
 
-    public float getValue(){
+    public float getValue() {
         long periodTime = new Date().getTime() - prevTime;
         long repeat = periodTime / periodMs;
         long partialTime = periodTime % periodMs;
         prevTime += repeat * periodMs;
         double x = Ease_Interpolate((double) partialTime / (double) periodMs);
-        if(repeat == 1){
+        if (repeat == 1) {
             prevNum = num;
-            num =  random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
-            if(reverse && prevNum * num > 0) num = -num;
-        }else if(repeat > 1){
+            num = random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
+            if (reverse && prevNum * num > 0)
+                num = -num;
+        } else if (repeat > 1) {
             prevNum = random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
-            num =  random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
-            if(reverse && prevNum * num > 0) num = -num;
+            num = random.nextFloat() * (rangeUp - rangeDown) + rangeDown;
+            if (reverse && prevNum * num > 0)
+                num = -num;
         }
-        return (float) (prevNum*(1 - x) + num * x);
+        return (float) (prevNum * (1 - x) + num * x);
     }
 }

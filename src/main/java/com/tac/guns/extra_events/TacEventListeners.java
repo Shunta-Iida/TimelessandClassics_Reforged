@@ -19,30 +19,32 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 
-
 /**
  * Author: ClumsyAlien
  */
-
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TacEventListeners {
 
     /*
-        A bit decent bit of extra code will be locked in external methods such as this, separating some of the standard and advanced
-        Functions, especially in order to keep it all clean and allow easy backtracking, however both functions may receive changes
-        For now as much of the work I can do will be kept externally such as with fire selection, and burst fire.
-        (In short this serves as a temporary test bed to keep development on new functions on course)
-    */
+     * A bit decent bit of extra code will be locked in external methods such as
+     * this, separating some of the standard and advanced
+     * Functions, especially in order to keep it all clean and allow easy
+     * backtracking, however both functions may receive changes
+     * For now as much of the work I can do will be kept externally such as with
+     * fire selection, and burst fire.
+     * (In short this serves as a temporary test bed to keep development on new
+     * functions on course)
+     */
 
     private static boolean checked = true;
     private static boolean confirmed = false;
     private static VersionChecker.CheckResult status;
+
     @SubscribeEvent
-    public static void InformPlayerOfUpdate(EntityJoinWorldEvent e)
-    {
+    public static void InformPlayerOfUpdate(EntityJoinWorldEvent e) {
         try {
-            if(!(e.getEntity() instanceof Player))
+            if (!(e.getEntity() instanceof Player))
                 return;
 
             if (checked) {
@@ -52,14 +54,14 @@ public class TacEventListeners {
                 }
             }
             if (!confirmed) {
-                if (status.status() == VersionChecker.Status.OUTDATED || status.status() == VersionChecker.Status.BETA_OUTDATED) {
-                    ((Player) e.getEntity()).displayClientMessage(new TranslatableComponent("updateCheck.tac", status.target(), status.url()), false);
+                if (status.status() == VersionChecker.Status.OUTDATED
+                        || status.status() == VersionChecker.Status.BETA_OUTDATED) {
+                    ((Player) e.getEntity()).displayClientMessage(
+                            new TranslatableComponent("updateCheck.tac", status.target(), status.url()), false);
                     confirmed = true;
                 }
             }
-        }
-        catch(Exception ev)
-        {
+        } catch (Exception ev) {
             GunMod.LOGGER.log(Level.ERROR, ev.getMessage());
             return;
         }
@@ -67,10 +69,11 @@ public class TacEventListeners {
     }
 
     @SubscribeEvent
-    public void onPartialLevel(LevelUpEvent.Post event)
-    {
+    public void onPartialLevel(LevelUpEvent.Post event) {
         Player player = event.getPlayer();
-        event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup")), SoundSource.PLAYERS,4.0F, 1.0F);
+        event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
+                ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup")),
+                SoundSource.PLAYERS, 4.0F, 1.0F);
     }
 
     // TODO: remaster method to play empty fire sound on most-all guns
@@ -79,33 +82,35 @@ public class TacEventListeners {
     public static void postShoot(GunFireEvent.Post event) {
         Player player = event.getPlayer();
         ItemStack heldItem = player.getMainHandItem();
-        if(!(heldItem.getItem() instanceof M1GunItem))
+        if (!(heldItem.getItem() instanceof M1GunItem))
             return;
         CompoundTag tag = heldItem.getTag();
-        if(tag != null)
-        {
-            if(tag.getInt("AmmoCount") == 1)
-                event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(), ModSounds.M1_PING.get()/*.GARAND_PING.get()*/, SoundSource.MASTER, 3.0F, 1.0F);
+        if (tag != null) {
+            if (tag.getInt("AmmoCount") == 1)
+                event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
+                        ModSounds.M1_PING.get()/* .GARAND_PING.get() */, SoundSource.MASTER, 3.0F, 1.0F);
         }
     }
 
-    /*@SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void handleDeathWithArmor(LivingDeathEvent event)
-    {
-        if(event.getEntity() instanceof PlayerEntity)
-        {
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-            if(WearableHelper.PlayerWornRig(player) != null)
-            {
-                GearSlotsHandler ammoItemHandler = (GearSlotsHandler) player.getCapability(ITEM_HANDLER_CAPABILITY).resolve().get();
-                Block.spawnAsEntity(player.world, player.getPosition(), (ammoItemHandler.getStackInSlot(0)));
-                Block.spawnAsEntity(player.world, player.getPosition(), (ammoItemHandler.getStackInSlot(1)));
-            }
-        }
-        // TODO: Continue for dropping armor on a bot's death
-    }*/
-
-
-
+    /*
+     * @SubscribeEvent(priority = EventPriority.HIGHEST)
+     * public static void handleDeathWithArmor(LivingDeathEvent event)
+     * {
+     * if(event.getEntity() instanceof PlayerEntity)
+     * {
+     * PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+     * if(WearableHelper.PlayerWornRig(player) != null)
+     * {
+     * GearSlotsHandler ammoItemHandler = (GearSlotsHandler)
+     * player.getCapability(ITEM_HANDLER_CAPABILITY).resolve().get();
+     * Block.spawnAsEntity(player.world, player.getPosition(),
+     * (ammoItemHandler.getStackInSlot(0)));
+     * Block.spawnAsEntity(player.world, player.getPosition(),
+     * (ammoItemHandler.getStackInSlot(1)));
+     * }
+     * }
+     * // TODO: Continue for dropping armor on a bot's death
+     * }
+     */
 
 }

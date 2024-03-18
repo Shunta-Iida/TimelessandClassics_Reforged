@@ -11,37 +11,31 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateMoveInacc extends PlayMessage<MessageUpdateMoveInacc>
-{
+public class MessageUpdateMoveInacc extends PlayMessage<MessageUpdateMoveInacc> {
     private float dist = 0;
 
-    public MessageUpdateMoveInacc() {}
+    public MessageUpdateMoveInacc() {
+    }
 
-    public MessageUpdateMoveInacc(float dist)
-    {
+    public MessageUpdateMoveInacc(float dist) {
         this.dist = dist;
     }
 
     @Override
-    public void encode(MessageUpdateMoveInacc messageUpdateMoveInacc, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageUpdateMoveInacc messageUpdateMoveInacc, FriendlyByteBuf buffer) {
         buffer.writeFloat(messageUpdateMoveInacc.dist);
     }
 
     @Override
-    public MessageUpdateMoveInacc decode(FriendlyByteBuf buffer)
-    {
+    public MessageUpdateMoveInacc decode(FriendlyByteBuf buffer) {
         return new MessageUpdateMoveInacc(buffer.readFloat());
     }
 
     @Override
-    public void handle(MessageUpdateMoveInacc messageUpdateMoveInacc, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageUpdateMoveInacc messageUpdateMoveInacc, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null)
-            {
+            if (player != null) {
                 ModSyncedDataKeys.MOVING.setValue(player, messageUpdateMoveInacc.dist);
             }
         });

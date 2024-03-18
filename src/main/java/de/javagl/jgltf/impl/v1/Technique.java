@@ -11,52 +11,50 @@ package de.javagl.jgltf.impl.v1;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 /**
- * A template for material appearances. 
+ * A template for material appearances.
  * 
- * Auto-generated for technique.schema.json 
+ * Auto-generated for technique.schema.json
  * 
  */
 public class Technique
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * A dictionary object of technique.parameters objects. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of technique.parameters objects. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, TechniqueParameters> parameters;
     /**
-     * A dictionary object of strings that maps GLSL attribute names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL attribute names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, String> attributes;
     /**
-     * The ID of the program. (required) 
+     * The ID of the program. (required)
      * 
      */
     private String program;
     /**
-     * A dictionary object of strings that maps GLSL uniform names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL uniform names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, String> uniforms;
     /**
-     * Fixed-function rendering states. (optional)<br> 
-     * Default: {} 
+     * Fixed-function rendering states. (optional)<br>
+     * Default: {}
      * 
      */
     private TechniqueStates states;
 
     /**
-     * A dictionary object of technique.parameters objects. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of technique.parameters objects. (optional)<br>
+     * Default: {}
      * 
      * @param parameters The parameters to set
      * 
@@ -64,14 +62,14 @@ public class Technique
     public void setParameters(Map<String, TechniqueParameters> parameters) {
         if (parameters == null) {
             this.parameters = parameters;
-            return ;
+            return;
         }
         this.parameters = parameters;
     }
 
     /**
-     * A dictionary object of technique.parameters objects. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of technique.parameters objects. (optional)<br>
+     * Default: {}
      * 
      * @return The parameters
      * 
@@ -81,11 +79,11 @@ public class Technique
     }
 
     /**
-     * Add the given parameters. The parameters of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given parameters. The parameters of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -99,7 +97,7 @@ public class Technique
         }
         Map<String, TechniqueParameters> oldMap = this.parameters;
         Map<String, TechniqueParameters> newMap = new LinkedHashMap<String, TechniqueParameters>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -107,11 +105,11 @@ public class Technique
     }
 
     /**
-     * Remove the given parameters. The parameters of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given parameters. The parameters of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -123,7 +121,7 @@ public class Technique
         }
         Map<String, TechniqueParameters> oldMap = this.parameters;
         Map<String, TechniqueParameters> newMap = new LinkedHashMap<String, TechniqueParameters>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -135,8 +133,9 @@ public class Technique
     }
 
     /**
-     * Returns the default value of the parameters<br> 
-     * @see #getParameters 
+     * Returns the default value of the parameters<br>
+     * 
+     * @see #getParameters
      * 
      * @return The default parameters
      * 
@@ -146,9 +145,9 @@ public class Technique
     }
 
     /**
-     * A dictionary object of strings that maps GLSL attribute names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL attribute names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      * @param attributes The attributes to set
      * 
@@ -156,15 +155,15 @@ public class Technique
     public void setAttributes(Map<String, String> attributes) {
         if (attributes == null) {
             this.attributes = attributes;
-            return ;
+            return;
         }
         this.attributes = attributes;
     }
 
     /**
-     * A dictionary object of strings that maps GLSL attribute names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL attribute names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      * @return The attributes
      * 
@@ -174,11 +173,11 @@ public class Technique
     }
 
     /**
-     * Add the given attributes. The attributes of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given attributes. The attributes of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -192,7 +191,7 @@ public class Technique
         }
         Map<String, String> oldMap = this.attributes;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -200,11 +199,11 @@ public class Technique
     }
 
     /**
-     * Remove the given attributes. The attributes of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given attributes. The attributes of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -216,7 +215,7 @@ public class Technique
         }
         Map<String, String> oldMap = this.attributes;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -228,8 +227,9 @@ public class Technique
     }
 
     /**
-     * Returns the default value of the attributes<br> 
-     * @see #getAttributes 
+     * Returns the default value of the attributes<br>
+     * 
+     * @see #getAttributes
      * 
      * @return The default attributes
      * 
@@ -239,7 +239,7 @@ public class Technique
     }
 
     /**
-     * The ID of the program. (required) 
+     * The ID of the program. (required)
      * 
      * @param program The program to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -247,13 +247,13 @@ public class Technique
      */
     public void setProgram(String program) {
         if (program == null) {
-            throw new NullPointerException((("Invalid value for program: "+ program)+", may not be null"));
+            throw new NullPointerException((("Invalid value for program: " + program) + ", may not be null"));
         }
         this.program = program;
     }
 
     /**
-     * The ID of the program. (required) 
+     * The ID of the program. (required)
      * 
      * @return The program
      * 
@@ -263,9 +263,9 @@ public class Technique
     }
 
     /**
-     * A dictionary object of strings that maps GLSL uniform names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL uniform names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      * @param uniforms The uniforms to set
      * 
@@ -273,15 +273,15 @@ public class Technique
     public void setUniforms(Map<String, String> uniforms) {
         if (uniforms == null) {
             this.uniforms = uniforms;
-            return ;
+            return;
         }
         this.uniforms = uniforms;
     }
 
     /**
-     * A dictionary object of strings that maps GLSL uniform names to 
-     * technique parameter IDs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings that maps GLSL uniform names to
+     * technique parameter IDs. (optional)<br>
+     * Default: {}
      * 
      * @return The uniforms
      * 
@@ -291,11 +291,11 @@ public class Technique
     }
 
     /**
-     * Add the given uniforms. The uniforms of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given uniforms. The uniforms of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -309,7 +309,7 @@ public class Technique
         }
         Map<String, String> oldMap = this.uniforms;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -317,11 +317,11 @@ public class Technique
     }
 
     /**
-     * Remove the given uniforms. The uniforms of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given uniforms. The uniforms of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -333,7 +333,7 @@ public class Technique
         }
         Map<String, String> oldMap = this.uniforms;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -345,8 +345,9 @@ public class Technique
     }
 
     /**
-     * Returns the default value of the uniforms<br> 
-     * @see #getUniforms 
+     * Returns the default value of the uniforms<br>
+     * 
+     * @see #getUniforms
      * 
      * @return The default uniforms
      * 
@@ -356,8 +357,8 @@ public class Technique
     }
 
     /**
-     * Fixed-function rendering states. (optional)<br> 
-     * Default: {} 
+     * Fixed-function rendering states. (optional)<br>
+     * Default: {}
      * 
      * @param states The states to set
      * 
@@ -365,14 +366,14 @@ public class Technique
     public void setStates(TechniqueStates states) {
         if (states == null) {
             this.states = states;
-            return ;
+            return;
         }
         this.states = states;
     }
 
     /**
-     * Fixed-function rendering states. (optional)<br> 
-     * Default: {} 
+     * Fixed-function rendering states. (optional)<br>
+     * Default: {}
      * 
      * @return The states
      * 
@@ -382,8 +383,9 @@ public class Technique
     }
 
     /**
-     * Returns the default value of the states<br> 
-     * @see #getStates 
+     * Returns the default value of the states<br>
+     * 
+     * @see #getStates
      * 
      * @return The default states
      * 

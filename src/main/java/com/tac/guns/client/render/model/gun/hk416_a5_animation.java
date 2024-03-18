@@ -34,15 +34,17 @@ public class hk416_a5_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         HK416A5AnimationController controller = HK416A5AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_BODY,
+                    transformType, matrices);
             if (Gun.getScope(stack) != null) {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_FOLDED), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_FOLDED), stack, matrices, renderBuffer, light,
+                        overlay);
             } else {
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
             }
@@ -64,7 +66,10 @@ public class hk416_a5_animation extends SkinnedGunModel {
             {
                 if (transformType.firstPerson()) {
                     Gun gun = ((GunItem) stack.getItem()).getGun();
-                    float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                    float cooldownOg = ShootingHandler.get().getshootMsGap()
+                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                    : ShootingHandler.get().getshootMsGap()
+                                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
                     if (Gun.hasAmmo(stack)) {
                         // Math provided by Bomb787 on GitHub and Curseforge!!!
@@ -79,23 +84,30 @@ public class hk416_a5_animation extends SkinnedGunModel {
             matrices.popPose();
         }
         matrices.popPose();
-        /*if(Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.STANDARD_FLASHLIGHT.orElse(ItemStack.EMPTY.getItem()))
-        {
-            RenderUtil.renderModel(SpecialModels.AR_15_CQB_STANDARD_FLASHLIGHT.getModel(), stack, matrices, renderBuffer, light, overlay);
-        }*/
+        /*
+         * if(Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() ==
+         * ModItems.STANDARD_FLASHLIGHT.orElse(ItemStack.EMPTY.getItem()))
+         * {
+         * RenderUtil.renderModel(SpecialModels.AR_15_CQB_STANDARD_FLASHLIGHT.getModel()
+         * , stack, matrices, renderBuffer, light, overlay);
+         * }
+         */
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    HK416A5AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
-        //if(controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL)) {
+        // if(controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL))
+        // {
         matrices.pushPose();
         {
             if (transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
                 renderMag(stack, matrices, renderBuffer, light, overlay, skin);
             }
         }
@@ -103,16 +115,22 @@ public class hk416_a5_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            if (transformType.firstPerson() && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY).equals(controller.getPreviousAnimation())) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            if (transformType.firstPerson()
+                    && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
+                            .equals(controller.getPreviousAnimation())) {
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        HK416A5AnimationController.INDEX_MAGAZINE, transformType, matrices);
                 RenderUtil.renderModel(getComponentModel(skin, BULLET), stack, matrices, renderBuffer, light, overlay);
-            } else if (transformType.firstPerson() && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL).equals(controller.getPreviousAnimation())) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
+            } else if (transformType.firstPerson()
+                    && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL)
+                            .equals(controller.getPreviousAnimation())) {
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
                 RenderUtil.renderModel(getComponentModel(skin, BULLET), stack, matrices, renderBuffer, light, overlay);
             }
         }
         matrices.popPose();
-        //}
+        // }
         PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);
     }
 }

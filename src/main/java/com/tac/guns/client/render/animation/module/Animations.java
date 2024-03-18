@@ -41,9 +41,11 @@ public class Animations {
     private static final Map<String, AnimationRunner> animationRunnerMap = new HashMap<>();
     private static final Map<String, AnimationManager> animationManagerMap = new HashMap<>();
 
-    public static GltfModelV2 load(AnimationMeta animationMeta) throws IOException{
-        if(animationMeta != null)  return load(animationMeta.getResourceLocation());
-        else return null;
+    public static GltfModelV2 load(AnimationMeta animationMeta) throws IOException {
+        if (animationMeta != null)
+            return load(animationMeta.getResourceLocation());
+        else
+            return null;
     }
 
     public static GltfModelV2 load(ResourceLocation resourceLocation) throws IOException {
@@ -55,23 +57,23 @@ public class Animations {
             // put GltfModel into the gltfModelMap
             GltfModelV2 model = new GltfModelV2((GltfAssetV2) asset);
             gltfModelV2Map.put(resourceLocation.toString(), model);
-            //refresh animationManagerMap
+            // refresh animationManagerMap
             List<Animation> animations = GltfAnimations.createModelAnimations(model.getAnimationModels());
             AnimationManager animationManager = new AnimationManager(AnimationManager.AnimationPolicy.TIP_STOP);
             animationManager.addAnimations(animations);
-            animationManagerMap.put(resourceLocation.toString(),animationManager);
-            //refresh animationRunnerMap
+            animationManagerMap.put(resourceLocation.toString(), animationManager);
+            // refresh animationRunnerMap
             stopAnimation(resourceLocation);
             AnimationRunner newRunner = new AnimationRunner(animationManager);
-            animationRunnerMap.put(resourceLocation.toString(),newRunner);
-            //initialState
+            animationRunnerMap.put(resourceLocation.toString(), newRunner);
+            // initialState
             GltfModelV2 model2 = new GltfModelV2((GltfAssetV2) asset);
             List<Animation> animations2 = GltfAnimations.createModelAnimations(model2.getAnimationModels());
             AnimationManager initialStateManager = new AnimationManager(AnimationManager.AnimationPolicy.TIP_STOP);
             initialStateManager.addAnimations(animations2);
             initialStateManager.reset();
             initialStateManager.performStep(1);
-            initialModelMap.put(resourceLocation.toString(),model2);
+            initialModelMap.put(resourceLocation.toString(), model2);
             return model;
         }
         inputStream.close();
@@ -79,7 +81,8 @@ public class Animations {
     }
 
     public static void specifyInitialModel(AnimationMeta animationMeta, AnimationMeta initialMeta) throws IOException {
-        Resource initialResource = Minecraft.getInstance().getResourceManager().getResource(initialMeta.getResourceLocation());
+        Resource initialResource = Minecraft.getInstance().getResourceManager()
+                .getResource(initialMeta.getResourceLocation());
         InputStream inputStream = initialResource.getInputStream();
         GltfAssetReader reader = new GltfAssetReader();
         GltfAsset asset = reader.readWithoutReferences(inputStream);
@@ -89,124 +92,146 @@ public class Animations {
         initialStateManager.addAnimations(animations2);
         initialStateManager.reset();
         initialStateManager.performStep(1);
-        initialModelMap.put(animationMeta.getResourceLocation().toString(),model2);
+        initialModelMap.put(animationMeta.getResourceLocation().toString(), model2);
     }
 
-    private static GltfModelV2 getGltfModel(ResourceLocation resourceLocation){
+    private static GltfModelV2 getGltfModel(ResourceLocation resourceLocation) {
         return gltfModelV2Map.get(resourceLocation.toString());
     }
 
-    private static GltfModelV2 getInitialModel(ResourceLocation resourceLocation){
+    private static GltfModelV2 getInitialModel(ResourceLocation resourceLocation) {
         return initialModelMap.get(resourceLocation.toString());
     }
 
-    public static void pushNode(AnimationMeta animationMeta, int index){
-        if(animationMeta!=null) pushNode(animationMeta.getResourceLocation(),index);
+    public static void pushNode(AnimationMeta animationMeta, int index) {
+        if (animationMeta != null)
+            pushNode(animationMeta.getResourceLocation(), index);
     }
 
     public static void pushNode(ResourceLocation gltfResource, int index) {
-        if(gltfResource == null) return;
+        if (gltfResource == null)
+            return;
         GltfModelV2 gltfModel = getGltfModel(gltfResource);
-        if(gltfModel == null){
+        if (gltfModel == null) {
             bind = null;
-        }else bind = gltfModel.getNodeModels().get(index);
+        } else
+            bind = gltfModel.getNodeModels().get(index);
         GltfModelV2 initialModel = getInitialModel(gltfResource);
-        if(initialModel == null){
+        if (initialModel == null) {
             initial = null;
-        }else initial = initialModel.getNodeModels().get(index);
+        } else
+            initial = initialModel.getNodeModels().get(index);
         nodeModelStack.push(bind);
         initialModelStack.push(initial);
     }
 
-    public static void popNode(){
-        if(!nodeModelStack.empty()) nodeModelStack.pop();
-        if(!initialModelStack.empty()) initialModelStack.pop();
+    public static void popNode() {
+        if (!nodeModelStack.empty())
+            nodeModelStack.pop();
+        if (!initialModelStack.empty())
+            initialModelStack.pop();
         bind = (nodeModelStack.empty() ? null : nodeModelStack.peek());
         initial = (initialModelStack.empty() ? null : initialModelStack.peek());
     }
 
-    public static NodeModel peekNodeModel(){
+    public static NodeModel peekNodeModel() {
         return bind;
     }
 
-    public static NodeModel peekInitialModel(){
+    public static NodeModel peekInitialModel() {
         return initial;
     }
 
-    public static AnimationRunner getAnimationRunner(ResourceLocation resourceLocation){
+    public static AnimationRunner getAnimationRunner(ResourceLocation resourceLocation) {
         return animationRunnerMap.get(resourceLocation.toString());
     }
 
-    public static void runAnimation(AnimationMeta animationMeta){
-        if(animationMeta !=null) runAnimation(animationMeta.getResourceLocation());
+    public static void runAnimation(AnimationMeta animationMeta) {
+        if (animationMeta != null)
+            runAnimation(animationMeta.getResourceLocation());
     }
 
-    public static void runAnimation(ResourceLocation resourceLocation){
+    public static void runAnimation(ResourceLocation resourceLocation) {
         runAnimation(resourceLocation, null);
     }
 
-    public static void runAnimation(AnimationMeta animationMeta, Runnable callback){
-        if(animationMeta !=null)  runAnimation(animationMeta.getResourceLocation(), callback);
+    public static void runAnimation(AnimationMeta animationMeta, Runnable callback) {
+        if (animationMeta != null)
+            runAnimation(animationMeta.getResourceLocation(), callback);
     }
 
-    public static void runAnimation(ResourceLocation resourceLocation, Runnable callback){
+    public static void runAnimation(ResourceLocation resourceLocation, Runnable callback) {
         AnimationRunner runner = getAnimationRunner(resourceLocation);
-        if(runner!=null) {
-            if(runner.isRunning()) return;
+        if (runner != null) {
+            if (runner.isRunning())
+                return;
             runner.start(callback);
         }
     }
 
-    public static void stopAnimation(AnimationMeta animationMeta){
-        if(animationMeta!=null) stopAnimation(animationMeta.getResourceLocation());
+    public static void stopAnimation(AnimationMeta animationMeta) {
+        if (animationMeta != null)
+            stopAnimation(animationMeta.getResourceLocation());
     }
 
-    public static void stopAnimation(ResourceLocation resourceLocation){
+    public static void stopAnimation(ResourceLocation resourceLocation) {
         AnimationRunner runner = getAnimationRunner(resourceLocation);
-        if(runner!=null) runner.stop();
+        if (runner != null)
+            runner.stop();
         AnimationManager manager = getAnimationManager(resourceLocation);
-        if(manager!=null) {
+        if (manager != null) {
             manager.reset();
             manager.performStep(0);
         }
     }
 
-    public static boolean isAnimationRunning(AnimationMeta animationMeta){
-        if(animationMeta!=null) return isAnimationRunning(animationMeta.getResourceLocation());
-        else return false;
+    public static boolean isAnimationRunning(AnimationMeta animationMeta) {
+        if (animationMeta != null)
+            return isAnimationRunning(animationMeta.getResourceLocation());
+        else
+            return false;
     }
 
-    public static boolean isAnimationRunning(ResourceLocation resourceLocation){
+    public static boolean isAnimationRunning(ResourceLocation resourceLocation) {
         AnimationRunner runner = getAnimationRunner(resourceLocation);
-        if(runner == null) return false;
+        if (runner == null)
+            return false;
         return runner.isRunning();
     }
 
-    private static AnimationManager getAnimationManager(ResourceLocation resourceLocation){
+    private static AnimationManager getAnimationManager(ResourceLocation resourceLocation) {
         return animationManagerMap.get(resourceLocation.toString());
     }
 
-    public static PoseStack getExtraMatrixStack() { return extraMatrixStack; }
+    public static PoseStack getExtraMatrixStack() {
+        return extraMatrixStack;
+    }
 
-    public static void applyExtraTransform(PoseStack matrixStack){
+    public static void applyExtraTransform(PoseStack matrixStack) {
         matrixStack.last().pose().multiply(extraMatrixStack.last().pose());
         matrixStack.last().normal().mul(extraMatrixStack.last().normal());
     }
 
-    public static void applyAnimationTransform(ItemStack itemStack, ItemTransforms.TransformType transformType, LivingEntity entity, PoseStack matrixStack){
-        if(itemStack != null && entity != null) {
-            BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(itemStack, entity.level, entity, entity.getId());
+    public static void applyAnimationTransform(ItemStack itemStack, ItemTransforms.TransformType transformType,
+            LivingEntity entity, PoseStack matrixStack) {
+        if (itemStack != null && entity != null) {
+            BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(itemStack, entity.level, entity,
+                    entity.getId());
             applyAnimationTransform(model, transformType, matrixStack);
         }
     }
 
-    public static void applyAnimationTransform(BakedModel model, ItemTransforms.TransformType transformType, PoseStack matrixStack){
-        if(Animations.peekNodeModel() != null && Animations.peekInitialModel() != null) {
-            ItemTransform modelTransformVec3f = (model == null ? null : model.getTransforms().getTransform(transformType) );
-            if(modelTransformVec3f != null) {
-                matrixStack.translate(modelTransformVec3f.translation.x(), modelTransformVec3f.translation.y(), modelTransformVec3f.translation.z());
-                matrixStack.scale(modelTransformVec3f.scale.x(),modelTransformVec3f.scale.y(),modelTransformVec3f.scale.z());
-                matrixStack.translate(-0.5,-0.5,-0.5);
+    public static void applyAnimationTransform(BakedModel model, ItemTransforms.TransformType transformType,
+            PoseStack matrixStack) {
+        if (Animations.peekNodeModel() != null && Animations.peekInitialModel() != null) {
+            ItemTransform modelTransformVec3f = (model == null ? null
+                    : model.getTransforms().getTransform(transformType));
+            if (modelTransformVec3f != null) {
+                matrixStack.translate(modelTransformVec3f.translation.x(), modelTransformVec3f.translation.y(),
+                        modelTransformVec3f.translation.z());
+                matrixStack.scale(modelTransformVec3f.scale.x(), modelTransformVec3f.scale.y(),
+                        modelTransformVec3f.scale.z());
+                matrixStack.translate(-0.5, -0.5, -0.5);
             }
             Matrix4f animationTransition = new Matrix4f(Animations.peekNodeModel().computeGlobalTransform(null));
             Matrix4f initialTransition = new Matrix4f(Animations.peekInitialModel().computeGlobalTransform(null));
@@ -215,10 +240,12 @@ public class Animations {
             initialTransition.invert();
             matrixStack.last().pose().multiply(animationTransition);
             matrixStack.last().pose().multiply(initialTransition);
-            if(modelTransformVec3f !=null) {
+            if (modelTransformVec3f != null) {
                 matrixStack.translate(0.5, 0.5, 0.5);
-                matrixStack.scale(1/modelTransformVec3f.scale.x(),1/modelTransformVec3f.scale.y(),1/modelTransformVec3f.scale.z());
-                matrixStack.translate(-modelTransformVec3f.translation.x(), -modelTransformVec3f.translation.y(), -modelTransformVec3f.translation.z());
+                matrixStack.scale(1 / modelTransformVec3f.scale.x(), 1 / modelTransformVec3f.scale.y(),
+                        1 / modelTransformVec3f.scale.z());
+                matrixStack.translate(-modelTransformVec3f.translation.x(), -modelTransformVec3f.translation.y(),
+                        -modelTransformVec3f.translation.z());
             }
         }
         applyExtraTransform(matrixStack);

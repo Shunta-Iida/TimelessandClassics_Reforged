@@ -4,4 +4,3 @@
  * limited to the functionality that is required for glTF.
  */
 package de.javagl.jgltf.model.animation;
-

@@ -39,8 +39,7 @@ import java.util.*;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunItem, Gun>>
-{
+public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunItem, Gun>> {
 
     private static final Gson GSON_INSTANCE = Util.make(() -> {
         GsonBuilder builder = new GsonBuilder();
@@ -55,42 +54,34 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
 
     public HashSet<UUID> Ids = new HashSet<>();
     public Map<UUID, ItemStack> StackIds = new HashMap<>();
+
     @Override
-    protected Map<GunItem, Gun> prepare(ResourceManager resourceManager, ProfilerFiller profiler)
-    {
+    protected Map<GunItem, Gun> prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
         Map<GunItem, Gun> map = Maps.newHashMap();
         GunMod.LOGGER.info("YO_DATA_GUN");
-        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof GunItem).forEach(item ->
-        {
+        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof GunItem).forEach(item -> {
             ResourceLocation id = item.getRegistryName();
-            if(id != null)
-            {
-                ResourceLocation resourceLocation = new ResourceLocation(String.format("%s:guns/%s.json", id.getNamespace(), id.getPath()));
-                try(Resource resource = resourceManager.getResource(resourceLocation); InputStream is = resource.getInputStream();
-                    Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)))
-                {
+            if (id != null) {
+                ResourceLocation resourceLocation = new ResourceLocation(
+                        String.format("%s:guns/%s.json", id.getNamespace(), id.getPath()));
+                try (Resource resource = resourceManager.getResource(resourceLocation);
+                        InputStream is = resource.getInputStream();
+                        Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
                     Gun gun = GsonHelper.fromJson(GSON_INSTANCE, reader, Gun.class);
-                    if(gun != null && Validator.isValidObject(gun))
-                    {
+                    if (gun != null && Validator.isValidObject(gun)) {
                         map.put((GunItem) item, gun);
-                    }
-                    else
-                    {
-                        GunMod.LOGGER.error("Couldn't load data file {} as it is missing or malformed. Using default gun data", resourceLocation);
+                    } else {
+                        GunMod.LOGGER.error(
+                                "Couldn't load data file {} as it is missing or malformed. Using default gun data",
+                                resourceLocation);
                         map.put((GunItem) item, new Gun());
                     }
-                }
-                catch(InvalidObjectException e)
-                {
+                } catch (InvalidObjectException e) {
                     GunMod.LOGGER.error("Missing required properties for {}", resourceLocation);
                     e.printStackTrace();
-                }
-                catch(IOException e)
-                {
+                } catch (IOException e) {
                     GunMod.LOGGER.error("Couldn't parse data file {}", resourceLocation);
-                }
-                catch(IllegalAccessException e)
-                {
+                } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
@@ -99,8 +90,7 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
     }
 
     @Override
-    protected void apply(Map<GunItem, Gun> objects, ResourceManager resourceManager, ProfilerFiller profiler)
-    {
+    protected void apply(Map<GunItem, Gun> objects, ResourceManager resourceManager, ProfilerFiller profiler) {
         ImmutableMap.Builder<ResourceLocation, Gun> builder = ImmutableMap.builder();
         objects.forEach((item, gun) -> {
             Validate.notNull(item.getRegistryName());
@@ -115,8 +105,7 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
      *
      * @param buffer a packet buffer get
      */
-    public void writeRegisteredGuns(FriendlyByteBuf buffer)
-    {
+    public void writeRegisteredGuns(FriendlyByteBuf buffer) {
         buffer.writeVarInt(this.registeredGuns.size());
         this.registeredGuns.forEach((id, gun) -> {
             buffer.writeResourceLocation(id);
@@ -130,14 +119,11 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
      * @param buffer a packet buffer get
      * @return a map of registered guns from the server
      */
-    public static ImmutableMap<ResourceLocation, Gun> readRegisteredGuns(FriendlyByteBuf buffer)
-    {
+    public static ImmutableMap<ResourceLocation, Gun> readRegisteredGuns(FriendlyByteBuf buffer) {
         int size = buffer.readVarInt();
-        if(size > 0)
-        {
+        if (size > 0) {
             ImmutableMap.Builder<ResourceLocation, Gun> builder = ImmutableMap.builder();
-            for(int i = 0; i < size; i++)
-            {
+            for (int i = 0; i < size; i++) {
                 ResourceLocation id = buffer.readResourceLocation();
                 Gun gun = Gun.create(buffer.readNbt());
                 builder.put(id, gun);
@@ -147,28 +133,23 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
         return ImmutableMap.of();
     }
 
-    public static boolean updateRegisteredGuns(MessageUpdateGuns message)
-    {
+    public static boolean updateRegisteredGuns(MessageUpdateGuns message) {
         return updateRegisteredGuns(message.getRegisteredGuns());
     }
-
 
     /**
      * Updates registered guns from data provided by the server
      *
-     * @return true if all registered guns were able to update their corresponding gun item
+     * @return true if all registered guns were able to update their corresponding
+     *         gun item
      */
     @OnlyIn(Dist.CLIENT)
-    public static boolean updateRegisteredGuns(Map<ResourceLocation, Gun> registeredGuns)
-    {
+    public static boolean updateRegisteredGuns(Map<ResourceLocation, Gun> registeredGuns) {
         clientRegisteredGuns.clear();
-        if(registeredGuns != null)
-        {
-            for(Map.Entry<ResourceLocation, Gun> entry : registeredGuns.entrySet())
-            {
+        if (registeredGuns != null) {
+            for (Map.Entry<ResourceLocation, Gun> entry : registeredGuns.entrySet()) {
                 Item item = ForgeRegistries.ITEMS.getValue(entry.getKey());
-                if(!(item instanceof GunItem))
-                {
+                if (!(item instanceof GunItem)) {
                     return false;
                 }
                 ((GunItem) item).setGun(new Supplier(entry.getValue()));
@@ -180,90 +161,83 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
     }
 
     /**
-     * Gets a map of all the registered guns objects. Note, this is an immutable map.
+     * Gets a map of all the registered guns objects. Note, this is an immutable
+     * map.
      *
      * @return a map of registered gun objects
      */
-    public Map<ResourceLocation, Gun> getRegisteredGuns()
-    {
+    public Map<ResourceLocation, Gun> getRegisteredGuns() {
         return this.registeredGuns;
     }
 
     /**
-     * Gets a list of all the guns registered on the client side. Note, this is an immutable list.
+     * Gets a list of all the guns registered on the client side. Note, this is an
+     * immutable list.
      *
      * @return a map of guns registered on the client
      */
-    public static List<GunItem> getClientRegisteredGuns()
-    {
+    public static List<GunItem> getClientRegisteredGuns() {
         return ImmutableList.copyOf(clientRegisteredGuns);
     }
 
     @SubscribeEvent
-    public static void onServerStopped(ServerStoppedEvent event)
-    {
+    public static void onServerStopped(ServerStoppedEvent event) {
         NetworkGunManager.instance = null;
     }
 
     @SubscribeEvent
-    public static void addReloadListenerEvent(AddReloadListenerEvent event)
-    {
+    public static void addReloadListenerEvent(AddReloadListenerEvent event) {
         NetworkGunManager networkGunManager = new NetworkGunManager();
         event.addListener(networkGunManager);
         NetworkGunManager.instance = networkGunManager;
     }
 
     /**
-     * Gets the network gun manager. This will be null if the client isn't running an integrated
+     * Gets the network gun manager. This will be null if the client isn't running
+     * an integrated
      * server or the client is connected to a dedicated server.
      *
      * @return the network gun manager
      */
     @Nullable
-    public static NetworkGunManager get()
-    {
+    public static NetworkGunManager get() {
         return instance;
     }
 
-    public interface IGunProvider
-    {
+    public interface IGunProvider {
         ImmutableMap<ResourceLocation, Gun> getRegisteredGuns();
 
         ImmutableMap<ResourceLocation, CustomGun> getCustomGuns();
     }
 
     /**
-     * A simple wrapper for a gun object to pass to GunItem. This is to indicate to developers that
-     * Gun instances shouldn't be changed on GunItems as they are controlled by NetworkGunManager.
+     * A simple wrapper for a gun object to pass to GunItem. This is to indicate to
+     * developers that
+     * Gun instances shouldn't be changed on GunItems as they are controlled by
+     * NetworkGunManager.
      * Changes to gun properties should be made through the JSON file.
      */
-    public static class Supplier
-    {
+    public static class Supplier {
         private Gun gun;
 
-        private Supplier(Gun gun)
-        {
+        private Supplier(Gun gun) {
             this.gun = gun;
         }
 
-        public Gun getGun()
-        {
+        public Gun getGun() {
             return this.gun;
         }
     }
 
-    public static class LoginData implements ILoginData
-    {
+    public static class LoginData implements ILoginData {
         @Override
-        public void writeData(FriendlyByteBuf buffer)
-        {
+        public void writeData(FriendlyByteBuf buffer) {
             Validate.notNull(NetworkGunManager.get());
             NetworkGunManager.get().writeRegisteredGuns(buffer);
         }
 
         @Override
-        public Optional<String> readData(FriendlyByteBuf buffer)
-        {
+        public Optional<String> readData(FriendlyByteBuf buffer) {
             Map<ResourceLocation, Gun> registeredGuns = NetworkGunManager.readRegisteredGuns(buffer);
             NetworkGunManager.updateRegisteredGuns(registeredGuns);
             return Optional.empty();

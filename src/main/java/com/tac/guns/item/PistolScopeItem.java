@@ -16,21 +16,20 @@ import java.util.List;
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class PistolScopeItem extends ScopeItem
-{
-    public PistolScopeItem(Scope scope, Properties properties)
-    {
-        super(scope,properties);
+public class PistolScopeItem extends ScopeItem {
+    public PistolScopeItem(Scope scope, Properties properties) {
+        super(scope, properties);
     }
+
     @Override
-    public Type getType()
-    {
+    public Type getType() {
         return Type.PISTOL_SCOPE;
     }
+
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag)
-    {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, worldIn, tooltip, flag);
-        tooltip.add((new TranslatableComponent("info.tac.pistolScope_type").withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(ChatFormatting.BOLD)));
+        tooltip.add((new TranslatableComponent("info.tac.pistolScope_type").withStyle(ChatFormatting.LIGHT_PURPLE)
+                .withStyle(ChatFormatting.BOLD)));
     }
 }

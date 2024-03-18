@@ -15,76 +15,65 @@ import net.minecraft.world.level.Level;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class WorkbenchRecipe implements Recipe<WorkbenchTileEntity>
-{
+public class WorkbenchRecipe implements Recipe<WorkbenchTileEntity> {
     private final ResourceLocation id;
     private final ItemStack item;
     private final ImmutableList<Pair<Ingredient, Integer>> materials;
     private final String group;
 
-    public WorkbenchRecipe(ResourceLocation id, ItemStack item, ImmutableList<Pair<Ingredient, Integer>> materials, String group)
-    {
+    public WorkbenchRecipe(ResourceLocation id, ItemStack item, ImmutableList<Pair<Ingredient, Integer>> materials,
+            String group) {
         this.id = id;
         this.item = item;
         this.materials = materials;
         this.group = group;
     }
 
-    public ItemStack getItem()
-    {
+    public ItemStack getItem() {
         return this.item.copy();
     }
 
-    public ImmutableList<Pair<Ingredient, Integer>> getMaterials()
-    {
+    public ImmutableList<Pair<Ingredient, Integer>> getMaterials() {
         return this.materials;
     }
 
     @Override
-    public boolean matches(WorkbenchTileEntity inv, Level worldIn)
-    {
+    public boolean matches(WorkbenchTileEntity inv, Level worldIn) {
         return false;
     }
 
     @Override
-    public ItemStack assemble(WorkbenchTileEntity inv)
-    {
+    public ItemStack assemble(WorkbenchTileEntity inv) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height)
-    {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getResultItem()
-    {
+    public ItemStack getResultItem() {
         return this.item.copy();
     }
 
     @Override
-    public ResourceLocation getId()
-    {
+    public ResourceLocation getId() {
         return this.id;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer()
-    {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipeSerializers.WORKBENCH.get();
     }
 
     @Override
-    public RecipeType<?> getType()
-    {
+    public RecipeType<?> getType() {
         return com.tac.guns.crafting.RecipeType.WORKBENCH;
     }
 
     @Override
-    public String getGroup()
-    {
+    public String getGroup() {
         return group;
     }
 }

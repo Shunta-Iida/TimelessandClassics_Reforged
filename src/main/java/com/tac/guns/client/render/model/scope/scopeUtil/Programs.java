@@ -25,7 +25,7 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(normalvshader);
-        if(GL20.glGetShaderi(normalvshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(normalvshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(normalvshader, 512));
         }
 
@@ -41,7 +41,7 @@ public class Programs {
                         + "    gl_FragColor = src*color;\r\n"
                         + "}");
         GL20.glCompileShader(normalfshader);
-        if(GL20.glGetShaderi(normalfshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(normalfshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(normalfshader, 512));
         }
 
@@ -51,7 +51,7 @@ public class Programs {
         GL20.glDeleteShader(normalvshader);
         GL20.glDeleteShader(normalfshader);
         GL20.glLinkProgram(normalProgram);
-        if(GL20.glGetProgrami(normalProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(normalProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(normalProgram, 512));
         }
 
@@ -72,7 +72,7 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(depthvshader);
-        if(GL20.glGetShaderi(depthvshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(depthvshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(depthvshader, 512));
         }
 
@@ -89,7 +89,7 @@ public class Programs {
                         + "    gl_FragDepth=src.r;\r\n"
                         + "}");
         GL20.glCompileShader(depthfshader);
-        if(GL20.glGetShaderi(depthfshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(depthfshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(depthfshader, 512));
         }
 
@@ -99,7 +99,7 @@ public class Programs {
         GL20.glDeleteShader(depthvshader);
         GL20.glDeleteShader(depthfshader);
         GL20.glLinkProgram(depthProgram);
-        if(GL20.glGetProgrami(depthProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(depthProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(depthProgram, 512));
         }
 
@@ -120,7 +120,7 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(overlayvshader);
-        if(GL20.glGetShaderi(overlayvshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(overlayvshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(overlayvshader, 512));
         }
 
@@ -167,7 +167,7 @@ public class Programs {
                         + "    gl_FragColor.a = step(0.1,gl_FragColor.a);\r\n"
                         + "}");
         GL20.glCompileShader(overlayfshader);
-        if(GL20.glGetShaderi(overlayfshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(overlayfshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(overlayfshader, 512));
         }
 
@@ -177,7 +177,7 @@ public class Programs {
         GL20.glDeleteShader(overlayvshader);
         GL20.glDeleteShader(overlayfshader);
         GL20.glLinkProgram(overlayProgram);
-        if(GL20.glGetProgrami(overlayProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(overlayProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(overlayProgram, 512));
         }
 
@@ -200,11 +200,11 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(scopeBorderShader_V);
-        if(GL20.glGetShaderi(scopeBorderShader_V, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(scopeBorderShader_V, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(scopeBorderShader_V, 512));
         }
 
-        int scopeBorderShader_F=GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
+        int scopeBorderShader_F = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
         GL20.glShaderSource(scopeBorderShader_F,
                 "#version 120\r\n"
                         + "uniform sampler2D texture;\r\n"
@@ -243,7 +243,7 @@ public class Programs {
                         + "    gl_FragColor = albedo * color;\r\n"
                         + "}");
         GL20.glCompileShader(scopeBorderShader_F);
-        if(GL20.glGetShaderi(scopeBorderShader_F, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(scopeBorderShader_F, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(scopeBorderShader_F, 512));
         }
 
@@ -253,7 +253,7 @@ public class Programs {
         GL20.glDeleteShader(scopeBorderShader_V);
         GL20.glDeleteShader(scopeBorderShader_F);
         GL20.glLinkProgram(scopeBorderProgram);
-        if(GL20.glGetProgrami(scopeBorderProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(scopeBorderProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(scopeBorderProgram, 512));
         }
 
@@ -274,7 +274,7 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(sunglassesvshader);
-        if(GL20.glGetShaderi(sunglassesvshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(sunglassesvshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(sunglassesvshader, 512));
         }
 
@@ -292,7 +292,7 @@ public class Programs {
                         + "    gl_FragDepth=0;\r\n"
                         + "}");
         GL20.glCompileShader(sunglassesfshader);
-        if(GL20.glGetShaderi(sunglassesfshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(sunglassesfshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(sunglassesfshader, 512));
         }
 
@@ -302,7 +302,7 @@ public class Programs {
         GL20.glDeleteShader(sunglassesvshader);
         GL20.glDeleteShader(sunglassesfshader);
         GL20.glLinkProgram(sunglassesProgram);
-        if(GL20.glGetProgrami(sunglassesProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(sunglassesProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(sunglassesProgram, 512));
         }
 
@@ -323,7 +323,7 @@ public class Programs {
                         + "    gl_Position = gl_ProjectionMatrix  * gl_ModelViewMatrix * gl_Vertex;"
                         + "}");
         GL20.glCompileShader(alphaDepthvshader);
-        if(GL20.glGetShaderi(alphaDepthvshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(alphaDepthvshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(alphaDepthvshader, 512));
         }
 
@@ -342,7 +342,7 @@ public class Programs {
                         + "    gl_FragColor = mask;\r\n"
                         + "}");
         GL20.glCompileShader(alphaDepthfshader);
-        if(GL20.glGetShaderi(alphaDepthfshader, GL20.GL_COMPILE_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetShaderi(alphaDepthfshader, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetShaderInfoLog(alphaDepthfshader, 512));
         }
 
@@ -352,7 +352,7 @@ public class Programs {
         GL20.glDeleteShader(alphaDepthvshader);
         GL20.glDeleteShader(alphaDepthfshader);
         GL20.glLinkProgram(alphaDepthProgram);
-        if(GL20.glGetProgrami(alphaDepthProgram, GL20.GL_LINK_STATUS)!=GL11.GL_TRUE) {
+        if (GL20.glGetProgrami(alphaDepthProgram, GL20.GL_LINK_STATUS) != GL11.GL_TRUE) {
             throw new RuntimeException(GL20.glGetProgramInfoLog(alphaDepthProgram, 512));
         }
 

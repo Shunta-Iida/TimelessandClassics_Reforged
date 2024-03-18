@@ -5,7 +5,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-
 // Will be one for backpacks too
 public class ArmorRigSlot extends SlotItemHandler {
 

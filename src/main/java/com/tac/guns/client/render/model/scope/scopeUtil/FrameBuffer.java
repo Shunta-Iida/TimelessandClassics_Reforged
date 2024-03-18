@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL30.*;
+
 public class FrameBuffer {
 
     private int buffer;
@@ -45,11 +46,11 @@ public class FrameBuffer {
         glDrawBuffer(GL_COLOR_ATTACHMENT0);
         checkComplete();
 
-        if(hasRenderBuffer) {
+        if (hasRenderBuffer) {
             generateRenderBuffer();
         }
 
-        if(hasDepthTexture) {
+        if (hasDepthTexture) {
             createDepthTexture();
         }
     }
@@ -66,7 +67,8 @@ public class FrameBuffer {
 
     public void bind(boolean viewport) {
         glBindFramebuffer(GL_FRAMEBUFFER, buffer);
-        if(viewport) glViewport(0, 0, width, height);
+        if (viewport)
+            glViewport(0, 0, width, height);
     }
 
     public void unbind() {
@@ -88,7 +90,8 @@ public class FrameBuffer {
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
     }
 
-    public void createTexture(int index, int textureFormat, int format, int type, int colorAttachment, int wrap, int filter) {
+    public void createTexture(int index, int textureFormat, int format, int type, int colorAttachment, int wrap,
+            int filter) {
         int texture = glGenTextures();
         textures[index] = texture;
         glBindTexture(GL_TEXTURE_2D, texture);
@@ -109,7 +112,8 @@ public class FrameBuffer {
     private void createDepthTexture() {
         textureDepth = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, textureDepth);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, (ByteBuffer) null);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT,
+                (ByteBuffer) null);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -123,11 +127,13 @@ public class FrameBuffer {
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
 
-        /*if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-            Throwable t = new Throwable("Render buffer couldn't create!");
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Shader compile");
-            throw new ReportedException(crashreport);
-        }*/
+        /*
+         * if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+         * Throwable t = new Throwable("Render buffer couldn't create!");
+         * CrashReport crashreport = CrashReport.makeCrashReport(t, "Shader compile");
+         * throw new ReportedException(crashreport);
+         * }
+         */
     }
 
     public void bindTexture(int index) {
@@ -147,11 +153,13 @@ public class FrameBuffer {
     }
 
     private void checkComplete() {
-        /*if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-            Throwable t = new Throwable("MRT couldn't create!");
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Shader compile");
-            throw new ReportedException(crashreport);
-        }*/
+        /*
+         * if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+         * Throwable t = new Throwable("MRT couldn't create!");
+         * CrashReport crashreport = CrashReport.makeCrashReport(t, "Shader compile");
+         * throw new ReportedException(crashreport);
+         * }
+         */
     }
 
     public void clear() {
@@ -164,13 +172,15 @@ public class FrameBuffer {
 
     public void delete() {
         deleteTextures();
-        if(hasDepthTexture) glDeleteTextures(textureDepth);
-        if(hasRenderBuffer) glDeleteRenderbuffers(renderBuffer);
+        if (hasDepthTexture)
+            glDeleteTextures(textureDepth);
+        if (hasRenderBuffer)
+            glDeleteRenderbuffers(renderBuffer);
         glDeleteFramebuffers(buffer);
     }
 
     private void deleteTextures() {
-        if(textures != null)
+        if (textures != null)
             for (int texture : textures) {
                 glDeleteTextures(texture);
             }

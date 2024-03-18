@@ -10,38 +10,33 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageRemoveProjectile extends PlayMessage<MessageRemoveProjectile>
-{
+public class MessageRemoveProjectile extends PlayMessage<MessageRemoveProjectile> {
     private int entityId;
 
-    public MessageRemoveProjectile() {}
+    public MessageRemoveProjectile() {
+    }
 
-    public MessageRemoveProjectile(int entityId)
-    {
+    public MessageRemoveProjectile(int entityId) {
         this.entityId = entityId;
     }
 
     @Override
-    public void encode(MessageRemoveProjectile messageRemoveProjectile, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageRemoveProjectile messageRemoveProjectile, FriendlyByteBuf buffer) {
         buffer.writeInt(messageRemoveProjectile.entityId);
     }
 
     @Override
-    public MessageRemoveProjectile decode(FriendlyByteBuf buffer)
-    {
+    public MessageRemoveProjectile decode(FriendlyByteBuf buffer) {
         return new MessageRemoveProjectile(buffer.readInt());
     }
 
     @Override
-    public void handle(MessageRemoveProjectile messageRemoveProjectile, Supplier<NetworkEvent.Context> supplier)
-    {
+    public void handle(MessageRemoveProjectile messageRemoveProjectile, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleRemoveProjectile(messageRemoveProjectile));
         supplier.get().setPacketHandled(true);
     }
 
-    public int getEntityId()
-    {
+    public int getEntityId() {
         return this.entityId;
     }
 }

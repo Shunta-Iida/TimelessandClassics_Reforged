@@ -8,45 +8,42 @@
 
 package de.javagl.jgltf.impl.v2;
 
-
-
 /**
- * A camera's projection. A node **MAY** reference a camera to apply a 
- * transform to place the camera in the scene. 
+ * A camera's projection. A node **MAY** reference a camera to apply a
+ * transform to place the camera in the scene.
  * 
- * Auto-generated for camera.schema.json 
+ * Auto-generated for camera.schema.json
  * 
  */
 public class Camera
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * An orthographic camera containing properties to create an orthographic 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `perspective` is defined. (optional) 
+     * An orthographic camera containing properties to create an orthographic
+     * projection matrix. This property **MUST NOT** be defined when
+     * `perspective` is defined. (optional)
      * 
      */
     private CameraOrthographic orthographic;
     /**
-     * A perspective camera containing properties to create a perspective 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `orthographic` is defined. (optional) 
+     * A perspective camera containing properties to create a perspective
+     * projection matrix. This property **MUST NOT** be defined when
+     * `orthographic` is defined. (optional)
      * 
      */
     private CameraPerspective perspective;
     /**
-     * Specifies if the camera uses a perspective or orthographic projection. 
-     * (required)<br> 
-     * Valid values: [perspective, orthographic] 
+     * Specifies if the camera uses a perspective or orthographic projection.
+     * (required)<br>
+     * Valid values: [perspective, orthographic]
      * 
      */
     private String type;
 
     /**
-     * An orthographic camera containing properties to create an orthographic 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `perspective` is defined. (optional) 
+     * An orthographic camera containing properties to create an orthographic
+     * projection matrix. This property **MUST NOT** be defined when
+     * `perspective` is defined. (optional)
      * 
      * @param orthographic The orthographic to set
      * 
@@ -54,15 +51,15 @@ public class Camera
     public void setOrthographic(CameraOrthographic orthographic) {
         if (orthographic == null) {
             this.orthographic = orthographic;
-            return ;
+            return;
         }
         this.orthographic = orthographic;
     }
 
     /**
-     * An orthographic camera containing properties to create an orthographic 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `perspective` is defined. (optional) 
+     * An orthographic camera containing properties to create an orthographic
+     * projection matrix. This property **MUST NOT** be defined when
+     * `perspective` is defined. (optional)
      * 
      * @return The orthographic
      * 
@@ -72,9 +69,9 @@ public class Camera
     }
 
     /**
-     * A perspective camera containing properties to create a perspective 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `orthographic` is defined. (optional) 
+     * A perspective camera containing properties to create a perspective
+     * projection matrix. This property **MUST NOT** be defined when
+     * `orthographic` is defined. (optional)
      * 
      * @param perspective The perspective to set
      * 
@@ -82,15 +79,15 @@ public class Camera
     public void setPerspective(CameraPerspective perspective) {
         if (perspective == null) {
             this.perspective = perspective;
-            return ;
+            return;
         }
         this.perspective = perspective;
     }
 
     /**
-     * A perspective camera containing properties to create a perspective 
-     * projection matrix. This property **MUST NOT** be defined when 
-     * `orthographic` is defined. (optional) 
+     * A perspective camera containing properties to create a perspective
+     * projection matrix. This property **MUST NOT** be defined when
+     * `orthographic` is defined. (optional)
      * 
      * @return The perspective
      * 
@@ -100,30 +97,31 @@ public class Camera
     }
 
     /**
-     * Specifies if the camera uses a perspective or orthographic projection. 
-     * (required)<br> 
-     * Valid values: [perspective, orthographic] 
+     * Specifies if the camera uses a perspective or orthographic projection.
+     * (required)<br>
+     * Valid values: [perspective, orthographic]
      * 
      * @param type The type to set
-     * @throws NullPointerException If the given value is <code>null</code>
+     * @throws NullPointerException     If the given value is <code>null</code>
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setType(String type) {
         if (type == null) {
-            throw new NullPointerException((("Invalid value for type: "+ type)+", may not be null"));
+            throw new NullPointerException((("Invalid value for type: " + type) + ", may not be null"));
         }
-        if ((!"perspective".equals(type))&&(!"orthographic".equals(type))) {
-            throw new IllegalArgumentException((("Invalid value for type: "+ type)+", valid: [perspective, orthographic]"));
+        if ((!"perspective".equals(type)) && (!"orthographic".equals(type))) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for type: " + type) + ", valid: [perspective, orthographic]"));
         }
         this.type = type;
     }
 
     /**
-     * Specifies if the camera uses a perspective or orthographic projection. 
-     * (required)<br> 
-     * Valid values: [perspective, orthographic] 
+     * Specifies if the camera uses a perspective or orthographic projection.
+     * (required)<br>
+     * Valid values: [perspective, orthographic]
      * 
      * @return The type
      * 

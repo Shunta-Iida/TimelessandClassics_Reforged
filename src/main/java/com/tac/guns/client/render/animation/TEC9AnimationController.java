@@ -15,24 +15,37 @@ public class TEC9AnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 7;
     public static int INDEX_RIGHT_HAND = 4;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/tec_9_inspect.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/tec_9_inspect.gltf"));
     private static final TEC9AnimationController instance = new TEC9AnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case DRAW: return DRAW;
-            case STATIC: return STATIC;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            default: return null;
+        switch (label) {
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case DRAW:
+                return DRAW;
+            case STATIC:
+                return STATIC;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            default:
+                return null;
         }
     }
 
@@ -48,16 +61,17 @@ public class TEC9AnimationController extends PistalAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.TEC_9.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.TEC_9.getId(), this);
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.TEC_9.get(), label);
     }
 
-
-    public static TEC9AnimationController getInstance() { return instance; }
+    public static TEC9AnimationController getInstance() {
+        return instance;
+    }
 
     @Override
     protected int getAttachmentsNodeIndex() {

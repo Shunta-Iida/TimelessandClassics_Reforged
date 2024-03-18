@@ -31,41 +31,38 @@ import java.util.List;
 /**
  * Interface for an animation
  */
-public interface AnimationModel extends NamedModelElement
-{
+public interface AnimationModel extends NamedModelElement {
     /**
      * Enumeration of the different interpolation methods for an animation
      */
-    public enum Interpolation
-    {
+    public enum Interpolation {
         /**
          * Stepwise interpolation
          */
         STEP,
-        
+
         /**
          * Linear interpolation
          */
         LINEAR,
-        
+
         /**
          * Cubic spline interpolation
          */
-        CUBICSPLINE        
+        CUBICSPLINE
     }
-    
+
     /**
      * Interface for an animation channel
      */
-    public interface Channel 
-    {
+    public interface Channel {
         /**
          * Returns the {@link Sampler} for this channel
          * 
          * @return The {@link Sampler}
          */
         Sampler getSampler();
-        
+
         /**
          * Returns the optional {@link NodeModel} to which the animated
          * property (path) belongs.
@@ -73,7 +70,7 @@ public interface AnimationModel extends NamedModelElement
          * @return The {@link NodeModel}
          */
         NodeModel getNodeModel();
-        
+
         /**
          * Returns the path describing the animated property
          * 
@@ -81,12 +78,11 @@ public interface AnimationModel extends NamedModelElement
          */
         String getPath();
     }
-    
+
     /**
      * Interface for an animation sampler
      */
-    public interface Sampler
-    {
+    public interface Sampler {
         /**
          * Returns the {@link AccessorModel} that contains the input (time
          * key frame) data
@@ -94,14 +90,14 @@ public interface AnimationModel extends NamedModelElement
          * @return The input data
          */
         AccessorModel getInput();
-        
+
         /**
          * Returns the {@link Interpolation} method
          * 
          * @return The {@link Interpolation}
          */
         Interpolation getInterpolation();
-        
+
         /**
          * Returns the {@link AccessorModel} that contains the output (value
          * key frame) data
@@ -110,7 +106,7 @@ public interface AnimationModel extends NamedModelElement
          */
         AccessorModel getOutput();
     }
-    
+
     /**
      * Returns an unmodifiable list containing the {@link Channel} instances
      * of the animation

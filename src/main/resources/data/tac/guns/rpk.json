@@ -2,8 +2,10 @@
   "general": {
     "auto": true,
     "rate": 600,
-    "rateSelector": [2],
-    "gripType":  "tac:two_handed_ak47",
+    "rateSelector": [
+      2
+    ],
+    "gripType": "tac:two_handed_ak47",
     "recoilAngle": 3.125,
     "horizontalRecoilAngle": 1.65,
     "recoilKick": 1.575,
@@ -12,7 +14,6 @@
     "cameraRecoilModifier": 1.35,
     "recoilDuration": 0.205,
     "weightKilo": 6.5,
-
     "spread": 0.545,
     "firstShotSpread": 0.125,
     "hipFireInaccuracy": 6.45,
@@ -21,7 +22,7 @@
     "movementInaccuracy": 0.55
   },
   "projectile": {
-    "item":  "tac:762x39",
+    "item": "tac:762x39",
     "visible": false,
     "damage": 9,
     "armorIgnore": 0.6,
@@ -42,17 +43,21 @@
     "maxAmmo": 40,
     "reloadMagTimer": 48,
     "additionalReloadEmptyMagTimer": 18,
-    "maxAdditionalAmmoPerOC": [10, 22, 35],
+    "maxAdditionalAmmoPerOC": [
+      10,
+      22,
+      35
+    ],
     "preReloadPauseTicks": 0
   },
   "sounds": {
-    "fire":  "tac:item.rpk_fire",
+    "fire": "tac:item.rpk_fire",
     "reloadNormal": "tac:animation.rpk_reload_norm",
     "reloadEmpty": "tac:animation.rpk_reload_empty",
     "draw": "tac:animation.rpk_draw",
     "inspect": "tac:animation.rpk_inspect",
-    "cock":  "tac:item.pistol.cock",
-    "silencedFire":  "tac:item.rpk_fire_s"
+    "cock": "tac:item.pistol.cock",
+    "silencedFire": "tac:item.rpk_fire_s"
   },
   "display": {
     "flash": {
@@ -62,7 +67,7 @@
       "size": 0.8
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": 4,
       "xOffset": 0,
       "zOffset": 3,

@@ -17,14 +17,15 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements NetworkRigManager.IRigProvider
-{
+public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements NetworkRigManager.IRigProvider {
     private ImmutableMap<ResourceLocation, Rig> registeredRigs;
     private ImmutableMap<ResourceLocation, CustomRig> customRigs;
 
-    public MessageUpdateRigs() {}
+    public MessageUpdateRigs() {
+    }
 
-    public MessageUpdateRigs(ImmutableMap<ResourceLocation, Rig> registeredRigs, ImmutableMap<ResourceLocation, CustomRig> customRigs) {
+    public MessageUpdateRigs(ImmutableMap<ResourceLocation, Rig> registeredRigs,
+            ImmutableMap<ResourceLocation, CustomRig> customRigs) {
         this.registeredRigs = registeredRigs;
         this.customRigs = customRigs;
     }
@@ -38,8 +39,7 @@ public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements
     }
 
     @Override
-    public MessageUpdateRigs decode(FriendlyByteBuf buffer)
-    {
+    public MessageUpdateRigs decode(FriendlyByteBuf buffer) {
         ImmutableMap<ResourceLocation, Rig> registeredRigs = NetworkRigManager.readRegisteredRigs(buffer);
         ImmutableMap<ResourceLocation, CustomRig> customrig = CustomRigLoader.readCustomRigs(buffer);
         return new MessageUpdateRigs(registeredRigs, customrig);
@@ -50,14 +50,13 @@ public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleUpdateRigs(this));
         supplier.get().setPacketHandled(true);
     }
+
     @Override
-    public ImmutableMap<ResourceLocation, Rig> getRegisteredRigs()
-    {
+    public ImmutableMap<ResourceLocation, Rig> getRegisteredRigs() {
         return this.registeredRigs;
     }
 
-    public ImmutableMap<ResourceLocation, CustomRig> getCustomRigs()
-    {
+    public ImmutableMap<ResourceLocation, CustomRig> getCustomRigs() {
         return this.customRigs;
     }
 }

@@ -18,24 +18,37 @@ public class TtiG34AnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 20;
     public static int INDEX_RIGHT_HAND = 17;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/glock_tac_inspect.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
     private static final TtiG34AnimationController instance = new TtiG34AnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case DRAW: return DRAW;
-            case STATIC: return STATIC;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            default: return null;
+        switch (label) {
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case DRAW:
+                return DRAW;
+            case STATIC:
+                return STATIC;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            default:
+                return null;
         }
     }
 
@@ -51,16 +64,17 @@ public class TtiG34AnimationController extends PistalAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.TTI_G34.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.TTI_G34.getId(), this);
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.TTI_G34.get(), label);
     }
 
-
-    public static TtiG34AnimationController getInstance() { return instance; }
+    public static TtiG34AnimationController getInstance() {
+        return instance;
+    }
 
     @Override
     protected int getAttachmentsNodeIndex() {

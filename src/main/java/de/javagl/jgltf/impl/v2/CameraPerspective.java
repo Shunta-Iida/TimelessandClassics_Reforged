@@ -8,68 +8,65 @@
 
 package de.javagl.jgltf.impl.v2;
 
-
-
 /**
- * A perspective camera containing properties to create a perspective 
- * projection matrix. 
+ * A perspective camera containing properties to create a perspective
+ * projection matrix.
  * 
- * Auto-generated for camera.perspective.schema.json 
+ * Auto-generated for camera.perspective.schema.json
  * 
  */
 public class CameraPerspective
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * The floating-point aspect ratio of the field of view. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point aspect ratio of the field of view. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      */
     private Float aspectRatio;
     /**
-     * The floating-point vertical field of view in radians. This value 
-     * **SHOULD** be less than π. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point vertical field of view in radians. This value
+     * **SHOULD** be less than π. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      */
     private Float yfov;
     /**
-     * The floating-point distance to the far clipping plane. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the far clipping plane. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      */
     private Float zfar;
     /**
-     * The floating-point distance to the near clipping plane. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the near clipping plane. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      */
     private Float znear;
 
     /**
-     * The floating-point aspect ratio of the field of view. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point aspect ratio of the field of view. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @param aspectRatio The aspectRatio to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setAspectRatio(Float aspectRatio) {
         if (aspectRatio == null) {
             this.aspectRatio = aspectRatio;
-            return ;
+            return;
         }
-        if (aspectRatio<= 0.0D) {
+        if (aspectRatio <= 0.0D) {
             throw new IllegalArgumentException("aspectRatio <= 0.0");
         }
         this.aspectRatio = aspectRatio;
     }
 
     /**
-     * The floating-point aspect ratio of the field of view. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point aspect ratio of the field of view. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @return The aspectRatio
      * 
@@ -79,30 +76,30 @@ public class CameraPerspective
     }
 
     /**
-     * The floating-point vertical field of view in radians. This value 
-     * **SHOULD** be less than π. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point vertical field of view in radians. This value
+     * **SHOULD** be less than π. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @param yfov The yfov to set
-     * @throws NullPointerException If the given value is <code>null</code>
+     * @throws NullPointerException     If the given value is <code>null</code>
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setYfov(Float yfov) {
         if (yfov == null) {
-            throw new NullPointerException((("Invalid value for yfov: "+ yfov)+", may not be null"));
+            throw new NullPointerException((("Invalid value for yfov: " + yfov) + ", may not be null"));
         }
-        if (yfov<= 0.0D) {
+        if (yfov <= 0.0D) {
             throw new IllegalArgumentException("yfov <= 0.0");
         }
         this.yfov = yfov;
     }
 
     /**
-     * The floating-point vertical field of view in radians. This value 
-     * **SHOULD** be less than π. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point vertical field of view in radians. This value
+     * **SHOULD** be less than π. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @return The yfov
      * 
@@ -112,28 +109,28 @@ public class CameraPerspective
     }
 
     /**
-     * The floating-point distance to the far clipping plane. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the far clipping plane. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @param zfar The zfar to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setZfar(Float zfar) {
         if (zfar == null) {
             this.zfar = zfar;
-            return ;
+            return;
         }
-        if (zfar<= 0.0D) {
+        if (zfar <= 0.0D) {
             throw new IllegalArgumentException("zfar <= 0.0");
         }
         this.zfar = zfar;
     }
 
     /**
-     * The floating-point distance to the far clipping plane. (optional)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the far clipping plane. (optional)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @return The zfar
      * 
@@ -143,28 +140,28 @@ public class CameraPerspective
     }
 
     /**
-     * The floating-point distance to the near clipping plane. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the near clipping plane. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @param znear The znear to set
-     * @throws NullPointerException If the given value is <code>null</code>
+     * @throws NullPointerException     If the given value is <code>null</code>
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setZnear(Float znear) {
         if (znear == null) {
-            throw new NullPointerException((("Invalid value for znear: "+ znear)+", may not be null"));
+            throw new NullPointerException((("Invalid value for znear: " + znear) + ", may not be null"));
         }
-        if (znear<= 0.0D) {
+        if (znear <= 0.0D) {
             throw new IllegalArgumentException("znear <= 0.0");
         }
         this.znear = znear;
     }
 
     /**
-     * The floating-point distance to the near clipping plane. (required)<br> 
-     * Minimum: 0.0 (exclusive) 
+     * The floating-point distance to the near clipping plane. (required)<br>
+     * Minimum: 0.0 (exclusive)
      * 
      * @return The znear
      * 

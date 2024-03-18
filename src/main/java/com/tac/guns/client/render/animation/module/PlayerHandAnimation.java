@@ -13,40 +13,48 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PlayerHandAnimation {
-    public static void render(GunAnimationController controller, ItemTransforms.TransformType transformType, PoseStack matrices, MultiBufferSource renderBuffer, int light){
-        if(!transformType.firstPerson()) return;
+    public static void render(GunAnimationController controller, ItemTransforms.TransformType transformType,
+            PoseStack matrices, MultiBufferSource renderBuffer, int light) {
+        if (!transformType.firstPerson())
+            return;
         matrices.pushPose();
         {
             controller.applyRightHandTransform(matrices);
-            RenderUtil.renderFirstPersonArm(Minecraft.getInstance().player, HumanoidArm.RIGHT, matrices, renderBuffer, light);
+            RenderUtil.renderFirstPersonArm(Minecraft.getInstance().player, HumanoidArm.RIGHT, matrices, renderBuffer,
+                    light);
         }
         matrices.popPose();
         matrices.pushPose();
         {
-            if(GunRenderingHandler.get() != null)
-            {
-                /*if(ObjectRenderEditor.get() != null && ObjectRenderEditor.get().GetFromElements(1) != null)
-                {
-                    element = ObjectRenderEditor.get().GetFromElements(1);
-                }*/
+            if (GunRenderingHandler.get() != null) {
+                /*
+                 * if(ObjectRenderEditor.get() != null &&
+                 * ObjectRenderEditor.get().GetFromElements(1) != null)
+                 * {
+                 * element = ObjectRenderEditor.get().GetFromElements(1);
+                 * }
+                 */
 
-                //When performing a tactical sprint, apply additional actions
-                if(GunRenderingHandler.get().wSpeed > 0.094f) {
-                    /*ObjectRenderEditor.RENDER_Element element =
-                            new ObjectRenderEditor.RENDER_Element(0,0,0.25f,0);*/
+                // When performing a tactical sprint, apply additional actions
+                if (GunRenderingHandler.get().wSpeed > 0.094f) {
+                    /*
+                     * ObjectRenderEditor.RENDER_Element element =
+                     * new ObjectRenderEditor.RENDER_Element(0,0,0.25f,0);
+                     */
                     float transition = GunRenderingHandler.get().sOT;
 
                     float result = GunRenderingHandler.get().sprintDynamicsHSSLeftHand.update(0.15f, transition);
-                    //Reverse the left arm rotation
+                    // Reverse the left arm rotation
                     matrices.mulPose(Vector3f.XP.rotationDegrees(-90F * result));
                     matrices.mulPose(Vector3f.ZP.rotationDegrees(25f * result));
-                    matrices.translate(-1.2 * /*leftHanded **/ result ,
-                            -0.8 * result ,
+                    matrices.translate(-1.2 * /* leftHanded **/ result,
+                            -0.8 * result,
                             0);
                 }
             }
             controller.applyLeftHandTransform(matrices);
-            RenderUtil.renderFirstPersonArm(Minecraft.getInstance().player, HumanoidArm.LEFT, matrices, renderBuffer, light);
+            RenderUtil.renderFirstPersonArm(Minecraft.getInstance().player, HumanoidArm.LEFT, matrices, renderBuffer,
+                    light);
         }
         matrices.popPose();
     }

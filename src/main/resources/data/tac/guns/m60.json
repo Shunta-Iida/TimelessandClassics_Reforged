@@ -2,7 +2,9 @@
   "general": {
     "auto": true,
     "rate": 600,
-    "rateSelector": [2],
+    "rateSelector": [
+      2
+    ],
     "gripType": "tac:two_handed_m60",
     "recoilAngle": 2.75,
     "recoilKick": 1.35,
@@ -12,7 +14,6 @@
     "cameraRecoilModifier": 1.15,
     "recoilDuration": 0.25,
     "weightKilo": 13.55,
-
     "spread": 0.525,
     "firstShotSpread": 1.875,
     "hipFireInaccuracy": 6.85,
@@ -25,7 +26,11 @@
     "maxAmmo": 70,
     "reloadMagTimer": 120,
     "additionalReloadEmptyMagTimer": 20,
-    "maxAdditionalAmmoPerOC": [25, 50, 75],
+    "maxAdditionalAmmoPerOC": [
+      25,
+      50,
+      75
+    ],
     "preReloadPauseTicks": 0,
     "openBolt": true
   },
@@ -63,7 +68,7 @@
       "trailAdjust": 1.5
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": -3,
       "xOffset": 0,
       "zOffset": 6,

@@ -11,192 +11,190 @@ package de.javagl.jgltf.impl.v2;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * The root object for a glTF asset. 
+ * The root object for a glTF asset.
  * 
- * Auto-generated for glTF.schema.json 
+ * Auto-generated for glTF.schema.json
  * 
  */
 public class GlTF
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * Names of glTF extensions used in this asset. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions used in this asset. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> extensionsUsed;
     /**
-     * Names of glTF extensions required to properly load this asset. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions required to properly load this asset.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> extensionsRequired;
     /**
-     * An array of accessors. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary 
-     * data. (optional) 
+     * An array of accessors. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary
+     * data. (optional)
      * 
      */
     private List<Accessor> accessors;
     /**
-     * An array of keyframe animations. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A keyframe animation. (optional) 
+     * An array of keyframe animations. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A keyframe animation. (optional)
      * 
      */
     private List<Animation> animations;
     /**
-     * Metadata about the glTF asset. (required) 
+     * Metadata about the glTF asset. (required)
      * 
      */
     private Asset asset;
     /**
-     * An array of buffers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins. 
-     * (optional) 
+     * An array of buffers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins.
+     * (optional)
      * 
      */
     private List<Buffer> buffers;
     /**
-     * An array of bufferViews. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A view into a buffer generally representing a subset of 
-     * the buffer. (optional) 
+     * An array of bufferViews. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A view into a buffer generally representing a subset of
+     * the buffer. (optional)
      * 
      */
     private List<BufferView> bufferViews;
     /**
-     * An array of cameras. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera 
-     * to apply a transform to place the camera in the scene. (optional) 
+     * An array of cameras. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera
+     * to apply a transform to place the camera in the scene. (optional)
      * 
      */
     private List<Camera> cameras;
     /**
-     * An array of images. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be 
-     * referenced by an URI (or IRI) or a buffer view index. (optional) 
+     * An array of images. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be
+     * referenced by an URI (or IRI) or a buffer view index. (optional)
      * 
      */
     private List<Image> images;
     /**
-     * An array of materials. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The material appearance of a primitive. (optional) 
+     * An array of materials. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The material appearance of a primitive. (optional)
      * 
      */
     private List<Material> materials;
     /**
-     * An array of meshes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform 
-     * is defined by a node that references it. (optional) 
+     * An array of meshes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform
+     * is defined by a node that references it. (optional)
      * 
      */
     private List<Mesh> meshes;
     /**
-     * An array of nodes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains 
-     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and 
-     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any 
-     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS 
-     * properties are converted to matrices and postmultiplied in the `T * R 
-     * * S` order to compose the transformation matrix; first the scale is 
-     * applied to the vertices, then the rotation, and then the translation. 
-     * If none are provided, the transform is the identity. When a node is 
-     * targeted for animation (referenced by an animation.channel.target), 
-     * `matrix` **MUST NOT** be present. (optional) 
+     * An array of nodes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains
+     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and
+     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any
+     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS
+     * properties are converted to matrices and postmultiplied in the `T * R
+     * * S` order to compose the transformation matrix; first the scale is
+     * applied to the vertices, then the rotation, and then the translation.
+     * If none are provided, the transform is the identity. When a node is
+     * targeted for animation (referenced by an animation.channel.target),
+     * `matrix` **MUST NOT** be present. (optional)
      * 
      */
     private List<Node> nodes;
     /**
-     * An array of samplers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping 
-     * modes. (optional) 
+     * An array of samplers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping
+     * modes. (optional)
      * 
      */
     private List<Sampler> samplers;
     /**
-     * The index of the default scene. (optional) 
+     * The index of the default scene. (optional)
      * 
      */
     private Integer scene;
     /**
-     * An array of scenes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The root nodes of a scene. (optional) 
+     * An array of scenes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The root nodes of a scene. (optional)
      * 
      */
     private List<Scene> scenes;
     /**
-     * An array of skins. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional) 
+     * An array of skins. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional)
      * 
      */
     private List<Skin> skins;
     /**
-     * An array of textures. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A texture and its sampler. (optional) 
+     * An array of textures. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A texture and its sampler. (optional)
      * 
      */
     private List<Texture> textures;
 
     /**
-     * Names of glTF extensions used in this asset. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions used in this asset. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param extensionsUsed The extensionsUsed to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setExtensionsUsed(List<String> extensionsUsed) {
         if (extensionsUsed == null) {
             this.extensionsUsed = extensionsUsed;
-            return ;
+            return;
         }
-        if (extensionsUsed.size()< 1) {
+        if (extensionsUsed.size() < 1) {
             throw new IllegalArgumentException("Number of extensionsUsed elements is < 1");
         }
         this.extensionsUsed = extensionsUsed;
     }
 
     /**
-     * Names of glTF extensions used in this asset. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions used in this asset. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The extensionsUsed
      * 
@@ -206,9 +204,9 @@ public class GlTF
     }
 
     /**
-     * Add the given extensionsUsed. The extensionsUsed of this instance will 
-     * be replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given extensionsUsed. The extensionsUsed of this instance will
+     * be replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -220,7 +218,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsUsed;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -228,11 +226,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given extensionsUsed. The extensionsUsed of this instance 
-     * will be replaced with a list that contains all previous elements, 
-     * except for the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given extensionsUsed. The extensionsUsed of this instance
+     * will be replaced with a list that contains all previous elements,
+     * except for the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -244,7 +242,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsUsed;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -256,34 +254,34 @@ public class GlTF
     }
 
     /**
-     * Names of glTF extensions required to properly load this asset. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions required to properly load this asset.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param extensionsRequired The extensionsRequired to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setExtensionsRequired(List<String> extensionsRequired) {
         if (extensionsRequired == null) {
             this.extensionsRequired = extensionsRequired;
-            return ;
+            return;
         }
-        if (extensionsRequired.size()< 1) {
+        if (extensionsRequired.size() < 1) {
             throw new IllegalArgumentException("Number of extensionsRequired elements is < 1");
         }
         this.extensionsRequired = extensionsRequired;
     }
 
     /**
-     * Names of glTF extensions required to properly load this asset. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of glTF extensions required to properly load this asset.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The extensionsRequired
      * 
@@ -293,9 +291,9 @@ public class GlTF
     }
 
     /**
-     * Add the given extensionsRequired. The extensionsRequired of this 
-     * instance will be replaced with a list that contains all previous 
-     * elements, and additionally the new element. 
+     * Add the given extensionsRequired. The extensionsRequired of this
+     * instance will be replaced with a list that contains all previous
+     * elements, and additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -307,7 +305,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsRequired;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -315,11 +313,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given extensionsRequired. The extensionsRequired of this 
-     * instance will be replaced with a list that contains all previous 
-     * elements, except for the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given extensionsRequired. The extensionsRequired of this
+     * instance will be replaced with a list that contains all previous
+     * elements, except for the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -331,7 +329,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsRequired;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -343,34 +341,34 @@ public class GlTF
     }
 
     /**
-     * An array of accessors. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary 
-     * data. (optional) 
+     * An array of accessors. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary
+     * data. (optional)
      * 
      * @param accessors The accessors to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setAccessors(List<Accessor> accessors) {
         if (accessors == null) {
             this.accessors = accessors;
-            return ;
+            return;
         }
-        if (accessors.size()< 1) {
+        if (accessors.size() < 1) {
             throw new IllegalArgumentException("Number of accessors elements is < 1");
         }
         this.accessors = accessors;
     }
 
     /**
-     * An array of accessors. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary 
-     * data. (optional) 
+     * An array of accessors. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A typed view into a buffer view that contains raw binary
+     * data. (optional)
      * 
      * @return The accessors
      * 
@@ -380,9 +378,9 @@ public class GlTF
     }
 
     /**
-     * Add the given accessors. The accessors of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given accessors. The accessors of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -394,7 +392,7 @@ public class GlTF
         }
         List<Accessor> oldList = this.accessors;
         List<Accessor> newList = new ArrayList<Accessor>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -402,11 +400,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given accessors. The accessors of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given accessors. The accessors of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -418,7 +416,7 @@ public class GlTF
         }
         List<Accessor> oldList = this.accessors;
         List<Accessor> newList = new ArrayList<Accessor>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -430,32 +428,32 @@ public class GlTF
     }
 
     /**
-     * An array of keyframe animations. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A keyframe animation. (optional) 
+     * An array of keyframe animations. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A keyframe animation. (optional)
      * 
      * @param animations The animations to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setAnimations(List<Animation> animations) {
         if (animations == null) {
             this.animations = animations;
-            return ;
+            return;
         }
-        if (animations.size()< 1) {
+        if (animations.size() < 1) {
             throw new IllegalArgumentException("Number of animations elements is < 1");
         }
         this.animations = animations;
     }
 
     /**
-     * An array of keyframe animations. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A keyframe animation. (optional) 
+     * An array of keyframe animations. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A keyframe animation. (optional)
      * 
      * @return The animations
      * 
@@ -465,9 +463,9 @@ public class GlTF
     }
 
     /**
-     * Add the given animations. The animations of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given animations. The animations of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -479,7 +477,7 @@ public class GlTF
         }
         List<Animation> oldList = this.animations;
         List<Animation> newList = new ArrayList<Animation>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -487,11 +485,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given animations. The animations of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given animations. The animations of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -503,7 +501,7 @@ public class GlTF
         }
         List<Animation> oldList = this.animations;
         List<Animation> newList = new ArrayList<Animation>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -515,7 +513,7 @@ public class GlTF
     }
 
     /**
-     * Metadata about the glTF asset. (required) 
+     * Metadata about the glTF asset. (required)
      * 
      * @param asset The asset to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -523,13 +521,13 @@ public class GlTF
      */
     public void setAsset(Asset asset) {
         if (asset == null) {
-            throw new NullPointerException((("Invalid value for asset: "+ asset)+", may not be null"));
+            throw new NullPointerException((("Invalid value for asset: " + asset) + ", may not be null"));
         }
         this.asset = asset;
     }
 
     /**
-     * Metadata about the glTF asset. (required) 
+     * Metadata about the glTF asset. (required)
      * 
      * @return The asset
      * 
@@ -539,34 +537,34 @@ public class GlTF
     }
 
     /**
-     * An array of buffers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins. 
-     * (optional) 
+     * An array of buffers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins.
+     * (optional)
      * 
      * @param buffers The buffers to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setBuffers(List<Buffer> buffers) {
         if (buffers == null) {
             this.buffers = buffers;
-            return ;
+            return;
         }
-        if (buffers.size()< 1) {
+        if (buffers.size() < 1) {
             throw new IllegalArgumentException("Number of buffers elements is < 1");
         }
         this.buffers = buffers;
     }
 
     /**
-     * An array of buffers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins. 
-     * (optional) 
+     * An array of buffers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A buffer points to binary geometry, animation, or skins.
+     * (optional)
      * 
      * @return The buffers
      * 
@@ -576,9 +574,9 @@ public class GlTF
     }
 
     /**
-     * Add the given buffers. The buffers of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given buffers. The buffers of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -590,7 +588,7 @@ public class GlTF
         }
         List<Buffer> oldList = this.buffers;
         List<Buffer> newList = new ArrayList<Buffer>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -598,11 +596,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given buffers. The buffers of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given buffers. The buffers of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -614,7 +612,7 @@ public class GlTF
         }
         List<Buffer> oldList = this.buffers;
         List<Buffer> newList = new ArrayList<Buffer>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -626,34 +624,34 @@ public class GlTF
     }
 
     /**
-     * An array of bufferViews. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A view into a buffer generally representing a subset of 
-     * the buffer. (optional) 
+     * An array of bufferViews. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A view into a buffer generally representing a subset of
+     * the buffer. (optional)
      * 
      * @param bufferViews The bufferViews to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setBufferViews(List<BufferView> bufferViews) {
         if (bufferViews == null) {
             this.bufferViews = bufferViews;
-            return ;
+            return;
         }
-        if (bufferViews.size()< 1) {
+        if (bufferViews.size() < 1) {
             throw new IllegalArgumentException("Number of bufferViews elements is < 1");
         }
         this.bufferViews = bufferViews;
     }
 
     /**
-     * An array of bufferViews. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A view into a buffer generally representing a subset of 
-     * the buffer. (optional) 
+     * An array of bufferViews. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A view into a buffer generally representing a subset of
+     * the buffer. (optional)
      * 
      * @return The bufferViews
      * 
@@ -663,9 +661,9 @@ public class GlTF
     }
 
     /**
-     * Add the given bufferViews. The bufferViews of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given bufferViews. The bufferViews of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -677,7 +675,7 @@ public class GlTF
         }
         List<BufferView> oldList = this.bufferViews;
         List<BufferView> newList = new ArrayList<BufferView>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -685,11 +683,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given bufferViews. The bufferViews of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given bufferViews. The bufferViews of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -701,7 +699,7 @@ public class GlTF
         }
         List<BufferView> oldList = this.bufferViews;
         List<BufferView> newList = new ArrayList<BufferView>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -713,34 +711,34 @@ public class GlTF
     }
 
     /**
-     * An array of cameras. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera 
-     * to apply a transform to place the camera in the scene. (optional) 
+     * An array of cameras. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera
+     * to apply a transform to place the camera in the scene. (optional)
      * 
      * @param cameras The cameras to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setCameras(List<Camera> cameras) {
         if (cameras == null) {
             this.cameras = cameras;
-            return ;
+            return;
         }
-        if (cameras.size()< 1) {
+        if (cameras.size() < 1) {
             throw new IllegalArgumentException("Number of cameras elements is < 1");
         }
         this.cameras = cameras;
     }
 
     /**
-     * An array of cameras. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera 
-     * to apply a transform to place the camera in the scene. (optional) 
+     * An array of cameras. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A camera's projection. A node **MAY** reference a camera
+     * to apply a transform to place the camera in the scene. (optional)
      * 
      * @return The cameras
      * 
@@ -750,9 +748,9 @@ public class GlTF
     }
 
     /**
-     * Add the given cameras. The cameras of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given cameras. The cameras of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -764,7 +762,7 @@ public class GlTF
         }
         List<Camera> oldList = this.cameras;
         List<Camera> newList = new ArrayList<Camera>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -772,11 +770,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given cameras. The cameras of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given cameras. The cameras of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -788,7 +786,7 @@ public class GlTF
         }
         List<Camera> oldList = this.cameras;
         List<Camera> newList = new ArrayList<Camera>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -800,34 +798,34 @@ public class GlTF
     }
 
     /**
-     * An array of images. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be 
-     * referenced by an URI (or IRI) or a buffer view index. (optional) 
+     * An array of images. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be
+     * referenced by an URI (or IRI) or a buffer view index. (optional)
      * 
      * @param images The images to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setImages(List<Image> images) {
         if (images == null) {
             this.images = images;
-            return ;
+            return;
         }
-        if (images.size()< 1) {
+        if (images.size() < 1) {
             throw new IllegalArgumentException("Number of images elements is < 1");
         }
         this.images = images;
     }
 
     /**
-     * An array of images. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be 
-     * referenced by an URI (or IRI) or a buffer view index. (optional) 
+     * An array of images. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Image data used to create a texture. Image **MAY** be
+     * referenced by an URI (or IRI) or a buffer view index. (optional)
      * 
      * @return The images
      * 
@@ -837,9 +835,9 @@ public class GlTF
     }
 
     /**
-     * Add the given images. The images of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given images. The images of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -851,7 +849,7 @@ public class GlTF
         }
         List<Image> oldList = this.images;
         List<Image> newList = new ArrayList<Image>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -859,11 +857,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given images. The images of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given images. The images of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -875,7 +873,7 @@ public class GlTF
         }
         List<Image> oldList = this.images;
         List<Image> newList = new ArrayList<Image>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -887,32 +885,32 @@ public class GlTF
     }
 
     /**
-     * An array of materials. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The material appearance of a primitive. (optional) 
+     * An array of materials. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The material appearance of a primitive. (optional)
      * 
      * @param materials The materials to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMaterials(List<Material> materials) {
         if (materials == null) {
             this.materials = materials;
-            return ;
+            return;
         }
-        if (materials.size()< 1) {
+        if (materials.size() < 1) {
             throw new IllegalArgumentException("Number of materials elements is < 1");
         }
         this.materials = materials;
     }
 
     /**
-     * An array of materials. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The material appearance of a primitive. (optional) 
+     * An array of materials. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The material appearance of a primitive. (optional)
      * 
      * @return The materials
      * 
@@ -922,9 +920,9 @@ public class GlTF
     }
 
     /**
-     * Add the given materials. The materials of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given materials. The materials of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -936,7 +934,7 @@ public class GlTF
         }
         List<Material> oldList = this.materials;
         List<Material> newList = new ArrayList<Material>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -944,11 +942,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given materials. The materials of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given materials. The materials of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -960,7 +958,7 @@ public class GlTF
         }
         List<Material> oldList = this.materials;
         List<Material> newList = new ArrayList<Material>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -972,34 +970,34 @@ public class GlTF
     }
 
     /**
-     * An array of meshes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform 
-     * is defined by a node that references it. (optional) 
+     * An array of meshes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform
+     * is defined by a node that references it. (optional)
      * 
      * @param meshes The meshes to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMeshes(List<Mesh> meshes) {
         if (meshes == null) {
             this.meshes = meshes;
-            return ;
+            return;
         }
-        if (meshes.size()< 1) {
+        if (meshes.size() < 1) {
             throw new IllegalArgumentException("Number of meshes elements is < 1");
         }
         this.meshes = meshes;
     }
 
     /**
-     * An array of meshes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform 
-     * is defined by a node that references it. (optional) 
+     * An array of meshes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A set of primitives to be rendered. Its global transform
+     * is defined by a node that references it. (optional)
      * 
      * @return The meshes
      * 
@@ -1009,9 +1007,9 @@ public class GlTF
     }
 
     /**
-     * Add the given meshes. The meshes of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given meshes. The meshes of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1023,7 +1021,7 @@ public class GlTF
         }
         List<Mesh> oldList = this.meshes;
         List<Mesh> newList = new ArrayList<Mesh>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1031,11 +1029,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given meshes. The meshes of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given meshes. The meshes of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1047,7 +1045,7 @@ public class GlTF
         }
         List<Mesh> oldList = this.meshes;
         List<Mesh> newList = new ArrayList<Mesh>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -1059,50 +1057,50 @@ public class GlTF
     }
 
     /**
-     * An array of nodes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains 
-     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and 
-     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any 
-     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS 
-     * properties are converted to matrices and postmultiplied in the `T * R 
-     * * S` order to compose the transformation matrix; first the scale is 
-     * applied to the vertices, then the rotation, and then the translation. 
-     * If none are provided, the transform is the identity. When a node is 
-     * targeted for animation (referenced by an animation.channel.target), 
-     * `matrix` **MUST NOT** be present. (optional) 
+     * An array of nodes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains
+     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and
+     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any
+     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS
+     * properties are converted to matrices and postmultiplied in the `T * R
+     * * S` order to compose the transformation matrix; first the scale is
+     * applied to the vertices, then the rotation, and then the translation.
+     * If none are provided, the transform is the identity. When a node is
+     * targeted for animation (referenced by an animation.channel.target),
+     * `matrix` **MUST NOT** be present. (optional)
      * 
      * @param nodes The nodes to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setNodes(List<Node> nodes) {
         if (nodes == null) {
             this.nodes = nodes;
-            return ;
+            return;
         }
-        if (nodes.size()< 1) {
+        if (nodes.size() < 1) {
             throw new IllegalArgumentException("Number of nodes elements is < 1");
         }
         this.nodes = nodes;
     }
 
     /**
-     * An array of nodes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains 
-     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and 
-     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any 
-     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS 
-     * properties are converted to matrices and postmultiplied in the `T * R 
-     * * S` order to compose the transformation matrix; first the scale is 
-     * applied to the vertices, then the rotation, and then the translation. 
-     * If none are provided, the transform is the identity. When a node is 
-     * targeted for animation (referenced by an animation.channel.target), 
-     * `matrix` **MUST NOT** be present. (optional) 
+     * An array of nodes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A node in the node hierarchy. When the node contains
+     * `skin`, all `mesh.primitives` **MUST** contain `JOINTS_0` and
+     * `WEIGHTS_0` attributes. A node **MAY** have either a `matrix` or any
+     * combination of `translation`/`rotation`/`scale` (TRS) properties. TRS
+     * properties are converted to matrices and postmultiplied in the `T * R
+     * * S` order to compose the transformation matrix; first the scale is
+     * applied to the vertices, then the rotation, and then the translation.
+     * If none are provided, the transform is the identity. When a node is
+     * targeted for animation (referenced by an animation.channel.target),
+     * `matrix` **MUST NOT** be present. (optional)
      * 
      * @return The nodes
      * 
@@ -1112,9 +1110,9 @@ public class GlTF
     }
 
     /**
-     * Add the given nodes. The nodes of this instance will be replaced with 
-     * a list that contains all previous elements, and additionally the new 
-     * element. 
+     * Add the given nodes. The nodes of this instance will be replaced with
+     * a list that contains all previous elements, and additionally the new
+     * element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1126,7 +1124,7 @@ public class GlTF
         }
         List<Node> oldList = this.nodes;
         List<Node> newList = new ArrayList<Node>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1134,11 +1132,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given nodes. The nodes of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given nodes. The nodes of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1150,7 +1148,7 @@ public class GlTF
         }
         List<Node> oldList = this.nodes;
         List<Node> newList = new ArrayList<Node>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -1162,34 +1160,34 @@ public class GlTF
     }
 
     /**
-     * An array of samplers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping 
-     * modes. (optional) 
+     * An array of samplers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping
+     * modes. (optional)
      * 
      * @param samplers The samplers to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setSamplers(List<Sampler> samplers) {
         if (samplers == null) {
             this.samplers = samplers;
-            return ;
+            return;
         }
-        if (samplers.size()< 1) {
+        if (samplers.size() < 1) {
             throw new IllegalArgumentException("Number of samplers elements is < 1");
         }
         this.samplers = samplers;
     }
 
     /**
-     * An array of samplers. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping 
-     * modes. (optional) 
+     * An array of samplers. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Texture sampler properties for filtering and wrapping
+     * modes. (optional)
      * 
      * @return The samplers
      * 
@@ -1199,9 +1197,9 @@ public class GlTF
     }
 
     /**
-     * Add the given samplers. The samplers of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given samplers. The samplers of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1213,7 +1211,7 @@ public class GlTF
         }
         List<Sampler> oldList = this.samplers;
         List<Sampler> newList = new ArrayList<Sampler>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1221,11 +1219,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given samplers. The samplers of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given samplers. The samplers of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1237,7 +1235,7 @@ public class GlTF
         }
         List<Sampler> oldList = this.samplers;
         List<Sampler> newList = new ArrayList<Sampler>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -1249,7 +1247,7 @@ public class GlTF
     }
 
     /**
-     * The index of the default scene. (optional) 
+     * The index of the default scene. (optional)
      * 
      * @param scene The scene to set
      * 
@@ -1257,13 +1255,13 @@ public class GlTF
     public void setScene(Integer scene) {
         if (scene == null) {
             this.scene = scene;
-            return ;
+            return;
         }
         this.scene = scene;
     }
 
     /**
-     * The index of the default scene. (optional) 
+     * The index of the default scene. (optional)
      * 
      * @return The scene
      * 
@@ -1273,32 +1271,32 @@ public class GlTF
     }
 
     /**
-     * An array of scenes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The root nodes of a scene. (optional) 
+     * An array of scenes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The root nodes of a scene. (optional)
      * 
      * @param scenes The scenes to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setScenes(List<Scene> scenes) {
         if (scenes == null) {
             this.scenes = scenes;
-            return ;
+            return;
         }
-        if (scenes.size()< 1) {
+        if (scenes.size() < 1) {
             throw new IllegalArgumentException("Number of scenes elements is < 1");
         }
         this.scenes = scenes;
     }
 
     /**
-     * An array of scenes. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The root nodes of a scene. (optional) 
+     * An array of scenes. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The root nodes of a scene. (optional)
      * 
      * @return The scenes
      * 
@@ -1308,9 +1306,9 @@ public class GlTF
     }
 
     /**
-     * Add the given scenes. The scenes of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given scenes. The scenes of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1322,7 +1320,7 @@ public class GlTF
         }
         List<Scene> oldList = this.scenes;
         List<Scene> newList = new ArrayList<Scene>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1330,11 +1328,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given scenes. The scenes of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given scenes. The scenes of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1346,7 +1344,7 @@ public class GlTF
         }
         List<Scene> oldList = this.scenes;
         List<Scene> newList = new ArrayList<Scene>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -1358,32 +1356,32 @@ public class GlTF
     }
 
     /**
-     * An array of skins. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional) 
+     * An array of skins. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional)
      * 
      * @param skins The skins to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setSkins(List<Skin> skins) {
         if (skins == null) {
             this.skins = skins;
-            return ;
+            return;
         }
-        if (skins.size()< 1) {
+        if (skins.size() < 1) {
             throw new IllegalArgumentException("Number of skins elements is < 1");
         }
         this.skins = skins;
     }
 
     /**
-     * An array of skins. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional) 
+     * An array of skins. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Joints and matrices defining a skin. (optional)
      * 
      * @return The skins
      * 
@@ -1393,9 +1391,9 @@ public class GlTF
     }
 
     /**
-     * Add the given skins. The skins of this instance will be replaced with 
-     * a list that contains all previous elements, and additionally the new 
-     * element. 
+     * Add the given skins. The skins of this instance will be replaced with
+     * a list that contains all previous elements, and additionally the new
+     * element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1407,7 +1405,7 @@ public class GlTF
         }
         List<Skin> oldList = this.skins;
         List<Skin> newList = new ArrayList<Skin>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1415,11 +1413,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given skins. The skins of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given skins. The skins of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1431,7 +1429,7 @@ public class GlTF
         }
         List<Skin> oldList = this.skins;
         List<Skin> newList = new ArrayList<Skin>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -1443,32 +1441,32 @@ public class GlTF
     }
 
     /**
-     * An array of textures. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A texture and its sampler. (optional) 
+     * An array of textures. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A texture and its sampler. (optional)
      * 
      * @param textures The textures to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setTextures(List<Texture> textures) {
         if (textures == null) {
             this.textures = textures;
-            return ;
+            return;
         }
-        if (textures.size()< 1) {
+        if (textures.size() < 1) {
             throw new IllegalArgumentException("Number of textures elements is < 1");
         }
         this.textures = textures;
     }
 
     /**
-     * An array of textures. (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;A texture and its sampler. (optional) 
+     * An array of textures. (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;A texture and its sampler. (optional)
      * 
      * @return The textures
      * 
@@ -1478,9 +1476,9 @@ public class GlTF
     }
 
     /**
-     * Add the given textures. The textures of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given textures. The textures of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1492,7 +1490,7 @@ public class GlTF
         }
         List<Texture> oldList = this.textures;
         List<Texture> newList = new ArrayList<Texture>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -1500,11 +1498,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given textures. The textures of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given textures. The textures of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -1516,7 +1514,7 @@ public class GlTF
         }
         List<Texture> oldList = this.textures;
         List<Texture> newList = new ArrayList<Texture>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);

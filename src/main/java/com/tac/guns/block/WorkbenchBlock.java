@@ -28,51 +28,44 @@ import java.util.Map;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class WorkbenchBlock extends RotatedObjectBlock implements EntityBlock
-{
+public class WorkbenchBlock extends RotatedObjectBlock implements EntityBlock {
     private final Map<BlockState, VoxelShape> SHAPES = new HashMap<>();
 
-    public WorkbenchBlock(Block.Properties properties)
-    {
+    public WorkbenchBlock(Block.Properties properties) {
         super(properties);
     }
 
-    private VoxelShape getShape(BlockState state)
-    {
-        if(SHAPES.containsKey(state))
-        {
+    private VoxelShape getShape(BlockState state) {
+        if (SHAPES.containsKey(state)) {
             return SHAPES.get(state);
         }
         Direction direction = state.getValue(FACING);
         List<VoxelShape> shapes = new ArrayList<>();
         shapes.add(Block.box(0.5, 0, 0.5, 15.5, 13, 15.5));
         shapes.add(Block.box(0, 13, 0, 16, 15, 16));
-        shapes.add(VoxelShapeHelper.getRotatedShapes(VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction.get2DDataValue()]);
+        shapes.add(VoxelShapeHelper.getRotatedShapes(
+                VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction.get2DDataValue()]);
         VoxelShape shape = VoxelShapeHelper.combineAll(shapes);
         SHAPES.put(state, shape);
         return shape;
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context)
-    {
+    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         return this.getShape(state);
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter reader, BlockPos pos)
-    {
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter reader, BlockPos pos) {
         return this.getShape(state);
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand, BlockHitResult result)
-    {
-        if(!world.isClientSide())
-        {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand,
+            BlockHitResult result) {
+        if (!world.isClientSide()) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
-            if(tileEntity instanceof MenuProvider)
-            {
+            if (tileEntity instanceof MenuProvider) {
                 NetworkHooks.openGui((ServerPlayer) playerEntity, (MenuProvider) tileEntity, pos);
             }
         }

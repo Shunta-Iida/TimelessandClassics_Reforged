@@ -2,7 +2,10 @@
   "general": {
     "auto": true,
     "rate": 600,
-    "rateSelector": [2, 1],
+    "rateSelector": [
+      2,
+      1
+    ],
     "gripType": "tac:two_handed_vector",
     "recoilAngle": 2,
     "horizontalRecoilAngle": 1,
@@ -12,7 +15,6 @@
     "cameraRecoilModifier": 1.375,
     "recoilDuration": 0.2125,
     "weightKilo": 2.9,
-
     "spread": 2,
     "firstShotSpread": 0.195,
     "hipFireInaccuracy": 3.5,

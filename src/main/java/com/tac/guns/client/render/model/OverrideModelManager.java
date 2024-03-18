@@ -18,24 +18,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT)
-public class OverrideModelManager
-{
+public class OverrideModelManager {
     private static final Map<Item, IOverrideModel> MODEL_MAP = new HashMap<>();
 
     /**
      * Registers an override model to the given item.
      * OverrideModels will not affect the common rendering of items.
-     * Only when rendering guns and their attachments, {@link com.tac.guns.client.handler.GunRenderingHandler} will call them at the appropriate time.
+     * Only when rendering guns and their attachments,
+     * {@link com.tac.guns.client.handler.GunRenderingHandler} will call them at the
+     * appropriate time.
+     * 
      * @param item  the item to override it's model.
-     *              It should be an item related to guns. It may be the gun item itself, or it may be an attachment such as a scope.
+     *              It should be an item related to guns. It may be the gun item
+     *              itself, or it may be an attachment such as a scope.
      * @param model an IOverrideModel implementation
      */
-    public static void register(Item item, IOverrideModel model)
-    {
-        if(MODEL_MAP.putIfAbsent(item, model) == null)
-        {
-            /* Register model overrides as an event for ease. Doesn't create an extra overhead because
-             * Forge will just ignore it if it contains no events */
+    public static void register(Item item, IOverrideModel model) {
+        if (MODEL_MAP.putIfAbsent(item, model) == null) {
+            /*
+             * Register model overrides as an event for ease. Doesn't create an extra
+             * overhead because
+             * Forge will just ignore it if it contains no events
+             */
             MinecraftForge.EVENT_BUS.register(model);
         }
     }
@@ -46,19 +50,18 @@ public class OverrideModelManager
      * @param stack the stack to check
      * @return True if overridden model exists
      */
-    public static boolean hasModel(ItemStack stack)
-    {
+    public static boolean hasModel(ItemStack stack) {
         return MODEL_MAP.containsKey(stack.getItem());
     }
 
     /**
      * Gets the overridden model for the given ItemStack.
      *
-     * @return The overridden model for the stack or null if no overridden model exists.
+     * @return The overridden model for the stack or null if no overridden model
+     *         exists.
      */
     @Nullable
-    public static IOverrideModel getModel(ItemStack stack)
-    {
+    public static IOverrideModel getModel(ItemStack stack) {
         return MODEL_MAP.get(stack.getItem());
     }
 }

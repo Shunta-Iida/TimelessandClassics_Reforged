@@ -1,32 +1,32 @@
-modLoader="javafml"
-loaderVersion="[32,)"
-license="GPL3"
+modLoader = "javafml"
+loaderVersion = "[32,)"
+license = "GPL3"
 
 [[mods]]
-    modId="tac"
-    version="${file.jarVersion}"
-    displayName="Timeless and Classics Guns"
-    updateJSONURL=""
-    displayURL=""
-    authors="Timeless Development Team"
-    description='''
+modId = "tac"
+version = "${file.jarVersion}"
+displayName = "Timeless and Classics Guns"
+updateJSONURL = ""
+displayURL = ""
+authors = "Timeless Development Team"
+description = '''
 '''
 
 [[dependencies.tac]]
-    modId="forge"
-    mandatory=true
-    versionRange="[32,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[32,)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.tac]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.18.2,1.19)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,1.19)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.tac]]
-    modId="framework"
-    mandatory=true
-    versionRange="[0.2.3,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "framework"
+mandatory = true
+versionRange = "[0.2.3,)"
+ordering = "NONE"
+side = "BOTH"

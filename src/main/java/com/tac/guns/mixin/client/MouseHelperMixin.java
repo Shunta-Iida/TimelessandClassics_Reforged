@@ -21,13 +21,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 @Mixin(MouseHandler.class)
-public abstract class MouseHelperMixin implements MouseSensitivityModifier
-{
+public abstract class MouseHelperMixin implements MouseSensitivityModifier {
     private double originSensitivity;
     private double sensitivity;
     @Final
@@ -35,15 +33,15 @@ public abstract class MouseHelperMixin implements MouseSensitivityModifier
     private Minecraft minecraft;
 
     @Inject(method = "turnPlayer", at = @At("HEAD"))
-    public void modifySensitivity(CallbackInfo ci){
+    public void modifySensitivity(CallbackInfo ci) {
         originSensitivity = minecraft.options.sensitivity;
-        if(AimingHandler.get().isAiming()) {
+        if (AimingHandler.get().isAiming()) {
             minecraft.options.sensitivity = this.sensitivity;
         }
     }
 
     @Inject(method = "turnPlayer", at = @At("RETURN"))
-    public void backtraceSensitivity(CallbackInfo ci){
+    public void backtraceSensitivity(CallbackInfo ci) {
         minecraft.options.sensitivity = originSensitivity;
     }
 

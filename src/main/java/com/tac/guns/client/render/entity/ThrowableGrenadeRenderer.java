@@ -18,8 +18,7 @@ import javax.annotation.Nullable;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEntity>
-{
+public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEntity> {
 
     public ThrowableGrenadeRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -27,14 +26,13 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
 
     @Nullable
     @Override
-    public ResourceLocation getTextureLocation(ThrowableGrenadeEntity entity)
-    {
+    public ResourceLocation getTextureLocation(ThrowableGrenadeEntity entity) {
         return null;
     }
 
     @Override
-    public void render(ThrowableGrenadeEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light)
-    {
+    public void render(ThrowableGrenadeEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack,
+            MultiBufferSource renderTypeBuffer, int light) {
         matrixStack.pushPose();
 
         /* Makes the grenade face in the direction of travel */
@@ -47,8 +45,7 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(-rotation));
         matrixStack.translate(0, -0.15, 0);
 
-        if(entity instanceof ThrowableStunGrenadeEntity)
-        {
+        if (entity instanceof ThrowableStunGrenadeEntity) {
             matrixStack.translate(0, entity.getDimensions(Pose.STANDING).height / 2, 0);
             matrixStack.mulPose(Vector3f.ZP.rotationDegrees(-90F));
             matrixStack.translate(0, -entity.getDimensions(Pose.STANDING).height / 2, 0);
@@ -57,7 +54,8 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
         /* */
         matrixStack.translate(0.0, 0.5, 0.0);
 
-        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE, light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
+        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE,
+                light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
 
         matrixStack.popPose();
     }

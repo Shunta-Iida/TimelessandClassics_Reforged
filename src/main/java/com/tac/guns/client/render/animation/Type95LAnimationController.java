@@ -17,15 +17,21 @@ public class Type95LAnimationController extends GunAnimationController {
     public static int INDEX_MAGAZINE = 0;
     public static int INDEX_BOLT = 1;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/type_95_longbow_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/type_95_longbow_inspect.gltf"));
     private static final Type95LAnimationController instance = new Type95LAnimationController();
 
-    private Type95LAnimationController(){
+    private Type95LAnimationController() {
         try {
             Animations.load(RELOAD_NORM);
             Animations.load(RELOAD_EMPTY);
@@ -37,28 +43,35 @@ public class Type95LAnimationController extends GunAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.QBZ_95.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.QBZ_95.getId(), this);
     }
 
-    public static Type95LAnimationController getInstance(){
+    public static Type95LAnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+        switch (label) {
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.QBZ_95.get(), label);
     }
 

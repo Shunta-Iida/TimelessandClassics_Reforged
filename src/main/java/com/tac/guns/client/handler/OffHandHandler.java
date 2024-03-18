@@ -26,45 +26,48 @@ public class OffHandHandler {
     public static void renderOffHandEvent(RenderHandEvent event) {
         if (event.getHand() == InteractionHand.OFF_HAND) {
             Minecraft mc = Minecraft.getInstance();
-            if(mc.player == null) return;
+            if (mc.player == null)
+                return;
             ItemStack mainHand = mc.player.getMainHandItem();
             ItemStack offHand = event.getItemStack();
 
             if (mainHand.getItem() instanceof GunItem) {
                 GunAnimationController controller = GunAnimationController.fromItem(mainHand.getItem());
-                if (!isSingleHanded(mainHand) || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
+                if (!isSingleHanded(mainHand)
+                        || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY_END) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY))
                     if (!(offHand.getItem() instanceof GunItem) && !offHand.isEmpty())
-                        event.setCanceled(true);//Turn off rendering.
+                        event.setCanceled(true);// Turn off rendering.
             }
         }
     }
-
 
     @SubscribeEvent
     public static void useOffHandEvent(InputEvent.ClickInputEvent event) {
         if (event.getHand() == InteractionHand.OFF_HAND) {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            if(player == null) return;
+            if (player == null)
+                return;
             ItemStack mainHand = player.getMainHandItem();
             ItemStack offHand = player.getOffhandItem();
 
             if (mainHand.getItem() instanceof GunItem) {
                 GunAnimationController controller = GunAnimationController.fromItem(mainHand.getItem());
-                if (!isSingleHanded(mainHand) || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
+                if (!isSingleHanded(mainHand)
+                        || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY_END) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL) ||
                         controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY))
                     if (!(offHand.getItem() instanceof GunItem) && !offHand.isEmpty()) {
-                        event.setSwingHand(false);//Close arm swing
-                        event.setCanceled(true);//Disable deputies
+                        event.setSwingHand(false);// Close arm swing
+                        event.setCanceled(true);// Disable deputies
                     }
 
             }

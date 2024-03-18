@@ -1,7 +1,9 @@
 {
   "general": {
     "rate": 300,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:two_handed_ak47",
     "recoilAngle": 8.175,
     "horizontalRecoilAngle": 2.775,
@@ -12,7 +14,6 @@
     "recoilDuration": 0.2,
     "projectileAmount": 10,
     "weightKilo": 5.6,
-
     "spread": 5.75,
     "firstShotSpread": 3.95,
     "hipFireInaccuracy": 1.15,
@@ -66,7 +67,7 @@
       "trailAdjust": 1.555
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": 1,
       "xOffset": 0,
       "zOffset": -1,
@@ -88,7 +89,7 @@
     "weaponType": 3
   },
   "modules": {
-    "zoom":{
+    "zoom": {
       "fovModifier": 0.8,
       "yOffset": 11.12,
       "zOffset": -2

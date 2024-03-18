@@ -33,17 +33,18 @@ import java.util.concurrent.ScheduledExecutorService;
 /**
  * Simple utility class to run an {@link AnimationManager} in an own thread
  */
-public final class AnimationRunner
-{
+public final class AnimationRunner {
     public static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5, Thread::new);
     static {
-        for(int i =0; i<5; i++) executorService.execute(()->{});
+        for (int i = 0; i < 5; i++)
+            executorService.execute(() -> {
+            });
     }
     /**
      * The {@link AnimationManager}
      */
     private final AnimationManager animationManager;
-    
+
     /**
      * Whether this runner is currently running
      */
@@ -56,91 +57,80 @@ public final class AnimationRunner
      * The step size, in milliseconds
      */
     private final long stepSizeMs = 6;
-    
+
     /**
      * Create a new runner for the given {@link AnimationManager}
      * 
      * @param animationManager The {@link AnimationManager}
      */
-    public AnimationRunner(AnimationManager animationManager)
-    {
-        Objects.requireNonNull(animationManager, 
-            "The animationManager may not be null");
+    public AnimationRunner(AnimationManager animationManager) {
+        Objects.requireNonNull(animationManager,
+                "The animationManager may not be null");
         this.animationManager = animationManager;
     }
 
-    public AnimationRunner(){
+    public AnimationRunner() {
         animationManager = null;
     }
-    
+
     /**
      * Start this runner. If the runner is already {@link #isRunning()},
      * then this has no effect.
      */
-    public synchronized void start()
-    {
-        if (isRunning())
-        {
+    public synchronized void start() {
+        if (isRunning()) {
             return;
         }
         executorService.execute(new AnimationRunnable(null));
     }
 
-    public synchronized void start(Runnable callback)
-    {
-        if (isRunning())
-        {
+    public synchronized void start(Runnable callback) {
+        if (isRunning()) {
             return;
         }
         executorService.execute(new AnimationRunnable(callback));
     }
-    
+
     /**
      * Stop this runner. If the runner is not {@link #isRunning()},
      * then this has no effect.
      */
-    public synchronized void stop()
-    {
+    public synchronized void stop() {
         running = false;
     }
 
     /**
      * Returns whether this runner is currently running
      * 
-     * @return Whether this runner is currently running 
+     * @return Whether this runner is currently running
      */
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return running;
     }
-    
+
     /**
      * Will be called in an own thread to perform time steps in the
      * {@link AnimationManager}
      */
-    private void runAnimations()
-    {
-        while (blocking){ }
+    private void runAnimations() {
+        while (blocking) {
+        }
         running = true;
         previousNs = System.nanoTime();
-        while (isRunning())
-        {
+        while (isRunning()) {
             blocking = true;
             long currentNs = System.nanoTime();
             long deltaNs = currentNs - previousNs;
             animationManager.performStep(deltaNs);
             previousNs = currentNs;
-            if(animationManager.tipStop()) {
+            if (animationManager.tipStop()) {
                 stop();
                 animationManager.reset();
                 break;
             }
-            try
-            {
+            try {
                 Thread.sleep(stepSizeMs);
-            } 
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 blocking = false;
                 return;
@@ -153,17 +143,18 @@ public final class AnimationRunner
         return animationManager;
     }
 
-    public class AnimationRunnable implements Runnable{
+    public class AnimationRunnable implements Runnable {
         private final Runnable callback;
 
-        public AnimationRunnable(Runnable callback){
+        public AnimationRunnable(Runnable callback) {
             this.callback = callback;
         }
 
         @Override
         public void run() {
             runAnimations();
-            if(callback != null) callback.run();
+            if (callback != null)
+                callback.run();
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.tac.guns.item.transition;
 
-
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
@@ -17,10 +16,8 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.List;
 
-
 public class TimelessOldRifleGunItem extends TimelessGunItem {
-    public TimelessOldRifleGunItem(Process<Properties> properties, IGunModifier... modifiers)
-    {
+    public TimelessOldRifleGunItem(Process<Properties> properties, IGunModifier... modifiers) {
         super(properties1 -> properties.process(new Properties().stacksTo(1).tab(GunMod.GROUP)), modifiers);
     }
 
@@ -32,8 +29,11 @@ public class TimelessOldRifleGunItem extends TimelessGunItem {
         boolean isShift = Keys.MORE_INFO_HOLD.isDown();
         if (isShift) {
             if (tagCompound != null) {
-                //tooltip.add((new TranslatableComponent("info.tac.oldRifle", new TranslatableComponent(IAttachment.Type.OLD_SCOPE.getTranslationKey())).withStyle(ChatFormatting.GREEN)));
-                tooltip.add((new TranslatableComponent("info.tac.oldRifleScope", new TranslatableComponent("OldScope").withStyle(ChatFormatting.BOLD)).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                // tooltip.add((new TranslatableComponent("info.tac.oldRifle", new
+                // TranslatableComponent(IAttachment.Type.OLD_SCOPE.getTranslationKey())).withStyle(ChatFormatting.GREEN)));
+                tooltip.add((new TranslatableComponent("info.tac.oldRifleScope",
+                        new TranslatableComponent("OldScope").withStyle(ChatFormatting.BOLD))
+                        .withStyle(ChatFormatting.LIGHT_PURPLE)));
             }
         }
     }

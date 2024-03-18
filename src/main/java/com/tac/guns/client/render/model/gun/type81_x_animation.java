@@ -30,18 +30,23 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class type81_x_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         Type81AnimationController controller = Type81AnimationController.getInstance();
 
-
         Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+        float cooldownOg = ShootingHandler.get().getshootMsGap()
+                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                        : ShootingHandler.get().getshootMsGap()
+                                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Type81AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Type81AnimationController.INDEX_BODY,
+                    transformType, matrices);
             if (Gun.getScope(stack) != null) {
-                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light,
+                        overlay);
             }
             RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
         }
@@ -49,18 +54,22 @@ public class type81_x_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Type81AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    Type81AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
-        //Always push
+        // Always push
         matrices.pushPose();
         {
             if (transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), Type81AnimationController.INDEX_BOLT, transformType, matrices);
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        Type81AnimationController.INDEX_BOLT, transformType, matrices);
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     double v1 = -4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0;
                     matrices.translate(0, 0, 0.280f * v1);

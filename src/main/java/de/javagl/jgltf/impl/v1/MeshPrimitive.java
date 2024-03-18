@@ -11,47 +11,45 @@ package de.javagl.jgltf.impl.v1;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 /**
- * Geometry to be rendered with the given material. 
+ * Geometry to be rendered with the given material.
  * 
- * Auto-generated for mesh.primitive.schema.json 
+ * Auto-generated for mesh.primitive.schema.json
  * 
  */
 public class MeshPrimitive
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * A dictionary object of strings, where each string is the ID of the 
-     * accessor containing an attribute. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings, where each string is the ID of the
+     * accessor containing an attribute. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, String> attributes;
     /**
-     * The ID of the accessor that contains the indices. (optional) 
+     * The ID of the accessor that contains the indices. (optional)
      * 
      */
     private String indices;
     /**
-     * The ID of the material to apply to this primitive when rendering. 
-     * (required) 
+     * The ID of the material to apply to this primitive when rendering.
+     * (required)
      * 
      */
     private String material;
     /**
-     * The type of primitives to render. (optional)<br> 
-     * Default: 4<br> 
-     * Valid values: [0, 1, 2, 3, 4, 5, 6] 
+     * The type of primitives to render. (optional)<br>
+     * Default: 4<br>
+     * Valid values: [0, 1, 2, 3, 4, 5, 6]
      * 
      */
     private Integer mode;
 
     /**
-     * A dictionary object of strings, where each string is the ID of the 
-     * accessor containing an attribute. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings, where each string is the ID of the
+     * accessor containing an attribute. (optional)<br>
+     * Default: {}
      * 
      * @param attributes The attributes to set
      * 
@@ -59,15 +57,15 @@ public class MeshPrimitive
     public void setAttributes(Map<String, String> attributes) {
         if (attributes == null) {
             this.attributes = attributes;
-            return ;
+            return;
         }
         this.attributes = attributes;
     }
 
     /**
-     * A dictionary object of strings, where each string is the ID of the 
-     * accessor containing an attribute. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings, where each string is the ID of the
+     * accessor containing an attribute. (optional)<br>
+     * Default: {}
      * 
      * @return The attributes
      * 
@@ -77,11 +75,11 @@ public class MeshPrimitive
     }
 
     /**
-     * Add the given attributes. The attributes of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given attributes. The attributes of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -95,7 +93,7 @@ public class MeshPrimitive
         }
         Map<String, String> oldMap = this.attributes;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -103,11 +101,11 @@ public class MeshPrimitive
     }
 
     /**
-     * Remove the given attributes. The attributes of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given attributes. The attributes of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -119,7 +117,7 @@ public class MeshPrimitive
         }
         Map<String, String> oldMap = this.attributes;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -131,8 +129,9 @@ public class MeshPrimitive
     }
 
     /**
-     * Returns the default value of the attributes<br> 
-     * @see #getAttributes 
+     * Returns the default value of the attributes<br>
+     * 
+     * @see #getAttributes
      * 
      * @return The default attributes
      * 
@@ -142,7 +141,7 @@ public class MeshPrimitive
     }
 
     /**
-     * The ID of the accessor that contains the indices. (optional) 
+     * The ID of the accessor that contains the indices. (optional)
      * 
      * @param indices The indices to set
      * 
@@ -150,13 +149,13 @@ public class MeshPrimitive
     public void setIndices(String indices) {
         if (indices == null) {
             this.indices = indices;
-            return ;
+            return;
         }
         this.indices = indices;
     }
 
     /**
-     * The ID of the accessor that contains the indices. (optional) 
+     * The ID of the accessor that contains the indices. (optional)
      * 
      * @return The indices
      * 
@@ -166,8 +165,8 @@ public class MeshPrimitive
     }
 
     /**
-     * The ID of the material to apply to this primitive when rendering. 
-     * (required) 
+     * The ID of the material to apply to this primitive when rendering.
+     * (required)
      * 
      * @param material The material to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -175,14 +174,14 @@ public class MeshPrimitive
      */
     public void setMaterial(String material) {
         if (material == null) {
-            throw new NullPointerException((("Invalid value for material: "+ material)+", may not be null"));
+            throw new NullPointerException((("Invalid value for material: " + material) + ", may not be null"));
         }
         this.material = material;
     }
 
     /**
-     * The ID of the material to apply to this primitive when rendering. 
-     * (required) 
+     * The ID of the material to apply to this primitive when rendering.
+     * (required)
      * 
      * @return The material
      * 
@@ -192,30 +191,32 @@ public class MeshPrimitive
     }
 
     /**
-     * The type of primitives to render. (optional)<br> 
-     * Default: 4<br> 
-     * Valid values: [0, 1, 2, 3, 4, 5, 6] 
+     * The type of primitives to render. (optional)<br>
+     * Default: 4<br>
+     * Valid values: [0, 1, 2, 3, 4, 5, 6]
      * 
      * @param mode The mode to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMode(Integer mode) {
         if (mode == null) {
             this.mode = mode;
-            return ;
+            return;
         }
-        if (((((((mode!= 0)&&(mode!= 1))&&(mode!= 2))&&(mode!= 3))&&(mode!= 4))&&(mode!= 5))&&(mode!= 6)) {
-            throw new IllegalArgumentException((("Invalid value for mode: "+ mode)+", valid: [0, 1, 2, 3, 4, 5, 6]"));
+        if (((((((mode != 0) && (mode != 1)) && (mode != 2)) && (mode != 3)) && (mode != 4)) && (mode != 5))
+                && (mode != 6)) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for mode: " + mode) + ", valid: [0, 1, 2, 3, 4, 5, 6]"));
         }
         this.mode = mode;
     }
 
     /**
-     * The type of primitives to render. (optional)<br> 
-     * Default: 4<br> 
-     * Valid values: [0, 1, 2, 3, 4, 5, 6] 
+     * The type of primitives to render. (optional)<br>
+     * Default: 4<br>
+     * Valid values: [0, 1, 2, 3, 4, 5, 6]
      * 
      * @return The mode
      * 
@@ -225,14 +226,15 @@ public class MeshPrimitive
     }
 
     /**
-     * Returns the default value of the mode<br> 
-     * @see #getMode 
+     * Returns the default value of the mode<br>
+     * 
+     * @see #getMode
      * 
      * @return The default mode
      * 
      */
     public Integer defaultMode() {
-        return  4;
+        return 4;
     }
 
 }

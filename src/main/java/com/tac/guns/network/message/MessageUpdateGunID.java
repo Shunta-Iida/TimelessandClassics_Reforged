@@ -13,18 +13,20 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateGunID extends PlayMessage<MessageUpdateGunID>
-{
+public class MessageUpdateGunID extends PlayMessage<MessageUpdateGunID> {
     private boolean regenerate;
+
     public MessageUpdateGunID(boolean regenerate) {
         this.regenerate = regenerate;
     }
+
     public MessageUpdateGunID() {
-        this.regenerate=false;
+        this.regenerate = false;
     }
 
     @Override
-    public void encode(MessageUpdateGunID messageUpdateGunID, FriendlyByteBuf buffer) {}
+    public void encode(MessageUpdateGunID messageUpdateGunID, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageUpdateGunID decode(FriendlyByteBuf buffer) {
@@ -32,20 +34,14 @@ public class MessageUpdateGunID extends PlayMessage<MessageUpdateGunID>
     }
 
     @Override
-    public void handle(MessageUpdateGunID messageUpdateGunID, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageUpdateGunID messageUpdateGunID, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null && !player.isSpectator())
-            {
-                try
-                {
+            if (player != null && !player.isSpectator()) {
+                try {
                     Validate.notNull(NetworkGunManager.get());
-                    ServerPlayHandler.handleGunID(player,messageUpdateGunID.regenerate);
-                }
-                catch (Exception e)
-                {
+                    ServerPlayHandler.handleGunID(player, messageUpdateGunID.regenerate);
+                } catch (Exception e) {
 
                 }
             }

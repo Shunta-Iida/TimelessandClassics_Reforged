@@ -11,8 +11,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.Material.Builder;
 import net.minecraft.world.level.material.MaterialColor;
 
-public class FlashLightBlock extends AirBlock implements EntityBlock
-{
+public class FlashLightBlock extends AirBlock implements EntityBlock {
     public static final Material flashLightBlock;
 
     public FlashLightBlock() {
@@ -20,9 +19,11 @@ public class FlashLightBlock extends AirBlock implements EntityBlock
             return 15;
         }));
     }
+
     public int getLightValue(BlockState state, BlockGetter world, BlockPos pos) {
         return 15;
     }
+
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
@@ -32,6 +33,7 @@ public class FlashLightBlock extends AirBlock implements EntityBlock
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
         return new FlashLightSource(p_153215_, p_153216_);
     }
+
     static {
         flashLightBlock = (new Builder(MaterialColor.NONE)).noCollider().nonSolid().build();
     }

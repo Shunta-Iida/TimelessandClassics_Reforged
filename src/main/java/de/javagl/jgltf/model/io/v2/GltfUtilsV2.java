@@ -39,8 +39,7 @@ import java.io.IOException;
 /**
  * Utility methods related to {@link GlTF}s
  */
-class GltfUtilsV2
-{
+class GltfUtilsV2 {
     /**
      * Creates a deep copy of the given {@link GlTF}.<br>
      * <br>
@@ -50,22 +49,18 @@ class GltfUtilsV2
      * as far as reasonably possible, "structurally equivalent" to the
      * given input.
      * 
-     * @param gltf The input 
+     * @param gltf The input
      * @return The copy
      * @throws GltfException If the copy can not be created
      */
-    static GlTF copy(GlTF gltf)
-    {
+    static GlTF copy(GlTF gltf) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(Include.NON_NULL);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try
-        {
+        try {
             objectMapper.writeValue(baos, gltf);
             return objectMapper.readValue(baos.toByteArray(), GlTF.class);
-        } 
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             throw new GltfException("Could not copy glTF", e);
         }
     }
@@ -76,8 +71,7 @@ class GltfUtilsV2
      * @param bufferView The {@link BufferView}
      * @return The copy
      */
-    static BufferView copy(BufferView bufferView)
-    {
+    static BufferView copy(BufferView bufferView) {
         BufferView copy = new BufferView();
         copy.setExtensions(bufferView.getExtensions());
         copy.setExtras(bufferView.getExtras());
@@ -89,16 +83,14 @@ class GltfUtilsV2
         copy.setByteStride(bufferView.getByteStride());
         return copy;
     }
-    
-    
+
     /**
      * Creates a shallow copy of the given {@link Image}
      * 
      * @param image The {@link Image}
      * @return The copy
      */
-    static Image copy(Image image)
-    {
+    static Image copy(Image image) {
         Image copy = new Image();
         copy.setExtensions(image.getExtensions());
         copy.setExtras(image.getExtras());
@@ -108,12 +100,11 @@ class GltfUtilsV2
         copy.setMimeType(image.getMimeType());
         return copy;
     }
-    
+
     /**
      * Private constructor to prevent instantiation
      */
-    private GltfUtilsV2()
-    {
+    private GltfUtilsV2() {
         // Private constructor to prevent instantiation
     }
 }

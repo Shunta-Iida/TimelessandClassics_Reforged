@@ -20,27 +20,26 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class OneHandedPose implements IHeldAnimation
-{
+public class OneHandedPose implements IHeldAnimation {
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress)
-    {
-        boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT ? hand == InteractionHand.MAIN_HAND : hand == InteractionHand.OFF_HAND;
+    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
+        boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
+                ? hand == InteractionHand.MAIN_HAND
+                : hand == InteractionHand.OFF_HAND;
         ModelPart arm = right ? model.rightArm : model.leftArm;
         IHeldAnimation.copyModelAngles(model.head, arm);
         arm.xRot += Math.toRadians(-90F);
     }
 
     @Override
-    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks)
-    {
+    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
+            MultiBufferSource buffer, int light, float partialTicks) {
         matrixStack.translate(0, 0, -1);
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
         double centerOffset = 2.5;
-        if(Minecraft.getInstance().player.getModelName().equals("slim"))
-        {
+        if (Minecraft.getInstance().player.getModelName().equals("slim")) {
             centerOffset += hand == HumanoidArm.RIGHT ? 0.2 : 0.8;
         }
         centerOffset = hand == HumanoidArm.RIGHT ? -centerOffset : centerOffset;
@@ -53,21 +52,16 @@ public class OneHandedPose implements IHeldAnimation
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack, float partialTicks)
-    {
+    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
+            float partialTicks) {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180F));
 
-        if(player.isCrouching())
-        {
+        if (player.isCrouching()) {
             matrixStack.translate(-4.5 * 0.0625, -15 * 0.0625, -4 * 0.0625);
-        }
-        else if(!player.getItemBySlot(EquipmentSlot.LEGS).isEmpty())
-        {
+        } else if (!player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
             matrixStack.translate(-4.0 * 0.0625, -13 * 0.0625, 1 * 0.0625);
-        }
-        else
-        {
+        } else {
             matrixStack.translate(-3.5 * 0.0625, -13 * 0.0625, 1 * 0.0625);
         }
 
@@ -80,14 +74,12 @@ public class OneHandedPose implements IHeldAnimation
     }
 
     @Override
-    public boolean canApplySprintingAnimation()
-    {
+    public boolean canApplySprintingAnimation() {
         return true;
     }
 
     @Override
-    public boolean canRenderOffhandItem()
-    {
+    public boolean canRenderOffhandItem() {
         return true;
     }
 }

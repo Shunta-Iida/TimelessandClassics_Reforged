@@ -11,70 +11,68 @@ package de.javagl.jgltf.impl.v2;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * A set of primitives to be rendered. Its global transform is defined by 
- * a node that references it. 
+ * A set of primitives to be rendered. Its global transform is defined by
+ * a node that references it.
  * 
- * Auto-generated for mesh.schema.json 
+ * Auto-generated for mesh.schema.json
  * 
  */
 public class Mesh
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * An array of primitives, each defining geometry to be rendered. 
-     * (required)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Geometry to be rendered with the given material. 
-     * (optional) 
+     * An array of primitives, each defining geometry to be rendered.
+     * (required)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Geometry to be rendered with the given material.
+     * (optional)
      * 
      */
     private List<MeshPrimitive> primitives;
     /**
-     * Array of weights to be applied to the morph targets. The number of 
-     * array elements **MUST** match the number of morph targets. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Array of weights to be applied to the morph targets. The number of
+     * array elements **MUST** match the number of morph targets.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<Float> weights;
 
     /**
-     * An array of primitives, each defining geometry to be rendered. 
-     * (required)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Geometry to be rendered with the given material. 
-     * (optional) 
+     * An array of primitives, each defining geometry to be rendered.
+     * (required)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Geometry to be rendered with the given material.
+     * (optional)
      * 
      * @param primitives The primitives to set
-     * @throws NullPointerException If the given value is <code>null</code>
+     * @throws NullPointerException     If the given value is <code>null</code>
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setPrimitives(List<MeshPrimitive> primitives) {
         if (primitives == null) {
-            throw new NullPointerException((("Invalid value for primitives: "+ primitives)+", may not be null"));
+            throw new NullPointerException((("Invalid value for primitives: " + primitives) + ", may not be null"));
         }
-        if (primitives.size()< 1) {
+        if (primitives.size() < 1) {
             throw new IllegalArgumentException("Number of primitives elements is < 1");
         }
         this.primitives = primitives;
     }
 
     /**
-     * An array of primitives, each defining geometry to be rendered. 
-     * (required)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Geometry to be rendered with the given material. 
-     * (optional) 
+     * An array of primitives, each defining geometry to be rendered.
+     * (required)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Geometry to be rendered with the given material.
+     * (optional)
      * 
      * @return The primitives
      * 
@@ -84,9 +82,9 @@ public class Mesh
     }
 
     /**
-     * Add the given primitives. The primitives of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given primitives. The primitives of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -98,7 +96,7 @@ public class Mesh
         }
         List<MeshPrimitive> oldList = this.primitives;
         List<MeshPrimitive> newList = new ArrayList<MeshPrimitive>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -106,9 +104,9 @@ public class Mesh
     }
 
     /**
-     * Remove the given primitives. The primitives of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one. 
+     * Remove the given primitives. The primitives of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -120,7 +118,7 @@ public class Mesh
         }
         List<MeshPrimitive> oldList = this.primitives;
         List<MeshPrimitive> newList = new ArrayList<MeshPrimitive>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -128,36 +126,36 @@ public class Mesh
     }
 
     /**
-     * Array of weights to be applied to the morph targets. The number of 
-     * array elements **MUST** match the number of morph targets. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Array of weights to be applied to the morph targets. The number of
+     * array elements **MUST** match the number of morph targets.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param weights The weights to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setWeights(List<Float> weights) {
         if (weights == null) {
             this.weights = weights;
-            return ;
+            return;
         }
-        if (weights.size()< 1) {
+        if (weights.size() < 1) {
             throw new IllegalArgumentException("Number of weights elements is < 1");
         }
         this.weights = weights;
     }
 
     /**
-     * Array of weights to be applied to the morph targets. The number of 
-     * array elements **MUST** match the number of morph targets. 
-     * (optional)<br> 
-     * Minimum number of items: 1<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Array of weights to be applied to the morph targets. The number of
+     * array elements **MUST** match the number of morph targets.
+     * (optional)<br>
+     * Minimum number of items: 1<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The weights
      * 
@@ -167,9 +165,9 @@ public class Mesh
     }
 
     /**
-     * Add the given weights. The weights of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given weights. The weights of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -181,7 +179,7 @@ public class Mesh
         }
         List<Float> oldList = this.weights;
         List<Float> newList = new ArrayList<Float>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -189,11 +187,11 @@ public class Mesh
     }
 
     /**
-     * Remove the given weights. The weights of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given weights. The weights of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -205,7 +203,7 @@ public class Mesh
         }
         List<Float> oldList = this.weights;
         List<Float> newList = new ArrayList<Float>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);

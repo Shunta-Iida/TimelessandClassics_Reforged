@@ -8,40 +8,37 @@
 
 package de.javagl.jgltf.impl.v1;
 
-
-
 /**
- * A buffer points to binary geometry, animation, or skins. 
+ * A buffer points to binary geometry, animation, or skins.
  * 
- * Auto-generated for buffer.schema.json 
+ * Auto-generated for buffer.schema.json
  * 
  */
 public class Buffer
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * The uri of the buffer. (required) 
+     * The uri of the buffer. (required)
      * 
      */
     private String uri;
     /**
-     * The length of the buffer in bytes. (optional)<br> 
-     * Default: 0<br> 
-     * Minimum: 0 (inclusive) 
+     * The length of the buffer in bytes. (optional)<br>
+     * Default: 0<br>
+     * Minimum: 0 (inclusive)
      * 
      */
     private Integer byteLength;
     /**
-     * XMLHttpRequest `responseType`. (optional)<br> 
-     * Default: "arraybuffer"<br> 
-     * Valid values: ["arraybuffer", "text"] 
+     * XMLHttpRequest `responseType`. (optional)<br>
+     * Default: "arraybuffer"<br>
+     * Valid values: ["arraybuffer", "text"]
      * 
      */
     private String type;
 
     /**
-     * The uri of the buffer. (required) 
+     * The uri of the buffer. (required)
      * 
      * @param uri The uri to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -49,13 +46,13 @@ public class Buffer
      */
     public void setUri(String uri) {
         if (uri == null) {
-            throw new NullPointerException((("Invalid value for uri: "+ uri)+", may not be null"));
+            throw new NullPointerException((("Invalid value for uri: " + uri) + ", may not be null"));
         }
         this.uri = uri;
     }
 
     /**
-     * The uri of the buffer. (required) 
+     * The uri of the buffer. (required)
      * 
      * @return The uri
      * 
@@ -65,30 +62,30 @@ public class Buffer
     }
 
     /**
-     * The length of the buffer in bytes. (optional)<br> 
-     * Default: 0<br> 
-     * Minimum: 0 (inclusive) 
+     * The length of the buffer in bytes. (optional)<br>
+     * Default: 0<br>
+     * Minimum: 0 (inclusive)
      * 
      * @param byteLength The byteLength to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setByteLength(Integer byteLength) {
         if (byteLength == null) {
             this.byteLength = byteLength;
-            return ;
+            return;
         }
-        if (byteLength< 0) {
+        if (byteLength < 0) {
             throw new IllegalArgumentException("byteLength < 0");
         }
         this.byteLength = byteLength;
     }
 
     /**
-     * The length of the buffer in bytes. (optional)<br> 
-     * Default: 0<br> 
-     * Minimum: 0 (inclusive) 
+     * The length of the buffer in bytes. (optional)<br>
+     * Default: 0<br>
+     * Minimum: 0 (inclusive)
      * 
      * @return The byteLength
      * 
@@ -98,41 +95,43 @@ public class Buffer
     }
 
     /**
-     * Returns the default value of the byteLength<br> 
-     * @see #getByteLength 
+     * Returns the default value of the byteLength<br>
+     * 
+     * @see #getByteLength
      * 
      * @return The default byteLength
      * 
      */
     public Integer defaultByteLength() {
-        return  0;
+        return 0;
     }
 
     /**
-     * XMLHttpRequest `responseType`. (optional)<br> 
-     * Default: "arraybuffer"<br> 
-     * Valid values: ["arraybuffer", "text"] 
+     * XMLHttpRequest `responseType`. (optional)<br>
+     * Default: "arraybuffer"<br>
+     * Valid values: ["arraybuffer", "text"]
      * 
      * @param type The type to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setType(String type) {
         if (type == null) {
             this.type = type;
-            return ;
+            return;
         }
-        if ((!"arraybuffer".equals(type))&&(!"text".equals(type))) {
-            throw new IllegalArgumentException((("Invalid value for type: "+ type)+", valid: [\"arraybuffer\", \"text\"]"));
+        if ((!"arraybuffer".equals(type)) && (!"text".equals(type))) {
+            throw new IllegalArgumentException(
+                    (("Invalid value for type: " + type) + ", valid: [\"arraybuffer\", \"text\"]"));
         }
         this.type = type;
     }
 
     /**
-     * XMLHttpRequest `responseType`. (optional)<br> 
-     * Default: "arraybuffer"<br> 
-     * Valid values: ["arraybuffer", "text"] 
+     * XMLHttpRequest `responseType`. (optional)<br>
+     * Default: "arraybuffer"<br>
+     * Valid values: ["arraybuffer", "text"]
      * 
      * @return The type
      * 
@@ -142,8 +141,9 @@ public class Buffer
     }
 
     /**
-     * Returns the default value of the type<br> 
-     * @see #getType 
+     * Returns the default value of the type<br>
+     * 
+     * @see #getType
      * 
      * @return The default type
      * 

@@ -34,13 +34,17 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     public ArmorRigItem(Properties properties) {
         super(properties);
     }
+
     private ArmorRigContainerProvider containerProvider;
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        if(player.getItemInHand(hand).getOrCreateTag().get("rig_rows") == null)
+        if (player.getItemInHand(hand).getOrCreateTag().get("rig_rows") == null)
             player.getItemInHand(hand).getOrCreateTag().putInt("rig_rows", rig.getGeneral().getInventoryRows());
-        if(world.isClientSide) return super.use(world, player, hand);
-        if(hand != InteractionHand.MAIN_HAND) return InteractionResultHolder.pass(player.getItemInHand(hand));
+        if (world.isClientSide)
+            return super.use(world, player, hand);
+        if (hand != InteractionHand.MAIN_HAND)
+            return InteractionResultHolder.pass(player.getItemInHand(hand));
         containerProvider = new ArmorRigContainerProvider(player.getItemInHand(hand));
         NetworkHooks.openGui((ServerPlayer) player, containerProvider);
         super.use(world, player, hand);
@@ -48,8 +52,7 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt)
-    {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new ArmorRigCapabilityProvider();
     }
 
@@ -57,57 +60,66 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
 
     private Rig rig = new Rig();
 
-    public void setRig(NetworkRigManager.Supplier supplier)
-    {
+    public void setRig(NetworkRigManager.Supplier supplier) {
         this.rig = supplier.getRig();
     }
 
-    public Rig getRig()
-    {
+    public Rig getRig() {
         return this.rig;
     }
 
-    /*@OnlyIn(Dist.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flag) {
-       super.addInformation(stack, worldIn, tooltip, flag);
+    /*
+     * @OnlyIn(Dist.CLIENT)
+     * 
+     * @Override
+     * public void addInformation(ItemStack stack, @Nullable World worldIn,
+     * List<ITextComponent> tooltip, ITooltipFlag flag) {
+     * super.addInformation(stack, worldIn, tooltip, flag);
+     * 
+     * tooltip.add(new
+     * TranslatableComponent("info.tac.current_armor_amount").append(new
+     * TranslatableComponent(ItemStack.DECIMALFORMAT.format(WearableHelper.
+     * GetCurrentDurability(stack))+"")).withStyle(ChatFormatting.BLUE));
+     * int scancode =
+     * GLFW.glfwGetKeyScancode(InputHandler.ARMOR_REPAIRING.getKeyCode());
+     * if(GLFW.glfwGetKeyName(InputHandler.ARMOR_REPAIRING.getKeyCode(),scancode) !=
+     * null)
+     * tooltip.add((new
+     * TranslatableComponent("info.tac.tac_armor_repair1").append(new
+     * TranslatableComponent(GLFW.glfwGetKeyName(InputHandler.ARMOR_REPAIRING.
+     * getKeyCode(), scancode)).withStyle(ChatFormatting.AQUA)).append(new
+     * TranslatableComponent("info.tac.tac_armor_repair2"))).withStyle(
+     * ChatFormatting.YELLOW));
+     * }
+     */
 
-       tooltip.add(new TranslatableComponent("info.tac.current_armor_amount").append(new TranslatableComponent(ItemStack.DECIMALFORMAT.format(WearableHelper.GetCurrentDurability(stack))+"")).withStyle(ChatFormatting.BLUE));
-       int scancode = GLFW.glfwGetKeyScancode(InputHandler.ARMOR_REPAIRING.getKeyCode());
-       if(GLFW.glfwGetKeyName(InputHandler.ARMOR_REPAIRING.getKeyCode(),scancode) != null)
-           tooltip.add((new TranslatableComponent("info.tac.tac_armor_repair1").append(new TranslatableComponent(GLFW.glfwGetKeyName(InputHandler.ARMOR_REPAIRING.getKeyCode(), scancode)).withStyle(ChatFormatting.AQUA)).append(new TranslatableComponent("info.tac.tac_armor_repair2"))).withStyle(ChatFormatting.YELLOW));
-    }*/
-
     @Override
-    public boolean shouldOverrideMultiplayerNbt() {return true;}
+    public boolean shouldOverrideMultiplayerNbt() {
+        return true;
+    }
 
     @Nullable
     @Override
-    public CompoundTag getShareTag(ItemStack stack)
-    {
+    public CompoundTag getShareTag(ItemStack stack) {
         stack.getOrCreateTag();
         CompoundTag nbt = super.getShareTag(stack);
         if (stack.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) stack.getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
+            RigSlotsHandler itemHandler = (RigSlotsHandler) stack.getCapability(ArmorRigCapabilityProvider.capability)
+                    .resolve().get();
             nbt.put("storage", itemHandler.serializeNBT());
         }
 
         return nbt;
     }
 
-
-
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity)
-    {
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         return true;
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks)
-    {
-        if(this.allowdedIn(group))
-        {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
+        if (this.allowdedIn(group)) {
             ItemStack stack = new ItemStack(this);
             stack.getOrCreateTag();
             WearableHelper.FillDefaults(stack, this.rig);
@@ -121,11 +133,11 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     }
 
     @Override
-    public int getBarWidth(ItemStack stack)
-    {
+    public int getBarWidth(ItemStack stack) {
         stack.getOrCreateTag();
         Rig modifiedRig = this.getModifiedRig(stack);
-        return (int) (13* (WearableHelper.GetCurrentDurability(stack) / (double) RigEnchantmentHelper.getModifiedDurability(stack, modifiedRig)));
+        return (int) (13 * (WearableHelper.GetCurrentDurability(stack)
+                / (double) RigEnchantmentHelper.getModifiedDurability(stack, modifiedRig)));
     }
 
     @Override
@@ -133,19 +145,13 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
         return Objects.requireNonNull(ChatFormatting.AQUA.getColor());
     }
 
-    public Rig getModifiedRig(ItemStack stack)
-    {
+    public Rig getModifiedRig(ItemStack stack) {
         CompoundTag tagCompound = stack.getTag();
-        if(tagCompound != null && tagCompound.contains("Rig", Tag.TAG_COMPOUND))
-        {
-            return this.modifiedRigCache.computeIfAbsent(tagCompound, item ->
-            {
-                if(tagCompound.getBoolean("Custom"))
-                {
+        if (tagCompound != null && tagCompound.contains("Rig", Tag.TAG_COMPOUND)) {
+            return this.modifiedRigCache.computeIfAbsent(tagCompound, item -> {
+                if (tagCompound.getBoolean("Custom")) {
                     return Rig.create(tagCompound.getCompound("Rig"));
-                }
-                else
-                {
+                } else {
                     Rig gunCopy = this.rig.copy();
                     gunCopy.deserializeNBT(tagCompound.getCompound("Rig"));
                     return gunCopy;

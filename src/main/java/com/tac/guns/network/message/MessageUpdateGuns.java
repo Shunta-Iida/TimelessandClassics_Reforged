@@ -17,21 +17,21 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns> implements NetworkGunManager.IGunProvider
-{
+public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns> implements NetworkGunManager.IGunProvider {
     private ImmutableMap<ResourceLocation, Gun> registeredGuns;
     private ImmutableMap<ResourceLocation, CustomGun> customGuns;
 
-    public MessageUpdateGuns() {}
+    public MessageUpdateGuns() {
+    }
 
-    public MessageUpdateGuns(ImmutableMap<ResourceLocation, Gun> readRegisteredGuns, ImmutableMap<ResourceLocation, CustomGun> readCustomGuns) {
+    public MessageUpdateGuns(ImmutableMap<ResourceLocation, Gun> readRegisteredGuns,
+            ImmutableMap<ResourceLocation, CustomGun> readCustomGuns) {
         this.registeredGuns = readRegisteredGuns;
         this.customGuns = readCustomGuns;
     }
 
     @Override
-    public void encode(MessageUpdateGuns messageUpdateGuns, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageUpdateGuns messageUpdateGuns, FriendlyByteBuf buffer) {
         Validate.notNull(NetworkGunManager.get());
         Validate.notNull(CustomGunLoader.get());
         NetworkGunManager.get().writeRegisteredGuns(buffer);
@@ -39,26 +39,23 @@ public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns> implements
     }
 
     @Override
-    public MessageUpdateGuns decode(FriendlyByteBuf buffer)
-    {
-        return new MessageUpdateGuns(NetworkGunManager.readRegisteredGuns(buffer), CustomGunLoader.readCustomGuns(buffer));
+    public MessageUpdateGuns decode(FriendlyByteBuf buffer) {
+        return new MessageUpdateGuns(NetworkGunManager.readRegisteredGuns(buffer),
+                CustomGunLoader.readCustomGuns(buffer));
     }
 
     @Override
-    public void handle(MessageUpdateGuns messageUpdateGuns, Supplier<NetworkEvent.Context> supplier)
-    {
+    public void handle(MessageUpdateGuns messageUpdateGuns, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleUpdateGuns(messageUpdateGuns));
         supplier.get().setPacketHandled(true);
     }
 
     @Override
-    public ImmutableMap<ResourceLocation, Gun> getRegisteredGuns()
-    {
+    public ImmutableMap<ResourceLocation, Gun> getRegisteredGuns() {
         return this.registeredGuns;
     }
 
-    public ImmutableMap<ResourceLocation, CustomGun> getCustomGuns()
-    {
+    public ImmutableMap<ResourceLocation, CustomGun> getCustomGuns() {
         return this.customGuns;
     }
 }

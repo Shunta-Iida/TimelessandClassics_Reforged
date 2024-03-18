@@ -10,21 +10,21 @@ public class GunSkin extends Attachment {
 
     private ResourceLocation skin;
 
-    private GunSkin(String skin, IGunModifier...  modifier) {
+    private GunSkin(String skin, IGunModifier... modifier) {
         super(modifier);
-        this.skin = ResourceLocation.tryParse("tac:"+skin);
+        this.skin = ResourceLocation.tryParse("tac:" + skin);
     }
 
-    private GunSkin(ResourceLocation resourceLocation, IGunModifier...  modifier) {
+    private GunSkin(ResourceLocation resourceLocation, IGunModifier... modifier) {
         super(modifier);
         this.skin = resourceLocation;
     }
 
-    public static GunSkin create(ResourceLocation resourceLocation, IGunModifier...  modifier) {
+    public static GunSkin create(ResourceLocation resourceLocation, IGunModifier... modifier) {
         return new GunSkin(resourceLocation, modifier);
     }
 
-    public static GunSkin create(String skin, IGunModifier...  modifier) {
+    public static GunSkin create(String skin, IGunModifier... modifier) {
         return new GunSkin(skin, modifier);
     }
 }

@@ -13,40 +13,34 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageCraft extends PlayMessage<MessageCraft>
-{
+public class MessageCraft extends PlayMessage<MessageCraft> {
     private ResourceLocation id;
     private BlockPos pos;
 
-    public MessageCraft() {}
+    public MessageCraft() {
+    }
 
-    public MessageCraft(ResourceLocation id, BlockPos pos)
-    {
+    public MessageCraft(ResourceLocation id, BlockPos pos) {
         this.id = id;
         this.pos = pos;
     }
 
     @Override
-    public void encode(MessageCraft messageCraft, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageCraft messageCraft, FriendlyByteBuf buffer) {
         buffer.writeResourceLocation(messageCraft.id);
         buffer.writeBlockPos(messageCraft.pos);
     }
 
     @Override
-    public MessageCraft decode(FriendlyByteBuf buffer)
-    {
+    public MessageCraft decode(FriendlyByteBuf buffer) {
         return new MessageCraft(buffer.readResourceLocation(), buffer.readBlockPos());
     }
 
     @Override
-    public void handle(MessageCraft messageCraft, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageCraft messageCraft, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null)
-            {
+            if (player != null) {
                 ServerPlayHandler.handleCraft(player, messageCraft.id, messageCraft.pos);
             }
         });

@@ -35,13 +35,14 @@ public class scar_l_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         SCAR_LAnimationController controller = SCAR_LAnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_LAnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_LAnimationController.INDEX_BODY,
+                    transformType, matrices);
 
             renderSight(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -60,7 +61,8 @@ public class scar_l_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_LAnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    SCAR_LAnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
@@ -68,7 +70,8 @@ public class scar_l_animation extends SkinnedGunModel {
         matrices.pushPose();
         {
             if (transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_LAnimationController.INDEX_MAGAZINE2, transformType, matrices);
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        SCAR_LAnimationController.INDEX_MAGAZINE2, transformType, matrices);
                 renderMag(stack, matrices, renderBuffer, light, overlay, skin);
             }
         }
@@ -77,12 +80,18 @@ public class scar_l_animation extends SkinnedGunModel {
         matrices.pushPose();
         {
             if (transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_LAnimationController.INDEX_BOLT, transformType, matrices);
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        SCAR_LAnimationController.INDEX_BOLT, transformType, matrices);
                 Gun gun = ((GunItem) stack.getItem()).getGun();
-                float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                float cooldownOg = ShootingHandler.get().getshootMsGap()
+                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                : ShootingHandler.get().getshootMsGap()
+                                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));

@@ -9,5 +9,6 @@ import net.minecraft.world.item.ItemStack;
 
 public interface IRigContainer {
     int getNumRows();
+
     AbstractContainerMenu getSelf();
 }

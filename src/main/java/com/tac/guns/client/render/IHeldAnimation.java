@@ -15,43 +15,54 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IHeldAnimation
-{
+public interface IHeldAnimation {
     /**
-     * Allows for modifications of the player model. This is where arms should be aligned to hold
-     * the weapon correctly. This also gives you access to the current aiming progress.
+     * Allows for modifications of the player model. This is where arms should be
+     * aligned to hold
+     * the weapon correctly. This also gives you access to the current aiming
+     * progress.
      *
-     * @param model an get of the player model
-     * @param hand the hand which is currently being used
-     * @param aimProgress the current animation progress of looking down the weapons sight
+     * @param model       an get of the player model
+     * @param hand        the hand which is currently being used
+     * @param aimProgress the current animation progress of looking down the weapons
+     *                    sight
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {}
+    default void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
+    }
 
     /**
-     * Allows for transformations of the player model. This is where the entire player model can
+     * Allows for transformations of the player model. This is where the entire
+     * player model can
      * be rotated and translated to suit the current weapon.
      *
-     * @param player the player holding the weapon
-     * @param hand the hand which is currently being used
-     * @param aimProgress the current animation progress of looking down the weapons sight
+     * @param player      the player holding the weapon
+     * @param hand        the hand which is currently being used
+     * @param aimProgress the current animation progress of looking down the weapons
+     *                    sight
      * @param matrixStack the current matrix stack
-     * @param buffer a render type buffer get
+     * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack, MultiBufferSource buffer) {}
+    default void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
+            MultiBufferSource buffer) {
+    }
 
     /**
-     * Allows for transformations of the weapon before rendering. This is where rotations can be
+     * Allows for transformations of the weapon before rendering. This is where
+     * rotations can be
      * applied to the item for animating aiming.
      *
-     * @param hand the hand which is currently being used
-     * @param aimProgress the current animation progress of looking down the weapons sight
+     * @param hand        the hand which is currently being used
+     * @param aimProgress the current animation progress of looking down the weapons
+     *                    sight
      * @param matrixStack the current matrix stack
-     * @param buffer a render type buffer get
+     * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack, MultiBufferSource buffer) {}
+    default void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
+            MultiBufferSource buffer) {
+    }
 
     /**
      *
@@ -63,7 +74,9 @@ public interface IHeldAnimation
      * @param light
      * @param partialTicks
      */
-    default void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {}
+    default void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
+            MultiBufferSource buffer, int light, float partialTicks) {
+    }
 
     /**
      *
@@ -72,27 +85,26 @@ public interface IHeldAnimation
      * @param stack
      * @param partialTicks
      */
-    default boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack, float partialTicks)
-    {
+    default boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
+            float partialTicks) {
         return false;
     }
 
     /**
-     * If the sprinting animation should be applied in first person for the grip type this held
+     * If the sprinting animation should be applied in first person for the grip
+     * type this held
      * animation is applied to.
      *
      * @return can apply sprinting animation
      */
-    default boolean canApplySprintingAnimation()
-    {
+    default boolean canApplySprintingAnimation() {
         return true;
     }
 
     /**
      * @return <code>true</code> if any items in the offhand should be rendered
      */
-    default boolean canRenderOffhandItem()
-    {
+    default boolean canRenderOffhandItem() {
         return false;
     }
 
@@ -103,8 +115,7 @@ public interface IHeldAnimation
      * @param dest   the model renderer to apply the rotations to
      */
     @OnlyIn(Dist.CLIENT)
-    static void copyModelAngles(ModelPart source, ModelPart dest)
-    {
+    static void copyModelAngles(ModelPart source, ModelPart dest) {
         dest.xRot = source.xRot;
         dest.yRot = source.yRot;
         dest.zRot = source.zRot;

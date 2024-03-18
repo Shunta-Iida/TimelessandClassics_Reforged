@@ -20,52 +20,46 @@ import java.util.List;
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class PistolBarrelItem extends Item implements IBarrel, IColored
-{
+public class PistolBarrelItem extends Item implements IBarrel, IColored {
     private final Barrel barrel;
     private final boolean colored;
 
-    public PistolBarrelItem(Barrel barrel, Properties properties)
-    {
+    public PistolBarrelItem(Barrel barrel, Properties properties) {
         super(properties);
         this.barrel = barrel;
         this.colored = true;
     }
 
-    public PistolBarrelItem(Barrel barrel, Properties properties, boolean colored)
-    {
+    public PistolBarrelItem(Barrel barrel, Properties properties, boolean colored) {
         super(properties);
         this.barrel = barrel;
         this.colored = colored;
     }
 
     @Override
-    public Barrel getProperties()
-    {
+    public Barrel getProperties() {
         return this.barrel;
     }
 
     @Override
-    public boolean canColor(ItemStack stack)
-    {
+    public boolean canColor(ItemStack stack) {
         return this.colored;
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
-    {
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment == Enchantments.BINDING_CURSE || super.canApplyAtEnchantingTable(stack, enchantment);
     }
+
     @Override
-    public Type getType()
-    {
+    public Type getType() {
         return Type.PISTOL_BARREL;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag)
-    {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, worldIn, tooltip, flag);
-        tooltip.add((new TranslatableComponent("info.tac.pistolBarrel_type").withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(ChatFormatting.BOLD)));
+        tooltip.add((new TranslatableComponent("info.tac.pistolBarrel_type").withStyle(ChatFormatting.LIGHT_PURPLE)
+                .withStyle(ChatFormatting.BOLD)));
     }
 }

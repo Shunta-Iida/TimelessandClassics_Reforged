@@ -5,5 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface CacheableModelBakery {
     void cacheModel(ResourceLocation resourceLocation, UnbakedModel model);
+
     UnbakedModel getMissingModel();
 }

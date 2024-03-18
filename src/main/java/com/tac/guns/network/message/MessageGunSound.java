@@ -12,8 +12,7 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageGunSound extends PlayMessage<MessageGunSound>
-{
+public class MessageGunSound extends PlayMessage<MessageGunSound> {
     private ResourceLocation id;
     private SoundSource category;
     private float x;
@@ -25,10 +24,11 @@ public class MessageGunSound extends PlayMessage<MessageGunSound>
     private boolean muzzle;
     private boolean reload;
 
-    public MessageGunSound() {}
+    public MessageGunSound() {
+    }
 
-    public MessageGunSound(ResourceLocation id, SoundSource category, float x, float y, float z, float volume, float pitch, int shooterId, boolean muzzle, boolean reload)
-    {
+    public MessageGunSound(ResourceLocation id, SoundSource category, float x, float y, float z, float volume,
+            float pitch, int shooterId, boolean muzzle, boolean reload) {
         this.id = id;
         this.category = category;
         this.x = x;
@@ -42,8 +42,7 @@ public class MessageGunSound extends PlayMessage<MessageGunSound>
     }
 
     @Override
-    public void encode(MessageGunSound messageGunSound, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageGunSound messageGunSound, FriendlyByteBuf buffer) {
         buffer.writeUtf(messageGunSound.id.toString());
         buffer.writeEnum(messageGunSound.category);
         buffer.writeFloat(messageGunSound.x);
@@ -57,8 +56,7 @@ public class MessageGunSound extends PlayMessage<MessageGunSound>
     }
 
     @Override
-    public MessageGunSound decode(FriendlyByteBuf buffer)
-    {
+    public MessageGunSound decode(FriendlyByteBuf buffer) {
         return new MessageGunSound(
                 ResourceLocation.tryParse(buffer.readUtf()),
                 buffer.readEnum(SoundSource.class),
@@ -69,59 +67,48 @@ public class MessageGunSound extends PlayMessage<MessageGunSound>
                 buffer.readFloat(),
                 buffer.readInt(),
                 buffer.readBoolean(),
-                buffer.readBoolean()
-        );
+                buffer.readBoolean());
     }
 
     @Override
-    public void handle(MessageGunSound messageGunSound, Supplier<NetworkEvent.Context> supplier)
-    {
+    public void handle(MessageGunSound messageGunSound, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleMessageGunSound(messageGunSound));
         supplier.get().setPacketHandled(true);
     }
 
-    public ResourceLocation getId()
-    {
+    public ResourceLocation getId() {
         return this.id;
     }
 
-    public SoundSource getCategory()
-    {
+    public SoundSource getCategory() {
         return this.category;
     }
 
-    public float getX()
-    {
+    public float getX() {
         return this.x;
     }
 
-    public float getY()
-    {
+    public float getY() {
         return this.y;
     }
 
-    public float getZ()
-    {
+    public float getZ() {
         return this.z;
     }
 
-    public float getVolume()
-    {
+    public float getVolume() {
         return this.volume;
     }
 
-    public float getPitch()
-    {
+    public float getPitch() {
         return this.pitch;
     }
 
-    public int getShooterId()
-    {
+    public int getShooterId() {
         return this.shooterId;
     }
 
-    public boolean showMuzzleFlash()
-    {
+    public boolean showMuzzleFlash() {
         return this.muzzle;
     }
 

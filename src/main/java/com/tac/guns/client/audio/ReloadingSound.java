@@ -18,21 +18,21 @@ public class ReloadingSound extends EntityBoundSoundInstance {
         this.attenuation = Attenuation.NONE;
 
         LocalPlayer player = Minecraft.getInstance().player;
-        if(player != null)
-        {
+        if (player != null) {
             float distance = Config.SERVER.gunShotMaxDistance.get().floatValue();
             this.volume = volume * (1.0F - Math.min(1.0F, (float) Math.sqrt(player.distanceToSqr(x, y, z)) / distance));
             this.volume *= this.volume;
         }
     }
+
     @Override
-    public void tick(){
+    public void tick() {
         super.tick();
         LocalPlayer player = Minecraft.getInstance().player;
-        if(player != null)
-        {
+        if (player != null) {
             float distance = Config.SERVER.gunShotMaxDistance.get().floatValue();
-            this.volume = this.volume * (1.0F - Math.min(1.0F, (float) Math.sqrt(player.distanceToSqr(this.x, this.y, this.z)) / distance));
+            this.volume = this.volume * (1.0F
+                    - Math.min(1.0F, (float) Math.sqrt(player.distanceToSqr(this.x, this.y, this.z)) / distance));
             this.volume *= this.volume;
         }
     }

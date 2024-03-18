@@ -8,28 +8,25 @@
 
 package de.javagl.jgltf.impl.v2;
 
-
-
 /**
- * Auto-generated for material.normalTextureInfo.schema.json 
+ * Auto-generated for material.normalTextureInfo.schema.json
  * 
  */
 public class MaterialNormalTextureInfo
-    extends TextureInfo
-{
+        extends TextureInfo {
 
     /**
-     * The scalar parameter applied to each normal vector of the normal 
-     * texture. (optional)<br> 
-     * Default: 1.0 
+     * The scalar parameter applied to each normal vector of the normal
+     * texture. (optional)<br>
+     * Default: 1.0
      * 
      */
     private Float scale;
 
     /**
-     * The scalar parameter applied to each normal vector of the normal 
-     * texture. (optional)<br> 
-     * Default: 1.0 
+     * The scalar parameter applied to each normal vector of the normal
+     * texture. (optional)<br>
+     * Default: 1.0
      * 
      * @param scale The scale to set
      * 
@@ -37,15 +34,15 @@ public class MaterialNormalTextureInfo
     public void setScale(Float scale) {
         if (scale == null) {
             this.scale = scale;
-            return ;
+            return;
         }
         this.scale = scale;
     }
 
     /**
-     * The scalar parameter applied to each normal vector of the normal 
-     * texture. (optional)<br> 
-     * Default: 1.0 
+     * The scalar parameter applied to each normal vector of the normal
+     * texture. (optional)<br>
+     * Default: 1.0
      * 
      * @return The scale
      * 
@@ -55,14 +52,15 @@ public class MaterialNormalTextureInfo
     }
 
     /**
-     * Returns the default value of the scale<br> 
-     * @see #getScale 
+     * Returns the default value of the scale<br>
+     * 
+     * @see #getScale
      * 
      * @return The default scale
      * 
      */
     public Float defaultScale() {
-        return  1.0F;
+        return 1.0F;
     }
 
 }

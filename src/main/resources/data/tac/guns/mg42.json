@@ -23,7 +23,11 @@
     "maxAmmo": 100,
     "reloadMagTimer": 142,
     "additionalReloadEmptyMagTimer": -10,
-    "maxAdditionalAmmoPerOC": [50, 75, 100],
+    "maxAdditionalAmmoPerOC": [
+      50,
+      75,
+      100
+    ],
     "preReloadPauseTicks": 26,
     "openBolt": true
   },
@@ -50,7 +54,7 @@
     "weaponType": 1
   },
   "modules": {
-    "zoom":{
+    "zoom": {
       "fovModifier": 0.8,
       "yOffset": 8.7,
       "zOffset": 2.7

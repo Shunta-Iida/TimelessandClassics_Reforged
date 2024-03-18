@@ -13,50 +13,48 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * A keyframe animation. 
+ * A keyframe animation.
  * 
- * Auto-generated for animation.schema.json 
+ * Auto-generated for animation.schema.json
  * 
  */
 public class Animation
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * An array of channels, each of which targets an animation's sampler at 
-     * a node's property. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Targets an animation's sampler at a node's property. 
-     * (optional) 
+     * An array of channels, each of which targets an animation's sampler at
+     * a node's property. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Targets an animation's sampler at a node's property.
+     * (optional)
      * 
      */
     private List<AnimationChannel> channels;
     /**
-     * A dictionary object of strings whose values are IDs of accessors with 
-     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings whose values are IDs of accessors with
+     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, String> parameters;
     /**
-     * A dictionary object of samplers that combines input and output 
-     * parameters with an interpolation algorithm to define a keyframe graph 
-     * (but not its target). (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers that combines input and output
+     * parameters with an interpolation algorithm to define a keyframe graph
+     * (but not its target). (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, AnimationSampler> samplers;
 
     /**
-     * An array of channels, each of which targets an animation's sampler at 
-     * a node's property. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Targets an animation's sampler at a node's property. 
-     * (optional) 
+     * An array of channels, each of which targets an animation's sampler at
+     * a node's property. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Targets an animation's sampler at a node's property.
+     * (optional)
      * 
      * @param channels The channels to set
      * 
@@ -64,18 +62,18 @@ public class Animation
     public void setChannels(List<AnimationChannel> channels) {
         if (channels == null) {
             this.channels = channels;
-            return ;
+            return;
         }
         this.channels = channels;
     }
 
     /**
-     * An array of channels, each of which targets an animation's sampler at 
-     * a node's property. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;Targets an animation's sampler at a node's property. 
-     * (optional) 
+     * An array of channels, each of which targets an animation's sampler at
+     * a node's property. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;Targets an animation's sampler at a node's property.
+     * (optional)
      * 
      * @return The channels
      * 
@@ -85,9 +83,9 @@ public class Animation
     }
 
     /**
-     * Add the given channels. The channels of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given channels. The channels of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -99,7 +97,7 @@ public class Animation
         }
         List<AnimationChannel> oldList = this.channels;
         List<AnimationChannel> newList = new ArrayList<AnimationChannel>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -107,11 +105,11 @@ public class Animation
     }
 
     /**
-     * Remove the given channels. The channels of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given channels. The channels of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -123,7 +121,7 @@ public class Animation
         }
         List<AnimationChannel> oldList = this.channels;
         List<AnimationChannel> newList = new ArrayList<AnimationChannel>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -135,8 +133,9 @@ public class Animation
     }
 
     /**
-     * Returns the default value of the channels<br> 
-     * @see #getChannels 
+     * Returns the default value of the channels<br>
+     * 
+     * @see #getChannels
      * 
      * @return The default channels
      * 
@@ -146,9 +145,9 @@ public class Animation
     }
 
     /**
-     * A dictionary object of strings whose values are IDs of accessors with 
-     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings whose values are IDs of accessors with
+     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br>
+     * Default: {}
      * 
      * @param parameters The parameters to set
      * 
@@ -156,15 +155,15 @@ public class Animation
     public void setParameters(Map<String, String> parameters) {
         if (parameters == null) {
             this.parameters = parameters;
-            return ;
+            return;
         }
         this.parameters = parameters;
     }
 
     /**
-     * A dictionary object of strings whose values are IDs of accessors with 
-     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of strings whose values are IDs of accessors with
+     * keyframe data, e.g., time, translation, rotation, etc. (optional)<br>
+     * Default: {}
      * 
      * @return The parameters
      * 
@@ -174,11 +173,11 @@ public class Animation
     }
 
     /**
-     * Add the given parameters. The parameters of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given parameters. The parameters of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -192,7 +191,7 @@ public class Animation
         }
         Map<String, String> oldMap = this.parameters;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -200,11 +199,11 @@ public class Animation
     }
 
     /**
-     * Remove the given parameters. The parameters of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given parameters. The parameters of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -216,7 +215,7 @@ public class Animation
         }
         Map<String, String> oldMap = this.parameters;
         Map<String, String> newMap = new LinkedHashMap<String, String>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -228,8 +227,9 @@ public class Animation
     }
 
     /**
-     * Returns the default value of the parameters<br> 
-     * @see #getParameters 
+     * Returns the default value of the parameters<br>
+     * 
+     * @see #getParameters
      * 
      * @return The default parameters
      * 
@@ -239,10 +239,10 @@ public class Animation
     }
 
     /**
-     * A dictionary object of samplers that combines input and output 
-     * parameters with an interpolation algorithm to define a keyframe graph 
-     * (but not its target). (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers that combines input and output
+     * parameters with an interpolation algorithm to define a keyframe graph
+     * (but not its target). (optional)<br>
+     * Default: {}
      * 
      * @param samplers The samplers to set
      * 
@@ -250,16 +250,16 @@ public class Animation
     public void setSamplers(Map<String, AnimationSampler> samplers) {
         if (samplers == null) {
             this.samplers = samplers;
-            return ;
+            return;
         }
         this.samplers = samplers;
     }
 
     /**
-     * A dictionary object of samplers that combines input and output 
-     * parameters with an interpolation algorithm to define a keyframe graph 
-     * (but not its target). (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers that combines input and output
+     * parameters with an interpolation algorithm to define a keyframe graph
+     * (but not its target). (optional)<br>
+     * Default: {}
      * 
      * @return The samplers
      * 
@@ -269,11 +269,11 @@ public class Animation
     }
 
     /**
-     * Add the given samplers. The samplers of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given samplers. The samplers of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -287,7 +287,7 @@ public class Animation
         }
         Map<String, AnimationSampler> oldMap = this.samplers;
         Map<String, AnimationSampler> newMap = new LinkedHashMap<String, AnimationSampler>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -295,11 +295,11 @@ public class Animation
     }
 
     /**
-     * Remove the given samplers. The samplers of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given samplers. The samplers of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -311,7 +311,7 @@ public class Animation
         }
         Map<String, AnimationSampler> oldMap = this.samplers;
         Map<String, AnimationSampler> newMap = new LinkedHashMap<String, AnimationSampler>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -323,8 +323,9 @@ public class Animation
     }
 
     /**
-     * Returns the default value of the samplers<br> 
-     * @see #getSamplers 
+     * Returns the default value of the samplers<br>
+     * 
+     * @see #getSamplers
      * 
      * @return The default samplers
      * 

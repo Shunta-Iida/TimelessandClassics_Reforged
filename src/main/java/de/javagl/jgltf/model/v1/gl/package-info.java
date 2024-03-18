@@ -3,4 +3,3 @@
  * a glTF asset with GL.
  */
 package de.javagl.jgltf.model.v1.gl;
-

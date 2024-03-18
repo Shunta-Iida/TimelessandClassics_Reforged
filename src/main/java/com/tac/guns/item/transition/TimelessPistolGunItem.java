@@ -1,6 +1,5 @@
 package com.tac.guns.item.transition;
 
-
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
@@ -19,14 +18,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class TimelessPistolGunItem extends TimelessGunItem {
-    public TimelessPistolGunItem(Process<Properties> properties)
-    {
+    public TimelessPistolGunItem(Process<Properties> properties) {
         super(properties1 -> properties.process(new Properties().stacksTo(1).tab(GunMod.GROUP)));
     }
 
     public TimelessPistolGunItem(Process<Item.Properties> properties, IGunModifier... modifiers) {
-        super(properties1 -> properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)),  modifiers);
+        super(properties1 -> properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)), modifiers);
     }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag) {
         Gun modifiedGun = this.getModifiedGun(stack);
@@ -35,12 +34,17 @@ public class TimelessPistolGunItem extends TimelessGunItem {
         boolean isShift = Keys.MORE_INFO_HOLD.isDown();
         if (isShift) {
             if (tagCompound != null) {
-                //tooltip.add((new TranslatableComponent("info.tac.oldRifle", new TranslatableComponent(IAttachment.Type.OLD_SCOPE.getTranslationKey())).withStyle(ChatFormatting.GREEN)));
-                //tooltip.add((new TranslatableComponent("info.tac.pistolScope", new TranslatableComponent("MiniScope").withStyle(ChatFormatting.BOLD)).withStyle(ChatFormatting.LIGHT_PURPLE)));
-                tooltip.add((new TranslatableComponent("info.tac.pistolBarrel", new TranslatableComponent("PistolBarrel").withStyle(ChatFormatting.BOLD)).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                // tooltip.add((new TranslatableComponent("info.tac.oldRifle", new
+                // TranslatableComponent(IAttachment.Type.OLD_SCOPE.getTranslationKey())).withStyle(ChatFormatting.GREEN)));
+                // tooltip.add((new TranslatableComponent("info.tac.pistolScope", new
+                // TranslatableComponent("MiniScope").withStyle(ChatFormatting.BOLD)).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                tooltip.add((new TranslatableComponent("info.tac.pistolBarrel",
+                        new TranslatableComponent("PistolBarrel").withStyle(ChatFormatting.BOLD))
+                        .withStyle(ChatFormatting.LIGHT_PURPLE)));
             }
         }
     }
+
     public TimelessPistolGunItem() {
         this(properties -> properties);
     }

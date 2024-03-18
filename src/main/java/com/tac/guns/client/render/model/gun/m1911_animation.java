@@ -32,16 +32,18 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class m1911_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         M1911AnimationController controller = M1911AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M1911AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M1911AnimationController.INDEX_BODY,
+                    transformType, matrices);
             if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack).getItem() == ModItems.PISTOL_SILENCER.get()) {
                 matrices.translate(0, 0, -0.0475);
-                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices, renderBuffer, light,
+                        overlay);
                 matrices.translate(0, 0, 0.0475);
             }
             RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
@@ -49,20 +51,27 @@ public class m1911_animation extends SkinnedGunModel {
         matrices.popPose();
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M1911AnimationController.INDEX_MAG, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M1911AnimationController.INDEX_MAG,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+        float cooldownOg = ShootingHandler.get().getshootMsGap()
+                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                        : ShootingHandler.get().getshootMsGap()
+                                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
         matrices.pushPose();
         {
             if (transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), M1911AnimationController.INDEX_SLIDE, transformType, matrices);
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        M1911AnimationController.INDEX_SLIDE, transformType, matrices);
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
 
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     double v1 = -4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0;

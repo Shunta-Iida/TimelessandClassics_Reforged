@@ -30,51 +30,44 @@ import java.util.Map;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock
-{
+public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock {
     private final Map<BlockState, VoxelShape> SHAPES = new HashMap<>();
 
-    public UpgradeBenchBlock(Properties properties)
-    {
+    public UpgradeBenchBlock(Properties properties) {
         super(properties);
     }
 
-    private VoxelShape getShape(BlockState state)
-    {
-        if(SHAPES.containsKey(state))
-        {
+    private VoxelShape getShape(BlockState state) {
+        if (SHAPES.containsKey(state)) {
             return SHAPES.get(state);
         }
         Direction direction = state.getValue(FACING);
         List<VoxelShape> shapes = new ArrayList<>();
         shapes.add(Block.box(0.5, 0, 0.5, 15.5, 13, 15.5));
         shapes.add(Block.box(0, 13, 0, 16, 15, 16));
-        shapes.add(VoxelShapeHelper.getRotatedShapes(VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction.get2DDataValue()]);
+        shapes.add(VoxelShapeHelper.getRotatedShapes(
+                VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction.get2DDataValue()]);
         VoxelShape shape = VoxelShapeHelper.combineAll(shapes);
         SHAPES.put(state, shape);
         return shape;
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context)
-    {
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         return this.getShape(state);
     }
 
     @Override
-    public @NotNull VoxelShape getOcclusionShape(BlockState state, BlockGetter reader, BlockPos pos)
-    {
+    public @NotNull VoxelShape getOcclusionShape(BlockState state, BlockGetter reader, BlockPos pos) {
         return this.getShape(state);
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand, BlockHitResult result)
-    {
-        if(!world.isClientSide())
-        {
+    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity,
+            InteractionHand hand, BlockHitResult result) {
+        if (!world.isClientSide()) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
-            if(tileEntity instanceof MenuProvider)
-            {
+            if (tileEntity instanceof MenuProvider) {
                 PacketHandler.getPlayChannel().sendToServer(new MessageSaveItemUpgradeBench(pos));
                 tileEntity.setChanged();
             }
@@ -85,16 +78,14 @@ public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock
 
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.hasBlockEntity() && state.getBlock() != newState.getBlock())
-        {
+        if (state.hasBlockEntity() && state.getBlock() != newState.getBlock()) {
             popResource(worldIn, pos,
-                    ((UpgradeBenchTileEntity)worldIn.getBlockEntity(pos)).getInventory().get(0));
+                    ((UpgradeBenchTileEntity) worldIn.getBlockEntity(pos)).getInventory().get(0));
             popResource(worldIn, pos,
-                    ((UpgradeBenchTileEntity)worldIn.getBlockEntity(pos)).getInventory().get(1));
+                    ((UpgradeBenchTileEntity) worldIn.getBlockEntity(pos)).getInventory().get(1));
             worldIn.removeBlockEntity(pos);
         }
     }
-
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new WorkbenchTileEntity(pos, state);

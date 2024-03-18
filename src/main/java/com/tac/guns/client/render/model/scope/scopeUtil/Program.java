@@ -18,7 +18,6 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
 public class Program {
     private final int program;
 
-
     public Program(ResourceLocation vertexShader) throws Exception {
         int vertShader = createShader(vertexShader, ARBVertexShader.GL_VERTEX_SHADER_ARB);
 
@@ -68,7 +67,7 @@ public class Program {
         try {
             shader = glCreateShaderObjectARB(shaderType);
 
-            if(shader == 0)
+            if (shader == 0)
                 throw new Exception("glCreateShaderObjectARB failed");
 
             Resource resource = Minecraft.getInstance().getResourceManager().getResource(resourceLocation);
@@ -81,8 +80,7 @@ public class Program {
                 throw new RuntimeException("Error creating shader: " + getLogInfo(shader));
 
             return shader;
-        }
-        catch(Exception exc) {
+        } catch (Exception exc) {
             glDeleteObjectARB(shader);
             throw exc;
         }

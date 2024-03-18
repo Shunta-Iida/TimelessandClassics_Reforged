@@ -8,34 +8,31 @@
 
 package de.javagl.jgltf.impl.v1;
 
-
-
 /**
- * Specifies the target rendering API and version, e.g., WebGL 1.0.3. 
+ * Specifies the target rendering API and version, e.g., WebGL 1.0.3.
  * 
- * Auto-generated for asset.profile.schema.json 
+ * Auto-generated for asset.profile.schema.json
  * 
  */
 public class AssetProfile
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * Specifies the target rendering API. (optional)<br> 
-     * Default: "WebGL" 
+     * Specifies the target rendering API. (optional)<br>
+     * Default: "WebGL"
      * 
      */
     private String api;
     /**
-     * The API version. (optional)<br> 
-     * Default: "1.0.3" 
+     * The API version. (optional)<br>
+     * Default: "1.0.3"
      * 
      */
     private String version;
 
     /**
-     * Specifies the target rendering API. (optional)<br> 
-     * Default: "WebGL" 
+     * Specifies the target rendering API. (optional)<br>
+     * Default: "WebGL"
      * 
      * @param api The api to set
      * 
@@ -43,14 +40,14 @@ public class AssetProfile
     public void setApi(String api) {
         if (api == null) {
             this.api = api;
-            return ;
+            return;
         }
         this.api = api;
     }
 
     /**
-     * Specifies the target rendering API. (optional)<br> 
-     * Default: "WebGL" 
+     * Specifies the target rendering API. (optional)<br>
+     * Default: "WebGL"
      * 
      * @return The api
      * 
@@ -60,8 +57,9 @@ public class AssetProfile
     }
 
     /**
-     * Returns the default value of the api<br> 
-     * @see #getApi 
+     * Returns the default value of the api<br>
+     * 
+     * @see #getApi
      * 
      * @return The default api
      * 
@@ -71,8 +69,8 @@ public class AssetProfile
     }
 
     /**
-     * The API version. (optional)<br> 
-     * Default: "1.0.3" 
+     * The API version. (optional)<br>
+     * Default: "1.0.3"
      * 
      * @param version The version to set
      * 
@@ -80,14 +78,14 @@ public class AssetProfile
     public void setVersion(String version) {
         if (version == null) {
             this.version = version;
-            return ;
+            return;
         }
         this.version = version;
     }
 
     /**
-     * The API version. (optional)<br> 
-     * Default: "1.0.3" 
+     * The API version. (optional)<br>
+     * Default: "1.0.3"
      * 
      * @return The version
      * 
@@ -97,8 +95,9 @@ public class AssetProfile
     }
 
     /**
-     * Returns the default value of the version<br> 
-     * @see #getVersion 
+     * Returns the default value of the version<br>
+     * 
+     * @see #getVersion
      * 
      * @return The default version
      * 

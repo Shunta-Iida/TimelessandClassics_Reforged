@@ -1,6 +1,5 @@
 package com.tac.guns.client.render.animation;
 
-
 import com.tac.guns.GunMod;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
@@ -22,12 +21,18 @@ public class Ak47AnimationController extends GunAnimationController {
     public static int INDEX_EXTRA_MAG = 1;
     public static int INDEX_BOLT = 2;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/ak47_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/ak47_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/ak47_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/ak47_inspect.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/ak47_draw.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/ak47_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_inspect.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_draw.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/ak47_static.gltf"));
     private static final Ak47AnimationController instance = new Ak47AnimationController();
 
     private Ak47AnimationController() {
@@ -42,28 +47,35 @@ public class Ak47AnimationController extends GunAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         this.enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.AK47.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.AK47.getId(), this);
     }
 
-    public static Ak47AnimationController getInstance(){
+    public static Ak47AnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case STATIC: return STATIC;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            default: return null;
+        switch (label) {
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case STATIC:
+                return STATIC;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            default:
+                return null;
         }
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.AK47.get(), label);
     }
 

@@ -9,14 +9,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 /**
- * This class allows weapons to fire custom projectiles instead of the default implementation. The
- * grenade launcher uses this to spawn a grenade entity with custom physics. Use {@link ProjectileManager}
+ * This class allows weapons to fire custom projectiles instead of the default
+ * implementation. The
+ * grenade launcher uses this to spawn a grenade entity with custom physics. Use
+ * {@link ProjectileManager}
  * to register a factory.
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IProjectileFactory
-{
+public interface IProjectileFactory {
     /**
      * Creates a new projectile entity.
      *
@@ -27,5 +28,6 @@ public interface IProjectileFactory
      * @param modifiedGun the properties of the gun
      * @return a projectile entity
      */
-    ProjectileEntity create(Level worldIn, LivingEntity entity, ItemStack weapon, GunItem item, Gun modifiedGun, float randP, float randY);
+    ProjectileEntity create(Level worldIn, LivingEntity entity, ItemStack weapon, GunItem item, Gun modifiedGun,
+            float randP, float randY);
 }

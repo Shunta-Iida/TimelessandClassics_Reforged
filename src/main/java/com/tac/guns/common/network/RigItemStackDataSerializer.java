@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 public class RigItemStackDataSerializer implements EntityDataSerializer<ItemStackWrapper> {
     public static final RigItemStackDataSerializer INSTANCE = new RigItemStackDataSerializer();
 
-    private RigItemStackDataSerializer(){
+    private RigItemStackDataSerializer() {
         EntityDataSerializers.registerSerializer(this);
     }
 
@@ -22,8 +22,9 @@ public class RigItemStackDataSerializer implements EntityDataSerializer<ItemStac
 
     public ItemStackWrapper read(FriendlyByteBuf p_135188_) {
         ItemStack itemStack = p_135188_.readItem();
-        if(itemStack.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) itemStack.getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
+        if (itemStack.getItem() instanceof ArmorRigItem) {
+            RigSlotsHandler itemHandler = (RigSlotsHandler) itemStack
+                    .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
             itemHandler.deserializeNBT(itemStack.getTag().getCompound("storage"));
         }
         return new ItemStackWrapper(itemStack);

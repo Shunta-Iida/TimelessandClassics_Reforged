@@ -21,24 +21,37 @@ public class Type191AnimationController extends GunAnimationController {
     public static int INDEX_RELEASE = 5;
     public static int INDEX_BOLT = 0;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_inspect.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_draw.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac", "animations/qbz_191_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_inspect.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_draw.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/qbz_191_static.gltf"));
     private static final Type191AnimationController instance = new Type191AnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
         switch (label) {
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
@@ -62,7 +75,7 @@ public class Type191AnimationController extends GunAnimationController {
         return super.getSoundFromLabel(ModItems.QBZ_191.get(), label);
     }
 
-    public static Type191AnimationController getInstance(){
+    public static Type191AnimationController getInstance() {
         return instance;
     }
 

@@ -16,13 +16,13 @@ public class MessageAnimationRun extends PlayMessage<MessageAnimationRun> {
     private boolean play;
     private UUID fromWho;
 
-    public MessageAnimationRun(){}
+    public MessageAnimationRun() {
+    }
 
     public MessageAnimationRun(ResourceLocation animationResource,
-                                 ResourceLocation soundResource,
-                                 boolean play,
-                                 UUID fromWho)
-    {
+            ResourceLocation soundResource,
+            boolean play,
+            UUID fromWho) {
         this.animationResource = animationResource;
         this.soundResource = soundResource;
         this.play = play;
@@ -39,15 +39,16 @@ public class MessageAnimationRun extends PlayMessage<MessageAnimationRun> {
 
     @Override
     public MessageAnimationRun decode(FriendlyByteBuf buffer) {
-        return new MessageAnimationRun(buffer.readResourceLocation(), buffer.readResourceLocation(), buffer.readBoolean(), buffer.readUUID());
+        return new MessageAnimationRun(buffer.readResourceLocation(), buffer.readResourceLocation(),
+                buffer.readBoolean(), buffer.readUUID());
     }
 
     @Override
     public void handle(MessageAnimationRun messageAnimationRun, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() ->
-        {
-            MessageAnimationSound message = new MessageAnimationSound(messageAnimationRun.animationResource, messageAnimationRun.soundResource, messageAnimationRun.play, messageAnimationRun.fromWho);
-            //TODO: Send to ALL? Is this not why we hear animations across the world?
+        supplier.get().enqueueWork(() -> {
+            MessageAnimationSound message = new MessageAnimationSound(messageAnimationRun.animationResource,
+                    messageAnimationRun.soundResource, messageAnimationRun.play, messageAnimationRun.fromWho);
+            // TODO: Send to ALL? Is this not why we hear animations across the world?
             PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(), message);
         });
         supplier.get().setPacketHandled(true);

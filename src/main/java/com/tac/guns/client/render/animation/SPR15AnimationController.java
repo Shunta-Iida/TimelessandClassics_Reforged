@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
-public class SPR15AnimationController extends GunAnimationController{
+public class SPR15AnimationController extends GunAnimationController {
     public static int INDEX_BODY = 2;
     public static int INDEX_LEFT_HAND = 10;
     public static int INDEX_RIGHT_HAND = 7;
@@ -22,12 +22,18 @@ public class SPR15AnimationController extends GunAnimationController{
     public static int INDEX_HANDLE = 1;
     public static int INDEX_BULLET = 4;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/spr15_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/spr15_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/spr15_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/spr15_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/spr15_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/spr15_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/spr15_static.gltf"));
     private static final SPR15AnimationController instance = new SPR15AnimationController();
 
     private SPR15AnimationController() {
@@ -42,28 +48,35 @@ public class SPR15AnimationController extends GunAnimationController{
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.SPR_15.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.SPR_15.getId(), this);
     }
 
-    public static SPR15AnimationController getInstance(){
+    public static SPR15AnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+        switch (label) {
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.SPR_15.get(), label);
     }
 

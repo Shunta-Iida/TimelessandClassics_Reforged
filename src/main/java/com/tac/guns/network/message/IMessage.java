@@ -8,8 +8,7 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IMessage
-{
+public interface IMessage {
     void encode(FriendlyByteBuf buffer);
 
     void decode(FriendlyByteBuf buffer);

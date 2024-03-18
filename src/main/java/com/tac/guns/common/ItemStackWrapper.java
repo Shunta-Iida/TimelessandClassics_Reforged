@@ -9,7 +9,7 @@ public record ItemStackWrapper(ItemStack itemStack) {
         return false;
     }
 
-    public ItemStackWrapper copy(){
+    public ItemStackWrapper copy() {
         return new ItemStackWrapper(itemStack);
     }
 }

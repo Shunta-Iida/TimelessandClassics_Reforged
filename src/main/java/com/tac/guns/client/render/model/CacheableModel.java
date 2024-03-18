@@ -14,35 +14,33 @@ public class CacheableModel {
     private final ResourceLocation modelLocation;
     private BakedModel cachedModel;
 
-    public CacheableModel(ResourceLocation location)
-    {
+    public CacheableModel(ResourceLocation location) {
         this.modelLocation = location;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public BakedModel getModel()
-    {
-        if(this.cachedModel == null)
-        {
+    public BakedModel getModel() {
+        if (this.cachedModel == null) {
             BakedModel model = Minecraft.getInstance().getModelManager().getModel(this.modelLocation);
-            if(model == Minecraft.getInstance().getModelManager().getMissingModel())
+            if (model == Minecraft.getInstance().getModelManager().getMissingModel())
                 return model;
             this.cachedModel = model;
         }
         return this.cachedModel;
     }
 
-    public void cleanCache(){
+    public void cleanCache() {
         this.cachedModel = null;
     }
 
-    public static final CacheableModel MISSING_MODEL = new CacheableModel(null){
+    public static final CacheableModel MISSING_MODEL = new CacheableModel(null) {
         @Override
-        public BakedModel getModel(){
+        public BakedModel getModel() {
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
 
         @Override
-        public void cleanCache(){}
+        public void cleanCache() {
+        }
     };
 }

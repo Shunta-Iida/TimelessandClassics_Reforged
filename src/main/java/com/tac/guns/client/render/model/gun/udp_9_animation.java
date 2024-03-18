@@ -22,25 +22,32 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class udp_9_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         UDP9AnimationController controller = UDP9AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_BODY, transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
-                RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE), Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, light, overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_BODY,
+                    transformType, matrices);
+            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.BASIC_LASER
+                    .orElse(ItemStack.EMPTY.getItem())) {
+                RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
+                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, light, overlay);
                 if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
-                    RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC), Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, 15728880, overlay); // 15728880 For fixed max light
+                    RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
+                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, 15728880,
+                            overlay); // 15728880 For fixed max light
             } else {
-                RenderUtil.renderModel(getComponentModel(skin, SIDE_RAIL_COVER), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIDE_RAIL_COVER), stack, matrices, renderBuffer, light,
+                        overlay);
             }
 
             renderSight(stack, matrices, renderBuffer, light, overlay, skin);
 
             if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) == ItemStack.EMPTY) {
-                RenderUtil.renderModel(getComponentModel(skin, GRIP_RAIL_COVER), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, GRIP_RAIL_COVER), stack, matrices, renderBuffer, light,
+                        overlay);
             }
 
             renderStock(stack, matrices, renderBuffer, light, overlay, skin);
@@ -55,7 +62,10 @@ public class udp_9_animation extends SkinnedGunModel {
             {
                 if (transformType.firstPerson()) {
                     Gun gun = ((GunItem) stack.getItem()).getGun();
-                    float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                    float cooldownOg = ShootingHandler.get().getshootMsGap()
+                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                    : ShootingHandler.get().getshootMsGap()
+                                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
                     if (Gun.hasAmmo(stack)) {
                         // Math provided by Bomb787 on GitHub and Curseforge!!!
@@ -72,21 +82,24 @@ public class udp_9_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_MAG, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_MAG,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_BULLET, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_BULLET,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, BULLET), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_HANDLE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), UDP9AnimationController.INDEX_HANDLE,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, HANDLE), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();

@@ -34,13 +34,17 @@ public class ArmorInteractionHandler {
     }
 
     private static final double MAX_AIM_PROGRESS = 4;
-    // TODO: Only commented, since we may need to track players per client for future third person animation ... private final Map<PlayerEntity, AimTracker> aimingMap = new WeakHashMap<>();
+    // TODO: Only commented, since we may need to track players per client for
+    // future third person animation ... private final Map<PlayerEntity, AimTracker>
+    // aimingMap = new WeakHashMap<>();
     private double normalisedRepairProgress;
     private int totalPlatesToRepair;
     private boolean repairing = false;
+
     public boolean getRepairing() {
         return repairing;
     }
+
     private int repairTime = -1;
     private int prevRepairTime = 0;
 
@@ -51,14 +55,14 @@ public class ArmorInteractionHandler {
             this.initializeRepairing(false);
         });
     }
+
     // Made public so interrupts can simply reset the armor repairing process
     // true = armor will attempt to repair again, false = armor has been reset.
     public void resetRepairProgress(boolean isAnotherPlateRepairing) {
-        if(isAnotherPlateRepairing) {
-            if(initializeRepairing(true))
+        if (isAnotherPlateRepairing) {
+            if (initializeRepairing(true))
                 return;
-        }
-        else
+        } else
             totalPlatesToRepair = 0;
         this.repairing = false;
         this.repairTime = 0;
@@ -67,37 +71,40 @@ public class ArmorInteractionHandler {
 
     private boolean initializeRepairing(boolean isAnotherPlateRepairing) {
         final Minecraft mc = Minecraft.getInstance();
-        if(mc.player != null) {
+        if (mc.player != null) {
             ItemStack rigStack = WearableHelper.PlayerWornRig(mc.player);
             if (!rigStack.isEmpty() && !WearableHelper.isFullDurability(rigStack)) {
                 Rig rig = ((ArmorRigItem) rigStack.getItem()).getRig();
                 if (rig.getRepair().isQuickRepairable()) {
                     Item repairItem = ForgeRegistries.ITEMS.getValue(rig.getRepair().getItem());
                     if (repairItem == null) {
-                        GunMod.LOGGER.log(Level.ERROR, rig.getRepair().getItem() + " | Is not a real / registered item.");
+                        GunMod.LOGGER.log(Level.ERROR,
+                                rig.getRepair().getItem() + " | Is not a real / registered item.");
                         return false;
                     }
                     int loc = -1;
-                    for(int i = 0; i < mc.player.getInventory().getContainerSize(); ++i)
-                    {
+                    for (int i = 0; i < mc.player.getInventory().getContainerSize(); ++i) {
                         ItemStack stack = mc.player.getInventory().getItem(i);
-                        if(!stack.isEmpty() && stack.getItem().getRegistryName().equals(rig.getRepair().getItem())) {
+                        if (!stack.isEmpty() && stack.getItem().getRegistryName().equals(rig.getRepair().getItem())) {
                             loc = i;
                         }
                     }
-                    if(loc > -1) {
+                    if (loc > -1) {
                         this.repairing = true;
                         this.repairTime = rig.getRepair().getTicksToRepair();
-                        if(!isAnotherPlateRepairing) {
-                            float rawPlates = (rig.getRepair().getDurability() - WearableHelper.GetCurrentDurability(rigStack)) / (rig.getRepair().getDurability() * rig.getRepair().getQuickRepairability());
-                            this.totalPlatesToRepair = rawPlates > (int)rawPlates ? (int)(rawPlates+1) : (int)rawPlates;
-                            if(this.totalPlatesToRepair > mc.player.getInventory().getItem(loc).getCount())
+                        if (!isAnotherPlateRepairing) {
+                            float rawPlates = (rig.getRepair().getDurability()
+                                    - WearableHelper.GetCurrentDurability(rigStack))
+                                    / (rig.getRepair().getDurability() * rig.getRepair().getQuickRepairability());
+                            this.totalPlatesToRepair = rawPlates > (int) rawPlates ? (int) (rawPlates + 1)
+                                    : (int) rawPlates;
+                            if (this.totalPlatesToRepair > mc.player.getInventory().getItem(loc).getCount())
                                 this.totalPlatesToRepair = mc.player.getInventory().getItem(loc).getCount();
                         }
                         SyncedEntityData.instance().set(mc.player, ModSyncedDataKeys.QREPAIRING, true);
-                    }
-                    else {
-                        GunMod.LOGGER.log(Level.WARN, rig.getRepair().getItem() + " | Is not found in local player inventory.");
+                    } else {
+                        GunMod.LOGGER.log(Level.WARN,
+                                rig.getRepair().getItem() + " | Is not found in local player inventory.");
                         return false;
                     }
                 }
@@ -106,12 +113,15 @@ public class ArmorInteractionHandler {
         return true;
     }
 
-
     public float getRepairProgress(Player player) {
-        if(WearableHelper.PlayerWornRig(player).isEmpty())
+        if (WearableHelper.PlayerWornRig(player).isEmpty())
             return 0;
-        return this.repairTime > 0 ? ((float)this.repairTime) / (float) ((ArmorRigItem) WearableHelper.PlayerWornRig(player).getItem()).getRig().getRepair().getTicksToRepair() : 1F;
+        return this.repairTime > 0
+                ? ((float) this.repairTime) / (float) ((ArmorRigItem) WearableHelper.PlayerWornRig(player).getItem())
+                        .getRig().getRepair().getTicksToRepair()
+                : 1F;
     }
+
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.START)
@@ -119,13 +129,13 @@ public class ArmorInteractionHandler {
         Player player = Minecraft.getInstance().player;
         if (player == null)
             return;
-        if(WearableHelper.PlayerWornRig(player).isEmpty()) {
+        if (WearableHelper.PlayerWornRig(player).isEmpty()) {
             this.repairing = false;
             return;
         }
 
-        if(this.repairing) {
-            if(this.repairTime == 0) {
+        if (this.repairing) {
+            if (this.repairTime == 0) {
                 totalPlatesToRepair--;
                 boolean canRepairAgain = totalPlatesToRepair > 0;
                 resetRepairProgress(canRepairAgain);
@@ -135,7 +145,7 @@ public class ArmorInteractionHandler {
                 this.prevRepairTime = this.repairTime;
                 this.repairTime--;
             }
-            GunMod.LOGGER.log(Level.WARN,  this.repairTime + " | " + totalPlatesToRepair);
+            GunMod.LOGGER.log(Level.WARN, this.repairTime + " | " + totalPlatesToRepair);
         }
 
     }

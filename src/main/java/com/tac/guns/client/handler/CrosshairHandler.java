@@ -26,14 +26,11 @@ import java.util.Map;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class CrosshairHandler
-{
+public class CrosshairHandler {
     private static CrosshairHandler instance;
 
-    public static CrosshairHandler get()
-    {
-        if(instance == null)
-        {
+    public static CrosshairHandler get() {
+        if (instance == null) {
             instance = new CrosshairHandler();
         }
         return instance;
@@ -43,8 +40,7 @@ public class CrosshairHandler
     private final List<Crosshair> registeredCrosshairs = new ArrayList<>();
     private Crosshair currentCrosshair = null;
 
-    private CrosshairHandler()
-    {
+    private CrosshairHandler() {
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "better_default")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "circle")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "filled_circle"), false));
@@ -53,35 +49,36 @@ public class CrosshairHandler
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "arrow")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "dot")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "box")));
-        //this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "hit_marker")));
+        // this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID,
+        // "hit_marker")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "line")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "t")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "smiley")));
-        this.register(new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID,"dynamic_default")));
-        this.register(new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID,"clean_no_crosshair")));
+        this.register(new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "dynamic_default")));
+        this.register(
+                new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "clean_no_crosshair")));
         this.register(new TechCrosshair());
     }
 
     /**
-     * Registers a new crosshair. If the crosshair has already been registered, it will be ignored.
+     * Registers a new crosshair. If the crosshair has already been registered, it
+     * will be ignored.
      */
-    public void register(Crosshair crosshair)
-    {
-        if(!this.idToCrosshair.containsKey(crosshair.getLocation()))
-        {
+    public void register(Crosshair crosshair) {
+        if (!this.idToCrosshair.containsKey(crosshair.getLocation())) {
             this.idToCrosshair.put(crosshair.getLocation(), crosshair);
             this.registeredCrosshairs.add(crosshair);
         }
     }
 
     /**
-     * Sets the crosshair using the given id. The crosshair with the associated id must be registered
+     * Sets the crosshair using the given id. The crosshair with the associated id
+     * must be registered
      * or the default crosshair will be used.
      *
      * @param id the id of the crosshair
      */
-    public void setCrosshair(ResourceLocation id)
-    {
+    public void setCrosshair(ResourceLocation id) {
         this.currentCrosshair = this.idToCrosshair.getOrDefault(id, Crosshair.DEFAULT);
     }
 
@@ -89,46 +86,44 @@ public class CrosshairHandler
      * Gets the current crosshair
      */
     @Nullable
-    public Crosshair getCurrentCrosshair()
-    {
-        if(this.currentCrosshair == null && this.registeredCrosshairs.size() > 0)
-        {
+    public Crosshair getCurrentCrosshair() {
+        if (this.currentCrosshair == null && this.registeredCrosshairs.size() > 0) {
             ResourceLocation id = ResourceLocation.tryParse(Config.CLIENT.display.crosshair.get());
-            this.currentCrosshair = id != null ? this.idToCrosshair.getOrDefault(id, Crosshair.DEFAULT) : Crosshair.DEFAULT;
+            this.currentCrosshair = id != null ? this.idToCrosshair.getOrDefault(id, Crosshair.DEFAULT)
+                    : Crosshair.DEFAULT;
         }
         return this.currentCrosshair;
     }
 
     /**
-     * Gets a list of registered crosshairs. Please note that this list is immutable.
+     * Gets a list of registered crosshairs. Please note that this list is
+     * immutable.
      */
-    public ImmutableList<Crosshair> getRegisteredCrosshairs()
-    {
+    public ImmutableList<Crosshair> getRegisteredCrosshairs() {
         return ImmutableList.copyOf(this.registeredCrosshairs);
     }
 
     @SubscribeEvent
-    public void onRenderOverlay(RenderGameOverlayEvent.PreLayer event)
-    {
-        if(event.getOverlay() != ForgeIngameGui.CROSSHAIR_ELEMENT)
+    public void onRenderOverlay(RenderGameOverlayEvent.PreLayer event) {
+        if (event.getOverlay() != ForgeIngameGui.CROSSHAIR_ELEMENT)
             return;
 
         Crosshair crosshair = this.getCurrentCrosshair();
-        if(crosshair == null || crosshair.isDefault())
+        if (crosshair == null || crosshair.isDefault())
             return;
 
         Minecraft mc = Minecraft.getInstance();
-        if(mc.player == null)
+        if (mc.player == null)
             return;
 
         ItemStack heldItem = mc.player.getMainHandItem();
-        if(!(heldItem.getItem() instanceof GunItem))
+        if (!(heldItem.getItem() instanceof GunItem))
             return;
 
-        if(!Config.COMMON.development.permanentCrosshair.get())
+        if (!Config.COMMON.development.permanentCrosshair.get())
             event.setCanceled(true);
 
-        if(!mc.options.getCameraType().isFirstPerson())
+        if (!mc.options.getCameraType().isFirstPerson())
             return;
 
         PoseStack stack = event.getMatrixStack();
@@ -140,26 +135,27 @@ public class CrosshairHandler
     }
 
     @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event)
-    {
-        if(event.phase != TickEvent.Phase.END)
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END)
             return;
 
         Crosshair crosshair = this.getCurrentCrosshair();
-        if((crosshair == null|| crosshair.isDefault()))
+        if ((crosshair == null || crosshair.isDefault()))
             return;
-        if(ShootingHandler.get().isShooting())
+        if (ShootingHandler.get().isShooting())
             crosshair.onGunFired();
         crosshair.tick();
     }
 
-    /*@SubscribeEvent
-    public void onGunFired(GunFireEvent.Post event)
-    {
-        Crosshair crosshair = this.getCurrentCrosshair();
-        if(crosshair == null || crosshair.isDefault())
-            return;
-
-        crosshair.onGunFired();
-    }*/
+    /*
+     * @SubscribeEvent
+     * public void onGunFired(GunFireEvent.Post event)
+     * {
+     * Crosshair crosshair = this.getCurrentCrosshair();
+     * if(crosshair == null || crosshair.isDefault())
+     * return;
+     * 
+     * crosshair.onGunFired();
+     * }
+     */
 }

@@ -19,8 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Author: MrCrayfish
  */
 @Mixin(PlayerModel.class)
-public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T>
-{
+public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T> {
     @Shadow
     @Final
     private boolean slim;
@@ -45,39 +44,38 @@ public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T>
     @Final
     public ModelPart jacket;
 
-    public PlayerModelMixin(ModelPart part)
-    {
+    public PlayerModelMixin(ModelPart part) {
         super(part);
     }
 
     @Inject(method = "setupAnim", at = @At(value = "HEAD"), cancellable = true)
-    private void setRotationAnglesHead(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci)
-    {
-        if(!(entityIn instanceof Player))
+    private void setRotationAnglesHead(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
+            float netHeadYaw, float headPitch, CallbackInfo ci) {
+        if (!(entityIn instanceof Player))
             return;
 
         PlayerModel model = (PlayerModel) (Object) this;
         this.resetRotationAngles();
-        if(MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Pre((Player) entityIn, model, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime())))
-        {
+        if (MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Pre((Player) entityIn, model, limbSwing,
+                limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()))) {
             this.setupRotationAngles();
             ci.cancel();
         }
     }
 
     @Inject(method = "setupAnim", at = @At(value = "TAIL"))
-    private void setRotationAnglesTail(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci)
-    {
-        if(!(entityIn instanceof Player))
+    private void setRotationAnglesTail(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
+            float netHeadYaw, float headPitch, CallbackInfo ci) {
+        if (!(entityIn instanceof Player))
             return;
 
         PlayerModel model = (PlayerModel) (Object) this;
-        MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Post((Player) entityIn, model, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()));
+        MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Post((Player) entityIn, model, limbSwing,
+                limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()));
         this.setupRotationAngles();
     }
 
-    private void setupRotationAngles()
-    {
+    private void setupRotationAngles() {
         this.rightSleeve.copyFrom(this.rightArm);
         this.leftSleeve.copyFrom(this.leftArm);
         this.rightPants.copyFrom(this.rightLeg);
@@ -87,11 +85,11 @@ public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T>
     }
 
     /**
-     * Resets all the rotations and rotation points back to their initial values. This makes it
+     * Resets all the rotations and rotation points back to their initial values.
+     * This makes it
      * so ever developer doesn't have to do it themselves.
      */
-    private void resetRotationAngles()
-    {
+    private void resetRotationAngles() {
         this.resetAll(this.head);
         this.resetAll(this.hat);
         this.resetAll(this.body);
@@ -139,8 +137,7 @@ public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T>
      *
      * @param part the model part to reset
      */
-    private void resetAll(ModelPart part)
-    {
+    private void resetAll(ModelPart part) {
         part.xRot = 0.0F;
         part.yRot = 0.0F;
         part.zRot = 0.0F;

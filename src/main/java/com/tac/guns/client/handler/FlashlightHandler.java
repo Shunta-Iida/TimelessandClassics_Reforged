@@ -103,17 +103,19 @@ public class FlashlightHandler {
              */
 
         }
-        if (event.phase == Phase.START && (player.getHeldItemMainhand() != null && this.active
-                && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, player.getHeldItemMainhand()) != null)) {
-            this.createLight(player, 32);
-            int lightNumber = 32 / 5;
-            int lightRange = 32;
+        // if (event.phase == Phase.START && (player.getHeldItemMainhand() != null &&
+        // this.active
+        // && Gun.getAttachment(IAttachment.Type.SIDE_RAIL,
+        // player.getHeldItemMainhand()) != null)) {
+        // this.createLight(player, 32);
+        // int lightNumber = 32 / 5;
+        // int lightRange = 32;
 
-            for (int i = 1; i < lightNumber; ++i) {
-                lightRange -= 5;
-                this.createLight(player, lightRange);
-            }
-        }
+        // for (int i = 1; i < lightNumber; ++i) {
+        // lightRange -= 5;
+        // this.createLight(player, lightRange);
+        // }
+        // }
     }
 
     /*

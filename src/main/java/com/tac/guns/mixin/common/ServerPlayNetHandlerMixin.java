@@ -16,9 +16,9 @@ public class ServerPlayNetHandlerMixin {
     public ServerPlayer player;
 
     @Inject(at = @At("HEAD"), method = "handlePlayerAction")
-    public void applyDraw(ServerboundPlayerActionPacket packetIn, CallbackInfo ci){
+    public void applyDraw(ServerboundPlayerActionPacket packetIn, CallbackInfo ci) {
         ServerboundPlayerActionPacket.Action action = packetIn.getAction();
-        if(action.name().equals("SWAP_ITEM_WITH_OFFHAND") && !player.isSpectator()){
+        if (action.name().equals("SWAP_ITEM_WITH_OFFHAND") && !player.isSpectator()) {
             CommonStateBox.isSwapped = true;
         }
     }

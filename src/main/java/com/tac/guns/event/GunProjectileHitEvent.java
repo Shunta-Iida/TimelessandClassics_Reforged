@@ -5,17 +5,17 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.eventbus.api.Event;
 
 /**
- * <p>Fired when a projectile hits a block or entity.</p>
+ * <p>
+ * Fired when a projectile hits a block or entity.
+ * </p>
  *
  * @author Ocelot
  */
-public class GunProjectileHitEvent extends Event
-{
+public class GunProjectileHitEvent extends Event {
     private final HitResult result;
     private final ProjectileEntity projectile;
 
-    public GunProjectileHitEvent(HitResult result, ProjectileEntity projectile)
-    {
+    public GunProjectileHitEvent(HitResult result, ProjectileEntity projectile) {
         this.result = result;
         this.projectile = projectile;
     }
@@ -23,16 +23,14 @@ public class GunProjectileHitEvent extends Event
     /**
      * @return The result of the entity's ray trace
      */
-    public HitResult getRayTrace()
-    {
+    public HitResult getRayTrace() {
         return result;
     }
 
     /**
      * @return The projectile that hit
      */
-    public ProjectileEntity getProjectile()
-    {
+    public ProjectileEntity getProjectile() {
         return projectile;
     }
 }

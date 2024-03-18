@@ -21,28 +21,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-@Mixin({ModelBakery.class})
+@Mixin({ ModelBakery.class })
 public abstract class ModelBakeryMixin implements CacheableModelBakery {
     @Shadow
     public abstract UnbakedModel getModel(ResourceLocation modelLocation);
+
     @Shadow
     @Final
     private Map<ResourceLocation, UnbakedModel> unbakedCache;
     @Shadow
     @Final
     private Map<ResourceLocation, UnbakedModel> topLevelModels;
-    @Shadow @Final public static ModelResourceLocation MISSING_MODEL_LOCATION;
+    @Shadow
+    @Final
+    public static ModelResourceLocation MISSING_MODEL_LOCATION;
 
-    @Inject(method = "processLoading",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V",
-                    ordinal = 0
-            ),
-            remap = true)
+    @Inject(method = "processLoading", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V", ordinal = 0), remap = true)
     public void onBakeryLoading(ProfilerFiller p_119249_, int p_119250_, CallbackInfo ci) {
 
-        //init
+        // init
         SkinLoader.missingModel = getModel(MISSING_MODEL_LOCATION);
         SkinLoader.unbakedModels = unbakedCache;
         SkinLoader.topUnbakedModels = topLevelModels;
@@ -50,7 +47,7 @@ public abstract class ModelBakeryMixin implements CacheableModelBakery {
         GunSkinLoader.unbakedModels = unbakedCache;
         GunSkinLoader.topUnbakedModels = topLevelModels;
 
-        //reload
+        // reload
         SkinManager.reload();
     }
 }

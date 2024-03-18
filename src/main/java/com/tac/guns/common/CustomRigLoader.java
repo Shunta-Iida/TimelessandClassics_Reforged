@@ -26,8 +26,7 @@ import java.util.Map;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-public class CustomRigLoader extends SimpleJsonResourceReloadListener
-{
+public class CustomRigLoader extends SimpleJsonResourceReloadListener {
     private static final Gson GSON_INSTANCE = Util.make(() -> {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(ResourceLocation.class, JsonDeserializers.RESOURCE_LOCATION);
@@ -37,36 +36,26 @@ public class CustomRigLoader extends SimpleJsonResourceReloadListener
     private static CustomRigLoader instance;
 
     private Map<ResourceLocation, CustomRig> customRigMap = new HashMap<>();
-    public CustomRigLoader()
-    {
+
+    public CustomRigLoader() {
         super(GSON_INSTANCE, "rigs");
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> objects, ResourceManager manager, ProfilerFiller profiler)
-    {
+    protected void apply(Map<ResourceLocation, JsonElement> objects, ResourceManager manager, ProfilerFiller profiler) {
         ImmutableMap.Builder<ResourceLocation, CustomRig> builder = ImmutableMap.builder();
-        objects.forEach((resourceLocation, object) ->
-        {
-            try
-            {
+        objects.forEach((resourceLocation, object) -> {
+            try {
                 CustomRig customRig = GSON_INSTANCE.fromJson(object, CustomRig.class);
-                if(customRig != null && Validator.isValidObject(customRig))
-                {
+                if (customRig != null && Validator.isValidObject(customRig)) {
                     builder.put(resourceLocation, customRig);
-                }
-                else
-                {
+                } else {
                     GunMod.LOGGER.error("Couldn't load data file {} as it is missing or malformed", resourceLocation);
                 }
-            }
-            catch(InvalidObjectException e)
-            {
+            } catch (InvalidObjectException e) {
                 GunMod.LOGGER.error("Missing required properties for {}", resourceLocation);
                 e.printStackTrace();
-            }
-            catch(IllegalAccessException e)
-            {
+            } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         });
@@ -78,8 +67,7 @@ public class CustomRigLoader extends SimpleJsonResourceReloadListener
      *
      * @param buffer a packet buffer get
      */
-    public void writeCustomRigs(FriendlyByteBuf buffer)
-    {
+    public void writeCustomRigs(FriendlyByteBuf buffer) {
         buffer.writeVarInt(this.customRigMap.size());
         this.customRigMap.forEach((id, rig) -> {
             buffer.writeResourceLocation(id);
@@ -93,14 +81,11 @@ public class CustomRigLoader extends SimpleJsonResourceReloadListener
      * @param buffer a packet buffer get
      * @return a map of registered guns from the server
      */
-    public static ImmutableMap<ResourceLocation, CustomRig> readCustomRigs(FriendlyByteBuf buffer)
-    {
+    public static ImmutableMap<ResourceLocation, CustomRig> readCustomRigs(FriendlyByteBuf buffer) {
         int size = buffer.readVarInt();
-        if(size > 0)
-        {
+        if (size > 0) {
             ImmutableMap.Builder<ResourceLocation, CustomRig> builder = ImmutableMap.builder();
-            for(int i = 0; i < size; i++)
-            {
+            for (int i = 0; i < size; i++) {
                 ResourceLocation id = buffer.readResourceLocation();
                 CustomRig customRig = new CustomRig();
                 customRig.deserializeNBT(buffer.readNbt());
@@ -112,16 +97,14 @@ public class CustomRigLoader extends SimpleJsonResourceReloadListener
     }
 
     @SubscribeEvent
-    public static void addReloadListenerEvent(AddReloadListenerEvent event)
-    {
+    public static void addReloadListenerEvent(AddReloadListenerEvent event) {
         CustomRigLoader customGunLoader = new CustomRigLoader();
         event.addListener(customGunLoader);
         CustomRigLoader.instance = customGunLoader;
     }
 
     @Nullable
-    public static CustomRigLoader get()
-    {
+    public static CustomRigLoader get() {
         return instance;
     }
 }

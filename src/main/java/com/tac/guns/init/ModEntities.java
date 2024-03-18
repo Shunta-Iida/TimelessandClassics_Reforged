@@ -15,20 +15,26 @@ import java.util.function.BiFunction;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class ModEntities
-{
-    public static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITIES, Reference.MOD_ID);
+public class ModEntities {
+    public static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITIES,
+            Reference.MOD_ID);
 
-    public static final RegistryObject<EntityType<ProjectileEntity>> PROJECTILE = registerProjectile("projectile", ProjectileEntity::new);
-    public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE = registerBasic("grenade", GrenadeEntity::new);
-    public static final RegistryObject<EntityType<MissileEntity>> MISSILE = registerBasic("missile", MissileEntity::new);
-    public static final RegistryObject<EntityType<ThrowableGrenadeEntity>> THROWABLE_GRENADE = registerBasic("throwable_grenade", ThrowableGrenadeEntity::new);
-    public static final RegistryObject<EntityType<ThrowableStunGrenadeEntity>> THROWABLE_STUN_GRENADE = registerBasic("throwable_stun_grenade", ThrowableStunGrenadeEntity::new);
+    public static final RegistryObject<EntityType<ProjectileEntity>> PROJECTILE = registerProjectile("projectile",
+            ProjectileEntity::new);
+    public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE = registerBasic("grenade",
+            GrenadeEntity::new);
+    public static final RegistryObject<EntityType<MissileEntity>> MISSILE = registerBasic("missile",
+            MissileEntity::new);
+    public static final RegistryObject<EntityType<ThrowableGrenadeEntity>> THROWABLE_GRENADE = registerBasic(
+            "throwable_grenade", ThrowableGrenadeEntity::new);
+    public static final RegistryObject<EntityType<ThrowableStunGrenadeEntity>> THROWABLE_STUN_GRENADE = registerBasic(
+            "throwable_stun_grenade", ThrowableStunGrenadeEntity::new);
 
-    public static final RegistryObject<EntityType<MissileEntity>> RPG7_MISSILE = registerBasic("rpg7_missile", MissileEntity::new);
+    public static final RegistryObject<EntityType<MissileEntity>> RPG7_MISSILE = registerBasic("rpg7_missile",
+            MissileEntity::new);
 
-    private static <T extends Entity> RegistryObject<EntityType<T>> registerBasic(String id, BiFunction<EntityType<T>, Level, T> function)
-    {
+    private static <T extends Entity> RegistryObject<EntityType<T>> registerBasic(String id,
+            BiFunction<EntityType<T>, Level, T> function) {
         return REGISTER.register(id, () -> EntityType.Builder.of(function::apply, MobCategory.MISC)
                 .sized(0.25F, 0.25F)
                 .setTrackingRange(100)
@@ -38,13 +44,18 @@ public class ModEntities
                 .setShouldReceiveVelocityUpdates(true).build(id));
     }
 
-    public static void init(){};
+    public static void init() {
+    };
 
     /**
-     * Entity registration that prevents the entity from being sent and tracked by clients. Projectiles
-     * are rendered separately from Minecraft's entity rendering system and their logic is handled
-     * exclusively by the server, why send them to the client. Projectiles also have very short time
-     * in the world and are spawned many times a tick. There is no reason to send unnecessary packets
+     * Entity registration that prevents the entity from being sent and tracked by
+     * clients. Projectiles
+     * are rendered separately from Minecraft's entity rendering system and their
+     * logic is handled
+     * exclusively by the server, why send them to the client. Projectiles also have
+     * very short time
+     * in the world and are spawned many times a tick. There is no reason to send
+     * unnecessary packets
      * when it can be avoided to drastically improve the performance of the game.
      *
      * @param id       the id of the projectile
@@ -52,8 +63,8 @@ public class ModEntities
      * @param <T>      an entity that is a projectile entity
      * @return A registry object containing the new entity type
      */
-    private static <T extends ProjectileEntity> RegistryObject<EntityType<T>> registerProjectile(String id, BiFunction<EntityType<T>, Level, T> function)
-    {
+    private static <T extends ProjectileEntity> RegistryObject<EntityType<T>> registerProjectile(String id,
+            BiFunction<EntityType<T>, Level, T> function) {
         return REGISTER.register(id, () -> EntityType.Builder.of(function::apply, MobCategory.MISC)
                 .sized(0.25F, 0.25F)
                 .setTrackingRange(0)

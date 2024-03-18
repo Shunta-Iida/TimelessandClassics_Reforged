@@ -31,18 +31,23 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class sks_tactical_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+        float cooldownOg = ShootingHandler.get().getshootMsGap()
+                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                        : ShootingHandler.get().getshootMsGap()
+                                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
         SKSTacticalAnimationController controller = SKSTacticalAnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SKSTacticalAnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    SKSTacticalAnimationController.INDEX_BODY, transformType, matrices);
 
             if (Gun.getScope(stack) != null) {
-                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light,
+                        overlay);
             } else {
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
             }
@@ -51,7 +56,6 @@ public class sks_tactical_animation extends SkinnedGunModel {
 
             if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                 renderLaser(stack, matrices, renderBuffer, light, overlay, skin);
-
 
             renderStock(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -63,17 +67,21 @@ public class sks_tactical_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SKSTacticalAnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    SKSTacticalAnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SKSTacticalAnimationController.INDEX_BOLT, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    SKSTacticalAnimationController.INDEX_BOLT, transformType, matrices);
             if (transformType.firstPerson()) {
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
                 double v1 = -4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0;
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!

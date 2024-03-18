@@ -148,16 +148,13 @@
     "item.tac.bullet68": "6.8mm SIG 弾",
     "item.tac.ae50": ".50 AE 弾",
     "item.tac.lapua338": ".338 Lapua 弾",
-
     "item.tac.cardboard_armor": "段ボールアーマー",
     "item.tac.light_armor": "軽量アーマー",
     "item.tac.medium_steel_armor": "金属製アーマー",
     "item.tac.light_armor_plate": "軽量アーマー用 修理プレート",
-
     "item.tac.light_grenade": "F1 グレネード",
     "item.tac.baseball_grenade": "M67 グレネード",
     "item.tac.grenade40mm": "40mm グレネード",
-
     "block.tac.box45": "弾薬箱（.45 ACP x 16）",
     "block.tac.magnumbox": "弾薬箱（.357 Magnum x 12）",
     "block.tac.win30-30box": "弾薬箱（.30-30 Winchester x 10）",
@@ -166,7 +163,6 @@
     "block.tac.nato_556_box_block": "弾薬箱（5.56x45mm x 50）",
     "block.tac.9mm_box_block": "弾薬箱（9x19mm Parabellum x 24）",
     "block.tac.10_gauge_box_block": "弾薬箱（10g x 12）",
-
     "subtitle.tac.fire_1911fire": "45 Pistol の銃声",
     "subtitle.tac.fire_1911fires": "45 Pistol （消音）の銃声",
     "subtitle.tac.fire_mosin-nagantfire": "Mosin の銃声",
@@ -204,7 +200,6 @@
     "subtitle.tac.sig552": "SIG 552 の銃声",
     "subtitle.tac.sig552s": "SIG 552 （消音）の銃声",
     "subtitle.tac.p226": "P226 の銃声",
-
     "subtitle.tac.aa12": "AA-12 の銃声",
     "subtitle.tac.ai_awp": "AWP の銃声",
     "subtitle.tac.hk416": "HK416 の銃声",
@@ -214,12 +209,9 @@
     "subtitle.tac.rpg7": "RPG7 の銃声",
     "subtitle.tac.sten": "Sten の銃声",
     "subtitle.tac.vector": "Vector の銃声",
-
     "info.tac.auto": "フルオート射撃が可能",
     "info.tac.gun_safety_lock": "セーフティが有効になっています。 %s で解除",
-
     "item.tac.missile": "ミサイル",
-
     "item.tac.coyote_sight": "Coyote オプティックサイト",
     "item.tac.micro_holo_sight": "Micro ホロサイト",
     "item.tac.eotech_n": "Eotech 553 ホロサイト",
@@ -238,7 +230,6 @@
     "item.tac.acog_4x_scope": "§5ACOG 4x スコープ",
     "item.tac.elcan_14x": "§5ELCAN SpecterDR 1x-4x スコープ",
     "item.tac.slx_2x": "§9SLX 2x",
-
     "item.tac.muzzle_brake": "マズルブレーキ",
     "item.tac.muzzle_compensator": "コンペンセイター",
     "item.tac.silencer": "サプレッサー",
@@ -247,14 +238,11 @@
     "item.tac.weighted_stock": "ヘビーストック",
     "item.tac.light_grip": "ライトグリップ",
     "item.tac.specialised_grip": "バーティカルグリップ",
-
     "item.tac.pistol_silencer": "サプレッサー",
-
     "item.minecraft.potion.effect.blinding": "視覚妨害のポーション",
     "item.minecraft.potion.effect.deafening": "聴覚妨害のポーション",
     "item.minecraft.lingering_potion.effect.blinding": "残留する視覚妨害のポーション",
     "item.minecraft.lingering_potion.effect.deafening": "残留する聴覚妨害のポーション",
-
     "itemGroup.tac": "その他",
     "itemGroup.Pistols": "ピストル",
     "itemGroup.SMGs": "SMG",
@@ -264,47 +252,35 @@
     "itemGroup.HeavyWeapons": "重火器",
     "itemGroup.Ammo": "弾薬",
     "itemGroup.Skins": "スキン",
-
     "death.attack.tac.bullet.killed": "%1$s は %2$s に倒された",
     "death.attack.tac.bullet.eliminated": "%1$s は %2$s に殺害された",
     "death.attack.tac.bullet.executed": "%1$s は %2$s に抹消された",
     "death.attack.tac.bullet.annihilated": "%1$s は %2$s に破壊された",
     "death.attack.tac.bullet.decimated": "%1$s は %2$s に処刑された",
-
     "info.tac.damage": "ダメージ: %s",
     "info.tac.ignore_ammo": "弾薬無限",
     "info.tac.ammo": "弾薬: %s",
     "info.tac.ammo_type": "弾薬タイプ: %s",
-
     "info.tac.oldRifleScope": "スコープ のスロットは %s のみ使用可能です",
     "info.tac.pistolScope": "スコープ のスロットは %s が使用可能です",
     "info.tac.irLaserEquip": "サイドレール のスロットは %s が使用可能です",
     "info.tac.pistolBarrel": "バレル のスロットは %s のみ使用可能です",
-
     "info.tac.oldScope_type": "クラシック スコープ",
     "info.tac.pistolScope_type": "ミニスコープ",
     "info.tac.pistolBarrel_type": "バレル",
-
     "info.tac.lightWeightGun": "軽量: 移動速度 %s",
     "info.tac.standardWeightGun": "中量: 移動速度 %s",
     "info.tac.heavyWeightGun": "重量: 移動速度 %s",
-
     "info.tac.firemode_safe": "<セーフティ> %s で切り替え",
     "info.tac.firemode_semi": "<セミオート> %s で切り替え",
     "info.tac.firemode_auto": "<フルオート> %s で切り替え",
-
     "info.tac.armorPen": "ダメージがMinecraftのアーマーを無視する %s",
     "info.tac.headDamageModifier": "ヘッドショットダメージでのダメージ増加量 %s",
-
     "info.tac.attachment_help": "%s を押してアタッチメントを操作",
-
     "info.tac.more_info_gunitem": "%s 長押しで詳細を見る",
-
     "info.tac.tac_armor_repair1": "",
     "info.tac.tac_armor_repair2": " 長押しでアーマーを修理",
     "info.tac.current_armor_amount": "現在のアーマー耐久度: ",
-
-
     "perk.tac.title": "パーク:",
     "perk.tac.entry.positive": "+ %s",
     "perk.tac.entry.negative": "- %s",
@@ -327,7 +303,6 @@
     "perk.tac.ads_speed.negative": "%s",
     "perk.tac.rate.positive": "%s",
     "perk.tac.rate.negative": "%s",
-
     "perk.tac.silencedv2": "+静音",
     "perk.tac.sound_radiusv2": "音の範囲 %s",
     "perk.tac.additional_damage.positivev2": "追加ダメージ §r(§l+%s ♥§r)",
@@ -352,43 +327,30 @@
     "perk.tac.recoilh.negativev2": "-水平反動 %s",
     "perk.tac.ads_speed.positivev2": "-ADS速度 %s",
     "perk.tac.ads_speed.negativev2": "+ADS速度 %s",
-
-
     "updateCheck.tac": "TaC can be updated to %s \n %s",
-
-
     "key.categories.tac": "Timeless and Classic Guns",
-
     "key.tac.shoot": "射撃",
     "key.tac.ads": "ADS",
-
-	"key.tac.pull_trigger": "トリガーを引く",
-	"key.tac.aim_hold": "エイム長押し",
-	"key.tac.aim_toggle": "エイム切り替え",
-	
+    "key.tac.pull_trigger": "トリガーを引く",
+    "key.tac.aim_hold": "エイム長押し",
+    "key.tac.aim_toggle": "エイム切り替え",
     "key.tac.reload": "リロード",
     "key.tac.unload": "アンロード",
     "key.tac.attachments": "アタッチメント操作",
     "key.tac.moreInfoHold": "武器の詳細を表示（長押し）",
-	
     "key.tac.fireSelect": "射撃モード",
     "key.tac.inspect": "武器を見る",
     "key.tac.activateSideRail": "デバイスの切り替え",
     "key.tac.sight_switch": "スコープ倍率の切り替え",
-	
     "key.tac.color_bench": "Color Bench",
-	
-	"key.tac.co": "Co-key",
-	"key.tac.co_unload": "Co-Unload",
-	"key.tac.co_inspect": "Co-Inspect",
-
+    "key.tac.co": "Co-key",
+    "key.tac.co_unload": "Co-Unload",
+    "key.tac.co_inspect": "Co-Inspect",
     "key.tac.armor_repairing": "アーマー修理",
     "key.tac.equipArmor": "アーマーの付け外し",
     "key.tac.openArmorAmmoPack": "弾薬パックを開ける（リグ装備時）",
-
     "effect.tac.blinded": "視覚妨害",
     "effect.tac.deafened": "聴覚妨害",
-
     "subtitle.tac.stun.explosion": "スタングレネードの爆発",
     "subtitle.tac.stun.ring": "耳鳴り",
     "subtitle.tac.fire": "射撃",
@@ -396,23 +358,18 @@
     "subtitle.tac.reload": "リロード",
     "subtitle.tac.grenade.pin": "グレネードのピン",
     "subtitle.tac.attach": "アタッチメントの装着",
-
     "tac.option_list.no_items": "アイテムなし",
     "tac.options.adsSensitivity": "ADS感度",
     "tac.options.adsSensitivity.format": "ADS感度: %s",
     "tac.options.crosshair.format": "クロスヘア: %s",
     "tac.options.weaponsVolume.format": "銃声の音量: %s",
     "tac.options.toggleAim": "ADS切り替え方式",
-
     "tac.options.showFirstPersonBulletTrails": "弾道の表示",
-
     "tac.crosshair.arrow": "矢印",
     "tac.crosshair.better_default": "デフォルトの改良版",
     "tac.crosshair.box": "ボックス",
     "tac.crosshair.circle": "サークル",
-
     "minecraft.crosshair.default": "デフォルト",
-
     "tac.crosshair.dot": "ドット",
     "tac.crosshair.filled_circle": "塗りつぶし円",
     "tac.crosshair.hit_marker": "ヒットマーカー",
@@ -423,7 +380,6 @@
     "tac.crosshair.t": "T字",
     "tac.crosshair.tech": "テクニカル",
     "tac.crosshair.dynamic_default": "ダイナミック（デフォルト）",
-
     "gui.tac.workbench.assemble": "ビルド",
     "gui.tac.workbench.show_remaining": "不足分のみ表示",
     "gui.tac.workbench.tab.weapons": "武器",
@@ -436,17 +392,14 @@
     "gui.tac.workbench.tab.weapons_sg": "ショットガン",
     "gui.tac.workbench.tab.weapons_smg": "SMG",
     "gui.tac.workbench.tab.weapons_sr": "マークスマン",
-
     "container.tac.workbench": "",
     "container.tac.attachments": "アタッチメントの操作",
     "container.tac.attachments.window_help": "マウスドラッグで移動・回転",
-
     "slot.tac.attachment.not_applicable": "\u00a7cなし",
     "slot.tac.attachment.scope": "スコープ",
     "slot.tac.attachment.barrel": "バレル",
     "slot.tac.attachment.stock": "ストック",
     "slot.tac.attachment.under_barrel": "アンダーバレル",
-
     "enchantment.tac.quick_hands": "l_クイックハンド",
     "enchantment.tac.trigger_finger": "l_指切り",
     "enchantment.tac.lightweight": "エルゴノミック",
@@ -457,9 +410,7 @@
     "enchantment.tac.fire_starter": "l_Fire Starter",
     "enchantment.tac.rifling": "Advanced Rifling",
     "enchantment.tac.buffered": "Buffered Recoil",
-
     "enchantment.tac.quick_hands.desc": "リロード速度を速める",
-
     "enchantment.tac.trigger_finger.desc": "銃を撃つスピードを速める",
     "enchantment.tac.lightweight.desc": "武器の重量を減らし、移動速度を速める",
     "enchantment.tac.collateral.desc": "弾薬が貫通し、複数の敵にダメージを与える",
@@ -469,11 +420,8 @@
     "enchantment.tac.fire_starter.desc": "Fired bullets will set blocks and entities on fire upon impact",
     "enchantment.tac.rifling.desc": "Minor Accuracy improvement per level",
     "enchantment.tac.buffered.desc": "Mild reduction to recoil",
-
     "perk.tac.vol": "% Gun Vol",
-
     "tac.options.gui_settings": "TAC GUI",
-
     "tac.options.xFiremodePos.format": "TAC: 射撃モード 水平位置: %s",
     "tac.options.yFiremodePos.format": "TAC: 射撃モード 垂直位置: %s",
     "tac.options.sizeFiremodePos.format": "TAC: 射撃モード サイズ: %s",
@@ -490,8 +438,7 @@
     "tac.options.reloadBarExist": "リロードバーの表示",
     "tac.options.ammoCounterExist": "弾薬表示",
     "tac.options.iconExist": "武器アイコンの表示",
-    "tac.options.doubleRender": "スコープ用二重レンダの使用" ,
-
+    "tac.options.doubleRender": "スコープ用二重レンダの使用",
     "tac.options.disableAllUse": "すべて無効化",
     "tac.options.allowLever": "レバーの使用",
     "tac.options.allowButton": "ボタンの使用",
@@ -500,23 +447,17 @@
     "tac.options.allowCraftingTable": "作業台の使用",
     "tac.options.allowChests": "チェストの使用",
     "tac.options.allowFenceGates": "フェンスゲートの使用",
-
     "info.tac.current_level": "レベル",
     "info.tac.out_of_ammo": "リロード",
     "info.tac.mag_error": "アンロード済",
-
     "tac.options.screenFormat": "TAC GUI SETTINGS",
-
     "gui.tac.assemble": "Assemble",
     "gui.tac.show_remaining": "不足分のみ表示",
-
     "button.categories.tac": "Timeless and Classic Guns",
-
     "tac.button.shoot": "撃つ",
     "tac.button.aim": "ADS",
     "tac.button.reload": "リロード / アンロード",
     "tac.button.attachments": "アタッチメントの操作",
     "tac.button.steadyAim": "エイムの集中",
-
     "curios.identifier.armor_rig": "Timeless Armor"
 }

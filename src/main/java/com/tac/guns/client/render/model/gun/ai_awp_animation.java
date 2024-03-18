@@ -22,7 +22,8 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
  */
 
 /**
- * Author: ClumsyAlien, codebase and design based off Mr.Pineapple's original addon
+ * Author: ClumsyAlien, codebase and design based off Mr.Pineapple's original
+ * addon
  */
 public class ai_awp_animation extends SkinnedGunModel {
 
@@ -31,15 +32,18 @@ public class ai_awp_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay){
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         AWPAnimationController controller = AWPAnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BODY,
+                    transformType, matrices);
             if (Gun.getScope(stack) == null) {
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880,
+                        overlay);
             }
 
             renderBarrel(stack, matrices, renderBuffer, light, overlay, skin);
@@ -50,30 +54,37 @@ public class ai_awp_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BOLT, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BOLT,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BOLT_EXTRA, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    AWPAnimationController.INDEX_BOLT_EXTRA, transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, BOLT_TAIL), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_MAGAZINE,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            if (controller.isAnimationRunning() && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT).equals(controller.getPreviousAnimation())) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), AWPAnimationController.INDEX_BULLET, transformType, matrices);
-                RenderUtil.renderModel(getComponentModel(skin, BULLET_SHELL), stack, matrices, renderBuffer, light, overlay);
+            if (controller.isAnimationRunning()
+                    && controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT)
+                            .equals(controller.getPreviousAnimation())) {
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        AWPAnimationController.INDEX_BULLET, transformType, matrices);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET_SHELL), stack, matrices, renderBuffer, light,
+                        overlay);
             }
         }
         matrices.popPose();

@@ -38,23 +38,21 @@ import java.util.List;
  * Implementation of a {@link MeshModel}
  */
 public final class DefaultMeshModel extends AbstractNamedModelElement
-    implements MeshModel
-{
+        implements MeshModel {
     /**
-     * The {@link MeshPrimitiveModel} instances 
+     * The {@link MeshPrimitiveModel} instances
      */
     private final List<MeshPrimitiveModel> meshPrimitiveModels;
-    
+
     /**
      * The morph target weights
      */
     private float weights[];
-    
+
     /**
      * Creates a new instance
      */
-    public DefaultMeshModel()
-    {
+    public DefaultMeshModel() {
         this.meshPrimitiveModels = new ArrayList<MeshPrimitiveModel>();
     }
 
@@ -63,31 +61,27 @@ public final class DefaultMeshModel extends AbstractNamedModelElement
      * 
      * @param meshPrimitiveModel The {@link MeshPrimitiveModel} to add
      */
-    public void addMeshPrimitiveModel(MeshPrimitiveModel meshPrimitiveModel)
-    {
+    public void addMeshPrimitiveModel(MeshPrimitiveModel meshPrimitiveModel) {
         this.meshPrimitiveModels.add(meshPrimitiveModel);
     }
-    
+
     /**
      * Set the default morph target weights to be a copy of the given array,
      * or <code>null</code> if the given array is <code>null</code>.
      * 
      * @param weights the default morph target weights
      */
-    public void setWeights(float[] weights)
-    {
+    public void setWeights(float[] weights) {
         this.weights = Optionals.clone(weights);
     }
-    
+
     @Override
-    public List<MeshPrimitiveModel> getMeshPrimitiveModels()
-    {
+    public List<MeshPrimitiveModel> getMeshPrimitiveModels() {
         return Collections.unmodifiableList(meshPrimitiveModels);
     }
-    
+
     @Override
-    public float[] getWeights()
-    {
+    public float[] getWeights() {
         return Optionals.clone(weights);
     }
 

@@ -16,51 +16,52 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class R3_RigContainer extends AbstractContainerMenu implements IRigContainer {
-    public final static int ROW_NUM = 3; //swap per row count
+    public final static int ROW_NUM = 3; // swap per row count
+
     public R3_RigContainer(int windowId, Inventory inv, ItemStack item) {
         super(ModContainers.ARMOR_R3.get(), windowId); // Swap per row count
-        RigSlotsHandler itemHandler = (RigSlotsHandler) item.getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
+        RigSlotsHandler itemHandler = (RigSlotsHandler) item.getCapability(ArmorRigCapabilityProvider.capability)
+                .resolve().get();
         int i = (this.getNumRows() - 4) * 18;
 
-        for(int j = 0; j < this.getNumRows(); ++j) {
-            for(int k = 0; k < 9; ++k) {
+        for (int j = 0; j < this.getNumRows(); ++j) {
+            for (int k = 0; k < 9; ++k) {
                 this.addSlot(new AmmoSlot(itemHandler, k + j * 9, 8 + k * 18, 18 + j * 18));
             }
         }
 
-        for(int l = 0; l < 3; ++l) {
-            for(int j1 = 0; j1 < 9; ++j1) {
+        for (int l = 0; l < 3; ++l) {
+            for (int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(inv, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 + i));
             }
         }
 
-        for(int i1 = 0; i1 < 9; ++i1) {
+        for (int i1 = 0; i1 < 9; ++i1) {
             this.addSlot(new Slot(inv, i1, 8 + i1 * 18, 161 + i));
         }
     }
 
     public R3_RigContainer(int windowId, Inventory inv) {
-        super(ModContainers.ARMOR_R3.get(), windowId);  // Swap per row count
+        super(ModContainers.ARMOR_R3.get(), windowId); // Swap per row count
 
         int i = (this.getNumRows() - 4) * 18;
-        ItemStackHandler itemHandler = new ItemStackHandler(9*getNumRows());
-        for(int j = 0; j < this.getNumRows(); ++j) {
-            for(int k = 0; k < 9; ++k) {
+        ItemStackHandler itemHandler = new ItemStackHandler(9 * getNumRows());
+        for (int j = 0; j < this.getNumRows(); ++j) {
+            for (int k = 0; k < 9; ++k) {
                 this.addSlot(new AmmoSlot(itemHandler, k + j * 9, 8 + k * 18, 18 + j * 18));
             }
         }
 
-        for(int l = 0; l < 3; ++l) {
-            for(int j1 = 0; j1 < 9; ++j1) {
+        for (int l = 0; l < 3; ++l) {
+            for (int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(inv, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 + i));
             }
         }
 
-        for(int i1 = 0; i1 < 9; ++i1) {
+        for (int i1 = 0; i1 < 9; ++i1) {
             this.addSlot(new Slot(inv, i1, 8 + i1 * 18, 161 + i));
         }
     }
-
 
     @Override
     public boolean stillValid(Player playerIn) {
@@ -69,13 +70,14 @@ public class R3_RigContainer extends AbstractContainerMenu implements IRigContai
 
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
-        if(slotId <= 0) {
+        if (slotId <= 0) {
             super.clicked(slotId, dragType, clickTypeIn, player);
             return;
         }
         Slot slot = this.slots.get(slotId);
-        if(slot.hasItem()) {
-            if(slot.getItem().getItem() instanceof ArmorRigItem) return;
+        if (slot.hasItem()) {
+            if (slot.getItem().getItem() instanceof ArmorRigItem)
+                return;
         }
         super.clicked(slotId, dragType, clickTypeIn, player);
     }
@@ -104,14 +106,18 @@ public class R3_RigContainer extends AbstractContainerMenu implements IRigContai
 
         return itemstack;
     }
+
     @Override
     public AbstractContainerMenu getSelf() {
         return this;
     }
+
     @Override
-    public int getNumRows(){return ROW_NUM;}
-    private static boolean isAmmo(ItemStack stack, ResourceLocation id)
-    {
+    public int getNumRows() {
+        return ROW_NUM;
+    }
+
+    private static boolean isAmmo(ItemStack stack, ResourceLocation id) {
         return stack != null && stack.getItem().getRegistryName().equals(id);
     }
 }

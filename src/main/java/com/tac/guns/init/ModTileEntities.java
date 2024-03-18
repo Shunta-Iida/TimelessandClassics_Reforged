@@ -16,22 +16,28 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class ModTileEntities
-{
-    public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Reference.MOD_ID);
+public class ModTileEntities {
+    public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister
+            .create(ForgeRegistries.BLOCK_ENTITIES, Reference.MOD_ID);
 
-    public static final RegistryObject<BlockEntityType<WorkbenchTileEntity>> WORKBENCH = register("workbench", WorkbenchTileEntity::new, () -> new Block[]{ModBlocks.WORKBENCH.get()});
+    public static final RegistryObject<BlockEntityType<WorkbenchTileEntity>> WORKBENCH = register("workbench",
+            WorkbenchTileEntity::new, () -> new Block[] { ModBlocks.WORKBENCH.get() });
 
-    //public static final RegistryObject<BlockEntityType<UpgradeBenchTileEntity>> UPGRADE_BENCH = registers("upgrade_benchy", UpgradeBenchTileEntity::new, () -> ModBlocks.UPGRADE_BENCH.get());
-    public static final RegistryObject<BlockEntityType<FlashLightSource>> LIGHT_SOURCE = register("flashlight",FlashLightSource::new, () -> new Block[]{ModBlocks.FLASHLIGHT_BLOCK.get()});
+    // public static final RegistryObject<BlockEntityType<UpgradeBenchTileEntity>>
+    // UPGRADE_BENCH = registers("upgrade_benchy", UpgradeBenchTileEntity::new, ()
+    // -> ModBlocks.UPGRADE_BENCH.get());
+    public static final RegistryObject<BlockEntityType<FlashLightSource>> LIGHT_SOURCE = register("flashlight",
+            FlashLightSource::new, () -> new Block[] { ModBlocks.FLASHLIGHT_BLOCK.get() });
 
-    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registers(String id, BlockEntityType.BlockEntitySupplier<T> factoryIn, Supplier<Block> validBlocksSupplier)
-    {
-        return REGISTER.register(id, () -> BlockEntityType.Builder.of(factoryIn, validBlocksSupplier.get()).build(null));
+    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registers(String id,
+            BlockEntityType.BlockEntitySupplier<T> factoryIn, Supplier<Block> validBlocksSupplier) {
+        return REGISTER.register(id,
+                () -> BlockEntityType.Builder.of(factoryIn, validBlocksSupplier.get()).build(null));
     }
 
-    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String id, BlockEntityType.BlockEntitySupplier<T> factoryIn, Supplier<Block[]> validBlocksSupplier)
-    {
-        return REGISTER.register(id, () -> BlockEntityType.Builder.of(factoryIn, validBlocksSupplier.get()).build(null));
+    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String id,
+            BlockEntityType.BlockEntitySupplier<T> factoryIn, Supplier<Block[]> validBlocksSupplier) {
+        return REGISTER.register(id,
+                () -> BlockEntityType.Builder.of(factoryIn, validBlocksSupplier.get()).build(null));
     }
 }

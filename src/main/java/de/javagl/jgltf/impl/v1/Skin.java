@@ -11,63 +11,61 @@ package de.javagl.jgltf.impl.v1;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * Joints and matrices defining a skin. 
+ * Joints and matrices defining a skin.
  * 
- * Auto-generated for skin.schema.json 
+ * Auto-generated for skin.schema.json
  * 
  */
 public class Skin
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * Floating-point 4x4 transformation matrix stored in column-major order. 
-     * (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Floating-point 4x4 transformation matrix stored in column-major order.
+     * (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private float[] bindShapeMatrix;
     /**
-     * The ID of the accessor containing the floating-point 4x4 inverse-bind 
-     * matrices. (required) 
+     * The ID of the accessor containing the floating-point 4x4 inverse-bind
+     * matrices. (required)
      * 
      */
     private String inverseBindMatrices;
     /**
-     * Joint names of the joints (nodes with a `jointName` property) in this 
-     * skin. (required)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Joint names of the joints (nodes with a `jointName` property) in this
+     * skin. (required)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> jointNames;
 
     /**
-     * Floating-point 4x4 transformation matrix stored in column-major order. 
-     * (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Floating-point 4x4 transformation matrix stored in column-major order.
+     * (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param bindShapeMatrix The bindShapeMatrix to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setBindShapeMatrix(float[] bindShapeMatrix) {
         if (bindShapeMatrix == null) {
             this.bindShapeMatrix = bindShapeMatrix;
-            return ;
+            return;
         }
-        if (bindShapeMatrix.length< 16) {
+        if (bindShapeMatrix.length < 16) {
             throw new IllegalArgumentException("Number of bindShapeMatrix elements is < 16");
         }
         if (bindShapeMatrix.length > 16) {
@@ -77,13 +75,13 @@ public class Skin
     }
 
     /**
-     * Floating-point 4x4 transformation matrix stored in column-major order. 
-     * (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Floating-point 4x4 transformation matrix stored in column-major order.
+     * (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The bindShapeMatrix
      * 
@@ -93,19 +91,21 @@ public class Skin
     }
 
     /**
-     * Returns the default value of the bindShapeMatrix<br> 
-     * @see #getBindShapeMatrix 
+     * Returns the default value of the bindShapeMatrix<br>
+     * 
+     * @see #getBindShapeMatrix
      * 
      * @return The default bindShapeMatrix
      * 
      */
     public float[] defaultBindShapeMatrix() {
-        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F };
+        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+                1.0F };
     }
 
     /**
-     * The ID of the accessor containing the floating-point 4x4 inverse-bind 
-     * matrices. (required) 
+     * The ID of the accessor containing the floating-point 4x4 inverse-bind
+     * matrices. (required)
      * 
      * @param inverseBindMatrices The inverseBindMatrices to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -113,14 +113,15 @@ public class Skin
      */
     public void setInverseBindMatrices(String inverseBindMatrices) {
         if (inverseBindMatrices == null) {
-            throw new NullPointerException((("Invalid value for inverseBindMatrices: "+ inverseBindMatrices)+", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for inverseBindMatrices: " + inverseBindMatrices) + ", may not be null"));
         }
         this.inverseBindMatrices = inverseBindMatrices;
     }
 
     /**
-     * The ID of the accessor containing the floating-point 4x4 inverse-bind 
-     * matrices. (required) 
+     * The ID of the accessor containing the floating-point 4x4 inverse-bind
+     * matrices. (required)
      * 
      * @return The inverseBindMatrices
      * 
@@ -130,10 +131,10 @@ public class Skin
     }
 
     /**
-     * Joint names of the joints (nodes with a `jointName` property) in this 
-     * skin. (required)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Joint names of the joints (nodes with a `jointName` property) in this
+     * skin. (required)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param jointNames The jointNames to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -141,16 +142,16 @@ public class Skin
      */
     public void setJointNames(List<String> jointNames) {
         if (jointNames == null) {
-            throw new NullPointerException((("Invalid value for jointNames: "+ jointNames)+", may not be null"));
+            throw new NullPointerException((("Invalid value for jointNames: " + jointNames) + ", may not be null"));
         }
         this.jointNames = jointNames;
     }
 
     /**
-     * Joint names of the joints (nodes with a `jointName` property) in this 
-     * skin. (required)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Joint names of the joints (nodes with a `jointName` property) in this
+     * skin. (required)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The jointNames
      * 
@@ -160,9 +161,9 @@ public class Skin
     }
 
     /**
-     * Add the given jointNames. The jointNames of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given jointNames. The jointNames of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -174,7 +175,7 @@ public class Skin
         }
         List<String> oldList = this.jointNames;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -182,9 +183,9 @@ public class Skin
     }
 
     /**
-     * Remove the given jointNames. The jointNames of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one. 
+     * Remove the given jointNames. The jointNames of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -196,7 +197,7 @@ public class Skin
         }
         List<String> oldList = this.jointNames;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);

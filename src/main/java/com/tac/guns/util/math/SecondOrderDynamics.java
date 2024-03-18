@@ -6,12 +6,14 @@ import java.util.concurrent.ScheduledExecutorService;
 public class SecondOrderDynamics {
     public static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(15, Thread::new);
     static {
-        for(int i =0; i<15; i++) executorService.execute(()->{});
+        for (int i = 0; i < 15; i++)
+            executorService.execute(() -> {
+            });
     }
 
     private final float k1;
     private final float k2;
-    private final float k3 ;
+    private final float k3;
 
     private float py;
     private float pyd;
@@ -20,12 +22,12 @@ public class SecondOrderDynamics {
     private float target;
 
     /**
-     * @param f Natural frequency
-     * @param z Damping coefficient
-     * @param r Initial velocity
+     * @param f  Natural frequency
+     * @param z  Damping coefficient
+     * @param r  Initial velocity
      * @param x0 Initial position
-     * */
-    public SecondOrderDynamics(float f, float z, float r, float x0){
+     */
+    public SecondOrderDynamics(float f, float z, float r, float x0) {
         k1 = (float) (z / (Math.PI * f));
         k2 = (float) (1 / ((2 * Math.PI * f) * (2 * Math.PI * f)));
         k3 = (float) (r * z / (2 * Math.PI * f));
@@ -41,13 +43,13 @@ public class SecondOrderDynamics {
     /**
      * @return processed y value
      * @param T abandoned.
-     * */
-    public float update(float T, float x){
+     */
+    public float update(float T, float x) {
         target = x;
         return py + 0.05f * pyd;
     }
 
-    private void update(){
+    private void update() {
         while (true) {
             float T = 0.05f;
             float xd = (target - px) / T;
@@ -57,12 +59,9 @@ public class SecondOrderDynamics {
             px = target;
             py = y;
 
-            try
-            {
+            try {
                 Thread.sleep(6);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }

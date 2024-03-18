@@ -28,28 +28,36 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
  */
 public class tec_9_animation extends SkinnedGunModel {
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         TEC9AnimationController controller = TEC9AnimationController.getInstance();
 
-
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BODY, transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BODY,
+                transformType, matrices);
         RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
         matrices.popPose();
 
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_MAG, transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_MAG,
+                transformType, matrices);
         renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         matrices.popPose();
 
-        //Always push
+        // Always push
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BOLT, transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BOLT,
+                transformType, matrices);
         Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+        float cooldownOg = ShootingHandler.get().getshootMsGap()
+                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                        : ShootingHandler.get().getshootMsGap()
+                                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
         if (transformType.firstPerson()) {
-            AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-            boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+            AnimationMeta reloadEmpty = controller
+                    .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+            boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                    && controller.isAnimationRunning();
             if (!shouldOffset && !Gun.hasAmmo(stack)) {
                 matrices.translate(0, 0, -0.375);
             } else {
@@ -57,11 +65,12 @@ public class tec_9_animation extends SkinnedGunModel {
             }
         }
         RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
-        //Always pop
+        // Always pop
         matrices.popPose();
 
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BULLET, transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY), TEC9AnimationController.INDEX_BULLET,
+                transformType, matrices);
         RenderUtil.renderModel(getComponentModel(skin, BULLET), stack, matrices, renderBuffer, light, overlay);
         matrices.popPose();
 

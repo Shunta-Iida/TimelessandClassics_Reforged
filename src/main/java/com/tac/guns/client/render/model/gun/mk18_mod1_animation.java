@@ -28,13 +28,14 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class mk18_mod1_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         MK18MOD1AnimationController controller = MK18MOD1AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK18MOD1AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK18MOD1AnimationController.INDEX_BODY,
+                    transformType, matrices);
 
             renderLaserDevice(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -55,7 +56,10 @@ public class mk18_mod1_animation extends SkinnedGunModel {
             {
                 if (transformType.firstPerson()) {
                     Gun gun = ((GunItem) stack.getItem()).getGun();
-                    float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                    float cooldownOg = ShootingHandler.get().getshootMsGap()
+                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                    : ShootingHandler.get().getshootMsGap()
+                                            / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
                     if (Gun.hasAmmo(stack)) {
                         // Math provided by Bomb787 on GitHub and Curseforge!!!
@@ -72,7 +76,8 @@ public class mk18_mod1_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK18MOD1AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MK18MOD1AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();

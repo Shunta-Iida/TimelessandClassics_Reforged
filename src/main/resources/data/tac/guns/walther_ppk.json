@@ -49,12 +49,11 @@
     "weaponType": 2
   },
   "modules": {
-    "zoom":
-      {
-        "fovModifier": 0.9,
-        "yOffset": 12.22,
-        "zOffset": -10.6
-      },
+    "zoom": {
+      "fovModifier": 0.9,
+      "yOffset": 12.22,
+      "zOffset": -10.6
+    },
     "attachments": {}
   }
 }

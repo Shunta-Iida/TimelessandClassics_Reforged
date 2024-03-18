@@ -32,8 +32,7 @@ import java.util.function.Supplier;
 /**
  * Interface for a node that is part of a scene hierarchy
  */
-public interface NodeModel extends NamedModelElement
-{
+public interface NodeModel extends NamedModelElement {
     /**
      * Returns the parent of this node, or <code>null</code> if this is
      * a root node
@@ -48,7 +47,7 @@ public interface NodeModel extends NamedModelElement
      * @return The children
      */
     List<NodeModel> getChildren();
-    
+
     /**
      * Returns an unmodifiable view on the list of {@link MeshModel} instances
      * that are attached to this node.
@@ -60,31 +59,31 @@ public interface NodeModel extends NamedModelElement
     /**
      * Returns the {@link SkinModel} for this node, or <code>null</code> if
      * this node is not associated with a skin
-     *  
+     * 
      * @return The {@link SkinModel}
      */
     SkinModel getSkinModel();
-    
+
     /**
      * Set the matrix of this node to be a <b>reference</b> to the given
      * array. <br>
      * <br>
-     * The matrix is assumed to be a 16-element array containing the matrix 
-     * in column-major order. If the given matrix is <code>null</code>, then 
+     * The matrix is assumed to be a 16-element array containing the matrix
+     * in column-major order. If the given matrix is <code>null</code>, then
      * the {@link #getTranslation() translation},
      * {@link #getRotation() rotation}, and
-     * {@link #getScale() scale} properties will be used for determining the 
+     * {@link #getScale() scale} properties will be used for determining the
      * local transform.
      * 
      * @param matrix The matrix
      * @throws IllegalArgumentException If the given array does not have
-     * a length of 16
+     *                                  a length of 16
      */
     void setMatrix(float matrix[]);
-    
+
     /**
      * Returns a <b>reference</b> to the array storing the matrix of this node.
-     * This is a 16-element array containing the matrix in column-major order, 
+     * This is a 16-element array containing the matrix in column-major order,
      * or <code>null</code> if no matrix was set.
      * 
      * @return The matrix
@@ -93,16 +92,16 @@ public interface NodeModel extends NamedModelElement
 
     /**
      * Set the translation of this node to be a <b>reference</b> to the given
-     * array. 
+     * array.
      * 
      * @param translation The translation
      * @throws IllegalArgumentException If the given array does not have
-     * a length of 3
+     *                                  a length of 3
      */
     void setTranslation(float translation[]);
-    
+
     /**
-     * Returns a <b>reference</b> to the array storing the translation of this 
+     * Returns a <b>reference</b> to the array storing the translation of this
      * node, or <code>null</code> if no translation was set.
      * 
      * @return The translation
@@ -116,12 +115,12 @@ public interface NodeModel extends NamedModelElement
      * 
      * @param rotation The rotation
      * @throws IllegalArgumentException If the given array does not have
-     * a length of 4
+     *                                  a length of 4
      */
     void setRotation(float rotation[]);
-    
+
     /**
-     * Returns a <b>reference</b> to the array storing the rotation of this 
+     * Returns a <b>reference</b> to the array storing the rotation of this
      * node, or <code>null</code> if no rotation was set
      * 
      * @return The rotation
@@ -134,41 +133,41 @@ public interface NodeModel extends NamedModelElement
      * 
      * @param scale The scale
      * @throws IllegalArgumentException If the given array does not have
-     * a length of 3
+     *                                  a length of 3
      */
     void setScale(float scale[]);
 
     /**
-     * Returns a <b>reference</b> to the array storing the scale of this 
+     * Returns a <b>reference</b> to the array storing the scale of this
      * node, or <code>null</code> if no scale was set
      * 
      * @return The scale
      */
     float[] getScale();
-    
+
     /**
      * Set the morph target weights to be a <b>reference</b> to the given
-     * array. 
+     * array.
      * 
      * @param weights The weights
      */
     void setWeights(float weights[]);
-    
+
     /**
-     * Returns a <b>reference</b> to the morph target weights, 
+     * Returns a <b>reference</b> to the morph target weights,
      * or <code>null</code> if no morph target weights have been defined
      * 
      * @return The morph target weights
      */
     float[] getWeights();
-    
+
     /**
      * Computes the local transform of this node.<br>
      * <br>
-     * The result will be written to the given array, as a 4x4 matrix in 
+     * The result will be written to the given array, as a 4x4 matrix in
      * column major order. If the given array is <code>null</code> or does
-     * not have a length of 16, then a new array with length 16 will be 
-     * created and returned. 
+     * not have a length of 16, then a new array with length 16 will be
+     * created and returned.
      * 
      * @param result The result array
      * @return The result array
@@ -178,10 +177,10 @@ public interface NodeModel extends NamedModelElement
     /**
      * Computes the global transform of this node.<br>
      * <br>
-     * The result will be written to the given array, as a 4x4 matrix in 
+     * The result will be written to the given array, as a 4x4 matrix in
      * column major order. If the given array is <code>null</code> or does
-     * not have a length of 16, then a new array with length 16 will be 
-     * created and returned. 
+     * not have a length of 16, then a new array with length 16 will be
+     * created and returned.
      * 
      * @param result The result array
      * @return The result array
@@ -189,14 +188,14 @@ public interface NodeModel extends NamedModelElement
     float[] computeGlobalTransform(float result[]);
 
     /**
-     * Creates a supplier for the global transform matrix of this node 
+     * Creates a supplier for the global transform matrix of this node
      * model.<br>
-     * <br> 
-     * The matrix will be provided as a float array with 16 elements, 
+     * <br>
+     * The matrix will be provided as a float array with 16 elements,
      * storing the matrix entries in column-major order.<br>
      * <br>
      * Note: The supplier MAY always return the same array instance.
-     * Callers MUST NOT store or modify the returned array. 
+     * Callers MUST NOT store or modify the returned array.
      * 
      * @return The supplier
      */
@@ -204,12 +203,12 @@ public interface NodeModel extends NamedModelElement
 
     /**
      * Creates a supplier for the local transform matrix of this node model.<br>
-     * <br> 
-     * The matrix will be provided as a float array with 16 elements, 
+     * <br>
+     * The matrix will be provided as a float array with 16 elements,
      * storing the matrix entries in column-major order.<br>
      * <br>
      * Note: The supplier MAY always return the same array instance.
-     * Callers MUST NOT store or modify the returned array. 
+     * Callers MUST NOT store or modify the returned array.
      * 
      * @return The supplier
      */

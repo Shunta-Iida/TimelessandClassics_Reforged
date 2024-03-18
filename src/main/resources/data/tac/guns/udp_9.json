@@ -2,7 +2,10 @@
   "general": {
     "auto": true,
     "rate": 1200,
-    "rateSelector": [2, 1],
+    "rateSelector": [
+      2,
+      1
+    ],
     "gripType": "tac:two_handed_vector",
     "recoilAngle": 1.45,
     "horizontalRecoilAngle": 1.25,
@@ -12,7 +15,6 @@
     "cameraRecoilModifier": 1.125,
     "recoilDuration": 0.15,
     "weightKilo": 2.3,
-
     "spread": 2.5,
     "firstShotSpread": 0.165,
     "hipFireInaccuracy": 2.95,
@@ -25,7 +27,11 @@
     "maxAmmo": 22,
     "reloadMagTimer": 26,
     "additionalReloadEmptyMagTimer": 8,
-    "maxAdditionalAmmoPerOC": [4, 7, 11],
+    "maxAdditionalAmmoPerOC": [
+      4,
+      7,
+      11
+    ],
     "preReloadPauseTicks": 8
   },
   "projectile": {
@@ -63,7 +69,7 @@
       "trailAdjust": 0.75
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": 1,
       "xOffset": 0,
       "zOffset": -3,

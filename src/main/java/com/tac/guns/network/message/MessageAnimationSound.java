@@ -15,13 +15,13 @@ public class MessageAnimationSound extends PlayMessage<MessageAnimationSound> {
     private boolean play;
     private UUID fromWho;
 
-    public MessageAnimationSound(){}
+    public MessageAnimationSound() {
+    }
 
     public MessageAnimationSound(ResourceLocation animationResource,
-                                 ResourceLocation soundResource,
-                                 boolean play,
-                                 UUID fromWho)
-    {
+            ResourceLocation soundResource,
+            boolean play,
+            UUID fromWho) {
         this.animationResource = animationResource;
         this.soundResource = soundResource;
         this.play = play;
@@ -38,14 +38,16 @@ public class MessageAnimationSound extends PlayMessage<MessageAnimationSound> {
 
     @Override
     public MessageAnimationSound decode(FriendlyByteBuf buffer) {
-        return new MessageAnimationSound(buffer.readResourceLocation(), buffer.readResourceLocation(), buffer.readBoolean(), buffer.readUUID());
+        return new MessageAnimationSound(buffer.readResourceLocation(), buffer.readResourceLocation(),
+                buffer.readBoolean(), buffer.readUUID());
     }
 
     @Override
     public void handle(MessageAnimationSound messageAnimationSound, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() ->
-        {
-            ClientPlayHandler.handleMessageAnimationSound(messageAnimationSound.fromWho, messageAnimationSound.animationResource, messageAnimationSound.soundResource, messageAnimationSound.play);
+        supplier.get().enqueueWork(() -> {
+            ClientPlayHandler.handleMessageAnimationSound(messageAnimationSound.fromWho,
+                    messageAnimationSound.animationResource, messageAnimationSound.soundResource,
+                    messageAnimationSound.play);
         });
         supplier.get().setPacketHandled(true);
     }

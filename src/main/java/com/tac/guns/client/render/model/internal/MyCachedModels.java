@@ -19,10 +19,9 @@ import net.minecraftforge.fml.common.Mod;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public enum MyCachedModels
-{
+public enum MyCachedModels {
     FLAME("flame"),
-    //Everything from this point on is all scope additions
+    // Everything from this point on is all scope additions
 
     MINI_DOT_BASE("optics/mini_dot_base"),
     MICRO_HOLO_BASE("optics/micro_holo_base"),
@@ -47,8 +46,7 @@ public enum MyCachedModels
      *
      * @param modelName name of the model file
      */
-    MyCachedModels(String modelName)
-    {
+    MyCachedModels(String modelName) {
         this(new ResourceLocation(Reference.MOD_ID, "special/" + modelName));
     }
 
@@ -57,8 +55,7 @@ public enum MyCachedModels
      *
      * @param resource name of the model file
      */
-    MyCachedModels(ResourceLocation resource)
-    {
+    MyCachedModels(ResourceLocation resource) {
         this.modelLocation = resource;
         cacheableModel = new CacheableModel(resource);
     }
@@ -69,22 +66,20 @@ public enum MyCachedModels
      * @return isolated model
      */
     @OnlyIn(Dist.CLIENT)
-    public BakedModel getModel()
-    {
+    public BakedModel getModel() {
         return cacheableModel.getModel();
     }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public static void init(ModelRegistryEvent event)
-    {
-        for(MyCachedModels model : values())
-        {
+    public static void init(ModelRegistryEvent event) {
+        for (MyCachedModels model : values()) {
             ForgeModelBakery.addSpecialModel(model.modelLocation);
         }
 
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
-        ((ReloadableResourceManager)manager).registerReloadListener((ResourceManagerReloadListener) resourceManager -> MyCachedModels.cleanCache());
+        ((ReloadableResourceManager) manager)
+                .registerReloadListener((ResourceManagerReloadListener) resourceManager -> MyCachedModels.cleanCache());
     }
 
     public static void cleanCache() {

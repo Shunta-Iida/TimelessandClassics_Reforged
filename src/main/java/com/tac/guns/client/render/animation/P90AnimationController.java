@@ -13,15 +13,20 @@ public class P90AnimationController extends GunAnimationController implements Ca
     public static int INDEX_LEFT_HAND = 6;
     public static int INDEX_RIGHT_HAND = 3;
     public static int INDEX_PULL = 1;
-    //public static int INDEX_RELEASE = -1;
+    // public static int INDEX_RELEASE = -1;
     public static int CAMERA_INDEX = 9;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/p90_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/p90_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/p90_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/p90_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/p90_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/p90_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/p90_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac", "animations/p90_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/p90_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/p90_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/p90_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/p90_static.gltf"));
     private static final P90AnimationController instance = new P90AnimationController();
 
     private P90AnimationController() {
@@ -36,26 +41,35 @@ public class P90AnimationController extends GunAnimationController implements Ca
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.P90.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.P90.getId(), this);
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.P90.get(), label);
     }
 
-    public static P90AnimationController getInstance(){ return instance; }
+    public static P90AnimationController getInstance() {
+        return instance;
+    }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+        switch (label) {
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 

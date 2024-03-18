@@ -27,20 +27,25 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class dp28_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         Dp28AnimationController controller = Dp28AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Dp28AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Dp28AnimationController.INDEX_BODY,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
-            //Always push
+            // Always push
             matrices.pushPose();
             if (transformType.firstPerson()) {
-                //We're getting the cooldown tracker for the item - items like the sword, ender pearl, and chorus fruit all have this too.
+                // We're getting the cooldown tracker for the item - items like the sword, ender
+                // pearl, and chorus fruit all have this too.
                 Gun gun = ((GunItem) stack.getItem()).getGun();
-                float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                float cooldownOg = ShootingHandler.get().getshootMsGap()
+                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                : ShootingHandler.get().getshootMsGap()
+                                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
                 if (Gun.hasAmmo(stack)) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
@@ -51,14 +56,15 @@ public class dp28_animation extends SkinnedGunModel {
             }
             RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
 
-            //Always pop
+            // Always pop
             matrices.popPose();
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Dp28AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Dp28AnimationController.INDEX_MAGAZINE,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, MAG), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();

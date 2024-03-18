@@ -73,24 +73,33 @@ public class ClientHandler {
         registerEntityRenders();
         MinecraftForge.EVENT_BUS.register(SoundHandler.get());
         MinecraftForge.EVENT_BUS.register(HUDRenderingHandler.get());
-        MinecraftForge.EVENT_BUS.register(FireModeSwitchEvent.get()); // Technically now a handler but, yes I need some naming reworks
-        MinecraftForge.EVENT_BUS.register(SightSwitchEvent.get()); // Still, as well an event, am uncertain on what to name it, in short handles upcoming advanced iron sights
+        MinecraftForge.EVENT_BUS.register(FireModeSwitchEvent.get()); // Technically now a handler but, yes I need some
+                                                                      // naming reworks
+        MinecraftForge.EVENT_BUS.register(SightSwitchEvent.get()); // Still, as well an event, am uncertain on what to
+                                                                   // name it, in short handles upcoming advanced iron
+                                                                   // sights
         MinecraftForge.EVENT_BUS.register(ArmorInteractionHandler.get());
 
-        //MinecraftForge.EVENT_BUS.register(FlashlightHandler.get()); // Completely broken... Needs a full rework
-        //MinecraftForge.EVENT_BUS.register(FloodLightSource.get());
+        // MinecraftForge.EVENT_BUS.register(FlashlightHandler.get()); // Completely
+        // broken... Needs a full rework
+        // MinecraftForge.EVENT_BUS.register(FloodLightSource.get());
 
-        MinecraftForge.EVENT_BUS.register(ScopeJitterHandler.getInstance()); // All built by MayDayMemory part of the Timeless dev team, amazing work!!!!!!!!!!!
+        MinecraftForge.EVENT_BUS.register(ScopeJitterHandler.getInstance()); // All built by MayDayMemory part of the
+                                                                             // Timeless dev team, amazing
+                                                                             // work!!!!!!!!!!!
         MinecraftForge.EVENT_BUS.register(MovementAdaptationsHandler.get());
-        MinecraftForge.EVENT_BUS.register(AnimationHandler.INSTANCE); //Mainly controls when the animation should play.
+        MinecraftForge.EVENT_BUS.register(AnimationHandler.INSTANCE); // Mainly controls when the animation should play.
         if (Config.COMMON.development.enableTDev.get()) {
-            /*MinecraftForge.EVENT_BUS.register(GuiEditor.get());
-            MinecraftForge.EVENT_BUS.register(GunEditor.get());
-            MinecraftForge.EVENT_BUS.register(ScopeEditor.get());
-            MinecraftForge.EVENT_BUS.register(ObjectRenderEditor.get());*/
+            /*
+             * MinecraftForge.EVENT_BUS.register(GuiEditor.get());
+             * MinecraftForge.EVENT_BUS.register(GunEditor.get());
+             * MinecraftForge.EVENT_BUS.register(ScopeEditor.get());
+             * MinecraftForge.EVENT_BUS.register(ObjectRenderEditor.get());
+             */
         }
 
-        //ClientRegistry.bindTileEntityRenderer(ModTileEntities.UPGRADE_BENCH.get(), UpgradeBenchRenderUtil::new);
+        // ClientRegistry.bindTileEntityRenderer(ModTileEntities.UPGRADE_BENCH.get(),
+        // UpgradeBenchRenderUtil::new);
 
         setupRenderLayers();
         registerColors();
@@ -98,20 +107,22 @@ public class ClientHandler {
         registerScreenFactories();
 
         AnimationHandler.preloadAnimations();
-        new AnimationRunner(); //preload thread pool
-        new SecondOrderDynamics(1f, 1f, 1f, 1f); //preload thread pool
+        new AnimationRunner(); // preload thread pool
+        new SecondOrderDynamics(1f, 1f, 1f, 1f); // preload thread pool
 
-        Map<String, EntityRenderer<? extends Player>> skins = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
-        //addVestLayer(skins.get("default"));
-        //addVestLayer(skins.get("slim"));
+        Map<String, EntityRenderer<? extends Player>> skins = Minecraft.getInstance().getEntityRenderDispatcher()
+                .getSkinMap();
+        // addVestLayer(skins.get("default"));
+        // addVestLayer(skins.get("slim"));
     }
 
     private static void addVestLayer(LivingEntityRenderer<? extends Player, HumanoidModel<Player>> renderer) {
-        //renderer.addLayer(new VestLayerRender<>(RenderLayerParent));
+        // renderer.addLayer(new VestLayerRender<>(RenderLayerParent));
     }
 
     private static void setupRenderLayers() {
-        //ItemBlockRenderTypes.setRenderLayer(ModBlocks.UPGRADE_BENCH.get(), RenderType.cutout());
+        // ItemBlockRenderTypes.setRenderLayer(ModBlocks.UPGRADE_BENCH.get(),
+        // RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WORKBENCH.get(), RenderType.cutout());
     }
 
@@ -120,7 +131,7 @@ public class ClientHandler {
         EntityRenderers.register(ModEntities.GRENADE.get(), GrenadeRenderer::new);
         EntityRenderers.register(ModEntities.THROWABLE_GRENADE.get(), ThrowableGrenadeRenderer::new);
         EntityRenderers.register(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new);
-        //EntityRenderers.register(ModEntities.MISSILE.get(), MissileRenderer::new);
+        // EntityRenderers.register(ModEntities.MISSILE.get(), MissileRenderer::new);
         EntityRenderers.register(ModEntities.RPG7_MISSILE.get(), MissileRenderer::new);
     }
 
@@ -145,8 +156,9 @@ public class ClientHandler {
         OverrideModelManager.register(ModItems.COYOTE_SIGHT.get(), new CoyoteSightModel());
         OverrideModelManager.register(ModItems.STANDARD_6_10x_SCOPE.get(), new Standard6_10xScopeModel());
         OverrideModelManager.register(ModItems.VORTEX_LPVO_3_6.get(), new VortexLPVO_3_6xScopeModel());
-        //TODO: Fix up the SLX 2x, give a new reticle, new scope data, new mount and eye pos, pretty much remake the code end.
-        //ModelOverrides.register(ModItems.SLX_2X.get(), new SLX_2X_ScopeModel());
+        // TODO: Fix up the SLX 2x, give a new reticle, new scope data, new mount and
+        // eye pos, pretty much remake the code end.
+        // ModelOverrides.register(ModItems.SLX_2X.get(), new SLX_2X_ScopeModel());
         OverrideModelManager.register(ModItems.ACOG_4.get(), new ACOG_4x_ScopeModel());
         OverrideModelManager.register(ModItems.ELCAN_DR_14X.get(), new elcan_14x_ScopeModel());
         OverrideModelManager.register(ModItems.AIMPOINT_T2_SIGHT.get(), new AimpointT2SightModel());
@@ -163,13 +175,16 @@ public class ClientHandler {
         OverrideModelManager.register(ModItems.OLD_LONGRANGE_4x_SCOPE.get(), new OldLongRange4xScopeModel());
 
         OverrideModelManager.register(ModItems.MINI_DOT.get(), new MiniDotSightModel());
-        //ModelOverrides.register(ModItems.MICRO_HOLO_SIGHT.get(), new MicroHoloSightModel());
+        // ModelOverrides.register(ModItems.MICRO_HOLO_SIGHT.get(), new
+        // MicroHoloSightModel());
         OverrideModelManager.register(ModItems.SRO_DOT.get(), new SroDotSightModel());
 
-        // Armor registry, kept manual cause nice and simple, requires registry on client side only
+        // Armor registry, kept manual cause nice and simple, requires registry on
+        // client side only
         VestLayerRender.registerModel(ModItems.LIGHT_ARMOR.get(), new ModernArmor());
         VestLayerRender.registerModel(ModItems.MEDIUM_STEEL_ARMOR.get(), new MediumArmor());
-        //VestLayerRender.registerModel(ModItems.CARDBOARD_ARMOR_FUN.get(), new CardboardArmor());
+        // VestLayerRender.registerModel(ModItems.CARDBOARD_ARMOR_FUN.get(), new
+        // CardboardArmor());
     }
 
     private static void registerScreenFactories() {
@@ -182,7 +197,8 @@ public class ClientHandler {
         MenuScreens.register(ModContainers.ARMOR_R3.get(), AmmoScreen<R3_RigContainer>::new);
         MenuScreens.register(ModContainers.ARMOR_R4.get(), AmmoScreen<R4_RigContainer>::new);
         MenuScreens.register(ModContainers.ARMOR_R5.get(), AmmoScreen<R5_RigContainer>::new);
-        //ScreenManager.registerFactory(ModContainers.COLOR_BENCH.get(), ColorBenchAttachmentScreen::new);
+        // ScreenManager.registerFactory(ModContainers.COLOR_BENCH.get(),
+        // ColorBenchAttachmentScreen::new);
     }
 
     @SubscribeEvent
@@ -195,21 +211,23 @@ public class ClientHandler {
             }
             try {
                 OptionsList list = (OptionsList) mouseOptionsField.get(screen);
-                list.addSmall(GunOptions.ADS_SENSITIVITY, GunOptions.HOLD_TO_AIM/*, GunOptions.CROSSHAIR*/);
+                list.addSmall(GunOptions.ADS_SENSITIVITY, GunOptions.HOLD_TO_AIM/* , GunOptions.CROSSHAIR */);
                 list.addSmall(GunOptions.ALLOW_CHESTS, GunOptions.ALLOW_FENCE_GATES);
                 list.addSmall(GunOptions.ALLOW_LEVER, GunOptions.ALLOW_BUTTON);
                 list.addSmall(GunOptions.ALLOW_DOORS, GunOptions.ALLOW_TRAP_DOORS);
-                list.addSmall(new CycleOption[]{GunOptions.ALLOW_CRAFTING_TABLE});
+                list.addSmall(new CycleOption[] { GunOptions.ALLOW_CRAFTING_TABLE });
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
         if (event.getScreen() instanceof PauseScreen) {
-            PauseScreen  screen = (PauseScreen ) event.getScreen();
+            PauseScreen screen = (PauseScreen) event.getScreen();
 
-            event.addListener((new Button(screen.width / 2 - 215, 10, 75, 20, new TranslatableComponent("tac.options.gui_settings"), (p_213126_1_) -> {
-                Minecraft.getInstance().setScreen(new TaCSettingsScreen(screen, Minecraft.getInstance().options));
-            })));
+            event.addListener((new Button(screen.width / 2 - 215, 10, 75, 20,
+                    new TranslatableComponent("tac.options.gui_settings"), (p_213126_1_) -> {
+                        Minecraft.getInstance()
+                                .setScreen(new TaCSettingsScreen(screen, Minecraft.getInstance().options));
+                    })));
         }
     }
 
@@ -228,36 +246,44 @@ public class ClientHandler {
                 return;
 
             final Minecraft mc = Minecraft.getInstance();
-            if (
-                    mc.player != null
-                            && mc.screen == null
-                            && GunAnimationController.fromItem(
-                            Minecraft.getInstance().player.getInventory().getSelected().getItem()
-                    ) == null
-            ) PacketHandler.getPlayChannel().sendToServer(new MessageInspection());
+            if (mc.player != null
+                    && mc.screen == null
+                    && GunAnimationController.fromItem(
+                            Minecraft.getInstance().player.getInventory().getSelected().getItem()) == null)
+                PacketHandler.getPlayChannel().sendToServer(new MessageInspection());
         });
     }
 
-
     /* Uncomment for debugging headshot hit boxes */
 
-    /*@SubscribeEvent
-    @SuppressWarnings("unchecked")
-    public static void onRenderLiving(RenderLivingEvent.Post event)
-    {
-        LivingEntity entity = event.getEntity();
-        IHeadshotBox<LivingEntity> headshotBox = (IHeadshotBox<LivingEntity>) BoundingBoxManager.getHeadshotBoxes(entity.getType());
-        if(headshotBox != null)
-        {
-            AxisAlignedBB box = headshotBox.getHeadshotBox(entity);
-            if(box != null)
-            {
-                WorldRenderer.drawBoundingBox(event.getMatrixStack(), event.getBuffers().getBuffer(RenderType.getLines()), box, 1.0F, 1.0F, 0.0F, 1.0F);
-
-                AxisAlignedBB boundingBox = entity.getBoundingBox().offset(entity.getPositionVec().inverse());
-                boundingBox = boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmountV2.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmountV2.get());
-                WorldRenderer.drawBoundingBox(event.getMatrixStack(), event.getBuffers().getBuffer(RenderType.getLines()), boundingBox, 0.0F, 1.0F, 1.0F, 1.0F);
-            }
-        }
-    }*/
+    /*
+     * @SubscribeEvent
+     * 
+     * @SuppressWarnings("unchecked")
+     * public static void onRenderLiving(RenderLivingEvent.Post event)
+     * {
+     * LivingEntity entity = event.getEntity();
+     * IHeadshotBox<LivingEntity> headshotBox = (IHeadshotBox<LivingEntity>)
+     * BoundingBoxManager.getHeadshotBoxes(entity.getType());
+     * if(headshotBox != null)
+     * {
+     * AxisAlignedBB box = headshotBox.getHeadshotBox(entity);
+     * if(box != null)
+     * {
+     * WorldRenderer.drawBoundingBox(event.getMatrixStack(),
+     * event.getBuffers().getBuffer(RenderType.getLines()), box, 1.0F, 1.0F, 0.0F,
+     * 1.0F);
+     * 
+     * AxisAlignedBB boundingBox =
+     * entity.getBoundingBox().offset(entity.getPositionVec().inverse());
+     * boundingBox =
+     * boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmountV2.get(), 0,
+     * Config.COMMON.gameplay.growBoundingBoxAmountV2.get());
+     * WorldRenderer.drawBoundingBox(event.getMatrixStack(),
+     * event.getBuffers().getBuffer(RenderType.getLines()), boundingBox, 0.0F, 1.0F,
+     * 1.0F, 1.0F);
+     * }
+     * }
+     * }
+     */
 }

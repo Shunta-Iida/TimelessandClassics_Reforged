@@ -8,65 +8,62 @@
 
 package de.javagl.jgltf.impl.v2;
 
-
-
 /**
- * Sparse storage of accessor values that deviate from their 
- * initialization value. 
+ * Sparse storage of accessor values that deviate from their
+ * initialization value.
  * 
- * Auto-generated for accessor.sparse.schema.json 
+ * Auto-generated for accessor.sparse.schema.json
  * 
  */
 public class AccessorSparse
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * Number of deviating accessor values stored in the sparse array. 
-     * (required)<br> 
-     * Minimum: 1 (inclusive) 
+     * Number of deviating accessor values stored in the sparse array.
+     * (required)<br>
+     * Minimum: 1 (inclusive)
      * 
      */
     private Integer count;
     /**
-     * An object pointing to a buffer view containing the indices of 
-     * deviating accessor values. The number of indices is equal to `count`. 
-     * Indices **MUST** strictly increase. (required) 
+     * An object pointing to a buffer view containing the indices of
+     * deviating accessor values. The number of indices is equal to `count`.
+     * Indices **MUST** strictly increase. (required)
      * 
      */
     private AccessorSparseIndices indices;
     /**
-     * An object pointing to a buffer view containing the deviating accessor 
-     * values. (required) 
+     * An object pointing to a buffer view containing the deviating accessor
+     * values. (required)
      * 
      */
     private AccessorSparseValues values;
 
     /**
-     * Number of deviating accessor values stored in the sparse array. 
-     * (required)<br> 
-     * Minimum: 1 (inclusive) 
+     * Number of deviating accessor values stored in the sparse array.
+     * (required)<br>
+     * Minimum: 1 (inclusive)
      * 
      * @param count The count to set
-     * @throws NullPointerException If the given value is <code>null</code>
+     * @throws NullPointerException     If the given value is <code>null</code>
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setCount(Integer count) {
         if (count == null) {
-            throw new NullPointerException((("Invalid value for count: "+ count)+", may not be null"));
+            throw new NullPointerException((("Invalid value for count: " + count) + ", may not be null"));
         }
-        if (count< 1) {
+        if (count < 1) {
             throw new IllegalArgumentException("count < 1");
         }
         this.count = count;
     }
 
     /**
-     * Number of deviating accessor values stored in the sparse array. 
-     * (required)<br> 
-     * Minimum: 1 (inclusive) 
+     * Number of deviating accessor values stored in the sparse array.
+     * (required)<br>
+     * Minimum: 1 (inclusive)
      * 
      * @return The count
      * 
@@ -76,9 +73,9 @@ public class AccessorSparse
     }
 
     /**
-     * An object pointing to a buffer view containing the indices of 
-     * deviating accessor values. The number of indices is equal to `count`. 
-     * Indices **MUST** strictly increase. (required) 
+     * An object pointing to a buffer view containing the indices of
+     * deviating accessor values. The number of indices is equal to `count`.
+     * Indices **MUST** strictly increase. (required)
      * 
      * @param indices The indices to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -86,15 +83,15 @@ public class AccessorSparse
      */
     public void setIndices(AccessorSparseIndices indices) {
         if (indices == null) {
-            throw new NullPointerException((("Invalid value for indices: "+ indices)+", may not be null"));
+            throw new NullPointerException((("Invalid value for indices: " + indices) + ", may not be null"));
         }
         this.indices = indices;
     }
 
     /**
-     * An object pointing to a buffer view containing the indices of 
-     * deviating accessor values. The number of indices is equal to `count`. 
-     * Indices **MUST** strictly increase. (required) 
+     * An object pointing to a buffer view containing the indices of
+     * deviating accessor values. The number of indices is equal to `count`.
+     * Indices **MUST** strictly increase. (required)
      * 
      * @return The indices
      * 
@@ -104,8 +101,8 @@ public class AccessorSparse
     }
 
     /**
-     * An object pointing to a buffer view containing the deviating accessor 
-     * values. (required) 
+     * An object pointing to a buffer view containing the deviating accessor
+     * values. (required)
      * 
      * @param values The values to set
      * @throws NullPointerException If the given value is <code>null</code>
@@ -113,14 +110,14 @@ public class AccessorSparse
      */
     public void setValues(AccessorSparseValues values) {
         if (values == null) {
-            throw new NullPointerException((("Invalid value for values: "+ values)+", may not be null"));
+            throw new NullPointerException((("Invalid value for values: " + values) + ", may not be null"));
         }
         this.values = values;
     }
 
     /**
-     * An object pointing to a buffer view containing the deviating accessor 
-     * values. (required) 
+     * An object pointing to a buffer view containing the deviating accessor
+     * values. (required)
      * 
      * @return The values
      * 

@@ -15,8 +15,7 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
-{
+public class MessageBulletTrail extends PlayMessage<MessageBulletTrail> {
     private int[] entityIds;
     private Vec3[] positions;
     private Vec3[] motions;
@@ -30,17 +29,17 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
     private int shooterId;
     private float size;
 
-    public MessageBulletTrail() {}
+    public MessageBulletTrail() {
+    }
 
-    public MessageBulletTrail(ProjectileEntity[] spawnedProjectiles, Gun.Projectile projectileProps, int shooterId, float size)
-    {
+    public MessageBulletTrail(ProjectileEntity[] spawnedProjectiles, Gun.Projectile projectileProps, int shooterId,
+            float size) {
         this.positions = new Vec3[spawnedProjectiles.length];
         this.motions = new Vec3[spawnedProjectiles.length];
         this.shooterYaws = new float[spawnedProjectiles.length];
         this.shooterPitches = new float[spawnedProjectiles.length];
         this.entityIds = new int[spawnedProjectiles.length];
-        for(int i = 0; i < spawnedProjectiles.length; i++)
-        {
+        for (int i = 0; i < spawnedProjectiles.length; i++) {
             ProjectileEntity projectile = spawnedProjectiles[i];
             this.positions[i] = projectile.position();
             this.motions[i] = projectile.getDeltaMovement();
@@ -52,14 +51,15 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
         this.trailColor = projectileProps.getTrailColor();
         this.trailLengthMultiplier = projectileProps.getTrailLengthMultiplier();
         this.life = projectileProps.getLife();
-        this.gravity = spawnedProjectiles[0].getModifiedGravity(); //It's possible that projectiles have different gravity
+        this.gravity = spawnedProjectiles[0].getModifiedGravity(); // It's possible that projectiles have different
+                                                                   // gravity
         this.shooterId = shooterId;
         this.size = size;
     }
 
-    public MessageBulletTrail(Vec3[] position, Vec3[] motions, float[] shooteryaws, float[]shooterPitches, int[] entityIds, ItemStack item, int color, double trailLengthMultiplier,
-                              int life, double gravity, int shooterId, float size)
-    {
+    public MessageBulletTrail(Vec3[] position, Vec3[] motions, float[] shooteryaws, float[] shooterPitches,
+            int[] entityIds, ItemStack item, int color, double trailLengthMultiplier,
+            int life, double gravity, int shooterId, float size) {
         this.positions = position;
         this.motions = motions;
         this.shooterYaws = shooteryaws;
@@ -69,7 +69,7 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
         this.trailColor = color;
         this.trailLengthMultiplier = trailLengthMultiplier;
         this.life = life;
-        this.gravity = gravity; //It's possible that projectiles have different gravity
+        this.gravity = gravity; // It's possible that projectiles have different gravity
         this.shooterId = shooterId;
         this.size = size;
     }
@@ -77,8 +77,7 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
     @Override
     public void encode(MessageBulletTrail messageBulletTrail, FriendlyByteBuf buffer) {
         buffer.writeInt(messageBulletTrail.entityIds.length);
-        for(int i = 0; i < messageBulletTrail.entityIds.length; i++)
-        {
+        for (int i = 0; i < messageBulletTrail.entityIds.length; i++) {
             buffer.writeInt(messageBulletTrail.entityIds[i]);
 
             Vec3 position = messageBulletTrail.positions[i];
@@ -111,8 +110,7 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
         Vec3[] motions = new Vec3[size];
         float[] shooterYaws = new float[size];
         float[] shooterPitches = new float[size];
-        for(int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++) {
             entityIds[i] = buffer.readInt();
             positions[i] = new Vec3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble());
             motions[i] = new Vec3(buffer.readDouble(), buffer.readDouble(), buffer.readDouble());
@@ -126,7 +124,8 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
         double gravity = buffer.readDouble();
         int shooterId = buffer.readInt();
         float scale = buffer.readFloat();
-        return new MessageBulletTrail(positions,motions, shooterYaws, shooterPitches, entityIds, item, trailColor, trailLengthMultiplier, life, gravity, shooterId, scale);
+        return new MessageBulletTrail(positions, motions, shooterYaws, shooterPitches, entityIds, item, trailColor,
+                trailLengthMultiplier, life, gravity, shooterId, scale);
     }
 
     @Override
@@ -135,59 +134,55 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail>
         supplier.get().setPacketHandled(true);
     }
 
-
-    public int getCount()
-    {
+    public int getCount() {
         return this.entityIds.length;
     }
 
-    public int[] getEntityIds()
-    {
+    public int[] getEntityIds() {
         return this.entityIds;
     }
 
-    public Vec3[] getPositions()
-    {
+    public Vec3[] getPositions() {
         return this.positions;
     }
 
-    public Vec3[] getMotions()
-    {
+    public Vec3[] getMotions() {
         return this.motions;
     }
 
-    public int getTrailColor()
-    {
+    public int getTrailColor() {
         return this.trailColor;
     }
 
-    public double getTrailLengthMultiplier()
-    {
+    public double getTrailLengthMultiplier() {
         return this.trailLengthMultiplier;
     }
 
-    public int getLife()
-    {
+    public int getLife() {
         return this.life;
     }
 
-    public ItemStack getItem()
-    {
+    public ItemStack getItem() {
         return this.item;
     }
 
-    public double getGravity()
-    {
+    public double getGravity() {
         return this.gravity;
     }
 
-    public int getShooterId()
-    {
+    public int getShooterId() {
         return this.shooterId;
     }
 
-    public float[] getShooterYaws() { return shooterYaws; }
+    public float[] getShooterYaws() {
+        return shooterYaws;
+    }
 
-    public float[] getShooterPitches() { return shooterPitches; }
-    public float getSize() { return size; }
+    public float[] getShooterPitches() {
+        return shooterPitches;
+    }
+
+    public float getSize() {
+        return size;
+    }
 }

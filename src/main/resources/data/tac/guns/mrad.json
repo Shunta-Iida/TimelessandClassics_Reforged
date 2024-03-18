@@ -2,7 +2,9 @@
   "general": {
     "boltAction": false,
     "rate": 200,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:two_handed_mosin",
     "recoilAngle": 7.85,
     "recoilKick": 1.25,
@@ -12,7 +14,6 @@
     "recoilDuration": 0.45,
     "cameraRecoilModifier": 1.325,
     "weightKilo": 6.0,
-
     "spread": 0.002,
     "firstShotSpread": 0.002,
     "hipFireInaccuracy": 17.5,
@@ -25,7 +26,11 @@
     "maxAmmo": 5,
     "reloadMagTimer": 41,
     "additionalReloadEmptyMagTimer": 24,
-    "maxAdditionalAmmoPerOC": [2, 3, 5],
+    "maxAdditionalAmmoPerOC": [
+      2,
+      3,
+      5
+    ],
     "preReloadPauseTicks": 0
   },
   "projectile": {

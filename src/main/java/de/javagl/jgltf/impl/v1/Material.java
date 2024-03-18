@@ -11,31 +11,29 @@ package de.javagl.jgltf.impl.v1;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 /**
- * The material appearance of a primitive. 
+ * The material appearance of a primitive.
  * 
- * Auto-generated for material.schema.json 
+ * Auto-generated for material.schema.json
  * 
  */
 public class Material
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * The ID of the technique. (optional) 
+     * The ID of the technique. (optional)
      * 
      */
     private String technique;
     /**
-     * A dictionary object of parameter values. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of parameter values. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Object> values;
 
     /**
-     * The ID of the technique. (optional) 
+     * The ID of the technique. (optional)
      * 
      * @param technique The technique to set
      * 
@@ -43,13 +41,13 @@ public class Material
     public void setTechnique(String technique) {
         if (technique == null) {
             this.technique = technique;
-            return ;
+            return;
         }
         this.technique = technique;
     }
 
     /**
-     * The ID of the technique. (optional) 
+     * The ID of the technique. (optional)
      * 
      * @return The technique
      * 
@@ -59,8 +57,8 @@ public class Material
     }
 
     /**
-     * A dictionary object of parameter values. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of parameter values. (optional)<br>
+     * Default: {}
      * 
      * @param values The values to set
      * 
@@ -68,14 +66,14 @@ public class Material
     public void setValues(Map<String, Object> values) {
         if (values == null) {
             this.values = values;
-            return ;
+            return;
         }
         this.values = values;
     }
 
     /**
-     * A dictionary object of parameter values. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of parameter values. (optional)<br>
+     * Default: {}
      * 
      * @return The values
      * 
@@ -85,11 +83,11 @@ public class Material
     }
 
     /**
-     * Add the given values. The values of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given values. The values of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -103,7 +101,7 @@ public class Material
         }
         Map<String, Object> oldMap = this.values;
         Map<String, Object> newMap = new LinkedHashMap<String, Object>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -111,11 +109,11 @@ public class Material
     }
 
     /**
-     * Remove the given values. The values of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given values. The values of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -127,7 +125,7 @@ public class Material
         }
         Map<String, Object> oldMap = this.values;
         Map<String, Object> newMap = new LinkedHashMap<String, Object>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -139,8 +137,9 @@ public class Material
     }
 
     /**
-     * Returns the default value of the values<br> 
-     * @see #getValues 
+     * Returns the default value of the values<br>
+     * 
+     * @see #getValues
      * 
      * @return The default values
      * 

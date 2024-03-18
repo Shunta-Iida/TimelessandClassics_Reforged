@@ -45,51 +45,46 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 
 /**
- * A class for creating a binary {@link GltfAssetV1} from a 
+ * A class for creating a binary {@link GltfAssetV1} from a
  * {@link GltfModelV1}.<br>
  * <br>
  */
-final class BinaryAssetCreatorV1
-{
+final class BinaryAssetCreatorV1 {
     /**
      * Creates a new asset creator
      */
-    BinaryAssetCreatorV1()
-    {
+    BinaryAssetCreatorV1() {
         // Default constructor
     }
-    
+
     /**
      * Create a binary {@link GltfAssetV1} from the given {@link GltfModelV1}.
      * The resulting asset will have a {@link GlTF} that uses the binary
      * glTF extension objects in its {@link Buffer}, {@link Image} and
-     * {@link Shader} elements, to refer to the 
-     * {@link GltfAssetV1#getBinaryData() binary data} of the asset. 
+     * {@link Shader} elements, to refer to the
+     * {@link GltfAssetV1#getBinaryData() binary data} of the asset.
      * 
      * @param gltfModel The {@link GltfModelV1}
      * @return The {@link GltfAssetV1}
      */
-    GltfAssetV1 create(GltfModelV1 gltfModel)
-    {
+    GltfAssetV1 create(GltfModelV1 gltfModel) {
         GlTF inputGltf = gltfModel.getGltf();
         GlTF outputGltf = GltfUtilsV1.copy(inputGltf);
-        
-        // Create the new byte buffer for the data of the "binary_glTF" Buffer
-        int binaryGltfBufferSize = 
-            computeBinaryGltfBufferSize(gltfModel);
-        ByteBuffer binaryGltfByteBuffer = 
-            Buffers.create(binaryGltfBufferSize);
 
-        // Create the "binary_glTF" Buffer, 
-        GltfExtensionsV1.addExtensionUsed(outputGltf, 
-            BinaryGltfV1.getBinaryGltfExtensionName());
+        // Create the new byte buffer for the data of the "binary_glTF" Buffer
+        int binaryGltfBufferSize = computeBinaryGltfBufferSize(gltfModel);
+        ByteBuffer binaryGltfByteBuffer = Buffers.create(binaryGltfBufferSize);
+
+        // Create the "binary_glTF" Buffer,
+        GltfExtensionsV1.addExtensionUsed(outputGltf,
+                BinaryGltfV1.getBinaryGltfExtensionName());
         Buffer binaryGltfBuffer = new Buffer();
         binaryGltfBuffer.setType("arraybuffer");
         binaryGltfBuffer.setUri(
-            BinaryGltfV1.getBinaryGltfBufferId() + ".bin");
+                BinaryGltfV1.getBinaryGltfBufferId() + ".bin");
         binaryGltfBuffer.setByteLength(binaryGltfBufferSize);
         Map<String, Buffer> newBuffers = Collections.singletonMap(
-            BinaryGltfV1.getBinaryGltfBufferId(), binaryGltfBuffer);
+                BinaryGltfV1.getBinaryGltfBufferId(), binaryGltfBuffer);
 
         // Create defensive copies of the original maps, as linked maps
         // with a fixed iteration order (!). If the input maps are null,
@@ -100,31 +95,28 @@ final class BinaryAssetCreatorV1
         Map<String, Shader> oldShaders = copy(outputGltf.getShaders());
 
         // Place the data from buffers, images and shaders into the
-        // new binary glTF buffer. The mappings from IDs to offsets 
+        // new binary glTF buffer. The mappings from IDs to offsets
         // inside the resulting buffer will be used to compute the
         // offsets for the buffer views
         Map<String, Integer> bufferOffsets = concatBuffers(
-            oldBuffers.keySet(), 
-            id -> gltfModel.getBufferModelById(id).getBufferData(), 
-            binaryGltfByteBuffer);
+                oldBuffers.keySet(),
+                id -> gltfModel.getBufferModelById(id).getBufferData(),
+                binaryGltfByteBuffer);
         Map<String, Integer> imageOffsets = concatBuffers(
-            oldImages.keySet(), 
-            id -> gltfModel.getImageModelById(id).getImageData(), 
-            binaryGltfByteBuffer);
+                oldImages.keySet(),
+                id -> gltfModel.getImageModelById(id).getImageData(),
+                binaryGltfByteBuffer);
         Map<String, Integer> shaderOffsets = concatBuffers(
-            oldShaders.keySet(), 
-            id -> gltfModel.getShaderModelById(id).getShaderData(), 
-            binaryGltfByteBuffer);
+                oldShaders.keySet(),
+                id -> gltfModel.getShaderModelById(id).getShaderData(),
+                binaryGltfByteBuffer);
         binaryGltfByteBuffer.position(0);
 
-        // For all existing BufferViews, create new ones that are updated to 
+        // For all existing BufferViews, create new ones that are updated to
         // refer to the new binary glTF buffer, with the appropriate offset
-        Map<String, BufferView> oldBufferViews = 
-            copy(outputGltf.getBufferViews());
-        Map<String, BufferView> newBufferViews = 
-            new LinkedHashMap<String, BufferView>();
-        for (Entry<String, BufferView> oldEntry : oldBufferViews.entrySet())
-        {
+        Map<String, BufferView> oldBufferViews = copy(outputGltf.getBufferViews());
+        Map<String, BufferView> newBufferViews = new LinkedHashMap<String, BufferView>();
+        for (Entry<String, BufferView> oldEntry : oldBufferViews.entrySet()) {
             String id = oldEntry.getKey();
             BufferView oldBufferView = oldEntry.getValue();
             BufferView newBufferView = GltfUtilsV1.copy(oldBufferView);
@@ -139,21 +131,18 @@ final class BinaryAssetCreatorV1
             newBufferViews.put(id, newBufferView);
         }
 
-        // For all existing Images, create new ones that are updated to 
+        // For all existing Images, create new ones that are updated to
         // refer to the new binary glTF buffer, using a bufferView ID
         // (in the binary_glTF extension object) that refers to a newly
         // created BufferView
-        Map<String, Image> newImages = 
-            new LinkedHashMap<String, Image>();
-        for (Entry<String, Image> oldEntry : oldImages.entrySet())
-        {
+        Map<String, Image> newImages = new LinkedHashMap<String, Image>();
+        for (Entry<String, Image> oldEntry : oldImages.entrySet()) {
             String id = oldEntry.getKey();
             Image oldImage = oldEntry.getValue();
             Image newImage = GltfUtilsV1.copy(oldImage);
 
             // Create the BufferView for the image
-            ByteBuffer imageData = 
-                gltfModel.getImageModelById(id).getImageData();
+            ByteBuffer imageData = gltfModel.getImageModelById(id).getImageData();
             int byteLength = imageData.capacity();
             int byteOffset = imageOffsets.get(id);
             BufferView imageBufferView = new BufferView();
@@ -162,14 +151,13 @@ final class BinaryAssetCreatorV1
             imageBufferView.setByteLength(byteLength);
 
             // Store the BufferView under a newly generated ID
-            String generatedBufferViewId = 
-                GltfIds.generateId("bufferView_for_image_" + id, 
+            String generatedBufferViewId = GltfIds.generateId("bufferView_for_image_" + id,
                     oldBufferViews.keySet());
             newBufferViews.put(generatedBufferViewId, imageBufferView);
 
             // Let the image refer to the BufferView via its extension object
             BinaryGltfV1.setBinaryGltfBufferViewId(
-                newImage, generatedBufferViewId);
+                    newImage, generatedBufferViewId);
 
             // Set the width, height and mimeType properties for the
             // extension object
@@ -178,21 +166,18 @@ final class BinaryAssetCreatorV1
             newImages.put(id, newImage);
         }
 
-        // For all existing Shaders, create new ones that are updated to 
+        // For all existing Shaders, create new ones that are updated to
         // refer to the new binary glTF buffer using a bufferView ID
         // (in the binary_glTF extension object) that refers to a newly
         // created BufferView
-        Map<String, Shader> newShaders = 
-            new LinkedHashMap<String, Shader>();
-        for (Entry<String, Shader> oldEntry : oldShaders.entrySet())
-        {
+        Map<String, Shader> newShaders = new LinkedHashMap<String, Shader>();
+        for (Entry<String, Shader> oldEntry : oldShaders.entrySet()) {
             String id = oldEntry.getKey();
             Shader oldShader = oldEntry.getValue();
             Shader newShader = GltfUtilsV1.copy(oldShader);
 
             // Create the BufferView for the shader
-            ByteBuffer shaderData = 
-                gltfModel.getShaderModelById(id).getShaderData();
+            ByteBuffer shaderData = gltfModel.getShaderModelById(id).getShaderData();
             int byteLength = shaderData.capacity();
             int byteOffset = shaderOffsets.get(id);
             BufferView shaderBufferView = new BufferView();
@@ -201,39 +186,33 @@ final class BinaryAssetCreatorV1
             shaderBufferView.setByteLength(byteLength);
 
             // Store the BufferView under a newly generated ID
-            String generatedBufferViewId =
-                GltfIds.generateId("bufferView_for_shader_" + id, 
+            String generatedBufferViewId = GltfIds.generateId("bufferView_for_shader_" + id,
                     oldBufferViews.keySet());
             newBufferViews.put(generatedBufferViewId, shaderBufferView);
 
             // Let the shader refer to the BufferView via its extension object
             BinaryGltfV1.setBinaryGltfBufferViewId(
-                newShader, generatedBufferViewId);
+                    newShader, generatedBufferViewId);
 
             newShaders.put(id, newShader);
         }
 
         // Place the newly created mappings into the output glTF,
         // if there have been non-null mappings for them in the input
-        if (inputGltf.getBuffers() != null)
-        {
+        if (inputGltf.getBuffers() != null) {
             outputGltf.setBuffers(newBuffers);
         }
-        if (inputGltf.getImages() != null)
-        {
+        if (inputGltf.getImages() != null) {
             outputGltf.setImages(newImages);
         }
-        if (inputGltf.getShaders() != null)
-        {
+        if (inputGltf.getShaders() != null) {
             outputGltf.setShaders(newShaders);
         }
-        if (!newBufferViews.isEmpty())
-        {
+        if (!newBufferViews.isEmpty()) {
             outputGltf.setBufferViews(newBufferViews);
         }
         return new GltfAssetV1(outputGltf, binaryGltfByteBuffer);
     }
-
 
     /**
      * Compute the total size that is required for the binary glTF buffer
@@ -243,50 +222,43 @@ final class BinaryAssetCreatorV1
      * @param gltfModel The {@link GltfModel}
      * @return The total size for the binary glTF buffer
      */
-    private static int computeBinaryGltfBufferSize(GltfModelV1 gltfModel)
-    {
+    private static int computeBinaryGltfBufferSize(GltfModelV1 gltfModel) {
         int binaryGltfBufferSize = 0;
-        for (BufferModel bufferModel : gltfModel.getBufferModels())
-        {
+        for (BufferModel bufferModel : gltfModel.getBufferModels()) {
             ByteBuffer bufferData = bufferModel.getBufferData();
             binaryGltfBufferSize += bufferData.capacity();
         }
-        for (ImageModel imageModel : gltfModel.getImageModels())
-        {
+        for (ImageModel imageModel : gltfModel.getImageModels()) {
             ByteBuffer imageData = imageModel.getImageData();
             binaryGltfBufferSize += imageData.capacity();
         }
-        for (ShaderModel shaderModel : gltfModel.getShaderModels())
-        {
+        for (ShaderModel shaderModel : gltfModel.getShaderModels()) {
             ByteBuffer shaderData = shaderModel.getShaderData();
             binaryGltfBufferSize += shaderData.capacity();
         }
         return binaryGltfBufferSize;
     }
 
-
     /**
      * Put the contents of all byte buffers that are associated with the
      * given keys into the given target buffer. This method assumes
-     * that the target buffer has a sufficient capacity to hold all 
+     * that the target buffer has a sufficient capacity to hold all
      * buffers.
      * 
-     * @param <K> The key type
+     * @param <K>             The key type
      * 
-     * @param keys The mapping keys
-     * @param keyToByteBuffer The function that provides the byte buffer 
-     * based on the key of the element
-     * @param targetBuffer The target buffer
+     * @param keys            The mapping keys
+     * @param keyToByteBuffer The function that provides the byte buffer
+     *                        based on the key of the element
+     * @param targetBuffer    The target buffer
      * @return A mapping from each key to the offset inside the target buffer
      */
     private static <K> Map<K, Integer> concatBuffers(
-        Iterable<K> keys, 
-        Function<? super K, ? extends ByteBuffer> keyToByteBuffer,
-        ByteBuffer targetBuffer)
-    {
+            Iterable<K> keys,
+            Function<? super K, ? extends ByteBuffer> keyToByteBuffer,
+            ByteBuffer targetBuffer) {
         Map<K, Integer> offsets = new LinkedHashMap<K, Integer>();
-        for (K key : keys)
-        {
+        for (K key : keys) {
             ByteBuffer oldByteBuffer = keyToByteBuffer.apply(key);
             int offset = targetBuffer.position();
             offsets.put(key, offset);
@@ -303,14 +275,11 @@ final class BinaryAssetCreatorV1
      * @param map The input map
      * @return The copy
      */
-    private static <K, V> Map<K, V> copy(Map<K, V> map)
-    {
-        if (map == null)
-        {
+    private static <K, V> Map<K, V> copy(Map<K, V> map) {
+        if (map == null) {
             return Collections.emptyMap();
         }
         return new LinkedHashMap<K, V>(map);
     }
-    
 
 }

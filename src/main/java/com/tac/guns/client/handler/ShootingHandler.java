@@ -34,7 +34,8 @@ import static net.minecraftforge.event.TickEvent.Type.RENDER;
  */
 public class ShootingHandler {
 
-    // TODO: Cleanup and document ShootingHandler fire code, what is important or able to be simplified.
+    // TODO: Cleanup and document ShootingHandler fire code, what is important or
+    // able to be simplified.
     private static ShootingHandler instance;
 
     public static ShootingHandler get() {
@@ -112,7 +113,6 @@ public class ShootingHandler {
         return shootTickGap;
     }
 
-
     private static float hitmarkerCooldownMultiplier() {
         int fps = ((CurrentFpsGetter) Minecraft.getInstance()).getCurrentFps();
         if (fps < 11)
@@ -158,7 +158,8 @@ public class ShootingHandler {
         if (!evt.type.equals(RENDER) || evt.phase.equals(TickEvent.Phase.START))
             return;
 
-        //TODO: Gurantee this solution is good, run a performance profile soon and reduce renderTick listeners
+        // TODO: Gurantee this solution is good, run a performance profile soon and
+        // reduce renderTick listeners
         if (HUDRenderingHandler.get().hitMarkerTracker > 0F)
             HUDRenderingHandler.get().hitMarkerTracker -= evt.renderTickTime * hitmarkerCooldownMultiplier();
         else
@@ -171,15 +172,19 @@ public class ShootingHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void renderTick(TickEvent.RenderTickEvent evt) {
-        // Upper is to handle rendering, bellow is handling animation calls and burst tracking
+        // Upper is to handle rendering, bellow is handling animation calls and burst
+        // tracking
 
-        if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.isAlive() || Minecraft.getInstance().player.getMainHandItem().getItem() instanceof GunItem)
+        if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.isAlive()
+                || Minecraft.getInstance().player.getMainHandItem().getItem() instanceof GunItem)
             return;
-        GunAnimationController controller = GunAnimationController.fromItem(Minecraft.getInstance().player.getMainHandItem().getItem());
+        GunAnimationController controller = GunAnimationController
+                .fromItem(Minecraft.getInstance().player.getMainHandItem().getItem());
         if (controller == null)
             return;
         else if (controller.isAnimationRunning() && (shootMsGap < 0F && this.burstTracker != 0)) {
-            if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.PUMP) || controller.isAnimationRunning(GunAnimationController.AnimationLabel.PULL_BOLT))
+            if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.PUMP)
+                    || controller.isAnimationRunning(GunAnimationController.AnimationLabel.PULL_BOLT))
                 return;
             if (Config.CLIENT.controls.burstPress.get())
                 this.burstTracker = 0;
@@ -211,10 +216,10 @@ public class ShootingHandler {
                 // Update #shooting state if it has changed
                 final boolean shooting = Keys.PULL_TRIGGER.isDown() && GunRenderingHandler.get().sprintTransition == 0;
                 // TODO: check if this is needed
-//              if(GunMod.controllableLoaded)
-//              {
-//                  shooting |= ControllerHandler.isShooting();
-//              }
+                // if(GunMod.controllableLoaded)
+                // {
+                // shooting |= ControllerHandler.isShooting();
+                // }
                 if (shooting ^ this.shooting) {
                     this.shooting = shooting;
                     PacketHandler.getPlayChannel().sendToServer(new MessageShooting(shooting));
@@ -237,7 +242,7 @@ public class ShootingHandler {
         if (player != null)
             if (this.burstCooldown > 0)
                 this.burstCooldown -= 1;
-        if(emptyCheckCountDown <= emptyCheckCoolDown)
+        if (emptyCheckCountDown <= emptyCheckCoolDown)
             emptyCheckCountDown++;
     }
 
@@ -246,7 +251,7 @@ public class ShootingHandler {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         ItemStack heldItem = player.getMainHandItem();
-        if(heldItem.getItem() instanceof TimelessGunItem) {
+        if (heldItem.getItem() instanceof TimelessGunItem) {
             if (Keys.PULL_TRIGGER.isDown()) {
                 if (event.isAttack()) {
                     event.setCanceled(true);
@@ -256,7 +261,10 @@ public class ShootingHandler {
                 if (emptyCheckCountDown > emptyCheckCoolDown) {
                     if (magError(player, heldItem)) {
                         emptyCheckCountDown = 0;
-                        player.displayClientMessage(new TranslatableComponent("info.tac.mag_error").withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED), true);
+                        player.displayClientMessage(
+                                new TranslatableComponent("info.tac.mag_error").withStyle(ChatFormatting.UNDERLINE)
+                                        .withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED),
+                                true);
                         PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
                         return;
                     }
@@ -275,7 +283,10 @@ public class ShootingHandler {
                 if (emptyCheckCountDown > emptyCheckCoolDown) {
                     if (!(heldItem.getTag().getInt("AmmoCount") > 0)) {
                         emptyCheckCountDown = 0;
-                        player.displayClientMessage(new TranslatableComponent("info.tac.out_of_ammo").withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED), true);
+                        player.displayClientMessage(
+                                new TranslatableComponent("info.tac.out_of_ammo").withStyle(ChatFormatting.UNDERLINE)
+                                        .withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED),
+                                true);
                         PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
                     }
                 }
@@ -314,7 +325,8 @@ public class ShootingHandler {
                         fire(player, heldItem);
                         return;
                     }
-                    if (heldItem.getTag().getInt("CurrentFireMode") == 3 && !Config.CLIENT.controls.burstPress.get() && !this.clickUp && this.burstCooldown == 0) {
+                    if (heldItem.getTag().getInt("CurrentFireMode") == 3 && !Config.CLIENT.controls.burstPress.get()
+                            && !this.clickUp && this.burstCooldown == 0) {
                         if (this.burstTracker < gun.getGeneral().getBurstCount()) {
                             if (ShootingHandler.get().getshootMsGap() <= 0) {
                                 fire(player, heldItem);
@@ -328,20 +340,22 @@ public class ShootingHandler {
                         }
                         return;
                     }
-                } else if (this.clickUp /*|| InputHandler.PULL_TRIGGER.down*/) {
+                } else if (this.clickUp /* || InputHandler.PULL_TRIGGER.down */) {
                     if (heldItem.getTag().getInt("CurrentFireMode") == 3 && this.burstTracker > 0) {
                         this.burstCooldown = gunItem.getGun().getGeneral().getBurstRate();
                     }
                     this.burstTracker = 0;
                     this.clickUp = false;
                 }
-                // CONTINUER FOR BURST. USING BURST TRACKER AS A REVERSE ITOR WHEN BURST IS ON PRESS MODE.
+                // CONTINUER FOR BURST. USING BURST TRACKER AS A REVERSE ITOR WHEN BURST IS ON
+                // PRESS MODE.
             }
         }
     }
 
     public void fire(Player player, ItemStack heldItem) {
-        if (magError(player, heldItem)) return;
+        if (magError(player, heldItem))
+            return;
 
         if (!(heldItem.getItem() instanceof GunItem))
             return;
@@ -359,7 +373,7 @@ public class ShootingHandler {
         }
 
         // CHECK HERE: Restrict the fire rate
-//      if(!tracker.hasCooldown(heldItem.getItem()))
+        // if(!tracker.hasCooldown(heldItem.getItem()))
         if (shootTickGapLeft <= 0F) {
             GunItem gunItem = (GunItem) heldItem.getItem();
             Gun modifiedGun = gunItem.getModifiedGun(heldItem);
@@ -370,15 +384,19 @@ public class ShootingHandler {
 
             // CHECK HERE: Change this to test different rpm settings.
             // TODO: Test serverside, possible issues 0.3.4-alpha
-            final float rpm = modifiedGun.getGeneral().getRate(); // Rounds per sec. Should come from gun properties in the end.
+            final float rpm = modifiedGun.getGeneral().getRate(); // Rounds per sec. Should come from gun properties in
+                                                                  // the end.
             shootTickGapLeft += calcShootTickGap((int) rpm);
             shootMsGap = calcShootTickGap((int) rpm);
             RecoilHandler.get().lastRandPitch = RecoilHandler.get().lastRandPitch;
             RecoilHandler.get().lastRandYaw = RecoilHandler.get().lastRandYaw;
-            PacketHandler.getPlayChannel().sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1), RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));
+            PacketHandler.getPlayChannel().sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1),
+                    RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));
 
-            if (Config.CLIENT.controls.burstPress.get()) this.burstTracker--;
-            else this.burstTracker++;
+            if (Config.CLIENT.controls.burstPress.get())
+                this.burstTracker--;
+            else
+                this.burstTracker++;
             MinecraftForge.EVENT_BUS.post(new GunFireEvent.Post(player, heldItem));
         }
     }
@@ -387,11 +405,14 @@ public class ShootingHandler {
         int[] extraAmmo = ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAdditionalAmmoPerOC();
         int magMode = GunModifierHelper.getAmmoCapacity(heldItem);
         if (magMode < 0) {
-            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount") - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()) {
+            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount")
+                    - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()) {
                 return true;
             }
         } else {
-            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount") - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo() + extraAmmo[magMode]) {
+            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount")
+                    - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()
+                            + extraAmmo[magMode]) {
                 return true;
             }
         }

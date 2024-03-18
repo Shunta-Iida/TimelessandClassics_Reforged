@@ -11,109 +11,107 @@ package de.javagl.jgltf.impl.v1;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * A node in the node hierarchy. A node can have either the `camera`, 
- * `meshes`, or `skeletons`/`skin`/`meshes` properties defined. In the 
- * later case, all `primitives` in the referenced `meshes` contain 
- * `JOINT` and `WEIGHT` attributes and the referenced 
- * `material`/`technique` from each `primitive` has parameters with 
- * `JOINT` and `WEIGHT` semantics. A node can have either a `matrix` or 
- * any combination of `translation`/`rotation`/`scale` (TRS) properties. 
- * TRS properties are converted to matrices and postmultiplied in the `T 
- * * R * S` order to compose the transformation matrix; first the scale 
- * is applied to the vertices, then the rotation, and then the 
- * translation. If none are provided, the transform is the identity. When 
- * a node is targeted for animation (referenced by an 
- * animation.channel.target), only TRS properties may be present; 
- * `matrix` will not be present. 
+ * A node in the node hierarchy. A node can have either the `camera`,
+ * `meshes`, or `skeletons`/`skin`/`meshes` properties defined. In the
+ * later case, all `primitives` in the referenced `meshes` contain
+ * `JOINT` and `WEIGHT` attributes and the referenced
+ * `material`/`technique` from each `primitive` has parameters with
+ * `JOINT` and `WEIGHT` semantics. A node can have either a `matrix` or
+ * any combination of `translation`/`rotation`/`scale` (TRS) properties.
+ * TRS properties are converted to matrices and postmultiplied in the `T
+ * * R * S` order to compose the transformation matrix; first the scale
+ * is applied to the vertices, then the rotation, and then the
+ * translation. If none are provided, the transform is the identity. When
+ * a node is targeted for animation (referenced by an
+ * animation.channel.target), only TRS properties may be present;
+ * `matrix` will not be present.
  * 
- * Auto-generated for node.schema.json 
+ * Auto-generated for node.schema.json
  * 
  */
 public class Node
-    extends GlTFChildOfRootProperty
-{
+        extends GlTFChildOfRootProperty {
 
     /**
-     * The ID of the camera referenced by this node. (optional) 
+     * The ID of the camera referenced by this node. (optional)
      * 
      */
     private String camera;
     /**
-     * The IDs of this node's children. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of this node's children. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> children;
     /**
-     * The ID of skeleton nodes. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The ID of skeleton nodes. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> skeletons;
     /**
-     * The ID of the skin referenced by this node. (optional) 
+     * The ID of the skin referenced by this node. (optional)
      * 
      */
     private String skin;
     /**
-     * Name used when this node is a joint in a skin. (optional) 
+     * Name used when this node is a joint in a skin. (optional)
      * 
      */
     private String jointName;
     /**
-     * A floating-point 4x4 transformation matrix stored in column-major 
-     * order. (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * A floating-point 4x4 transformation matrix stored in column-major
+     * order. (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private float[] matrix;
     /**
-     * The IDs of the meshes in this node. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of the meshes in this node. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> meshes;
     /**
-     * The node's unit quaternion rotation in the order (x, y, z, w), where w 
-     * is the scalar. (optional)<br> 
-     * Default: [0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 4<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's unit quaternion rotation in the order (x, y, z, w), where w
+     * is the scalar. (optional)<br>
+     * Default: [0.0,0.0,0.0,1.0]<br>
+     * Number of items: 4<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private float[] rotation;
     /**
-     * The node's non-uniform scale. (optional)<br> 
-     * Default: [1.0,1.0,1.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's non-uniform scale. (optional)<br>
+     * Default: [1.0,1.0,1.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private float[] scale;
     /**
-     * The node's translation. (optional)<br> 
-     * Default: [0.0,0.0,0.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's translation. (optional)<br>
+     * Default: [0.0,0.0,0.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private float[] translation;
 
     /**
-     * The ID of the camera referenced by this node. (optional) 
+     * The ID of the camera referenced by this node. (optional)
      * 
      * @param camera The camera to set
      * 
@@ -121,13 +119,13 @@ public class Node
     public void setCamera(String camera) {
         if (camera == null) {
             this.camera = camera;
-            return ;
+            return;
         }
         this.camera = camera;
     }
 
     /**
-     * The ID of the camera referenced by this node. (optional) 
+     * The ID of the camera referenced by this node. (optional)
      * 
      * @return The camera
      * 
@@ -137,10 +135,10 @@ public class Node
     }
 
     /**
-     * The IDs of this node's children. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of this node's children. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param children The children to set
      * 
@@ -148,16 +146,16 @@ public class Node
     public void setChildren(List<String> children) {
         if (children == null) {
             this.children = children;
-            return ;
+            return;
         }
         this.children = children;
     }
 
     /**
-     * The IDs of this node's children. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of this node's children. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The children
      * 
@@ -167,9 +165,9 @@ public class Node
     }
 
     /**
-     * Add the given children. The children of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given children. The children of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -181,7 +179,7 @@ public class Node
         }
         List<String> oldList = this.children;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -189,11 +187,11 @@ public class Node
     }
 
     /**
-     * Remove the given children. The children of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given children. The children of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -205,7 +203,7 @@ public class Node
         }
         List<String> oldList = this.children;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -217,8 +215,9 @@ public class Node
     }
 
     /**
-     * Returns the default value of the children<br> 
-     * @see #getChildren 
+     * Returns the default value of the children<br>
+     * 
+     * @see #getChildren
      * 
      * @return The default children
      * 
@@ -228,9 +227,9 @@ public class Node
     }
 
     /**
-     * The ID of skeleton nodes. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The ID of skeleton nodes. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param skeletons The skeletons to set
      * 
@@ -238,15 +237,15 @@ public class Node
     public void setSkeletons(List<String> skeletons) {
         if (skeletons == null) {
             this.skeletons = skeletons;
-            return ;
+            return;
         }
         this.skeletons = skeletons;
     }
 
     /**
-     * The ID of skeleton nodes. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The ID of skeleton nodes. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The skeletons
      * 
@@ -256,9 +255,9 @@ public class Node
     }
 
     /**
-     * Add the given skeletons. The skeletons of this instance will be 
-     * replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given skeletons. The skeletons of this instance will be
+     * replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -270,7 +269,7 @@ public class Node
         }
         List<String> oldList = this.skeletons;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -278,11 +277,11 @@ public class Node
     }
 
     /**
-     * Remove the given skeletons. The skeletons of this instance will be 
-     * replaced with a list that contains all previous elements, except for 
-     * the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given skeletons. The skeletons of this instance will be
+     * replaced with a list that contains all previous elements, except for
+     * the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -294,7 +293,7 @@ public class Node
         }
         List<String> oldList = this.skeletons;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -306,7 +305,7 @@ public class Node
     }
 
     /**
-     * The ID of the skin referenced by this node. (optional) 
+     * The ID of the skin referenced by this node. (optional)
      * 
      * @param skin The skin to set
      * 
@@ -314,13 +313,13 @@ public class Node
     public void setSkin(String skin) {
         if (skin == null) {
             this.skin = skin;
-            return ;
+            return;
         }
         this.skin = skin;
     }
 
     /**
-     * The ID of the skin referenced by this node. (optional) 
+     * The ID of the skin referenced by this node. (optional)
      * 
      * @return The skin
      * 
@@ -330,7 +329,7 @@ public class Node
     }
 
     /**
-     * Name used when this node is a joint in a skin. (optional) 
+     * Name used when this node is a joint in a skin. (optional)
      * 
      * @param jointName The jointName to set
      * 
@@ -338,13 +337,13 @@ public class Node
     public void setJointName(String jointName) {
         if (jointName == null) {
             this.jointName = jointName;
-            return ;
+            return;
         }
         this.jointName = jointName;
     }
 
     /**
-     * Name used when this node is a joint in a skin. (optional) 
+     * Name used when this node is a joint in a skin. (optional)
      * 
      * @return The jointName
      * 
@@ -354,25 +353,25 @@ public class Node
     }
 
     /**
-     * A floating-point 4x4 transformation matrix stored in column-major 
-     * order. (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * A floating-point 4x4 transformation matrix stored in column-major
+     * order. (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param matrix The matrix to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setMatrix(float[] matrix) {
         if (matrix == null) {
             this.matrix = matrix;
-            return ;
+            return;
         }
-        if (matrix.length< 16) {
+        if (matrix.length < 16) {
             throw new IllegalArgumentException("Number of matrix elements is < 16");
         }
         if (matrix.length > 16) {
@@ -382,13 +381,13 @@ public class Node
     }
 
     /**
-     * A floating-point 4x4 transformation matrix stored in column-major 
-     * order. (optional)<br> 
-     * Default: 
-     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 16<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * A floating-point 4x4 transformation matrix stored in column-major
+     * order. (optional)<br>
+     * Default:
+     * [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]<br>
+     * Number of items: 16<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The matrix
      * 
@@ -398,20 +397,22 @@ public class Node
     }
 
     /**
-     * Returns the default value of the matrix<br> 
-     * @see #getMatrix 
+     * Returns the default value of the matrix<br>
+     * 
+     * @see #getMatrix
      * 
      * @return The default matrix
      * 
      */
     public float[] defaultMatrix() {
-        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F };
+        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+                1.0F };
     }
 
     /**
-     * The IDs of the meshes in this node. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of the meshes in this node. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param meshes The meshes to set
      * 
@@ -419,15 +420,15 @@ public class Node
     public void setMeshes(List<String> meshes) {
         if (meshes == null) {
             this.meshes = meshes;
-            return ;
+            return;
         }
         this.meshes = meshes;
     }
 
     /**
-     * The IDs of the meshes in this node. (optional)<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The IDs of the meshes in this node. (optional)<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The meshes
      * 
@@ -437,9 +438,9 @@ public class Node
     }
 
     /**
-     * Add the given meshes. The meshes of this instance will be replaced 
-     * with a list that contains all previous elements, and additionally the 
-     * new element. 
+     * Add the given meshes. The meshes of this instance will be replaced
+     * with a list that contains all previous elements, and additionally the
+     * new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -451,7 +452,7 @@ public class Node
         }
         List<String> oldList = this.meshes;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -459,11 +460,11 @@ public class Node
     }
 
     /**
-     * Remove the given meshes. The meshes of this instance will be replaced 
-     * with a list that contains all previous elements, except for the 
-     * removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given meshes. The meshes of this instance will be replaced
+     * with a list that contains all previous elements, except for the
+     * removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -475,7 +476,7 @@ public class Node
         }
         List<String> oldList = this.meshes;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -487,24 +488,24 @@ public class Node
     }
 
     /**
-     * The node's unit quaternion rotation in the order (x, y, z, w), where w 
-     * is the scalar. (optional)<br> 
-     * Default: [0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 4<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's unit quaternion rotation in the order (x, y, z, w), where w
+     * is the scalar. (optional)<br>
+     * Default: [0.0,0.0,0.0,1.0]<br>
+     * Number of items: 4<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param rotation The rotation to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setRotation(float[] rotation) {
         if (rotation == null) {
             this.rotation = rotation;
-            return ;
+            return;
         }
-        if (rotation.length< 4) {
+        if (rotation.length < 4) {
             throw new IllegalArgumentException("Number of rotation elements is < 4");
         }
         if (rotation.length > 4) {
@@ -514,12 +515,12 @@ public class Node
     }
 
     /**
-     * The node's unit quaternion rotation in the order (x, y, z, w), where w 
-     * is the scalar. (optional)<br> 
-     * Default: [0.0,0.0,0.0,1.0]<br> 
-     * Number of items: 4<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's unit quaternion rotation in the order (x, y, z, w), where w
+     * is the scalar. (optional)<br>
+     * Default: [0.0,0.0,0.0,1.0]<br>
+     * Number of items: 4<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The rotation
      * 
@@ -529,8 +530,9 @@ public class Node
     }
 
     /**
-     * Returns the default value of the rotation<br> 
-     * @see #getRotation 
+     * Returns the default value of the rotation<br>
+     * 
+     * @see #getRotation
      * 
      * @return The default rotation
      * 
@@ -540,23 +542,23 @@ public class Node
     }
 
     /**
-     * The node's non-uniform scale. (optional)<br> 
-     * Default: [1.0,1.0,1.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's non-uniform scale. (optional)<br>
+     * Default: [1.0,1.0,1.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param scale The scale to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setScale(float[] scale) {
         if (scale == null) {
             this.scale = scale;
-            return ;
+            return;
         }
-        if (scale.length< 3) {
+        if (scale.length < 3) {
             throw new IllegalArgumentException("Number of scale elements is < 3");
         }
         if (scale.length > 3) {
@@ -566,11 +568,11 @@ public class Node
     }
 
     /**
-     * The node's non-uniform scale. (optional)<br> 
-     * Default: [1.0,1.0,1.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's non-uniform scale. (optional)<br>
+     * Default: [1.0,1.0,1.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The scale
      * 
@@ -580,8 +582,9 @@ public class Node
     }
 
     /**
-     * Returns the default value of the scale<br> 
-     * @see #getScale 
+     * Returns the default value of the scale<br>
+     * 
+     * @see #getScale
      * 
      * @return The default scale
      * 
@@ -591,23 +594,23 @@ public class Node
     }
 
     /**
-     * The node's translation. (optional)<br> 
-     * Default: [0.0,0.0,0.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's translation. (optional)<br>
+     * Default: [0.0,0.0,0.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param translation The translation to set
      * @throws IllegalArgumentException If the given value does not meet
-     * the given constraints
+     *                                  the given constraints
      * 
      */
     public void setTranslation(float[] translation) {
         if (translation == null) {
             this.translation = translation;
-            return ;
+            return;
         }
-        if (translation.length< 3) {
+        if (translation.length < 3) {
             throw new IllegalArgumentException("Number of translation elements is < 3");
         }
         if (translation.length > 3) {
@@ -617,11 +620,11 @@ public class Node
     }
 
     /**
-     * The node's translation. (optional)<br> 
-     * Default: [0.0,0.0,0.0]<br> 
-     * Number of items: 3<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * The node's translation. (optional)<br>
+     * Default: [0.0,0.0,0.0]<br>
+     * Number of items: 3<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The translation
      * 
@@ -631,8 +634,9 @@ public class Node
     }
 
     /**
-     * Returns the default value of the translation<br> 
-     * @see #getTranslation 
+     * Returns the default value of the translation<br>
+     * 
+     * @see #getTranslation
      * 
      * @return The default translation
      * 

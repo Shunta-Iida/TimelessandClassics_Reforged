@@ -21,26 +21,27 @@ public class BackpackContainer extends AbstractContainerMenu {
     public BackpackContainer(int windowId, Inventory inv, ItemStack item) {
         super(ModContainers.ARMOR_R2.get(), windowId);
         this.item = item;
-        GearSlotsHandler itemHandler = (GearSlotsHandler)this.item.getCapability(WearableCapabilityProvider.capability).resolve().get();
+        GearSlotsHandler itemHandler = (GearSlotsHandler) this.item.getCapability(WearableCapabilityProvider.capability)
+                .resolve().get();
         int i = (this.numRows - 4) * 18;
 
-        for(int j = 0; j < this.numRows; ++j) {
-            for(int k = 0; k < 9; ++k) {
+        for (int j = 0; j < this.numRows; ++j) {
+            for (int k = 0; k < 9; ++k) {
                 this.addSlot(new AmmoSlot(itemHandler, k + j * 9, 8 + k * 18, 18 + j * 18));
             }
         }
 
-        for(int l = 0; l < 3; ++l) {
-            for(int j1 = 0; j1 < 9; ++j1) {
+        for (int l = 0; l < 3; ++l) {
+            for (int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(inv, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 + i));
             }
         }
 
-        for(int i1 = 0; i1 < 9; ++i1) {
+        for (int i1 = 0; i1 < 9; ++i1) {
             this.addSlot(new Slot(inv, i1, 8 + i1 * 18, 161 + i));
         }
 
-        //this.setAll(itemHandler.getStacks());
+        // this.setAll(itemHandler.getStacks());
     }
 
     public BackpackContainer(int windowId, Inventory inv) {
@@ -49,23 +50,22 @@ public class BackpackContainer extends AbstractContainerMenu {
         int i = (this.numRows - 4) * 18;
 
         ItemStackHandler itemHandler = new ItemStackHandler(18);
-        for(int j = 0; j < this.numRows; ++j) {
-            for(int k = 0; k < 9; ++k) {
+        for (int j = 0; j < this.numRows; ++j) {
+            for (int k = 0; k < 9; ++k) {
                 this.addSlot(new AmmoSlot(itemHandler, k + j * 9, 8 + k * 18, 18 + j * 18));
             }
         }
 
-        for(int l = 0; l < 3; ++l) {
-            for(int j1 = 0; j1 < 9; ++j1) {
+        for (int l = 0; l < 3; ++l) {
+            for (int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(inv, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 + i));
             }
         }
 
-        for(int i1 = 0; i1 < 9; ++i1) {
+        for (int i1 = 0; i1 < 9; ++i1) {
             this.addSlot(new Slot(inv, i1, 8 + i1 * 18, 161 + i));
         }
     }
-
 
     @Override
     public boolean stillValid(Player playerIn) {
@@ -74,10 +74,12 @@ public class BackpackContainer extends AbstractContainerMenu {
 
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
-        if(slotId <= 0) super.clicked(slotId, dragType, clickTypeIn, player);
+        if (slotId <= 0)
+            super.clicked(slotId, dragType, clickTypeIn, player);
         Slot slot = this.slots.get(slotId);
-        if(slot.hasItem()) {
-            if(slot.getItem().getItem() instanceof ArmorRigItem) return;
+        if (slot.hasItem()) {
+            if (slot.getItem().getItem() instanceof ArmorRigItem)
+                return;
         }
         super.clicked(slotId, dragType, clickTypeIn, player);
     }

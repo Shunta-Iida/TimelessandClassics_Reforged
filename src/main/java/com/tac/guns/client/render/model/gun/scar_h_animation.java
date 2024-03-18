@@ -35,14 +35,14 @@ public class scar_h_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay)
-    {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         SCAR_HAnimationController controller = SCAR_HAnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_HAnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_HAnimationController.INDEX_BODY,
+                    transformType, matrices);
 
             renderSight(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -59,19 +59,19 @@ public class scar_h_animation extends SkinnedGunModel {
         }
         matrices.popPose();
 
-
-
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_HAnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    SCAR_HAnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            if(transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_HAnimationController.INDEX_MAGAZINE2, transformType, matrices);
+            if (transformType.firstPerson()) {
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        SCAR_HAnimationController.INDEX_MAGAZINE2, transformType, matrices);
                 renderMag(stack, matrices, renderBuffer, light, overlay, skin);
             }
         }
@@ -79,13 +79,19 @@ public class scar_h_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            if(transformType.firstPerson()) {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), SCAR_HAnimationController.INDEX_BOLT, transformType, matrices);
+            if (transformType.firstPerson()) {
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        SCAR_HAnimationController.INDEX_BOLT, transformType, matrices);
                 Gun gun = ((GunItem) stack.getItem()).getGun();
-                float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                float cooldownOg = ShootingHandler.get().getshootMsGap()
+                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                                : ShootingHandler.get().getshootMsGap()
+                                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
@@ -99,6 +105,6 @@ public class scar_h_animation extends SkinnedGunModel {
             RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
-        PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
+        PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);
     }
 }

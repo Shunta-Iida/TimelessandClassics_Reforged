@@ -10,10 +10,9 @@ import net.minecraft.sounds.SoundSource;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class GunShotSound extends AbstractSoundInstance
-{
-    public GunShotSound(ResourceLocation soundIn, SoundSource categoryIn, float x, float y, float z, float volume, float pitch, boolean reload)
-    {
+public class GunShotSound extends AbstractSoundInstance {
+    public GunShotSound(ResourceLocation soundIn, SoundSource categoryIn, float x, float y, float z, float volume,
+            float pitch, boolean reload) {
         super(soundIn, categoryIn);
         this.x = x;
         this.y = y;
@@ -22,11 +21,10 @@ public class GunShotSound extends AbstractSoundInstance
         this.attenuation = Attenuation.NONE;
 
         LocalPlayer player = Minecraft.getInstance().player;
-        if(player != null)
-        {
+        if (player != null) {
             float distance = reload ? 16.0F : Config.SERVER.gunShotMaxDistance.get().floatValue();
             this.volume = volume * (1.0F - Math.min(1.0F, (float) Math.sqrt(player.distanceToSqr(x, y, z)) / distance));
-            this.volume *= this.volume; //Ease the volume instead of linear
+            this.volume *= this.volume; // Ease the volume instead of linear
         }
     }
 }

@@ -28,13 +28,14 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
  */
 public class cz75_animation extends SkinnedGunModel {
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         CZ75AnimationController controller = CZ75AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_BODY,
+                    transformType, matrices);
 
             renderBarrel(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -44,21 +45,28 @@ public class cz75_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_MAG, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_MAG,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
-        //Always push
+        // Always push
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_SLIDE, transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY), CZ75AnimationController.INDEX_SLIDE,
+                transformType, matrices);
 
         if (transformType.firstPerson()) {
             Gun gun = ((GunItem) stack.getItem()).getGun();
-            float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+            float cooldownOg = ShootingHandler.get().getshootMsGap()
+                    / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                            : ShootingHandler.get().getshootMsGap()
+                                    / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
             if (transformType.firstPerson()) {
-                AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
+                AnimationMeta reloadEmpty = controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                        && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.2075f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
@@ -70,12 +78,11 @@ public class cz75_animation extends SkinnedGunModel {
         }
         RenderUtil.renderModel(getComponentModel(skin, SLIDE), stack, matrices, renderBuffer, light, overlay);
 
-        //Always pop
+        // Always pop
         matrices.popPose();
 
         PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);
     }
 
-
-    //TODO comments
+    // TODO comments
 }

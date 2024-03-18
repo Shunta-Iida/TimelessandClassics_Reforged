@@ -10,18 +10,17 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHitEntity>
-{
+public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHitEntity> {
     private double x;
     private double y;
     private double z;
     private int type;
     private boolean player;
 
-    public MessageProjectileHitEntity() {}
+    public MessageProjectileHitEntity() {
+    }
 
-    public MessageProjectileHitEntity(double x, double y, double z, int type, boolean player)
-    {
+    public MessageProjectileHitEntity(double x, double y, double z, int type, boolean player) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -30,8 +29,7 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
     }
 
     @Override
-    public void encode(MessageProjectileHitEntity messageProjectileHitEntity, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageProjectileHitEntity messageProjectileHitEntity, FriendlyByteBuf buffer) {
         buffer.writeDouble(messageProjectileHitEntity.x);
         buffer.writeDouble(messageProjectileHitEntity.y);
         buffer.writeDouble(messageProjectileHitEntity.z);
@@ -40,56 +38,46 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
     }
 
     @Override
-    public MessageProjectileHitEntity decode(FriendlyByteBuf buffer)
-    {
+    public MessageProjectileHitEntity decode(FriendlyByteBuf buffer) {
         return new MessageProjectileHitEntity(
                 buffer.readDouble(),
                 buffer.readDouble(),
                 buffer.readDouble(),
                 buffer.readByte(),
-                buffer.readBoolean()
-        );
+                buffer.readBoolean());
     }
 
     @Override
-    public void handle(MessageProjectileHitEntity messageProjectileHitEntity, Supplier<NetworkEvent.Context> supplier)
-    {
+    public void handle(MessageProjectileHitEntity messageProjectileHitEntity, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleProjectileHitEntity(messageProjectileHitEntity));
         supplier.get().setPacketHandled(true);
     }
 
-    public double getX()
-    {
+    public double getX() {
         return this.x;
     }
 
-    public double getY()
-    {
+    public double getY() {
         return this.y;
     }
 
-    public double getZ()
-    {
+    public double getZ() {
         return this.z;
     }
 
-    public boolean isHeadshot()
-    {
+    public boolean isHeadshot() {
         return this.type == HitType.HEADSHOT;
     }
 
-    public boolean isCritical()
-    {
+    public boolean isCritical() {
         return this.type == HitType.CRITICAL;
     }
 
-    public boolean isPlayer()
-    {
+    public boolean isPlayer() {
         return this.player;
     }
 
-    public static class HitType
-    {
+    public static class HitType {
         public static final int NORMAL = 0;
         public static final int HEADSHOT = 1;
         public static final int CRITICAL = 2;

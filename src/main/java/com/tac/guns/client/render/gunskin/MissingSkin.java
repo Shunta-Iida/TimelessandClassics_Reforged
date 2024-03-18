@@ -4,7 +4,7 @@ import com.tac.guns.client.render.model.CacheableModel;
 import com.tac.guns.client.render.model.GunComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class MissingSkin extends GunSkin{
+public class MissingSkin extends GunSkin {
     public static final MissingSkin INSTANCE = new MissingSkin();
 
     private MissingSkin() {
@@ -12,7 +12,7 @@ public class MissingSkin extends GunSkin{
     }
 
     @Override
-    public CacheableModel getModel(GunComponent component){
+    public CacheableModel getModel(GunComponent component) {
         return CacheableModel.MISSING_MODEL;
     }
 

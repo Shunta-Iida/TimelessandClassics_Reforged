@@ -21,56 +21,49 @@ import javax.annotation.Nullable;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class WorkbenchTileEntity extends SyncedTileEntity implements IStorageBlock
-{
+public class WorkbenchTileEntity extends SyncedTileEntity implements IStorageBlock {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    public WorkbenchTileEntity(BlockPos pos, BlockState state)
-    {
+    public WorkbenchTileEntity(BlockPos pos, BlockState state) {
         super(ModTileEntities.WORKBENCH.get(), pos, state);
     }
 
     @Override
-    public NonNullList<ItemStack> getInventory()
-    {
+    public NonNullList<ItemStack> getInventory() {
         return this.inventory;
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound)
-    {
+    public void saveAdditional(CompoundTag compound) {
         ContainerHelper.saveAllItems(compound, this.inventory);
     }
 
     @Override
-    public void load(CompoundTag compound)
-    {
+    public void load(CompoundTag compound) {
         super.load(compound);
         ContainerHelper.loadAllItems(compound, this.inventory);
     }
 
     @Override
-    public boolean canPlaceItem(int index, ItemStack stack)
-    {
+    public boolean canPlaceItem(int index, ItemStack stack) {
         return index != 0 || (stack.getItem() instanceof DyeItem && this.inventory.get(index).getCount() < 1);
     }
 
     @Override
-    public boolean stillValid(Player player)
-    {
-        return this.level.getBlockEntity(this.worldPosition) == this && player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5) <= 64.0;
+    public boolean stillValid(Player player) {
+        return this.level.getBlockEntity(this.worldPosition) == this
+                && player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5,
+                        this.worldPosition.getZ() + 0.5) <= 64.0;
     }
 
     @Override
-    public Component getDisplayName()
-    {
+    public Component getDisplayName() {
         return new TranslatableComponent("container.tac.workbench");
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity)
-    {
+    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
         return new WorkbenchContainer(windowId, playerInventory, this);
     }
 }

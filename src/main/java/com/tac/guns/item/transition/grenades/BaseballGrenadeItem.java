@@ -9,26 +9,23 @@ import net.minecraft.world.level.Level;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class BaseballGrenadeItem extends GrenadeItem
-{
+public class BaseballGrenadeItem extends GrenadeItem {
     private float power;
-    public BaseballGrenadeItem(Properties properties, int maxCookTime, float power, float speed)
-    {
+
+    public BaseballGrenadeItem(Properties properties, int maxCookTime, float power, float speed) {
         super(properties, maxCookTime, power, speed);
         this.power = power;
     }
 
-    public ThrowableGrenadeEntity create(Level world, LivingEntity entity, int timeLeft)
-    {
-        return new BaseballGrenadeEntity(world, entity, timeLeft, this.power); // Current ThrowableGrenadeEntity is perfect for impact 1/31/2022
+    public ThrowableGrenadeEntity create(Level world, LivingEntity entity, int timeLeft) {
+        return new BaseballGrenadeEntity(world, entity, timeLeft, this.power); // Current ThrowableGrenadeEntity is
+                                                                               // perfect for impact 1/31/2022
     }
 
-    public boolean canCook()
-    {
+    public boolean canCook() {
         return true;
     }
 
-    protected void onThrown(Level world, ThrowableGrenadeEntity entity)
-    {
+    protected void onThrown(Level world, ThrowableGrenadeEntity entity) {
     }
 }

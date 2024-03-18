@@ -17,24 +17,37 @@ public class COLTPYTHONAnimationController extends PistalAnimationController imp
     public static int INDEX_RIGHT_HAND = 2;
     public static int CAMERA_INDEX = 13;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_reload.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_reload.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/colt_python_inspect.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
     private static final COLTPYTHONAnimationController instance = new COLTPYTHONAnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case DRAW: return DRAW;
-            case STATIC: return STATIC;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            default: return null;
+        switch (label) {
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case DRAW:
+                return DRAW;
+            case STATIC:
+                return STATIC;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            default:
+                return null;
         }
     }
 
@@ -50,15 +63,17 @@ public class COLTPYTHONAnimationController extends PistalAnimationController imp
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.COLT_PYTHON.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.COLT_PYTHON.getId(), this);
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.COLT_PYTHON.get(), label);
     }
 
-    public static COLTPYTHONAnimationController getInstance() { return instance; }
+    public static COLTPYTHONAnimationController getInstance() {
+        return instance;
+    }
 
     @Override
     protected int getAttachmentsNodeIndex() {

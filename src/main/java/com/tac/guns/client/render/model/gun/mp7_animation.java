@@ -28,13 +28,14 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class mp7_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         Mp7AnimationController controller = Mp7AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_BODY,
+                    transformType, matrices);
 
             renderLaserDevice(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -42,7 +43,8 @@ public class mp7_animation extends SkinnedGunModel {
                 renderLaser(stack, matrices, renderBuffer, light, overlay, skin);
 
             if (Gun.getScope(stack) == null) {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880,
+                        overlay);
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
             }
 
@@ -54,16 +56,21 @@ public class mp7_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_MAG, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_MAG,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         if (transformType.firstPerson()) {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Mp7AnimationController.INDEX_BODY,
+                    transformType, matrices);
             Gun gun = ((GunItem) stack.getItem()).getGun();
-            float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+            float cooldownOg = ShootingHandler.get().getshootMsGap()
+                    / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                            : ShootingHandler.get().getshootMsGap()
+                                    / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
             if (Gun.hasAmmo(stack)) {
                 // Math provided by Bomb787 on GitHub and Curseforge!!!

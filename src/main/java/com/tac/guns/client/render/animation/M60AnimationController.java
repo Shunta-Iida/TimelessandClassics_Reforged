@@ -20,17 +20,24 @@ public class M60AnimationController extends MachineGunAnimationController {
     public static int INDEX_CAPS = 2;
     public static int INDEX_HANDLE = 3;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/m60_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/m60_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/m60_reload_empty.gltf"));
-    public static final AnimationMeta RELOAD_NORM_SCOPE = new AnimationMeta(new ResourceLocation("tac","animations/m60_reload_norm_scope.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY_SCOPE = new AnimationMeta(new ResourceLocation("tac","animations/m60_reload_empty_scope.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/m60_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/m60_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/m60_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_reload_empty.gltf"));
+    public static final AnimationMeta RELOAD_NORM_SCOPE = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_reload_norm_scope.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY_SCOPE = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_reload_empty_scope.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac", "animations/m60_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m60_inspect.gltf"));
     private static final M60AnimationController instance = new M60AnimationController();
 
-    private M60AnimationController(){
+    private M60AnimationController() {
         try {
             Animations.load(RELOAD_NORM);
             Animations.load(RELOAD_EMPTY);
@@ -44,43 +51,52 @@ public class M60AnimationController extends MachineGunAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.M60.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.M60.getId(), this);
     }
 
-    public static M60AnimationController getInstance(){
+    public static M60AnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
         LocalPlayer player = Minecraft.getInstance().player;
-        switch (label){
+        switch (label) {
             case RELOAD_EMPTY: {
-                if(player != null){
+                if (player != null) {
                     ItemStack stack = player.getMainHandItem();
-                    if(Gun.getScope(stack) == null) return RELOAD_EMPTY;
-                    else return RELOAD_EMPTY_SCOPE;
+                    if (Gun.getScope(stack) == null)
+                        return RELOAD_EMPTY;
+                    else
+                        return RELOAD_EMPTY_SCOPE;
                 }
                 return RELOAD_EMPTY;
             }
             case RELOAD_NORMAL: {
-                if(player != null){
+                if (player != null) {
                     ItemStack stack = player.getMainHandItem();
-                    if(Gun.getScope(stack) == null) return RELOAD_NORM;
-                    else return RELOAD_NORM_SCOPE;
+                    if (Gun.getScope(stack) == null)
+                        return RELOAD_NORM;
+                    else
+                        return RELOAD_NORM_SCOPE;
                 }
                 return RELOAD_NORM;
             }
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
     @Override
-    protected void enableStaticState(){
+    protected void enableStaticState() {
         try {
             Animations.specifyInitialModel(RELOAD_NORM_SCOPE, STATIC);
             Animations.specifyInitialModel(RELOAD_EMPTY_SCOPE, STATIC);
@@ -91,7 +107,7 @@ public class M60AnimationController extends MachineGunAnimationController {
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.M60.get(), label);
     }
 

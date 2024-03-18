@@ -55,9 +55,7 @@
     "config.tac.client.display.tooltip": "Configurazione per le opzioni relative al display",
     "config.tac.client.display.workbench_animation": "Animazione banco da lavoro",
     "config.tac.client.display.workbench_animation.tooltip": "Se attivo, viene riprodotta un'animazione del banco da lavoro.",
-
     "config.tac.server": "Server",
-
     "config.tac.server.tooltip": "Configurazioni server",
     "config.tac.server.aggro": "Mob aggressivi",
     "config.tac.server.aggro.tooltip": "I mob vicini si arrabbiano/spaventano se sentono i suoni delle armi.",
@@ -71,21 +69,18 @@
     "config.tac.server.aggro.unsilenced.tooltip": "Qualsiasi mob entro una sfera di questo raggio aggredira' qualsiasi giocatore con armi non silenziate.",
     "config.tac.server.aggro.exempt": "Classi di mob escluse",
     "config.tac.server.aggro.exempt.tooltip": "Qualsiasi mob che appartenga ad una classe elencata in questa lista will non aggredira' i giocatori.",
-
     "config.tac.server.grenade.stun": "Granate stordenti",
     "config.tac.server.grenade.stun.tooltip": "Proprieta' accecanti/assordanti delle granate stordenti",
     "config.tac.server.grenade.stun.blind": "Cecita'",
     "config.tac.server.grenade.stun.blind.tooltip": "Proprieta' accecanti delle granate stordenti",
     "config.tac.server.grenade.stun.deafen": "Sordita'",
     "config.tac.server.grenade.stun.deafen.tooltip": "Proprieta' assordanti delle granate stordenti",
-
     "config.tac.server.grenade.stun.effect_criteria.blind": "Criterio dell'effetto",
     "config.tac.server.grenade.stun.effect_criteria.blind.tooltip": "Criterio che determina la presenza o l'assenza e la durata della cecita'.",
     "config.tac.server.grenade.stun.blind.overlay.alpha": "Overlay alpha",
     "config.tac.server.grenade.stun.blind.overlay.alpha.tooltip": "Dopo che la durata cade a questo ammontare di tick, l'overlay diventa trasparente gradualmente.",
     "config.tac.server.grenade.stun.blind.overlay.fade": "Soglia dissolvenza overlay",
     "config.tac.server.grenade.stun.blind.overlay.fade.tooltip": "La trasparenza dell'overlay da ceco cadra' a questo numero, prima di eventualmente andare a 0.",
-
     "config.tac.server.grenade.stun.effect_criteria.deafen": "Criterio dell'effetto",
     "config.tac.server.grenade.stun.effect_criteria.deafen.tooltip": "Criterio che determina la presenza o l'assenza e la durata della sordita'.",
     "config.tac.server.grenade.stun.deafen.sound.percentage": "Percentuale del suono",
@@ -94,7 +89,6 @@
     "config.tac.server.grenade.stun.deafen.sound.fade.tooltip": "Dopo che la durata cade a questo ammontare di tick, il volume dello stordimento cadra' gradualmente a 0 e gli altri suoni a 100.",
     "config.tac.server.grenade.stun.deafen.sound.ring": "Volume stordimento",
     "config.tac.server.grenade.stun.deafen.sound.ring.tooltip": "Il volume dello stordimento da sordo verra' riprodotto a questo valore, prima di eventualmente andare a 0.",
-
     "config.tac.server.grenade.stun.effect_criteria.radius": "Raggio",
     "config.tac.server.grenade.stun.effect_criteria.radius.tooltip": "La granata non deve superare questi metri in largo per avere un effetto.",
     "config.tac.server.grenade.stun.effect_criteria.duration.max": "Durata massima",
@@ -107,7 +101,6 @@
     "config.tac.server.grenade.stun.effect_criteria.angle.attenuation.max.tooltip": "Dopo che la durata si e' attenuata dalla distanza, viene attenuata ulteriormente a seconda dell'angolo (in gradi) tra l'occhio/direzione visiva e l'occhio/direzione della granata. Si fa cio' moltiplicandolo per 1 (senza attenuazione) se l'angolo e' 0; e da questo valore se l'angolo e' massimo entro l'angolo d'effetto.",
     "config.tac.server.grenade.stun.effect_criteria.raytrace.opaque": "Raytrace blocchi opachi",
     "config.tac.server.grenade.stun.effect_criteria.raytrace.opaque.tooltip": "Se attivo, l'effetto e' applicato solo se la linea tra gli occhi e la granata non si interseca con qualsiasi blocco non-liquido con un opacita' con valore positivo.",
-
     "key.categories.gun": "MrCrayfish's Gun Mod",
     "key.aim": "Mira",
     "key.reload": "Ricarica",

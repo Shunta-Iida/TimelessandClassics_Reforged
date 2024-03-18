@@ -1,7 +1,9 @@
 {
   "general": {
     "rate": 50,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:two_handed_ak47",
     "recoilAngle": 1.65,
     "recoilKick": 1.45,
@@ -45,11 +47,11 @@
     "weaponType": 5
   },
   "modules": {
-    "zoom":{
+    "zoom": {
       "fovModifier": 0.6,
       "yOffset": 14.48,
       "zOffset": 4.95
     },
-    "attachments": { }
+    "attachments": {}
   }
 }

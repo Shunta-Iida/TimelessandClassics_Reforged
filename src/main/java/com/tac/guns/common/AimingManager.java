@@ -37,11 +37,11 @@ public class AimingManager {
         if (event.phase != TickEvent.Phase.START)
             return;
         Player player = event.player;
-        if(player.isLocalPlayer())
+        if (player.isLocalPlayer())
             return;
         AimingManager manager = AimingManager.get();
         boolean isAiming = SyncedEntityData.instance().get(player, ModSyncedDataKeys.AIMING);
-        if (isAiming && ! manager.aimingMap.containsKey(player)) {
+        if (isAiming && !manager.aimingMap.containsKey(player)) {
             manager.aimingMap.put(player, new AimTracker());
         }
         AimTracker tracker = manager.getAimTracker(player);
@@ -55,8 +55,7 @@ public class AimingManager {
     }
 
     @SubscribeEvent
-    public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event)
-    {
+    public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         AimingManager.get().aimingMap.remove(event.getPlayer());
     }
 
@@ -65,17 +64,17 @@ public class AimingManager {
         return aimingMap.get(player);
     }
 
-    public Map<Player, AimTracker> getAimingMap(){
+    public Map<Player, AimTracker> getAimingMap() {
         return aimingMap;
     }
 
-    public static class AimTracker
-    {
+    public static class AimTracker {
         private double currentAim;
         private double previousAim;
         private double amplifier = 0.8;
 
         private double lerpProgress;
+
         public void handleAiming(ItemStack heldItem, boolean isAiming) {
             this.previousAim = this.currentAim;
             double vAmplifier = 0.1;
@@ -104,7 +103,8 @@ public class AimingManager {
                         amplifier = 0.5;
                         this.currentAim = 0;
                     }
-                } else amplifier = 0.8;
+                } else
+                    amplifier = 0.8;
             }
         }
 
@@ -112,16 +112,18 @@ public class AimingManager {
             return this.currentAim != 0 || this.previousAim != 0;
         }
 
-        protected void tickLerpProgress(){
+        protected void tickLerpProgress() {
             lerpProgress += (getNormalProgress(1) - lerpProgress) * 0.5;
         }
 
-        public double getLerpProgress(){
+        public double getLerpProgress() {
             return lerpProgress;
         }
 
         public double getNormalProgress(float partialTicks) {
-            return (this.previousAim + (this.currentAim - this.previousAim) * (this.previousAim == 0 || this.previousAim == MAX_AIM_PROGRESS ? 0 : partialTicks)) / (float) MAX_AIM_PROGRESS;
+            return (this.previousAim + (this.currentAim - this.previousAim)
+                    * (this.previousAim == 0 || this.previousAim == MAX_AIM_PROGRESS ? 0 : partialTicks))
+                    / (float) MAX_AIM_PROGRESS;
         }
     }
 }

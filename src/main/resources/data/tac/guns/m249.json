@@ -2,7 +2,9 @@
   "general": {
     "auto": true,
     "rate": 600,
-    "rateSelector": [2],
+    "rateSelector": [
+      2
+    ],
     "gripType": "tac:two_handed_m60",
     "recoilAngle": 2.5,
     "recoilKick": 1.35,
@@ -12,7 +14,6 @@
     "cameraRecoilModifier": 1.15,
     "recoilDuration": 0.25,
     "weightKilo": 8.5,
-
     "spread": 0.495,
     "firstShotSpread": 1.75,
     "hipFireInaccuracy": 6.45,
@@ -25,7 +26,11 @@
     "maxAmmo": 80,
     "reloadMagTimer": 100,
     "additionalReloadEmptyMagTimer": 24,
-    "maxAdditionalAmmoPerOC": [40, 70, 120],
+    "maxAdditionalAmmoPerOC": [
+      40,
+      70,
+      120
+    ],
     "preReloadPauseTicks": 18,
     "openBolt": true
   },
@@ -63,7 +68,7 @@
       "trailAdjust": 1.5
     },
     "shellCasing": {
-      "tickLife":10,
+      "tickLife": 10,
       "yOffset": -3,
       "xOffset": 0,
       "zOffset": 0,
@@ -85,11 +90,12 @@
     "weaponType": 1
   },
   "modules": {
-    "zoom":{
+    "zoom": {
       "fovModifier": 0.8,
       "yOffset": 11.025,
       "zOffset": -5.3
-    },"attachments": {
+    },
+    "attachments": {
       "scope": {
         "yOffset": 10.125,
         "zOffset": 6.5,

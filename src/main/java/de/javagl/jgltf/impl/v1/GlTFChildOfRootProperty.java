@@ -8,24 +8,21 @@
 
 package de.javagl.jgltf.impl.v1;
 
-
-
 /**
- * Auto-generated for glTFChildOfRootProperty.schema.json 
+ * Auto-generated for glTFChildOfRootProperty.schema.json
  * 
  */
 public class GlTFChildOfRootProperty
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * The user-defined name of this object. (optional) 
+     * The user-defined name of this object. (optional)
      * 
      */
     private String name;
 
     /**
-     * The user-defined name of this object. (optional) 
+     * The user-defined name of this object. (optional)
      * 
      * @param name The name to set
      * 
@@ -33,13 +30,13 @@ public class GlTFChildOfRootProperty
     public void setName(String name) {
         if (name == null) {
             this.name = name;
-            return ;
+            return;
         }
         this.name = name;
     }
 
     /**
-     * The user-defined name of this object. (optional) 
+     * The user-defined name of this object. (optional)
      * 
      * @return The name
      * 

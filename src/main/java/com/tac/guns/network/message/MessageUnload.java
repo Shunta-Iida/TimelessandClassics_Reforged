@@ -11,10 +11,10 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUnload extends PlayMessage<MessageUnload>
-{
+public class MessageUnload extends PlayMessage<MessageUnload> {
     @Override
-    public void encode(MessageUnload messageUnload, FriendlyByteBuf buffer) {}
+    public void encode(MessageUnload messageUnload, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageUnload decode(FriendlyByteBuf buffer) {
@@ -22,13 +22,10 @@ public class MessageUnload extends PlayMessage<MessageUnload>
     }
 
     @Override
-    public void handle(MessageUnload messageUnload, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageUnload messageUnload, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null && !player.isSpectator())
-            {
+            if (player != null && !player.isSpectator()) {
                 ServerPlayHandler.handleUnload(player);
             }
         });

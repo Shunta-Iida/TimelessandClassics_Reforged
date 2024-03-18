@@ -34,19 +34,24 @@ public class ak47_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         Ak47AnimationController controller = Ak47AnimationController.getInstance();
 
-
         Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-//
+        float cooldownOg = ShootingHandler.get().getshootMsGap()
+                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
+                        : ShootingHandler.get().getshootMsGap()
+                                / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+        //
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_BODY,
+                    transformType, matrices);
             if (Gun.getScope(stack) != null) {
-                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light,
+                        overlay);
             }
 
             renderStock(stack, matrices, renderBuffer, light, overlay, skin);
@@ -57,15 +62,21 @@ public class ak47_animation extends SkinnedGunModel {
         }
         matrices.popPose();
 
-        //Always push
+        // Always push
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_BOLT, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_BOLT,
+                    transformType, matrices);
 
-            /*//We're getting the cooldown tracker for the item - items like the sword, ender pearl, and chorus fruit all have this too.
-            Gun gun = ((GunItem) stack.getItem()).getGun();
-        float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-        */
+            /*
+             * //We're getting the cooldown tracker for the item - items like the sword,
+             * ender pearl, and chorus fruit all have this too.
+             * Gun gun = ((GunItem) stack.getItem()).getGun();
+             * float cooldownOg = ShootingHandler.get().getshootMsGap() /
+             * ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 :
+             * ShootingHandler.get().getshootMsGap() /
+             * ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+             */
             if (transformType.firstPerson()) {
                 // Math provided by Bomb787 on GitHub and Curseforge!!!
                 matrices.translate(0, 0, 0.190f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1));
@@ -74,20 +85,23 @@ public class ak47_animation extends SkinnedGunModel {
             }
             RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
         }
-        //Always pop
+        // Always pop
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_MAGAZINE,
+                    transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
-        if (controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY).equals(controller.getPreviousAnimation())) {
+        if (controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
+                .equals(controller.getPreviousAnimation())) {
             matrices.pushPose();
             {
-                controller.applySpecialModelTransform(getComponentModel(skin, BODY), Ak47AnimationController.INDEX_EXTRA_MAG, transformType, matrices);
+                controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                        Ak47AnimationController.INDEX_EXTRA_MAG, transformType, matrices);
                 renderMag(stack, matrices, renderBuffer, light, overlay, skin);
             }
             matrices.popPose();

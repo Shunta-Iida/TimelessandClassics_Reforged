@@ -1,7 +1,9 @@
 {
   "general": {
     "rate": 300,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:one_handed_m1911",
     "recoilAngle": 20,
     "horizontalRecoilAngle": 12,
@@ -12,7 +14,6 @@
     "recoilDuration": 0.225,
     "projectileAmount": 14,
     "weightKilo": 2.1,
-
     "spread": 8.5,
     "firstShotSpread": 8.5,
     "hipFireInaccuracy": 1,
@@ -64,7 +65,7 @@
     "hipfireScale": 2,
     "hipfireMoveScale": 0.05,
     "hipfireRecoilScale": 1.0,
-    "showDynamicHipfire":true,
+    "showDynamicHipfire": true,
     "weaponType": 3
   },
   "modules": {

@@ -16,8 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 @Mixin(PlayerList.class)
-public class PlayerListMixin
-{
+public class PlayerListMixin {
     @Inject(method = "reloadResources", at = @At(value = "TAIL"))
     private void onReload(CallbackInfo ci) {
         NetworkGunManager manager = NetworkGunManager.get();

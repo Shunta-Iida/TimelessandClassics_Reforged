@@ -5,4 +5,3 @@
  * In most cases, these classes should not directly be used by clients.
  */
 package de.javagl.jgltf.model.v2;
-

@@ -19,12 +19,18 @@ public class SIGMCXAnimationController extends GunAnimationController {
     public static int INDEX_HANDLE1 = 2;
     public static int INDEX_HANDLE2 = 1;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/sig_mcx_spear_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/sig_mcx_spear_static.gltf"));
     private static final SIGMCXAnimationController instance = new SIGMCXAnimationController();
 
     private SIGMCXAnimationController() {
@@ -39,28 +45,35 @@ public class SIGMCXAnimationController extends GunAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.SIG_MCX_SPEAR.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.SIG_MCX_SPEAR.getId(), this);
     }
 
-    public static SIGMCXAnimationController getInstance(){
+    public static SIGMCXAnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+        switch (label) {
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.SIG_MCX_SPEAR.get(), label);
     }
 

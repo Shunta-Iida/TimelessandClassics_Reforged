@@ -6,22 +6,18 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class TriggerFingerEnchantment extends GunEnchantment
-{
-    public TriggerFingerEnchantment()
-    {
-        super(Rarity.RARE, EnchantmentTypes.SEMI_AUTO_GUN, new EquipmentSlot[]{EquipmentSlot.MAINHAND}, Type.WEAPON);
+public class TriggerFingerEnchantment extends GunEnchantment {
+    public TriggerFingerEnchantment() {
+        super(Rarity.RARE, EnchantmentTypes.SEMI_AUTO_GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.WEAPON);
     }
 
     @Override
-    public int getMaxLevel()
-    {
+    public int getMaxLevel() {
         return 2;
     }
 
     @Override
-    public int getMinCost(int level)
-    {
+    public int getMinCost(int level) {
         return 0;
     }
 
@@ -31,8 +27,7 @@ public class TriggerFingerEnchantment extends GunEnchantment
     }
 
     @Override
-    public int getMaxCost(int level)
-    {
+    public int getMaxCost(int level) {
         return this.getMinCost(level) + 40;
     }
 }

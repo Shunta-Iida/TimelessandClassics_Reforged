@@ -13,21 +13,27 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
-public class SCAR_LAnimationController extends GunAnimationController{
+public class SCAR_LAnimationController extends GunAnimationController {
     public static int INDEX_BODY = 17; // only prob
     public static int INDEX_LEFT_HAND = 15;
     public static int INDEX_RIGHT_HAND = 12;
     public static int INDEX_MAGAZINE = 8;
     public static int INDEX_MAGAZINE2 = 3;
     public static int INDEX_BOLT = 10;
-    //public static int INDEX_CHARGE_HANDLE = 1;
+    // public static int INDEX_CHARGE_HANDLE = 1;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/scar_l_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/scar_l_static.gltf"));
     private static final SCAR_LAnimationController instance = new SCAR_LAnimationController();
 
     private SCAR_LAnimationController() {
@@ -42,28 +48,35 @@ public class SCAR_LAnimationController extends GunAnimationController{
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.SCAR_L.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.SCAR_L.getId(), this);
     }
 
-    public static SCAR_LAnimationController getInstance(){
+    public static SCAR_LAnimationController getInstance() {
         return instance;
     }
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case DRAW: return DRAW;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            case STATIC: return STATIC;
-            default: return null;
+        switch (label) {
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case DRAW:
+                return DRAW;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            case STATIC:
+                return STATIC;
+            default:
+                return null;
         }
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.SCAR_L.get(), label);
     }
 

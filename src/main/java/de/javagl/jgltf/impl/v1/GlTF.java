@@ -13,138 +13,136 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * The root object for a glTF asset. 
+ * The root object for a glTF asset.
  * 
- * Auto-generated for glTF.schema.json 
+ * Auto-generated for glTF.schema.json
  * 
  */
 public class GlTF
-    extends GlTFProperty
-{
+        extends GlTFProperty {
 
     /**
-     * Names of extensions used somewhere in this asset. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of extensions used somewhere in this asset. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      */
     private List<String> extensionsUsed;
     /**
-     * A dictionary object of accessors. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of accessors. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Accessor> accessors;
     /**
-     * A dictionary object of keyframe animations. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of keyframe animations. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Animation> animations;
     /**
-     * Metadata about the glTF asset. (optional)<br> 
-     * Default: {} 
+     * Metadata about the glTF asset. (optional)<br>
+     * Default: {}
      * 
      */
     private Asset asset;
     /**
-     * A dictionary object of buffers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of buffers. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Buffer> buffers;
     /**
-     * A dictionary object of bufferViews. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of bufferViews. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, BufferView> bufferViews;
     /**
-     * A dictionary object of cameras. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of cameras. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Camera> cameras;
     /**
-     * A dictionary object of images. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of images. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Image> images;
     /**
-     * A dictionary object of materials. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of materials. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Material> materials;
     /**
-     * A dictionary object of meshes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of meshes. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Mesh> meshes;
     /**
-     * A dictionary object of nodes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of nodes. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Node> nodes;
     /**
-     * A dictionary object of programs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of programs. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Program> programs;
     /**
-     * A dictionary object of samplers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Sampler> samplers;
     /**
-     * The ID of the default scene. (optional) 
+     * The ID of the default scene. (optional)
      * 
      */
     private String scene;
     /**
-     * A dictionary object of scenes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of scenes. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Scene> scenes;
     /**
-     * A dictionary object of shaders. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of shaders. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Shader> shaders;
     /**
-     * A dictionary object of skins. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of skins. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Skin> skins;
     /**
-     * A dictionary object of techniques. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of techniques. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Technique> techniques;
     /**
-     * A dictionary object of textures. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of textures. (optional)<br>
+     * Default: {}
      * 
      */
     private Map<String, Texture> textures;
 
     /**
-     * Names of extensions used somewhere in this asset. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of extensions used somewhere in this asset. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @param extensionsUsed The extensionsUsed to set
      * 
@@ -152,16 +150,16 @@ public class GlTF
     public void setExtensionsUsed(List<String> extensionsUsed) {
         if (extensionsUsed == null) {
             this.extensionsUsed = extensionsUsed;
-            return ;
+            return;
         }
         this.extensionsUsed = extensionsUsed;
     }
 
     /**
-     * Names of extensions used somewhere in this asset. (optional)<br> 
-     * Default: []<br> 
-     * Array elements:<br> 
-     * &nbsp;&nbsp;The elements of this array (optional) 
+     * Names of extensions used somewhere in this asset. (optional)<br>
+     * Default: []<br>
+     * Array elements:<br>
+     * &nbsp;&nbsp;The elements of this array (optional)
      * 
      * @return The extensionsUsed
      * 
@@ -171,9 +169,9 @@ public class GlTF
     }
 
     /**
-     * Add the given extensionsUsed. The extensionsUsed of this instance will 
-     * be replaced with a list that contains all previous elements, and 
-     * additionally the new element. 
+     * Add the given extensionsUsed. The extensionsUsed of this instance will
+     * be replaced with a list that contains all previous elements, and
+     * additionally the new element.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -185,7 +183,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsUsed;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.add(element);
@@ -193,11 +191,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given extensionsUsed. The extensionsUsed of this instance 
-     * will be replaced with a list that contains all previous elements, 
-     * except for the removed one.<br> 
-     * If this new list would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given extensionsUsed. The extensionsUsed of this instance
+     * will be replaced with a list that contains all previous elements,
+     * except for the removed one.<br>
+     * If this new list would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param element The element
      * @throws NullPointerException If the given element is <code>null</code>
@@ -209,7 +207,7 @@ public class GlTF
         }
         List<String> oldList = this.extensionsUsed;
         List<String> newList = new ArrayList<String>();
-        if (oldList!= null) {
+        if (oldList != null) {
             newList.addAll(oldList);
         }
         newList.remove(element);
@@ -221,8 +219,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the extensionsUsed<br> 
-     * @see #getExtensionsUsed 
+     * Returns the default value of the extensionsUsed<br>
+     * 
+     * @see #getExtensionsUsed
      * 
      * @return The default extensionsUsed
      * 
@@ -232,8 +231,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of accessors. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of accessors. (optional)<br>
+     * Default: {}
      * 
      * @param accessors The accessors to set
      * 
@@ -241,14 +240,14 @@ public class GlTF
     public void setAccessors(Map<String, Accessor> accessors) {
         if (accessors == null) {
             this.accessors = accessors;
-            return ;
+            return;
         }
         this.accessors = accessors;
     }
 
     /**
-     * A dictionary object of accessors. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of accessors. (optional)<br>
+     * Default: {}
      * 
      * @return The accessors
      * 
@@ -258,11 +257,11 @@ public class GlTF
     }
 
     /**
-     * Add the given accessors. The accessors of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given accessors. The accessors of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -276,7 +275,7 @@ public class GlTF
         }
         Map<String, Accessor> oldMap = this.accessors;
         Map<String, Accessor> newMap = new LinkedHashMap<String, Accessor>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -284,11 +283,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given accessors. The accessors of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given accessors. The accessors of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -300,7 +299,7 @@ public class GlTF
         }
         Map<String, Accessor> oldMap = this.accessors;
         Map<String, Accessor> newMap = new LinkedHashMap<String, Accessor>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -312,8 +311,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the accessors<br> 
-     * @see #getAccessors 
+     * Returns the default value of the accessors<br>
+     * 
+     * @see #getAccessors
      * 
      * @return The default accessors
      * 
@@ -323,8 +323,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of keyframe animations. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of keyframe animations. (optional)<br>
+     * Default: {}
      * 
      * @param animations The animations to set
      * 
@@ -332,14 +332,14 @@ public class GlTF
     public void setAnimations(Map<String, Animation> animations) {
         if (animations == null) {
             this.animations = animations;
-            return ;
+            return;
         }
         this.animations = animations;
     }
 
     /**
-     * A dictionary object of keyframe animations. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of keyframe animations. (optional)<br>
+     * Default: {}
      * 
      * @return The animations
      * 
@@ -349,11 +349,11 @@ public class GlTF
     }
 
     /**
-     * Add the given animations. The animations of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given animations. The animations of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -367,7 +367,7 @@ public class GlTF
         }
         Map<String, Animation> oldMap = this.animations;
         Map<String, Animation> newMap = new LinkedHashMap<String, Animation>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -375,11 +375,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given animations. The animations of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given animations. The animations of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -391,7 +391,7 @@ public class GlTF
         }
         Map<String, Animation> oldMap = this.animations;
         Map<String, Animation> newMap = new LinkedHashMap<String, Animation>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -403,8 +403,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the animations<br> 
-     * @see #getAnimations 
+     * Returns the default value of the animations<br>
+     * 
+     * @see #getAnimations
      * 
      * @return The default animations
      * 
@@ -414,8 +415,8 @@ public class GlTF
     }
 
     /**
-     * Metadata about the glTF asset. (optional)<br> 
-     * Default: {} 
+     * Metadata about the glTF asset. (optional)<br>
+     * Default: {}
      * 
      * @param asset The asset to set
      * 
@@ -423,14 +424,14 @@ public class GlTF
     public void setAsset(Asset asset) {
         if (asset == null) {
             this.asset = asset;
-            return ;
+            return;
         }
         this.asset = asset;
     }
 
     /**
-     * Metadata about the glTF asset. (optional)<br> 
-     * Default: {} 
+     * Metadata about the glTF asset. (optional)<br>
+     * Default: {}
      * 
      * @return The asset
      * 
@@ -440,8 +441,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the asset<br> 
-     * @see #getAsset 
+     * Returns the default value of the asset<br>
+     * 
+     * @see #getAsset
      * 
      * @return The default asset
      * 
@@ -451,8 +453,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of buffers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of buffers. (optional)<br>
+     * Default: {}
      * 
      * @param buffers The buffers to set
      * 
@@ -460,14 +462,14 @@ public class GlTF
     public void setBuffers(Map<String, Buffer> buffers) {
         if (buffers == null) {
             this.buffers = buffers;
-            return ;
+            return;
         }
         this.buffers = buffers;
     }
 
     /**
-     * A dictionary object of buffers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of buffers. (optional)<br>
+     * Default: {}
      * 
      * @return The buffers
      * 
@@ -477,11 +479,11 @@ public class GlTF
     }
 
     /**
-     * Add the given buffers. The buffers of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given buffers. The buffers of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -495,7 +497,7 @@ public class GlTF
         }
         Map<String, Buffer> oldMap = this.buffers;
         Map<String, Buffer> newMap = new LinkedHashMap<String, Buffer>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -503,11 +505,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given buffers. The buffers of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given buffers. The buffers of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -519,7 +521,7 @@ public class GlTF
         }
         Map<String, Buffer> oldMap = this.buffers;
         Map<String, Buffer> newMap = new LinkedHashMap<String, Buffer>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -531,8 +533,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the buffers<br> 
-     * @see #getBuffers 
+     * Returns the default value of the buffers<br>
+     * 
+     * @see #getBuffers
      * 
      * @return The default buffers
      * 
@@ -542,8 +545,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of bufferViews. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of bufferViews. (optional)<br>
+     * Default: {}
      * 
      * @param bufferViews The bufferViews to set
      * 
@@ -551,14 +554,14 @@ public class GlTF
     public void setBufferViews(Map<String, BufferView> bufferViews) {
         if (bufferViews == null) {
             this.bufferViews = bufferViews;
-            return ;
+            return;
         }
         this.bufferViews = bufferViews;
     }
 
     /**
-     * A dictionary object of bufferViews. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of bufferViews. (optional)<br>
+     * Default: {}
      * 
      * @return The bufferViews
      * 
@@ -568,11 +571,11 @@ public class GlTF
     }
 
     /**
-     * Add the given bufferViews. The bufferViews of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given bufferViews. The bufferViews of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -586,7 +589,7 @@ public class GlTF
         }
         Map<String, BufferView> oldMap = this.bufferViews;
         Map<String, BufferView> newMap = new LinkedHashMap<String, BufferView>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -594,11 +597,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given bufferViews. The bufferViews of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given bufferViews. The bufferViews of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -610,7 +613,7 @@ public class GlTF
         }
         Map<String, BufferView> oldMap = this.bufferViews;
         Map<String, BufferView> newMap = new LinkedHashMap<String, BufferView>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -622,8 +625,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the bufferViews<br> 
-     * @see #getBufferViews 
+     * Returns the default value of the bufferViews<br>
+     * 
+     * @see #getBufferViews
      * 
      * @return The default bufferViews
      * 
@@ -633,8 +637,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of cameras. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of cameras. (optional)<br>
+     * Default: {}
      * 
      * @param cameras The cameras to set
      * 
@@ -642,14 +646,14 @@ public class GlTF
     public void setCameras(Map<String, Camera> cameras) {
         if (cameras == null) {
             this.cameras = cameras;
-            return ;
+            return;
         }
         this.cameras = cameras;
     }
 
     /**
-     * A dictionary object of cameras. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of cameras. (optional)<br>
+     * Default: {}
      * 
      * @return The cameras
      * 
@@ -659,11 +663,11 @@ public class GlTF
     }
 
     /**
-     * Add the given cameras. The cameras of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given cameras. The cameras of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -677,7 +681,7 @@ public class GlTF
         }
         Map<String, Camera> oldMap = this.cameras;
         Map<String, Camera> newMap = new LinkedHashMap<String, Camera>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -685,11 +689,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given cameras. The cameras of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given cameras. The cameras of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -701,7 +705,7 @@ public class GlTF
         }
         Map<String, Camera> oldMap = this.cameras;
         Map<String, Camera> newMap = new LinkedHashMap<String, Camera>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -713,8 +717,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the cameras<br> 
-     * @see #getCameras 
+     * Returns the default value of the cameras<br>
+     * 
+     * @see #getCameras
      * 
      * @return The default cameras
      * 
@@ -724,8 +729,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of images. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of images. (optional)<br>
+     * Default: {}
      * 
      * @param images The images to set
      * 
@@ -733,14 +738,14 @@ public class GlTF
     public void setImages(Map<String, Image> images) {
         if (images == null) {
             this.images = images;
-            return ;
+            return;
         }
         this.images = images;
     }
 
     /**
-     * A dictionary object of images. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of images. (optional)<br>
+     * Default: {}
      * 
      * @return The images
      * 
@@ -750,11 +755,11 @@ public class GlTF
     }
 
     /**
-     * Add the given images. The images of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given images. The images of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -768,7 +773,7 @@ public class GlTF
         }
         Map<String, Image> oldMap = this.images;
         Map<String, Image> newMap = new LinkedHashMap<String, Image>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -776,11 +781,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given images. The images of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given images. The images of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -792,7 +797,7 @@ public class GlTF
         }
         Map<String, Image> oldMap = this.images;
         Map<String, Image> newMap = new LinkedHashMap<String, Image>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -804,8 +809,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the images<br> 
-     * @see #getImages 
+     * Returns the default value of the images<br>
+     * 
+     * @see #getImages
      * 
      * @return The default images
      * 
@@ -815,8 +821,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of materials. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of materials. (optional)<br>
+     * Default: {}
      * 
      * @param materials The materials to set
      * 
@@ -824,14 +830,14 @@ public class GlTF
     public void setMaterials(Map<String, Material> materials) {
         if (materials == null) {
             this.materials = materials;
-            return ;
+            return;
         }
         this.materials = materials;
     }
 
     /**
-     * A dictionary object of materials. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of materials. (optional)<br>
+     * Default: {}
      * 
      * @return The materials
      * 
@@ -841,11 +847,11 @@ public class GlTF
     }
 
     /**
-     * Add the given materials. The materials of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given materials. The materials of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -859,7 +865,7 @@ public class GlTF
         }
         Map<String, Material> oldMap = this.materials;
         Map<String, Material> newMap = new LinkedHashMap<String, Material>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -867,11 +873,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given materials. The materials of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given materials. The materials of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -883,7 +889,7 @@ public class GlTF
         }
         Map<String, Material> oldMap = this.materials;
         Map<String, Material> newMap = new LinkedHashMap<String, Material>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -895,8 +901,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the materials<br> 
-     * @see #getMaterials 
+     * Returns the default value of the materials<br>
+     * 
+     * @see #getMaterials
      * 
      * @return The default materials
      * 
@@ -906,8 +913,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of meshes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of meshes. (optional)<br>
+     * Default: {}
      * 
      * @param meshes The meshes to set
      * 
@@ -915,14 +922,14 @@ public class GlTF
     public void setMeshes(Map<String, Mesh> meshes) {
         if (meshes == null) {
             this.meshes = meshes;
-            return ;
+            return;
         }
         this.meshes = meshes;
     }
 
     /**
-     * A dictionary object of meshes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of meshes. (optional)<br>
+     * Default: {}
      * 
      * @return The meshes
      * 
@@ -932,11 +939,11 @@ public class GlTF
     }
 
     /**
-     * Add the given meshes. The meshes of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given meshes. The meshes of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -950,7 +957,7 @@ public class GlTF
         }
         Map<String, Mesh> oldMap = this.meshes;
         Map<String, Mesh> newMap = new LinkedHashMap<String, Mesh>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -958,11 +965,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given meshes. The meshes of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given meshes. The meshes of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -974,7 +981,7 @@ public class GlTF
         }
         Map<String, Mesh> oldMap = this.meshes;
         Map<String, Mesh> newMap = new LinkedHashMap<String, Mesh>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -986,8 +993,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the meshes<br> 
-     * @see #getMeshes 
+     * Returns the default value of the meshes<br>
+     * 
+     * @see #getMeshes
      * 
      * @return The default meshes
      * 
@@ -997,8 +1005,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of nodes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of nodes. (optional)<br>
+     * Default: {}
      * 
      * @param nodes The nodes to set
      * 
@@ -1006,14 +1014,14 @@ public class GlTF
     public void setNodes(Map<String, Node> nodes) {
         if (nodes == null) {
             this.nodes = nodes;
-            return ;
+            return;
         }
         this.nodes = nodes;
     }
 
     /**
-     * A dictionary object of nodes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of nodes. (optional)<br>
+     * Default: {}
      * 
      * @return The nodes
      * 
@@ -1023,11 +1031,11 @@ public class GlTF
     }
 
     /**
-     * Add the given nodes. The nodes of this instance will be replaced with 
-     * a map that contains all previous mappings, and additionally the new 
-     * mapping. 
+     * Add the given nodes. The nodes of this instance will be replaced with
+     * a map that contains all previous mappings, and additionally the new
+     * mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1041,7 +1049,7 @@ public class GlTF
         }
         Map<String, Node> oldMap = this.nodes;
         Map<String, Node> newMap = new LinkedHashMap<String, Node>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1049,11 +1057,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given nodes. The nodes of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given nodes. The nodes of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1065,7 +1073,7 @@ public class GlTF
         }
         Map<String, Node> oldMap = this.nodes;
         Map<String, Node> newMap = new LinkedHashMap<String, Node>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1077,8 +1085,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the nodes<br> 
-     * @see #getNodes 
+     * Returns the default value of the nodes<br>
+     * 
+     * @see #getNodes
      * 
      * @return The default nodes
      * 
@@ -1088,8 +1097,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of programs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of programs. (optional)<br>
+     * Default: {}
      * 
      * @param programs The programs to set
      * 
@@ -1097,14 +1106,14 @@ public class GlTF
     public void setPrograms(Map<String, Program> programs) {
         if (programs == null) {
             this.programs = programs;
-            return ;
+            return;
         }
         this.programs = programs;
     }
 
     /**
-     * A dictionary object of programs. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of programs. (optional)<br>
+     * Default: {}
      * 
      * @return The programs
      * 
@@ -1114,11 +1123,11 @@ public class GlTF
     }
 
     /**
-     * Add the given programs. The programs of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given programs. The programs of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1132,7 +1141,7 @@ public class GlTF
         }
         Map<String, Program> oldMap = this.programs;
         Map<String, Program> newMap = new LinkedHashMap<String, Program>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1140,11 +1149,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given programs. The programs of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given programs. The programs of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1156,7 +1165,7 @@ public class GlTF
         }
         Map<String, Program> oldMap = this.programs;
         Map<String, Program> newMap = new LinkedHashMap<String, Program>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1168,8 +1177,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the programs<br> 
-     * @see #getPrograms 
+     * Returns the default value of the programs<br>
+     * 
+     * @see #getPrograms
      * 
      * @return The default programs
      * 
@@ -1179,8 +1189,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of samplers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers. (optional)<br>
+     * Default: {}
      * 
      * @param samplers The samplers to set
      * 
@@ -1188,14 +1198,14 @@ public class GlTF
     public void setSamplers(Map<String, Sampler> samplers) {
         if (samplers == null) {
             this.samplers = samplers;
-            return ;
+            return;
         }
         this.samplers = samplers;
     }
 
     /**
-     * A dictionary object of samplers. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of samplers. (optional)<br>
+     * Default: {}
      * 
      * @return The samplers
      * 
@@ -1205,11 +1215,11 @@ public class GlTF
     }
 
     /**
-     * Add the given samplers. The samplers of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given samplers. The samplers of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1223,7 +1233,7 @@ public class GlTF
         }
         Map<String, Sampler> oldMap = this.samplers;
         Map<String, Sampler> newMap = new LinkedHashMap<String, Sampler>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1231,11 +1241,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given samplers. The samplers of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given samplers. The samplers of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1247,7 +1257,7 @@ public class GlTF
         }
         Map<String, Sampler> oldMap = this.samplers;
         Map<String, Sampler> newMap = new LinkedHashMap<String, Sampler>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1259,8 +1269,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the samplers<br> 
-     * @see #getSamplers 
+     * Returns the default value of the samplers<br>
+     * 
+     * @see #getSamplers
      * 
      * @return The default samplers
      * 
@@ -1270,7 +1281,7 @@ public class GlTF
     }
 
     /**
-     * The ID of the default scene. (optional) 
+     * The ID of the default scene. (optional)
      * 
      * @param scene The scene to set
      * 
@@ -1278,13 +1289,13 @@ public class GlTF
     public void setScene(String scene) {
         if (scene == null) {
             this.scene = scene;
-            return ;
+            return;
         }
         this.scene = scene;
     }
 
     /**
-     * The ID of the default scene. (optional) 
+     * The ID of the default scene. (optional)
      * 
      * @return The scene
      * 
@@ -1294,8 +1305,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of scenes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of scenes. (optional)<br>
+     * Default: {}
      * 
      * @param scenes The scenes to set
      * 
@@ -1303,14 +1314,14 @@ public class GlTF
     public void setScenes(Map<String, Scene> scenes) {
         if (scenes == null) {
             this.scenes = scenes;
-            return ;
+            return;
         }
         this.scenes = scenes;
     }
 
     /**
-     * A dictionary object of scenes. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of scenes. (optional)<br>
+     * Default: {}
      * 
      * @return The scenes
      * 
@@ -1320,11 +1331,11 @@ public class GlTF
     }
 
     /**
-     * Add the given scenes. The scenes of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given scenes. The scenes of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1338,7 +1349,7 @@ public class GlTF
         }
         Map<String, Scene> oldMap = this.scenes;
         Map<String, Scene> newMap = new LinkedHashMap<String, Scene>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1346,11 +1357,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given scenes. The scenes of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given scenes. The scenes of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1362,7 +1373,7 @@ public class GlTF
         }
         Map<String, Scene> oldMap = this.scenes;
         Map<String, Scene> newMap = new LinkedHashMap<String, Scene>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1374,8 +1385,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the scenes<br> 
-     * @see #getScenes 
+     * Returns the default value of the scenes<br>
+     * 
+     * @see #getScenes
      * 
      * @return The default scenes
      * 
@@ -1385,8 +1397,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of shaders. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of shaders. (optional)<br>
+     * Default: {}
      * 
      * @param shaders The shaders to set
      * 
@@ -1394,14 +1406,14 @@ public class GlTF
     public void setShaders(Map<String, Shader> shaders) {
         if (shaders == null) {
             this.shaders = shaders;
-            return ;
+            return;
         }
         this.shaders = shaders;
     }
 
     /**
-     * A dictionary object of shaders. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of shaders. (optional)<br>
+     * Default: {}
      * 
      * @return The shaders
      * 
@@ -1411,11 +1423,11 @@ public class GlTF
     }
 
     /**
-     * Add the given shaders. The shaders of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given shaders. The shaders of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1429,7 +1441,7 @@ public class GlTF
         }
         Map<String, Shader> oldMap = this.shaders;
         Map<String, Shader> newMap = new LinkedHashMap<String, Shader>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1437,11 +1449,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given shaders. The shaders of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given shaders. The shaders of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1453,7 +1465,7 @@ public class GlTF
         }
         Map<String, Shader> oldMap = this.shaders;
         Map<String, Shader> newMap = new LinkedHashMap<String, Shader>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1465,8 +1477,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the shaders<br> 
-     * @see #getShaders 
+     * Returns the default value of the shaders<br>
+     * 
+     * @see #getShaders
      * 
      * @return The default shaders
      * 
@@ -1476,8 +1489,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of skins. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of skins. (optional)<br>
+     * Default: {}
      * 
      * @param skins The skins to set
      * 
@@ -1485,14 +1498,14 @@ public class GlTF
     public void setSkins(Map<String, Skin> skins) {
         if (skins == null) {
             this.skins = skins;
-            return ;
+            return;
         }
         this.skins = skins;
     }
 
     /**
-     * A dictionary object of skins. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of skins. (optional)<br>
+     * Default: {}
      * 
      * @return The skins
      * 
@@ -1502,11 +1515,11 @@ public class GlTF
     }
 
     /**
-     * Add the given skins. The skins of this instance will be replaced with 
-     * a map that contains all previous mappings, and additionally the new 
-     * mapping. 
+     * Add the given skins. The skins of this instance will be replaced with
+     * a map that contains all previous mappings, and additionally the new
+     * mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1520,7 +1533,7 @@ public class GlTF
         }
         Map<String, Skin> oldMap = this.skins;
         Map<String, Skin> newMap = new LinkedHashMap<String, Skin>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1528,11 +1541,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given skins. The skins of this instance will be replaced 
-     * with a map that contains all previous mappings, except for the one 
-     * with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given skins. The skins of this instance will be replaced
+     * with a map that contains all previous mappings, except for the one
+     * with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1544,7 +1557,7 @@ public class GlTF
         }
         Map<String, Skin> oldMap = this.skins;
         Map<String, Skin> newMap = new LinkedHashMap<String, Skin>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1556,8 +1569,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the skins<br> 
-     * @see #getSkins 
+     * Returns the default value of the skins<br>
+     * 
+     * @see #getSkins
      * 
      * @return The default skins
      * 
@@ -1567,8 +1581,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of techniques. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of techniques. (optional)<br>
+     * Default: {}
      * 
      * @param techniques The techniques to set
      * 
@@ -1576,14 +1590,14 @@ public class GlTF
     public void setTechniques(Map<String, Technique> techniques) {
         if (techniques == null) {
             this.techniques = techniques;
-            return ;
+            return;
         }
         this.techniques = techniques;
     }
 
     /**
-     * A dictionary object of techniques. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of techniques. (optional)<br>
+     * Default: {}
      * 
      * @return The techniques
      * 
@@ -1593,11 +1607,11 @@ public class GlTF
     }
 
     /**
-     * Add the given techniques. The techniques of this instance will be 
-     * replaced with a map that contains all previous mappings, and 
-     * additionally the new mapping. 
+     * Add the given techniques. The techniques of this instance will be
+     * replaced with a map that contains all previous mappings, and
+     * additionally the new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1611,7 +1625,7 @@ public class GlTF
         }
         Map<String, Technique> oldMap = this.techniques;
         Map<String, Technique> newMap = new LinkedHashMap<String, Technique>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1619,11 +1633,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given techniques. The techniques of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given techniques. The techniques of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1635,7 +1649,7 @@ public class GlTF
         }
         Map<String, Technique> oldMap = this.techniques;
         Map<String, Technique> newMap = new LinkedHashMap<String, Technique>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1647,8 +1661,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the techniques<br> 
-     * @see #getTechniques 
+     * Returns the default value of the techniques<br>
+     * 
+     * @see #getTechniques
      * 
      * @return The default techniques
      * 
@@ -1658,8 +1673,8 @@ public class GlTF
     }
 
     /**
-     * A dictionary object of textures. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of textures. (optional)<br>
+     * Default: {}
      * 
      * @param textures The textures to set
      * 
@@ -1667,14 +1682,14 @@ public class GlTF
     public void setTextures(Map<String, Texture> textures) {
         if (textures == null) {
             this.textures = textures;
-            return ;
+            return;
         }
         this.textures = textures;
     }
 
     /**
-     * A dictionary object of textures. (optional)<br> 
-     * Default: {} 
+     * A dictionary object of textures. (optional)<br>
+     * Default: {}
      * 
      * @return The textures
      * 
@@ -1684,11 +1699,11 @@ public class GlTF
     }
 
     /**
-     * Add the given textures. The textures of this instance will be replaced 
-     * with a map that contains all previous mappings, and additionally the 
-     * new mapping. 
+     * Add the given textures. The textures of this instance will be replaced
+     * with a map that contains all previous mappings, and additionally the
+     * new mapping.
      * 
-     * @param key The key
+     * @param key   The key
      * @param value The value
      * @throws NullPointerException If the given key or value is <code>null</code>
      * 
@@ -1702,7 +1717,7 @@ public class GlTF
         }
         Map<String, Texture> oldMap = this.textures;
         Map<String, Texture> newMap = new LinkedHashMap<String, Texture>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.put(key, value);
@@ -1710,11 +1725,11 @@ public class GlTF
     }
 
     /**
-     * Remove the given textures. The textures of this instance will be 
-     * replaced with a map that contains all previous mappings, except for 
-     * the one with the given key.<br> 
-     * If this new map would be empty, then it will be set to 
-     * <code>null</code>. 
+     * Remove the given textures. The textures of this instance will be
+     * replaced with a map that contains all previous mappings, except for
+     * the one with the given key.<br>
+     * If this new map would be empty, then it will be set to
+     * <code>null</code>.
      * 
      * @param key The key
      * @throws NullPointerException If the given key is <code>null</code>
@@ -1726,7 +1741,7 @@ public class GlTF
         }
         Map<String, Texture> oldMap = this.textures;
         Map<String, Texture> newMap = new LinkedHashMap<String, Texture>();
-        if (oldMap!= null) {
+        if (oldMap != null) {
             newMap.putAll(oldMap);
         }
         newMap.remove(key);
@@ -1738,8 +1753,9 @@ public class GlTF
     }
 
     /**
-     * Returns the default value of the textures<br> 
-     * @see #getTextures 
+     * Returns the default value of the textures<br>
+     * 
+     * @see #getTextures
      * 
      * @return The default textures
      * 

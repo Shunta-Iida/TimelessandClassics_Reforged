@@ -11,12 +11,13 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageColorBench extends PlayMessage<MessageColorBench>
-{
-    public MessageColorBench() {}
+public class MessageColorBench extends PlayMessage<MessageColorBench> {
+    public MessageColorBench() {
+    }
 
     @Override
-    public void encode(MessageColorBench messageColorBench, FriendlyByteBuf buffer) {}
+    public void encode(MessageColorBench messageColorBench, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageColorBench decode(FriendlyByteBuf buffer) {
@@ -24,13 +25,10 @@ public class MessageColorBench extends PlayMessage<MessageColorBench>
     }
 
     @Override
-    public void handle(MessageColorBench messageColorBench, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageColorBench messageColorBench, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null)
-            {
+            if (player != null) {
                 ServerPlayHandler.handleColorbenchGui(player);
             }
         });

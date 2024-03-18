@@ -17,24 +17,37 @@ public class M1911AnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 0; // ALWAYS KEEP l -> left hand BONES
     public static int INDEX_RIGHT_HAND = 9;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/m1911_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac","animations/m1911_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/m1911_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/m1911_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(new ResourceLocation("tac","animations/m1911_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(new ResourceLocation("tac","animations/m1911_inspect.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation("tac", "animations/m1911_inspect.gltf"));
     private static final M1911AnimationController instance = new M1911AnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
-        switch (label){
-            case RELOAD_NORMAL: return RELOAD_NORM;
-            case RELOAD_EMPTY: return RELOAD_EMPTY;
-            case DRAW: return DRAW;
-            case STATIC: return STATIC;
-            case INSPECT: return INSPECT;
-            case INSPECT_EMPTY: return INSPECT_EMPTY;
-            default: return null;
+        switch (label) {
+            case RELOAD_NORMAL:
+                return RELOAD_NORM;
+            case RELOAD_EMPTY:
+                return RELOAD_EMPTY;
+            case DRAW:
+                return DRAW;
+            case STATIC:
+                return STATIC;
+            case INSPECT:
+                return INSPECT;
+            case INSPECT_EMPTY:
+                return INSPECT_EMPTY;
+            default:
+                return null;
         }
     }
 
@@ -50,16 +63,17 @@ public class M1911AnimationController extends PistalAnimationController {
             GunMod.LOGGER.fatal(e.getStackTrace());
         }
         enableStaticState();
-        GunAnimationController.setAnimationControllerMap(ModItems.M1911.getId(),this);
+        GunAnimationController.setAnimationControllerMap(ModItems.M1911.getId(), this);
     }
 
     @Override
-    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label){
+    public AnimationSoundMeta getSoundFromLabel(AnimationLabel label) {
         return super.getSoundFromLabel(ModItems.M1911.get(), label);
     }
 
-
-    public static M1911AnimationController getInstance() { return instance; }
+    public static M1911AnimationController getInstance() {
+        return instance;
+    }
 
     @Override
     protected int getAttachmentsNodeIndex() {

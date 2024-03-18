@@ -11,37 +11,31 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageShooting extends PlayMessage<MessageShooting>
-{
+public class MessageShooting extends PlayMessage<MessageShooting> {
     private boolean shooting;
 
-    public MessageShooting() {}
+    public MessageShooting() {
+    }
 
-    public MessageShooting(boolean shooting)
-    {
+    public MessageShooting(boolean shooting) {
         this.shooting = shooting;
     }
 
     @Override
-    public void encode(MessageShooting messageShooting, FriendlyByteBuf buffer)
-    {
+    public void encode(MessageShooting messageShooting, FriendlyByteBuf buffer) {
         buffer.writeBoolean(messageShooting.shooting);
     }
 
     @Override
-    public MessageShooting decode(FriendlyByteBuf buffer)
-    {
+    public MessageShooting decode(FriendlyByteBuf buffer) {
         return new MessageShooting(buffer.readBoolean());
     }
 
     @Override
-    public void handle(MessageShooting messageShooting, Supplier<NetworkEvent.Context> supplier)
-    {
-        supplier.get().enqueueWork(() ->
-        {
+    public void handle(MessageShooting messageShooting, Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null)
-            {
+            if (player != null) {
                 ModSyncedDataKeys.SHOOTING.setValue(player, messageShooting.shooting);
             }
         });

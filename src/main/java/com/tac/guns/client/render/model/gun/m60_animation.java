@@ -26,30 +26,34 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class m60_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack, LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
+            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
         M60AnimationController controller = M60AnimationController.getInstance();
-
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_BODY, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_BODY,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_MAGAZINE, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_MAGAZINE,
+                    transformType, matrices);
             RenderUtil.renderModel(getComponentModel(skin, MAG), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_CHAIN, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_CHAIN,
+                    transformType, matrices);
             if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
                     || Gun.hasAmmo(stack)) {
-                RenderUtil.renderModel(getComponentModel(skin, BULLET_CHAIN), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET_CHAIN), stack, matrices, renderBuffer, light,
+                        overlay);
 
             }
         }
@@ -57,11 +61,13 @@ public class m60_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_CAPS, transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_CAPS,
+                    transformType, matrices);
             if (Gun.getScope(stack) == null) {
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
             } else {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_FOLDED), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_FOLDED), stack, matrices, renderBuffer, light,
+                        overlay);
             }
             RenderUtil.renderModel(getComponentModel(skin, CAP), stack, matrices, renderBuffer, light, overlay);
         }
@@ -69,7 +75,8 @@ public class m60_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_HANDLE, transformType, matrices);//HANDLE?
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M60AnimationController.INDEX_HANDLE,
+                    transformType, matrices);// HANDLE?
             RenderUtil.renderModel(getComponentModel(skin, HANDLE), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();

@@ -2,2419 +2,3153 @@
    "item.aa12_fire_s": {
       "subtitle": "subtitle.tac.aa12_fire_s",
       "sounds": [
-         { "name": "tac:item/aa12_fire_s" }
+         {
+            "name": "tac:item/aa12_fire_s"
+         }
       ]
    },
    "item.aa12_fire": {
       "subtitle": "subtitle.tac.aa12_fire_s",
       "sounds": [
-         { "name": "tac:item/aa12_fire" }
+         {
+            "name": "tac:item/aa12_fire"
+         }
       ]
    },
    "item.dbl_fire": {
       "subtitle": "subtitle.tac.db_fire",
       "sounds": [
-         { "name": "tac:item/dbl_fire" }
+         {
+            "name": "tac:item/dbl_fire"
+         }
       ]
    },
    "item.dbs_fire": {
       "subtitle": "subtitle.tac.dbs_fire",
       "sounds": [
-         { "name": "tac:item/dbs_fire" }
+         {
+            "name": "tac:item/dbs_fire"
+         }
       ]
    },
    "item.m590_fire": {
       "subtitle": "subtitle.tac.m590_fire",
       "sounds": [
-         { "name": "tac:item/m590_fire" }
+         {
+            "name": "tac:item/m590_fire"
+         }
       ]
    },
    "item.m590_fire_s": {
       "subtitle": "subtitle.tac.m590_fire_s",
       "sounds": [
-         { "name": "tac:item/m590_fire_s" }
+         {
+            "name": "tac:item/m590_fire_s"
+         }
       ]
    },
    "item.m870_fire": {
-         "subtitle": "subtitle.tac.m870_fire",
-         "sounds": [
-            { "name": "tac:item/m870_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.m870_fire",
+      "sounds": [
+         {
+            "name": "tac:item/m870_fire"
+         }
+      ]
+   },
    "item.m1014_fire": {
-         "subtitle": "subtitle.tac.m1014_fire",
-         "sounds": [
-            { "name": "tac:item/m1014_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.m1014_fire",
+      "sounds": [
+         {
+            "name": "tac:item/m1014_fire"
+         }
+      ]
+   },
    "item.m1014_fire_s": {
-         "subtitle": "subtitle.tac.m1014_fire_s",
-         "sounds": [
-            { "name": "tac:item/m1014_fire_s" }
-         ]
-      },
+      "subtitle": "subtitle.tac.m1014_fire_s",
+      "sounds": [
+         {
+            "name": "tac:item/m1014_fire_s"
+         }
+      ]
+   },
    "item.spas12_fire": {
       "subtitle": "subtitle.tac.spas12_fire",
       "sounds": [
-         { "name": "tac:item/spas12_fire" }
+         {
+            "name": "tac:item/spas12_fire"
+         }
       ]
    },
    "item.ak47_fire_s": {
       "subtitle": "subtitle.tac.ak47_fire_s",
       "sounds": [
-         { "name": "tac:item/ak47_fire_s" }
+         {
+            "name": "tac:item/ak47_fire_s"
+         }
       ]
    },
    "item.ar10_fire_s": {
       "subtitle": "subtitle.tac.ar10_fire_s",
       "sounds": [
-         { "name": "tac:item/ar10_fire_s" }
+         {
+            "name": "tac:item/ar10_fire_s"
+         }
       ]
    },
    "item.ar15_fire": {
       "subtitle": "subtitle.tac.ar15_fire_s",
       "sounds": [
-         { "name": "tac:item/ar15_fire" }
+         {
+            "name": "tac:item/ar15_fire"
+         }
       ]
    },
    "item.ar15_fire_s": {
       "subtitle": "subtitle.tac.ar15_fire_s",
       "sounds": [
-         { "name": "tac:item/ar15_fire_s" }
+         {
+            "name": "tac:item/ar15_fire_s"
+         }
       ]
    },
    "item.fnfal_fire_s": {
       "subtitle": "subtitle.tac.fnfal_fire_s",
       "sounds": [
-         { "name": "tac:item/fnfal_fire_s" }
+         {
+            "name": "tac:item/fnfal_fire_s"
+         }
       ]
    },
    "item.m1_fire_s": {
       "subtitle": "subtitle.tac.m1garand_fire_s",
       "sounds": [
-         { "name": "tac:item/m1_fire_s" }
+         {
+            "name": "tac:item/m1_fire_s"
+         }
       ]
    },
    "item.m4a1_fire_s": {
       "subtitle": "subtitle.tac.m4a1_fire_s",
       "sounds": [
-         { "name": "tac:item/m4a1_fire_s" }
+         {
+            "name": "tac:item/m4a1_fire_s"
+         }
       ]
    },
    "item.m16a4_fire_s": {
       "subtitle": "subtitle.tac.m16a4_fire_s",
       "sounds": [
-         { "name": "tac:item/m16a4_fire_s" }
+         {
+            "name": "tac:item/m16a4_fire_s"
+         }
       ]
    },
    "item.m92fs_fire_s": {
       "subtitle": "subtitle.tac.m92fs_fire_s",
       "sounds": [
-         { "name": "tac:item/m92fs_fire_s" }
+         {
+            "name": "tac:item/m92fs_fire_s"
+         }
       ]
    },
    "item.mk14ebr_fire": {
       "subtitle": "subtitle.tac.mk14ebr_fire",
       "sounds": [
-         { "name": "tac:item/mk14ebr_fire" }
+         {
+            "name": "tac:item/mk14ebr_fire"
+         }
       ]
    },
    "item.mk14ebr_fire_s": {
       "subtitle": "subtitle.tac.mk14ebr_fire_s",
       "sounds": [
-         { "name": "tac:item/mk14ebr_fire_s" }
+         {
+            "name": "tac:item/mk14ebr_fire_s"
+         }
       ]
    },
    "item.mk47_fire": {
       "subtitle": "subtitle.tac.mk47_fire",
       "sounds": [
-         { "name": "tac:item/mk47_fire" }
+         {
+            "name": "tac:item/mk47_fire"
+         }
       ]
    },
    "item.mk47_fire_s": {
       "subtitle": "subtitle.tac.mk47_fire_s",
       "sounds": [
-         { "name": "tac:item/mk47_fire_s" }
+         {
+            "name": "tac:item/mk47_fire_s"
+         }
       ]
    },
    "item.qbz95_fire_s": {
       "subtitle": "subtitle.tac.qbz95_fire_s",
       "sounds": [
-         { "name": "tac:item/qbz95_fire_s" }
+         {
+            "name": "tac:item/qbz95_fire_s"
+         }
       ]
    },
    "item.qbz95_fire": {
       "subtitle": "subtitle.tac.qbz95_fire",
       "sounds": [
-         { "name": "tac:item/qbz95_fire" }
+         {
+            "name": "tac:item/qbz95_fire"
+         }
       ]
    },
    "item.qbz191_fire_s": {
       "subtitle": "subtitle.tac.qbz191_fire_s",
       "sounds": [
-         { "name": "tac:item/qbz191_fire_s" }
+         {
+            "name": "tac:item/qbz191_fire_s"
+         }
       ]
    },
    "item.qbz191_fire": {
       "subtitle": "subtitle.tac.qbz191_fire",
       "sounds": [
-         { "name": "tac:item/qbz191_fire" }
+         {
+            "name": "tac:item/qbz191_fire"
+         }
       ]
    },
    "item.scarh_fire": {
-         "subtitle": "subtitle.tac.scarh_fire",
-         "sounds": [
-            { "name": "tac:item/scarh_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.scarh_fire",
+      "sounds": [
+         {
+            "name": "tac:item/scarh_fire"
+         }
+      ]
+   },
    "item.scarh_fire_s": {
       "subtitle": "subtitle.tac.scarh_fire_s",
       "sounds": [
-         { "name": "tac:item/scarh_fire_s" }
+         {
+            "name": "tac:item/scarh_fire_s"
+         }
       ]
    },
    "item.scarl_fire": {
-            "subtitle": "subtitle.tac.scarl_fire",
-            "sounds": [
-               { "name": "tac:item/scarl_fire" }
-            ]
-         },
+      "subtitle": "subtitle.tac.scarl_fire",
+      "sounds": [
+         {
+            "name": "tac:item/scarl_fire"
+         }
+      ]
+   },
    "item.scarl_fire_s": {
-         "subtitle": "subtitle.tac.scarl_fire_s",
-         "sounds": [
-            { "name": "tac:item/scarl_fire_s" }
-         ]
-      },
+      "subtitle": "subtitle.tac.scarl_fire_s",
+      "sounds": [
+         {
+            "name": "tac:item/scarl_fire_s"
+         }
+      ]
+   },
    "item.hk416_fire": {
-         "subtitle": "subtitle.tac.hk416_fire",
-         "sounds": [
-            { "name": "tac:item/hk416_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.hk416_fire",
+      "sounds": [
+         {
+            "name": "tac:item/hk416_fire"
+         }
+      ]
+   },
    "item.hk416_fire_s": {
-         "subtitle": "subtitle.tac.hk416_fire",
-         "sounds": [
-            { "name": "tac:item/hk416_fire_s" }
-         ]
-      },
+      "subtitle": "subtitle.tac.hk416_fire",
+      "sounds": [
+         {
+            "name": "tac:item/hk416_fire_s"
+         }
+      ]
+   },
    "item.hkmk23_fire": {
       "subtitle": "subtitle.tac.hkmk23_fire",
       "sounds": [
-         { "name": "tac:item/hkmk23_fire" }
+         {
+            "name": "tac:item/hkmk23_fire"
+         }
       ]
    },
    "item.hkmk23_fire_s": {
       "subtitle": "subtitle.tac.hkmk23_fire",
       "sounds": [
-         { "name": "tac:item/hkmk23_fire_s" }
+         {
+            "name": "tac:item/hkmk23_fire_s"
+         }
       ]
    },
    "item.sigmcx_fire": {
       "subtitle": "subtitle.tac.sigmcx_fire",
       "sounds": [
-         { "name": "tac:item/sigmcx_fire" }
+         {
+            "name": "tac:item/sigmcx_fire"
+         }
       ]
    },
    "item.sigmcx_fire_s": {
       "subtitle": "subtitle.tac.sigmcx_fire_s",
       "sounds": [
-         { "name": "tac:item/sigmcx_fire_s" }
+         {
+            "name": "tac:item/sigmcx_fire_s"
+         }
       ]
    },
    "item.sks_fire": {
       "subtitle": "subtitle.tac.sks_fire",
       "sounds": [
-         { "name": "tac:item/sks_fire" }
+         {
+            "name": "tac:item/sks_fire"
+         }
       ]
    },
    "item.sks_fire_s": {
       "subtitle": "subtitle.tac.sks_fire_s",
       "sounds": [
-         { "name": "tac:item/sks_fire_s" }
+         {
+            "name": "tac:item/sks_fire_s"
+         }
       ]
    },
    "item.skstti_fire": {
-         "subtitle": "subtitle.tac.skstti_fire",
-         "sounds": [
-            { "name": "tac:item/skstti_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.skstti_fire",
+      "sounds": [
+         {
+            "name": "tac:item/skstti_fire"
+         }
+      ]
+   },
    "item.type81_fire": {
-         "subtitle": "subtitle.tac.type81_fire",
-         "sounds": [
-            { "name": "tac:item/type81_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.type81_fire",
+      "sounds": [
+         {
+            "name": "tac:item/type81_fire"
+         }
+      ]
+   },
    "item.type81_fire_s": {
-         "subtitle": "subtitle.tac.type81_fire_s",
-         "sounds": [
-            { "name": "tac:item/type81_fire_s" }
-         ]
-      },
+      "subtitle": "subtitle.tac.type81_fire_s",
+      "sounds": [
+         {
+            "name": "tac:item/type81_fire_s"
+         }
+      ]
+   },
    "item.x95r_fire_s": {
-         "subtitle": "subtitle.tac.x95r_fire_s",
-         "sounds": [
-            { "name": "tac:item/x95r_fire_s" }
-         ]
-      },
+      "subtitle": "subtitle.tac.x95r_fire_s",
+      "sounds": [
+         {
+            "name": "tac:item/x95r_fire_s"
+         }
+      ]
+   },
    "item.x95r_fire": {
-         "subtitle": "subtitle.tac.x95r_fire",
-         "sounds": [
-            { "name": "tac:item/x95r_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.x95r_fire",
+      "sounds": [
+         {
+            "name": "tac:item/x95r_fire"
+         }
+      ]
+   },
    "item.aiawp_fire_s": {
       "subtitle": "subtitle.tac.aiawp_fire_s",
       "sounds": [
-         { "name": "tac:item/aiawp_fire_s" }
+         {
+            "name": "tac:item/aiawp_fire_s"
+         }
       ]
    },
    "item.aiawp_fire": {
-         "subtitle": "subtitle.tac.aiawp_fire",
-         "sounds": [
-            { "name": "tac:item/aiawp_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.aiawp_fire",
+      "sounds": [
+         {
+            "name": "tac:item/aiawp_fire"
+         }
+      ]
+   },
    "item.ak47_fire": {
-         "subtitle": "subtitle.tac.ak47_fire",
-         "sounds": [
-            { "name": "tac:item/ak47_fire" }
-         ]
-      },
+      "subtitle": "subtitle.tac.ak47_fire",
+      "sounds": [
+         {
+            "name": "tac:item/ak47_fire"
+         }
+      ]
+   },
    "item.ar10_fire": {
       "subtitle": "subtitle.tac.ar10_fire",
       "sounds": [
-         { "name": "tac:item/ar10_fire" }
+         {
+            "name": "tac:item/ar10_fire"
+         }
       ]
    },
    "item.delisle_fire_s": {
       "subtitle": "subtitle.tac.delisle_fire_s",
       "sounds": [
-         { "name": "tac:item/delisle_fire_s" }
+         {
+            "name": "tac:item/delisle_fire_s"
+         }
       ]
    },
    "item.espadon_fire": {
       "subtitle": "subtitle.tac.espadon_fire",
       "sounds": [
-         { "name": "tac:item/espadon_fire" }
+         {
+            "name": "tac:item/espadon_fire"
+         }
       ]
    },
    "item.espadon_fire_s": {
       "subtitle": "subtitle.tac.espadon_fire_s",
       "sounds": [
-         { "name": "tac:item/espadon_fire_s" }
+         {
+            "name": "tac:item/espadon_fire_s"
+         }
       ]
    },
    "item.fnfal_fire": {
       "subtitle": "subtitle.tac.fnfal_fire",
       "sounds": [
-         { "name": "tac:item/fnfal_fire" }
+         {
+            "name": "tac:item/fnfal_fire"
+         }
       ]
    },
    "item.frf2_fire_s": {
       "subtitle": "subtitle.tac.frf2_fire_s",
       "sounds": [
-         { "name": "tac:item/frf2_fire_s" }
+         {
+            "name": "tac:item/frf2_fire_s"
+         }
       ]
    },
    "item.kar98_fire": {
       "subtitle": "subtitle.tac.kar98_fire",
       "sounds": [
-         { "name": "tac:item/kar98_fire" }
+         {
+            "name": "tac:item/kar98_fire"
+         }
       ]
    },
    "item.kar98_fire_s": {
       "subtitle": "subtitle.tac.kar98_fire_s",
       "sounds": [
-         { "name": "tac:item/kar98_fire_s" }
+         {
+            "name": "tac:item/kar98_fire_s"
+         }
       ]
    },
    "item.smle_fire": {
       "subtitle": "subtitle.tac.leeenfield3_fire",
       "sounds": [
-         { "name": "tac:item/smle_fire" }
+         {
+            "name": "tac:item/smle_fire"
+         }
       ]
    },
    "item.m4a1_fire": {
       "subtitle": "subtitle.tac.m4a1_fire",
       "sounds": [
-         { "name": "tac:item/m4a1_fire" }
+         {
+            "name": "tac:item/m4a1_fire"
+         }
       ]
    },
    "item.m16a1_fire": {
       "subtitle": "subtitle.tac.m16a1_fire",
       "sounds": [
-         { "name": "tac:item/m16a1_fire" }
+         {
+            "name": "tac:item/m16a1_fire"
+         }
       ]
    },
    "item.m16a4_fire": {
       "subtitle": "subtitle.tac.m16a4_fire",
       "sounds": [
-         { "name": "tac:item/m16a4_fire" }
+         {
+            "name": "tac:item/m16a4_fire"
+         }
       ]
    },
    "item.m16a1_fire_s": {
       "subtitle": "subtitle.tac.m16a1_fire_s",
       "sounds": [
-         { "name": "tac:item/m16a1_fire_s" }
+         {
+            "name": "tac:item/m16a1_fire_s"
+         }
       ]
    },
    "item.m24_fire": {
       "subtitle": "subtitle.tac.m24_fire",
       "sounds": [
-         { "name": "tac:item/m24_fire" }
+         {
+            "name": "tac:item/m24_fire"
+         }
       ]
    },
    "item.m24_fire_s": {
       "subtitle": "subtitle.tac.m24_fire_s",
       "sounds": [
-         { "name": "tac:item/m24_fire_s" }
+         {
+            "name": "tac:item/m24_fire_s"
+         }
       ]
    },
    "item.m82a2_fire": {
       "subtitle": "subtitle.tac.m82a2_fire",
       "sounds": [
-         { "name": "tac:item/m82a2_fire" }
+         {
+            "name": "tac:item/m82a2_fire"
+         }
       ]
    },
    "item.m82a3_fire": {
       "subtitle": "subtitle.tac.m82a3_fire",
       "sounds": [
-         { "name": "tac:item/m82a3_fire" }
+         {
+            "name": "tac:item/m82a3_fire"
+         }
       ]
    },
    "item.m82a2_fire_s": {
       "subtitle": "subtitle.tac.m82a2_fire_s",
       "sounds": [
-         { "name": "tac:item/m82a2_fire_s" }
+         {
+            "name": "tac:item/m82a2_fire_s"
+         }
       ]
    },
    "item.m1903_fire": {
       "subtitle": "subtitle.tac.m1903",
       "sounds": [
-         { "name": "tac:item/m1903" }
+         {
+            "name": "tac:item/m1903"
+         }
       ]
    },
    "item.mosin_fire": {
       "subtitle": "subtitle.tac.mosinnagant_fire",
       "sounds": [
-         { "name": "tac:item/mosin_fire" }
+         {
+            "name": "tac:item/mosin_fire"
+         }
       ]
    },
    "item.mosin_fire_s": {
       "subtitle": "subtitle.tac.mosinnagant_fire_s",
       "sounds": [
-         { "name": "tac:item/mosin_fire_s" }
+         {
+            "name": "tac:item/mosin_fire_s"
+         }
       ]
    },
    "item.ttisti2011_fire_s": {
       "subtitle": "subtitle.tac.ttisti2011_fire_s",
       "sounds": [
-         { "name": "tac:item/ttisti2011_fire_s" }
+         {
+            "name": "tac:item/ttisti2011_fire_s"
+         }
       ]
    },
    "item.m92fs_fire": {
       "subtitle": "subtitle.tac.m92fs_fire",
       "sounds": [
-         { "name": "tac:item/m92fs_fire" }
+         {
+            "name": "tac:item/m92fs_fire"
+         }
       ]
    },
    "item.c96_fire_s": {
       "subtitle": "subtitle.tac.c96_fire_s",
       "sounds": [
-         { "name": "tac:item/c96_fire_s" }
+         {
+            "name": "tac:item/c96_fire_s"
+         }
       ]
    },
    "item.c96_fire": {
       "subtitle": "subtitle.tac.c96_fire",
       "sounds": [
-         { "name": "tac:item/c96_fire" }
+         {
+            "name": "tac:item/c96_fire"
+         }
       ]
    },
    "item.cz75_fire_s": {
       "subtitle": "subtitle.tac.cz75_fire_s",
       "sounds": [
-         { "name": "tac:item/cz75_fire_s" }
+         {
+            "name": "tac:item/cz75_fire_s"
+         }
       ]
    },
    "item.cz75_fire": {
       "subtitle": "subtitle.tac.cz75_fire",
       "sounds": [
-         { "name": "tac:item/cz75_fire" }
+         {
+            "name": "tac:item/cz75_fire"
+         }
       ]
    },
    "item.cz75auto_fire_s": {
       "subtitle": "subtitle.tac.cz75auto_fire_s",
       "sounds": [
-         { "name": "tac:item/cz75auto_fire_s" }
+         {
+            "name": "tac:item/cz75auto_fire_s"
+         }
       ]
    },
    "item.cz75auto_fire": {
       "subtitle": "subtitle.tac.cz75auto_fire",
       "sounds": [
-         { "name": "tac:item/cz75auto_fire" }
+         {
+            "name": "tac:item/cz75auto_fire"
+         }
       ]
    },
    "item.deagle_fire": {
       "subtitle": "subtitle.tac.deagle_fire",
       "sounds": [
-         { "name": "tac:item/deagle_fire" }
+         {
+            "name": "tac:item/deagle_fire"
+         }
       ]
    },
    "item.deagle_fire_s": {
       "subtitle": "subtitle.tac.deagle_fire_s",
       "sounds": [
-         { "name": "tac:item/deagle_fire_s" }
+         {
+            "name": "tac:item/deagle_fire_s"
+         }
       ]
    },
    "item.glock17_fire_s": {
       "subtitle": "subtitle.tac.glock17_fire_s",
       "sounds": [
-         { "name": "tac:item/glock17_fire_s" }
+         {
+            "name": "tac:item/glock17_fire_s"
+         }
       ]
    },
    "item.glock17_fire": {
       "subtitle": "subtitle.tac.glock17_fire",
       "sounds": [
-         { "name": "tac:item/glock17_fire" }
+         {
+            "name": "tac:item/glock17_fire"
+         }
       ]
    },
    "item.glock18_fire_s": {
       "subtitle": "subtitle.tac.glock18_fire_s",
       "sounds": [
-         { "name": "tac:item/glock18_fire_s" }
+         {
+            "name": "tac:item/glock18_fire_s"
+         }
       ]
    },
    "item.glock18_fire": {
       "subtitle": "subtitle.tac.glock18_fire",
       "sounds": [
-         { "name": "tac:item/glock18_fire" }
+         {
+            "name": "tac:item/glock18_fire"
+         }
       ]
    },
    "item.mk23_fire_s": {
       "subtitle": "subtitle.tac.mk23_fire_s",
       "sounds": [
-         { "name": "tac:item/mk23_fire_s" }
+         {
+            "name": "tac:item/mk23_fire_s"
+         }
       ]
    },
    "item.mk23_fire": {
       "subtitle": "subtitle.tac.mk23_fire",
       "sounds": [
-         { "name": "tac:item/mk23_fire" }
+         {
+            "name": "tac:item/mk23_fire"
+         }
       ]
    },
    "item.m1911_fire": {
       "subtitle": "subtitle.tac.m1911_fire",
       "sounds": [
-         { "name": "tac:item/m1911_fire" }
+         {
+            "name": "tac:item/m1911_fire"
+         }
       ]
    },
    "item.m1911_fire_s": {
       "subtitle": "subtitle.tac.m1911_fire_s",
       "sounds": [
-         { "name": "tac:item/m1911_fire_s" }
+         {
+            "name": "tac:item/m1911_fire_s"
+         }
       ]
    },
    "item.ppk_fire": {
       "subtitle": "subtitle.tac.ppk_fire",
       "sounds": [
-         { "name": "tac:item/ppk_fire" }
+         {
+            "name": "tac:item/ppk_fire"
+         }
       ]
    },
    "item.ppk_fire_s": {
       "subtitle": "subtitle.tac.ppk_fire_s",
       "sounds": [
-         { "name": "tac:item/ppk_fire_s" }
+         {
+            "name": "tac:item/ppk_fire_s"
+         }
       ]
    },
    "item.qsz92_fire_s": {
       "subtitle": "subtitle.tac.qsz92_fire_s",
       "sounds": [
-         { "name": "tac:item/qsz92_fire_s" }
+         {
+            "name": "tac:item/qsz92_fire_s"
+         }
       ]
    },
    "item.qsz92_fire": {
       "subtitle": "subtitle.tac.qsz92_fire",
       "sounds": [
-         { "name": "tac:item/qsz92_fire" }
+         {
+            "name": "tac:item/qsz92_fire"
+         }
       ]
    },
    "item.scorpion_fire": {
       "subtitle": "subtitle.tac.scorpion_fire",
       "sounds": [
-         { "name": "tac:item/scorpion_fire" }
+         {
+            "name": "tac:item/scorpion_fire"
+         }
       ]
    },
    "item.ttisti2011_fire": {
       "subtitle": "subtitle.tac.ttisti2011_fire",
       "sounds": [
-         { "name": "tac:item/ttisti2011_fire" }
+         {
+            "name": "tac:item/ttisti2011_fire"
+         }
       ]
    },
    "item.m1917_s": {
       "subtitle": "subtitle.tac.m1917_s",
       "sounds": [
-         { "name": "tac:item/m1917_s" }
+         {
+            "name": "tac:item/m1917_s"
+         }
       ]
    },
    "item.mac10_fire": {
       "subtitle": "subtitle.tac.mac10_fire",
       "sounds": [
-         { "name": "tac:item/mac10_fire" }
+         {
+            "name": "tac:item/mac10_fire"
+         }
       ]
    },
    "item.mp5a5_fire": {
       "subtitle": "subtitle.tac.mp5a5_fire",
       "sounds": [
-         { "name": "tac:item/mp5a5_fire" }
+         {
+            "name": "tac:item/mp5a5_fire"
+         }
       ]
    },
    "item.mp7_fire": {
       "subtitle": "subtitle.tac.mp7_fire",
       "sounds": [
-         { "name": "tac:item/mp7_fire" }
+         {
+            "name": "tac:item/mp7_fire"
+         }
       ]
    },
    "item.mp7_fire_s": {
       "subtitle": "subtitle.tac.mp7_fire_s",
       "sounds": [
-         { "name": "tac:item/mp7_fire_s" }
+         {
+            "name": "tac:item/mp7_fire_s"
+         }
       ]
    },
    "item.mp9_fire": {
       "subtitle": "subtitle.tac.mp9_fire",
       "sounds": [
-         { "name": "tac:item/mp9_fire" }
+         {
+            "name": "tac:item/mp9_fire"
+         }
       ]
    },
    "item.mp9_fire_s": {
       "subtitle": "subtitle.tac.mp9_fire_s",
       "sounds": [
-         { "name": "tac:item/mp9_fire_s" }
+         {
+            "name": "tac:item/mp9_fire_s"
+         }
       ]
    },
    "item.stenmk2_fire": {
       "subtitle": "subtitle.tac.stenmk2_fire",
       "sounds": [
-         { "name": "tac:item/stenmk2_fire" }
+         {
+            "name": "tac:item/stenmk2_fire"
+         }
       ]
    },
    "item.vector_fire": {
       "subtitle": "subtitle.tac.vector_fire",
       "sounds": [
-         { "name": "tac:item/vector_fire" }
+         {
+            "name": "tac:item/vector_fire"
+         }
       ]
    },
    "item.vector_fire_s": {
       "subtitle": "subtitle.tac.vector_fire",
       "sounds": [
-         { "name": "tac:item/vector_fire_s" }
+         {
+            "name": "tac:item/vector_fire_s"
+         }
       ]
    },
-
    "item.m1a1_smg_fire": {
       "subtitle": "subtitle.tac.m1a1_smg_fire",
       "sounds": [
-         { "name": "tac:item/m1a1_smg_fire" }
+         {
+            "name": "tac:item/m1a1_smg_fire"
+         }
       ]
    },
-
    "item.m60_fire": {
       "subtitle": "subtitle.tac.m60_fire",
       "sounds": [
-         { "name": "tac:item/m60_fire" }
+         {
+            "name": "tac:item/m60_fire"
+         }
       ]
    },
    "item.m60_fire_s": {
       "subtitle": "subtitle.tac.m60_fire_s",
       "sounds": [
-         { "name": "tac:item/m60_fire_s" }
+         {
+            "name": "tac:item/m60_fire_s"
+         }
       ]
    },
    "item.mp5a5_fire_s": {
       "subtitle": "subtitle.tac.mp5_fires",
       "sounds": [
-         { "name": "tac:item/mp5a5_fire_s" }
+         {
+            "name": "tac:item/mp5a5_fire_s"
+         }
       ]
    },
    "item.rpg7_fire": {
       "subtitle": "subtitle.tac.rpg7_fire",
       "sounds": [
-         { "name": "tac:item/rpg7_fire" }
+         {
+            "name": "tac:item/rpg7_fire"
+         }
       ]
    },
    "item.m1928_fire": {
       "subtitle": "subtitle.tac.m1928",
       "sounds": [
-         { "name": "tac:item/m1928_fire" }
+         {
+            "name": "tac:item/m1928_fire"
+         }
       ]
    },
    "item.dp28_fire": {
       "subtitle": "subtitle.tac.dp28_fire",
       "sounds": [
-         { "name": "tac:item/dp28_fire" }
+         {
+            "name": "tac:item/dp28_fire"
+         }
       ]
    },
    "item.ttig34_fire": {
       "subtitle": "subtitle.tac.ttig34_fire",
       "sounds": [
-         { "name": "tac:item/ttig34_fire" }
+         {
+            "name": "tac:item/ttig34_fire"
+         }
       ]
    },
    "item.ttig34_fire_s": {
       "subtitle": "subtitle.tac.ttig34_fire_s",
       "sounds": [
-         { "name": "tac:item/ttig34_fire_s" }
+         {
+            "name": "tac:item/ttig34_fire_s"
+         }
       ]
    },
    "item.spr15_fire": {
       "subtitle": "subtitle.tac.spr15_fire",
       "sounds": [
-         { "name": "tac:item/spr15_fire" }
+         {
+            "name": "tac:item/spr15_fire"
+         }
       ]
    },
    "item.spr15_fire_s": {
       "subtitle": "subtitle.tac.spr15_fire_s",
       "sounds": [
-         { "name": "tac:item/spr15_fire_s" }
+         {
+            "name": "tac:item/spr15_fire_s"
+         }
       ]
    },
    "item.mk18_fire": {
       "subtitle": "subtitle.tac.mk18_fire",
       "sounds": [
-         { "name": "tac:item/mk18_fire" }
+         {
+            "name": "tac:item/mk18_fire"
+         }
       ]
    },
    "item.mk18_fire_s": {
       "subtitle": "subtitle.tac.mk18_fire_s",
       "sounds": [
-         { "name": "tac:item/mk18_fire_s" }
+         {
+            "name": "tac:item/mk18_fire_s"
+         }
       ]
    },
    "item.m249_fire": {
       "subtitle": "subtitle.tac.m249_fire",
       "sounds": [
-         { "name": "tac:item/m249_fire" }
+         {
+            "name": "tac:item/m249_fire"
+         }
       ]
    },
    "item.m249_fire_s": {
       "subtitle": "subtitle.tac.m249_fire_s",
       "sounds": [
-         { "name": "tac:item/m249_fire_s" }
+         {
+            "name": "tac:item/m249_fire_s"
+         }
       ]
    },
    "item.rpk_fire": {
       "subtitle": "subtitle.tac.rpk_fire",
       "sounds": [
-         { "name": "tac:item/rpk_fire" }
+         {
+            "name": "tac:item/rpk_fire"
+         }
       ]
    },
    "item.m79_fire": {
       "subtitle": "subtitle.tac.m203",
       "sounds": [
-         { "name": "tac:item/m79_fire" }
+         {
+            "name": "tac:item/m79_fire"
+         }
       ]
    },
    "item.udp_9_fire_s": {
       "subtitle": "subtitle.tac.udp_9_fire_s",
       "sounds": [
-         { "name": "tac:item/udp_9_fire_s" }
+         {
+            "name": "tac:item/udp_9_fire_s"
+         }
       ]
    },
    "item.udp_9_fire": {
       "subtitle": "subtitle.tac.udp_9_fire",
       "sounds": [
-         { "name": "tac:item/udp_9_fire" }
+         {
+            "name": "tac:item/udp_9_fire"
+         }
       ]
    },
    "item.uzi_fire_s": {
       "subtitle": "subtitle.tac.uzi_fire_s",
       "sounds": [
-         { "name": "tac:item/uzi_fire_s" }
+         {
+            "name": "tac:item/uzi_fire_s"
+         }
       ]
    },
    "item.uzi_fire": {
       "subtitle": "subtitle.tac.uzi_fire",
       "sounds": [
-         { "name": "tac:item/uzi_fire" }
+         {
+            "name": "tac:item/uzi_fire"
+         }
       ]
    },
    "item.mrad_fire_s": {
       "subtitle": "subtitle.tac.mrad_fire_s",
       "sounds": [
-         { "name": "tac:item/mrad_fire_s" }
+         {
+            "name": "tac:item/mrad_fire_s"
+         }
       ]
    },
    "item.mrad_fire": {
       "subtitle": "subtitle.tac.mrad_fire",
       "sounds": [
-         { "name": "tac:item/mrad_fire" }
+         {
+            "name": "tac:item/mrad_fire"
+         }
       ]
    },
    "item.mk20_fire_s": {
       "subtitle": "subtitle.tac.mk20_fire_s",
       "sounds": [
-         { "name": "tac:item/mk20_fire_s" }
+         {
+            "name": "tac:item/mk20_fire_s"
+         }
       ]
    },
    "item.mk20_fire": {
       "subtitle": "subtitle.tac.mk20_fire",
       "sounds": [
-         { "name": "tac:item/mk20_fire" }
+         {
+            "name": "tac:item/mk20_fire"
+         }
       ]
    },
    "item.hk_g3_fire_s": {
       "subtitle": "subtitle.tac.hk_g3_fire_s",
       "sounds": [
-         { "name": "tac:item/hk_g3_fire_s" }
+         {
+            "name": "tac:item/hk_g3_fire_s"
+         }
       ]
    },
    "item.hk_g3_fire": {
       "subtitle": "subtitle.tac.hk_g3_fire",
       "sounds": [
-         { "name": "tac:item/hk_g3_fire" }
+         {
+            "name": "tac:item/hk_g3_fire"
+         }
       ]
    },
    "item.tec_9_fire": {
       "subtitle": "subtitle.tac.tec_9_fire",
       "sounds": [
-         { "name": "tac:item/tec_9_fire" }
+         {
+            "name": "tac:item/tec_9_fire"
+         }
       ]
    },
    "item.colt_python_fire": {
       "subtitle": "subtitle.tac.colt_python_fire",
       "sounds": [
-         { "name": "tac:item/colt_python_fire" }
+         {
+            "name": "tac:item/colt_python_fire"
+         }
       ]
    },
    "item.p90_fire": {
       "subtitle": "subtitle.tac.p90_fire",
       "sounds": [
-         { "name": "tac:item/p90_fire" }
+         {
+            "name": "tac:item/p90_fire"
+         }
       ]
    },
    "item.p90_fire_s": {
       "subtitle": "subtitle.tac.p90_fire_s",
       "sounds": [
-         { "name": "tac:item/p90_fire_s" }
+         {
+            "name": "tac:item/p90_fire_s"
+         }
       ]
    },
-
-
-
-
-
    "item.m1ping": {
       "subtitle": "subtitle.tac.m1ping",
       "sounds": [
-         { "name": "tac:item/m1ping" }
+         {
+            "name": "tac:item/m1ping"
+         }
       ]
    },
    "item.headshot": {
       "subtitle": "subtitle.tac.headshot",
       "sounds": [
-         { "name": "tac:item/headshot" }
+         {
+            "name": "tac:item/headshot"
+         }
       ]
    },
    "item.pistol.reload": {
       "subtitle": "subtitle.tac.reload",
       "sounds": [
-         { "name": "tac:item/reload" }
+         {
+            "name": "tac:item/reload"
+         }
       ]
    },
    "item.pistol.cock": {
       "subtitle": "subtitle.tac.cock",
       "sounds": [
-         { "name": "tac:item/cock" }
+         {
+            "name": "tac:item/cock"
+         }
       ]
    },
    "item.noammo": {
       "subtitle": "subtitle.tac.noammo",
       "sounds": [
-         { "name": "tac:item/noammo" }
+         {
+            "name": "tac:item/noammo"
+         }
       ]
    },
-
-
-
-
-
    "animation.hk416_a5_reload_empty": {
       "subtitle": "animation.hk416_a5_reload_empty",
       "sounds": [
-         { "name": "tac:animation/hk416_a5_reload_empty"}
+         {
+            "name": "tac:animation/hk416_a5_reload_empty"
+         }
       ]
    },
    "animation.hk416_a5_reload_norm": {
       "subtitle": "animation.hk416_a5_reload_norm",
       "sounds": [
-         { "name": "tac:animation/hk416_a5_reload_norm"}
+         {
+            "name": "tac:animation/hk416_a5_reload_norm"
+         }
       ]
    },
    "animation.hk416_a5_draw": {
       "subtitle": "animation.hk416_a5_draw",
       "sounds": [
-         { "name": "tac:animation/hk416_a5_draw"}
+         {
+            "name": "tac:animation/hk416_a5_draw"
+         }
       ]
    },
    "animation.hk416_a5_inspect": {
       "subtitle": "animation.hk416_a5_inspect",
       "sounds": [
-         { "name": "tac:animation/hk416_a5_inspect"}
+         {
+            "name": "tac:animation/hk416_a5_inspect"
+         }
       ]
    },
    "animation.hk416_a5_inspect_empty": {
       "subtitle": "animation.hk416_a5_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/hk416_a5_inspect_empty"}
+         {
+            "name": "tac:animation/hk416_a5_inspect_empty"
+         }
       ]
    },
-
    "animation.glock17_draw": {
       "subtitle": "animation.glock17_draw",
       "sounds": [
-         { "name": "tac:animation/glock17_draw"}
+         {
+            "name": "tac:animation/glock17_draw"
+         }
       ]
    },
    "animation.glock17_inspect": {
       "subtitle": "animation.glock17_inspect",
       "sounds": [
-         { "name": "tac:animation/glock17_inspect"}
+         {
+            "name": "tac:animation/glock17_inspect"
+         }
       ]
    },
    "animation.glock17_inspect_empty": {
       "subtitle": "animation.glock17_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/glock17_inspect_empty"}
+         {
+            "name": "tac:animation/glock17_inspect_empty"
+         }
       ]
    },
    "animation.glock17_reload_empty": {
       "subtitle": "animation.glock17_reload_empty",
       "sounds": [
-         { "name": "tac:animation/glock17_reload_empty"}
+         {
+            "name": "tac:animation/glock17_reload_empty"
+         }
       ]
    },
    "animation.glock17_reload_norm": {
       "subtitle": "animation.glock17_reload_norm",
       "sounds": [
-         { "name": "tac:animation/glock17_reload_norm"}
+         {
+            "name": "tac:animation/glock17_reload_norm"
+         }
       ]
    },
-
    "animation.glock_18_draw": {
       "subtitle": "animation.glock_18_draw",
       "sounds": [
-         { "name": "tac:animation/glock_18_draw"}
+         {
+            "name": "tac:animation/glock_18_draw"
+         }
       ]
    },
    "animation.glock_18_inspect": {
       "subtitle": "animation.glock_18_inspect",
       "sounds": [
-         { "name": "tac:animation/glock_18_inspect"}
+         {
+            "name": "tac:animation/glock_18_inspect"
+         }
       ]
    },
    "animation.glock_18_inspect_empty": {
       "subtitle": "animation.glock_18_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/glock_18_inspect_empty"}
+         {
+            "name": "tac:animation/glock_18_inspect_empty"
+         }
       ]
    },
    "animation.glock_18_reload_empty": {
       "subtitle": "animation.glock_18_reload_empty",
       "sounds": [
-         { "name": "tac:animation/glock_18_reload_empty"}
+         {
+            "name": "tac:animation/glock_18_reload_empty"
+         }
       ]
    },
    "animation.glock_18_reload_norm": {
       "subtitle": "animation.glock_18_reload_norm",
       "sounds": [
-         { "name": "tac:animation/glock_18_reload_norm"}
+         {
+            "name": "tac:animation/glock_18_reload_norm"
+         }
       ]
    },
-
    "animation.mp7_draw": {
       "subtitle": "animation.mp7_draw",
       "sounds": [
-         { "name": "tac:animation/mp7_draw"}
+         {
+            "name": "tac:animation/mp7_draw"
+         }
       ]
    },
    "animation.mp7_reload_empty": {
       "subtitle": "animation.mp7_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mp7_reload_empty"}
+         {
+            "name": "tac:animation/mp7_reload_empty"
+         }
       ]
    },
    "animation.mp7_inspect": {
       "subtitle": "animation.mp7_inspect",
       "sounds": [
-         { "name": "tac:animation/mp7_inspect"}
+         {
+            "name": "tac:animation/mp7_inspect"
+         }
       ]
    },
    "animation.mp7_inspect_empty": {
       "subtitle": "animation.mp7_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mp7_inspect_empty"}
+         {
+            "name": "tac:animation/mp7_inspect_empty"
+         }
       ]
    },
    "animation.mp7_reload_norm": {
       "subtitle": "animation.mp7_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mp7_reload_norm"}
+         {
+            "name": "tac:animation/mp7_reload_norm"
+         }
       ]
    },
    "animation.type81_reload_norm": {
       "subtitle": "animation.type81_reload_norm",
       "sounds": [
-         { "name": "tac:animation/type81_reload_norm"}
+         {
+            "name": "tac:animation/type81_reload_norm"
+         }
       ]
    },
    "animation.type81_reload_empty": {
       "subtitle": "animation.type81_reload_empty",
       "sounds": [
-         { "name": "tac:animation/type81_reload_empty"}
+         {
+            "name": "tac:animation/type81_reload_empty"
+         }
       ]
    },
    "animation.type81_draw": {
       "subtitle": "animation.type81_draw",
       "sounds": [
-         { "name": "tac:animation/type81_draw"}
+         {
+            "name": "tac:animation/type81_draw"
+         }
       ]
    },
    "animation.type81_inspect": {
       "subtitle": "animation.type81_inspect",
       "sounds": [
-         { "name": "tac:animation/type81_inspect"}
+         {
+            "name": "tac:animation/type81_inspect"
+         }
       ]
    },
    "animation.type81_inspect_empty": {
       "subtitle": "animation.type81_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/type81_inspect_empty"}
+         {
+            "name": "tac:animation/type81_inspect_empty"
+         }
       ]
    },
    "animation.dp28_draw": {
       "subtitle": "animation.dp28_draw",
       "sounds": [
-         { "name": "tac:animation/dp28_draw"}
+         {
+            "name": "tac:animation/dp28_draw"
+         }
       ]
    },
    "animation.dp28_inspect": {
       "subtitle": "animation.dp28_inspect",
       "sounds": [
-         { "name": "tac:animation/dp28_inspect"}
+         {
+            "name": "tac:animation/dp28_inspect"
+         }
       ]
    },
    "animation.dp28_inspect_empty": {
       "subtitle": "animation.dp28_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/dp28_inspect_empty"}
+         {
+            "name": "tac:animation/dp28_inspect_empty"
+         }
       ]
    },
    "animation.dp28_reload_norm": {
       "subtitle": "animation.dp28_reload_norm",
       "sounds": [
-         { "name": "tac:animation/dp28_reload_norm"}
+         {
+            "name": "tac:animation/dp28_reload_norm"
+         }
       ]
    },
    "animation.dp28_reload_empty": {
       "subtitle": "animation.dp28_reload_empty",
       "sounds": [
-         { "name": "tac:animation/dp28_reload_empty"}
+         {
+            "name": "tac:animation/dp28_reload_empty"
+         }
       ]
    },
    "animation.aa12_draw": {
       "subtitle": "animation.aa12_draw",
       "sounds": [
-         { "name": "tac:animation/aa12_draw"}
+         {
+            "name": "tac:animation/aa12_draw"
+         }
       ]
    },
    "animation.aa12_inspect": {
       "subtitle": "animation.aa12_inspect",
       "sounds": [
-         { "name": "tac:animation/aa12_inspect"}
+         {
+            "name": "tac:animation/aa12_inspect"
+         }
       ]
    },
    "animation.aa12_inspect_empty": {
       "subtitle": "animation.aa12_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/aa12_inspect_empty"}
+         {
+            "name": "tac:animation/aa12_inspect_empty"
+         }
       ]
    },
    "animation.aa12_reload_norm": {
       "subtitle": "animation.aa12_reload_norm",
       "sounds": [
-         { "name": "tac:animation/aa12_reload_norm"}
+         {
+            "name": "tac:animation/aa12_reload_norm"
+         }
       ]
    },
    "animation.aa12_reload_empty": {
       "subtitle": "animation.aa12_reload_empty",
       "sounds": [
-         { "name": "tac:animation/aa12_reload_empty"}
+         {
+            "name": "tac:animation/aa12_reload_empty"
+         }
       ]
    },
    "animation.hk_mp5a5_reload_empty": {
       "subtitle": "animation.hk_mp5a5_reload_empty",
       "sounds": [
-         { "name": "tac:animation/hk_mp5a5_reload_empty"}
+         {
+            "name": "tac:animation/hk_mp5a5_reload_empty"
+         }
       ]
    },
    "animation.hk_mp5a5_reload_norm": {
       "subtitle": "animation.hk_mp5a5_reload_norm",
       "sounds": [
-         { "name": "tac:animation/hk_mp5a5_reload_norm"}
+         {
+            "name": "tac:animation/hk_mp5a5_reload_norm"
+         }
       ]
    },
    "animation.hk_mp5a5_inspect": {
       "subtitle": "animation.hk_mp5a5_inspect",
       "sounds": [
-         { "name": "tac:animation/hk_mp5a5_inspect"}
+         {
+            "name": "tac:animation/hk_mp5a5_inspect"
+         }
       ]
    },
    "animation.hk_mp5a5_inspect_empty": {
       "subtitle": "animation.hk_mp5a5_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/hk_mp5a5_inspect_empty"}
+         {
+            "name": "tac:animation/hk_mp5a5_inspect_empty"
+         }
       ]
    },
    "animation.hk_mp5a5_draw": {
       "subtitle": "animation.hk_mp5a5_draw",
       "sounds": [
-         { "name": "tac:animation/hk_mp5a5_draw"}
+         {
+            "name": "tac:animation/hk_mp5a5_draw"
+         }
       ]
    },
    "animation.awp_reload_empty": {
       "subtitle": "animation.awp_reload_empty",
       "sounds": [
-         { "name": "tac:animation/awp_reload_empty"}
+         {
+            "name": "tac:animation/awp_reload_empty"
+         }
       ]
    },
    "animation.awp_reload_norm": {
       "subtitle": "animation.awp_reload_norm",
       "sounds": [
-         { "name": "tac:animation/awp_reload_norm"}
+         {
+            "name": "tac:animation/awp_reload_norm"
+         }
       ]
    },
    "animation.awp_inspect": {
       "subtitle": "animation.awp_inspect",
       "sounds": [
-         { "name": "tac:animation/awp_inspect"}
+         {
+            "name": "tac:animation/awp_inspect"
+         }
       ]
    },
    "animation.awp_inspect_empty": {
       "subtitle": "animation.awp_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/awp_inspect_empty"}
+         {
+            "name": "tac:animation/awp_inspect_empty"
+         }
       ]
    },
    "animation.awp_draw": {
       "subtitle": "animation.awp_draw",
       "sounds": [
-         { "name": "tac:animation/awp_draw"}
+         {
+            "name": "tac:animation/awp_draw"
+         }
       ]
    },
    "animation.awp_bolt": {
       "subtitle": "animation.awp_bolt",
       "sounds": [
-         { "name": "tac:animation/awp_bolt"}
+         {
+            "name": "tac:animation/awp_bolt"
+         }
       ]
    },
    "animation.ak47_reload_empty": {
       "subtitle": "animation.ak47_reload_empty",
       "sounds": [
-         { "name": "tac:animation/ak47_reload_empty"}
+         {
+            "name": "tac:animation/ak47_reload_empty"
+         }
       ]
    },
    "animation.ak47_reload_norm": {
       "subtitle": "animation.ak47_reload_norm",
       "sounds": [
-         { "name": "tac:animation/ak47_reload_norm"}
+         {
+            "name": "tac:animation/ak47_reload_norm"
+         }
       ]
    },
    "animation.ak47_inspect": {
       "subtitle": "animation.ak47_inspect",
       "sounds": [
-         { "name": "tac:animation/ak47_inspect"}
+         {
+            "name": "tac:animation/ak47_inspect"
+         }
       ]
    },
    "animation.ak47_inspect_empty": {
       "subtitle": "animation.ak47_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/ak47_inspect_empty"}
+         {
+            "name": "tac:animation/ak47_inspect_empty"
+         }
       ]
    },
    "animation.ak47_draw": {
       "subtitle": "animation.ak47_draw",
       "sounds": [
-         { "name": "tac:animation/ak47_draw"}
+         {
+            "name": "tac:animation/ak47_draw"
+         }
       ]
    },
    "animation.m60_reload_empty": {
       "subtitle": "animation.m60_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m60_reload_empty"}
+         {
+            "name": "tac:animation/m60_reload_empty"
+         }
       ]
    },
    "animation.m60_reload_norm": {
       "subtitle": "animation.m60_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m60_reload_norm"}
+         {
+            "name": "tac:animation/m60_reload_norm"
+         }
       ]
    },
    "animation.m60_inspect": {
       "subtitle": "animation.m60_inspect",
       "sounds": [
-         { "name": "tac:animation/m60_inspect"}
+         {
+            "name": "tac:animation/m60_inspect"
+         }
       ]
    },
    "animation.m60_inspect_empty": {
       "subtitle": "animation.m60_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m60_inspect_empty"}
+         {
+            "name": "tac:animation/m60_inspect_empty"
+         }
       ]
    },
    "animation.m60_draw": {
       "subtitle": "animation.m60_draw",
       "sounds": [
-         { "name": "tac:animation/m60_draw"}
+         {
+            "name": "tac:animation/m60_draw"
+         }
       ]
    },
    "animation.deagle_reload_empty": {
       "subtitle": "animation.deagle_reload_empty",
       "sounds": [
-         { "name": "tac:animation/deagle_reload_empty"}
+         {
+            "name": "tac:animation/deagle_reload_empty"
+         }
       ]
    },
    "animation.deagle_reload_norm": {
       "subtitle": "animation.deagle_reload_norm",
       "sounds": [
-         { "name": "tac:animation/deagle_reload_norm"}
+         {
+            "name": "tac:animation/deagle_reload_norm"
+         }
       ]
    },
    "animation.deagle_inspect": {
       "subtitle": "animation.deagle_inspect",
       "sounds": [
-         { "name": "tac:animation/deagle_inspect"}
+         {
+            "name": "tac:animation/deagle_inspect"
+         }
       ]
    },
    "animation.deagle_inspect_empty": {
       "subtitle": "animation.deagle_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/deagle_inspect_empty"}
+         {
+            "name": "tac:animation/deagle_inspect_empty"
+         }
       ]
    },
    "animation.deagle_draw": {
       "subtitle": "animation.deagle_draw",
       "sounds": [
-         { "name": "tac:animation/deagle_draw"}
+         {
+            "name": "tac:animation/deagle_draw"
+         }
       ]
    },
    "animation.vector45_reload_empty": {
       "subtitle": "animation.vector45_reload_empty",
       "sounds": [
-         { "name": "tac:animation/vector45_reload_empty"}
+         {
+            "name": "tac:animation/vector45_reload_empty"
+         }
       ]
    },
    "animation.vector45_reload_norm": {
       "subtitle": "animation.vector45_reload_norm",
       "sounds": [
-         { "name": "tac:animation/vector45_reload_norm"}
+         {
+            "name": "tac:animation/vector45_reload_norm"
+         }
       ]
    },
    "animation.vector45_inspect": {
       "subtitle": "animation.vector45_inspect",
       "sounds": [
-         { "name": "tac:animation/vector45_inspect"}
+         {
+            "name": "tac:animation/vector45_inspect"
+         }
       ]
    },
    "animation.vector45_inspect_empty": {
       "subtitle": "animation.vector45_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/vector45_inspect_empty"}
+         {
+            "name": "tac:animation/vector45_inspect_empty"
+         }
       ]
    },
    "animation.vector45_draw": {
       "subtitle": "animation.vector45_draw",
       "sounds": [
-         { "name": "tac:animation/vector45_draw"}
+         {
+            "name": "tac:animation/vector45_draw"
+         }
       ]
    },
    "animation.m1014_reload_intro": {
       "subtitle": "animation.m1014_reload_intro",
       "sounds": [
-         { "name": "tac:animation/m1014_reload_intro"}
+         {
+            "name": "tac:animation/m1014_reload_intro"
+         }
       ]
    },
    "animation.m1014_reload_loop": {
       "subtitle": "animation.m1014_reload_loop",
       "sounds": [
-         { "name": "tac:animation/m1014_reload_loop"}
+         {
+            "name": "tac:animation/m1014_reload_loop"
+         }
       ]
    },
    "animation.m1014_reload_norm_end": {
       "subtitle": "animation.m1014_reload_norm_end",
       "sounds": [
-         { "name": "tac:animation/m1014_reload_norm_end"}
+         {
+            "name": "tac:animation/m1014_reload_norm_end"
+         }
       ]
    },
    "animation.m1014_reload_empty_end": {
       "subtitle": "animation.m1014_reload_empty_end",
       "sounds": [
-         { "name": "tac:animation/m1014_reload_empty_end"}
+         {
+            "name": "tac:animation/m1014_reload_empty_end"
+         }
       ]
    },
    "animation.m1014_draw": {
       "subtitle": "animation.m1014_draw",
       "sounds": [
-         { "name": "tac:animation/m1014_draw"}
+         {
+            "name": "tac:animation/m1014_draw"
+         }
       ]
    },
    "animation.m1014_inspect": {
       "subtitle": "animation.m1014_inspect",
       "sounds": [
-         { "name": "tac:animation/m1014_inspect"}
+         {
+            "name": "tac:animation/m1014_inspect"
+         }
       ]
    },
    "animation.m1014_inspect_empty": {
       "subtitle": "animation.m1014_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m1014_inspect_empty"}
+         {
+            "name": "tac:animation/m1014_inspect_empty"
+         }
       ]
    },
-
    "animation.m870_reload_intro": {
       "subtitle": "animation.m870_reload_intro",
       "sounds": [
-         { "name": "tac:animation/m870_reload_intro"}
+         {
+            "name": "tac:animation/m870_reload_intro"
+         }
       ]
    },
    "animation.m870_reload_loop": {
       "subtitle": "animation.m870_reload_loop",
       "sounds": [
-         { "name": "tac:animation/m870_reload_loop"}
+         {
+            "name": "tac:animation/m870_reload_loop"
+         }
       ]
    },
    "animation.m870_reload_norm_end": {
       "subtitle": "animation.m870_reload_norm_end",
       "sounds": [
-         { "name": "tac:animation/m870_reload_norm_end"}
+         {
+            "name": "tac:animation/m870_reload_norm_end"
+         }
       ]
    },
    "animation.m870_reload_empty_end": {
       "subtitle": "animation.m870_reload_empty_end",
       "sounds": [
-         { "name": "tac:animation/m870_reload_empty_end"}
+         {
+            "name": "tac:animation/m870_reload_empty_end"
+         }
       ]
    },
    "animation.m870_draw": {
       "subtitle": "animation.m870_draw",
       "sounds": [
-         { "name": "tac:animation/m870_draw"}
+         {
+            "name": "tac:animation/m870_draw"
+         }
       ]
    },
    "animation.m870_inspect": {
       "subtitle": "animation.m870_inspect",
       "sounds": [
-         { "name": "tac:animation/m870_inspect"}
+         {
+            "name": "tac:animation/m870_inspect"
+         }
       ]
    },
    "animation.m870_inspect_empty": {
       "subtitle": "animation.m870_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m870_inspect_empty"}
+         {
+            "name": "tac:animation/m870_inspect_empty"
+         }
       ]
    },
-
    "animation.m4_draw": {
       "subtitle": "animation.m4_draw",
       "sounds": [
-         { "name": "tac:animation/m4_draw"}
+         {
+            "name": "tac:animation/m4_draw"
+         }
       ]
    },
    "animation.m4_reload_empty": {
       "subtitle": "animation.m4_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m4_reload_empty"}
+         {
+            "name": "tac:animation/m4_reload_empty"
+         }
       ]
    },
    "animation.m4_inspect": {
       "subtitle": "animation.m4_inspect",
       "sounds": [
-         { "name": "tac:animation/m4_inspect"}
+         {
+            "name": "tac:animation/m4_inspect"
+         }
       ]
    },
    "animation.m4_inspect_empty": {
       "subtitle": "animation.m4_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m4_inspect_empty"}
+         {
+            "name": "tac:animation/m4_inspect_empty"
+         }
       ]
    },
    "animation.m4_reload_norm": {
       "subtitle": "animation.m4_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m4_reload_norm"}
+         {
+            "name": "tac:animation/m4_reload_norm"
+         }
       ]
    },
-
    "animation.sig_mcx_spear_draw": {
       "subtitle": "animation.sig_mcx_spear_draw",
       "sounds": [
-         { "name": "tac:animation/sig_mcx_spear_draw"}
+         {
+            "name": "tac:animation/sig_mcx_spear_draw"
+         }
       ]
    },
    "animation.sig_mcx_spear_reload_empty": {
       "subtitle": "animation.sig_mcx_spear_reload_empty",
       "sounds": [
-         { "name": "tac:animation/sig_mcx_spear_reload_empty"}
+         {
+            "name": "tac:animation/sig_mcx_spear_reload_empty"
+         }
       ]
    },
    "animation.sig_mcx_spear_inspect": {
       "subtitle": "animation.sig_mcx_spear_inspect",
       "sounds": [
-         { "name": "tac:animation/sig_mcx_spear_inspect"}
+         {
+            "name": "tac:animation/sig_mcx_spear_inspect"
+         }
       ]
    },
    "animation.sig_mcx_spear_inspect_empty": {
       "subtitle": "animation.sig_mcx_spear_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/sig_mcx_spear_inspect_empty"}
+         {
+            "name": "tac:animation/sig_mcx_spear_inspect_empty"
+         }
       ]
    },
    "animation.sig_mcx_spear_reload_norm": {
       "subtitle": "animation.sig_mcx_spear_reload_norm",
       "sounds": [
-         { "name": "tac:animation/sig_mcx_spear_reload_norm"}
+         {
+            "name": "tac:animation/sig_mcx_spear_reload_norm"
+         }
       ]
    },
-
    "animation.m82a2_draw": {
       "subtitle": "animation.m82a2_draw",
       "sounds": [
-         { "name": "tac:animation/m82a2_draw"}
+         {
+            "name": "tac:animation/m82a2_draw"
+         }
       ]
    },
    "animation.m82a2_reload_empty": {
       "subtitle": "animation.m82a2_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m82a2_reload_empty"}
+         {
+            "name": "tac:animation/m82a2_reload_empty"
+         }
       ]
    },
    "animation.m82a2_inspect": {
       "subtitle": "animation.m82a2_inspect",
       "sounds": [
-         { "name": "tac:animation/m82a2_inspect"}
+         {
+            "name": "tac:animation/m82a2_inspect"
+         }
       ]
    },
    "animation.m82a2_inspect_empty": {
       "subtitle": "animation.m82a2_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m82a2_inspect_empty"}
+         {
+            "name": "tac:animation/m82a2_inspect_empty"
+         }
       ]
    },
    "animation.m82a2_reload_norm": {
       "subtitle": "animation.m82a2_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m82a2_reload_norm"}
+         {
+            "name": "tac:animation/m82a2_reload_norm"
+         }
       ]
    },
-
    "animation.sti2011_draw": {
       "subtitle": "animation.sti2011_draw",
       "sounds": [
-         { "name": "tac:animation/sti2011_draw"}
+         {
+            "name": "tac:animation/sti2011_draw"
+         }
       ]
    },
    "animation.sti2011_reload_empty": {
       "subtitle": "animation.sti2011_reload_empty",
       "sounds": [
-         { "name": "tac:animation/sti2011_reload_empty"}
+         {
+            "name": "tac:animation/sti2011_reload_empty"
+         }
       ]
    },
    "animation.sti2011_inspect": {
       "subtitle": "animation.sti2011_inspect",
       "sounds": [
-         { "name": "tac:animation/sti2011_inspect"}
+         {
+            "name": "tac:animation/sti2011_inspect"
+         }
       ]
    },
    "animation.sti2011_inspect_empty": {
       "subtitle": "animation.sti2011_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/sti2011_inspect_empty"}
+         {
+            "name": "tac:animation/sti2011_inspect_empty"
+         }
       ]
    },
    "animation.sti2011_reload_norm": {
       "subtitle": "animation.sti2011_reload_norm",
       "sounds": [
-         { "name": "tac:animation/sti2011_reload_norm"}
+         {
+            "name": "tac:animation/sti2011_reload_norm"
+         }
       ]
    },
-
    "animation.m1911_draw": {
       "subtitle": "animation.m1911_draw",
       "sounds": [
-         { "name": "tac:animation/m1911_draw"}
+         {
+            "name": "tac:animation/m1911_draw"
+         }
       ]
    },
    "animation.m1911_reload_empty": {
       "subtitle": "animation.m1911_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m1911_reload_empty"}
+         {
+            "name": "tac:animation/m1911_reload_empty"
+         }
       ]
    },
    "animation.m1911_inspect": {
       "subtitle": "animation.m1911_inspect",
       "sounds": [
-         { "name": "tac:animation/m1911_inspect"}
+         {
+            "name": "tac:animation/m1911_inspect"
+         }
       ]
    },
    "animation.m1911_inspect_empty": {
       "subtitle": "animation.m1911_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m1911_inspect_empty"}
+         {
+            "name": "tac:animation/m1911_inspect_empty"
+         }
       ]
    },
    "animation.m1911_reload_norm": {
       "subtitle": "animation.m1911_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m1911_reload_norm"}
+         {
+            "name": "tac:animation/m1911_reload_norm"
+         }
       ]
    },
-
    "animation.mk47_draw": {
       "subtitle": "animation.mk47_draw",
       "sounds": [
-         { "name": "tac:animation/mk47_draw"}
+         {
+            "name": "tac:animation/mk47_draw"
+         }
       ]
    },
    "animation.mk47_reload_empty": {
       "subtitle": "animation.mk47_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mk47_reload_empty"}
+         {
+            "name": "tac:animation/mk47_reload_empty"
+         }
       ]
    },
    "animation.mk47_inspect": {
       "subtitle": "animation.mk47_inspect",
       "sounds": [
-         { "name": "tac:animation/mk47_inspect"}
+         {
+            "name": "tac:animation/mk47_inspect"
+         }
       ]
    },
    "animation.mk47_inspect_empty": {
       "subtitle": "animation.mk47_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mk47_inspect_empty"}
+         {
+            "name": "tac:animation/mk47_inspect_empty"
+         }
       ]
    },
    "animation.mk47_reload_norm": {
       "subtitle": "animation.mk47_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mk47_reload_norm"}
+         {
+            "name": "tac:animation/mk47_reload_norm"
+         }
       ]
    },
-
    "animation.scar_h_draw": {
       "subtitle": "animation.scar_h_draw",
       "sounds": [
-         { "name": "tac:animation/scar_h_draw"}
+         {
+            "name": "tac:animation/scar_h_draw"
+         }
       ]
    },
    "animation.scar_h_reload_empty": {
       "subtitle": "animation.scar_h_reload_empty",
       "sounds": [
-         { "name": "tac:animation/scar_h_reload_empty"}
+         {
+            "name": "tac:animation/scar_h_reload_empty"
+         }
       ]
    },
    "animation.scar_h_inspect": {
       "subtitle": "animation.scar_h_inspect",
       "sounds": [
-         { "name": "tac:animation/scar_h_inspect"}
+         {
+            "name": "tac:animation/scar_h_inspect"
+         }
       ]
    },
    "animation.scar_h_inspect_empty": {
       "subtitle": "animation.scar_h_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/scar_h_inspect_empty"}
+         {
+            "name": "tac:animation/scar_h_inspect_empty"
+         }
       ]
    },
    "animation.scar_h_reload_norm": {
       "subtitle": "animation.scar_h_reload_norm",
       "sounds": [
-         { "name": "tac:animation/scar_h_reload_norm"}
+         {
+            "name": "tac:animation/scar_h_reload_norm"
+         }
       ]
    },
-
    "animation.scar_l_draw": {
       "subtitle": "animation.scar_l_draw",
       "sounds": [
-         { "name": "tac:animation/scar_l_draw"}
+         {
+            "name": "tac:animation/scar_l_draw"
+         }
       ]
    },
    "animation.scar_l_reload_empty": {
       "subtitle": "animation.scar_l_reload_empty",
       "sounds": [
-         { "name": "tac:animation/scar_l_reload_empty"}
+         {
+            "name": "tac:animation/scar_l_reload_empty"
+         }
       ]
    },
    "animation.scar_l_inspect": {
       "subtitle": "animation.scar_l_inspect",
       "sounds": [
-         { "name": "tac:animation/scar_l_inspect"}
+         {
+            "name": "tac:animation/scar_l_inspect"
+         }
       ]
    },
    "animation.scar_l_inspect_empty": {
       "subtitle": "animation.scar_l_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/scar_l_inspect_empty"}
+         {
+            "name": "tac:animation/scar_l_inspect_empty"
+         }
       ]
    },
    "animation.scar_l_reload_norm": {
       "subtitle": "animation.scar_l_reload_norm",
       "sounds": [
-         { "name": "tac:animation/scar_l_reload_norm"}
+         {
+            "name": "tac:animation/scar_l_reload_norm"
+         }
       ]
    },
-   
    "animation.mk14_draw": {
       "subtitle": "animation.mk14_draw",
       "sounds": [
-         { "name": "tac:animation/mk14_draw"}
+         {
+            "name": "tac:animation/mk14_draw"
+         }
       ]
    },
    "animation.mk14_reload_empty": {
       "subtitle": "animation.mk14_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mk14_reload_empty"}
+         {
+            "name": "tac:animation/mk14_reload_empty"
+         }
       ]
    },
    "animation.mk14_inspect": {
       "subtitle": "animation.mk14_inspect",
       "sounds": [
-         { "name": "tac:animation/mk14_inspect"}
+         {
+            "name": "tac:animation/mk14_inspect"
+         }
       ]
    },
    "animation.mk14_inspect_empty": {
       "subtitle": "animation.mk14_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mk14_inspect_empty"}
+         {
+            "name": "tac:animation/mk14_inspect_empty"
+         }
       ]
    },
    "animation.mk14_reload_norm": {
       "subtitle": "animation.mk14_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mk14_reload_norm"}
+         {
+            "name": "tac:animation/mk14_reload_norm"
+         }
       ]
    },
-
    "animation.db_shortgun_draw": {
       "subtitle": "animation.db_shortgun_draw",
       "sounds": [
-         { "name": "tac:animation/db_shortgun_draw"}
+         {
+            "name": "tac:animation/db_shortgun_draw"
+         }
       ]
    },
    "animation.db_shortgun_reload_norm": {
       "subtitle": "animation.db_shortgun_reload_norm",
       "sounds": [
-         { "name": "tac:animation/db_shortgun_reload_norm"}
+         {
+            "name": "tac:animation/db_shortgun_reload_norm"
+         }
       ]
    },
    "animation.db_shortgun_inspect": {
       "subtitle": "animation.db_shortgun_inspect",
       "sounds": [
-         { "name": "tac:animation/db_shortgun_inspect"}
+         {
+            "name": "tac:animation/db_shortgun_inspect"
+         }
       ]
    },
    "animation.db_shortgun_inspect_empty": {
       "subtitle": "animation.db_shortgun_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/db_shortgun_inspect_empty"}
+         {
+            "name": "tac:animation/db_shortgun_inspect_empty"
+         }
       ]
    },
    "animation.db_shortgun_reload_empty": {
       "subtitle": "animation.db_shortgun_reload_empty",
       "sounds": [
-         { "name": "tac:animation/db_shortgun_reload_empty"}
+         {
+            "name": "tac:animation/db_shortgun_reload_empty"
+         }
       ]
    },
-
    "animation.cz75_draw": {
       "subtitle": "animation.cz75_draw",
       "sounds": [
-         { "name": "tac:animation/cz75_draw"}
+         {
+            "name": "tac:animation/cz75_draw"
+         }
       ]
    },
    "animation.cz75_reload_norm": {
       "subtitle": "animation.cz75_reload_norm",
       "sounds": [
-         { "name": "tac:animation/cz75_reload_norm"}
+         {
+            "name": "tac:animation/cz75_reload_norm"
+         }
       ]
    },
    "animation.cz75_inspect": {
       "subtitle": "animation.cz75_inspect",
       "sounds": [
-         { "name": "tac:animation/cz75_inspect"}
+         {
+            "name": "tac:animation/cz75_inspect"
+         }
       ]
    },
    "animation.cz75_inspect_empty": {
       "subtitle": "animation.cz75_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/cz75_inspect_empty"}
+         {
+            "name": "tac:animation/cz75_inspect_empty"
+         }
       ]
    },
    "animation.cz75_reload_empty": {
       "subtitle": "animation.cz75_reload_empty",
       "sounds": [
-         { "name": "tac:animation/cz75_reload_empty"}
+         {
+            "name": "tac:animation/cz75_reload_empty"
+         }
       ]
    },
-
    "animation.cz75_auto_draw": {
       "subtitle": "animation.cz75_auto_draw",
       "sounds": [
-         { "name": "tac:animation/cz75_auto_draw"}
+         {
+            "name": "tac:animation/cz75_auto_draw"
+         }
       ]
    },
    "animation.cz75_auto_reload_norm": {
       "subtitle": "animation.cz75_auto_reload_norm",
       "sounds": [
-         { "name": "tac:animation/cz75_auto_reload_norm"}
+         {
+            "name": "tac:animation/cz75_auto_reload_norm"
+         }
       ]
    },
    "animation.cz75_auto_inspect": {
       "subtitle": "animation.cz75_auto_inspect",
       "sounds": [
-         { "name": "tac:animation/cz75_auto_inspect"}
+         {
+            "name": "tac:animation/cz75_auto_inspect"
+         }
       ]
    },
    "animation.cz75_auto_inspect_empty": {
       "subtitle": "animation.cz75_auto_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/cz75_auto_inspect_empty"}
+         {
+            "name": "tac:animation/cz75_auto_inspect_empty"
+         }
       ]
    },
    "animation.cz75_auto_reload_empty": {
       "subtitle": "animation.cz75_auto_reload_empty",
       "sounds": [
-         { "name": "tac:animation/cz75_auto_reload_empty"}
+         {
+            "name": "tac:animation/cz75_auto_reload_empty"
+         }
       ]
    },
-
    "animation.fn_fal_draw": {
       "subtitle": "animation.fn_fal_draw",
       "sounds": [
-         { "name": "tac:animation/fn_fal_draw"}
+         {
+            "name": "tac:animation/fn_fal_draw"
+         }
       ]
    },
    "animation.fn_fal_reload_norm": {
       "subtitle": "animation.fn_fal_reload_norm",
       "sounds": [
-         { "name": "tac:animation/fn_fal_reload_norm"}
+         {
+            "name": "tac:animation/fn_fal_reload_norm"
+         }
       ]
    },
    "animation.fn_fal_inspect": {
       "subtitle": "animation.fn_fal_inspect",
       "sounds": [
-         { "name": "tac:animation/fn_fal_inspect"}
+         {
+            "name": "tac:animation/fn_fal_inspect"
+         }
       ]
    },
    "animation.fn_fal_inspect_empty": {
       "subtitle": "animation.fn_fal_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/fn_fal_inspect_empty"}
+         {
+            "name": "tac:animation/fn_fal_inspect_empty"
+         }
       ]
    },
    "animation.fn_fal_reload_empty": {
       "subtitle": "animation.fn_fal_reload_empty",
       "sounds": [
-         { "name": "tac:animation/fn_fal_reload_empty"}
+         {
+            "name": "tac:animation/fn_fal_reload_empty"
+         }
       ]
    },
-
    "animation.m16a4_draw": {
       "subtitle": "animation.m16a4_draw",
       "sounds": [
-         { "name": "tac:animation/m16a4_draw"}
+         {
+            "name": "tac:animation/m16a4_draw"
+         }
       ]
    },
    "animation.m16a4_reload_norm": {
       "subtitle": "animation.m16a4_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m16a4_reload_norm"}
+         {
+            "name": "tac:animation/m16a4_reload_norm"
+         }
       ]
    },
    "animation.m16a4_inspect": {
       "subtitle": "animation.m16a4_inspect",
       "sounds": [
-         { "name": "tac:animation/m16a4_inspect"}
+         {
+            "name": "tac:animation/m16a4_inspect"
+         }
       ]
    },
    "animation.m16a4_inspect_empty": {
       "subtitle": "animation.m16a4_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m16a4_inspect_empty"}
+         {
+            "name": "tac:animation/m16a4_inspect_empty"
+         }
       ]
    },
    "animation.m16a4_reload_empty": {
       "subtitle": "animation.m16a4_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m16a4_reload_empty"}
+         {
+            "name": "tac:animation/m16a4_reload_empty"
+         }
       ]
    },
-
    "animation.spr15_draw": {
       "subtitle": "animation.spr15_draw",
       "sounds": [
-         { "name": "tac:animation/spr15_draw"}
+         {
+            "name": "tac:animation/spr15_draw"
+         }
       ]
    },
    "animation.spr15_reload_norm": {
       "subtitle": "animation.spr15_reload_norm",
       "sounds": [
-         { "name": "tac:animation/spr15_reload_norm"}
+         {
+            "name": "tac:animation/spr15_reload_norm"
+         }
       ]
    },
    "animation.spr15_inspect": {
       "subtitle": "animation.spr15_inspect",
       "sounds": [
-         { "name": "tac:animation/spr15_inspect"}
+         {
+            "name": "tac:animation/spr15_inspect"
+         }
       ]
    },
    "animation.spr15_inspect_empty": {
       "subtitle": "animation.spr15_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/spr15_inspect_empty"}
+         {
+            "name": "tac:animation/spr15_inspect_empty"
+         }
       ]
    },
    "animation.spr15_reload_empty": {
       "subtitle": "animation.spr15_reload_empty",
       "sounds": [
-         { "name": "tac:animation/spr15_reload_empty"}
+         {
+            "name": "tac:animation/spr15_reload_empty"
+         }
       ]
    },
-
    "animation.m24_draw": {
       "subtitle": "animation.m24_draw",
       "sounds": [
-         { "name": "tac:animation/m24_draw"}
+         {
+            "name": "tac:animation/m24_draw"
+         }
       ]
    },
    "animation.m24_reload_norm": {
       "subtitle": "animation.m24_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m24_reload_norm"}
+         {
+            "name": "tac:animation/m24_reload_norm"
+         }
       ]
    },
    "animation.m24_inspect": {
       "subtitle": "animation.m24_inspect",
       "sounds": [
-         { "name": "tac:animation/m24_inspect"}
+         {
+            "name": "tac:animation/m24_inspect"
+         }
       ]
    },
    "animation.m24_inspect_empty": {
       "subtitle": "animation.m24_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m24_inspect_empty"}
+         {
+            "name": "tac:animation/m24_inspect_empty"
+         }
       ]
    },
    "animation.m24_reload_empty": {
       "subtitle": "animation.m24_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m24_reload_empty"}
+         {
+            "name": "tac:animation/m24_reload_empty"
+         }
       ]
    },
    "animation.m24_bolt": {
       "subtitle": "animation.m24_bolt",
       "sounds": [
-         { "name": "tac:animation/m24_bolt"}
+         {
+            "name": "tac:animation/m24_bolt"
+         }
       ]
    },
-
    "animation.rpk_draw": {
       "subtitle": "animation.rpk_draw",
       "sounds": [
-         { "name": "tac:animation/rpk_draw"}
+         {
+            "name": "tac:animation/rpk_draw"
+         }
       ]
    },
    "animation.rpk_reload_norm": {
       "subtitle": "animation.rpk_reload_norm",
       "sounds": [
-         { "name": "tac:animation/rpk_reload_norm"}
+         {
+            "name": "tac:animation/rpk_reload_norm"
+         }
       ]
    },
    "animation.rpk_inspect": {
       "subtitle": "animation.rpk_inspect",
       "sounds": [
-         { "name": "tac:animation/rpk_inspect"}
+         {
+            "name": "tac:animation/rpk_inspect"
+         }
       ]
    },
    "animation.rpk_inspect_empty": {
       "subtitle": "animation.rpk_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/rpk_inspect_empty"}
+         {
+            "name": "tac:animation/rpk_inspect_empty"
+         }
       ]
    },
    "animation.rpk_reload_empty": {
       "subtitle": "animation.rpk_reload_empty",
       "sounds": [
-         { "name": "tac:animation/rpk_reload_empty"}
+         {
+            "name": "tac:animation/rpk_reload_empty"
+         }
       ]
    },
-
    "animation.m1a1_smg_draw": {
       "subtitle": "animation.m1a1_smg_draw",
       "sounds": [
-         { "name": "tac:animation/m1a1_smg_draw"}
+         {
+            "name": "tac:animation/m1a1_smg_draw"
+         }
       ]
    },
    "animation.m1a1_smg_reload_norm": {
       "subtitle": "animation.m1a1_smg_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m1a1_smg_reload_norm"}
+         {
+            "name": "tac:animation/m1a1_smg_reload_norm"
+         }
       ]
    },
    "animation.m1a1_smg_inspect": {
       "subtitle": "animation.m1a1_smg_inspect",
       "sounds": [
-         { "name": "tac:animation/m1a1_smg_inspect"}
+         {
+            "name": "tac:animation/m1a1_smg_inspect"
+         }
       ]
    },
    "animation.m1a1_smg_inspect_empty": {
       "subtitle": "animation.m1a1_smg_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m1a1_smg_inspect_empty"}
+         {
+            "name": "tac:animation/m1a1_smg_inspect_empty"
+         }
       ]
    },
    "animation.m1a1_smg_reload_empty": {
       "subtitle": "animation.m1a1_smg_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m1a1_smg_reload_empty"}
+         {
+            "name": "tac:animation/m1a1_smg_reload_empty"
+         }
       ]
    },
-
    "animation.mac10_draw": {
       "subtitle": "animation.mac10_draw",
       "sounds": [
-         { "name": "tac:animation/mac10_draw"}
+         {
+            "name": "tac:animation/mac10_draw"
+         }
       ]
    },
    "animation.mac10_reload_norm": {
       "subtitle": "animation.mac10_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mac10_reload_norm"}
+         {
+            "name": "tac:animation/mac10_reload_norm"
+         }
       ]
    },
    "animation.mac10_inspect": {
       "subtitle": "animation.mac10_inspect",
       "sounds": [
-         { "name": "tac:animation/mac10_inspect"}
+         {
+            "name": "tac:animation/mac10_inspect"
+         }
       ]
    },
    "animation.mac10_inspect_empty": {
       "subtitle": "animation.mac10_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mac10_inspect_empty"}
+         {
+            "name": "tac:animation/mac10_inspect_empty"
+         }
       ]
    },
    "animation.mac10_reload_empty": {
       "subtitle": "animation.mac10_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mac10_reload_empty"}
+         {
+            "name": "tac:animation/mac10_reload_empty"
+         }
       ]
    },
-
    "animation.type_95_draw": {
       "subtitle": "animation.type_95_draw",
       "sounds": [
-         { "name": "tac:animation/type_95_draw"}
+         {
+            "name": "tac:animation/type_95_draw"
+         }
       ]
    },
    "animation.type_95_reload_norm": {
       "subtitle": "animation.type_95_reload_norm",
       "sounds": [
-         { "name": "tac:animation/type_95_reload_norm"}
+         {
+            "name": "tac:animation/type_95_reload_norm"
+         }
       ]
    },
    "animation.type_95_inspect": {
       "subtitle": "animation.type_95_inspect",
       "sounds": [
-         { "name": "tac:animation/type_95_inspect"}
+         {
+            "name": "tac:animation/type_95_inspect"
+         }
       ]
    },
    "animation.type_95_inspect_empty": {
       "subtitle": "animation.type_95_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/type_95_inspect_empty"}
+         {
+            "name": "tac:animation/type_95_inspect_empty"
+         }
       ]
    },
    "animation.type_95_reload_empty": {
       "subtitle": "animation.type_95_reload_empty",
       "sounds": [
-         { "name": "tac:animation/type_95_reload_empty"}
+         {
+            "name": "tac:animation/type_95_reload_empty"
+         }
       ]
    },
-
    "animation.qbz_191_draw": {
       "subtitle": "animation.qbz_191_draw",
       "sounds": [
-         { "name": "tac:animation/qbz_191_draw"}
+         {
+            "name": "tac:animation/qbz_191_draw"
+         }
       ]
    },
    "animation.qbz_191_reload_norm": {
       "subtitle": "animation.qbz_191_reload_norm",
       "sounds": [
-         { "name": "tac:animation/qbz_191_reload_norm"}
+         {
+            "name": "tac:animation/qbz_191_reload_norm"
+         }
       ]
    },
    "animation.qbz_191_inspect": {
       "subtitle": "animation.qbz_191_inspect",
       "sounds": [
-         { "name": "tac:animation/qbz_191_inspect"}
+         {
+            "name": "tac:animation/qbz_191_inspect"
+         }
       ]
    },
    "animation.qbz_191_inspect_empty": {
       "subtitle": "animation.qbz_191_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/qbz_191_inspect_empty"}
+         {
+            "name": "tac:animation/qbz_191_inspect_empty"
+         }
       ]
    },
    "animation.qbz_191_reload_empty": {
       "subtitle": "animation.qbz_191_reload_empty",
       "sounds": [
-         { "name": "tac:animation/qbz_191_reload_empty"}
+         {
+            "name": "tac:animation/qbz_191_reload_empty"
+         }
       ]
    },
-
    "animation.sks_tactical_draw": {
       "subtitle": "animation.sks_tactical_draw",
       "sounds": [
-         { "name": "tac:animation/sks_tactical_draw"}
+         {
+            "name": "tac:animation/sks_tactical_draw"
+         }
       ]
    },
    "animation.sks_tactical_reload_norm": {
       "subtitle": "animation.sks_tactical_reload_norm",
       "sounds": [
-         { "name": "tac:animation/sks_tactical_reload_norm"}
+         {
+            "name": "tac:animation/sks_tactical_reload_norm"
+         }
       ]
    },
    "animation.sks_tactical_inspect": {
       "subtitle": "animation.sks_tactical_inspect",
       "sounds": [
-         { "name": "tac:animation/sks_tactical_inspect"}
+         {
+            "name": "tac:animation/sks_tactical_inspect"
+         }
       ]
    },
    "animation.sks_tactical_inspect_empty": {
       "subtitle": "animation.sks_tactical_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/sks_tactical_inspect_empty"}
+         {
+            "name": "tac:animation/sks_tactical_inspect_empty"
+         }
       ]
    },
    "animation.sks_tactical_reload_empty": {
       "subtitle": "animation.sks_tactical_reload_empty",
       "sounds": [
-         { "name": "tac:animation/sks_tactical_reload_empty"}
+         {
+            "name": "tac:animation/sks_tactical_reload_empty"
+         }
       ]
    },
-
    "animation.m249_draw": {
       "subtitle": "animation.m249_draw",
       "sounds": [
-         { "name": "tac:animation/m249_draw"}
+         {
+            "name": "tac:animation/m249_draw"
+         }
       ]
    },
    "animation.m249_reload_norm": {
       "subtitle": "animation.m249_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m249_reload_norm"}
+         {
+            "name": "tac:animation/m249_reload_norm"
+         }
       ]
    },
    "animation.m249_inspect": {
       "subtitle": "animation.m249_inspect",
       "sounds": [
-         { "name": "tac:animation/m249_inspect"}
+         {
+            "name": "tac:animation/m249_inspect"
+         }
       ]
    },
    "animation.m249_inspect_empty": {
       "subtitle": "animation.m249_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m249_inspect_empty"}
+         {
+            "name": "tac:animation/m249_inspect_empty"
+         }
       ]
    },
    "animation.m249_reload_empty": {
       "subtitle": "animation.m249_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m249_reload_empty"}
+         {
+            "name": "tac:animation/m249_reload_empty"
+         }
       ]
    },
-
    "animation.m92fs_draw": {
       "subtitle": "animation.m92fs_draw",
       "sounds": [
-         { "name": "tac:animation/m92fs_draw"}
+         {
+            "name": "tac:animation/m92fs_draw"
+         }
       ]
    },
    "animation.m92fs_reload_norm": {
       "subtitle": "animation.m92fs_reload_norm",
       "sounds": [
-         { "name": "tac:animation/m92fs_reload_norm"}
+         {
+            "name": "tac:animation/m92fs_reload_norm"
+         }
       ]
    },
    "animation.m92fs_inspect": {
       "subtitle": "animation.m92fs_inspect",
       "sounds": [
-         { "name": "tac:animation/m92fs_inspect"}
+         {
+            "name": "tac:animation/m92fs_inspect"
+         }
       ]
    },
    "animation.m92fs_inspect_empty": {
       "subtitle": "animation.m92fs_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/m92fs_inspect_empty"}
+         {
+            "name": "tac:animation/m92fs_inspect_empty"
+         }
       ]
    },
    "animation.m92fs_reload_empty": {
       "subtitle": "animation.m92fs_reload_empty",
       "sounds": [
-         { "name": "tac:animation/m92fs_reload_empty"}
+         {
+            "name": "tac:animation/m92fs_reload_empty"
+         }
       ]
    },
-
    "animation.mp9_draw": {
       "subtitle": "animation.mp9_draw",
       "sounds": [
-         { "name": "tac:animation/mp9_draw"}
+         {
+            "name": "tac:animation/mp9_draw"
+         }
       ]
    },
    "animation.mp9_reload_norm": {
       "subtitle": "animation.mp9_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mp9_reload_norm"}
+         {
+            "name": "tac:animation/mp9_reload_norm"
+         }
       ]
    },
    "animation.mp9_inspect": {
       "subtitle": "animation.mp9_inspect",
       "sounds": [
-         { "name": "tac:animation/mp9_inspect"}
+         {
+            "name": "tac:animation/mp9_inspect"
+         }
       ]
    },
    "animation.mp9_inspect_empty": {
       "subtitle": "animation.mp9_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mp9_inspect_empty"}
+         {
+            "name": "tac:animation/mp9_inspect_empty"
+         }
       ]
    },
    "animation.mp9_reload_empty": {
       "subtitle": "animation.mp9_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mp9_reload_empty"}
+         {
+            "name": "tac:animation/mp9_reload_empty"
+         }
       ]
    },
-
    "animation.mk23_draw": {
       "subtitle": "animation.mk23_draw",
       "sounds": [
-         { "name": "tac:animation/mk23_draw"}
+         {
+            "name": "tac:animation/mk23_draw"
+         }
       ]
    },
    "animation.mk23_reload_norm": {
       "subtitle": "animation.mk23_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mk23_reload_norm"}
+         {
+            "name": "tac:animation/mk23_reload_norm"
+         }
       ]
    },
    "animation.mk23_inspect": {
       "subtitle": "animation.mk23_inspect",
       "sounds": [
-         { "name": "tac:animation/mk23_inspect"}
+         {
+            "name": "tac:animation/mk23_inspect"
+         }
       ]
    },
    "animation.mk23_inspect_empty": {
       "subtitle": "animation.mk23_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/mk23_inspect_empty"}
+         {
+            "name": "tac:animation/mk23_inspect_empty"
+         }
       ]
    },
    "animation.mk23_reload_empty": {
       "subtitle": "animation.mk23_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mk23_reload_empty"}
+         {
+            "name": "tac:animation/mk23_reload_empty"
+         }
       ]
    },
-
    "animation.rpg7_draw": {
       "subtitle": "animation.rpg7_draw",
       "sounds": [
-         { "name": "tac:animation/rpg7_draw"}
+         {
+            "name": "tac:animation/rpg7_draw"
+         }
       ]
    },
    "animation.rpg7_reload_norm": {
       "subtitle": "animation.rpg7_reload",
       "sounds": [
-         { "name": "tac:animation/rpg7_reload"}
+         {
+            "name": "tac:animation/rpg7_reload"
+         }
       ]
    },
    "animation.rpg7_inspect": {
       "subtitle": "animation.rpg7_inspect",
       "sounds": [
-         { "name": "tac:animation/rpg7_inspect"}
+         {
+            "name": "tac:animation/rpg7_inspect"
+         }
       ]
    },
    "animation.rpg7_inspect_empty": {
       "subtitle": "animation.rpg7_inspect",
       "sounds": [
-         { "name": "tac:animation/rpg7_inspect"}
+         {
+            "name": "tac:animation/rpg7_inspect"
+         }
       ]
    },
    "animation.rpg7_reload_empty": {
       "subtitle": "animation.rpg7_reload",
       "sounds": [
-         { "name": "tac:animation/rpg7_reload"}
+         {
+            "name": "tac:animation/rpg7_reload"
+         }
       ]
    },
-
    "animation.udp_9_draw": {
       "subtitle": "animation.udp_9_draw",
       "sounds": [
-         { "name": "tac:animation/udp_9_draw"}
+         {
+            "name": "tac:animation/udp_9_draw"
+         }
       ]
    },
    "animation.udp_9_reload_norm": {
       "subtitle": "animation.udp_9_reload_norm",
       "sounds": [
-         { "name": "tac:animation/udp_9_reload_norm"}
+         {
+            "name": "tac:animation/udp_9_reload_norm"
+         }
       ]
    },
    "animation.udp_9_inspect": {
       "subtitle": "animation.udp_9_inspect",
       "sounds": [
-         { "name": "tac:animation/udp_9_inspect"}
+         {
+            "name": "tac:animation/udp_9_inspect"
+         }
       ]
    },
    "animation.udp_9_inspect_empty": {
       "subtitle": "animation.udp_9_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/udp_9_inspect_empty"}
+         {
+            "name": "tac:animation/udp_9_inspect_empty"
+         }
       ]
    },
    "animation.udp_9_reload_empty": {
       "subtitle": "animation.udp_9_reload_empty",
       "sounds": [
-         { "name": "tac:animation/udp_9_reload_empty"}
+         {
+            "name": "tac:animation/udp_9_reload_empty"
+         }
       ]
    },
-
    "animation.uzi_draw": {
       "subtitle": "animation.uzi_draw",
       "sounds": [
-         { "name": "tac:animation/uzi_draw"}
+         {
+            "name": "tac:animation/uzi_draw"
+         }
       ]
    },
    "animation.uzi_reload_norm": {
       "subtitle": "animation.uzi_reload_norm",
       "sounds": [
-         { "name": "tac:animation/uzi_reload_norm"}
+         {
+            "name": "tac:animation/uzi_reload_norm"
+         }
       ]
    },
    "animation.uzi_inspect": {
       "subtitle": "animation.uzi_inspect",
       "sounds": [
-         { "name": "tac:animation/uzi_inspect"}
+         {
+            "name": "tac:animation/uzi_inspect"
+         }
       ]
    },
    "animation.uzi_inspect_empty": {
       "subtitle": "animation.uzi_inspect_empty",
       "sounds": [
-         { "name": "tac:animation/uzi_inspect_empty"}
+         {
+            "name": "tac:animation/uzi_inspect_empty"
+         }
       ]
    },
    "animation.uzi_reload_empty": {
       "subtitle": "animation.uzi_reload_empty",
       "sounds": [
-         { "name": "tac:animation/uzi_reload_empty"}
+         {
+            "name": "tac:animation/uzi_reload_empty"
+         }
       ]
    },
-
    "animation.mrad_reload_empty": {
       "subtitle": "animation.mrad_reload_empty",
       "sounds": [
-         { "name": "tac:animation/mrad_reload_empty"}
+         {
+            "name": "tac:animation/mrad_reload_empty"
+         }
       ]
    },
    "animation.mrad_reload_norm": {
       "subtitle": "animation.mrad_reload_norm",
       "sounds": [
-         { "name": "tac:animation/mrad_reload_norm"}
+         {
+            "name": "tac:animation/mrad_reload_norm"
+         }
       ]
    },
    "animation.mrad_inspect": {
       "subtitle": "animation.mrad_inspect",
       "sounds": [
-         { "name": "tac:animation/mrad_inspect"}
+         {
+            "name": "tac:animation/mrad_inspect"
+         }
       ]
    },
    "animation.mrad_draw": {
       "subtitle": "animation.mrad_draw",
       "sounds": [
-         { "name": "tac:animation/mrad_draw"}
+         {
+            "name": "tac:animation/mrad_draw"
+         }
       ]
    },
    "animation.mrad_bolt": {
       "subtitle": "animation.mrad_bolt",
       "sounds": [
-         { "name": "tac:animation/mrad_bolt"}
+         {
+            "name": "tac:animation/mrad_bolt"
+         }
       ]
    },
-
    "animation.hk_g3_reload_empty": {
       "subtitle": "animation.hk_g3_reload_empty",
       "sounds": [
-         { "name": "tac:animation/hk_g3_reload_empty"}
+         {
+            "name": "tac:animation/hk_g3_reload_empty"
+         }
       ]
    },
    "animation.hk_g3_reload_norm": {
       "subtitle": "animation.hk_g3_reload_norm",
       "sounds": [
-         { "name": "tac:animation/hk_g3_reload_norm"}
+         {
+            "name": "tac:animation/hk_g3_reload_norm"
+         }
       ]
    },
    "animation.hk_g3_inspect": {
       "subtitle": "animation.hk_g3_inspect",
       "sounds": [
-         { "name": "tac:animation/hk_g3_inspect"}
+         {
+            "name": "tac:animation/hk_g3_inspect"
+         }
       ]
    },
    "animation.hk_g3_draw": {
       "subtitle": "animation.hk_g3_draw",
       "sounds": [
-         { "name": "tac:animation/hk_g3_draw"}
+         {
+            "name": "tac:animation/hk_g3_draw"
+         }
       ]
    },
-
    "animation.kar98_reload_empty": {
       "subtitle": "animation.kar98_reload_empty",
       "sounds": [
-         { "name": "tac:animation/kar98_reload_empty"}
+         {
+            "name": "tac:animation/kar98_reload_empty"
+         }
       ]
    },
    "animation.kar98_reload_intro": {
       "subtitle": "animation.kar98_reload_intro",
       "sounds": [
-         { "name": "tac:animation/kar98_reload_intro"}
+         {
+            "name": "tac:animation/kar98_reload_intro"
+         }
       ]
    },
    "animation.kar98_reload_loop": {
       "subtitle": "animation.kar98_reload_loop",
       "sounds": [
-         { "name": "tac:animation/kar98_reload_loop"}
+         {
+            "name": "tac:animation/kar98_reload_loop"
+         }
       ]
    },
    "animation.kar98_reload_end": {
       "subtitle": "animation.kar98_reload_end",
       "sounds": [
-         { "name": "tac:animation/kar98_reload_end"}
+         {
+            "name": "tac:animation/kar98_reload_end"
+         }
       ]
    },
    "animation.kar98_inspect": {
       "subtitle": "animation.kar98_inspect",
       "sounds": [
-         { "name": "tac:animation/kar98_inspect"}
+         {
+            "name": "tac:animation/kar98_inspect"
+         }
       ]
    },
    "animation.kar98_draw": {
       "subtitle": "animation.kar98_draw",
       "sounds": [
-         { "name": "tac:animation/kar98_draw"}
+         {
+            "name": "tac:animation/kar98_draw"
+         }
       ]
    },
    "animation.kar98_bolt": {
       "subtitle": "animation.kar98_bolt",
       "sounds": [
-         { "name": "tac:animation/kar98_bolt"}
+         {
+            "name": "tac:animation/kar98_bolt"
+         }
       ]
    },
-
    "animation.tec_9_reload_empty": {
       "subtitle": "animation.tec_9_reload_empty",
       "sounds": [
-         { "name": "tac:animation/tec_9_reload_empty"}
+         {
+            "name": "tac:animation/tec_9_reload_empty"
+         }
       ]
    },
    "animation.tec_9_reload_norm": {
       "subtitle": "animation.tec_9_reload_norm",
       "sounds": [
-         { "name": "tac:animation/tec_9_reload_norm"}
+         {
+            "name": "tac:animation/tec_9_reload_norm"
+         }
       ]
    },
    "animation.tec_9_inspect": {
       "subtitle": "animation.tec_9_inspect",
       "sounds": [
-         { "name": "tac:animation/tec_9_inspect"}
+         {
+            "name": "tac:animation/tec_9_inspect"
+         }
       ]
    },
    "animation.tec_9_draw": {
       "subtitle": "animation.tec_9_draw",
       "sounds": [
-         { "name": "tac:animation/tec_9_draw"}
+         {
+            "name": "tac:animation/tec_9_draw"
+         }
       ]
    },
-
    "animation.colt_python_reload_empty": {
       "subtitle": "animation.colt_python_reload_empty",
       "sounds": [
-         { "name": "tac:animation/colt_python_reload"}
+         {
+            "name": "tac:animation/colt_python_reload"
+         }
       ]
    },
    "animation.colt_python_reload_norm": {
       "subtitle": "animation.colt_python_reload_norm",
       "sounds": [
-         { "name": "tac:animation/colt_python_reload"}
+         {
+            "name": "tac:animation/colt_python_reload"
+         }
       ]
    },
    "animation.colt_python_inspect": {
       "subtitle": "animation.colt_python_inspect",
       "sounds": [
-         { "name": "tac:animation/colt_python_inspect"}
+         {
+            "name": "tac:animation/colt_python_inspect"
+         }
       ]
    },
    "animation.colt_python_draw": {
       "subtitle": "animation.colt_python_draw",
       "sounds": [
-         { "name": "tac:animation/colt_python_draw"}
+         {
+            "name": "tac:animation/colt_python_draw"
+         }
       ]
    },
-
    "animation.p90_reload_empty": {
       "subtitle": "animation.p90_reload_empty",
       "sounds": [
-         { "name": "tac:animation/p90_reload_empty"}
+         {
+            "name": "tac:animation/p90_reload_empty"
+         }
       ]
    },
    "animation.p90_reload_norm": {
       "subtitle": "animation.p90_reload_norm",
       "sounds": [
-         { "name": "tac:animation/p90_reload_norm"}
+         {
+            "name": "tac:animation/p90_reload_norm"
+         }
       ]
    },
    "animation.p90_inspect": {
       "subtitle": "animation.p90_inspect",
       "sounds": [
-         { "name": "tac:animation/p90_inspect"}
+         {
+            "name": "tac:animation/p90_inspect"
+         }
       ]
    },
    "animation.p90_draw": {
       "subtitle": "animation.p90_draw",
       "sounds": [
-         { "name": "tac:animation/p90_draw"}
+         {
+            "name": "tac:animation/p90_draw"
+         }
       ]
    },
-
-
-
    "stun.ring": {
       "subtitle": "stun_grenade_ringing",
       "sounds": [
-         { "name": "tac:entity/stun_grenade/ring"}
+         {
+            "name": "tac:entity/stun_grenade/ring"
+         }
       ]
    },
    "stun.explosion": {
       "subtitle": "stun_grenade_exploded",
       "sounds": [
-         { "name": "tac:entity/stun_grenade/explosion"}
+         {
+            "name": "tac:entity/stun_grenade/explosion"
+         }
       ]
    }
 }

@@ -1,12 +1,10 @@
 package com.tac.guns.client.handler;
 
-
 import com.tac.guns.client.Keys;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageFireMode;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.settings.KeyConflictContext;
-
 
 /**
  * @author: ClumsyAlien
@@ -33,4 +31,3 @@ public class FireModeSwitchEvent {
         });
     }
 }
-

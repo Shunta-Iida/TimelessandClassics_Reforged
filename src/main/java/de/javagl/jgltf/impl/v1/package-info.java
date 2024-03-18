@@ -4,4 +4,3 @@
  * the schema is updated, and should not be modified manually.
  */
 package de.javagl.jgltf.impl.v1;
-

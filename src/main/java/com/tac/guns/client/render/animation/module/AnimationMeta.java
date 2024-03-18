@@ -8,15 +8,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class AnimationMeta {
     private final ResourceLocation resourceLocation;
 
-    public AnimationMeta(ResourceLocation resourceLocation){
+    public AnimationMeta(ResourceLocation resourceLocation) {
         this.resourceLocation = resourceLocation;
     }
-    public ResourceLocation getResourceLocation(){
+
+    public ResourceLocation getResourceLocation() {
         return resourceLocation;
     }
 
-    public boolean equals(AnimationMeta meta){
-        if(meta == null) return false;
+    public boolean equals(AnimationMeta meta) {
+        if (meta == null)
+            return false;
         return meta.resourceLocation.equals(resourceLocation);
     }
 }

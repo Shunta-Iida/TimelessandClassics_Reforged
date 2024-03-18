@@ -1,7 +1,9 @@
 {
   "general": {
     "rate": 200,
-    "rateSelector": [1],
+    "rateSelector": [
+      1
+    ],
     "gripType": "tac:bazooka",
     "recoilAngle": 3.25,
     "horizontalRecoilAngle": 3.25,
@@ -11,7 +13,6 @@
     "cameraRecoilModifier": 1.35,
     "recoilDuration": 0.35,
     "weightKilo": 10.3,
-
     "spread": 2.0,
     "firstShotSpread": 0.125,
     "hipFireInaccuracy": 4.0,
@@ -45,8 +46,8 @@
     "reloadEmpty": "tac:animation.rpg7_reload_empty",
     "draw": "tac:animation.rpg7_draw",
     "inspect": "tac:animation.rpg7_inspect",
-    "cock":  "tac:item.pistol.cock",
-    "silencedFire":  "tac:item.rpg7_fire"
+    "cock": "tac:item.pistol.cock",
+    "silencedFire": "tac:item.rpg7_fire"
   },
   "display": {
     "flash": {
@@ -61,12 +62,12 @@
     "weaponType": 6
   },
   "modules": {
-    "zoom":{
+    "zoom": {
       "fovModifier": 0.5,
       "xOffset": 0.885,
       "yOffset": 8.375,
       "zOffset": 3
     },
-    "attachments": { }
+    "attachments": {}
   }
 }

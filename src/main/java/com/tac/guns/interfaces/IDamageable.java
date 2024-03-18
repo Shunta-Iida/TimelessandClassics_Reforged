@@ -10,15 +10,13 @@ import net.minecraft.world.level.block.state.BlockState;
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IDamageable
-{
+public interface IDamageable {
     @Deprecated
-    default void onBlockDamaged(Level world, BlockState state, BlockPos pos, int damage)
-    {
+    default void onBlockDamaged(Level world, BlockState state, BlockPos pos, int damage) {
     }
 
-    default void onBlockDamaged(Level world, BlockState state, BlockPos pos, ProjectileEntity projectile, float rawDamage, int damage)
-    {
+    default void onBlockDamaged(Level world, BlockState state, BlockPos pos, ProjectileEntity projectile,
+            float rawDamage, int damage) {
         this.onBlockDamaged(world, state, pos, damage);
     }
 }

@@ -10,17 +10,19 @@ import java.util.function.Supplier;
 
 public class MessageArmorUpdate extends PlayMessage<MessageArmorUpdate> {
     @Override
-    public void encode(MessageArmorUpdate messageArmorUpdate, FriendlyByteBuf friendlyByteBuf) { }
+    public void encode(MessageArmorUpdate messageArmorUpdate, FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
-    public MessageArmorUpdate decode(FriendlyByteBuf friendlyByteBuf) {return new MessageArmorUpdate();}
+    public MessageArmorUpdate decode(FriendlyByteBuf friendlyByteBuf) {
+        return new MessageArmorUpdate();
+    }
 
     @Override
     public void handle(MessageArmorUpdate messageArmorUpdate, Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null && !player.isSpectator())
-            {
+            if (player != null && !player.isSpectator()) {
                 ((PlayerWithSynData) player).updateRig();
             }
         });

@@ -16,8 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Items;
 
-
-public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implements IDynamicScalable{
+public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implements IDynamicScalable {
     private final float initial = 0.95f;
     private final float horizontal = 1.2f;
     private final float vertical = 1.6f;
@@ -25,8 +24,13 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
     private float prevScale = initial;
     private int fractal = 4;
 
-    public DynamicScalingTexturedCrosshair(ResourceLocation id) { super(id); }
-    public DynamicScalingTexturedCrosshair(ResourceLocation id, boolean blend) { super(id,blend); }
+    public DynamicScalingTexturedCrosshair(ResourceLocation id) {
+        super(id);
+    }
+
+    public DynamicScalingTexturedCrosshair(ResourceLocation id, boolean blend) {
+        super(id, blend);
+    }
 
     @Override
     public void scale(float value) {
@@ -49,26 +53,32 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
         return vertical;
     }
 
-    public int getFractal() { return fractal; }
+    public int getFractal() {
+        return fractal;
+    }
 
-    public void setFractal(int value) { if(value > 0) this.fractal = value; }
+    public void setFractal(int value) {
+        if (value > 0)
+            this.fractal = value;
+    }
 
     @Override
-    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float partialTicks){
+    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float partialTicks) {
         LocalPlayer playerEntity = mc.player;
-        if(playerEntity == null)
+        if (playerEntity == null)
             return;
-        if(playerEntity.getMainHandItem().getItem() == null || playerEntity.getMainHandItem().getItem() == Items.AIR)
+        if (playerEntity.getMainHandItem().getItem() == null || playerEntity.getMainHandItem().getItem() == Items.AIR)
             return;
-        if(playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem)
-        {
+        if (playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem) {
             TimelessGunItem gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
             if (gunItem.getGun().getDisplay().isDynamicHipfire()) {
                 float alpha = 1.0F - (float) AimingHandler.get().getNormalisedAdsProgress();
                 float size = 8.0F;
 
                 RenderSystem.enableBlend();
-                RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE,
+                        GlStateManager.DestFactor.ZERO);
                 BufferBuilder buffer = Tesselator.getInstance().getBuilder();
 
                 stack.pushPose();
@@ -108,13 +118,13 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer playerEntity = mc.player;
 
-        if(playerEntity == null) return;
+        if (playerEntity == null)
+            return;
 
         float scale = this.getInitialScale();
         TimelessGunItem gunItem;
 
-        if(playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem)
-        {
+        if (playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem) {
             gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
 
             if (playerEntity.getX() != playerEntity.xo || playerEntity.getZ() != playerEntity.zo)
@@ -122,23 +132,36 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
             if (playerEntity.getY() != playerEntity.yo)
                 scale += this.getVerticalMovementScale() * gunItem.getGun().getDisplay().getHipfireMoveScale();
 
-            this.scale(scale * (gunItem.getGun().getDisplay().getHipfireScale()) * (GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(), gunItem.getGun().getGeneral().getSpread())*GunEnchantmentHelper.getSpreadModifier(playerEntity.getMainHandItem())));
-            //this.scale *= GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(), gunItem.getGun().getGeneral().getSpread());
+            this.scale(scale * (gunItem.getGun().getDisplay().getHipfireScale())
+                    * (GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(),
+                            gunItem.getGun().getGeneral().getSpread())
+                            * GunEnchantmentHelper.getSpreadModifier(playerEntity.getMainHandItem())));
+            // this.scale *=
+            // GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(),
+            // gunItem.getGun().getGeneral().getSpread());
         }
     }
-    @Override
-    public void onGunFired()
-    {
-        /*Minecraft mc = Minecraft.getInstance();
-        ClientPlayerEntity playerEntity = mc.player;
 
-        TimelessGunItem gunItem = (TimelessGunItem) playerentity.getMainHandItem().getItem();
-        float gunRecoil = GunModifierHelper.getRecoilModifier(playerentity.getMainHandItem());
-        float gunRecoilH = GunModifierHelper.getHorizontalRecoilModifier(playerentity.getMainHandItem());
-*/
-        // Calculating average Vertical and Horizontal recoil along with reducing modifier to a useful metric
-        //float recoil = -((gunRecoilH + gunRecoil)) * (gunItem.getGun().getDisplay().getHipfireRecoilScale());
-        // The +1 is used to ensure we have a "Percentage", only for testing and may be reverted
-        this.scale *= 1.25f;//recoil;
+    @Override
+    public void onGunFired() {
+        /*
+         * Minecraft mc = Minecraft.getInstance();
+         * ClientPlayerEntity playerEntity = mc.player;
+         * 
+         * TimelessGunItem gunItem = (TimelessGunItem)
+         * playerentity.getMainHandItem().getItem();
+         * float gunRecoil =
+         * GunModifierHelper.getRecoilModifier(playerentity.getMainHandItem());
+         * float gunRecoilH =
+         * GunModifierHelper.getHorizontalRecoilModifier(playerentity.getMainHandItem())
+         * ;
+         */
+        // Calculating average Vertical and Horizontal recoil along with reducing
+        // modifier to a useful metric
+        // float recoil = -((gunRecoilH + gunRecoil)) *
+        // (gunItem.getGun().getDisplay().getHipfireRecoilScale());
+        // The +1 is used to ensure we have a "Percentage", only for testing and may be
+        // reverted
+        this.scale *= 1.25f;// recoil;
     }
 }

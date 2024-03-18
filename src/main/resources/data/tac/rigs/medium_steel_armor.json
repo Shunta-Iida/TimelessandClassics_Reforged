@@ -15,10 +15,10 @@
   },
   "sounds": {
     "step": "minecraft:item.armor.equip_diamond",
-    "on":"minecraft:item.armor.equip_diamond",
-    "off":"minecraft:item.armor.equip_diamond",
-    "hit":"minecraft:item.armor.equip_diamond",
-    "broken":"minecraft:item.armor.equip_diamond",
-    "repair":"minecraft:item.armor.equip_diamond"
+    "on": "minecraft:item.armor.equip_diamond",
+    "off": "minecraft:item.armor.equip_diamond",
+    "hit": "minecraft:item.armor.equip_diamond",
+    "broken": "minecraft:item.armor.equip_diamond",
+    "repair": "minecraft:item.armor.equip_diamond"
   }
 }

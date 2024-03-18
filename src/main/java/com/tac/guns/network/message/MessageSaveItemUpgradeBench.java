@@ -12,14 +12,13 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgradeBench>
-{
+public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgradeBench> {
     private BlockPos pos;
 
     public MessageSaveItemUpgradeBench() {
     }
-    public MessageSaveItemUpgradeBench(BlockPos pos)
-    {
+
+    public MessageSaveItemUpgradeBench(BlockPos pos) {
         this.pos = pos;
     }
 
@@ -34,19 +33,19 @@ public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgr
     }
 
     @Override
-    public void handle(MessageSaveItemUpgradeBench messageSaveItemUpgradeBench, Supplier<NetworkEvent.Context> supplier)
-    {
+    public void handle(MessageSaveItemUpgradeBench messageSaveItemUpgradeBench,
+            Supplier<NetworkEvent.Context> supplier) {
 
-        supplier.get().enqueueWork(() ->
-        {
+        supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
-            if(player != null)
-            {
-                supplier.get().enqueueWork(() -> ServerPlayHandler.handleUpgradeBenchItem(messageSaveItemUpgradeBench, player));
+            if (player != null) {
+                supplier.get().enqueueWork(
+                        () -> ServerPlayHandler.handleUpgradeBenchItem(messageSaveItemUpgradeBench, player));
             }
         });
         supplier.get().setPacketHandled(true);
     }
+
     public BlockPos getPos() {
         return this.pos;
     }

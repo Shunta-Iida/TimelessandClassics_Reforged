@@ -19,8 +19,8 @@ public abstract class ServerPlayerMixin extends Player {
     }
 
     @Inject(method = "restoreFrom(Lnet/minecraft/server/level/ServerPlayer;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;replaceWith(Lnet/minecraft/world/entity/player/Inventory;)V"))
-    public void restoreRig(ServerPlayer p_9016_, boolean p_9017_, CallbackInfo ci){
-        ((PlayerWithSynData)this).setRig(((PlayerWithSynData)p_9016_).getRig());
-        ((PlayerWithSynData)p_9016_).setRig(ItemStack.EMPTY);
+    public void restoreRig(ServerPlayer p_9016_, boolean p_9017_, CallbackInfo ci) {
+        ((PlayerWithSynData) this).setRig(((PlayerWithSynData) p_9016_).getRig());
+        ((PlayerWithSynData) p_9016_).setRig(ItemStack.EMPTY);
     }
 }

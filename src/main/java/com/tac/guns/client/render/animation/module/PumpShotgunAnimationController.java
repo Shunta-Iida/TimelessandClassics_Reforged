@@ -14,6 +14,7 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
     }
 
     private boolean empty = false;
+
     @Override
     protected AnimationSoundMeta getSoundFromLabel(Item item, AnimationLabel label) {
         if (item instanceof GunItem) {
@@ -43,8 +44,9 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
         switch (label) {
             case RELOAD_EMPTY:
             case RELOAD_NORMAL:
-                super.runAnimation(AnimationLabel.RELOAD_INTRO , ()-> {
-                    if(!this.isAnimationRunning()) super.runAnimation(AnimationLabel.RELOAD_LOOP);
+                super.runAnimation(AnimationLabel.RELOAD_INTRO, () -> {
+                    if (!this.isAnimationRunning())
+                        super.runAnimation(AnimationLabel.RELOAD_LOOP);
                 });
             default:
                 super.runAnimation(label);
@@ -57,7 +59,8 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
             case RELOAD_EMPTY:
             case RELOAD_NORMAL:
                 super.runAnimation(AnimationLabel.RELOAD_INTRO, () -> {
-                    if(!this.isAnimationRunning())  super.runAnimation(AnimationLabel.RELOAD_LOOP, callback);
+                    if (!this.isAnimationRunning())
+                        super.runAnimation(AnimationLabel.RELOAD_LOOP, callback);
                 });
             default:
                 super.runAnimation(label, callback);
