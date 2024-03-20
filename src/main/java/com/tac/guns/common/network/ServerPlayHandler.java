@@ -98,7 +98,7 @@ public class ServerPlayHandler {
         if (!player.isSpectator()) {
             Level world = player.level;
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (heldItem.getItem() instanceof GunItem && (Gun.hasAmmo(heldItem) || player.isCreative())) {
+            if (heldItem.getItem() instanceof GunItem && (Gun.hasAmmo(heldItem))) {
                 GunItem item = (GunItem) heldItem.getItem();
                 Gun modifiedGun = item.getModifiedGun(heldItem);
                 if (modifiedGun != null) {
@@ -204,14 +204,12 @@ public class ServerPlayHandler {
                                 messageSound);
                     }
 
-                    if (!player.isCreative()) {
-                        CompoundTag tag = heldItem.getOrCreateTag();
-                        if (!tag.getBoolean("IgnoreAmmo")) {
-                            int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.RECLAIMED.get(),
-                                    heldItem);
-                            if (level == 0 || player.level.random.nextInt(4 - Mth.clamp(level, 1, 2)) != 0) {
-                                tag.putInt("AmmoCount", Math.max(0, tag.getInt("AmmoCount") - 1));
-                            }
+                    CompoundTag tag = heldItem.getOrCreateTag();
+                    if (!tag.getBoolean("IgnoreAmmo")) {
+                        int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.RECLAIMED.get(),
+                                heldItem);
+                        if (level == 0 || player.level.random.nextInt(4 - Mth.clamp(level, 1, 2)) != 0) {
+                            tag.putInt("AmmoCount", Math.max(0, tag.getInt("AmmoCount") - 1));
                         }
                     }
                 }

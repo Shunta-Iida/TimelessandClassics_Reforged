@@ -1,10 +1,7 @@
 package com.tac.guns.inventory.gear.armor.implementations;
 
 import com.tac.guns.init.ModContainers;
-import com.tac.guns.inventory.gear.armor.AmmoSlot;
-import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
-import com.tac.guns.inventory.gear.armor.IRigContainer;
-import com.tac.guns.inventory.gear.armor.RigSlotsHandler;
+import com.tac.guns.inventory.gear.armor.*;
 import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +12,13 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class R3_RigContainer extends AbstractContainerMenu implements IRigContainer {
-    public final static int ROW_NUM = 3; // swap per row count
+public class RigContainer extends AbstractContainerMenu implements IRigContainer {
+    public int rows = 1; // Swap per row count
 
-    public R3_RigContainer(int windowId, Inventory inv, ItemStack item) {
-        super(ModContainers.ARMOR_R3.get(), windowId); // Swap per row count
+    public RigContainer(int windowId, Inventory inv, ItemStack item, int rows) {
+        super(ModContainers.ARMOR_RIG.get(), windowId); // Swap per row count
+        this.rows = rows;
+
         RigSlotsHandler itemHandler = (RigSlotsHandler) item.getCapability(ArmorRigCapabilityProvider.capability)
                 .resolve().get();
         int i = (this.getNumRows() - 4) * 18;
@@ -30,6 +29,7 @@ public class R3_RigContainer extends AbstractContainerMenu implements IRigContai
             }
         }
 
+        // inventory
         for (int l = 0; l < 3; ++l) {
             for (int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(inv, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18 + i));
@@ -41,8 +41,8 @@ public class R3_RigContainer extends AbstractContainerMenu implements IRigContai
         }
     }
 
-    public R3_RigContainer(int windowId, Inventory inv) {
-        super(ModContainers.ARMOR_R3.get(), windowId); // Swap per row count
+    public RigContainer(int windowId, Inventory inv) {
+        super(ModContainers.ARMOR_R1.get(), windowId); // Swap per row count
         int i = (this.getNumRows() - 4) * 18;
         ItemStackHandler itemHandler = new ItemStackHandler(9 * getNumRows());
         for (int j = 0; j < this.getNumRows(); ++j) {
@@ -107,13 +107,12 @@ public class R3_RigContainer extends AbstractContainerMenu implements IRigContai
     }
 
     @Override
-    public AbstractContainerMenu getSelf() {
-        return this;
+    public int getNumRows() {
+        return rows;
     }
 
     @Override
-    public int getNumRows() {
-        return ROW_NUM;
+    public AbstractContainerMenu getSelf() {
+        return this;
     }
-
 }

@@ -4,6 +4,7 @@ import com.tac.guns.Config;
 import com.tac.guns.Reference;
 import com.tac.guns.client.handler.*;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.armor.models.ArmorRig1;
 import com.tac.guns.client.render.armor.models.MediumArmor;
 import com.tac.guns.client.render.armor.models.ModernArmor;
 import com.tac.guns.client.render.armor.vestlayer.VestLayerRender;
@@ -183,6 +184,7 @@ public class ClientHandler {
         // client side only
         VestLayerRender.registerModel(ModItems.LIGHT_ARMOR.get(), new ModernArmor());
         VestLayerRender.registerModel(ModItems.MEDIUM_STEEL_ARMOR.get(), new MediumArmor());
+        VestLayerRender.registerModel(ModItems.ARMOR_RIG.get(), new ArmorRig1());
         // VestLayerRender.registerModel(ModItems.CARDBOARD_ARMOR_FUN.get(), new
         // CardboardArmor());
     }
@@ -192,6 +194,7 @@ public class ClientHandler {
         MenuScreens.register(ModContainers.UPGRADE_BENCH.get(), UpgradeBenchScreen::new);
         MenuScreens.register(ModContainers.ATTACHMENTS.get(), AttachmentScreen::new);
         MenuScreens.register(ModContainers.INSPECTION.get(), InspectScreen::new);
+        MenuScreens.register(ModContainers.ARMOR_RIG.get(), AmmoScreen<R3_RigContainer>::new);
         MenuScreens.register(ModContainers.ARMOR_R1.get(), AmmoScreen<R1_RigContainer>::new);
         MenuScreens.register(ModContainers.ARMOR_R2.get(), AmmoScreen<R2_RigContainer>::new);
         MenuScreens.register(ModContainers.ARMOR_R3.get(), AmmoScreen<R3_RigContainer>::new);

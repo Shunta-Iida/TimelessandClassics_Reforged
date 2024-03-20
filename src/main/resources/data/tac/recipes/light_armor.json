@@ -17,6 +17,7 @@
     }
   },
   "result": {
-    "item": "tac:light_armor"
+    "item": "tac:light_armor",
+    "nbt": "{RigDurability:40.0f}"
   }
 }

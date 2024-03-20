@@ -60,7 +60,7 @@ public class ClientPlayHandler {
             Minecraft.getInstance().getSoundManager()
                     .play(new SimpleSoundInstance(message.getId(), SoundSource.PLAYERS,
                             (float) (message.getVolume() * Config.CLIENT.sounds.weaponsVolume.get()),
-                            message.getPitch(), false, 0, SoundInstance.Attenuation.LINEAR, 0, 0, 0,
+                            message.getPitch(), false, 0, SoundInstance.Attenuation.NONE, 0, 0, 0,
                             true));
         } else {
             Minecraft.getInstance().getSoundManager()

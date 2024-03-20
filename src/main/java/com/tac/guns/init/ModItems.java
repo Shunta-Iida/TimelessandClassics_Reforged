@@ -4,6 +4,8 @@ import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.client.render.armor.models.MediumArmor;
 import com.tac.guns.common.GunModifiers;
+import com.tac.guns.common.NetworkRigManager;
+import com.tac.guns.common.Rig;
 import com.tac.guns.item.*;
 import com.tac.guns.item.transition.*;
 import com.tac.guns.item.transition.grenades.BaseballGrenadeItem;
@@ -477,6 +479,11 @@ public class ModItems {
         // Item.Properties()tab(GunMod.GROUP), 20 * 4, 1.1f));
 
         /* Misc */
+        public static final RegistryObject<Item> ARMOR_RIG = REGISTER.register("armor_rig",
+                        () -> (new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)))
+                                        .setRigRows(3)
+                                        .setDamageRate(0.8F));
+
         public static final RegistryObject<Item> ARMOR_R1 = REGISTER.register("armor_r1",
                         () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
         public static final RegistryObject<Item> ARMOR_R2 = REGISTER.register("armor_r2",
@@ -492,9 +499,11 @@ public class ModItems {
         // Item.Properties().maxStackSize(4)tab(GunMod.GROUP)));
 
         public static final RegistryObject<Item> LIGHT_ARMOR = REGISTER.register("light_armor",
-                        () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+                        () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
+                                        .setDamageRate(0.6F));
         public static final RegistryObject<Item> MEDIUM_STEEL_ARMOR = REGISTER.register("medium_steel_armor",
-                        () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+                        () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
+                                        .setDamageRate(0.2F));
         // public static final RegistryObject<Item> CARDBOARD_ARMOR_FUN =
         // REGISTER.register("cardboard_armor", () -> new ArmorRigItem(2, new
         // Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));

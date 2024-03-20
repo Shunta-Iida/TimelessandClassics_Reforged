@@ -13,6 +13,7 @@
     }
   },
   "result": {
-    "item": "tac:medium_steel_armor"
+    "item": "tac:medium_steel_armor",
+    "nbt": "{RigDurability:40.0f}"
   }
 }

@@ -17,8 +17,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
-    id 'com.github.sherter.google-java-format' version '0.9'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -27,7 +26,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-version = '0.3.10.1-1.18.2'
+version = '0.0NONE'
 group = 'com.tac'
 archivesBaseName = 'tac'
 
@@ -100,9 +99,13 @@ sourceSets.main.resources {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.2.0'
 
-    implementation fg.deobf('curse.maven:framework-549225:3723144')
-    implementation fg.deobf('curse.maven:rubidium-574856:4494903')
-    implementation fg.deobf('curse.maven:oculus-581495:4578744')
+    implementation fg.deobf('curse.maven:framework-549225:4613856')
+    implementation fg.deobf('curse.maven:soundphysics-535489:3775919')
+    implementation fg.deobf('curse.maven:footsteps-433068:4328018')
+    implementation fg.deobf('curse.maven:voicechat-416089:4961311')
+    implementation fg.deobf('curse.maven:clothconfig-348521:4633387')
+    // implementation fg.deobf('curse.maven:rubidium-574856:4494903')
+    // implementation fg.deobf('curse.maven:oculus-581495:4578744')
 
     minecraftLibrary(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '[2.14.2,2.16.0)')
     minecraftLibrary(group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '[2.14.2,2.16.0)')

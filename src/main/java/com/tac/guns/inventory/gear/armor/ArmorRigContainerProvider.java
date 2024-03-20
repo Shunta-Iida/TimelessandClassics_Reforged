@@ -5,11 +5,13 @@ import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.inventory.gear.armor.implementations.*;
 import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.apache.logging.log4j.Level;
 
@@ -27,7 +29,7 @@ public class ArmorRigContainerProvider implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("AmmoPack");
+        return item.getItem().getName(item);
     }
 
     @Nullable
@@ -35,10 +37,9 @@ public class ArmorRigContainerProvider implements MenuProvider {
     public AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player) {
         ItemStack rig = ((PlayerWithSynData) player).getRig().isEmpty() ? player.getMainHandItem()
                 : ((PlayerWithSynData) player).getRig();
-        if (rig.getItem() instanceof ArmorRigItem) {
-            int rows = Math.max(item.getOrCreateTag().getInt("rig_rows"),
-                    player.getMainHandItem().getOrCreateTag().getInt("rig_rows"));
-            switch (rows) {
+        Item rigItem = rig.getItem();
+        if (rigItem instanceof ArmorRigItem) {
+            switch (((ArmorRigItem) rigItem).getRigRows()) {
                 case 1:
                     this.container = new R1_RigContainer(windowId, inv, this.item);
                     break;
