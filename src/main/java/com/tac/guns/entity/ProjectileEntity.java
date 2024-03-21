@@ -576,15 +576,18 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         }
 
         DamageSource source = new DamageSourceProjectile("bullet", this, shooter, weapon).setProjectile();
-        ItemStack rig = WearableHelper.PlayerWornRig((Player) entity);
-        if (entity instanceof Player && !rig.isEmpty()) {
-            if (!WearableHelper.tickFromCurrentDurability((Player) entity, this)) {
-                PacketHandler.getPlayChannel().sendTo(new MessagePlayerShake((Player) entity),
-                        ((ServerPlayer) entity).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-                damage *= ((ArmorRigItem) rig.getItem()).getDamageAttenuationRate();
-                tac_attackEntity(source, entity, damage);
-            } else {
-                tac_attackEntity(source, entity, damage);
+
+        if (entity instanceof Player) {
+            ItemStack rig = WearableHelper.PlayerWornRig((Player) entity);
+            if (!rig.isEmpty()) {
+                if (!WearableHelper.tickFromCurrentDurability((Player) entity, this)) {
+                    PacketHandler.getPlayChannel().sendTo(new MessagePlayerShake((Player) entity),
+                            ((ServerPlayer) entity).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+                    damage *= ((ArmorRigItem) rig.getItem()).getDamageAttenuationRate();
+                    tac_attackEntity(source, entity, damage);
+                } else {
+                    tac_attackEntity(source, entity, damage);
+                }
             }
         } else {
             tac_attackEntity(source, entity, damage);
