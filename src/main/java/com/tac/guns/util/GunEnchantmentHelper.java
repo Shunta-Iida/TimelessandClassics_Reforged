@@ -35,6 +35,9 @@ public class GunEnchantmentHelper {
                     new UpgradeBenchScreen.RequirementItem(new int[] { 1, 2, 3, 4, 5, 6 },
                             new int[] { 4, 6, 8, 11, 14, 17 },
                             ModEnchantments.PUNCTURING.get()));
+            put("Lightweight",
+                    new UpgradeBenchScreen.RequirementItem(new int[] { 1, 2, 3 }, new int[] { 4, 6, 8 },
+                            ModEnchantments.LIGHTWEIGHT.get()));
         }
     };
 
