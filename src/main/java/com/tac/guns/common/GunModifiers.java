@@ -118,7 +118,7 @@ public class GunModifiers {
             return 0.65F;
         }
     };
-    public static final IGunModifier LONGRANGE_8x_SCOPE_ADS = new IGunModifier() {
+    public static final IGunModifier LONGRANGE_6_10_SCOPE_ADS = new IGunModifier() {
         @Override
         public double modifyAimDownSightSpeed(double speed) {
             return speed * 0.7F;

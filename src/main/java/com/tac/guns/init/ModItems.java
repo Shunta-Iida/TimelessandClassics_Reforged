@@ -381,7 +381,7 @@ public class ModItems {
                         () -> new ScopeItem(Scope
                                         .create(new ScopeZoomData[] { new ScopeZoomData(10f, 0.395F, 4.2f),
                                                         new ScopeZoomData(6f, 0.4225F, 4.2f) }, 2.45F, 0.2125,
-                                                        "gener8x", true, GunModifiers.LONGRANGE_8x_SCOPE_ADS)
+                                                        "gener8x", true, GunModifiers.LONGRANGE_6_10_SCOPE_ADS)
                                         .viewFinderOffset(0.595).viewFinderOffsetDR(0.3925)
                                         .viewFinderOffsetSpecial(0.465).viewFinderOffsetSpecialDR(0.415),
                                         new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
