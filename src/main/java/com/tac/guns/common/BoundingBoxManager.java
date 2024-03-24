@@ -48,6 +48,7 @@ public class BoundingBoxManager {
         registerHeadshotBox(EntityType.ZOMBIFIED_PIGLIN, new ChildHeadshotBox<>(8.0, 24.0, 0.75, 0.5));
         registerHeadshotBox(EntityType.HUSK, new ChildHeadshotBox<>(8.0, 24.0, 0.75, 0.5));
         registerHeadshotBox(EntityType.SKELETON, new BasicHeadshotBox<>(8.0, 24.0));
+        registerHeadshotBox(EntityType.WITHER_SKELETON, new BasicHeadshotBox<>(8.0, 34.0));
         registerHeadshotBox(EntityType.STRAY, new BasicHeadshotBox<>(8.0, 24.0));
         registerHeadshotBox(EntityType.CREEPER, new BasicHeadshotBox<>(8.0, 18.0));
         registerHeadshotBox(EntityType.SPIDER, new RotatedHeadshotBox<>(8.0, 5.0, 7.0, false, true));
