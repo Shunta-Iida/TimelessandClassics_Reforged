@@ -583,7 +583,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 if (!WearableHelper.tickFromCurrentDurability((Player) entity, this)) {
                     PacketHandler.getPlayChannel().sendTo(new MessagePlayerShake((Player) entity),
                             ((ServerPlayer) entity).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-                    damage *= ((ArmorRigItem) rig.getItem()).getDamageAttenuationRate();
+                    damage *= ((ArmorRigItem) rig.getItem()).getDamageRate();
                     tac_attackEntity(source, entity, damage);
                 } else {
                     tac_attackEntity(source, entity, damage);
@@ -622,10 +622,10 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     private void tac_attackEntity(DamageSource source, Entity entity, float damage) {
         if (Config.COMMON.gameplay.bulletsIgnoreStandardArmor.get()) {
             float damageToMcArmor = 0;
-            if (Config.COMMON.gameplay.percentDamageIgnoresStandardArmor.get()
-                    * this.projectile.getGunArmorIgnore() <= 1.0) {
-                damageToMcArmor = (float) (damage * (1 - Config.COMMON.gameplay.percentDamageIgnoresStandardArmor.get()
-                        * this.projectile.getGunArmorIgnore()));
+            double armorIgnoreRate = Config.COMMON.gameplay.percentDamageIgnoresStandardArmor.get()
+                    * this.projectile.getGunArmorIgnore();
+            if (armorIgnoreRate <= 1.0) {
+                damageToMcArmor = (float) (damage * (1 - armorIgnoreRate));
                 entity.hurt(source, damageToMcArmor); // Apply vanilla armor aware damage
             }
 

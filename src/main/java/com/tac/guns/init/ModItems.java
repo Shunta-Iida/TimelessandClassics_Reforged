@@ -482,7 +482,7 @@ public class ModItems {
         public static final RegistryObject<Item> ARMOR_RIG = REGISTER.register("armor_rig",
                         () -> (new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)))
                                         .setRigRows(3)
-                                        .setDamageRate(0.8F));
+                                        .setDamageRate(0.6F));
 
         public static final RegistryObject<Item> ARMOR_R1 = REGISTER.register("armor_r1",
                         () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
@@ -500,7 +500,7 @@ public class ModItems {
 
         public static final RegistryObject<Item> LIGHT_ARMOR = REGISTER.register("light_armor",
                         () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
-                                        .setDamageRate(0.6F));
+                                        .setDamageRate(0.4F));
         public static final RegistryObject<Item> MEDIUM_STEEL_ARMOR = REGISTER.register("medium_steel_armor",
                         () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
                                         .setDamageRate(0.2F));

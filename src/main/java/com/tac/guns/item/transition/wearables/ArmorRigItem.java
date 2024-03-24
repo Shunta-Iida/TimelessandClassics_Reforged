@@ -32,7 +32,7 @@ import java.util.WeakHashMap;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ArmorRigItem extends Item implements IArmoredRigItem {
     private int rows = 0;
-    private float damageAttenuationRate = 1.0F;
+    private float damageRate = 1.0F;
 
     public ArmorRigItem(Properties properties) {
         super(properties);
@@ -173,12 +173,12 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
         return this.rows;
     }
 
-    public float getDamageAttenuationRate() {
-        return this.damageAttenuationRate;
+    public float getDamageRate() {
+        return this.damageRate;
     }
 
     public ArmorRigItem setDamageRate(float damageAttenuationRate) {
-        this.damageAttenuationRate = damageAttenuationRate;
+        this.damageRate = damageAttenuationRate;
         return this;
     }
 }
