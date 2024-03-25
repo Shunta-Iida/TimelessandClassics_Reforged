@@ -232,6 +232,11 @@ public class GunItem extends Item implements IColored {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
 
+        // ドロップ増加
+        if (enchantment instanceof LootBonusEnchantment && enchantment.category == EnchantmentCategory.WEAPON) {
+            return true;
+        }
+
         // 高速装填
         if (enchantment instanceof QuickChargeEnchantment) {
             return true;
