@@ -3,12 +3,14 @@ package com.tac.guns.item;
 import com.tac.guns.common.DiscardOffhand;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.NetworkGunManager;
+import com.tac.guns.enchantment.EnchantmentTypes;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.KeybindComponent;
@@ -19,15 +21,24 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.ArrowInfiniteEnchantment;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.LootBonusEnchantment;
+import net.minecraft.world.item.enchantment.QuickChargeEnchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
+
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
@@ -213,4 +224,19 @@ public class GunItem extends Item implements IColored {
      * return 5;
      * }
      */
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+
+        // 高速装填
+        if (enchantment instanceof QuickChargeEnchantment) {
+            return true;
+        }
+
+        return super.canApplyAtEnchantingTable(stack, enchantment);
+    }
 }

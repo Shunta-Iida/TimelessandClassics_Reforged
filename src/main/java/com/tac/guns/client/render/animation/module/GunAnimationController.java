@@ -64,8 +64,13 @@ public abstract class GunAnimationController {
     }
 
     private void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta, Runnable callback) {
+        runAnimation(animationMeta, soundMeta, callback, 1.0f);
+    }
+
+    public void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta, Runnable callback,
+            float speed) {
         if (animationMeta != null) {
-            Animations.runAnimation(animationMeta, callback);
+            Animations.runAnimation(animationMeta, callback, speed);
             previousAnimation = animationMeta;
         }
         if (animationMeta != null && soundMeta != null) {
@@ -113,8 +118,16 @@ public abstract class GunAnimationController {
         runAnimation(getAnimationFromLabel(label), getSoundFromLabel(label), null);
     }
 
+    public void runAnimation(AnimationLabel label, float speed) {
+        runAnimation(getAnimationFromLabel(label), getSoundFromLabel(label), null, speed);
+    }
+
     public void runAnimation(AnimationLabel label, Runnable callback) {
         runAnimation(getAnimationFromLabel(label), getSoundFromLabel(label), callback);
+    }
+
+    public void runAnimation(AnimationLabel label, Runnable callback, float speed) {
+        runAnimation(getAnimationFromLabel(label), getSoundFromLabel(label), callback, speed);
     }
 
     public abstract AnimationMeta getAnimationFromLabel(AnimationLabel label);

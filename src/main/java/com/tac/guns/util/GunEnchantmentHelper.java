@@ -42,15 +42,18 @@ public class GunEnchantmentHelper {
     };
 
     public static int getReloadInterval(ItemStack weapon) {
-        int interval = ((GunItem) weapon.getItem()).getGun().getReloads().getinterReloadPauseTicks();// 10;
-        // int level =
-        // EnchantmentHelper.getEnchantmentLevel(ModEnchantments.QUICK_HANDS.get(),
-        // weapon);
-        // if(level > 0)
-        // {
-        // interval -= 3 * level;
-        // }
-        return Math.max(interval, 1);
+        int interval = ((GunItem) weapon.getItem()).getGun().getReloads().getinterReloadPauseTicks();
+        return Math.max(1, Mth.floor((float) interval / getReloadSpeed(weapon)));
+    }
+
+    public static float getReloadSpeed(ItemStack weapon) {
+        float speed = 1.0F;
+        int level = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, weapon);
+        if (level > 0) {
+            speed = (float) Math.pow(1.2, level);
+        }
+
+        return speed;
     }
 
     public static double getAimDownSightSpeed(ItemStack weapon) {

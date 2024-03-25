@@ -81,14 +81,21 @@ public final class AnimationRunner {
         if (isRunning()) {
             return;
         }
-        executorService.execute(new AnimationRunnable(null));
+        executorService.execute(new AnimationRunnable(null, 1.0f));
     }
 
     public synchronized void start(Runnable callback) {
         if (isRunning()) {
             return;
         }
-        executorService.execute(new AnimationRunnable(callback));
+        executorService.execute(new AnimationRunnable(callback, 1.0f));
+    }
+
+    public synchronized void start(Runnable callback, float speedMultiplier) {
+        if (isRunning()) {
+            return;
+        }
+        executorService.execute(new AnimationRunnable(callback, speedMultiplier));
     }
 
     /**
@@ -112,7 +119,7 @@ public final class AnimationRunner {
      * Will be called in an own thread to perform time steps in the
      * {@link AnimationManager}
      */
-    private void runAnimations() {
+    private void runAnimations(float speedMultiplier) {
         while (blocking) {
         }
         running = true;
@@ -120,7 +127,7 @@ public final class AnimationRunner {
         while (isRunning()) {
             blocking = true;
             long currentNs = System.nanoTime();
-            long deltaNs = currentNs - previousNs;
+            long deltaNs = (long) ((currentNs - previousNs) * speedMultiplier);
             animationManager.performStep(deltaNs);
             previousNs = currentNs;
             if (animationManager.tipStop()) {
@@ -145,14 +152,16 @@ public final class AnimationRunner {
 
     public class AnimationRunnable implements Runnable {
         private final Runnable callback;
+        private final float speedMultiplier;
 
-        public AnimationRunnable(Runnable callback) {
+        public AnimationRunnable(Runnable callback, float speedMultiplier) {
             this.callback = callback;
+            this.speedMultiplier = speedMultiplier;
         }
 
         @Override
         public void run() {
-            runAnimations();
+            runAnimations(this.speedMultiplier);
             if (callback != null)
                 callback.run();
         }

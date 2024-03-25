@@ -10,6 +10,7 @@ import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.item.GunItem;
+import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import de.javagl.jgltf.model.animation.AnimationRunner;
 import net.minecraft.client.Minecraft;
@@ -107,6 +108,7 @@ public enum AnimationHandler {
             return;
         if (!reloading)
             return;
+        float reloadSpeed = GunEnchantmentHelper.getReloadSpeed(itemStack);
         AnimationMeta reloadEmptyMeta = controller
                 .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
         AnimationMeta reloadNormalMeta = controller
@@ -115,7 +117,7 @@ public enum AnimationHandler {
             if (controller.getPreviousAnimation() != null
                     && !controller.getPreviousAnimation().equals(reloadNormalMeta))
                 controller.stopAnimation();
-            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL);
+            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL, reloadSpeed);
         } else {
             if (controller.getPreviousAnimation() != null && !controller.getPreviousAnimation().equals(reloadEmptyMeta))
                 controller.stopAnimation();
@@ -123,7 +125,7 @@ public enum AnimationHandler {
             if (GunAnimationController.fromItem(itemStack.getItem()) instanceof PumpShotgunAnimationController)
                 ((PumpShotgunAnimationController) GunAnimationController.fromItem(itemStack.getItem())).setEmpty(true);
 
-            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
+            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_EMPTY, reloadSpeed);
         }
     }
 

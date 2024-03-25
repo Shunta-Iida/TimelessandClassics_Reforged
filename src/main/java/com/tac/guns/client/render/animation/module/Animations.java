@@ -1,6 +1,7 @@
 package com.tac.guns.client.render.animation.module;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import com.mojang.math.Matrix4f;
 import de.javagl.jgltf.model.GltfAnimations;
 import de.javagl.jgltf.model.NodeModel;
@@ -160,12 +161,26 @@ public class Animations {
             runAnimation(animationMeta.getResourceLocation(), callback);
     }
 
+    public static void runAnimation(AnimationMeta animationMeta, Runnable callback, float speed) {
+        if (animationMeta != null)
+            runAnimation(animationMeta.getResourceLocation(), callback, speed);
+    }
+
     public static void runAnimation(ResourceLocation resourceLocation, Runnable callback) {
         AnimationRunner runner = getAnimationRunner(resourceLocation);
         if (runner != null) {
             if (runner.isRunning())
                 return;
             runner.start(callback);
+        }
+    }
+
+    public static void runAnimation(ResourceLocation resourceLocation, Runnable callback, float speed) {
+        AnimationRunner runner = getAnimationRunner(resourceLocation);
+        if (runner != null) {
+            if (runner.isRunning())
+                return;
+            runner.start(callback, speed);
         }
     }
 
