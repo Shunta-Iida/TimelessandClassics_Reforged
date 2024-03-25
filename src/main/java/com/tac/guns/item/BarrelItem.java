@@ -12,34 +12,21 @@ import net.minecraft.world.item.enchantment.Enchantments;
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class BarrelItem extends Item implements IBarrel, IColored {
-    private final Barrel barrel;
+public class BarrelItem extends AttachmentItem<Barrel> implements IBarrel, IColored {
     private final boolean colored;
 
     public BarrelItem(Barrel barrel, Item.Properties properties) {
-        super(properties);
-        this.barrel = barrel;
+        super(barrel, properties);
         this.colored = true;
     }
 
     public BarrelItem(Barrel barrel, Item.Properties properties, boolean colored) {
-        super(properties);
-        this.barrel = barrel;
+        super(barrel, properties);
         this.colored = colored;
-    }
-
-    @Override
-    public Barrel getProperties() {
-        return this.barrel;
     }
 
     @Override
     public boolean canColor(ItemStack stack) {
         return this.colored;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.BINDING_CURSE || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }
