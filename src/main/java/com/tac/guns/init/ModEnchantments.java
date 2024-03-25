@@ -11,7 +11,8 @@ import net.minecraftforge.registries.RegistryObject;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ModEnchantments {
-    public static final DeferredRegister<Enchantment> REGISTER = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS,
+    public static final DeferredRegister<Enchantment> REGISTER = DeferredRegister.create(
+            ForgeRegistries.ENCHANTMENTS,
             Reference.MOD_ID);
 
     // public static final RegistryObject<Enchantment> TRIGGER_FINGER =
@@ -35,7 +36,9 @@ public class ModEnchantments {
             FireStarterEnchantment::new); // LEGACY
     public static final RegistryObject<Enchantment> RIFLING = REGISTER.register("rifling",
             AdvancedRiflingEnchantment::new);
-    public static final RegistryObject<Enchantment> BUFFERED = REGISTER.register("buffered", BufferedEnchantment::new);
+    public static final RegistryObject<Enchantment> BUFFERED = REGISTER.register("buffered",
+            BufferedEnchantment::new);
+
     // public static final RegistryObject<Enchantment> Reliability =
     // REGISTER.register("reliability", AcceleratorEnchantment::new); // TO-RENAME
 

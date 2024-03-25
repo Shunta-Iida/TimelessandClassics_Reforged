@@ -360,17 +360,25 @@ public class GunModifierHelper {
 
     public static float getCriticalChance(ItemStack weapon) {
         float chance = 0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+
+        // for attachment types
+        IAttachment.Type[] attachmentTypes = IAttachment.Type.values();
+        for (int i = 0; i < attachmentTypes.length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, attachmentTypes[i]);
             for (IGunModifier modifier : modifiers) {
                 chance += modifier.criticalChance();
             }
         }
+
+        // for classic guns
         IGunModifier[] modifiers = getModifiers(weapon);
         for (IGunModifier modifier : modifiers) {
             chance += modifier.criticalChance();
         }
+
+        // for enchantments
         chance += GunEnchantmentHelper.getPuncturingChance(weapon);
+
         return Mth.clamp(chance, 0F, 1F);
     }
 
@@ -404,6 +412,12 @@ public class GunModifierHelper {
         return modifierWeight;
     }
 
+    /**
+     * @param weapon
+     * @param modifiedGun
+     * @return チャンバーが空のときはチャンバーの分を含めないマガジンの最大弾数
+     *         チャンバーに弾が入っている時はチャンバーの分を含めたマガジンの最大弾数
+     */
     public static int getAmmoCapacity(ItemStack weapon, Gun modifiedGun) {
         int capacity = modifiedGun.getReloads().isOpenBolt() ? modifiedGun.getReloads().getMaxAmmo()
                 : modifiedGun.getReloads().getMaxAmmo() + 1;

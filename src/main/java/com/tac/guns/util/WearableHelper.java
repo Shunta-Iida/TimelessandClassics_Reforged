@@ -18,8 +18,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
