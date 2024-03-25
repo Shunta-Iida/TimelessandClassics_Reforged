@@ -347,6 +347,12 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0), PROJECTILE_TARGETS);
         double closestDistance = Double.MAX_VALUE;
         for (Entity entity : entities) {
+            if (!(entity instanceof LivingEntity))
+                continue;
+            LivingEntity living = (LivingEntity) entity;
+            if (living.isDeadOrDying())
+                continue;
+
             if (!entity.equals(this.shooter) || Config.COMMON.development.bulletSelfHarm.get()) {
                 EntityResult result = this.getHitResult(entity, startVec, endVec);
                 if (result == null)
@@ -370,6 +376,11 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         List<Entity> entities = this.level.getEntities(this,
                 this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0), PROJECTILE_TARGETS);
         for (Entity entity : entities) {
+            if (!(entity instanceof LivingEntity))
+                continue;
+            LivingEntity living = (LivingEntity) entity;
+            if (living.isDeadOrDying())
+                continue;
             if (!entity.equals(this.shooter) || Config.COMMON.development.bulletSelfHarm.get()) {
                 EntityResult result = this.getHitResult(entity, startVec, endVec);
                 if (result == null)
