@@ -252,7 +252,7 @@ public class ShootingHandler {
         Player player = mc.player;
         ItemStack heldItem = player.getMainHandItem();
         if (heldItem.getItem() instanceof TimelessGunItem) {
-            if (Keys.PULL_TRIGGER.isDown()) {
+            if (event.getKeyMapping().same(Keys.PULL_TRIGGER)) {
                 if (event.isAttack()) {
                     event.setCanceled(true);
                     event.setSwingHand(false);
@@ -360,7 +360,7 @@ public class ShootingHandler {
         if (!(heldItem.getItem() instanceof GunItem))
             return;
 
-        if (!Gun.hasAmmo(heldItem) && !player.isCreative())
+        if (!Gun.hasAmmo(heldItem))
             return;
 
         if (player.isSpectator())
