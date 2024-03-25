@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -83,8 +84,7 @@ public class HUDRenderingHandler extends GuiComponent {
     }
 
     private int ammoReserveCount = 0;
-
-    private ResourceLocation heldAmmoID = new ResourceLocation("");
+    private int tickCount = 0;
 
     @SubscribeEvent
     public void tick(TickEvent.ClientTickEvent e) {
@@ -93,17 +93,17 @@ public class HUDRenderingHandler extends GuiComponent {
         Player player = Minecraft.getInstance().player;
         if (player == null)
             return;
-        if (Minecraft.getInstance().player.getMainHandItem().getItem() instanceof GunItem) {
-            GunItem gunItem = (GunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        if (player.getMainHandItem().getItem() instanceof GunItem) {
+            GunItem gunItem = (GunItem) player.getMainHandItem().getItem();
             this.ammoReserveCount = ReloadTracker.calcMaxReserveAmmo(
-                    Gun.findAmmo(Minecraft.getInstance().player, gunItem.getGun().getProjectile().getItem()));
+                    Gun.findAmmo(player, gunItem.getGun().getProjectile().getItem()));
+
             // Only send if current id doesn't equal previous id, otherwise other serverside
             // actions can force this to change like reloading
             if (player.isCreative())
                 return;
             // if(gunItem.getGun().getProjectile().getItem().compareTo(heldAmmoID) != 0 ||
             // ammoReserveCount == 0) {
-            heldAmmoID = gunItem.getGun().getProjectile().getItem();
             // }
         }
     }
@@ -433,37 +433,27 @@ public class HUDRenderingHandler extends GuiComponent {
                     MutableComponent currentAmmo;
                     MutableComponent reserveAmmo;
                     int ammo = player.getMainHandItem().getTag().getInt("AmmoCount");
-                    if (player.getMainHandItem().getTag().getInt("AmmoCount") <= gun.getReloads().getMaxAmmo() / 4
-                            && this.ammoReserveCount <= gun.getReloads().getMaxAmmo()) {
-                        currentAmmo = byPaddingZeros(ammo).append(new TranslatableComponent("" + ammo))
+
+                    if (ammo <= gun.getReloads().getMaxAmmo() / 4) {
+                        currentAmmo = byPaddingZeros(ammo).append(new TextComponent("" + ammo))
                                 .withStyle(ChatFormatting.RED);
-                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                .append(new TranslatableComponent(
-                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
-                                .withStyle(ChatFormatting.RED);
-                    } else if (this.ammoReserveCount <= gun.getReloads().getMaxAmmo()) {
-                        currentAmmo = byPaddingZeros(ammo)
-                                .append(new TranslatableComponent("" + ammo).withStyle(ChatFormatting.WHITE));
-                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                .append(new TranslatableComponent(
-                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
-                                .withStyle(ChatFormatting.RED);
-                    } else if (player.getMainHandItem().getTag().getInt("AmmoCount") <= gun.getReloads().getMaxAmmo()
-                            / 4) {
-                        currentAmmo = byPaddingZeros(ammo).append(new TranslatableComponent("" + ammo))
-                                .withStyle(ChatFormatting.RED);
-                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                .append(new TranslatableComponent(
-                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
-                                .withStyle(ChatFormatting.GRAY);
                     } else {
                         currentAmmo = byPaddingZeros(ammo)
-                                .append(new TranslatableComponent("" + ammo).withStyle(ChatFormatting.WHITE));
+                                .append(new TextComponent("" + ammo).withStyle(ChatFormatting.WHITE));
+                    }
+
+                    if (this.ammoReserveCount <= gun.getReloads().getMaxAmmo()) {
+                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
+                                .append(new TranslatableComponent(
+                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
+                                .withStyle(ChatFormatting.RED);
+                    } else {
                         reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
                                 .append(new TranslatableComponent(
                                         "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
                                 .withStyle(ChatFormatting.GRAY);
                     }
+
                     stack.scale(counterSize, counterSize, counterSize);
                     stack.pushPose();
                     {
@@ -570,7 +560,7 @@ public class HUDRenderingHandler extends GuiComponent {
 
             if (!rig.isEmpty()) {
                 float blackBarAlpha = 0.325F;
-                var rigData = ((ArmorRigItem) rig.getItem()).getRig();
+                // var rigData = ((ArmorRigItem) rig.getItem()).getRig();
                 // RENDER BACKGROUND FOR ARMOR HEALTH
                 stack.pushPose();
                 {
