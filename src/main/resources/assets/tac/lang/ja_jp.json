@@ -73,7 +73,7 @@
     "info.tac.lightWeightGun": "軽量: 移動速度 %s",
     "info.tac.mag_error": "アンロード済",
     "info.tac.more_info_gunitem": "%s 長押しで詳細を見る",
-    "info.tac.out_of_ammo": "リロード",
+    "info.tac.out_of_ammo": "弾薬切れ",
     "info.tac.pistolBarrel": "バレル: %s のみ対応",
     "info.tac.pistolScope": "スコープ: %s のみ対応",
     "info.tac.standardWeightGun": "中量: 移動速度 %s",
