@@ -21,5 +21,8 @@
     "lambdaExpressionFromAnonymousClass",
     "lambdaExpression"
   ],
-  "java.saveActions.cleanup": true
+"java.saveActions.cleanup": true,
+"mcmodel-viewer.assetsRoots": [
+    "/workspaces/TimelessandClassics_Reforged/src/main/resources/assets"
+]
 }
