@@ -4,9 +4,7 @@ import java.util.HashMap;
 
 import com.tac.guns.client.screen.UpgradeBenchScreen;
 import com.tac.guns.init.ModEnchantments;
-import com.tac.guns.item.GunItem;
 
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -41,13 +39,6 @@ public class GunEnchantmentHelper {
                                     new int[] {4, 6, 8}, ModEnchantments.LIGHTWEIGHT.get()));
                 }
             };
-
-    public static int getReloadInterval(final ItemStack weapon) {
-        final int interval =
-                ((GunItem) weapon.getItem()).getGun().getReloads().getinterReloadPauseTicks();
-        return Math.max(1,
-                Mth.floor((float) interval / GunEnchantmentHelper.getReloadSpeed(weapon)));
-    }
 
     public static float getReloadSpeed(final ItemStack weapon) {
         float speed = 1.0F;
