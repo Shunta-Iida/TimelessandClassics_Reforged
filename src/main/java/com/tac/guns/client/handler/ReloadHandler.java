@@ -11,6 +11,7 @@ import com.tac.guns.item.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageReload;
 import com.tac.guns.network.message.MessageUpdateGunID;
+import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.WearableHelper;
 
@@ -300,6 +301,7 @@ public class ReloadHandler {
                 final CompoundTag tag = stack.getTag();
                 if (tag != null) {
                     final Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack);
+                    final float speed = GunEnchantmentHelper.getReloadSpeed(stack);
                     if (this.startUpReloadTimer == -1)
                         this.startUpReloadTimer = gun.getReloads().getPreReloadPauseTicks();
 
@@ -309,12 +311,14 @@ public class ReloadHandler {
                                 this.startReloadTick = player.tickCount + 5;
                             }
                             if (tag.getInt("AmmoCount") <= 0) {
-                                if (this.reloadTimer < gun.getReloads().getReloadMagTimer()
-                                        + gun.getReloads().getAdditionalReloadEmptyMagTimer()) {
+                                if (this.reloadTimer < (gun.getReloads().getReloadMagTimer()
+                                        + gun.getReloads().getAdditionalReloadEmptyMagTimer())
+                                        / speed) {
                                     this.reloadTimer++;
                                 }
                             } else {
-                                if (this.reloadTimer < gun.getReloads().getReloadMagTimer()) {
+                                if (this.reloadTimer < gun.getReloads().getReloadMagTimer()
+                                        / speed) {
                                     this.reloadTimer++;
                                 }
                             }
@@ -325,14 +329,16 @@ public class ReloadHandler {
                             if (this.startReloadTick == -1) {
                                 this.startReloadTick = player.tickCount + 5;
                             }
-                            if (this.reloadTimer < gun.getReloads().getinterReloadPauseTicks()) {
+                            if (this.reloadTimer < gun.getReloads().getinterReloadPauseTicks()
+                                    / speed) {
                                 if (!AnimationHandler.INSTANCE
                                         .isReloadingIntro(this.prevItemStack.getItem()))
                                     this.reloadTimer++;
                             }
-                            if (this.reloadTimer == gun.getReloads().getinterReloadPauseTicks()) {
-                                AnimationHandler.INSTANCE
-                                        .onReloadLoop(this.prevItemStack.getItem());
+                            if (this.reloadTimer == gun.getReloads().getinterReloadPauseTicks()
+                                    / speed) {
+                                AnimationHandler.INSTANCE.onReloadLoop(this.prevItemStack.getItem(),
+                                        speed);
                                 this.reloadTimer = 0;
                             }
                         } else
@@ -391,25 +397,30 @@ public class ReloadHandler {
     }
 
     public float getReloadProgress(final float partialTicks, final ItemStack stack) {
-        boolean isEmpty = false;
+        if (this.startUpReloadTimer == 0)
+            return 1F;
+        return this.getCalculatedReloadTicks(stack);
+    }
+
+    private float getCalculatedReloadTicks(final ItemStack stack) {
         final GunItem gunItem = (GunItem) stack.getItem();
         final CompoundTag tag = stack.getTag();
-        if (tag != null) {
-            isEmpty = tag.getInt("AmmoCount") <= 0;
+        if (tag == null) {
+            return 0F;
         }
-        return this.startUpReloadTimer == 0 ? (gunItem.getGun().getReloads().isMagFed()
-                ? (isEmpty ? ((this.prevReloadTimer
-                        + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
-                        + this.startUpReloadTimer)
-                        / ((float) gunItem.getGun().getReloads().getReloadMagTimer()
-                                + gunItem.getGun().getReloads().getAdditionalReloadEmptyMagTimer()))
-                        : ((this.prevReloadTimer
-                                + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
-                                + this.startUpReloadTimer)
-                                / (float) gunItem.getGun().getReloads().getReloadMagTimer()))
-                : ((this.reloadTimer + ((this.reloadTimer - this.prevReloadTimer) * partialTicks))
-                        / ((float) gunItem.getGun().getReloads().getinterReloadPauseTicks())))
-                : 1F;
+
+        float ticks = 0F;
+        final Gun gun = gunItem.getModifiedGun(stack);
+        if (gun.getReloads().isMagFed()) {
+            ticks += gun.getReloads().getReloadMagTimer();
+
+            if (tag.getInt("AmmoCount") <= 0) {
+                ticks += gun.getReloads().getAdditionalReloadEmptyMagTimer();
+            }
+        } else {
+            ticks += gun.getReloads().getinterReloadPauseTicks();
+        }
+        return ticks * GunEnchantmentHelper.getReloadSpeed(stack);
     }
 
     @SubscribeEvent
