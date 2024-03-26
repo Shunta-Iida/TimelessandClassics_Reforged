@@ -111,11 +111,11 @@ public class ModSounds {
      * public static final RegistryObject<SoundEvent> RPG7_FIRE =
      * register("item.rpg7");
      *//*
-          * public static final RegistryObject<SoundEvent> STEN_FIRE =
-          * register("item.sten");
-          * public static final RegistryObject<SoundEvent> VECTOR_FIRE =
-          * register("item.vector");
-          */
+            * public static final RegistryObject<SoundEvent> STEN_FIRE =
+            * register("item.sten");
+            * public static final RegistryObject<SoundEvent> VECTOR_FIRE =
+            * register("item.vector");
+            */
 
     // public static final RegistryObject<SoundEvent> COCK =
     // register("item.pistol.cock");

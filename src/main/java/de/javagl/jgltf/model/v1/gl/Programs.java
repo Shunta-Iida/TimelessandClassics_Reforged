@@ -41,7 +41,8 @@ class Programs {
      * @param fragmentShaderId The fragment {@link Shader} ID
      * @return The default {@link Program}
      */
-    static Program createDefaultProgram(final String vertexShaderId, final String fragmentShaderId) {
+    static Program createDefaultProgram(final String vertexShaderId,
+            final String fragmentShaderId) {
         final Program program = new Program();
         program.setVertexShader(vertexShaderId);
         program.setFragmentShader(fragmentShaderId);

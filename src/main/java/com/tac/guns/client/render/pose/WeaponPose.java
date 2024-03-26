@@ -1,8 +1,11 @@
 package com.tac.guns.client.render.pose;
 
+import javax.annotation.Nullable;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.tac.guns.client.render.IHeldAnimation;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,8 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
-
 /**
  * A simple class that handles interpolating between different poses depending
  * on the rotation pitch
@@ -25,9 +26,9 @@ import javax.annotation.Nullable;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public abstract class WeaponPose implements IHeldAnimation {
-    private AimPose upPose;
-    private AimPose forwardPose;
-    private AimPose downPose;
+    private final AimPose upPose;
+    private final AimPose forwardPose;
+    private final AimPose downPose;
 
     public WeaponPose() {
         this.upPose = this.getUpPose();
@@ -59,18 +60,19 @@ public abstract class WeaponPose implements IHeldAnimation {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
-            float aimProgress) {
-        Minecraft mc = Minecraft.getInstance();
-        boolean right = mc.options.mainHand == HumanoidArm.RIGHT ? hand == InteractionHand.MAIN_HAND
-                : hand == InteractionHand.OFF_HAND;
-        ModelPart mainArm = right ? model.rightArm : model.leftArm;
-        ModelPart secondaryArm = right ? model.leftArm : model.rightArm;
+    public void applyPlayerModelRotation(final Player player, final PlayerModel<?> model,
+            final InteractionHand hand, final float aimProgress) {
+        final Minecraft mc = Minecraft.getInstance();
+        final boolean right =
+                mc.options.mainHand == HumanoidArm.RIGHT ? hand == InteractionHand.MAIN_HAND
+                        : hand == InteractionHand.OFF_HAND;
+        final ModelPart mainArm = right ? model.rightArm : model.leftArm;
+        final ModelPart secondaryArm = right ? model.leftArm : model.rightArm;
 
-        float angle = this.getPlayerPitch(player);
-        float angleAbs = Math.abs(angle);
-        float zoom = this.hasAimPose() ? aimProgress : 0F;
-        AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
+        final float angle = this.getPlayerPitch(player);
+        final float angleAbs = Math.abs(angle);
+        final float zoom = this.hasAimPose() ? aimProgress : 0F;
+        final AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
         this.applyAimPose(targetPose, mainArm, secondaryArm, angleAbs, zoom, right ? 1 : -1,
                 model.crouching);
     }
@@ -83,7 +85,7 @@ public abstract class WeaponPose implements IHeldAnimation {
      * @param player the player the pose is being applied to
      * @return the current pitch of the player
      */
-    protected float getPlayerPitch(Player player) {
+    protected float getPlayerPitch(final Player player) {
         if (Minecraft.getInstance().getCameraEntity() == player
                 && Minecraft.getInstance().screen != null) {
             return 0F;
@@ -92,8 +94,9 @@ public abstract class WeaponPose implements IHeldAnimation {
                 / 90F;
     }
 
-    private void applyAimPose(AimPose targetPose, ModelPart rightArm, ModelPart leftArm,
-            float partial, float zoom, float offhand, boolean sneaking) {
+    private void applyAimPose(final AimPose targetPose, final ModelPart rightArm,
+            final ModelPart leftArm, final float partial, final float zoom, final float offhand,
+            final boolean sneaking) {
         this.applyLimbPoseToModelRenderer(targetPose.getIdle().getRightArm(),
                 targetPose.getAiming().getRightArm(), this.forwardPose.getIdle().getRightArm(),
                 this.forwardPose.getAiming().getRightArm(), rightArm, partial, zoom, offhand,
@@ -104,9 +107,10 @@ public abstract class WeaponPose implements IHeldAnimation {
                 sneaking);
     }
 
-    private void applyLimbPoseToModelRenderer(LimbPose targetIdlePose, LimbPose targetAimingPose,
-            LimbPose idlePose, LimbPose aimingPose, ModelPart renderer, float partial, float zoom,
-            float leftHanded, boolean sneaking) {
+    private void applyLimbPoseToModelRenderer(final LimbPose targetIdlePose,
+            final LimbPose targetAimingPose, final LimbPose idlePose, final LimbPose aimingPose,
+            final ModelPart renderer, final float partial, final float zoom, final float leftHanded,
+            final boolean sneaking) {
         renderer.xRot = (float) Math.toRadians(this.getValue(targetIdlePose.getRotationAngleX(),
                 targetAimingPose.getRotationAngleX(), idlePose.getRotationAngleX(),
                 aimingPose.getRotationAngleX(), renderer.xRot, partial, zoom, 1F));
@@ -128,27 +132,28 @@ public abstract class WeaponPose implements IHeldAnimation {
                 aimingPose.getRotationPointZ(), renderer.z, partial, zoom, 1F);
     }
 
-    private float getValue(@Nullable Float t1, @Nullable Float t2, Float s1, Float s2, Float def,
-            float partial, float zoom, float leftHanded) {
-        float start = t1 != null && s1 != null ? (s1 + (t1 - s1) * partial) * leftHanded
+    private float getValue(@Nullable final Float t1, @Nullable final Float t2, final Float s1,
+            final Float s2, final Float def, final float partial, final float zoom,
+            final float leftHanded) {
+        final float start = t1 != null && s1 != null ? (s1 + (t1 - s1) * partial) * leftHanded
                 : (s1 != null ? s1 * leftHanded : def);
-        float end = t2 != null && s2 != null ? (s2 + (t2 - s2) * partial) * leftHanded
+        final float end = t2 != null && s2 != null ? (s2 + (t2 - s2) * partial) * leftHanded
                 : (s2 != null ? s2 * leftHanded : def);
         return Mth.lerp(zoom, start, end);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {
-        boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
+    public void applyPlayerPreRender(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
+        final boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                 ? hand == InteractionHand.MAIN_HAND
                 : hand == InteractionHand.OFF_HAND;
-        float angle = this.getPlayerPitch(player);
-        float angleAbs = Math.abs(angle);
-        float zoom = this.hasAimPose() ? aimProgress : 0F;
-        AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
-        float rightOffset = this.getValue(targetPose.getIdle().getRenderYawOffset(),
+        final float angle = this.getPlayerPitch(player);
+        final float angleAbs = Math.abs(angle);
+        final float zoom = this.hasAimPose() ? aimProgress : 0F;
+        final AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
+        final float rightOffset = this.getValue(targetPose.getIdle().getRenderYawOffset(),
                 targetPose.getAiming().getRenderYawOffset(),
                 this.forwardPose.getIdle().getRenderYawOffset(),
                 this.forwardPose.getAiming().getRenderYawOffset(), 0F, angleAbs, zoom,
@@ -159,42 +164,42 @@ public abstract class WeaponPose implements IHeldAnimation {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {
+    public void applyHeldItemTransforms(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
         if (hand == InteractionHand.MAIN_HAND) {
-            boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT;
-            float leftHanded = right ? 1 : -1;
+            final boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT;
+            final float leftHanded = right ? 1 : -1;
             matrixStack.translate(0, 0, 0.05);
 
-            float angle = this.getPlayerPitch(player);
-            float angleAbs = Math.abs(angle);
-            float zoom = this.hasAimPose() ? aimProgress : 0F;
-            AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
+            final float angle = this.getPlayerPitch(player);
+            final float angleAbs = Math.abs(angle);
+            final float zoom = this.hasAimPose() ? aimProgress : 0F;
+            final AimPose targetPose = angle > 0.0 ? this.downPose : this.upPose;
 
-            float translateX = this.getValue(targetPose.getIdle().getItemTranslate().x(),
+            final float translateX = this.getValue(targetPose.getIdle().getItemTranslate().x(),
                     targetPose.getAiming().getItemTranslate().x(),
                     this.forwardPose.getIdle().getItemTranslate().x(),
                     this.forwardPose.getAiming().getItemTranslate().x(), 0F, angleAbs, zoom, 1F);
-            float translateY = this.getValue(targetPose.getIdle().getItemTranslate().y(),
+            final float translateY = this.getValue(targetPose.getIdle().getItemTranslate().y(),
                     targetPose.getAiming().getItemTranslate().y(),
                     this.forwardPose.getIdle().getItemTranslate().y(),
                     this.forwardPose.getAiming().getItemTranslate().y(), 0F, angleAbs, zoom, 1F);
-            float translateZ = this.getValue(targetPose.getIdle().getItemTranslate().z(),
+            final float translateZ = this.getValue(targetPose.getIdle().getItemTranslate().z(),
                     targetPose.getAiming().getItemTranslate().z(),
                     this.forwardPose.getIdle().getItemTranslate().z(),
                     this.forwardPose.getAiming().getItemTranslate().z(), 0F, angleAbs, zoom, 1F);
             matrixStack.translate(translateX * 0.0625 * leftHanded, translateY * 0.0625,
                     translateZ * 0.0625);
 
-            float mulPoseX = this.getValue(targetPose.getIdle().getItemRotation().x(),
+            final float mulPoseX = this.getValue(targetPose.getIdle().getItemRotation().x(),
                     targetPose.getAiming().getItemRotation().x(),
                     this.forwardPose.getIdle().getItemRotation().x(),
                     this.forwardPose.getAiming().getItemRotation().x(), 0F, angleAbs, zoom, 1F);
-            float mulPoseY = this.getValue(targetPose.getIdle().getItemRotation().y(),
+            final float mulPoseY = this.getValue(targetPose.getIdle().getItemRotation().y(),
                     targetPose.getAiming().getItemRotation().y(),
                     this.forwardPose.getIdle().getItemRotation().y(),
                     this.forwardPose.getAiming().getItemRotation().y(), 0F, angleAbs, zoom, 1F);
-            float mulPoseZ = this.getValue(targetPose.getIdle().getItemRotation().z(),
+            final float mulPoseZ = this.getValue(targetPose.getIdle().getItemRotation().z(),
                     targetPose.getAiming().getItemRotation().z(),
                     this.forwardPose.getIdle().getItemRotation().z(),
                     this.forwardPose.getAiming().getItemRotation().z(), 0F, angleAbs, zoom, 1F);

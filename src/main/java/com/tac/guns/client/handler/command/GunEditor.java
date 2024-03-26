@@ -1,12 +1,22 @@
 package com.tac.guns.client.handler.command;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.apache.logging.log4j.Level;
+import org.lwjgl.glfw.GLFW;
+
 import com.google.gson.GsonBuilder;
 import com.tac.guns.Config;
+import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
-import com.tac.guns.item.transition.TimelessGunItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.TimelessGunItem;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -16,24 +26,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.logging.log4j.Level;
-import org.lwjgl.glfw.GLFW;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-
-import static com.tac.guns.GunMod.LOGGER;
 
 public class GunEditor {
     private static GunEditor instance;
 
     public static GunEditor get() {
-        if (instance == null) {
-            instance = new GunEditor();
+        if (GunEditor.instance == null) {
+            GunEditor.instance = new GunEditor();
         }
-        return instance;
+        return GunEditor.instance;
     }
 
     private GunEditor() {}
@@ -41,41 +42,41 @@ public class GunEditor {
     private String previousWeaponTag = "";
     private TaCWeaponDevModes prevMode;
     private TaCWeaponDevModes mode;
-    private HashMap<String, Gun> map = new HashMap<>();
+    private final HashMap<String, Gun> map = new HashMap<>();
     private boolean resetMode;
 
     public TaCWeaponDevModes getMode() {
         return this.mode;
     }
 
-    public void setResetMode(boolean reset) {
+    public void setResetMode(final boolean reset) {
         this.resetMode = reset;
     }
 
-    public void setMode(TaCWeaponDevModes mode) {
+    public void setMode(final TaCWeaponDevModes mode) {
         this.mode = mode;
     }
 
     @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
+    public void onClientTick(final TickEvent.ClientTickEvent event) {
         if (!Config.COMMON.development.enableTDev.get())
             return;
-        Minecraft mc = Minecraft.getInstance();
+        final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
-        CommandsHandler ch = CommandsHandler.get();
+        final CommandsHandler ch = CommandsHandler.get();
         if (ch == null || ch.getCatCurrentIndex() != 1)
             return;
         if ((mc.player.getMainHandItem() == null || mc.player.getMainHandItem() == ItemStack.EMPTY
                 || !(mc.player.getMainHandItem().getItem() instanceof TimelessGunItem)))
             return;
-        TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
+        final TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
         if (this.prevMode == null)
             this.prevMode = this.mode;
         else if (this.prevMode != this.mode && this.resetMode) {
             this.resetMode = false;
-            resetData();
-            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
+            this.resetData();
+            this.ensureData(this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
                     gunItem.getGun().copy());
             this.prevMode = this.mode;
         }
@@ -83,31 +84,31 @@ public class GunEditor {
             this.previousWeaponTag = gunItem.getDescriptionId();
         else if (this.previousWeaponTag != gunItem.getDescriptionId()) {
             this.previousWeaponTag = gunItem.getDescriptionId();
-            resetData();
+            this.resetData();
             /*
              * if(this.map.containsKey(gunItem.getTranslationKey()))
              * ensureData(this.map.get(gunItem.getTranslationKey()),
              * gunItem.getGun().copy());
              */
-            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
+            this.ensureData(this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
                     gunItem.getGun().copy());
         }
     }
 
     @SubscribeEvent
-    public void onKeyPressed(InputEvent.KeyInputEvent event) {
+    public void onKeyPressed(final InputEvent.KeyInputEvent event) {
         if (!Config.COMMON.development.enableTDev.get())
             return;
-        Minecraft mc = Minecraft.getInstance();
+        final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
         if ((mc.player.getMainHandItem() == null || mc.player.getMainHandItem() == ItemStack.EMPTY
                 || !(mc.player.getMainHandItem().getItem() instanceof TimelessGunItem)))
             return;
-        CommandsHandler ch = CommandsHandler.get();
+        final CommandsHandler ch = CommandsHandler.get();
         if (ch == null || ch.getCatCurrentIndex() != 1)
             return;
-        TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
+        final TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
         if (ch.catInGlobal(1) && this.mode != null) {
             // TODO: HANDLE FOR PER MODULE, BEFORE APPLICATION, SAVE DATA ON INSTANCE TO
             // SERIALIZE LATER.
@@ -158,55 +159,55 @@ public class GunEditor {
     }
 
     public double getRateMod() {
-        return rateMod;
+        return this.rateMod;
     }
 
     public double getBurstRateMod() {
-        return burstRateMod;
+        return this.burstRateMod;
     }
 
     public float getRecoilAngleMod() {
-        return recoilAngleMod;
+        return this.recoilAngleMod;
     }
 
     public float getRecoilKickMod() {
-        return recoilKickMod;
+        return this.recoilKickMod;
     }
 
     public float getHorizontalRecoilAngleMod() {
-        return horizontalRecoilAngleMod;
+        return this.horizontalRecoilAngleMod;
     }
 
     public float getCameraRecoilModifierMod() {
-        return cameraRecoilModifierMod;
+        return this.cameraRecoilModifierMod;
     }
 
     public float getWeaponRecoilDurationMod() {
-        return weaponRecoilDurationMod;
+        return this.weaponRecoilDurationMod;
     }
 
     public float getcameraRecoilDurationMod() {
-        return cameraRecoilDurationMod;
+        return this.cameraRecoilDurationMod;
     }
 
     public float getRecoilDurationMod() {
-        return recoilDurationMod;
+        return this.recoilDurationMod;
     }
 
     public float getRecoilAdsReductionMod() {
-        return recoilAdsReductionMod;
+        return this.recoilAdsReductionMod;
     }
 
     public double getProjectileAmountMod() {
-        return projectileAmountMod;
+        return this.projectileAmountMod;
     }
 
     public float getSpreadMod() {
-        return spreadMod;
+        return this.spreadMod;
     }
 
     public float getWeightKiloMod() {
-        return weightKiloMod;
+        return this.weightKiloMod;
     }
 
     private double rateMod = 0;
@@ -216,24 +217,25 @@ public class GunEditor {
     private float horizontalRecoilAngleMod = 0;
     private float cameraRecoilModifierMod = 0;
     private float weaponRecoilDurationMod = 0;
-    private float cameraRecoilDurationMod = 0;
+    private final float cameraRecoilDurationMod = 0;
     private float recoilDurationMod = 0;
     private float recoilAdsReductionMod = 0;
     private double projectileAmountMod = 0;
     private float spreadMod = 0;
     private float weightKiloMod = 0;
 
-    private void handleGeneralMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleGeneralMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         double stepModifier = 1;
-        boolean isLeft = event.getKey() == GLFW.GLFW_KEY_LEFT;
-        boolean isRight = event.getKey() == GLFW.GLFW_KEY_RIGHT;
-        boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
-        boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
-        boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
-        boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
-        boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
-        Player player = Minecraft.getInstance().player;
-        Gun gunTmp = gunItem.getGun();
+        final boolean isLeft = event.getKey() == GLFW.GLFW_KEY_LEFT;
+        final boolean isRight = event.getKey() == GLFW.GLFW_KEY_RIGHT;
+        final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
+        final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
+        final boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
+        final boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
+        final boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
+        final Player player = Minecraft.getInstance().player;
+        final Gun gunTmp = gunItem.getGun();
         if (Keys.P.isDown()) {
             if (isShiftDown)
                 stepModifier *= 10;
@@ -441,11 +443,12 @@ public class GunEditor {
             }
         }
 
-        CompoundTag gun = getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
-                                                                                                   // are grabbing a
-                                                                                                   // copy of this data.
-                                                                                                   // new
-                                                                                                   // CompoundNBT();//
+        final CompoundTag gun =
+                this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
+        // are grabbing a
+        // copy of this data.
+        // new
+        // CompoundNBT();//
         gun.getCompound("General").remove("Rate");
         gun.getCompound("General").remove("RecoilAngle");
         gun.getCompound("General").remove("RecoilKick");
@@ -545,14 +548,15 @@ public class GunEditor {
     private double speedMod = 0;
     private double lifeMod = 0;
 
-    private void handleProjectileMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleProjectileMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         double stepModifier = 1;
-        boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
-        boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
-        boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
-        boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
-        Player player = Minecraft.getInstance().player;
-        Gun gunTmp = gunItem.getGun();
+        final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
+        final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
+        final boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
+        final boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
+        final Player player = Minecraft.getInstance().player;
+        final Gun gunTmp = gunItem.getGun();
         if (Keys.P.isDown()) {
             if (isShiftDown)
                 stepModifier *= 10;
@@ -710,11 +714,12 @@ public class GunEditor {
             }
         }
 
-        CompoundTag gun = getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
-                                                                                                   // are grabbing a
-                                                                                                   // copy of this data.
-                                                                                                   // new
-                                                                                                   // CompoundNBT();//
+        final CompoundTag gun =
+                this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
+        // are grabbing a
+        // copy of this data.
+        // new
+        // CompoundNBT();//
         gun.getCompound("Projectile").remove("Damage");
         gun.getCompound("Projectile").remove("ArmorIgnore");
         gun.getCompound("Projectile").remove("Critical");
@@ -745,23 +750,23 @@ public class GunEditor {
     }
 
     public double getReloadMagTimerMod() {
-        return reloadMagTimerMod;
+        return this.reloadMagTimerMod;
     }
 
     public double getAdditionalReloadEmptyMagTimerMod() {
-        return additionalReloadEmptyMagTimerMod;
+        return this.additionalReloadEmptyMagTimerMod;
     }
 
     public double getReloadAmountMod() {
-        return reloadAmountMod;
+        return this.reloadAmountMod;
     }
 
     public double getPreReloadPauseTicksMod() {
-        return preReloadPauseTicksMod;
+        return this.preReloadPauseTicksMod;
     }
 
     public double getInterReloadPauseTicksMod() {
-        return interReloadPauseTicksMod;
+        return this.interReloadPauseTicksMod;
     }
 
     double reloadMagTimerMod = 0;
@@ -770,12 +775,12 @@ public class GunEditor {
     double preReloadPauseTicksMod = 0;
     double interReloadPauseTicksMod = 0;
 
-    private void handleReloadsMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
-        double stepModifier = 1;
-        boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
-        boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
-        Player player = Minecraft.getInstance().player;
-        Gun gunTmp = gunItem.getGun();
+    private void handleReloadsMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
+        final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
+        final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
+        final Player player = Minecraft.getInstance().player;
+        final Gun gunTmp = gunItem.getGun();
         if (Keys.P.isDown()) {
             player.displayClientMessage(new TranslatableComponent(
                     "ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer()), true);
@@ -862,11 +867,12 @@ public class GunEditor {
                         true);
             }
         }
-        CompoundTag gun = getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
-                                                                                                   // are grabbing a
-                                                                                                   // copy of this data.
-                                                                                                   // new
-                                                                                                   // CompoundNBT();//
+        final CompoundTag gun =
+                this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
+        // are grabbing a
+        // copy of this data.
+        // new
+        // CompoundNBT();//
         gun.getCompound("Reloads").remove("ReloadSpeed");
         gun.getCompound("Reloads").remove("ReloadMagTimer");
         gun.getCompound("Reloads").remove("AdditionalReloadEmptyMagTimer");
@@ -889,32 +895,39 @@ public class GunEditor {
         this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).deserializeNBT(gun);
     }
 
-    private void handleZoomMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleZoomMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handlePositionedMod(event, gunItem);
     }
 
-    private void handleFlashMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleFlashMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleScopeMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleScopeMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleBarrelMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleBarrelMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleOldScopeMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleOldScopeMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handlePistolScopeMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handlePistolScopeMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handlePistolBarrelMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) { // "zoom" extends
-                                                                                                  // positioned
+    private void handlePistolBarrelMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) { // "zoom" extends
+        // positioned
         this.handleScaledPositionedMod(event, gunItem);
     }
 
@@ -939,12 +952,13 @@ public class GunEditor {
     private boolean controlToggle = false;
     private boolean altToggle = false;
 
-    private void handlePositionedMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handlePositionedMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         double stepModifier = 1;
-        boolean isLeft = Keys.LEFT.isDown();
-        boolean isRight = Keys.RIGHT.isDown();
-        boolean isUp = Keys.UP.isDown();
-        boolean isDown = Keys.DOWN.isDown();
+        final boolean isLeft = Keys.LEFT.isDown();
+        final boolean isRight = Keys.RIGHT.isDown();
+        final boolean isUp = Keys.UP.isDown();
+        final boolean isDown = Keys.DOWN.isDown();
         // boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown();
         // // Increase Module Size
         // boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); //
@@ -952,32 +966,32 @@ public class GunEditor {
         // boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z
         // modify
 
-        controlToggle = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown();
-        altToggle = Keys.ALTY.isDown() || Keys.ALTYR.isDown();
+        this.controlToggle = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown();
+        this.altToggle = Keys.ALTY.isDown() || Keys.ALTYR.isDown();
 
-        if (controlToggle)
+        if (this.controlToggle)
             stepModifier /= 10;
 
         if (isLeft)
             this.xMod -= 0.1 * stepModifier;
         else if (isRight)
             this.xMod += 0.1 * stepModifier;
-        else if (isUp && altToggle)
+        else if (isUp && this.altToggle)
             this.zMod -= 0.1 * stepModifier; // Forward
-        else if (isDown && altToggle)
+        else if (isDown && this.altToggle)
             this.zMod += 0.1 * stepModifier; // Backward
         else if (isUp)
             this.yMod += 0.1 * stepModifier;
         else if (isDown)
             this.yMod -= 0.1 * stepModifier;
 
-        CompoundTag gun =
+        final CompoundTag gun =
                 this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to
-                                                                                                                // ensure we are
-                                                                                                                // grabbing a
-                                                                                                                // copy of this
-                                                                                                                // data. new
-                                                                                                                // CompoundNBT();//
+                                                                                                                      // ensure we are
+                                                                                                                      // grabbing a
+                                                                                                                      // copy of this
+                                                                                                                      // data. new
+                                                                                                                      // CompoundNBT();//
         if (this.mode == TaCWeaponDevModes.flash) // Flash was apparently brought out of Display, I don't wish to break
                                                   // every gun at this point in time.
         {
@@ -1050,16 +1064,16 @@ public class GunEditor {
         return this.sizeMod;
     }
 
-    private void handleScaledPositionedMod(InputEvent.KeyInputEvent event,
-            TimelessGunItem gunItem) {
+    private void handleScaledPositionedMod(final InputEvent.KeyInputEvent event,
+            final TimelessGunItem gunItem) {
         this.handlePositionedMod(event, gunItem);
-        boolean isPeriodDown = Keys.SIZE_OPT.isDown(); // Increase Step Size
+        final boolean isPeriodDown = Keys.SIZE_OPT.isDown(); // Increase Step Size
 
         if (isPeriodDown) {
             double stepModifier = 1;
-            boolean isUp = Keys.UP.isDown();
-            boolean isDown = Keys.DOWN.isDown();
-            boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
+            final boolean isUp = Keys.UP.isDown();
+            final boolean isDown = Keys.DOWN.isDown();
+            final boolean isShiftDown = Keys.SHIFTY.isDown() || Keys.SHIFTYR.isDown(); // Increase Step Size
 
             if (isShiftDown)
                 stepModifier *= 10;
@@ -1069,8 +1083,9 @@ public class GunEditor {
             else if (isDown)
                 this.sizeMod -= 0.0075 * stepModifier;
         }
-        CompoundTag gun = getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // new
-                                                                                                   // CompoundNBT();//
+        final CompoundTag gun =
+                this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // new
+        // CompoundNBT();//
         if (this.mode == TaCWeaponDevModes.flash) // Flash was apparently brought out of Display, I don't wish to break
                                                   // every gun at this point in time.
         {
@@ -1089,7 +1104,7 @@ public class GunEditor {
         this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).deserializeNBT(gun);
     }
 
-    private Gun getMapItem(String gunTagName, Gun gun) {
+    private Gun getMapItem(final String gunTagName, final Gun gun) {
         if (this.map.containsKey(gunTagName))
             return this.map.get(gunTagName);
         else {
@@ -1099,7 +1114,7 @@ public class GunEditor {
     }
 
     private double casedGetScale() {
-        TimelessGunItem gunItem =
+        final TimelessGunItem gunItem =
                 (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
@@ -1125,12 +1140,13 @@ public class GunEditor {
                         ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
                                 .getScale()
                         : 0;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     private double casedGetX() {
-        TimelessGunItem gunItem =
+        final TimelessGunItem gunItem =
                 (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
@@ -1159,12 +1175,13 @@ public class GunEditor {
                         ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
                                 .getXOffset()
                         : 0;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     private double casedGetY() {
-        TimelessGunItem gunItem =
+        final TimelessGunItem gunItem =
                 (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
@@ -1193,12 +1210,13 @@ public class GunEditor {
                         ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
                                 .getYOffset()
                         : 0;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     private double casedGetZ() {
-        TimelessGunItem gunItem =
+        final TimelessGunItem gunItem =
                 (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
@@ -1227,8 +1245,9 @@ public class GunEditor {
                         ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
                                 .getZOffset()
                         : 0;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     public void resetData() {
@@ -1317,7 +1336,7 @@ public class GunEditor {
     // TODO: ENSURE WE ARE EDITING "TO EXPORT DATA", I DON'T WANT TO MANAGE MULTIPLE
     // DATA STORES AND ATTRIBUTES, HERE WE JUST ADJUST BASED ON THE GUNS MODIFIED
     // AND EXISTING!
-    private void ensureData(Gun gun, Gun toUpdate) {
+    private void ensureData(final Gun gun, final Gun toUpdate) {
         switch (this.mode) {
             case general:
                 if (gun.getGeneral() != null) {
@@ -1443,13 +1462,13 @@ public class GunEditor {
     public void exportData() {
         this.map.forEach((name, gun) -> {
             if (this.map.get(name) == null) {
-                LOGGER.log(Level.ERROR,
+                GunMod.LOGGER.log(Level.ERROR,
                         "WEAPON EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
                 return;
             }
-            LOGGER.log(Level.FATAL, gun.serializeNBT().getCompound("Modules")
+            GunMod.LOGGER.log(Level.FATAL, gun.serializeNBT().getCompound("Modules")
                     .getCompound("Attachments").toString());
-            GsonBuilder gsonB = new GsonBuilder().setLenient()
+            final GsonBuilder gsonB = new GsonBuilder().setLenient()
                     .addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();// .setNumberToNumberStrategy(ToNumberPolicy.DOUBLE).setObjectToNumberStrategy(ToNumberPolicy.DOUBLE).serializeSpecialFloatingPointValues();;
 
             String jsonString = gsonB.create().toJson(gun);// gson.toJson(ch.getCatGlobal(1).get(this.previousWeaponTag));
@@ -1473,18 +1492,18 @@ public class GunEditor {
         });
     }
 
-    private void writeExport(String jsonString, String name) {
+    private void writeExport(final String jsonString, final String name) {
         try {
-            File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
+            final File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter =
+            final FileWriter dataWriter =
                     new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO,
+            GunMod.LOGGER.log(Level.INFO,
                     "WEAPON EDITOR EXPORTED FILE ( " + name + "_export.txt ). BE PROUD!");
-        } catch (IOException e) {
-            LOGGER.log(Level.ERROR,
+        } catch (final IOException e) {
+            GunMod.LOGGER.log(Level.ERROR,
                     "WEAPON EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");
         }
     }
@@ -1499,19 +1518,19 @@ public class GunEditor {
                         "OldScope"), pistolScope("PistolScope"), pistolBarrel("PistolBarrel");
 
         public String getTagName() {
-            return tagName;
+            return this.tagName;
         }
 
-        TaCWeaponDevModes(String name) {
+        TaCWeaponDevModes(final String name) {
             this.tagName = name;
         }
 
-        private String tagName;
+        private final String tagName;
     }
 
     public static String formattedModeContext() {
         String result = "\n";
-        for (TaCWeaponDevModes mode : TaCWeaponDevModes.values()) {
+        for (final TaCWeaponDevModes mode : TaCWeaponDevModes.values()) {
             result += mode.tagName + "\n";
         }
         return result;

@@ -13,26 +13,26 @@ import net.minecraft.world.level.block.state.StateDefinition;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public abstract class RotatedObjectBlock extends HorizontalDirectionalBlock {
-    public RotatedObjectBlock(Block.Properties properties) {
+    public RotatedObjectBlock(final Block.Properties properties) {
         super(properties);
         this.registerDefaultState(
-                this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
+                this.getStateDefinition().any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState state) {
+    public boolean useShapeForLightOcclusion(final BlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+    public BlockState getStateForPlacement(final BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.getHorizontalDirection());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING);
+        builder.add(HorizontalDirectionalBlock.FACING);
     }
 }

@@ -1,21 +1,17 @@
 package com.tac.guns.client.render.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.tac.guns.Reference;
-import com.tac.guns.item.GunItem;
-import net.minecraft.world.entity.player.Player;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT)
 public class OverrideModelManager {
@@ -33,8 +29,8 @@ public class OverrideModelManager {
      *              itself, or it may be an attachment such as a scope.
      * @param model an IOverrideModel implementation
      */
-    public static void register(Item item, IOverrideModel model) {
-        if (MODEL_MAP.putIfAbsent(item, model) == null) {
+    public static void register(final Item item, final IOverrideModel model) {
+        if (OverrideModelManager.MODEL_MAP.putIfAbsent(item, model) == null) {
             /*
              * Register model overrides as an event for ease. Doesn't create an extra
              * overhead because
@@ -50,8 +46,8 @@ public class OverrideModelManager {
      * @param stack the stack to check
      * @return True if overridden model exists
      */
-    public static boolean hasModel(ItemStack stack) {
-        return MODEL_MAP.containsKey(stack.getItem());
+    public static boolean hasModel(final ItemStack stack) {
+        return OverrideModelManager.MODEL_MAP.containsKey(stack.getItem());
     }
 
     /**
@@ -61,7 +57,7 @@ public class OverrideModelManager {
      *         exists.
      */
     @Nullable
-    public static IOverrideModel getModel(ItemStack stack) {
-        return MODEL_MAP.get(stack.getItem());
+    public static IOverrideModel getModel(final ItemStack stack) {
+        return OverrideModelManager.MODEL_MAP.get(stack.getItem());
     }
 }

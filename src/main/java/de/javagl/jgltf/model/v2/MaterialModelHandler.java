@@ -122,8 +122,9 @@ class MaterialModelHandler {
         if (numJoints > 0) {
             vertexShaderDefines += "#define NUM_JOINTS " + numJoints + "\n";
         }
-        final ShaderModel vertexShaderModel = MaterialModelHandler.createDefaultShaderModel("pbr.vert",
-                "pbr" + numJoints + ".vert", ShaderType.VERTEX_SHADER, vertexShaderDefines);
+        final ShaderModel vertexShaderModel =
+                MaterialModelHandler.createDefaultShaderModel("pbr.vert",
+                        "pbr" + numJoints + ".vert", ShaderType.VERTEX_SHADER, vertexShaderDefines);
         return vertexShaderModel;
     }
 
@@ -134,8 +135,8 @@ class MaterialModelHandler {
      */
     private ShaderModel obtainFragmentShaderModel() {
         if (this.fragmentShaderModel == null) {
-            this.fragmentShaderModel = MaterialModelHandler.createDefaultShaderModel("pbr.frag", "pbr.frag",
-                    ShaderType.FRAGMENT_SHADER, null);
+            this.fragmentShaderModel = MaterialModelHandler.createDefaultShaderModel("pbr.frag",
+                    "pbr.frag", ShaderType.FRAGMENT_SHADER, null);
         }
         return this.fragmentShaderModel;
     }
@@ -366,72 +367,76 @@ class MaterialModelHandler {
             final MaterialStructure materialStructure) {
         MaterialModelHandler.addAttributeParameters(techniqueModel, "a_position", "position",
                 GltfConstants.GL_FLOAT_VEC4, 1, "POSITION");
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_normal", "normal", GltfConstants.GL_FLOAT_VEC4, 1,
-                "NORMAL");
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_tangent", "tangent", GltfConstants.GL_FLOAT_VEC4,
-                1, "TANGENT");
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_normal", "normal",
+                GltfConstants.GL_FLOAT_VEC4, 1, "NORMAL");
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_tangent", "tangent",
+                GltfConstants.GL_FLOAT_VEC4, 1, "TANGENT");
 
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_baseColorTexCoord", "baseColorTexCoord",
-                GltfConstants.GL_FLOAT_VEC2, 1, materialStructure.getBaseColorTexCoordSemantic());
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_baseColorTexCoord",
+                "baseColorTexCoord", GltfConstants.GL_FLOAT_VEC2, 1,
+                materialStructure.getBaseColorTexCoordSemantic());
         MaterialModelHandler.addAttributeParameters(techniqueModel, "a_metallicRoughnessTexCoord",
                 "metallicRoughnessTexCoord", GltfConstants.GL_FLOAT_VEC2, 1,
                 materialStructure.getMetallicRoughnessTexCoordSemantic());
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_normalTexCoord", "normalTexCoord",
-                GltfConstants.GL_FLOAT_VEC2, 1, materialStructure.getNormalTexCoordSemantic());
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_occlusionTexCoord", "occlusionTexCoord",
-                GltfConstants.GL_FLOAT_VEC2, 1, materialStructure.getOcclusionTexCoordSemantic());
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_emissiveTexCoord", "emissiveTexCoord",
-                GltfConstants.GL_FLOAT_VEC2, 1, materialStructure.getEmissiveTexCoordSemantic());
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_normalTexCoord",
+                "normalTexCoord", GltfConstants.GL_FLOAT_VEC2, 1,
+                materialStructure.getNormalTexCoordSemantic());
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_occlusionTexCoord",
+                "occlusionTexCoord", GltfConstants.GL_FLOAT_VEC2, 1,
+                materialStructure.getOcclusionTexCoordSemantic());
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_emissiveTexCoord",
+                "emissiveTexCoord", GltfConstants.GL_FLOAT_VEC2, 1,
+                materialStructure.getEmissiveTexCoordSemantic());
 
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_modelViewMatrix", "modelViewMatrix",
-                GltfConstants.GL_FLOAT_MAT4, 1, "MODELVIEW");
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_projectionMatrix", "projectionMatrix",
-                GltfConstants.GL_FLOAT_MAT4, 1, "PROJECTION");
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_modelViewMatrix",
+                "modelViewMatrix", GltfConstants.GL_FLOAT_MAT4, 1, "MODELVIEW");
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_projectionMatrix",
+                "projectionMatrix", GltfConstants.GL_FLOAT_MAT4, 1, "PROJECTION");
         MaterialModelHandler.addUniformParameters(techniqueModel, "u_normalMatrix", "normalMatrix",
                 GltfConstants.GL_FLOAT_MAT3, 1, "MODELVIEWINVERSETRANSPOSE");
 
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_isDoubleSided", "isDoubleSided",
-                GltfConstants.GL_INT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_isDoubleSided",
+                "isDoubleSided", GltfConstants.GL_INT, 1, null);
 
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_baseColorTexture", "baseColorTexture",
-                GltfConstants.GL_SAMPLER_2D, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_baseColorTexture",
+                "baseColorTexture", GltfConstants.GL_SAMPLER_2D, 1, null);
         MaterialModelHandler.addUniformParameters(techniqueModel, "u_metallicRoughnessTexture",
                 "metallicRoughnessTexture", GltfConstants.GL_SAMPLER_2D, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_normalTexture", "normalTexture",
-                GltfConstants.GL_SAMPLER_2D, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_occlusionTexture", "occlusionTexture",
-                GltfConstants.GL_SAMPLER_2D, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_emissiveTexture", "emissiveTexture",
-                GltfConstants.GL_SAMPLER_2D, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_normalTexture",
+                "normalTexture", GltfConstants.GL_SAMPLER_2D, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_occlusionTexture",
+                "occlusionTexture", GltfConstants.GL_SAMPLER_2D, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_emissiveTexture",
+                "emissiveTexture", GltfConstants.GL_SAMPLER_2D, 1, null);
 
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasBaseColorTexture", "hasBaseColorTexture",
-                GltfConstants.GL_INT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasBaseColorTexture",
+                "hasBaseColorTexture", GltfConstants.GL_INT, 1, null);
         MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasMetallicRoughnessTexture",
                 "hasMetallicRoughnessTexture", GltfConstants.GL_INT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasNormalTexture", "hasNormalTexture",
-                GltfConstants.GL_INT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasOcclusionTexture", "hasOcclusionTexture",
-                GltfConstants.GL_INT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasEmissiveTexture", "hasEmissiveTexture",
-                GltfConstants.GL_INT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasNormalTexture",
+                "hasNormalTexture", GltfConstants.GL_INT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasOcclusionTexture",
+                "hasOcclusionTexture", GltfConstants.GL_INT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_hasEmissiveTexture",
+                "hasEmissiveTexture", GltfConstants.GL_INT, 1, null);
 
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_baseColorFactor", "baseColorFactor",
-                GltfConstants.GL_FLOAT_VEC4, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_metallicFactor", "metallicFactor",
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_baseColorFactor",
+                "baseColorFactor", GltfConstants.GL_FLOAT_VEC4, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_metallicFactor",
+                "metallicFactor", GltfConstants.GL_FLOAT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_roughnessFactor",
+                "roughnessFactor", GltfConstants.GL_FLOAT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_normalScale", "normalScale",
                 GltfConstants.GL_FLOAT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_roughnessFactor", "roughnessFactor",
-                GltfConstants.GL_FLOAT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_normalScale", "normalScale", GltfConstants.GL_FLOAT,
-                1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_occlusionStrength", "occlusionStrength",
-                GltfConstants.GL_FLOAT, 1, null);
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_emissiveFactor", "emissiveFactor",
-                GltfConstants.GL_FLOAT_VEC3, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_occlusionStrength",
+                "occlusionStrength", GltfConstants.GL_FLOAT, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_emissiveFactor",
+                "emissiveFactor", GltfConstants.GL_FLOAT_VEC3, 1, null);
 
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_joint", "joint", GltfConstants.GL_FLOAT_VEC4, 1,
-                "JOINTS_0");
-        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_weight", "weight", GltfConstants.GL_FLOAT_VEC4, 1,
-                "WEIGHTS_0");
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_joint", "joint",
+                GltfConstants.GL_FLOAT_VEC4, 1, "JOINTS_0");
+        MaterialModelHandler.addAttributeParameters(techniqueModel, "a_weight", "weight",
+                GltfConstants.GL_FLOAT_VEC4, 1, "WEIGHTS_0");
 
         if (materialStructure.getNumJoints() > 0) {
             MaterialModelHandler.addUniformParameters(techniqueModel, "u_jointMat", "jointMat",
@@ -439,8 +444,8 @@ class MaterialModelHandler {
         }
 
         // TODO Preliminary uniform for a single point light
-        MaterialModelHandler.addUniformParameters(techniqueModel, "u_lightPosition", "lightPosition",
-                GltfConstants.GL_FLOAT_VEC3, 1, null);
+        MaterialModelHandler.addUniformParameters(techniqueModel, "u_lightPosition",
+                "lightPosition", GltfConstants.GL_FLOAT_VEC3, 1, null);
 
     }
 
@@ -455,7 +460,8 @@ class MaterialModelHandler {
      * @param semantic       The semantic
      */
     private static void addAttributeParameters(final DefaultTechniqueModel techniqueModel,
-            final String attributeName, final String parameterName, final int type, final int count, final String semantic) {
+            final String attributeName, final String parameterName, final int type, final int count,
+            final String semantic) {
         techniqueModel.addAttribute(attributeName, parameterName);
         MaterialModelHandler.addParameters(techniqueModel, parameterName, type, count, semantic);
     }
@@ -471,7 +477,8 @@ class MaterialModelHandler {
      * @param semantic       The semantic
      */
     private static void addUniformParameters(final DefaultTechniqueModel techniqueModel,
-            final String uniformName, final String parameterName, final int type, final int count, final String semantic) {
+            final String uniformName, final String parameterName, final int type, final int count,
+            final String semantic) {
         techniqueModel.addUniform(uniformName, parameterName);
         MaterialModelHandler.addParameters(techniqueModel, parameterName, type, count, semantic);
     }
@@ -486,8 +493,8 @@ class MaterialModelHandler {
      * @param count          The count
      * @param semantic       The semantic
      */
-    private static void addParameters(final DefaultTechniqueModel techniqueModel, final String parameterName,
-            final int type, final int count, final String semantic) {
+    private static void addParameters(final DefaultTechniqueModel techniqueModel,
+            final String parameterName, final int type, final int count, final String semantic) {
         final Object value = null;
         final NodeModel nodeModel = null;
         final TechniqueParametersModel techniqueParametersModel =

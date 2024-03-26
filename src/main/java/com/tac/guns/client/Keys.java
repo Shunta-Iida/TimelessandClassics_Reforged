@@ -3,7 +3,6 @@ package com.tac.guns.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.InputConstants.Key;
 import com.mrcrayfish.framework.common.data.SyncedEntityData;
-import com.tac.guns.Config;
 import com.tac.guns.client.TacKeyMapping.TacKeyBuilder;
 import com.tac.guns.client.handler.ReloadHandler;
 import com.tac.guns.client.handler.ShootingHandler;
@@ -11,35 +10,36 @@ import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PumpShotgunAnimationController;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.inventory.gear.armor.ArmorRigContainerProvider;
 import com.tac.guns.item.GunItem;
 import com.tac.guns.network.PacketHandler;
-import com.tac.guns.network.message.*;
+import com.tac.guns.network.message.MessageArmorEquip;
+import com.tac.guns.network.message.MessageArmorOpenAmmoPack;
+import com.tac.guns.network.message.MessageArmorRemove;
+import com.tac.guns.network.message.MessageUnload;
+import com.tac.guns.network.message.MessageUpdateGunID;
+
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
-import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 @OnlyIn(Dist.CLIENT)
 public final class Keys {
     private static class MouseKeyBinding extends KeyMapping {
-        private MouseKeyBinding(String description, Key mouse_button) {
+        private MouseKeyBinding(final String description, final Key mouse_button) {
             super(description, GunConflictContext.IN_GAME_HOLDING_WEAPON, KeyModifier.NONE,
                     mouse_button, "key.categories.tac");
         }
 
         @Override
-        public boolean same(KeyMapping mapping) {
+        public boolean same(final KeyMapping mapping) {
             // No conflict with vanilla attack and item use key binding.
             final Options settings = Minecraft.getInstance().options;
             return (mapping != settings.keyAttack && mapping != settings.keyUse
@@ -52,7 +52,7 @@ public final class Keys {
                     .buildAndRegis(),
             AIM_HOLD = new TacKeyBuilder("key.tac.ads")
                     .withKeyboardKey(InputConstants.MOUSE_BUTTON_RIGHT).buildAndRegis(),
-            AIM_TOGGLE = AIM_HOLD;
+            AIM_TOGGLE = Keys.AIM_HOLD;
 
     public static final TacKeyMapping RELOAD =
             new TacKeyBuilder("key.tac.reload").withKeyboardKey(InputConstants.KEY_R)
@@ -78,10 +78,10 @@ public final class Keys {
                     .withKeyboardKey(InputConstants.KEY_K).buildAndRegis();
 
     static {
-        EQUIP_ARMOR.addPressCallback(() -> {
+        Keys.EQUIP_ARMOR.addPressCallback(() -> {
             if (!Keys.noConflict(Keys.EQUIP_ARMOR))
                 return;
-            Player player = Minecraft.getInstance().player;
+            final Player player = Minecraft.getInstance().player;
             if (player == null)
                 return;
             if (((PlayerWithSynData) player).getRig().isEmpty())
@@ -90,7 +90,7 @@ public final class Keys {
                 PacketHandler.getPlayChannel().sendToServer(new MessageArmorRemove());
         });
 
-        OPEN_ARMOR_AMMO_PACK.addPressCallback(() -> {
+        Keys.OPEN_ARMOR_AMMO_PACK.addPressCallback(() -> {
             if (!Keys.noConflict(Keys.OPEN_ARMOR_AMMO_PACK))
                 return;
             PacketHandler.getPlayChannel().sendToServer(new MessageArmorOpenAmmoPack());
@@ -129,12 +129,12 @@ public final class Keys {
             }
         });
     }
-    public static final TacKeyMapping[] KEYS_VALUE =
-            {RELOAD, UNLOAD, ATTACHMENTS, FIRE_SELECT, INSPECT, SIGHT_SWITCH, ACTIVATE_SIDE_RAIL,
-                    ARMOR_REPAIRING, EQUIP_ARMOR, OPEN_ARMOR_AMMO_PACK};
+    public static final TacKeyMapping[] KEYS_VALUE = {Keys.RELOAD, Keys.UNLOAD, Keys.ATTACHMENTS,
+            Keys.FIRE_SELECT, Keys.INSPECT, Keys.SIGHT_SWITCH, Keys.ACTIVATE_SIDE_RAIL,
+            Keys.ARMOR_REPAIRING, Keys.EQUIP_ARMOR, Keys.OPEN_ARMOR_AMMO_PACK};
 
-    public static boolean noConflict(TacKeyMapping key) {
-        for (TacKeyMapping k : KEYS_VALUE) {
+    public static boolean noConflict(final TacKeyMapping key) {
+        for (final TacKeyMapping k : Keys.KEYS_VALUE) {
             if (k == key) {
                 if (!k.getKeyModifier().isActive(null))
                     return false;

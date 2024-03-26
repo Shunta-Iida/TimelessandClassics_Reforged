@@ -23,4 +23,7 @@
   "mcmodel-viewer.assetsRoots": [
     "/workspaces/TimelessandClassics_Reforged/src/main/resources/assets"
   ],
+  "formatAll.includeFileExtensions": [
+    ".java"
+  ]
 }

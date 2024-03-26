@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.tac.guns.Config;
 import com.tac.guns.common.GripType;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -21,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class BazookaPose extends WeaponPose {
     @Override
     protected AimPose getUpPose() {
-        AimPose pose = new AimPose();
+        final AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F).setItemRotation(new Vector3f(10F, 0F, 0F))
                 .setRightArm(new LimbPose().setRotationAngleX(-170F).setRotationAngleY(-35F)
                         .setRotationAngleZ(0F).setRotationPointY(4).setRotationPointZ(-2))
@@ -33,7 +34,7 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     protected AimPose getForwardPose() {
-        AimPose pose = new AimPose();
+        final AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F)
                 .setRightArm(new LimbPose().setRotationAngleX(-90F).setRotationAngleY(-35F)
                         .setRotationAngleZ(0F).setRotationPointY(2).setRotationPointZ(0))
@@ -45,7 +46,7 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     protected AimPose getDownPose() {
-        AimPose pose = new AimPose();
+        final AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F)
                 .setRightArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(-35F)
                         .setRotationAngleZ(0F).setRotationPointY(2).setRotationPointZ(0))
@@ -62,14 +63,14 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
-            float aimProgress) {
+    public void applyPlayerModelRotation(final Player player, final PlayerModel<?> model,
+            final InteractionHand hand, final float aimProgress) {
         if (Config.CLIENT.display.oldAnimations.get()) {
-            boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
+            final boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                     ? hand == InteractionHand.MAIN_HAND
                     : hand == InteractionHand.OFF_HAND;
-            ModelPart mainArm = right ? model.rightArm : model.leftArm;
-            ModelPart secondaryArm = right ? model.leftArm : model.rightArm;
+            final ModelPart mainArm = right ? model.rightArm : model.leftArm;
+            final ModelPart secondaryArm = right ? model.leftArm : model.rightArm;
             mainArm.xRot = (float) Math.toRadians(-90F);
             mainArm.yRot = (float) Math.toRadians(-35F) * (right ? 1F : -1F);
             mainArm.zRot = (float) Math.toRadians(0F);
@@ -82,10 +83,10 @@ public class BazookaPose extends WeaponPose {
     }
 
     @Override
-    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {
+    public void applyPlayerPreRender(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
         if (Config.CLIENT.display.oldAnimations.get()) {
-            boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
+            final boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                     ? hand == InteractionHand.MAIN_HAND
                     : hand == InteractionHand.OFF_HAND;
             player.yBodyRotO = player.yRotO + 35F * (right ? 1F : -1F);
@@ -97,16 +98,16 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {
+    public void applyHeldItemTransforms(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
         if (!Config.CLIENT.display.oldAnimations.get()) {
             super.applyHeldItemTransforms(player, hand, aimProgress, matrixStack, buffer);
         }
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
-            PoseStack matrixStack, float partialTicks) {
+    public boolean applyOffhandTransforms(final Player player, final PlayerModel<?> model,
+            final ItemStack stack, final PoseStack matrixStack, final float partialTicks) {
         return GripType.applyBackTransforms(player, matrixStack);
     }
 

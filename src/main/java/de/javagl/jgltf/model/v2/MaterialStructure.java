@@ -76,11 +76,14 @@ class MaterialStructure {
 
         this.baseColorTexCoordSemantic =
                 MaterialStructure.getTexCoordSemantic(pbrMetallicRoughness.getBaseColorTexture());
-        this.metallicRoughnessTexCoordSemantic =
-                MaterialStructure.getTexCoordSemantic(pbrMetallicRoughness.getMetallicRoughnessTexture());
-        this.normalTexCoordSemantic = MaterialStructure.getTexCoordSemantic(material.getNormalTexture());
-        this.occlusionTexCoordSemantic = MaterialStructure.getTexCoordSemantic(material.getOcclusionTexture());
-        this.emissiveTexCoordSemantic = MaterialStructure.getTexCoordSemantic(material.getEmissiveTexture());
+        this.metallicRoughnessTexCoordSemantic = MaterialStructure
+                .getTexCoordSemantic(pbrMetallicRoughness.getMetallicRoughnessTexture());
+        this.normalTexCoordSemantic =
+                MaterialStructure.getTexCoordSemantic(material.getNormalTexture());
+        this.occlusionTexCoordSemantic =
+                MaterialStructure.getTexCoordSemantic(material.getOcclusionTexture());
+        this.emissiveTexCoordSemantic =
+                MaterialStructure.getTexCoordSemantic(material.getEmissiveTexture());
 
         this.numJoints = numJoints;
     }
@@ -157,8 +160,8 @@ class MaterialStructure {
     @Override
     public int hashCode() {
         return Objects.hash(this.baseColorTexCoordSemantic, this.metallicRoughnessTexCoordSemantic,
-                this.normalTexCoordSemantic, this.occlusionTexCoordSemantic, this.emissiveTexCoordSemantic,
-                this.numJoints);
+                this.normalTexCoordSemantic, this.occlusionTexCoordSemantic,
+                this.emissiveTexCoordSemantic, this.numJoints);
     }
 
     @Override

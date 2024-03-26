@@ -1,40 +1,41 @@
 package com.tac.guns.client.handler.command;
 
-import com.google.gson.GsonBuilder;
-import com.tac.guns.Config;
-import com.tac.guns.client.Keys;
-import com.tac.guns.common.Gun;
-import com.tac.guns.common.tooling.CommandsHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.logging.log4j.Level;
-import org.lwjgl.glfw.GLFW;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static com.tac.guns.GunMod.LOGGER;
+import org.apache.logging.log4j.Level;
+import org.lwjgl.glfw.GLFW;
+
+import com.google.gson.GsonBuilder;
+import com.tac.guns.Config;
+import com.tac.guns.GunMod;
+import com.tac.guns.client.Keys;
+import com.tac.guns.common.Gun;
+import com.tac.guns.common.tooling.CommandsHandler;
+
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ObjectRenderEditor {
     private static ObjectRenderEditor instance;
 
     public static ObjectRenderEditor get() {
-        if (instance == null) {
-            instance = new ObjectRenderEditor();
+        if (ObjectRenderEditor.instance == null) {
+            ObjectRenderEditor.instance = new ObjectRenderEditor();
         }
-        return instance;
+        return ObjectRenderEditor.instance;
     }
 
     private ObjectRenderEditor() {}
 
     public int currElement = 0;
-    private HashMap<Integer, RENDER_Element> elements = new HashMap<>();
+    private final HashMap<Integer, RENDER_Element> elements = new HashMap<>();
 
-    public RENDER_Element GetFromElements(int index) {
+    public RENDER_Element GetFromElements(final int index) {
         return this.elements.get(index);
     }
 
@@ -44,7 +45,7 @@ public class ObjectRenderEditor {
         private float zMod = 0;
         private float sizeMod = 0;
 
-        public RENDER_Element(float x, float y, float z, float sizeX) {
+        public RENDER_Element(final float x, final float y, final float z, final float sizeX) {
             this.xMod = x;
             this.zMod = z;
             this.yMod = y;
@@ -52,26 +53,26 @@ public class ObjectRenderEditor {
         }
 
         public float getxMod() {
-            return xMod;
+            return this.xMod;
         }
 
         public float getyMod() {
-            return yMod;
+            return this.yMod;
         }
 
         public float getzMod() {
-            return zMod;
+            return this.zMod;
         }
 
         public float getSizeMod() {
-            return sizeMod;
+            return this.sizeMod;
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onKeyPressed(InputEvent.KeyInputEvent event) {
+    public void onKeyPressed(final InputEvent.KeyInputEvent event) {
         // Basics overview
-        Minecraft mc = Minecraft.getInstance();
+        final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
         if (!Config.COMMON.development.enableTDev.get()
@@ -115,17 +116,17 @@ public class ObjectRenderEditor {
             return;
         }
 
-        boolean isLeft = event.getKey() == GLFW.GLFW_KEY_LEFT;
-        boolean isRight = event.getKey() == GLFW.GLFW_KEY_RIGHT;
-        boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
-        boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
+        final boolean isLeft = event.getKey() == GLFW.GLFW_KEY_LEFT;
+        final boolean isRight = event.getKey() == GLFW.GLFW_KEY_RIGHT;
+        final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
+        final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
 
-        boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
-        boolean isShiftDown = event.getKey() == GLFW.GLFW_KEY_LEFT_SHIFT; // Increase Step Size
-        boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
-        boolean isPeriodDown = Keys.SIZE_OPT.isDown();
+        final boolean isControlDown = Keys.CONTROLLY.isDown() || Keys.CONTROLLYR.isDown(); // Increase Module Size
+        final boolean isShiftDown = event.getKey() == GLFW.GLFW_KEY_LEFT_SHIFT; // Increase Step Size
+        final boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
+        final boolean isPeriodDown = Keys.SIZE_OPT.isDown();
 
-        RENDER_Element element =
+        final RENDER_Element element =
                 this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
                         ? new RENDER_Element(0, 0, 0, 0)
                         : this.elements.get(this.currElement);
@@ -165,30 +166,30 @@ public class ObjectRenderEditor {
     public void exportData() {
         this.elements.forEach((name, data) -> {
             if (this.elements.get(name) == null) {
-                LOGGER.log(Level.ERROR,
+                GunMod.LOGGER.log(Level.ERROR,
                         "OBJ_RENDER EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
                 return;
             }
-            GsonBuilder gsonB = new GsonBuilder().setLenient()
+            final GsonBuilder gsonB = new GsonBuilder().setLenient()
                     .addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();
 
-            String jsonString = gsonB.create().toJson(data);
+            final String jsonString = gsonB.create().toJson(data);
             this.writeExport(jsonString, "OBJ_RENDER" + name);
         });
     }
 
-    private void writeExport(String jsonString, String name) {
+    private void writeExport(final String jsonString, final String name) {
         try {
-            File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
+            final File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter =
+            final FileWriter dataWriter =
                     new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO,
+            GunMod.LOGGER.log(Level.INFO,
                     "OBJ_RENDER EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
-        } catch (IOException e) {
-            LOGGER.log(Level.ERROR,
+        } catch (final IOException e) {
+            GunMod.LOGGER.log(Level.ERROR,
                     "OBJ_RENDER EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");
         }
     }

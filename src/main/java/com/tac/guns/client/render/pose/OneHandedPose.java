@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.tac.guns.client.render.IHeldAnimation;
 import com.tac.guns.client.util.RenderUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -23,19 +24,20 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class OneHandedPose implements IHeldAnimation {
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
-            float aimProgress) {
-        boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
+    public void applyPlayerModelRotation(final Player player, final PlayerModel<?> model,
+            final InteractionHand hand, final float aimProgress) {
+        final boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                 ? hand == InteractionHand.MAIN_HAND
                 : hand == InteractionHand.OFF_HAND;
-        ModelPart arm = right ? model.rightArm : model.leftArm;
+        final ModelPart arm = right ? model.rightArm : model.leftArm;
         IHeldAnimation.copyModelAngles(model.head, arm);
         arm.xRot += Math.toRadians(-90F);
     }
 
     @Override
-    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
-            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {
+    public void renderFirstPersonArms(final LocalPlayer player, final HumanoidArm hand,
+            final ItemStack stack, final PoseStack matrixStack, final MultiBufferSource buffer,
+            final int light, final float partialTicks) {
         matrixStack.translate(0, 0, -1);
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
@@ -53,8 +55,8 @@ public class OneHandedPose implements IHeldAnimation {
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
-            PoseStack matrixStack, float partialTicks) {
+    public boolean applyOffhandTransforms(final Player player, final PlayerModel<?> model,
+            final ItemStack stack, final PoseStack matrixStack, final float partialTicks) {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180F));
 

@@ -1,6 +1,7 @@
 package com.tac.guns.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
@@ -28,8 +29,8 @@ public interface IHeldAnimation {
      *                    sight
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
-            float aimProgress) {}
+    default void applyPlayerModelRotation(final Player player, final PlayerModel<?> model,
+            final InteractionHand hand, final float aimProgress) {}
 
     /**
      * Allows for transformations of the player model. This is where the entire
@@ -44,8 +45,8 @@ public interface IHeldAnimation {
      * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {}
+    default void applyPlayerPreRender(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {}
 
     /**
      * Allows for transformations of the weapon before rendering. This is where
@@ -59,8 +60,8 @@ public interface IHeldAnimation {
      * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
-            PoseStack matrixStack, MultiBufferSource buffer) {}
+    default void applyHeldItemTransforms(final Player player, final InteractionHand hand,
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {}
 
     /**
      *
@@ -72,8 +73,9 @@ public interface IHeldAnimation {
      * @param light
      * @param partialTicks
      */
-    default void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
-            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {}
+    default void renderFirstPersonArms(final LocalPlayer player, final HumanoidArm hand,
+            final ItemStack stack, final PoseStack matrixStack, final MultiBufferSource buffer,
+            final int light, final float partialTicks) {}
 
     /**
      *
@@ -82,8 +84,8 @@ public interface IHeldAnimation {
      * @param stack
      * @param partialTicks
      */
-    default boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
-            PoseStack matrixStack, float partialTicks) {
+    default boolean applyOffhandTransforms(final Player player, final PlayerModel<?> model,
+            final ItemStack stack, final PoseStack matrixStack, final float partialTicks) {
         return false;
     }
 
@@ -112,7 +114,7 @@ public interface IHeldAnimation {
      * @param dest   the model renderer to apply the rotations to
      */
     @OnlyIn(Dist.CLIENT)
-    static void copyModelAngles(ModelPart source, ModelPart dest) {
+    static void copyModelAngles(final ModelPart source, final ModelPart dest) {
         dest.xRot = source.xRot;
         dest.yRot = source.yRot;
         dest.zRot = source.zRot;

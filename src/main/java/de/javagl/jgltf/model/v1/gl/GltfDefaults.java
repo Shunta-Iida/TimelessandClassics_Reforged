@@ -72,8 +72,8 @@ public class GltfDefaults {
     /**
      * The default {@link Program}
      */
-    private static final Program DEFAULT_PROGRAM =
-            Programs.createDefaultProgram(GltfDefaults.DEFAULT_VERTEX_SHADER_ID, GltfDefaults.DEFAULT_FRAGMENT_SHADER_ID);
+    private static final Program DEFAULT_PROGRAM = Programs.createDefaultProgram(
+            GltfDefaults.DEFAULT_VERTEX_SHADER_ID, GltfDefaults.DEFAULT_FRAGMENT_SHADER_ID);
 
     /**
      * The default {@link Technique}

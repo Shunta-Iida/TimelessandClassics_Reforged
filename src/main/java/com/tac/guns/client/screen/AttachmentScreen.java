@@ -1,6 +1,8 @@
 package com.tac.guns.client.screen;
 
-import com.mojang.authlib.minecraft.TelemetrySession;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -8,8 +10,13 @@ import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.AttachmentContainer;
-import com.tac.guns.item.*;
+import com.tac.guns.item.GunItem;
+import com.tac.guns.item.IEasyColor;
+import com.tac.guns.item.IrDeviceItem;
+import com.tac.guns.item.ScopeItem;
+import com.tac.guns.item.SideRailItem;
 import com.tac.guns.item.attachment.IAttachment;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,8 +26,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -42,8 +47,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     private int mouseGrabbedButton;
     private int mouseClickedX, mouseClickedY;
 
-    public AttachmentScreen(AttachmentContainer screenContainer, Inventory playerInventory,
-            Component titleIn) {
+    public AttachmentScreen(final AttachmentContainer screenContainer,
+            final Inventory playerInventory, final Component titleIn) {
         super(screenContainer, playerInventory, titleIn);
         this.playerInventory = playerInventory;
         this.weaponInventory = screenContainer.getWeaponInventory();
@@ -65,21 +70,22 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(final PoseStack matrixStack, final int mouseX, final int mouseY,
+            final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY); // Render tool tips
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-        Minecraft minecraft = Minecraft.getInstance();
+    protected void renderLabels(final PoseStack matrixStack, final int mouseX, final int mouseY) {
+        final Minecraft minecraft = Minecraft.getInstance();
         this.font.draw(matrixStack, this.title, (float) this.titleLabelX + 30,
                 (float) this.titleLabelY, 4210752);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        int left = (this.width - this.imageWidth) / 2;
-        int top = (this.height - this.imageHeight) / 2;
+        final int left = (this.width - this.imageWidth) / 2;
+        final int top = (this.height - this.imageHeight) / 2;
         if ((this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)
                 || (this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem)
                 || (this.minecraft.player.getMainHandItem().getItem() instanceof IrDeviceItem))
@@ -87,7 +93,7 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
         else
             RenderUtil.scissor(left + 26, top + 17, 123, 70);
 
-        PoseStack stack = RenderSystem.getModelViewStack();
+        final PoseStack stack = RenderSystem.getModelViewStack();
         stack.pushPose();
         {
             stack.translate(96, 50, 100);
@@ -120,7 +126,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-            MultiBufferSource.BufferSource buffer = this.minecraft.renderBuffers().bufferSource();
+            final MultiBufferSource.BufferSource buffer =
+                    this.minecraft.renderBuffers().bufferSource();
             if (!(this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)) {
                 matrixStack.translate(0.0, 0.0, -0.4);
                 GunRenderingHandler.get().renderWeapon(this.minecraft.player,
@@ -153,16 +160,17 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     }
 
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(final PoseStack matrixStack, final float partialTicks, final int mouseX,
+            final int mouseY) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        Minecraft minecraft = Minecraft.getInstance();
+        final Minecraft minecraft = Minecraft.getInstance();
         if (!(this.minecraft.player.getMainHandItem().getItem() instanceof IEasyColor))
-            RenderSystem.setShaderTexture(0, GUN_GUI_TEXTURES);
+            RenderSystem.setShaderTexture(0, AttachmentScreen.GUN_GUI_TEXTURES);
         else
-            RenderSystem.setShaderTexture(0, SCOPE_GUI_TEXTURES);
+            RenderSystem.setShaderTexture(0, AttachmentScreen.SCOPE_GUI_TEXTURES);
 
-        int left = (this.width - this.imageWidth) / 2;
-        int top = (this.height - this.imageHeight) / 2;
+        final int left = (this.width - this.imageWidth) / 2;
+        final int top = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, left, top, 0, 0, this.imageWidth, this.imageHeight);
 
         if (this.minecraft.player.getMainHandItem().getItem() instanceof IEasyColor)
@@ -290,9 +298,9 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
-        int startX = (this.width - this.imageWidth) / 2;
-        int startY = (this.height - this.imageHeight) / 2;
+    public boolean mouseScrolled(final double mouseX, final double mouseY, final double scroll) {
+        final int startX = (this.width - this.imageWidth) / 2;
+        final int startY = (this.height - this.imageHeight) / 2;
         if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142,
                 70)) {
             if (scroll < 0 && this.windowZoom > 0) {
@@ -307,9 +315,9 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        int startX = (this.width - this.imageWidth) / 2;
-        int startY = (this.height - this.imageHeight) / 2;
+    public boolean mouseClicked(final double mouseX, final double mouseY, final int button) {
+        final int startX = (this.width - this.imageWidth) / 2;
+        final int startY = (this.height - this.imageHeight) / 2;
         if ((this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)
                 || (this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem)) {
             if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 93, startY + 18, 65,
@@ -342,13 +350,13 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+    public boolean mouseReleased(final double mouseX, final double mouseY, final int button) {
         if (this.mouseGrabbed) {
             if (this.mouseGrabbedButton == 0 && button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
                 this.mouseGrabbed = false;
                 this.windowX += (mouseX - this.mouseClickedX - 1);
                 this.windowY += (mouseY - this.mouseClickedY);
-            } else if (mouseGrabbedButton == 1 && button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+            } else if (this.mouseGrabbedButton == 1 && button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
                 this.mouseGrabbed = false;
                 this.windowRotationX += (mouseX - this.mouseClickedX);
                 this.windowRotationY -= (mouseY - this.mouseClickedY);

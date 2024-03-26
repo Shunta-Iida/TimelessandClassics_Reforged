@@ -1,10 +1,9 @@
 package com.tac.guns.client.render.model.internal;
 
-import com.tac.guns.client.render.model.CommonComponents;
-import com.tac.guns.client.render.model.GunComponent;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+
+import com.tac.guns.client.render.model.GunComponent;
 
 public class TacGunComponents {
     // crossbow
@@ -55,14 +54,14 @@ public class TacGunComponents {
 
     // register all these component
     static {
-        Field[] fields = TacGunComponents.class.getDeclaredFields();
-        for (Field field : fields) {
+        final Field[] fields = TacGunComponents.class.getDeclaredFields();
+        for (final Field field : fields) {
             if (GunComponent.class.isAssignableFrom(field.getType())) {
                 if (Modifier.isStatic(field.getModifiers())) {
                     try {
-                        GunComponent component = (GunComponent) field.get(null);
+                        final GunComponent component = (GunComponent) field.get(null);
                         component.registerThis();
-                    } catch (IllegalAccessException e) {
+                    } catch (final IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 }

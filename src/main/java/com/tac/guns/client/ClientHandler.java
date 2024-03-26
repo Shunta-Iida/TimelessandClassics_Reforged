@@ -1,7 +1,6 @@
 package com.tac.guns.client;
 
 import java.lang.reflect.Field;
-import java.util.Map;
 
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
@@ -78,14 +77,10 @@ import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.MouseSettingsScreen;
 import net.minecraft.client.gui.screens.PauseScreen;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -101,7 +96,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ClientHandler {
     private static Field mouseOptionsField;
 
-    public static void setup(Minecraft mc) {
+    public static void setup(final Minecraft mc) {
         MinecraftForge.EVENT_BUS.register(AimingHandler.get());
         MinecraftForge.EVENT_BUS.register(BulletTrailRenderingHandler.get());
         MinecraftForge.EVENT_BUS.register(CrosshairHandler.get());
@@ -109,7 +104,7 @@ public class ClientHandler {
         MinecraftForge.EVENT_BUS.register(RecoilHandler.get());
         MinecraftForge.EVENT_BUS.register(ReloadHandler.get());
         MinecraftForge.EVENT_BUS.register(ShootingHandler.get());
-        registerEntityRenders();
+        ClientHandler.registerEntityRenders();
         MinecraftForge.EVENT_BUS.register(SoundHandler.get());
         MinecraftForge.EVENT_BUS.register(HUDRenderingHandler.get());
         MinecraftForge.EVENT_BUS.register(FireModeSwitchEvent.get()); // Technically now a handler but, yes I need some
@@ -140,24 +135,14 @@ public class ClientHandler {
         // ClientRegistry.bindTileEntityRenderer(ModTileEntities.UPGRADE_BENCH.get(),
         // UpgradeBenchRenderUtil::new);
 
-        setupRenderLayers();
-        registerColors();
-        registerModelOverrides();
-        registerScreenFactories();
+        ClientHandler.setupRenderLayers();
+        ClientHandler.registerColors();
+        ClientHandler.registerModelOverrides();
+        ClientHandler.registerScreenFactories();
 
         AnimationHandler.preloadAnimations();
         new AnimationRunner(); // preload thread pool
         new SecondOrderDynamics(1f, 1f, 1f, 1f); // preload thread pool
-
-        Map<String, EntityRenderer<? extends Player>> skins =
-                Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
-        // addVestLayer(skins.get("default"));
-        // addVestLayer(skins.get("slim"));
-    }
-
-    private static void addVestLayer(
-            LivingEntityRenderer<? extends Player, HumanoidModel<Player>> renderer) {
-        // renderer.addLayer(new VestLayerRender<>(RenderLayerParent));
     }
 
     private static void setupRenderLayers() {
@@ -178,7 +163,7 @@ public class ClientHandler {
     }
 
     private static void registerColors() {
-        ItemColor color = (stack, index) -> {
+        final ItemColor color = (stack, index) -> {
             if (!((IColored) stack.getItem()).canColor(stack)) {
                 return -1;
             }
@@ -251,31 +236,31 @@ public class ClientHandler {
     }
 
     @SubscribeEvent
-    public static void onScreenInit(ScreenEvent.InitScreenEvent.Post event) {
+    public static void onScreenInit(final ScreenEvent.InitScreenEvent.Post event) {
         if (event.getScreen() instanceof MouseSettingsScreen) {
-            MouseSettingsScreen screen = (MouseSettingsScreen) event.getScreen();
-            if (mouseOptionsField == null) {
-                mouseOptionsField = ObfuscationReflectionHelper.findField(MouseSettingsScreen.class,
-                        "f_96218_");
-                mouseOptionsField.setAccessible(true);
+            final MouseSettingsScreen screen = (MouseSettingsScreen) event.getScreen();
+            if (ClientHandler.mouseOptionsField == null) {
+                ClientHandler.mouseOptionsField = ObfuscationReflectionHelper
+                        .findField(MouseSettingsScreen.class, "f_96218_");
+                ClientHandler.mouseOptionsField.setAccessible(true);
             }
             try {
-                OptionsList list = (OptionsList) mouseOptionsField.get(screen);
+                final OptionsList list = (OptionsList) ClientHandler.mouseOptionsField.get(screen);
                 list.addSmall(GunOptions.ADS_SENSITIVITY,
                         GunOptions.HOLD_TO_AIM/* , GunOptions.CROSSHAIR */);
                 list.addSmall(GunOptions.ALLOW_CHESTS, GunOptions.ALLOW_FENCE_GATES);
                 list.addSmall(GunOptions.ALLOW_LEVER, GunOptions.ALLOW_BUTTON);
                 list.addSmall(GunOptions.ALLOW_DOORS, GunOptions.ALLOW_TRAP_DOORS);
                 list.addSmall(new CycleOption[] {GunOptions.ALLOW_CRAFTING_TABLE});
-            } catch (IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
         if (event.getScreen() instanceof PauseScreen) {
-            PauseScreen screen = (PauseScreen) event.getScreen();
+            final PauseScreen screen = (PauseScreen) event.getScreen();
 
             event.addListener((new Button(screen.width / 2 - 215, 10, 75, 20,
-                    new TranslatableComponent("tac.options.gui_settings"), (p_213126_1_) -> {
+                    new TranslatableComponent("tac.options.gui_settings"), p_213126_1_ -> {
                         Minecraft.getInstance().setScreen(
                                 new TaCSettingsScreen(screen, Minecraft.getInstance().options));
                     })));

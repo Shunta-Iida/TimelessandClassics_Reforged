@@ -1,5 +1,8 @@
 package com.tac.guns.client.handler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
@@ -8,6 +11,7 @@ import com.tac.guns.Config;
 import com.tac.guns.client.BulletTrail;
 import com.tac.guns.client.GunRenderType;
 import com.tac.guns.client.util.RenderUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -22,11 +26,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.lwjgl.opengl.GL;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -35,13 +34,13 @@ public class BulletTrailRenderingHandler {
     private static BulletTrailRenderingHandler instance;
 
     public static BulletTrailRenderingHandler get() {
-        if (instance == null) {
-            instance = new BulletTrailRenderingHandler();
+        if (BulletTrailRenderingHandler.instance == null) {
+            BulletTrailRenderingHandler.instance = new BulletTrailRenderingHandler();
         }
-        return instance;
+        return BulletTrailRenderingHandler.instance;
     }
 
-    private Map<Integer, BulletTrail> bullets = new HashMap<>();
+    private final Map<Integer, BulletTrail> bullets = new HashMap<>();
 
     private BulletTrailRenderingHandler() {}
 
@@ -50,11 +49,11 @@ public class BulletTrailRenderingHandler {
      *
      * @param trail the bullet trail get
      */
-    public void add(BulletTrail trail) {
+    public void add(final BulletTrail trail) {
         // if(Config.CLIENT.particle.)
 
         // Prevents trails being added when not in a world
-        ClientLevel world = Minecraft.getInstance().level;
+        final ClientLevel world = Minecraft.getInstance().level;
         if (world != null) {
             this.bullets.put(trail.getEntityId(), trail);
         }
@@ -65,13 +64,13 @@ public class BulletTrailRenderingHandler {
      *
      * @param entityId the entity id of the bullet
      */
-    public void remove(int entityId) {
+    public void remove(final int entityId) {
         this.bullets.remove(entityId);
     }
 
     @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
-        ClientLevel world = Minecraft.getInstance().level;
+    public void onClientTick(final TickEvent.ClientTickEvent event) {
+        final ClientLevel world = Minecraft.getInstance().level;
         if (world != null) {
             if (event.phase == TickEvent.Phase.END) {
                 this.bullets.values().forEach(BulletTrail::tick);
@@ -82,19 +81,19 @@ public class BulletTrailRenderingHandler {
         }
     }
 
-    public void render(PoseStack stack, float partialSticks) {
-        for (BulletTrail bulletTrail : this.bullets.values()) {
+    public void render(final PoseStack stack, final float partialSticks) {
+        for (final BulletTrail bulletTrail : this.bullets.values()) {
             this.renderBulletTrail(bulletTrail, stack, partialSticks);
         }
     }
 
     @SubscribeEvent
-    public void onRespawn(ClientPlayerNetworkEvent.RespawnEvent event) {
+    public void onRespawn(final ClientPlayerNetworkEvent.RespawnEvent event) {
         this.bullets.clear();
     }
 
     @SubscribeEvent
-    public void onLoggedOut(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+    public void onLoggedOut(final ClientPlayerNetworkEvent.LoggedOutEvent event) {
         this.bullets.clear();
     }
 
@@ -105,11 +104,11 @@ public class BulletTrailRenderingHandler {
      * @param matrixStack
      * @param partialTicks
      */
-    private void renderBulletTrail(BulletTrail bulletTrail, PoseStack matrixStack,
-            float partialTicks) {
+    private void renderBulletTrail(final BulletTrail bulletTrail, final PoseStack matrixStack,
+            final float partialTicks) {
 
-        Minecraft mc = Minecraft.getInstance();
-        Entity entity = mc.getCameraEntity();
+        final Minecraft mc = Minecraft.getInstance();
+        final Entity entity = mc.getCameraEntity();
         if (entity == null || bulletTrail.isDead() || bulletTrail.getAge() < 2)
             return;
 
@@ -119,16 +118,16 @@ public class BulletTrailRenderingHandler {
                 && Minecraft.getInstance().player.is(entity))
             return;
         matrixStack.pushPose();
-        Vec3 view = mc.gameRenderer.getMainCamera().getPosition();
-        Vec3 position = bulletTrail.getPosition();
-        Vec3 motion = bulletTrail.getMotion();
+        final Vec3 view = mc.gameRenderer.getMainCamera().getPosition();
+        final Vec3 position = bulletTrail.getPosition();
+        final Vec3 motion = bulletTrail.getMotion();
 
-        double bulletX = position.x + motion.x * partialTicks;
-        double bulletY = position.y + motion.y * partialTicks;
-        double bulletZ = position.z + motion.z * partialTicks;
+        final double bulletX = position.x + motion.x * partialTicks;
+        final double bulletY = position.y + motion.y * partialTicks;
+        final double bulletZ = position.z + motion.z * partialTicks;
         // TODO: Use muzzle flash location of entity render as the render position for
         // muzzle flash start
-        Vec3 motionVec = new Vec3(motion.x, motion.y, motion.z);
+        final Vec3 motionVec = new Vec3(motion.x, motion.y, motion.z);
         float length = (float) motionVec.length();
 
         if (Minecraft.getInstance().player.is(entity)) {
@@ -153,13 +152,13 @@ public class BulletTrailRenderingHandler {
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(-bulletTrail.getPitch() + 90.105f));
 
         float trailLength = (float) ((length / 3f) * bulletTrail.getTrailLengthMultiplier());
-        float red = (float) (bulletTrail.getTrailColor() >> 16 & 255) / 255.0F;
-        float green = (float) (bulletTrail.getTrailColor() >> 8 & 255) / 255.0F;
-        float blue = (float) (bulletTrail.getTrailColor() & 255) / 255.0F;
-        float alpha = Config.CLIENT.display.bulletTrailOpacity.get().floatValue();
+        final float red = (float) (bulletTrail.getTrailColor() >> 16 & 255) / 255.0F;
+        final float green = (float) (bulletTrail.getTrailColor() >> 8 & 255) / 255.0F;
+        final float blue = (float) (bulletTrail.getTrailColor() & 255) / 255.0F;
+        final float alpha = Config.CLIENT.display.bulletTrailOpacity.get().floatValue();
 
         // Prevents the trail length from being longer than the distance to shooter
-        Entity shooter = bulletTrail.getShooter();
+        final Entity shooter = bulletTrail.getShooter();
         if (shooter != null && Minecraft.getInstance().player.is(shooter)) {
             if (AimingHandler.get().getNormalisedAdsProgress() > 0.4) {
                 trailLength =
@@ -186,8 +185,8 @@ public class BulletTrailRenderingHandler {
                                                                                                                                                                             // distance
         }
 
-        Matrix4f matrix4f = matrixStack.last().pose();
-        MultiBufferSource.BufferSource renderTypeBuffer = mc.renderBuffers().bufferSource();
+        final Matrix4f matrix4f = matrixStack.last().pose();
+        final MultiBufferSource.BufferSource renderTypeBuffer = mc.renderBuffers().bufferSource();
 
         /*
          * if(bulletTrail.isTrailVisible())
@@ -195,8 +194,8 @@ public class BulletTrailRenderingHandler {
          */
         if (bulletTrail.getAge() < 1 && Minecraft.getInstance().player.is(entity)
                 && !AimingHandler.get().isAiming()) {
-            RenderType bulletType = GunRenderType.getBulletTrail();
-            VertexConsumer builder = renderTypeBuffer.getBuffer(bulletType);
+            final RenderType bulletType = GunRenderType.getBulletTrail();
+            final VertexConsumer builder = renderTypeBuffer.getBuffer(bulletType);
 
             // all 0.2f works
             // 0.6f static
@@ -228,8 +227,8 @@ public class BulletTrailRenderingHandler {
                     .endVertex();
             Minecraft.getInstance().renderBuffers().bufferSource().endBatch(bulletType);
         } else {
-            RenderType bulletType = GunRenderType.getBulletTrail();
-            VertexConsumer builder = renderTypeBuffer.getBuffer(bulletType);
+            final RenderType bulletType = GunRenderType.getBulletTrail();
+            final VertexConsumer builder = renderTypeBuffer.getBuffer(bulletType);
             builder.vertex(matrix4f, 0, 0, 0.225F).color(red, green, blue, alpha).uv2(15728880)
                     .endVertex();
             builder.vertex(matrix4f, 0, 0, -0.225F).color(red, green, blue, alpha).uv2(15728880)
@@ -257,9 +256,9 @@ public class BulletTrailRenderingHandler {
                     .rotationDegrees((bulletTrail.getAge() + partialTicks) * (float) 50));
             matrixStack.scale(0.25F, 0.25F, 0.25F);
 
-            int combinedLight =
+            final int combinedLight =
                     LevelRenderer.getLightColor(entity.level, new BlockPos(entity.position()));
-            ItemStack stack = bulletTrail.getItem();
+            final ItemStack stack = bulletTrail.getItem();
             RenderUtil.renderModel(stack, ItemTransforms.TransformType.NONE, matrixStack,
                     renderTypeBuffer, combinedLight, OverlayTexture.NO_OVERLAY, null, null);
         }

@@ -1,10 +1,10 @@
 package com.tac.guns.client.render.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**

@@ -13,6 +13,7 @@ import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.attachment.IAttachment;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -31,9 +32,10 @@ public class VortexUh1SightModel implements IOverrideModel {
             "textures/items/timeless_scopes/hit_marker/vortex_uh_1_reticle.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType,
-            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light, int overlay) {
+    public void render(final float partialTicks, final ItemTransforms.TransformType transformType,
+            final ItemStack stack, final ItemStack parent, final LivingEntity entity,
+            final PoseStack matrixStack, final MultiBufferSource renderTypeBuffer, final int light,
+            final int overlay) {
         matrixStack.pushPose();
         /*
          * if (Config.CLIENT.display.redDotSquishUpdate.get() &&
@@ -81,50 +83,52 @@ public class VortexUh1SightModel implements IOverrideModel {
         matrixStack.popPose();
         matrixStack.translate(0, 0.0, -0.1025);
         if (transformType.firstPerson() && entity.equals(Minecraft.getInstance().player)) {
-            ScopeData scopeData = ScopeEditor.get().getScopeData() == null
+            final ScopeData scopeData = ScopeEditor.get().getScopeData() == null
                     || ScopeEditor.get().getScopeData().getTagName() != "vortex1"
                             ? new ScopeData("")
                             : ScopeEditor.get().getScopeData();
             matrixStack.pushPose();
             {
-                Matrix4f matrix = matrixStack.last().pose();
-                Matrix3f normal = matrixStack.last().normal();
+                final Matrix4f matrix = matrixStack.last().pose();
+                final Matrix3f normal = matrixStack.last().normal();
 
-                float size = 1.4F / 16.0F;
+                final float size = 1.4F / 16.0F;
                 matrixStack.translate(((-size / 2) - 0.001235 + scopeData.getReticleXMod()),
                         (1.5665 + 0.01775 + 0.20273875 + scopeData.getReticleYMod()) * 0.0625,
                         (0.3 + 0.0875 + scopeData.getReticleZMod()) * 0.0625); // 0.3
 
                 VertexConsumer builder;
 
-                double invertProgress = (1.0 - AimingHandler.get().getNormalisedAdsProgress());
+                final double invertProgress =
+                        (1.0 - AimingHandler.get().getNormalisedAdsProgress());
                 matrixStack.translate(-0.04 * invertProgress, 0.01 * invertProgress, 0);
 
-                double scale = 4.775 - 2.6548576 - 0.57749957 + scopeData.getReticleSizeMod();
+                final double scale = 4.775 - 2.6548576 - 0.57749957 + scopeData.getReticleSizeMod();
                 matrixStack.translate(size / 2, size / 2, 0);
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
 
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                final int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
                         IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
 
-                float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
-                float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
-                float blue = ((reticleGlowColor >> 0) & 0xFF) / 255F;
+                final float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
+                final float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
+                final float blue = ((reticleGlowColor >> 0) & 0xFF) / 255F;
                 float alpha = (float) AimingHandler.get().getNormalisedAdsProgress();
 
                 alpha = (float) (1F * AimingHandler.get().getNormalisedAdsProgress());
 
-                builder = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
+                builder = renderTypeBuffer.getBuffer(
+                        RenderType.entityTranslucent(VortexUh1SightModel.RED_DOT_RETICLE));
                 // Walking bobbing
                 boolean aimed = false;
                 /* The new controlled bobbing */
                 if (AimingHandler.get().isAiming())
                     aimed = true;
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true);
-                double invertZoomProgress = aimed ? 0.0575 : 0.468;// double invertZoomProgress = aimed ? 0.135 :
-                                                                   // 0.94;//aimed ? 1.0 -
-                                                                   // AimingHandler.get().getNormalisedAdsProgress() : ;
+                final double invertZoomProgress = aimed ? 0.0575 : 0.468;// double invertZoomProgress = aimed ? 0.135 :
+                // 0.94;//aimed ? 1.0 -
+                // AimingHandler.get().getNormalisedAdsProgress() : ;
 
                 GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack,
                         Minecraft.getInstance().player, partialTicks, -1f);

@@ -43,10 +43,12 @@ public class GltfReferenceResolver {
      * @param references The {@link GltfReference} objects
      * @param baseUri    The base URI that references will be resolved against
      */
-    public static void resolveAll(final Iterable<? extends GltfReference> references, final URI baseUri) {
+    public static void resolveAll(final Iterable<? extends GltfReference> references,
+            final URI baseUri) {
         Objects.requireNonNull(references, "The references may not be null");
         Objects.requireNonNull(baseUri, "The baseUri may not be null");
-        final Function<String, ByteBuffer> uriResolver = UriResolvers.createBaseUriResolver(baseUri);
+        final Function<String, ByteBuffer> uriResolver =
+                UriResolvers.createBaseUriResolver(baseUri);
         GltfReferenceResolver.resolveAll(references, uriResolver);
     }
 

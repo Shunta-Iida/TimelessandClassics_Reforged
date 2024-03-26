@@ -20,14 +20,14 @@ public class StunRingingSound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        Player player = Minecraft.getInstance().player;
+        final Player player = Minecraft.getInstance().player;
         if (player != null && player.isAlive()) {
-            MobEffectInstance effect = player.getEffect(ModEffects.DEAFENED.get());
+            final MobEffectInstance effect = player.getEffect(ModEffects.DEAFENED.get());
             if (effect != null) {
                 this.x = (float) player.getX();
                 this.y = (float) player.getY();
                 this.z = (float) player.getZ();
-                float percent = Math.min(
+                final float percent = Math.min(
                         (effect.getDuration() / (float) Config.SERVER.soundFadeThreshold.get()), 1);
                 this.volume = (float) (percent * Config.SERVER.ringVolume.get());
                 return;

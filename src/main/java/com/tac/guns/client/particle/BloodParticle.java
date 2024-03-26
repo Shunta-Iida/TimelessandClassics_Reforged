@@ -3,9 +3,14 @@ package com.tac.guns.client.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
@@ -18,7 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class BloodParticle extends TextureSheetParticle {
-    public BloodParticle(ClientLevel world, double x, double y, double z) {
+    public BloodParticle(final ClientLevel world, final double x, final double y, final double z) {
         super(world, x, y, z, 0.1, 0.1, 0.1);
         this.setColor(0.541F, 0.027F, 0.027F);
         this.gravity = 1.25F;
@@ -42,11 +47,11 @@ public class BloodParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-        Vec3 projectedView = renderInfo.getPosition();
-        float x = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - projectedView.x());
+    public void render(final VertexConsumer buffer, final Camera renderInfo, final float partialTicks) {
+        final Vec3 projectedView = renderInfo.getPosition();
+        final float x = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - projectedView.x());
         float y = (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - projectedView.y());
-        float z = (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - projectedView.z());
+        final float z = (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - projectedView.z());
 
         if (this.onGround) {
             y += 0.01;
@@ -59,27 +64,27 @@ public class BloodParticle extends TextureSheetParticle {
             }
         } else {
             rotation = new Quaternion(renderInfo.rotation());
-            float angle = Mth.lerp(partialTicks, this.oRoll, this.roll);
+            final float angle = Mth.lerp(partialTicks, this.oRoll, this.roll);
             rotation.mul(Vector3f.ZP.rotation(angle));
         }
 
-        Vector3f[] vertices =
+        final Vector3f[] vertices =
                 new Vector3f[] {new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F),
                         new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 
-        float scale = this.getQuadSize(partialTicks);
+        final float scale = this.getQuadSize(partialTicks);
         for (int i = 0; i < 4; ++i) {
-            Vector3f vertex = vertices[i];
+            final Vector3f vertex = vertices[i];
             vertex.transform(rotation);
             vertex.mul(scale);
             vertex.add(x, y, z);
         }
 
-        float minU = this.getU0();
-        float maxU = this.getU1();
-        float minV = this.getV0();
-        float maxV = this.getV1();
-        int light = this.getLightColor(partialTicks);
+        final float minU = this.getU0();
+        final float maxU = this.getU1();
+        final float minV = this.getV0();
+        final float maxV = this.getV1();
+        final int light = this.getLightColor(partialTicks);
         buffer.vertex(vertices[0].x(), vertices[0].y(), vertices[0].z()).uv(maxU, maxV)
                 .color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
         buffer.vertex(vertices[1].x(), vertices[1].y(), vertices[1].z()).uv(maxU, minV)
@@ -94,13 +99,14 @@ public class BloodParticle extends TextureSheetParticle {
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteSet;
 
-        public Factory(SpriteSet spriteSet) {
+        public Factory(final SpriteSet spriteSet) {
             this.spriteSet = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x,
-                double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            BloodParticle particle = new BloodParticle(worldIn, x, y, z);
+        @Override
+        public Particle createParticle(final SimpleParticleType typeIn, final ClientLevel worldIn, final double x,
+                final double y, final double z, final double xSpeed, final double ySpeed, final double zSpeed) {
+            final BloodParticle particle = new BloodParticle(worldIn, x, y, z);
             particle.pickSprite(this.spriteSet);
             return particle;
         }

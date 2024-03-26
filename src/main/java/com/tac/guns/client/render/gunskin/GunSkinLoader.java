@@ -1,24 +1,25 @@
 package com.tac.guns.client.render.gunskin;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.tac.guns.GunMod;
 import com.tac.guns.client.render.model.CacheableModel;
 import com.tac.guns.client.render.model.GunComponent;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraftforge.client.model.ForgeModelBakery;
-
-import javax.annotation.Nonnull;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Map;
 
 public class GunSkinLoader {
     public static UnbakedModel missingModel; // Reference to unbaked missing model
@@ -33,12 +34,12 @@ public class GunSkinLoader {
 
     protected HashSet<String> componentsNamespaces = new HashSet<>();
 
-    public void usingComponentsNamespace(String namespace) {
-        componentsNamespaces.add(namespace);
+    public void usingComponentsNamespace(final String namespace) {
+        this.componentsNamespaces.add(namespace);
     }
 
-    public void disableComponentsNamespace(String namespace) {
-        componentsNamespaces.remove(namespace);
+    public void disableComponentsNamespace(final String namespace) {
+        this.componentsNamespaces.remove(namespace);
     }
 
     /**
@@ -54,49 +55,52 @@ public class GunSkinLoader {
      *                     The file name before ".meta.json" will be used as the
      *                     skin's id.
      */
-    public GunSkin loadGunSkin(ResourceLocation metaLocation) {
+    public GunSkin loadGunSkin(final ResourceLocation metaLocation) {
         try {
-            Resource resource =
+            final Resource resource =
                     Minecraft.getInstance().getResourceManager().getResource(metaLocation);
 
-            String path = metaLocation.getPath();
-            String fileName = path.substring(path.lastIndexOf("/") + 1);
-            if (!fileName.endsWith(extension))
+            final String path = metaLocation.getPath();
+            final String fileName = path.substring(path.lastIndexOf("/") + 1);
+            if (!fileName.endsWith(GunSkinLoader.extension))
                 return null;
 
-            String namespace = metaLocation.getNamespace();
-            String skinId = fileName.substring(0, fileName.length() - extension.length());
+            final String namespace = metaLocation.getNamespace();
+            final String skinId =
+                    fileName.substring(0, fileName.length() - GunSkinLoader.extension.length());
 
-            InputStream stream = resource.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+            final InputStream stream = resource.getInputStream();
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            final JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
 
-            SkinType skinType = SkinType.valueOf(json.get("type").getAsString().toUpperCase());
-            ResourceLocation gunRegistryName =
+            final SkinType skinType =
+                    SkinType.valueOf(json.get("type").getAsString().toUpperCase());
+            final ResourceLocation gunRegistryName =
                     ResourceLocation.tryParse(json.get("gun_registry_name").getAsString());
-            ResourceLocation icon = ResourceLocation.tryParse(json.get("icon").getAsString());
-            ResourceLocation miniIcon =
+            final ResourceLocation icon = ResourceLocation.tryParse(json.get("icon").getAsString());
+            final ResourceLocation miniIcon =
                     ResourceLocation.tryParse(json.get("mini_icon").getAsString());
-            GunSkin gunSkin = new GunSkin(new ResourceLocation(namespace, skinId), gunRegistryName);
+            final GunSkin gunSkin =
+                    new GunSkin(new ResourceLocation(namespace, skinId), gunRegistryName);
             gunSkin.setIcon(icon);
             gunSkin.setMiniIcon(miniIcon);
 
             switch (skinType) {
                 case CUSTOM -> {
-                    String mainPath =
-                            namespace + ":" + path.substring(0, path.length() - extension.length());
+                    final String mainPath = namespace + ":"
+                            + path.substring(0, path.length() - GunSkinLoader.extension.length());
 
-                    JsonObject componentsJson = json.getAsJsonObject("components");
-                    for (Map.Entry<String, JsonElement> entry : componentsJson.entrySet()) {
-                        String componentKey = entry.getKey();
-                        String group = entry.getValue().getAsString();
-                        GunComponent component = getComponent(componentKey);
+                    final JsonObject componentsJson = json.getAsJsonObject("components");
+                    for (final Map.Entry<String, JsonElement> entry : componentsJson.entrySet()) {
+                        final String componentKey = entry.getKey();
+                        final String group = entry.getValue().getAsString();
+                        final GunComponent component = this.getComponent(componentKey);
 
                         // try to load the component model
-                        ResourceLocation modelRL = component.getModelLocation(mainPath);
+                        final ResourceLocation modelRL = component.getModelLocation(mainPath);
                         if (modelRL != null && Minecraft.getInstance().getResourceManager()
                                 .hasResource(modelRL)) {
-                            CacheableModel componentModel = new CacheableModel(modelRL);
+                            final CacheableModel componentModel = new CacheableModel(modelRL);
                             ForgeModelBakery.addSpecialModel(modelRL);
                             gunSkin.putComponentModel(component, componentModel);
                         }
@@ -105,24 +109,24 @@ public class GunSkinLoader {
                     }
                 }
                 case TEXTURE_ONLY -> {
-                    JsonObject componentsJson = json.getAsJsonObject("textures");
-                    for (Map.Entry<String, JsonElement> entry : componentsJson.entrySet()) {
+                    final JsonObject componentsJson = json.getAsJsonObject("textures");
+                    for (final Map.Entry<String, JsonElement> entry : componentsJson.entrySet()) {
 
                     }
                 }
             }
             return gunSkin;
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             GunMod.LOGGER.warn("Failed to load skins from {}\n{}", metaLocation, e);
         }
 
         return null;
     }
 
-    public @Nonnull GunComponent getComponent(String componentKey) {
-        for (String namespace : componentsNamespaces) {
-            GunComponent component = GunComponent.getComponent(namespace, componentKey);
+    public @Nonnull GunComponent getComponent(final String componentKey) {
+        for (final String namespace : this.componentsNamespaces) {
+            final GunComponent component = GunComponent.getComponent(namespace, componentKey);
             if (component != null)
                 return component;
         }

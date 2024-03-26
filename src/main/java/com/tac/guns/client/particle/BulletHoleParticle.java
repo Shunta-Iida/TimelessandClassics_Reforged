@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import com.tac.guns.Config;
+
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -30,8 +31,8 @@ public class BulletHoleParticle extends TextureSheetParticle {
     private int vOffset;
     private float textureDensity;
 
-    public BulletHoleParticle(ClientLevel world, double x, double y, double z, Direction direction,
-            BlockPos pos) {
+    public BulletHoleParticle(final ClientLevel world, final double x, final double y, final double z, final Direction direction,
+            final BlockPos pos) {
         super(world, x, y, z);
         this.setSprite(this.getSprite(pos));
         this.direction = direction;
@@ -44,18 +45,18 @@ public class BulletHoleParticle extends TextureSheetParticle {
         this.quadSize = 0.05F;
 
         /* Expire the particle straight away if the block is air */
-        BlockState state = world.getBlockState(pos);
+        final BlockState state = world.getBlockState(pos);
         if (world.getBlockState(pos).isAir())
             this.remove();
 
-        int color = this.getBlockColor(state, world, pos, direction);
+        final int color = this.getBlockColor(state, world, pos, direction);
         this.rCol = ((float) (color >> 16 & 255) / 255.0F) / 3.0F;
         this.gCol = ((float) (color >> 8 & 255) / 255.0F) / 3.0F;
         this.bCol = ((float) (color & 255) / 255.0F) / 3.0F;
         this.alpha = 0.9F;
     }
 
-    private int getBlockColor(BlockState state, Level world, BlockPos pos, Direction direction) {
+    private int getBlockColor(final BlockState state, final Level world, final BlockPos pos, final Direction direction) {
         // Add an exception for grass blocks
         if (state.getBlock() == Blocks.GRASS_BLOCK)
             return Integer.MAX_VALUE;
@@ -63,18 +64,18 @@ public class BulletHoleParticle extends TextureSheetParticle {
     }
 
     @Override
-    protected void setSprite(TextureAtlasSprite sprite) {
+    protected void setSprite(final TextureAtlasSprite sprite) {
         super.setSprite(sprite);
         this.uOffset = this.random.nextInt(16);
         this.vOffset = this.random.nextInt(16);
         this.textureDensity = (sprite.getU1() - sprite.getU0()) / 16.0F; // Assuming texture is a square
     }
 
-    private TextureAtlasSprite getSprite(BlockPos pos) {
-        Minecraft minecraft = Minecraft.getInstance();
-        Level world = minecraft.level;
+    private TextureAtlasSprite getSprite(final BlockPos pos) {
+        final Minecraft minecraft = Minecraft.getInstance();
+        final Level world = minecraft.level;
         if (world != null) {
-            BlockState state = world.getBlockState(pos);
+            final BlockState state = world.getBlockState(pos);
             return Minecraft.getInstance().getBlockRenderer().getBlockModelShaper()
                     .getParticleIcon(state);
         }
@@ -111,30 +112,30 @@ public class BulletHoleParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
-        Vec3 view = renderInfo.getPosition();
-        float particleX = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - view.x());
-        float particleY = (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - view.y());
-        float particleZ = (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - view.z());
-        Quaternion quaternion = this.direction.getRotation();
-        Vector3f[] points =
+    public void render(final VertexConsumer buffer, final Camera renderInfo, final float partialTicks) {
+        final Vec3 view = renderInfo.getPosition();
+        final float particleX = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - view.x());
+        final float particleY = (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - view.y());
+        final float particleZ = (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - view.z());
+        final Quaternion quaternion = this.direction.getRotation();
+        final Vector3f[] points =
                 new Vector3f[] {new Vector3f(-1.0F, 0.0F, -1.0F), new Vector3f(-1.0F, 0.0F, 1.0F),
                         new Vector3f(1.0F, 0.0F, 1.0F), new Vector3f(1.0F, 0.0F, -1.0F)};
-        float scale = this.getQuadSize(partialTicks);
+        final float scale = this.getQuadSize(partialTicks);
 
         for (int i = 0; i < 4; ++i) {
-            Vector3f vector3f = points[i];
+            final Vector3f vector3f = points[i];
             vector3f.transform(quaternion);
             vector3f.mul(scale);
             vector3f.add(particleX, particleY, particleZ);
         }
 
-        float f7 = this.getU0();
-        float f8 = this.getU1();
-        float f5 = this.getV0();
-        float f6 = this.getV1();
-        int j = this.getLightColor(partialTicks);
-        float fade =
+        final float f7 = this.getU0();
+        final float f8 = this.getU1();
+        final float f5 = this.getV0();
+        final float f6 = this.getV1();
+        final int j = this.getLightColor(partialTicks);
+        final float fade =
                 Config.CLIENT.particle.bulletHoleFadeThreshold.get() >= 1.0f ? 1.0f
                         : 1.0f - (Math.max((float) this.age - (float) this.lifetime
                                 * Config.CLIENT.particle.bulletHoleFadeThreshold.get().floatValue(),

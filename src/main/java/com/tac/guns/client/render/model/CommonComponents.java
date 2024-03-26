@@ -1,8 +1,5 @@
 package com.tac.guns.client.render.model;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 public class CommonComponents {
     private CommonComponents() {}
 

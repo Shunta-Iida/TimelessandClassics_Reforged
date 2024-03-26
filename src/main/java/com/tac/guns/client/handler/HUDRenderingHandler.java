@@ -1,8 +1,19 @@
 package com.tac.guns.client.handler;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.logging.log4j.Level;
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.logging.LogUtils;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Matrix4f;
 import com.tac.guns.Config;
 import com.tac.guns.GunMod;
@@ -12,16 +23,13 @@ import com.tac.guns.common.ReloadTracker;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.item.GunItem;
 import com.tac.guns.item.transition.TimelessGunItem;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
-import com.tac.guns.network.PacketHandler;
-import com.tac.guns.network.message.MessageFireMode;
 import com.tac.guns.util.WearableHelper;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
@@ -33,12 +41,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.logging.log4j.Level;
-import org.lwjgl.opengl.GL11;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public class HUDRenderingHandler extends GuiComponent {
     private static HUDRenderingHandler instance;
@@ -73,23 +75,25 @@ public class HUDRenderingHandler extends GuiComponent {
     };
 
     public static HUDRenderingHandler get() {
-        return instance == null ? instance = new HUDRenderingHandler() : instance;
+        return HUDRenderingHandler.instance == null
+                ? HUDRenderingHandler.instance = new HUDRenderingHandler()
+                : HUDRenderingHandler.instance;
     }
 
     private HUDRenderingHandler() {}
 
     private int ammoReserveCount = 0;
-    private int tickCount = 0;
+    private final int tickCount = 0;
 
     @SubscribeEvent
-    public void tick(TickEvent.ClientTickEvent e) {
+    public void tick(final TickEvent.ClientTickEvent e) {
         if (e.phase != TickEvent.Phase.END)
             return;
-        Player player = Minecraft.getInstance().player;
+        final Player player = Minecraft.getInstance().player;
         if (player == null)
             return;
         if (player.getMainHandItem().getItem() instanceof GunItem) {
-            GunItem gunItem = (GunItem) player.getMainHandItem().getItem();
+            final GunItem gunItem = (GunItem) player.getMainHandItem().getItem();
             this.ammoReserveCount = ReloadTracker.calcMaxReserveAmmo(
                     Gun.findAmmo(player, gunItem.getGun().getProjectile().getItem()));
 
@@ -104,12 +108,12 @@ public class HUDRenderingHandler extends GuiComponent {
     }
 
     // Jitter minecraft player screen a tiny bit per system nano time
-    private void jitterScreen(float partialTicks) {
-        long time = System.nanoTime();
-        float jitterX = (float) (Math.sin(time / 1000000000.0) * 0.0005);
-        float jitterY = (float) (Math.cos(time / 1000000000.0) * 0.0005);
-        Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuilder();
+    private void jitterScreen(final float partialTicks) {
+        final long time = System.nanoTime();
+        final float jitterX = (float) (Math.sin(time / 1000000000.0) * 0.0005);
+        final float jitterY = (float) (Math.cos(time / 1000000000.0) * 0.0005);
+        final Tesselator tessellator = Tesselator.getInstance();
+        final BufferBuilder bufferbuilder = tessellator.getBuilder();
         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);// beginWrite(false);
         GL11.glPushMatrix();
         GL11.glTranslatef(jitterX, jitterY, 0);
@@ -117,14 +121,14 @@ public class HUDRenderingHandler extends GuiComponent {
     }
 
     // EnchancedVisuals-1.16.5 helped with this one
-    private ResourceLocation getNoiseTypeResource(boolean doNoise) {
-        long time = Math.abs(System.nanoTime() / 3000000 / 50);
-        return NOISE_S[(int) (time % NOISE_S.length)];
+    private ResourceLocation getNoiseTypeResource(final boolean doNoise) {
+        final long time = Math.abs(System.nanoTime() / 3000000 / 50);
+        return HUDRenderingHandler.NOISE_S[(int) (time % HUDRenderingHandler.NOISE_S.length)];
     }
 
     // A method that tints the screen green like night vision if true
-    private void renderNightVision(boolean doNightVision) {
-        brightenScreen(doNightVision);
+    private void renderNightVision(final boolean doNightVision) {
+        this.brightenScreen(doNightVision);
         if (doNightVision) {
             RenderSystem.disableDepthTest();
             RenderSystem.depthMask(false);
@@ -132,8 +136,8 @@ public class HUDRenderingHandler extends GuiComponent {
             RenderSystem.disableDepthTest();
             RenderSystem.disableTexture();
             RenderSystem.enableBlend();
-            Tesselator tessellator = Tesselator.getInstance();
-            BufferBuilder bufferbuilder = tessellator.getBuilder();
+            final Tesselator tessellator = Tesselator.getInstance();
+            final BufferBuilder bufferbuilder = tessellator.getBuilder();
 
             bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
             bufferbuilder.vertex(0.0D,
@@ -159,15 +163,15 @@ public class HUDRenderingHandler extends GuiComponent {
 
     // "Brightens the screen" However this example is more useful less gimick, I
     // want to be a bit more gimicky, but a great V1 to be honest - ClumsyAlien
-    private void brightenScreen(boolean doNightVision) {
+    private void brightenScreen(final boolean doNightVision) {
 
         // Basic force gammed night vision
         if (doNightVision) {
-            if (defaultGameGamma == 0)
-                defaultGameGamma = Minecraft.getInstance().options.gamma;
+            if (this.defaultGameGamma == 0)
+                this.defaultGameGamma = Minecraft.getInstance().options.gamma;
             Minecraft.getInstance().options.gamma = 200;
         } else {
-            Minecraft.getInstance().options.gamma = defaultGameGamma;
+            Minecraft.getInstance().options.gamma = this.defaultGameGamma;
         }
     }
 
@@ -178,7 +182,7 @@ public class HUDRenderingHandler extends GuiComponent {
     public float hitMarkerTracker = 0;
 
     @SubscribeEvent
-    public void onOverlayRender(RenderGameOverlayEvent.Post event) {
+    public void onOverlayRender(final RenderGameOverlayEvent.Post event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
@@ -186,31 +190,31 @@ public class HUDRenderingHandler extends GuiComponent {
             return;
         }
 
-        LocalPlayer player = Minecraft.getInstance().player;
-        ItemStack heldItem = player.getMainHandItem();
-        PoseStack stack = event.getMatrixStack();
-        float anchorPointX = event.getWindow().getGuiScaledWidth() / 12F * 11F;
-        float anchorPointY = event.getWindow().getGuiScaledHeight() / 10F * 9F;
+        final LocalPlayer player = Minecraft.getInstance().player;
+        final ItemStack heldItem = player.getMainHandItem();
+        final PoseStack stack = event.getMatrixStack();
+        final float anchorPointX = event.getWindow().getGuiScaledWidth() / 12F * 11F;
+        final float anchorPointY = event.getWindow().getGuiScaledHeight() / 10F * 9F;
 
-        float configScaleWeaponCounter =
+        final float configScaleWeaponCounter =
                 Config.CLIENT.weaponGUI.weaponAmmoCounter.weaponAmmoCounterSize.get().floatValue();
-        float configScaleWeaponFireMode =
+        final float configScaleWeaponFireMode =
                 Config.CLIENT.weaponGUI.weaponFireMode.weaponFireModeSize.get().floatValue();
-        float configScaleWeaponReloadBar =
+        final float configScaleWeaponReloadBar =
                 Config.CLIENT.weaponGUI.weaponReloadTimer.weaponReloadTimerSize.get().floatValue();
 
-        float counterSize = 1.8F * configScaleWeaponCounter;
-        float fireModeSize = 32.0F * configScaleWeaponFireMode;
-        float ReloadBarSize = 32.0F * configScaleWeaponReloadBar;
+        final float counterSize = 1.8F * configScaleWeaponCounter;
+        final float fireModeSize = 32.0F * configScaleWeaponFireMode;
+        final float ReloadBarSize = 32.0F * configScaleWeaponReloadBar;
 
-        float hitMarkerSize = 128.0F;
+        final float hitMarkerSize = 128.0F;
 
         RenderSystem.enableDepthTest();
         BufferBuilder buffer = Tesselator.getInstance().getBuilder();
-        int width = event.getWindow().getScreenWidth();
-        int height = event.getWindow().getScreenHeight();
-        int centerX = event.getWindow().getGuiScaledWidth() / 2;
-        int centerY = event.getWindow().getGuiScaledHeight() / 2;
+        final int width = event.getWindow().getScreenWidth();
+        final int height = event.getWindow().getScreenHeight();
+        final int centerX = event.getWindow().getGuiScaledWidth() / 2;
+        final int centerY = event.getWindow().getGuiScaledHeight() / 2;
 
         if (Config.CLIENT.display.showHitMarkers.get()) {
             if (this.hitMarkerTracker > 0)// Hit Markers
@@ -219,15 +223,16 @@ public class HUDRenderingHandler extends GuiComponent {
                 stack.pushPose();
                 {
                     RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-                    RenderSystem.setShaderTexture(0, fleshHitMarker); // Future options to render bar types
+                    RenderSystem.setShaderTexture(0, HUDRenderingHandler.fleshHitMarker); // Future options to render bar types
 
-                    float opac =
-                            Math.max(Math.min(this.hitMarkerTracker / hitMarkerRatio, 100f), 0.20f);
-                    if (hitMarkerHeadshot)
+                    final float opac = Math.max(Math
+                            .min(this.hitMarkerTracker / HUDRenderingHandler.hitMarkerRatio, 100f),
+                            0.20f);
+                    if (this.hitMarkerHeadshot)
                         RenderSystem.setShaderColor(1.0f, 0.075f, 0.075f, opac); // Only render red
                     else
                         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, opac);
-                    blit(stack, centerX - 8, centerY - 8, 0, 0, 16, 16, 16, 16); // -264 + (int)(-9.0/4),-134,
+                    GuiComponent.blit(stack, centerX - 8, centerY - 8, 0, 0, 16, 16, 16, 16); // -264 + (int)(-9.0/4),-134,
                 }
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                 stack.popPose();
@@ -236,7 +241,7 @@ public class HUDRenderingHandler extends GuiComponent {
 
         // All code for rendering night vision, still only a test
         if (false) {
-            renderNightVision(Config.CLIENT.weaponGUI.weaponTypeIcon.showWeaponIcon.get());
+            this.renderNightVision(Config.CLIENT.weaponGUI.weaponTypeIcon.showWeaponIcon.get());
             if (Config.CLIENT.weaponGUI.weaponTypeIcon.showWeaponIcon.get()) {
 
                 RenderSystem.enableDepthTest();
@@ -246,9 +251,9 @@ public class HUDRenderingHandler extends GuiComponent {
                 stack.pushPose();
 
                 RenderSystem.setShaderTexture(0, this.getNoiseTypeResource(true));
-                float opacity = 0.25f;// 0.125f;// EnchancedVisuals-1.16.5 helped with this one, instead have a fading
-                                      // opacity visual.getOpacity();
-                Matrix4f matrix = stack.last().pose();
+                final float opacity = 0.25f;// 0.125f;// EnchancedVisuals-1.16.5 helped with this one, instead have a fading
+                // opacity visual.getOpacity();
+                final Matrix4f matrix = stack.last().pose();
                 buffer.vertex(matrix, 0, width, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, opacity)
                         .endVertex();
                 buffer.vertex(matrix, width, height, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, opacity)
@@ -338,8 +343,8 @@ public class HUDRenderingHandler extends GuiComponent {
         if (!(Minecraft.getInstance().player.getItemInHand(InteractionHand.MAIN_HAND)
                 .getItem() instanceof TimelessGunItem))
             return;
-        TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
-        Gun gun = gunItem.getGun();
+        final TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
+        final Gun gun = gunItem.getGun();
 
         if (!Config.CLIENT.weaponGUI.weaponGui.get()) {
             return;
@@ -410,16 +415,16 @@ public class HUDRenderingHandler extends GuiComponent {
                                     fireMode = gunItemFireModes[1];
                             }
                         }
-                    } catch (ArrayIndexOutOfBoundsException e) {
+                    } catch (final ArrayIndexOutOfBoundsException e) {
                         fireMode = gun.getGeneral().getRateSelector()[0];
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         fireMode = 0;
                         GunMod.LOGGER.log(Level.ERROR,
                                 "TaC HUD_RENDERER has failed obtaining the fire mode");
                     }
-                    RenderSystem.setShaderTexture(0, FIREMODE_ICONS[fireMode]); // Render true firemode
+                    RenderSystem.setShaderTexture(0, HUDRenderingHandler.FIREMODE_ICONS[fireMode]); // Render true firemode
 
-                    Matrix4f matrix = stack.last().pose();
+                    final Matrix4f matrix = stack.last().pose();
                     buffer.vertex(matrix, 0, fireModeSize / 2, 0).uv(0, 1)
                             .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
                     buffer.vertex(matrix, fireModeSize / 2, fireModeSize / 2, 0).uv(1, 1)
@@ -447,38 +452,40 @@ public class HUDRenderingHandler extends GuiComponent {
                 if (player.getMainHandItem().getTag() != null) {
                     MutableComponent currentAmmo;
                     MutableComponent reserveAmmo;
-                    int ammo = player.getMainHandItem().getTag().getInt("AmmoCount");
+                    final int ammo = player.getMainHandItem().getTag().getInt("AmmoCount");
 
                     if (ammo <= gun.getReloads().getMaxAmmo() / 4) {
-                        currentAmmo = byPaddingZeros(ammo).append(new TextComponent("" + ammo))
-                                .withStyle(ChatFormatting.RED);
+                        currentAmmo = HUDRenderingHandler.byPaddingZeros(ammo)
+                                .append(new TextComponent("" + ammo)).withStyle(ChatFormatting.RED);
                     } else {
-                        currentAmmo = byPaddingZeros(ammo).append(
+                        currentAmmo = HUDRenderingHandler.byPaddingZeros(ammo).append(
                                 new TextComponent("" + ammo).withStyle(ChatFormatting.WHITE));
                     }
 
                     if (this.ammoReserveCount <= gun.getReloads().getMaxAmmo()) {
-                        reserveAmmo = byPaddingZeros(
-                                this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                        .append(new TranslatableComponent(
-                                                "" + (this.ammoReserveCount > 10000 ? 9999
-                                                        : this.ammoReserveCount)))
-                                        .withStyle(ChatFormatting.RED);
+                        reserveAmmo = HUDRenderingHandler
+                                .byPaddingZeros(this.ammoReserveCount > 10000 ? 10000
+                                        : this.ammoReserveCount)
+                                .append(new TranslatableComponent(
+                                        "" + (this.ammoReserveCount > 10000 ? 9999
+                                                : this.ammoReserveCount)))
+                                .withStyle(ChatFormatting.RED);
                     } else {
-                        reserveAmmo = byPaddingZeros(
-                                this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                        .append(new TranslatableComponent(
-                                                "" + (this.ammoReserveCount > 10000 ? 9999
-                                                        : this.ammoReserveCount)))
-                                        .withStyle(ChatFormatting.GRAY);
+                        reserveAmmo = HUDRenderingHandler
+                                .byPaddingZeros(this.ammoReserveCount > 10000 ? 10000
+                                        : this.ammoReserveCount)
+                                .append(new TranslatableComponent(
+                                        "" + (this.ammoReserveCount > 10000 ? 9999
+                                                : this.ammoReserveCount)))
+                                .withStyle(ChatFormatting.GRAY);
                     }
 
                     stack.scale(counterSize, counterSize, counterSize);
                     stack.pushPose();
                     {
                         stack.translate(-21.15, 0, 0);
-                        drawString(stack, Minecraft.getInstance().font, currentAmmo, 0, 0,
-                                0xffffff); // Gun ammo
+                        GuiComponent.drawString(stack, Minecraft.getInstance().font, currentAmmo, 0,
+                                0, 0xffffff); // Gun ammo
                     }
                     stack.popPose();
 
@@ -486,8 +493,8 @@ public class HUDRenderingHandler extends GuiComponent {
                     {
                         stack.scale(0.7f, 0.7f, 0.7f);
                         stack.translate((3.7), (3.4), 0);
-                        drawString(stack, Minecraft.getInstance().font, reserveAmmo, 0, 0,
-                                0xffffff); // Reserve ammo
+                        GuiComponent.drawString(stack, Minecraft.getInstance().font, reserveAmmo, 0,
+                                0, 0xffffff); // Reserve ammo
                     }
                     stack.popPose();
                 }
@@ -497,17 +504,15 @@ public class HUDRenderingHandler extends GuiComponent {
 
         // ARMOR
         if (Config.CLIENT.weaponGUI.weaponAmmoCounter.showWeaponAmmoCounter.get()) {
-            ItemStack rig = ((PlayerWithSynData) player).getRig();
+            final ItemStack rig = ((PlayerWithSynData) player).getRig();
             if (!rig.isEmpty()) {
-                ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+                final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
                 stack.pushPose();
                 {
-                    MultiBufferSource bufferSource =
-                            Minecraft.getInstance().renderBuffers().bufferSource();
-                    float iconAnchorX = (anchorPointX - (counterSize * 32) / 2)
+                    final float iconAnchorX = (anchorPointX - (counterSize * 32) / 2)
                             + (-Config.CLIENT.weaponGUI.weaponAmmoCounter.x.get().floatValue())
                             + 38;
-                    float iconAnchorY = (anchorPointY - 3.5f
+                    final float iconAnchorY = (anchorPointY - 3.5f
                             + (-Config.CLIENT.weaponGUI.weaponAmmoCounter.y.get().floatValue()));
                     itemRenderer.renderGuiItem(rig, (int) iconAnchorX, (int) iconAnchorY);
                 }
@@ -528,7 +533,7 @@ public class HUDRenderingHandler extends GuiComponent {
 
             stack.translate(-16.25 - 7.3, 0.15 + 1.6, 0);
             stack.scale(3.05F, 0.028F, 0); // *21F
-            RenderSystem.setShaderTexture(0, RELOAD_ICONS[0]); // Future options to render bar types
+            RenderSystem.setShaderTexture(0, HUDRenderingHandler.RELOAD_ICONS[0]); // Future options to render bar types
 
             Matrix4f matrix = stack.last().pose();
             buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
@@ -572,7 +577,7 @@ public class HUDRenderingHandler extends GuiComponent {
                 stack.translate(-16.25 - 7.3, 7.25, 0);
                 stack.scale(3.05F * (1 - ArmorInteractionHandler.get().getRepairProgress(player)),
                         0.1F, 0); // *21F
-                RenderSystem.setShaderTexture(0, RELOAD_ICONS[0]); // Future options to render bar types
+                RenderSystem.setShaderTexture(0, HUDRenderingHandler.RELOAD_ICONS[0]); // Future options to render bar types
 
                 matrix = stack.last().pose();
                 buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
@@ -588,7 +593,7 @@ public class HUDRenderingHandler extends GuiComponent {
             stack.popPose();
 
             if (!rig.isEmpty()) {
-                float blackBarAlpha = 0.325F;
+                final float blackBarAlpha = 0.325F;
                 // var rigData = ((ArmorRigItem) rig.getItem()).getRig();
                 // RENDER BACKGROUND FOR ARMOR HEALTH
                 stack.pushPose();
@@ -635,7 +640,7 @@ public class HUDRenderingHandler extends GuiComponent {
                     stack.translate(-ReloadBarSize, -ReloadBarSize, 0);
 
                     stack.translate(-16.25 - 5.35, 4.2, 0);
-                    float healthPercentage = WearableHelper.currentDurabilityPercentage(rig);
+                    final float healthPercentage = WearableHelper.currentDurabilityPercentage(rig);
                     stack.scale(2.925F * healthPercentage, 0.16F, 0);
 
                     matrix = stack.last().pose();
@@ -701,13 +706,14 @@ public class HUDRenderingHandler extends GuiComponent {
      * }
      */
 
-    private static MutableComponent byPaddingZeros(int number) {
-        String text = String.format("%0" + (byPaddingZerosCount(number) + 1) + "d", 1);
+    private static MutableComponent byPaddingZeros(final int number) {
+        String text = String
+                .format("%0" + (HUDRenderingHandler.byPaddingZerosCount(number) + 1) + "d", 1);
         text = text.substring(0, text.length() - 1);
         return new TranslatableComponent(text).withStyle(ChatFormatting.GRAY);
     }
 
-    private static int byPaddingZerosCount(int length) {
+    private static int byPaddingZerosCount(final int length) {
         if (length < 10)
             return 2;
         if (length < 100)

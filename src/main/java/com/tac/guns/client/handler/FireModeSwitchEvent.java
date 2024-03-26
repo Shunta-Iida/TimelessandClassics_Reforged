@@ -3,8 +3,8 @@ package com.tac.guns.client.handler;
 import com.tac.guns.client.Keys;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageFireMode;
+
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.settings.KeyConflictContext;
 
 /**
  * @author: ClumsyAlien
@@ -15,10 +15,10 @@ public class FireModeSwitchEvent {
     // TODO: remove this class maybe? Its function has been replaced by callback
     @Deprecated
     public static FireModeSwitchEvent get() {
-        if (instance == null) {
-            instance = new FireModeSwitchEvent();
+        if (FireModeSwitchEvent.instance == null) {
+            FireModeSwitchEvent.instance = new FireModeSwitchEvent();
         }
-        return instance;
+        return FireModeSwitchEvent.instance;
     }
 
     private FireModeSwitchEvent() {

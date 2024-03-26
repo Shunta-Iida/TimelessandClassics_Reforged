@@ -303,7 +303,8 @@ public final class GltfModelV2 implements GltfModel {
         final List<BufferView> bufferViews = Optionals.of(this.gltf.getBufferViews());
         for (int i = 0; i < bufferViews.size(); i++) {
             final BufferView bufferView = bufferViews.get(i);
-            final DefaultBufferViewModel bufferViewModel = GltfModelV2.createBufferViewModel(bufferView);
+            final DefaultBufferViewModel bufferViewModel =
+                    GltfModelV2.createBufferViewModel(bufferView);
             this.bufferViewModels.add(bufferViewModel);
         }
     }
@@ -446,7 +447,8 @@ public final class GltfModelV2 implements GltfModel {
         if (bufferViewIndex != null) {
             // When there is a BufferView referenced from the accessor, then
             // the corresponding BufferViewModel may be assigned directly
-            final DefaultBufferViewModel bufferViewModel = this.bufferViewModels.get(bufferViewIndex);
+            final DefaultBufferViewModel bufferViewModel =
+                    this.bufferViewModels.get(bufferViewIndex);
             accessorModel.setBufferViewModel(bufferViewModel);
         } else {
             // When there is no BufferView referenced from the accessor,
@@ -456,7 +458,8 @@ public final class GltfModelV2 implements GltfModel {
             final int byteLength = elementSizeInBytes * count;
             final ByteBuffer bufferData = Buffers.create(byteLength);
             final String uriString = "buffer_for_accessor" + accessorIndex + ".bin";
-            final DefaultBufferViewModel bufferViewModel = GltfModelV2.createBufferViewModel(uriString, bufferData);
+            final DefaultBufferViewModel bufferViewModel =
+                    GltfModelV2.createBufferViewModel(uriString, bufferData);
             accessorModel.setBufferViewModel(bufferViewModel);
         }
 
@@ -490,7 +493,8 @@ public final class GltfModelV2 implements GltfModel {
         final int byteLength = elementSizeInBytes * count;
         final ByteBuffer bufferData = Buffers.create(byteLength);
         final String uriString = "buffer_for_accessor" + accessorIndex + ".bin";
-        final DefaultBufferViewModel denseBufferViewModel = GltfModelV2.createBufferViewModel(uriString, bufferData);
+        final DefaultBufferViewModel denseBufferViewModel =
+                GltfModelV2.createBufferViewModel(uriString, bufferData);
         accessorModel.setBufferViewModel(denseBufferViewModel);
         accessorModel.setByteOffset(0);
 
@@ -503,11 +507,13 @@ public final class GltfModelV2 implements GltfModel {
                 GltfModelV2.logger.fine(
                         "Substituting sparse accessor data," + " based on existing buffer view");
 
-                final DefaultBufferViewModel baseBufferViewModel = this.bufferViewModels.get(bufferViewIndex);
+                final DefaultBufferViewModel baseBufferViewModel =
+                        this.bufferViewModels.get(bufferViewIndex);
                 final ByteBuffer baseBufferViewData = baseBufferViewModel.getBufferViewData();
                 final AccessorData baseAccessorData =
                         AccessorDatas.create(accessorModel, baseBufferViewData);
-                final AccessorData denseAccessorData = AccessorDatas.create(accessorModel, bufferData);
+                final AccessorData denseAccessorData =
+                        AccessorDatas.create(accessorModel, bufferData);
                 this.substituteSparseAccessorData(accessor, accessorModel, denseAccessorData,
                         baseAccessorData);
             };
@@ -519,7 +525,8 @@ public final class GltfModelV2 implements GltfModel {
                 GltfModelV2.logger.fine(
                         "Substituting sparse accessor data, " + "without an existing buffer view");
 
-                final AccessorData denseAccessorData = AccessorDatas.create(accessorModel, bufferData);
+                final AccessorData denseAccessorData =
+                        AccessorDatas.create(accessorModel, bufferData);
                 this.substituteSparseAccessorData(accessor, accessorModel, denseAccessorData, null);
             };
             denseBufferViewModel.setSparseSubstitutionCallback(sparseSubstitutionCallback);
@@ -568,8 +575,9 @@ public final class GltfModelV2 implements GltfModel {
      *                          sparse data
      *                          substitution takes place
      */
-    private void substituteSparseAccessorData(final Accessor accessor, final AccessorModel accessorModel,
-            final AccessorData denseAccessorData, final AccessorData baseAccessorData) {
+    private void substituteSparseAccessorData(final Accessor accessor,
+            final AccessorModel accessorModel, final AccessorData denseAccessorData,
+            final AccessorData baseAccessorData) {
         final AccessorSparse accessorSparse = accessor.getSparse();
         final int count = accessorSparse.getCount();
 
@@ -579,8 +587,9 @@ public final class GltfModelV2 implements GltfModel {
 
         final AccessorSparseValues accessorSparseValues = accessorSparse.getValues();
         final ElementType elementType = accessorModel.getElementType();
-        final AccessorData sparseValuesAccessorData = this.createSparseValuesAccessorData(accessorSparseValues,
-                accessorModel.getComponentType(), elementType.getNumComponents(), count);
+        final AccessorData sparseValuesAccessorData =
+                this.createSparseValuesAccessorData(accessorSparseValues,
+                        accessorModel.getComponentType(), elementType.getNumComponents(), count);
 
         AccessorSparseUtils.substituteAccessorData(denseAccessorData, baseAccessorData,
                 sparseIndicesAccessorData, sparseValuesAccessorData);
@@ -616,8 +625,9 @@ public final class GltfModelV2 implements GltfModel {
      * @param count                   The count from the {@link AccessorSparse}
      * @return The {@link AccessorData}
      */
-    private AccessorData createSparseValuesAccessorData(final AccessorSparseValues accessorSparseValues,
-            final int componentType, final int numComponentsPerElement, final int count) {
+    private AccessorData createSparseValuesAccessorData(
+            final AccessorSparseValues accessorSparseValues, final int componentType,
+            final int numComponentsPerElement, final int count) {
         final Integer bufferViewIndex = accessorSparseValues.getBufferView();
         final BufferViewModel bufferViewModel = this.bufferViewModels.get(bufferViewIndex);
         final ByteBuffer bufferViewData = bufferViewModel.getBufferViewData();
@@ -651,7 +661,8 @@ public final class GltfModelV2 implements GltfModel {
      * @param animationChannel The {@link AnimationChannel}
      * @return The {@link Channel}
      */
-    private Channel createChannel(final Animation animation, final AnimationChannel animationChannel) {
+    private Channel createChannel(final Animation animation,
+            final AnimationChannel animationChannel) {
         final List<AnimationSampler> samplers = Optionals.of(animation.getSamplers());
 
         final int samplerIndex = animationChannel.getSampler();
@@ -661,7 +672,8 @@ public final class GltfModelV2 implements GltfModel {
         final DefaultAccessorModel inputAccessorModel = this.accessorModels.get(inputAccessorIndex);
 
         final int outputAccessorIndex = animationSampler.getOutput();
-        final DefaultAccessorModel outputAccessorModel = this.accessorModels.get(outputAccessorIndex);
+        final DefaultAccessorModel outputAccessorModel =
+                this.accessorModels.get(outputAccessorIndex);
 
         final String interpolationString = animationSampler.getInterpolation();
         final Interpolation interpolation = interpolationString == null ? Interpolation.LINEAR
@@ -752,7 +764,8 @@ public final class GltfModelV2 implements GltfModel {
 
             final List<MeshPrimitive> primitives = Optionals.of(mesh.getPrimitives());
             for (final MeshPrimitive meshPrimitive : primitives) {
-                final MeshPrimitiveModel meshPrimitiveModel = this.createMeshPrimitiveModel(meshPrimitive);
+                final MeshPrimitiveModel meshPrimitiveModel =
+                        this.createMeshPrimitiveModel(meshPrimitive);
                 meshModel.addMeshPrimitiveModel(meshPrimitiveModel);
             }
         }
@@ -888,7 +901,8 @@ public final class GltfModelV2 implements GltfModel {
             }
 
             final Integer inverseBindMatricesIndex = skin.getInverseBindMatrices();
-            final DefaultAccessorModel inverseBindMatrices = this.accessorModels.get(inverseBindMatricesIndex);
+            final DefaultAccessorModel inverseBindMatrices =
+                    this.accessorModels.get(inverseBindMatricesIndex);
             skinModel.setInverseBindMatrices(inverseBindMatrices);
         }
     }
@@ -1019,7 +1033,8 @@ public final class GltfModelV2 implements GltfModel {
      * @param meshModel The {@link MeshModel}
      * @param numJoints The number of joints
      */
-    private void instantiateMaterialModels(final Mesh mesh, final MeshModel meshModel, final int numJoints) {
+    private void instantiateMaterialModels(final Mesh mesh, final MeshModel meshModel,
+            final int numJoints) {
         final List<MeshPrimitive> meshPrimitives = mesh.getPrimitives();
         final List<MeshPrimitiveModel> meshPrimitiveModels = meshModel.getMeshPrimitiveModels();
 
