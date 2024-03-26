@@ -1,11 +1,11 @@
 package com.tac.guns.extra_events;
 
+import org.apache.logging.log4j.Level;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.event.LevelUpEvent;
 import com.tac.guns.init.ModSounds;
-import com.tac.guns.item.transition.M1GunItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.VersionChecker;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.Level;
 
 /**
  * Author: ClumsyAlien
@@ -56,8 +55,8 @@ public class TacEventListeners {
             if (!confirmed) {
                 if (status.status() == VersionChecker.Status.OUTDATED
                         || status.status() == VersionChecker.Status.BETA_OUTDATED) {
-                    ((Player) e.getEntity()).displayClientMessage(
-                            new TranslatableComponent("updateCheck.tac", status.target(), status.url()), false);
+                    ((Player) e.getEntity()).displayClientMessage(new TranslatableComponent(
+                            "updateCheck.tac", status.target(), status.url()), false);
                     confirmed = true;
                 }
             }
@@ -72,7 +71,8 @@ public class TacEventListeners {
     public void onPartialLevel(LevelUpEvent.Post event) {
         Player player = event.getPlayer();
         event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
-                ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup")),
+                ForgeRegistries.SOUND_EVENTS
+                        .getValue(new ResourceLocation("entity.experience_orb.pickup")),
                 SoundSource.PLAYERS, 4.0F, 1.0F);
     }
 
@@ -82,13 +82,12 @@ public class TacEventListeners {
     public static void postShoot(GunFireEvent.Post event) {
         Player player = event.getPlayer();
         ItemStack heldItem = player.getMainHandItem();
-        if (!(heldItem.getItem() instanceof M1GunItem))
-            return;
         CompoundTag tag = heldItem.getTag();
         if (tag != null) {
             if (tag.getInt("AmmoCount") == 1)
                 event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
-                        ModSounds.M1_PING.get()/* .GARAND_PING.get() */, SoundSource.MASTER, 3.0F, 1.0F);
+                        ModSounds.M1_PING.get()/* .GARAND_PING.get() */, SoundSource.MASTER, 3.0F,
+                        1.0F);
         }
     }
 
