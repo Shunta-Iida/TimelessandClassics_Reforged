@@ -1,7 +1,6 @@
 package com.tac.guns.enchantment;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -13,7 +12,7 @@ public class LightweightEnchantment extends GunEnchantment {
     }
 
     @Override
-    public int getMinCost(int level) {
+    public int getMinCost(final int level) {
         return 15;
     }
 
@@ -23,12 +22,7 @@ public class LightweightEnchantment extends GunEnchantment {
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public int getMaxCost(int level) {
+    public int getMaxCost(final int level) {
         return this.getMinCost(level) + 20;
     }
 }
