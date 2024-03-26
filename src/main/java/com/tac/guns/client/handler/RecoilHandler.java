@@ -59,8 +59,7 @@ public class RecoilHandler {
 
     private final int recoilDuration = 200; // 0.20s
 
-    private RecoilHandler() {
-    }
+    private RecoilHandler() {}
 
     @SubscribeEvent
     public void preShoot(GunFireEvent.Pre event) {
@@ -96,12 +95,13 @@ public class RecoilHandler {
 
         float horizontalRandomAmount = this.random.nextFloat() * (1.22f - 0.75f) + 0.75f;
 
-        float horizontalRecoilModifier = 1.0F - GunModifierHelper.getHorizontalRecoilModifier(heldItem);
+        float horizontalRecoilModifier =
+                1.0F - GunModifierHelper.getHorizontalRecoilModifier(heldItem);
         horizontalRecoilModifier *= this.getAdsRecoilReduction(modifiedGun);
         horizontalRecoilModifier *= GunEnchantmentHelper.getBufferedRecoil(heldItem);
         horizontalRecoilModifier *= horizontalRandomAmount;
-        horizontalCameraRecoil = (modifiedGun.getGeneral().getHorizontalRecoilAngle() * horizontalRecoilModifier
-                * 0.75F);
+        horizontalCameraRecoil = (modifiedGun.getGeneral().getHorizontalRecoilAngle()
+                * horizontalRecoilModifier * 0.75F);
         horizontalProgressCameraRecoil = 0F;
 
         timer = recoilDuration;
@@ -130,7 +130,8 @@ public class RecoilHandler {
             return;
 
         float cameraRecoilModifer = mc.player.getMainHandItem().getItem() instanceof GunItem
-                ? ((GunItem) mc.player.getMainHandItem().getItem()).getGun().getGeneral().getCameraRecoilModifier()
+                ? ((GunItem) mc.player.getMainHandItem().getItem()).getGun().getGeneral()
+                        .getCameraRecoilModifier()
                 : 1.0F;
 
         float recoilAmount = this.cameraRecoil * mc.getDeltaFrameTime() * 0.2F;// 0.25F;//0.1F;
@@ -139,31 +140,38 @@ public class RecoilHandler {
         float endProgress = ((this.progressCameraRecoil + recoilAmount) / this.cameraRecoil);
 
         float progressForward = mc.player.getMainHandItem().getItem() instanceof GunItem
-                ? ((GunItem) mc.player.getMainHandItem().getItem()).getGun().getGeneral().getRecoilDuration() *
-                        GunModifierHelper.getRecoilSmootheningTime(mc.player.getMainHandItem())
+                ? ((GunItem) mc.player.getMainHandItem().getItem()).getGun().getGeneral()
+                        .getRecoilDuration()
+                        * GunModifierHelper.getRecoilSmootheningTime(mc.player.getMainHandItem())
                 : 0.25F;
 
         float delay = 0.10F;
         float slow = 1.75F;
         if (startProgress < progressForward - delay) // && startProgress > 0.125F
         {
-            mc.player.setXRot(mc.player.getXRot()
-                    - ((endProgress - startProgress) / progressForward) * this.cameraRecoil / cameraRecoilModifer);
+            mc.player
+                    .setXRot(mc.player.getXRot() - ((endProgress - startProgress) / progressForward)
+                            * this.cameraRecoil / cameraRecoilModifer);
             if (recoilRand == 1)
-                mc.player.setYRot(mc.player.getYRot() - ((endProgress - startProgress) / progressForward)
-                        * this.horizontalCameraRecoil / cameraRecoilModifer);
+                mc.player.setYRot(
+                        mc.player.getYRot() - ((endProgress - startProgress) / progressForward)
+                                * this.horizontalCameraRecoil / cameraRecoilModifer);
             else
-                mc.player.setYRot(mc.player.getYRot() - ((endProgress - startProgress) / progressForward)
-                        * -this.horizontalCameraRecoil / cameraRecoilModifer);
+                mc.player.setYRot(
+                        mc.player.getYRot() - ((endProgress - startProgress) / progressForward)
+                                * -this.horizontalCameraRecoil / cameraRecoilModifer);
         } else if (startProgress > progressForward) {
-            mc.player.setXRot((float) (mc.player.getXRot() + ((endProgress - startProgress) / (1 - progressForward))
-                    * this.cameraRecoil / (cameraRecoilModifer * slow))); // 0.75F
+            mc.player.setXRot((float) (mc.player.getXRot()
+                    + ((endProgress - startProgress) / (1 - progressForward)) * this.cameraRecoil
+                            / (cameraRecoilModifer * slow))); // 0.75F
             if (recoilRand == 1)
-                mc.player.setYRot((float) (mc.player.getYRot() - ((endProgress - startProgress) / (1 - progressForward))
-                        * -this.horizontalCameraRecoil / (cameraRecoilModifer * slow)));
+                mc.player.setYRot((float) (mc.player.getYRot()
+                        - ((endProgress - startProgress) / (1 - progressForward))
+                                * -this.horizontalCameraRecoil / (cameraRecoilModifer * slow)));
             else
-                mc.player.setYRot((float) (mc.player.getYRot() - ((endProgress - startProgress) / (1 - progressForward))
-                        * this.horizontalCameraRecoil / (cameraRecoilModifer * slow)));
+                mc.player.setYRot((float) (mc.player.getYRot()
+                        - ((endProgress - startProgress) / (1 - progressForward))
+                                * this.horizontalCameraRecoil / (cameraRecoilModifer * slow)));
         }
 
         this.progressCameraRecoil += recoilAmount;
@@ -207,11 +215,13 @@ public class RecoilHandler {
          */
         if (cooldown >= recoilTimeOffset)// || tooFast) // Actually have any visual recoil at Rate 1???
         {
-            float amount = 1F * ((1.0F - cooldown) / (1 - modifiedGun.getGeneral().getWeaponRecoilOffset()));
+            float amount = 1F
+                    * ((1.0F - cooldown) / (1 - modifiedGun.getGeneral().getWeaponRecoilOffset()));
             this.gunRecoilNormal = 1 - (--amount);
         } else {
             float amount = ((cooldown) / modifiedGun.getGeneral().getWeaponRecoilOffset());
-            this.gunRecoilNormal = amount < 0.5 ? 2 * amount * amount : -1 + (4 - 2 * amount) * amount;
+            this.gunRecoilNormal =
+                    amount < 0.5 ? 2 * amount * amount : -1 + (4 - 2 * amount) * amount;
         }
 
         this.gunRecoilAngle = modifiedGun.getGeneral().getRecoilAngle();
@@ -232,7 +242,8 @@ public class RecoilHandler {
     }
 
     public double getAdsRecoilReduction(Gun gun) {
-        return 1.0 - gun.getGeneral().getRecoilAdsReduction() * AimingHandler.get().getNormalisedAdsProgress();
+        return 1.0 - gun.getGeneral().getRecoilAdsReduction()
+                * AimingHandler.get().getNormalisedAdsProgress();
     }
 
     public double getGunRecoilNormal() {

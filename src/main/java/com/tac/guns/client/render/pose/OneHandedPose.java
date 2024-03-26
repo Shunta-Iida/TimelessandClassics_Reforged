@@ -23,7 +23,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class OneHandedPose implements IHeldAnimation {
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
+    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
+            float aimProgress) {
         boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                 ? hand == InteractionHand.MAIN_HAND
                 : hand == InteractionHand.OFF_HAND;
@@ -33,8 +34,8 @@ public class OneHandedPose implements IHeldAnimation {
     }
 
     @Override
-    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
-            MultiBufferSource buffer, int light, float partialTicks) {
+    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {
         matrixStack.translate(0, 0, -1);
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
@@ -52,8 +53,8 @@ public class OneHandedPose implements IHeldAnimation {
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
-            float partialTicks) {
+    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
+            PoseStack matrixStack, float partialTicks) {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180F));
 
@@ -67,7 +68,8 @@ public class OneHandedPose implements IHeldAnimation {
 
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(90F));
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(75F));
-        matrixStack.mulPose(Vector3f.ZP.rotationDegrees((float) (Math.toDegrees(model.rightLeg.xRot) / 10F)));
+        matrixStack.mulPose(
+                Vector3f.ZP.rotationDegrees((float) (Math.toDegrees(model.rightLeg.xRot) / 10F)));
         matrixStack.scale(0.5F, 0.5F, 0.5F);
 
         return true;

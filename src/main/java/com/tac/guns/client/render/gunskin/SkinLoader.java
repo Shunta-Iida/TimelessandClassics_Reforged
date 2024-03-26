@@ -67,7 +67,8 @@ public class SkinLoader {
 
     public DefaultSkin loadDefaultSkin() {
         DefaultSkin skin = new DefaultSkin(this.gunItemRegistryName);
-        String mainLoc = this.gunItemRegistryName.getNamespace() + ":special/" + getGunRegistryName().getPath();
+        String mainLoc = this.gunItemRegistryName.getNamespace() + ":special/"
+                + getGunRegistryName().getPath();
         for (GunComponent key : this.components) {
             tryLoadComponent(skin, mainLoc, key);
         }
@@ -79,8 +80,9 @@ public class SkinLoader {
             skin.setIcon(iconLoc);
         }
 
-        ResourceLocation miniIconLoc = ResourceLocation.tryParse(this.gunItemRegistryName.getNamespace()
-                + ":textures/gui/icon/mini/" + this.gunItemRegistryName.getPath() + ".png");
+        ResourceLocation miniIconLoc =
+                ResourceLocation.tryParse(this.gunItemRegistryName.getNamespace()
+                        + ":textures/gui/icon/mini/" + this.gunItemRegistryName.getPath() + ".png");
         if (iconLoc != null && Minecraft.getInstance().getResourceManager().hasResource(iconLoc)) {
             skin.setMiniIcon(miniIconLoc);
         }
@@ -120,8 +122,8 @@ public class SkinLoader {
             skin.setIcon(iconLocation);
             return true;
         } else {
-            ResourceLocation tl = ResourceLocation
-                    .tryParse(iconLocation.getNamespace() + ":textures/" + iconLocation.getPath() + ".png");
+            ResourceLocation tl = ResourceLocation.tryParse(
+                    iconLocation.getNamespace() + ":textures/" + iconLocation.getPath() + ".png");
             if (tl != null && Minecraft.getInstance().getResourceManager().hasResource(tl)) {
                 skin.setIcon(tl);
                 return true;
@@ -136,8 +138,8 @@ public class SkinLoader {
             skin.setIcon(iconLocation);
             return true;
         } else {
-            ResourceLocation tl = ResourceLocation
-                    .tryParse(iconLocation.getNamespace() + ":textures/" + iconLocation.getPath() + ".png");
+            ResourceLocation tl = ResourceLocation.tryParse(
+                    iconLocation.getNamespace() + ":textures/" + iconLocation.getPath() + ".png");
             if (tl != null && Minecraft.getInstance().getResourceManager().hasResource(tl)) {
                 skin.setMiniIcon(tl);
                 return true;
@@ -147,7 +149,8 @@ public class SkinLoader {
         }
     }
 
-    private static void tryLoadComponent(GunSkin skin, Map<String, String> models, GunComponent component) {
+    private static void tryLoadComponent(GunSkin skin, Map<String, String> models,
+            GunComponent component) {
         if (models.containsKey(component.key)) {
             ResourceLocation loc = ResourceLocation.tryParse(models.get(component.key));
             if (loc != null) {
@@ -158,10 +161,12 @@ public class SkinLoader {
         }
     }
 
-    private static void tryLoadComponent(GunSkin skin, String mainLocation, GunComponent component) {
+    private static void tryLoadComponent(GunSkin skin, String mainLocation,
+            GunComponent component) {
         ResourceLocation loc = component.getModelLocation(mainLocation);
         if (loc != null) {
-            ResourceLocation test = new ResourceLocation(loc.getNamespace(), "models/" + loc.getPath() + ".json");
+            ResourceLocation test =
+                    new ResourceLocation(loc.getNamespace(), "models/" + loc.getPath() + ".json");
             if (Minecraft.getInstance().getResourceManager().hasResource(test)) {
                 CacheableModel mainModel = new CacheableModel(loc);
                 ForgeModelBakery.addSpecialModel(loc);
@@ -178,15 +183,17 @@ public class SkinLoader {
      * @return the skin, or return null if the default skin is null.
      * @see net.minecraftforge.client.model.ForgeModelBakery
      */
-    public GunSkin loadTextureOnlySkin(ResourceLocation skinName, List<Pair<String, ResourceLocation>> textures) {
+    public GunSkin loadTextureOnlySkin(ResourceLocation skinName,
+            List<Pair<String, ResourceLocation>> textures) {
         if (defaultSkin == null)
             return null;
 
         GunSkin skin = new GunSkin(skinName, this.getGunRegistryName());
         // create unbaked models for every component of this gun.
         for (GunComponent component : this.components) {
-            ResourceLocation parent = component.getModelLocation(
-                    this.gunItemRegistryName.getNamespace() + ":special/" + this.gunItemRegistryName.getPath());
+            ResourceLocation parent =
+                    component.getModelLocation(this.gunItemRegistryName.getNamespace() + ":special/"
+                            + this.gunItemRegistryName.getPath());
             // Copy one because we need to change the texture
             TextureModel componentModel = TextureModel.tryCreateCopy(parent);
             if (componentModel != null) {
@@ -194,8 +201,8 @@ public class SkinLoader {
                 componentModel.applyTextures(textures);
 
                 // Used as an identifier for component models with changed textures.
-                ResourceLocation componentLoc = component.getModelLocation(skinName.getNamespace() +
-                        ":gunskin/generated/" + this.gunItemRegistryName.getNamespace()
+                ResourceLocation componentLoc = component.getModelLocation(skinName.getNamespace()
+                        + ":gunskin/generated/" + this.gunItemRegistryName.getNamespace()
                         + this.gunItemRegistryName.getPath() + "_" + skinName.getPath());
 
                 // Add the component model into bakery's cache, so that it will be baked and
@@ -210,8 +217,8 @@ public class SkinLoader {
     }
 
     public static class TextureModel {
-        public static final ResourceLocation atlasLocation = new ResourceLocation(
-                "minecraft:textures/atlas/blocks.png");
+        public static final ResourceLocation atlasLocation =
+                new ResourceLocation("minecraft:textures/atlas/blocks.png");
         private final BlockModel unbaked;
 
         private TextureModel(BlockModel model) {
@@ -221,7 +228,8 @@ public class SkinLoader {
         public static TextureModel tryCreateCopy(ResourceLocation parentLocation) {
             TextureModel textureModel = null;
             if (ForgeModelBakery.instance() != null) {
-                BlockModel parent = (BlockModel) ForgeModelBakery.instance().getModel(parentLocation);
+                BlockModel parent =
+                        (BlockModel) ForgeModelBakery.instance().getModel(parentLocation);
 
                 if (parent == missingModel)
                     return null;
@@ -229,8 +237,8 @@ public class SkinLoader {
                 List<BlockElement> list = Lists.newArrayList();
                 Map<String, Either<Material, String>> map = Maps.newHashMap();
 
-                BlockModel model = new BlockModel(parentLocation, list, map,
-                        true, null, parent.getTransforms(), parent.getOverrides());
+                BlockModel model = new BlockModel(parentLocation, list, map, true, null,
+                        parent.getTransforms(), parent.getOverrides());
 
                 textureModel = new TextureModel(model);
             }
@@ -242,7 +250,8 @@ public class SkinLoader {
         }
 
         public void applyTexture(String key, ResourceLocation textureLocation) {
-            this.unbaked.textureMap.put(key, Either.left(new Material(atlasLocation, textureLocation)));
+            this.unbaked.textureMap.put(key,
+                    Either.left(new Material(atlasLocation, textureLocation)));
         }
 
         public BlockModel getModel() {

@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for glTF.schema.json
  * 
  */
-public class GlTF
-        extends GlTFProperty {
+public class GlTF extends GlTFProperty {
 
     /**
      * Names of glTF extensions used in this asset. (optional)<br>
@@ -521,7 +519,8 @@ public class GlTF
      */
     public void setAsset(Asset asset) {
         if (asset == null) {
-            throw new NullPointerException((("Invalid value for asset: " + asset) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for asset: " + asset) + ", may not be null"));
         }
         this.asset = asset;
     }

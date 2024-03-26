@@ -18,7 +18,8 @@ import javax.annotation.Nullable;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class WorkbenchRecipeSerializer extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>>
+public class WorkbenchRecipeSerializer
+        extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>>
         implements RecipeSerializer<WorkbenchRecipe> {
     @Override
     public WorkbenchRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

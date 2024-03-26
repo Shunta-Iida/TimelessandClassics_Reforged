@@ -38,23 +38,25 @@ public class p90_animation extends SkinnedGunModel {
             "textures/items/timeless_scopes/dot_reticle.png");
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         P90AnimationController controller = P90AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), P90AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    P90AnimationController.INDEX_BODY, transformType, matrices);
             if (Gun.getScope(stack) == null) {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.SCOPE_DEFAULT), stack, matrices,
-                        renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.SCOPE_DEFAULT),
+                        stack, matrices, renderBuffer, light, overlay);
 
                 // scope dot render
                 matrices.translate(0, 0.017, 0);
                 if (transformType.firstPerson() && entity.equals(Minecraft.getInstance().player)) {
                     ScopeData scopeData = ScopeEditor.get().getScopeData() == null
-                            || ScopeEditor.get().getScopeData().getTagName() == "item.tac.p90" ? new ScopeData("")
+                            || ScopeEditor.get().getScopeData().getTagName() == "item.tac.p90"
+                                    ? new ScopeData("")
                                     : ScopeEditor.get().getScopeData();
                     if (entity.getMainArm() == HumanoidArm.LEFT) {
                         matrices.scale(-1, 1, 1);
@@ -67,8 +69,8 @@ public class p90_animation extends SkinnedGunModel {
                     Minecraft mc = Minecraft.getInstance();
                     Window window = mc.getWindow();
 
-                    float texU = ((window.getWidth() - window.getHeight() + window.getHeight() * crop * 2.0F) / 2.0F)
-                            / window.getWidth();
+                    float texU = ((window.getWidth() - window.getHeight()
+                            + window.getHeight() * crop * 2.0F) / 2.0F) / window.getWidth();
 
                     // matrixStack.rotate(Vector3f.ZP.rotationDegrees(-GunRenderingHandler.get().immersiveWeaponRoll));
                     matrices.pushPose();
@@ -82,13 +84,15 @@ public class p90_animation extends SkinnedGunModel {
                                         ? (3.915 - 3.605 + scopeData.getDrZZoomMod()) * 0.0625
                                         : (3.075 - 3.605 + scopeData.getDrZZoomMod()) * 0.0625); // 3.275
 
-                        float color = (float) AimingHandler.get().getNormalisedAdsProgress() * 0.8F + 0.2F;
+                        float color = (float) AimingHandler.get().getNormalisedAdsProgress() * 0.8F
+                                + 0.2F;
 
                         VertexConsumer builder;
 
                         matrices.translate(0.002, -0.21, -0.54);
 
-                        double invertProgress = (1.0 - AimingHandler.get().getNormalisedAdsProgress());
+                        double invertProgress =
+                                (1.0 - AimingHandler.get().getNormalisedAdsProgress());
                         matrices.translate(-0.04 * invertProgress, 0.01 * invertProgress, 0);
 
                         double scale = 8.0;
@@ -109,44 +113,53 @@ public class p90_animation extends SkinnedGunModel {
                         GunRenderingHandler.get().applyBobbingTransforms(matrices, true);
                         matrices.scale(6f, 6f, 6f);
                         // matrixStack.translate(-0.00335715, -0.0039355, 0.0000);
-                        matrices.translate((-0.00335715 - 0.00375 - 0.00428) + scopeData.getReticleXMod(),
+                        matrices.translate(
+                                (-0.00335715 - 0.00375 - 0.00428) + scopeData.getReticleXMod(),
                                 (-0.0035055 - 0.00315) + scopeData.getReticleYMod(),
                                 0.0000 + scopeData.getReticleZMod());
 
-                        builder = renderBuffer.getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
+                        builder = renderBuffer
+                                .getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
                         // Walking bobbing
                         boolean aimed = false;
                         /* The new controlled bobbing */
                         if (AimingHandler.get().isAiming())
                             aimed = true;
 
-                        GunRenderingHandler.get().applyDelayedSwayTransforms(matrices, Minecraft.getInstance().player,
-                                partialTicks, -0.075f);
+                        GunRenderingHandler.get().applyDelayedSwayTransforms(matrices,
+                                Minecraft.getInstance().player, partialTicks, -0.075f);
                         GunRenderingHandler.get().applyBobbingTransforms(matrices, true, 0.1f);
                         GunRenderingHandler.get().applyNoiseMovementTransform(matrices, -0.1f);
-                        GunRenderingHandler.get().applyJumpingTransforms(matrices, partialTicks, -0.05f);
+                        GunRenderingHandler.get().applyJumpingTransforms(matrices, partialTicks,
+                                -0.05f);
 
                         matrices.translate(0, 0, -0.35);
-                        matrices.mulPose(Vector3f.YP.rotationDegrees(GunRenderingHandler.get().newSwayYaw * 0.15f));
-                        matrices.mulPose(Vector3f.ZN.rotationDegrees(GunRenderingHandler.get().newSwayPitch * 0.15f));
-                        matrices.mulPose(Vector3f.XP.rotationDegrees(
-                                (GunRenderingHandler.get().recoilLift * GunRenderingHandler.get().recoilReduction)
-                                        * 0.25F));
+                        matrices.mulPose(Vector3f.YP
+                                .rotationDegrees(GunRenderingHandler.get().newSwayYaw * 0.15f));
+                        matrices.mulPose(Vector3f.ZN
+                                .rotationDegrees(GunRenderingHandler.get().newSwayPitch * 0.15f));
+                        matrices.mulPose(
+                                Vector3f.XP.rotationDegrees((GunRenderingHandler.get().recoilLift
+                                        * GunRenderingHandler.get().recoilReduction) * 0.25F));
                         matrices.translate(0, 0, 0.35);
 
                         int lightmapValue = 15728880;
                         // alpha *= 0.6;
-                        builder.vertex(matrix, 0, (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
-                                .uv(0.0F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue)
+                        builder.vertex(matrix, 0, (float) (reticleSize / scale), 0)
+                                .color(red, green, blue, alpha).uv(0.0F, 0.9375F)
+                                .overlayCoords(overlay).uv2(lightmapValue)
                                 .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                        builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F)
-                                .overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                        builder.vertex(matrix, (float) (reticleSize / scale), 0, 0).color(red, green, blue, alpha)
-                                .uv(0.9375F, 0.0F).overlayCoords(overlay).uv2(lightmapValue)
+                        builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha)
+                                .uv(0.0F, 0.0F).overlayCoords(overlay).uv2(lightmapValue)
                                 .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                        builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale), 0)
-                                .color(red, green, blue, alpha).uv(0.9375F, 0.9375F).overlayCoords(overlay)
-                                .uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                        builder.vertex(matrix, (float) (reticleSize / scale), 0, 0)
+                                .color(red, green, blue, alpha).uv(0.9375F, 0.0F)
+                                .overlayCoords(overlay).uv2(lightmapValue)
+                                .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                        builder.vertex(matrix, (float) (reticleSize / scale),
+                                (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
+                                .uv(0.9375F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue)
+                                .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                     }
                     matrices.popPose();
                 }
@@ -156,38 +169,42 @@ public class p90_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), P90AnimationController.INDEX_BODY,
-                    transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.BASIC_LASER
-                    .orElse(ItemStack.EMPTY.getItem())) {
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    P90AnimationController.INDEX_BODY, transformType, matrices);
+            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+                    .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, light, overlay);
-                if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
+                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        renderBuffer, light, overlay);
+                if (transformType.firstPerson()
+                        || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                     RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, 15728880,
-                            overlay); // 15728880 For fixed max light
+                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                            renderBuffer, 15728880, overlay); // 15728880 For fixed max light
             }
 
             renderBarrelWithDefault(stack, matrices, renderBuffer, light, overlay, skin);
 
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), P90AnimationController.INDEX_MAG,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, MAG), stack, matrices, renderBuffer, light, overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    P90AnimationController.INDEX_MAG, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, MAG), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), P90AnimationController.INDEX_PULL,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.PULL), stack, matrices, renderBuffer, light,
-                    overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    P90AnimationController.INDEX_PULL, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.PULL), stack, matrices,
+                    renderBuffer, light, overlay);
         }
         matrices.popPose();
 

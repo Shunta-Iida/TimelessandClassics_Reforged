@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for camera.schema.json
  * 
  */
-public class Camera
-        extends GlTFChildOfRootProperty {
+public class Camera extends GlTFChildOfRootProperty {
 
     /**
      * An orthographic camera containing properties to create an orthographic
@@ -109,7 +107,8 @@ public class Camera
      */
     public void setType(String type) {
         if (type == null) {
-            throw new NullPointerException((("Invalid value for type: " + type) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for type: " + type) + ", may not be null"));
         }
         if ((!"perspective".equals(type)) && (!"orthographic".equals(type))) {
             throw new IllegalArgumentException(

@@ -85,7 +85,8 @@ public class ArmorInteractionHandler {
                     int loc = -1;
                     for (int i = 0; i < mc.player.getInventory().getContainerSize(); ++i) {
                         ItemStack stack = mc.player.getInventory().getItem(i);
-                        if (!stack.isEmpty() && stack.getItem().getRegistryName().equals(rig.getRepair().getItem())) {
+                        if (!stack.isEmpty() && stack.getItem().getRegistryName()
+                                .equals(rig.getRepair().getItem())) {
                             loc = i;
                         }
                     }
@@ -95,16 +96,21 @@ public class ArmorInteractionHandler {
                         if (!isAnotherPlateRepairing) {
                             float rawPlates = (rig.getRepair().getDurability()
                                     - WearableHelper.GetCurrentDurability(rigStack))
-                                    / (rig.getRepair().getDurability() * rig.getRepair().getQuickRepairability());
-                            this.totalPlatesToRepair = rawPlates > (int) rawPlates ? (int) (rawPlates + 1)
-                                    : (int) rawPlates;
-                            if (this.totalPlatesToRepair > mc.player.getInventory().getItem(loc).getCount())
-                                this.totalPlatesToRepair = mc.player.getInventory().getItem(loc).getCount();
+                                    / (rig.getRepair().getDurability()
+                                            * rig.getRepair().getQuickRepairability());
+                            this.totalPlatesToRepair =
+                                    rawPlates > (int) rawPlates ? (int) (rawPlates + 1)
+                                            : (int) rawPlates;
+                            if (this.totalPlatesToRepair > mc.player.getInventory().getItem(loc)
+                                    .getCount())
+                                this.totalPlatesToRepair =
+                                        mc.player.getInventory().getItem(loc).getCount();
                         }
-                        SyncedEntityData.instance().set(mc.player, ModSyncedDataKeys.QREPAIRING, true);
+                        SyncedEntityData.instance().set(mc.player, ModSyncedDataKeys.QREPAIRING,
+                                true);
                     } else {
-                        GunMod.LOGGER.log(Level.WARN,
-                                rig.getRepair().getItem() + " | Is not found in local player inventory.");
+                        GunMod.LOGGER.log(Level.WARN, rig.getRepair().getItem()
+                                + " | Is not found in local player inventory.");
                         return false;
                     }
                 }
@@ -116,9 +122,9 @@ public class ArmorInteractionHandler {
     public float getRepairProgress(Player player) {
         if (WearableHelper.PlayerWornRig(player).isEmpty())
             return 0;
-        return this.repairTime > 0
-                ? ((float) this.repairTime) / (float) ((ArmorRigItem) WearableHelper.PlayerWornRig(player).getItem())
-                        .getRig().getRepair().getTicksToRepair()
+        return this.repairTime > 0 ? ((float) this.repairTime)
+                / (float) ((ArmorRigItem) WearableHelper.PlayerWornRig(player).getItem()).getRig()
+                        .getRepair().getTicksToRepair()
                 : 1F;
     }
 

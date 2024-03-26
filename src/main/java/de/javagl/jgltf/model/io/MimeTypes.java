@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -88,8 +80,7 @@ public class MimeTypes {
      * @param after  The "after" part
      * @return The string between "before" and "after"
      */
-    private static String getStringBetween(
-            String input, String before, String after) {
+    private static String getStringBetween(String input, String before, String after) {
         int beforeIndex = input.indexOf(before);
         if (beforeIndex < 0) {
             return null;
@@ -114,8 +105,7 @@ public class MimeTypes {
      * @return The image format string
      * @throws IOException If the image format can not be detected
      */
-    private static String guessImageMimeTypeString(ByteBuffer imageData)
-            throws IOException {
+    private static String guessImageMimeTypeString(ByteBuffer imageData) throws IOException {
         ImageReader imageReader = null;
         try {
             imageReader = ImageReaders.findImageReader(imageData);
@@ -166,8 +156,7 @@ public class MimeTypes {
      * @return The image format string, or <code>null</code> if it can not
      *         be detected.
      */
-    public static String guessImageMimeTypeString(
-            String uriString, ByteBuffer imageData) {
+    public static String guessImageMimeTypeString(String uriString, ByteBuffer imageData) {
         if (uriString != null) {
             String imageMimeTypeString = MimeTypes.guessImageMimeTypeString(uriString);
             if (imageMimeTypeString != null) {
@@ -195,8 +184,7 @@ public class MimeTypes {
      * @param mimeTypeString The MIME type string
      * @return The file extension
      */
-    public static String imageFileNameExtensionForMimeTypeString(
-            String mimeTypeString) {
+    public static String imageFileNameExtensionForMimeTypeString(String mimeTypeString) {
         if ("image/jpeg".equals(mimeTypeString)) {
             return "jpg";
         }

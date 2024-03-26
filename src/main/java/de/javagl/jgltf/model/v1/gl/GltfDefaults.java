@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1.gl;
 
@@ -40,28 +32,32 @@ public class GltfDefaults {
     /**
      * An ID for the default vertex {@link Shader}
      */
-    private static final String DEFAULT_VERTEX_SHADER_ID = GltfDefaults.class.getName() + ".DEFAULT_VERTEX_SHADER_ID";
+    private static final String DEFAULT_VERTEX_SHADER_ID =
+            GltfDefaults.class.getName() + ".DEFAULT_VERTEX_SHADER_ID";
 
     /**
      * An ID for the default fragment {@link Shader}
      */
-    private static final String DEFAULT_FRAGMENT_SHADER_ID = GltfDefaults.class.getName()
-            + ".DEFAULT_FRAGMENT_SHADER_ID";
+    private static final String DEFAULT_FRAGMENT_SHADER_ID =
+            GltfDefaults.class.getName() + ".DEFAULT_FRAGMENT_SHADER_ID";
 
     /**
      * An ID for the default {@link Program}
      */
-    private static final String DEFAULT_PROGRAM_ID = GltfDefaults.class.getName() + ".DEFAULT_PROGRAM_ID";
+    private static final String DEFAULT_PROGRAM_ID =
+            GltfDefaults.class.getName() + ".DEFAULT_PROGRAM_ID";
 
     /**
      * An ID for the default {@link Technique}
      */
-    private static final String DEFAULT_TECHNIQUE_ID = GltfDefaults.class.getName() + ".DEFAULT_TECHNIQUE_ID";
+    private static final String DEFAULT_TECHNIQUE_ID =
+            GltfDefaults.class.getName() + ".DEFAULT_TECHNIQUE_ID";
 
     /**
      * An ID for the default {@link Material}
      */
-    private static final String DEFAULT_MATERIAL_ID = GltfDefaults.class.getName() + ".DEFAULT_MATERIAL_ID";
+    private static final String DEFAULT_MATERIAL_ID =
+            GltfDefaults.class.getName() + ".DEFAULT_MATERIAL_ID";
 
     /**
      * The default vertex {@link Shader}
@@ -76,18 +72,20 @@ public class GltfDefaults {
     /**
      * The default {@link Program}
      */
-    private static final Program DEFAULT_PROGRAM = Programs.createDefaultProgram(
-            DEFAULT_VERTEX_SHADER_ID, DEFAULT_FRAGMENT_SHADER_ID);
+    private static final Program DEFAULT_PROGRAM =
+            Programs.createDefaultProgram(GltfDefaults.DEFAULT_VERTEX_SHADER_ID, GltfDefaults.DEFAULT_FRAGMENT_SHADER_ID);
 
     /**
      * The default {@link Technique}
      */
-    private static final Technique DEFAULT_TECHNIQUE = Techniques.createDefaultTechnique(DEFAULT_PROGRAM_ID);
+    private static final Technique DEFAULT_TECHNIQUE =
+            Techniques.createDefaultTechnique(GltfDefaults.DEFAULT_PROGRAM_ID);
 
     /**
      * The default {@link Material}
      */
-    private static final Material DEFAULT_MATERIAL = Materials.createDefaultMaterial(DEFAULT_TECHNIQUE_ID);
+    private static final Material DEFAULT_MATERIAL =
+            Materials.createDefaultMaterial(GltfDefaults.DEFAULT_TECHNIQUE_ID);
 
     /**
      * Returns whether the given ID is the default ID as defined in this class
@@ -95,8 +93,8 @@ public class GltfDefaults {
      * @param id The ID
      * @return Whether the given ID is the default ID
      */
-    public static boolean isDefaultTechniqueId(String id) {
-        return DEFAULT_TECHNIQUE_ID.equals(id);
+    public static boolean isDefaultTechniqueId(final String id) {
+        return GltfDefaults.DEFAULT_TECHNIQUE_ID.equals(id);
     }
 
     /**
@@ -105,8 +103,8 @@ public class GltfDefaults {
      * @param id The ID
      * @return Whether the given ID is the default ID
      */
-    public static boolean isDefaultMaterialId(String id) {
-        return DEFAULT_MATERIAL_ID.equals(id);
+    public static boolean isDefaultMaterialId(final String id) {
+        return GltfDefaults.DEFAULT_MATERIAL_ID.equals(id);
     }
 
     /**
@@ -115,7 +113,7 @@ public class GltfDefaults {
      * @return The {@link Shader}
      */
     static Shader getDefaultVertexShader() {
-        return DEFAULT_VERTEX_SHADER;
+        return GltfDefaults.DEFAULT_VERTEX_SHADER;
     }
 
     /**
@@ -124,7 +122,7 @@ public class GltfDefaults {
      * @return The {@link Shader}
      */
     static Shader getDefaultFragmentShader() {
-        return DEFAULT_FRAGMENT_SHADER;
+        return GltfDefaults.DEFAULT_FRAGMENT_SHADER;
     }
 
     /**
@@ -133,7 +131,7 @@ public class GltfDefaults {
      * @return The {@link Technique}
      */
     static Technique getDefaultTechnique() {
-        return DEFAULT_TECHNIQUE;
+        return GltfDefaults.DEFAULT_TECHNIQUE;
     }
 
     /**
@@ -142,7 +140,7 @@ public class GltfDefaults {
      * @return The {@link Material}
      */
     static Material getDefaultMaterial() {
-        return DEFAULT_MATERIAL;
+        return GltfDefaults.DEFAULT_MATERIAL;
     }
 
     /**

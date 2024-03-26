@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -64,7 +56,7 @@ public final class ProgressInputStream extends FilterInputStream {
      * 
      * @param inputStream The input stream
      */
-    public ProgressInputStream(InputStream inputStream) {
+    public ProgressInputStream(final InputStream inputStream) {
         super(inputStream);
         this.propertyChangeSupport = new PropertyChangeSupport(this);
         this.totalNumBytesReadConsumers = new CopyOnWriteArrayList<LongConsumer>();
@@ -77,7 +69,7 @@ public final class ProgressInputStream extends FilterInputStream {
      * @return The number of bytes read
      */
     long getTotalNumBytesRead() {
-        return totalNumBytesRead;
+        return this.totalNumBytesRead;
     }
 
     /**
@@ -86,8 +78,8 @@ public final class ProgressInputStream extends FilterInputStream {
      * 
      * @param listener The listener to add
      */
-    void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
+    void addPropertyChangeListener(final PropertyChangeListener listener) {
+        this.propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
     /**
@@ -95,8 +87,8 @@ public final class ProgressInputStream extends FilterInputStream {
      * 
      * @param listener The listener to remove
      */
-    void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
+    void removePropertyChangeListener(final PropertyChangeListener listener) {
+        this.propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
     /**
@@ -105,8 +97,8 @@ public final class ProgressInputStream extends FilterInputStream {
      * 
      * @param consumer The consumer
      */
-    public void addTotalNumBytesReadConsumer(LongConsumer consumer) {
-        totalNumBytesReadConsumers.add(consumer);
+    public void addTotalNumBytesReadConsumer(final LongConsumer consumer) {
+        this.totalNumBytesReadConsumers.add(consumer);
     }
 
     /**
@@ -114,40 +106,40 @@ public final class ProgressInputStream extends FilterInputStream {
      * 
      * @param consumer The consumer
      */
-    public void removeTotalNumBytesReadConsumer(LongConsumer consumer) {
-        totalNumBytesReadConsumers.remove(consumer);
+    public void removeTotalNumBytesReadConsumer(final LongConsumer consumer) {
+        this.totalNumBytesReadConsumers.remove(consumer);
     }
 
     @Override
     public int read() throws IOException {
-        int b = super.read();
+        final int b = super.read();
         if (b != -1) {
-            updateProgress(1);
+            this.updateProgress(1);
         }
         return b;
     }
 
     @Override
-    public int read(byte[] b) throws IOException {
-        return read(b, 0, b.length);
+    public int read(final byte[] b) throws IOException {
+        return this.read(b, 0, b.length);
     }
 
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
-        int read = super.read(b, off, len);
+    public int read(final byte[] b, final int off, final int len) throws IOException {
+        final int read = super.read(b, off, len);
         if (read == -1) {
             return -1;
         }
-        return (int) updateProgress(read);
+        return (int) this.updateProgress(read);
     }
 
     @Override
-    public long skip(long n) throws IOException {
-        return updateProgress(super.skip(n));
+    public long skip(final long n) throws IOException {
+        return this.updateProgress(super.skip(n));
     }
 
     @Override
-    public void mark(int readlimit) {
+    public void mark(final int readlimit) {
         throw new UnsupportedOperationException();
     }
 
@@ -168,13 +160,13 @@ public final class ProgressInputStream extends FilterInputStream {
      * @param numBytesRead The number of bytes that have been read
      * @return The number of bytes read
      */
-    private long updateProgress(long numBytesRead) {
+    private long updateProgress(final long numBytesRead) {
         if (numBytesRead > 0) {
-            long oldTotalNumBytesRead = this.totalNumBytesRead;
+            final long oldTotalNumBytesRead = this.totalNumBytesRead;
             this.totalNumBytesRead += numBytesRead;
-            propertyChangeSupport.firePropertyChange("totalNumBytesRead",
-                    oldTotalNumBytesRead, this.totalNumBytesRead);
-            fireTotalNumBytesRead();
+            this.propertyChangeSupport.firePropertyChange("totalNumBytesRead", oldTotalNumBytesRead,
+                    this.totalNumBytesRead);
+            this.fireTotalNumBytesRead();
         }
         return numBytesRead;
     }
@@ -184,8 +176,8 @@ public final class ProgressInputStream extends FilterInputStream {
      * been read to the consumers
      */
     private void fireTotalNumBytesRead() {
-        for (LongConsumer consumer : totalNumBytesReadConsumers) {
-            consumer.accept(totalNumBytesRead);
+        for (final LongConsumer consumer : this.totalNumBytesReadConsumers) {
+            consumer.accept(this.totalNumBytesRead);
         }
     }
 }

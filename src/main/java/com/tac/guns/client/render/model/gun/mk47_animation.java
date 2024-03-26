@@ -20,8 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -34,14 +34,15 @@ public class mk47_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         MK47AnimationController controller = MK47AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK47AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MK47AnimationController.INDEX_BODY, transformType, matrices);
 
             renderSight(stack, matrices, renderBuffer, light, overlay, skin);
 
@@ -54,24 +55,25 @@ public class mk47_animation extends SkinnedGunModel {
             if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                 renderLaser(stack, matrices, renderBuffer, light, overlay, skin);
 
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK47AnimationController.INDEX_MAGAZINE,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MK47AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MK47AnimationController.INDEX_BOLT,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.PULL), stack, matrices, renderBuffer, light,
-                    overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MK47AnimationController.INDEX_BOLT, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.PULL), stack, matrices,
+                    renderBuffer, light, overlay);
 
             Gun gun = ((GunItem) stack.getItem()).getGun();
             float cooldownOg = ShootingHandler.get().getshootMsGap()
@@ -83,7 +85,8 @@ public class mk47_animation extends SkinnedGunModel {
                 matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1));
                 matrices.translate(0, 0, 0.025f);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
         PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);

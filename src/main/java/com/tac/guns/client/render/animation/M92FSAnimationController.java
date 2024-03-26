@@ -15,18 +15,18 @@ public class M92FSAnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 7;
     public static int INDEX_RIGHT_HAND = 4;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m92fs_inspect.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_reload_norm.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_reload_empty.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_static.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m92fs_inspect.gltf"));
     private static final M92FSAnimationController instance = new M92FSAnimationController();
 
     @Override

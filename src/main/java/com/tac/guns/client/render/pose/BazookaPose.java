@@ -23,10 +23,11 @@ public class BazookaPose extends WeaponPose {
     protected AimPose getUpPose() {
         AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F).setItemRotation(new Vector3f(10F, 0F, 0F))
-                .setRightArm(new LimbPose().setRotationAngleX(-170F).setRotationAngleY(-35F).setRotationAngleZ(0F)
-                        .setRotationPointY(4).setRotationPointZ(-2))
-                .setLeftArm(new LimbPose().setRotationAngleX(-130F).setRotationAngleY(65F).setRotationAngleZ(0F)
-                        .setRotationPointX(3).setRotationPointY(2).setRotationPointZ(1));
+                .setRightArm(new LimbPose().setRotationAngleX(-170F).setRotationAngleY(-35F)
+                        .setRotationAngleZ(0F).setRotationPointY(4).setRotationPointZ(-2))
+                .setLeftArm(new LimbPose().setRotationAngleX(-130F).setRotationAngleY(65F)
+                        .setRotationAngleZ(0F).setRotationPointX(3).setRotationPointY(2)
+                        .setRotationPointZ(1));
         return pose;
     }
 
@@ -34,10 +35,11 @@ public class BazookaPose extends WeaponPose {
     protected AimPose getForwardPose() {
         AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F)
-                .setRightArm(new LimbPose().setRotationAngleX(-90F).setRotationAngleY(-35F).setRotationAngleZ(0F)
-                        .setRotationPointY(2).setRotationPointZ(0))
-                .setLeftArm(new LimbPose().setRotationAngleX(-91F).setRotationAngleY(35F).setRotationAngleZ(0F)
-                        .setRotationPointX(4).setRotationPointY(2).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-90F).setRotationAngleY(-35F)
+                        .setRotationAngleZ(0F).setRotationPointY(2).setRotationPointZ(0))
+                .setLeftArm(new LimbPose().setRotationAngleX(-91F).setRotationAngleY(35F)
+                        .setRotationAngleZ(0F).setRotationPointX(4).setRotationPointY(2)
+                        .setRotationPointZ(0));
         return pose;
     }
 
@@ -45,10 +47,11 @@ public class BazookaPose extends WeaponPose {
     protected AimPose getDownPose() {
         AimPose pose = new AimPose();
         pose.getIdle().setRenderYawOffset(35F)
-                .setRightArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(-35F).setRotationAngleZ(0F)
-                        .setRotationPointY(2).setRotationPointZ(0))
-                .setLeftArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(15F).setRotationAngleZ(30F)
-                        .setRotationPointX(4).setRotationPointY(2).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(-35F)
+                        .setRotationAngleZ(0F).setRotationPointY(2).setRotationPointZ(0))
+                .setLeftArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(15F)
+                        .setRotationAngleZ(30F).setRotationPointX(4).setRotationPointY(2)
+                        .setRotationPointZ(0));
         return pose;
     }
 
@@ -59,7 +62,8 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
+    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
+            float aimProgress) {
         if (Config.CLIENT.display.oldAnimations.get()) {
             boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                     ? hand == InteractionHand.MAIN_HAND
@@ -78,8 +82,8 @@ public class BazookaPose extends WeaponPose {
     }
 
     @Override
-    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
+    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {
         if (Config.CLIENT.display.oldAnimations.get()) {
             boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                     ? hand == InteractionHand.MAIN_HAND
@@ -93,16 +97,16 @@ public class BazookaPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
+    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {
         if (!Config.CLIENT.display.oldAnimations.get()) {
             super.applyHeldItemTransforms(player, hand, aimProgress, matrixStack, buffer);
         }
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
-            float partialTicks) {
+    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
+            PoseStack matrixStack, float partialTicks) {
         return GripType.applyBackTransforms(player, matrixStack);
     }
 

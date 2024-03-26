@@ -26,16 +26,16 @@ public class TwoHandedPose extends WeaponPose {
     protected AimPose getUpPose() {
         AimPose upPose = new AimPose();
         upPose.getIdle().setRenderYawOffset(45F).setItemRotation(new Vector3f(60F, 0F, 10F))
-                .setRightArm(new LimbPose().setRotationAngleX(-120F).setRotationAngleY(-55F).setRotationPointX(-5)
-                        .setRotationPointY(3).setRotationPointZ(0))
-                .setLeftArm(new LimbPose().setRotationAngleX(-160F).setRotationAngleY(-20F).setRotationAngleZ(-30F)
-                        .setRotationPointY(2).setRotationPointZ(-1));
+                .setRightArm(new LimbPose().setRotationAngleX(-120F).setRotationAngleY(-55F)
+                        .setRotationPointX(-5).setRotationPointY(3).setRotationPointZ(0))
+                .setLeftArm(new LimbPose().setRotationAngleX(-160F).setRotationAngleY(-20F)
+                        .setRotationAngleZ(-30F).setRotationPointY(2).setRotationPointZ(-1));
         upPose.getAiming().setRenderYawOffset(45F).setItemRotation(new Vector3f(40F, 0F, 30F))
                 .setItemTranslate(new Vector3f(-1, 0, 0))
-                .setRightArm(new LimbPose().setRotationAngleX(-140F).setRotationAngleY(-55F).setRotationPointX(-5)
-                        .setRotationPointY(3).setRotationPointZ(0))
-                .setLeftArm(new LimbPose().setRotationAngleX(-170F).setRotationAngleY(-20F).setRotationAngleZ(-35F)
-                        .setRotationPointY(1).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-140F).setRotationAngleY(-55F)
+                        .setRotationPointX(-5).setRotationPointY(3).setRotationPointZ(0))
+                .setLeftArm(new LimbPose().setRotationAngleX(-170F).setRotationAngleY(-20F)
+                        .setRotationAngleZ(-35F).setRotationPointY(1).setRotationPointZ(0));
         return upPose;
     }
 
@@ -43,15 +43,16 @@ public class TwoHandedPose extends WeaponPose {
     protected AimPose getForwardPose() {
         AimPose forwardPose = new AimPose();
         forwardPose.getIdle().setRenderYawOffset(45F).setItemRotation(new Vector3f(30F, -11F, 0F))
-                .setRightArm(new LimbPose().setRotationAngleX(-60F).setRotationAngleY(-55F).setRotationAngleZ(0F)
-                        .setRotationPointX(-5).setRotationPointY(2).setRotationPointZ(1))
-                .setLeftArm(new LimbPose().setRotationAngleX(-65F).setRotationAngleY(-10F).setRotationAngleZ(5F)
-                        .setRotationPointY(2).setRotationPointZ(-1));
+                .setRightArm(new LimbPose().setRotationAngleX(-60F).setRotationAngleY(-55F)
+                        .setRotationAngleZ(0F).setRotationPointX(-5).setRotationPointY(2)
+                        .setRotationPointZ(1))
+                .setLeftArm(new LimbPose().setRotationAngleX(-65F).setRotationAngleY(-10F)
+                        .setRotationAngleZ(5F).setRotationPointY(2).setRotationPointZ(-1));
         forwardPose.getAiming().setRenderYawOffset(45F).setItemRotation(new Vector3f(5F, -21F, 0F))
-                .setRightArm(new LimbPose().setRotationAngleX(-85F).setRotationAngleY(-65F).setRotationAngleZ(0F)
-                        .setRotationPointX(-5).setRotationPointY(2))
-                .setLeftArm(new LimbPose().setRotationAngleX(-90F).setRotationAngleY(-15F).setRotationAngleZ(0F)
-                        .setRotationPointY(2).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-85F).setRotationAngleY(-65F)
+                        .setRotationAngleZ(0F).setRotationPointX(-5).setRotationPointY(2))
+                .setLeftArm(new LimbPose().setRotationAngleX(-90F).setRotationAngleY(-15F)
+                        .setRotationAngleZ(0F).setRotationPointY(2).setRotationPointZ(0));
         return forwardPose;
     }
 
@@ -60,26 +61,28 @@ public class TwoHandedPose extends WeaponPose {
         AimPose downPose = new AimPose();
         downPose.getIdle().setRenderYawOffset(45F).setItemRotation(new Vector3f(-15F, -5F, 0F))
                 .setItemTranslate(new Vector3f(0, -0.5F, 0.5F))
-                .setRightArm(new LimbPose().setRotationAngleX(-30F).setRotationAngleY(-65F).setRotationAngleZ(0F)
-                        .setRotationPointX(-5).setRotationPointY(2))
-                .setLeftArm(new LimbPose().setRotationAngleX(-5F).setRotationAngleY(-20F).setRotationAngleZ(20F)
-                        .setRotationPointY(5).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-30F).setRotationAngleY(-65F)
+                        .setRotationAngleZ(0F).setRotationPointX(-5).setRotationPointY(2))
+                .setLeftArm(new LimbPose().setRotationAngleX(-5F).setRotationAngleY(-20F)
+                        .setRotationAngleZ(20F).setRotationPointY(5).setRotationPointZ(0));
         downPose.getAiming().setRenderYawOffset(45F).setItemRotation(new Vector3f(-20F, -5F, -10F))
                 .setItemTranslate(new Vector3f(0, -0.5F, 1F))
-                .setRightArm(new LimbPose().setRotationAngleX(-30F).setRotationAngleY(-65F).setRotationAngleZ(0F)
-                        .setRotationPointX(-5).setRotationPointY(1))
-                .setLeftArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(-20F).setRotationAngleZ(30F)
-                        .setRotationPointY(5).setRotationPointZ(0));
+                .setRightArm(new LimbPose().setRotationAngleX(-30F).setRotationAngleY(-65F)
+                        .setRotationAngleZ(0F).setRotationPointX(-5).setRotationPointY(1))
+                .setLeftArm(new LimbPose().setRotationAngleX(-10F).setRotationAngleY(-20F)
+                        .setRotationAngleZ(30F).setRotationPointY(5).setRotationPointZ(0));
         return downPose;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
+    public void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
+            float aimProgress) {
         if (Config.CLIENT.display.oldAnimations.get()) {
             Minecraft mc = Minecraft.getInstance();
-            boolean right = mc.options.mainHand == HumanoidArm.RIGHT ? hand == InteractionHand.MAIN_HAND
-                    : hand == InteractionHand.OFF_HAND;
+            boolean right =
+                    mc.options.mainHand == HumanoidArm.RIGHT ? hand == InteractionHand.MAIN_HAND
+                            : hand == InteractionHand.OFF_HAND;
             ModelPart mainArm = right ? model.rightArm : model.leftArm;
             ModelPart secondaryArm = right ? model.leftArm : model.rightArm;
             mainArm.xRot = model.head.xRot;
@@ -91,7 +94,8 @@ public class TwoHandedPose extends WeaponPose {
             mainArm.xRot = (float) Math.toRadians(-55F + aimProgress * -30F);
             mainArm.yRot = (float) Math.toRadians((-45F + aimProgress * -20F) * (right ? 1F : -1F));
             secondaryArm.xRot = (float) Math.toRadians(-42F + aimProgress * -48F);
-            secondaryArm.yRot = (float) Math.toRadians((-15F + aimProgress * 5F) * (right ? 1F : -1F));
+            secondaryArm.yRot =
+                    (float) Math.toRadians((-15F + aimProgress * 5F) * (right ? 1F : -1F));
         } else {
             super.applyPlayerModelRotation(player, model, hand, aimProgress);
             float angle = this.getPlayerPitch(player);
@@ -101,14 +105,16 @@ public class TwoHandedPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
+    public void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {
         if (Config.CLIENT.display.oldAnimations.get()) {
             boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
                     ? hand == InteractionHand.MAIN_HAND
                     : hand == InteractionHand.OFF_HAND;
-            player.yBodyRotO = player.yRotO + (right ? 25F : -25F) + aimProgress * (right ? 20F : -20F);
-            player.yBodyRot = player.getYRot() + (right ? 25F : -25F) + aimProgress * (right ? 20F : -20F);
+            player.yBodyRotO =
+                    player.yRotO + (right ? 25F : -25F) + aimProgress * (right ? 20F : -20F);
+            player.yBodyRot =
+                    player.getYRot() + (right ? 25F : -25F) + aimProgress * (right ? 20F : -20F);
         } else {
             super.applyPlayerPreRender(player, hand, aimProgress, matrixStack, buffer);
         }
@@ -116,8 +122,8 @@ public class TwoHandedPose extends WeaponPose {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
+    public void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {
         if (Config.CLIENT.display.oldAnimations.get()) {
             if (hand == InteractionHand.MAIN_HAND) {
                 boolean right = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT
@@ -125,10 +131,12 @@ public class TwoHandedPose extends WeaponPose {
                         : hand == InteractionHand.OFF_HAND;
                 matrixStack.translate(0, 0, 0.05);
                 float invertRealProgress = 1.0F - aimProgress;
-                matrixStack.mulPose(Vector3f.ZP.rotationDegrees((25F * invertRealProgress) * (right ? 1F : -1F)));
-                matrixStack.mulPose(Vector3f.YP
-                        .rotationDegrees((30F * invertRealProgress + aimProgress * -20F) * (right ? 1F : -1F)));
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(25F * invertRealProgress + aimProgress * 5F));
+                matrixStack.mulPose(Vector3f.ZP
+                        .rotationDegrees((25F * invertRealProgress) * (right ? 1F : -1F)));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(
+                        (30F * invertRealProgress + aimProgress * -20F) * (right ? 1F : -1F)));
+                matrixStack.mulPose(
+                        Vector3f.XP.rotationDegrees(25F * invertRealProgress + aimProgress * 5F));
             }
         } else {
             super.applyHeldItemTransforms(player, hand, aimProgress, matrixStack, buffer);
@@ -136,8 +144,8 @@ public class TwoHandedPose extends WeaponPose {
     }
 
     @Override
-    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
-            MultiBufferSource buffer, int light, float partialTicks) {
+    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {
         matrixStack.translate(0, 0, -1);
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
@@ -149,7 +157,8 @@ public class TwoHandedPose extends WeaponPose {
         int side = hand.getOpposite() == HumanoidArm.RIGHT ? 1 : -1;
         matrixStack.translate(6 * side * 0.0625, -0.585, -0.5);
 
-        if (Minecraft.getInstance().player.getModelName().equals("slim") && hand.getOpposite() == HumanoidArm.LEFT) {
+        if (Minecraft.getInstance().player.getModelName().equals("slim")
+                && hand.getOpposite() == HumanoidArm.LEFT) {
             matrixStack.translate(0.03125F * -side, 0, 0);
         }
 
@@ -177,8 +186,8 @@ public class TwoHandedPose extends WeaponPose {
     }
 
     @Override
-    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
-            float partialTicks) {
+    public boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
+            PoseStack matrixStack, float partialTicks) {
         return GripType.applyBackTransforms(player, matrixStack);
     }
 }

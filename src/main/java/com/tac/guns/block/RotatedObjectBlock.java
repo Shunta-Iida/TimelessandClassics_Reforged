@@ -1,5 +1,7 @@
 package com.tac.guns.block;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -7,15 +9,14 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
-import javax.annotation.Nullable;
-
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public abstract class RotatedObjectBlock extends HorizontalDirectionalBlock {
     public RotatedObjectBlock(Block.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(
+                this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     @Override

@@ -29,11 +29,10 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail> {
     private int shooterId;
     private float size;
 
-    public MessageBulletTrail() {
-    }
+    public MessageBulletTrail() {}
 
-    public MessageBulletTrail(ProjectileEntity[] spawnedProjectiles, Gun.Projectile projectileProps, int shooterId,
-            float size) {
+    public MessageBulletTrail(ProjectileEntity[] spawnedProjectiles, Gun.Projectile projectileProps,
+            int shooterId, float size) {
         this.positions = new Vec3[spawnedProjectiles.length];
         this.motions = new Vec3[spawnedProjectiles.length];
         this.shooterYaws = new float[spawnedProjectiles.length];
@@ -57,9 +56,9 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail> {
         this.size = size;
     }
 
-    public MessageBulletTrail(Vec3[] position, Vec3[] motions, float[] shooteryaws, float[] shooterPitches,
-            int[] entityIds, ItemStack item, int color, double trailLengthMultiplier,
-            int life, double gravity, int shooterId, float size) {
+    public MessageBulletTrail(Vec3[] position, Vec3[] motions, float[] shooteryaws,
+            float[] shooterPitches, int[] entityIds, ItemStack item, int color,
+            double trailLengthMultiplier, int life, double gravity, int shooterId, float size) {
         this.positions = position;
         this.motions = motions;
         this.shooterYaws = shooteryaws;
@@ -124,13 +123,15 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail> {
         double gravity = buffer.readDouble();
         int shooterId = buffer.readInt();
         float scale = buffer.readFloat();
-        return new MessageBulletTrail(positions, motions, shooterYaws, shooterPitches, entityIds, item, trailColor,
-                trailLengthMultiplier, life, gravity, shooterId, scale);
+        return new MessageBulletTrail(positions, motions, shooterYaws, shooterPitches, entityIds,
+                item, trailColor, trailLengthMultiplier, life, gravity, shooterId, scale);
     }
 
     @Override
-    public void handle(MessageBulletTrail messageBulletTrail, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleMessageBulletTrail(messageBulletTrail));
+    public void handle(MessageBulletTrail messageBulletTrail,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get()
+                .enqueueWork(() -> ClientPlayHandler.handleMessageBulletTrail(messageBulletTrail));
         supplier.get().setPacketHandled(true);
     }
 

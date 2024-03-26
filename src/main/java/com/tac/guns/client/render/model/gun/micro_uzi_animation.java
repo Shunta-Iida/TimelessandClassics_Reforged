@@ -21,8 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -32,22 +32,24 @@ public class micro_uzi_animation extends SkinnedGunModel {
 
     // The render method, similar to what is in DartEntity. We can render the item
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         MAC10AnimationController controller = MAC10AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MAC10AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MAC10AnimationController.INDEX_BODY, transformType, matrices);
             if (GunModifierHelper.getAmmoCapacityWeight(stack) > 0) {
-                RenderUtil.renderModel(getComponentModel(skin, STOCK_DEFAULT), stack, matrices, renderBuffer, light,
-                        overlay);
-            } else {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.STOCK_FOLDED), stack, matrices,
+                RenderUtil.renderModel(getComponentModel(skin, STOCK_DEFAULT), stack, matrices,
                         renderBuffer, light, overlay);
+            } else {
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.STOCK_FOLDED),
+                        stack, matrices, renderBuffer, light, overlay);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
@@ -61,8 +63,8 @@ public class micro_uzi_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), MAC10AnimationController.INDEX_BOLT,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    MAC10AnimationController.INDEX_BOLT, transformType, matrices);
 
             Gun gun = ((GunItem) stack.getItem()).getGun();
             float cooldownOg = ShootingHandler.get().getshootMsGap()
@@ -73,15 +75,17 @@ public class micro_uzi_animation extends SkinnedGunModel {
             if (transformType.firstPerson()) {
                 AnimationMeta reloadEmpty = controller
                         .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
-                        && controller.isAnimationRunning();
+                boolean shouldOffset =
+                        reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                                && controller.isAnimationRunning();
                 if (!shouldOffset && !Gun.hasAmmo(stack)) {
                     matrices.translate(0, 0, -0.25);
                 } else {
                     matrices.translate(0, 0, -0.25 + Math.pow(cooldownOg - 0.5, 2));
                 }
             }
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 

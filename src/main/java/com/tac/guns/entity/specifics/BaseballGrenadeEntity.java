@@ -14,7 +14,8 @@ import net.minecraft.world.level.Level;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class BaseballGrenadeEntity extends ThrowableGrenadeEntity {
-    public BaseballGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType, Level worldIn) {
+    public BaseballGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType,
+            Level worldIn) {
         super(entityType, worldIn);
     }
 
@@ -45,8 +46,8 @@ public class BaseballGrenadeEntity extends ThrowableGrenadeEntity {
             this.rotation += speed * 235;
         }
         if (this.level.isClientSide) {
-            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25, this.getZ(), 0, 0.075,
-                    0);
+            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25,
+                    this.getZ(), 0, 0.075, 0);
         }
     }
 }

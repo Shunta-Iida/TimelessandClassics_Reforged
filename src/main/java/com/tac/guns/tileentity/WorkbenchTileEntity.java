@@ -46,14 +46,15 @@ public class WorkbenchTileEntity extends SyncedTileEntity implements IStorageBlo
 
     @Override
     public boolean canPlaceItem(int index, ItemStack stack) {
-        return index != 0 || (stack.getItem() instanceof DyeItem && this.inventory.get(index).getCount() < 1);
+        return index != 0
+                || (stack.getItem() instanceof DyeItem && this.inventory.get(index).getCount() < 1);
     }
 
     @Override
     public boolean stillValid(Player player) {
         return this.level.getBlockEntity(this.worldPosition) == this
-                && player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5,
-                        this.worldPosition.getZ() + 0.5) <= 64.0;
+                && player.distanceToSqr(this.worldPosition.getX() + 0.5,
+                        this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5) <= 64.0;
     }
 
     @Override
@@ -63,7 +64,8 @@ public class WorkbenchTileEntity extends SyncedTileEntity implements IStorageBlo
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
+    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory,
+            Player playerEntity) {
         return new WorkbenchContainer(windowId, playerInventory, this);
     }
 }

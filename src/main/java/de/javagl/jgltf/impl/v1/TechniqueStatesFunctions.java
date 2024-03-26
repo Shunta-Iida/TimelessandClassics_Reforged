@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for technique.states.functions.schema.json
  * 
  */
-public class TechniqueStatesFunctions
-        extends GlTFProperty {
+public class TechniqueStatesFunctions extends GlTFProperty {
 
     /**
      * Floating-point values passed to `blendColor()`. [red, green, blue,
@@ -190,7 +188,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public float[] defaultBlendColor() {
-        return new float[] { 0.0F, 0.0F, 0.0F, 0.0F };
+        return new float[] {0.0F, 0.0F, 0.0F, 0.0F};
     }
 
     /**
@@ -221,7 +219,8 @@ public class TechniqueStatesFunctions
             if (((blendEquationSeparateElement != 32774) && (blendEquationSeparateElement != 32778))
                     && (blendEquationSeparateElement != 32779)) {
                 throw new IllegalArgumentException(
-                        (("Invalid value for blendEquationSeparateElement: " + blendEquationSeparateElement)
+                        (("Invalid value for blendEquationSeparateElement: "
+                                + blendEquationSeparateElement)
                                 + ", valid: [32774, 32778, 32779]"));
             }
         }
@@ -252,7 +251,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public int[] defaultBlendEquationSeparate() {
-        return new int[] { 32774, 32774 };
+        return new int[] {32774, 32774};
     }
 
     /**
@@ -322,7 +321,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public int[] defaultBlendFuncSeparate() {
-        return new int[] { 1, 0, 1, 0 };
+        return new int[] {1, 0, 1, 0};
     }
 
     /**
@@ -376,7 +375,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public boolean[] defaultColorMask() {
-        return new boolean[] { true, true, true, true };
+        return new boolean[] {true, true, true, true};
     }
 
     /**
@@ -404,9 +403,11 @@ public class TechniqueStatesFunctions
             throw new IllegalArgumentException("Number of cullFace elements is > 1");
         }
         for (int cullFaceElement : cullFace) {
-            if (((cullFaceElement != 1028) && (cullFaceElement != 1029)) && (cullFaceElement != 1032)) {
+            if (((cullFaceElement != 1028) && (cullFaceElement != 1029))
+                    && (cullFaceElement != 1032)) {
                 throw new IllegalArgumentException(
-                        (("Invalid value for cullFaceElement: " + cullFaceElement) + ", valid: [1028, 1029, 1032]"));
+                        (("Invalid value for cullFaceElement: " + cullFaceElement)
+                                + ", valid: [1028, 1029, 1032]"));
             }
         }
         this.cullFace = cullFace;
@@ -436,7 +437,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public int[] defaultCullFace() {
-        return new int[] { 1029 };
+        return new int[] {1029};
     }
 
     /**
@@ -464,11 +465,13 @@ public class TechniqueStatesFunctions
             throw new IllegalArgumentException("Number of depthFunc elements is > 1");
         }
         for (int depthFuncElement : depthFunc) {
-            if ((((((((depthFuncElement != 512) && (depthFuncElement != 513)) && (depthFuncElement != 515))
-                    && (depthFuncElement != 514)) && (depthFuncElement != 516)) && (depthFuncElement != 517))
+            if ((((((((depthFuncElement != 512) && (depthFuncElement != 513))
+                    && (depthFuncElement != 515)) && (depthFuncElement != 514))
+                    && (depthFuncElement != 516)) && (depthFuncElement != 517))
                     && (depthFuncElement != 518)) && (depthFuncElement != 519)) {
-                throw new IllegalArgumentException((("Invalid value for depthFuncElement: " + depthFuncElement)
-                        + ", valid: [512, 513, 515, 514, 516, 517, 518, 519]"));
+                throw new IllegalArgumentException(
+                        (("Invalid value for depthFuncElement: " + depthFuncElement)
+                                + ", valid: [512, 513, 515, 514, 516, 517, 518, 519]"));
             }
         }
         this.depthFunc = depthFunc;
@@ -498,7 +501,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public int[] defaultDepthFunc() {
-        return new int[] { 513 };
+        return new int[] {513};
     }
 
     /**
@@ -550,7 +553,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public boolean[] defaultDepthMask() {
-        return new boolean[] { true };
+        return new boolean[] {true};
     }
 
     /**
@@ -604,7 +607,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public float[] defaultDepthRange() {
-        return new float[] { 0.0F, 1.0F };
+        return new float[] {0.0F, 1.0F};
     }
 
     /**
@@ -634,7 +637,8 @@ public class TechniqueStatesFunctions
         for (int frontFaceElement : frontFace) {
             if ((frontFaceElement != 2304) && (frontFaceElement != 2305)) {
                 throw new IllegalArgumentException(
-                        (("Invalid value for frontFaceElement: " + frontFaceElement) + ", valid: [2304, 2305]"));
+                        (("Invalid value for frontFaceElement: " + frontFaceElement)
+                                + ", valid: [2304, 2305]"));
             }
         }
         this.frontFace = frontFace;
@@ -664,7 +668,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public int[] defaultFrontFace() {
-        return new int[] { 2305 };
+        return new int[] {2305};
     }
 
     /**
@@ -723,7 +727,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public float[] defaultLineWidth() {
-        return new float[] { 1.0F };
+        return new float[] {1.0F};
     }
 
     /**
@@ -777,7 +781,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public float[] defaultPolygonOffset() {
-        return new float[] { 0.0F, 0.0F };
+        return new float[] {0.0F, 0.0F};
     }
 
     /**
@@ -831,7 +835,7 @@ public class TechniqueStatesFunctions
      * 
      */
     public float[] defaultScissor() {
-        return new float[] { 0.0F, 0.0F, 0.0F, 0.0F };
+        return new float[] {0.0F, 0.0F, 0.0F, 0.0F};
     }
 
 }

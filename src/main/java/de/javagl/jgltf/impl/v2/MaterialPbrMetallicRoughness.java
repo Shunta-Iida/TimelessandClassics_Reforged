@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -16,8 +15,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for material.pbrMetallicRoughness.schema.json
  * 
  */
-public class MaterialPbrMetallicRoughness
-        extends GlTFProperty {
+public class MaterialPbrMetallicRoughness extends GlTFProperty {
 
     /**
      * The factors for the base color of the material. (optional)<br>
@@ -118,7 +116,7 @@ public class MaterialPbrMetallicRoughness
      * 
      */
     public float[] defaultBaseColorFactor() {
-        return new float[] { 1.0F, 1.0F, 1.0F, 1.0F };
+        return new float[] {1.0F, 1.0F, 1.0F, 1.0F};
     }
 
     /**

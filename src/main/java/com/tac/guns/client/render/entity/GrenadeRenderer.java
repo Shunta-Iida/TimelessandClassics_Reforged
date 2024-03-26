@@ -25,8 +25,8 @@ public class GrenadeRenderer extends EntityRenderer<GrenadeEntity> {
     }
 
     @Override
-    public void render(GrenadeEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light) {
+    public void render(GrenadeEntity entity, float entityYaw, float partialTicks,
+            PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light) {
         if (!entity.getProjectile().isVisible() || entity.tickCount <= 1) {
             return;
         }
@@ -44,8 +44,9 @@ public class GrenadeRenderer extends EntityRenderer<GrenadeEntity> {
 
         matrixStack.translate(0.0, 0.5, 0.0);
 
-        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE,
-                light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
+        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(),
+                ItemTransforms.TransformType.NONE, light, OverlayTexture.NO_OVERLAY, matrixStack,
+                renderTypeBuffer, entity.getId());
         matrixStack.popPose();
     }
 }

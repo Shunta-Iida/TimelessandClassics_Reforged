@@ -1,8 +1,11 @@
 package com.tac.guns.client;
 
+import java.util.Map;
+
 import com.tac.guns.Reference;
 import com.tac.guns.common.CustomRig;
 import com.tac.guns.common.NetworkRigManager;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +13,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import java.util.Map;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -35,17 +37,17 @@ public class CustomRigManager {
          * "." + id.getPath() + ".name"));
          * CompoundNBT tag = stack.getOrCreateTag();
          *//*
-            * tag.put("Model", gun.getModel().serializeNBT());
-            * tag.put("Gun", gun.getGun().serializeNBT());
-            * tag.putBoolean("Custom", true);
-            * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
-            * tag.putIntArray("supportedFireModes",
-            * gun.getGun().getGeneral().getRateSelector());
-            *//*
-               * items.add(stack);
-               * });
-               * }
-               */
+              * tag.put("Model", gun.getModel().serializeNBT());
+              * tag.put("Gun", gun.getGun().serializeNBT());
+              * tag.putBoolean("Custom", true);
+              * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
+              * tag.putIntArray("supportedFireModes",
+              * gun.getGun().getGeneral().getRateSelector());
+              *//*
+                   * items.add(stack);
+                   * });
+                   * }
+                   */
     }
 
     @SubscribeEvent

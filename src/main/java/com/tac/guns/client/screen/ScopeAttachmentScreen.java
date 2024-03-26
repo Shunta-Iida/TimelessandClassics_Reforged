@@ -24,7 +24,8 @@ import com.tac.guns.util.GunModifierHelper;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentContainer> {
-    private static final ResourceLocation GUI_TEXTURES = new ResourceLocation("tac:textures/gui/attachments.png");
+    private static final ResourceLocation GUI_TEXTURES =
+            new ResourceLocation("tac:textures/gui/attachments.png");
 
     private final Inventory playerInventory;
     private final Container weaponInventory;
@@ -37,7 +38,8 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
     private int mouseGrabbedButton;
     private int mouseClickedX, mouseClickedY;
 
-    public ScopeAttachmentScreen(AttachmentContainer screenContainer, Inventory playerInventory, Component titleIn) {
+    public ScopeAttachmentScreen(AttachmentContainer screenContainer, Inventory playerInventory,
+            Component titleIn) {
         super(screenContainer, playerInventory, titleIn);
         this.playerInventory = playerInventory;
         this.weaponInventory = screenContainer.getWeaponInventory();
@@ -65,18 +67,20 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
         int startY = (this.height - this.imageHeight) / 2;
 
         for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            if (RenderUtil.isMouseWithin(mouseX, mouseY, startX + 7, startY + 16 + i * 18, 18, 18)) {
+            if (RenderUtil.isMouseWithin(mouseX, mouseY, startX + 7, startY + 16 + i * 18, 18,
+                    18)) {
                 IAttachment.Type type = IAttachment.Type.values()[i];
                 if (!this.menu.getSlot(i).isActive()) {
-                    this.renderComponentTooltip(matrixStack,
-                            Arrays.asList(new TranslatableComponent("slot.tac.attachment." + type.getTranslationKey()),
-                                    new TranslatableComponent("slot.tac.attachment.not_applicable")),
+                    this.renderComponentTooltip(matrixStack, Arrays.asList(
+                            new TranslatableComponent(
+                                    "slot.tac.attachment." + type.getTranslationKey()),
+                            new TranslatableComponent("slot.tac.attachment.not_applicable")),
                             mouseX, mouseY);
                 } else if (this.weaponInventory.getItem(i).isEmpty()) {
 
                     this.renderComponentTooltip(matrixStack,
-                            Collections.singletonList(
-                                    new TranslatableComponent("slot.tac.attachment." + type.getTranslationKey())),
+                            Collections.singletonList(new TranslatableComponent(
+                                    "slot.tac.attachment." + type.getTranslationKey())),
                             mouseX, mouseY);
                 }
             }
@@ -174,7 +178,8 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
         int startX = (this.width - this.imageWidth) / 2;
         int startY = (this.height - this.imageHeight) / 2;
-        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142, 70)) {
+        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142,
+                70)) {
             if (scroll < 0 && this.windowZoom > 0) {
                 this.showHelp = false;
                 this.windowZoom--;
@@ -191,9 +196,10 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
         int startX = (this.width - this.imageWidth) / 2;
         int startY = (this.height - this.imageHeight) / 2;
 
-        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142, 70)) {
-            if (!this.mouseGrabbed
-                    && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
+        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142,
+                70)) {
+            if (!this.mouseGrabbed && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT
+                    || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
                 this.mouseGrabbed = true;
                 this.mouseGrabbedButton = button == GLFW.GLFW_MOUSE_BUTTON_RIGHT ? 1 : 0;
                 this.mouseClickedX = (int) mouseX;

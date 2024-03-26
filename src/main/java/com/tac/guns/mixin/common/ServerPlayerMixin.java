@@ -14,11 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player {
-    public ServerPlayerMixin(Level p_36114_, BlockPos p_36115_, float p_36116_, GameProfile p_36117_) {
+    public ServerPlayerMixin(Level p_36114_, BlockPos p_36115_, float p_36116_,
+            GameProfile p_36117_) {
         super(p_36114_, p_36115_, p_36116_, p_36117_);
     }
 
-    @Inject(method = "restoreFrom(Lnet/minecraft/server/level/ServerPlayer;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;replaceWith(Lnet/minecraft/world/entity/player/Inventory;)V"))
+    @Inject(method = "restoreFrom(Lnet/minecraft/server/level/ServerPlayer;Z)V", at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Inventory;replaceWith(Lnet/minecraft/world/entity/player/Inventory;)V"))
     public void restoreRig(ServerPlayer p_9016_, boolean p_9017_, CallbackInfo ci) {
         ((PlayerWithSynData) this).setRig(((PlayerWithSynData) p_9016_).getRig());
         ((PlayerWithSynData) p_9016_).setRig(ItemStack.EMPTY);

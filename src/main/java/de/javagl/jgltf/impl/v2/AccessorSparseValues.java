@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -18,8 +17,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for accessor.sparse.values.schema.json
  * 
  */
-public class AccessorSparseValues
-        extends GlTFProperty {
+public class AccessorSparseValues extends GlTFProperty {
 
     /**
      * The index of the bufferView with sparse values. The referenced buffer
@@ -48,7 +46,8 @@ public class AccessorSparseValues
      */
     public void setBufferView(Integer bufferView) {
         if (bufferView == null) {
-            throw new NullPointerException((("Invalid value for bufferView: " + bufferView) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for bufferView: " + bufferView) + ", may not be null"));
         }
         this.bufferView = bufferView;
     }

@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1.gl;
 
@@ -86,21 +78,19 @@ public class DefaultModels {
     static {
         // Create models for the default vertex- and fragment shader
         Shader vertexShader = GltfDefaults.getDefaultVertexShader();
-        DEFAULT_VERTEX_SHADER_MODEL = new DefaultShaderModel(vertexShader.getUri(),
-                ShaderType.VERTEX_SHADER);
+        DEFAULT_VERTEX_SHADER_MODEL =
+                new DefaultShaderModel(vertexShader.getUri(), ShaderType.VERTEX_SHADER);
         initShaderData(DEFAULT_VERTEX_SHADER_MODEL);
 
         Shader fragmentShader = GltfDefaults.getDefaultFragmentShader();
-        DEFAULT_FRAGMENT_SHADER_MODEL = new DefaultShaderModel(fragmentShader.getUri(),
-                ShaderType.FRAGMENT_SHADER);
+        DEFAULT_FRAGMENT_SHADER_MODEL =
+                new DefaultShaderModel(fragmentShader.getUri(), ShaderType.FRAGMENT_SHADER);
         initShaderData(DEFAULT_FRAGMENT_SHADER_MODEL);
 
         // Create a model for the default program
         DEFAULT_PROGRAM_MODEL = new DefaultProgramModel();
-        DEFAULT_PROGRAM_MODEL.setVertexShaderModel(
-                DEFAULT_VERTEX_SHADER_MODEL);
-        DEFAULT_PROGRAM_MODEL.setFragmentShaderModel(
-                DEFAULT_FRAGMENT_SHADER_MODEL);
+        DEFAULT_PROGRAM_MODEL.setVertexShaderModel(DEFAULT_VERTEX_SHADER_MODEL);
+        DEFAULT_PROGRAM_MODEL.setFragmentShaderModel(DEFAULT_FRAGMENT_SHADER_MODEL);
 
         // Create a model for the default technique
         Technique technique = GltfDefaults.getDefaultTechnique();
@@ -112,15 +102,13 @@ public class DefaultModels {
         addUniforms(technique, DEFAULT_TECHNIQUE_MODEL);
 
         TechniqueStates states = technique.getStates();
-        List<Integer> enable = Optionals.of(
-                states.getEnable(),
-                states.defaultEnable());
+        List<Integer> enable = Optionals.of(states.getEnable(), states.defaultEnable());
 
         TechniqueStatesFunctions functions = states.getFunctions();
-        TechniqueStatesFunctionsModel techniqueStatesFunctionsModel = new DefaultTechniqueStatesFunctionsModelV1(
-                functions);
-        TechniqueStatesModel techniqueStatesModel = new DefaultTechniqueStatesModel(
-                enable, techniqueStatesFunctionsModel);
+        TechniqueStatesFunctionsModel techniqueStatesFunctionsModel =
+                new DefaultTechniqueStatesFunctionsModelV1(functions);
+        TechniqueStatesModel techniqueStatesModel =
+                new DefaultTechniqueStatesModel(enable, techniqueStatesFunctionsModel);
         DEFAULT_TECHNIQUE_MODEL.setTechniqueStatesModel(techniqueStatesModel);
 
         // Create a model for the default material
@@ -176,8 +164,8 @@ public class DefaultModels {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private static void addParametersForDefaultTechnique(
-            Technique technique, DefaultTechniqueModel techniqueModel) {
+    private static void addParametersForDefaultTechnique(Technique technique,
+            DefaultTechniqueModel techniqueModel) {
         Map<String, TechniqueParameters> parameters = Optionals.of(technique.getParameters());
         for (Entry<String, TechniqueParameters> entry : parameters.entrySet()) {
             String parameterName = entry.getKey();
@@ -191,10 +179,9 @@ public class DefaultModels {
             // The NodeModel is always null in the default technique
             NodeModel nodeModel = null;
 
-            TechniqueParametersModel techniqueParametersModel = new DefaultTechniqueParametersModel(
-                    type, count, semantic, value, nodeModel);
-            techniqueModel.addParameter(
-                    parameterName, techniqueParametersModel);
+            TechniqueParametersModel techniqueParametersModel =
+                    new DefaultTechniqueParametersModel(type, count, semantic, value, nodeModel);
+            techniqueModel.addParameter(parameterName, techniqueParametersModel);
         }
     }
 
@@ -205,8 +192,7 @@ public class DefaultModels {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private static void addAttributes(Technique technique,
-            DefaultTechniqueModel techniqueModel) {
+    private static void addAttributes(Technique technique, DefaultTechniqueModel techniqueModel) {
         Map<String, String> attributes = Optionals.of(technique.getAttributes());
         for (Entry<String, String> entry : attributes.entrySet()) {
             String attributeName = entry.getKey();
@@ -222,8 +208,7 @@ public class DefaultModels {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private static void addUniforms(Technique technique,
-            DefaultTechniqueModel techniqueModel) {
+    private static void addUniforms(Technique technique, DefaultTechniqueModel techniqueModel) {
         Map<String, String> uniforms = Optionals.of(technique.getUniforms());
         for (Entry<String, String> entry : uniforms.entrySet()) {
             String uniformName = entry.getKey();

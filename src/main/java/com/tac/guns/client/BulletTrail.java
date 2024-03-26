@@ -1,14 +1,15 @@
 package com.tac.guns.client;
 
+import java.lang.ref.WeakReference;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-
-import javax.annotation.Nullable;
-import java.lang.ref.WeakReference;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -40,8 +41,9 @@ public class BulletTrail {
 
     private float size;
 
-    public BulletTrail(int entityId, Vec3 position, Vec3 motion, float shooterYaw, float shooterPitch, ItemStack item,
-            int trailColor, double trailMultiplier, int maxAge, double gravity, int shooterId, float size) {
+    public BulletTrail(int entityId, Vec3 position, Vec3 motion, float shooterYaw,
+            float shooterPitch, ItemStack item, int trailColor, double trailMultiplier, int maxAge,
+            double gravity, int shooterId, float size) {
         this.entityId = entityId;
         this.position = position;
         this.motion = motion;
@@ -58,7 +60,8 @@ public class BulletTrail {
     }
 
     private void updateYawPitch() {
-        float horizontalLength = Mth.sqrt((float) (this.motion.x * this.motion.x + this.motion.z * this.motion.z));
+        float horizontalLength =
+                Mth.sqrt((float) (this.motion.x * this.motion.x + this.motion.z * this.motion.z));
         this.yaw = (float) Math.toDegrees(Mth.atan2(this.motion.x, this.motion.z));
         this.pitch = (float) Math.toDegrees(Mth.atan2(this.motion.y, (double) horizontalLength));
     }
@@ -74,7 +77,8 @@ public class BulletTrail {
         }
 
         Entity entity = Minecraft.getInstance().getCameraEntity();
-        double distance = entity != null ? Math.sqrt(entity.distanceToSqr(this.position)) : Double.MAX_VALUE;
+        double distance =
+                entity != null ? Math.sqrt(entity.distanceToSqr(this.position)) : Double.MAX_VALUE;
         if (this.age >= this.maxAge || distance > 1024) {
             this.dead = true;
         }

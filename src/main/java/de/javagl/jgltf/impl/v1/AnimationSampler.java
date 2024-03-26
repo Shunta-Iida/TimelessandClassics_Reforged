@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for animation.sampler.schema.json
  * 
  */
-public class AnimationSampler
-        extends GlTFProperty {
+public class AnimationSampler extends GlTFProperty {
 
     /**
      * The ID of a parameter in this animation to use as keyframe input,
@@ -48,7 +46,8 @@ public class AnimationSampler
      */
     public void setInput(String input) {
         if (input == null) {
-            throw new NullPointerException((("Invalid value for input: " + input) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for input: " + input) + ", may not be null"));
         }
         this.input = input;
     }
@@ -81,7 +80,8 @@ public class AnimationSampler
         }
         if ((!"LINEAR".equals(interpolation)) && (!"STEP".equals(interpolation))) {
             throw new IllegalArgumentException(
-                    (("Invalid value for interpolation: " + interpolation) + ", valid: [\"LINEAR\", \"STEP\"]"));
+                    (("Invalid value for interpolation: " + interpolation)
+                            + ", valid: [\"LINEAR\", \"STEP\"]"));
         }
         this.interpolation = interpolation;
     }
@@ -120,7 +120,8 @@ public class AnimationSampler
      */
     public void setOutput(String output) {
         if (output == null) {
-            throw new NullPointerException((("Invalid value for output: " + output) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for output: " + output) + ", may not be null"));
         }
         this.output = output;
     }

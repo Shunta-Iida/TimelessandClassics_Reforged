@@ -16,28 +16,32 @@ import net.minecraftforge.registries.RegistryObject;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ModContainers {
-    public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.CONTAINERS,
-            Reference.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> REGISTER =
+            DeferredRegister.create(ForgeRegistries.CONTAINERS, Reference.MOD_ID);
 
-    public static final RegistryObject<MenuType<WorkbenchContainer>> WORKBENCH = register("workbench",
-            (IContainerFactory<WorkbenchContainer>) (windowId, playerInventory, data) -> {
-                WorkbenchTileEntity workstation = (WorkbenchTileEntity) playerInventory.player.level
-                        .getBlockEntity(data.readBlockPos());
-                return new WorkbenchContainer(windowId, playerInventory, workstation);
-            });
+    public static final RegistryObject<MenuType<WorkbenchContainer>> WORKBENCH =
+            register("workbench",
+                    (IContainerFactory<WorkbenchContainer>) (windowId, playerInventory, data) -> {
+                        WorkbenchTileEntity workstation =
+                                (WorkbenchTileEntity) playerInventory.player.level
+                                        .getBlockEntity(data.readBlockPos());
+                        return new WorkbenchContainer(windowId, playerInventory, workstation);
+                    });
 
-    public static final RegistryObject<MenuType<AttachmentContainer>> ATTACHMENTS = register("attachments",
-            AttachmentContainer::new);
+    public static final RegistryObject<MenuType<AttachmentContainer>> ATTACHMENTS =
+            register("attachments", AttachmentContainer::new);
 
-    public static final RegistryObject<MenuType<InspectionContainer>> INSPECTION = register("inspection",
-            InspectionContainer::new);
+    public static final RegistryObject<MenuType<InspectionContainer>> INSPECTION =
+            register("inspection", InspectionContainer::new);
 
-    public static final RegistryObject<MenuType<ColorBenchContainer>> COLOR_BENCH = register("color_bench",
-            ColorBenchContainer::new);
-    public static final RegistryObject<MenuType<UpgradeBenchContainer>> UPGRADE_BENCH = register("upgrade_bench",
+    public static final RegistryObject<MenuType<ColorBenchContainer>> COLOR_BENCH =
+            register("color_bench", ColorBenchContainer::new);
+    public static final RegistryObject<MenuType<UpgradeBenchContainer>> UPGRADE_BENCH = register(
+            "upgrade_bench",
             (IContainerFactory<UpgradeBenchContainer>) (windowId, playerInventory, data) -> {
-                UpgradeBenchTileEntity workstation = (UpgradeBenchTileEntity) playerInventory.player.level
-                        .getBlockEntity(data.readBlockPos());
+                UpgradeBenchTileEntity workstation =
+                        (UpgradeBenchTileEntity) playerInventory.player.level
+                                .getBlockEntity(data.readBlockPos());
                 return new UpgradeBenchContainer(windowId, playerInventory, workstation);
             });
 
@@ -74,8 +78,7 @@ public class ModContainers {
      * }};
      */
 
-    public static void init() {
-    }
+    public static void init() {}
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String id,
             MenuType.MenuSupplier<T> factory) {

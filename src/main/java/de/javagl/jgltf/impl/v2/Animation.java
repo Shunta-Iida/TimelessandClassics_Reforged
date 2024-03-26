@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for animation.schema.json
  * 
  */
-public class Animation
-        extends GlTFChildOfRootProperty {
+public class Animation extends GlTFChildOfRootProperty {
 
     /**
      * An array of animation channels. An animation channel combines an
@@ -62,7 +60,8 @@ public class Animation
      */
     public void setChannels(List<AnimationChannel> channels) {
         if (channels == null) {
-            throw new NullPointerException((("Invalid value for channels: " + channels) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for channels: " + channels) + ", may not be null"));
         }
         if (channels.size() < 1) {
             throw new IllegalArgumentException("Number of channels elements is < 1");
@@ -148,7 +147,8 @@ public class Animation
      */
     public void setSamplers(List<AnimationSampler> samplers) {
         if (samplers == null) {
-            throw new NullPointerException((("Invalid value for samplers: " + samplers) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for samplers: " + samplers) + ", may not be null"));
         }
         if (samplers.size() < 1) {
             throw new IllegalArgumentException("Number of samplers elements is < 1");

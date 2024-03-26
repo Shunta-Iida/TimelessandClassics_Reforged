@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for accessor.sparse.schema.json
  * 
  */
-public class AccessorSparse
-        extends GlTFProperty {
+public class AccessorSparse extends GlTFProperty {
 
     /**
      * Number of deviating accessor values stored in the sparse array.
@@ -52,7 +50,8 @@ public class AccessorSparse
      */
     public void setCount(Integer count) {
         if (count == null) {
-            throw new NullPointerException((("Invalid value for count: " + count) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for count: " + count) + ", may not be null"));
         }
         if (count < 1) {
             throw new IllegalArgumentException("count < 1");
@@ -83,7 +82,8 @@ public class AccessorSparse
      */
     public void setIndices(AccessorSparseIndices indices) {
         if (indices == null) {
-            throw new NullPointerException((("Invalid value for indices: " + indices) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for indices: " + indices) + ", may not be null"));
         }
         this.indices = indices;
     }
@@ -110,7 +110,8 @@ public class AccessorSparse
      */
     public void setValues(AccessorSparseValues values) {
         if (values == null) {
-            throw new NullPointerException((("Invalid value for values: " + values) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for values: " + values) + ", may not be null"));
         }
         this.values = values;
     }

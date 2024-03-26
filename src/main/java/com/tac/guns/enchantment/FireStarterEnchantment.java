@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class FireStarterEnchantment extends GunEnchantment {
     public FireStarterEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.PROJECTILE);
+        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.PROJECTILE);
     }
 
     @Override

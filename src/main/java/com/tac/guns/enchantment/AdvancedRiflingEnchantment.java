@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class AdvancedRiflingEnchantment extends GunEnchantment {
     public AdvancedRiflingEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.PROJECTILE);
+        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.PROJECTILE);
     }
 
     @Override

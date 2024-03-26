@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -82,8 +74,7 @@ public class Buffers {
      *                                  by the position and length are not valid for
      *                                  the given buffer
      */
-    public static ByteBuffer createSlice(
-            ByteBuffer byteBuffer, int position, int length) {
+    public static ByteBuffer createSlice(ByteBuffer byteBuffer, int position, int length) {
         if (byteBuffer == null) {
             return null;
         }
@@ -92,9 +83,8 @@ public class Buffers {
         try {
             int newLimit = position + length;
             if (newLimit > byteBuffer.capacity()) {
-                throw new IllegalArgumentException(
-                        "The new limit is " + newLimit + ", but the capacity is "
-                                + byteBuffer.capacity());
+                throw new IllegalArgumentException("The new limit is " + newLimit
+                        + ", but the capacity is " + byteBuffer.capacity());
             }
             byteBuffer.limit(newLimit);
             byteBuffer.position(position);
@@ -171,17 +161,14 @@ public class Buffers {
      * @param byteBuffers The input byte buffers
      * @return The concatenated byte buffer
      */
-    public static ByteBuffer concat(
-            Collection<? extends ByteBuffer> byteBuffers) {
+    public static ByteBuffer concat(Collection<? extends ByteBuffer> byteBuffers) {
         if (byteBuffers == null || byteBuffers.isEmpty()) {
             return ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
         }
-        int resultCapacity = byteBuffers.stream()
-                .mapToInt(ByteBuffer::capacity)
-                .reduce(0, (a, b) -> a + b);
-        ByteBuffer newByteBuffer = ByteBuffer
-                .allocateDirect(resultCapacity)
-                .order(ByteOrder.nativeOrder());
+        int resultCapacity =
+                byteBuffers.stream().mapToInt(ByteBuffer::capacity).reduce(0, (a, b) -> a + b);
+        ByteBuffer newByteBuffer =
+                ByteBuffer.allocateDirect(resultCapacity).order(ByteOrder.nativeOrder());
         for (ByteBuffer byteBuffer : byteBuffers) {
             newByteBuffer.put(byteBuffer.slice());
         }
@@ -239,8 +226,8 @@ public class Buffers {
      * @return The byte buffer
      */
     public static ByteBuffer castToByteBuffer(IntBuffer buffer) {
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(buffer.capacity())
-                .order(ByteOrder.nativeOrder());
+        ByteBuffer byteBuffer =
+                ByteBuffer.allocateDirect(buffer.capacity()).order(ByteOrder.nativeOrder());
         for (int i = 0; i < buffer.capacity(); i++) {
             byteBuffer.put(i, (byte) buffer.get(i));
         }
@@ -297,9 +284,7 @@ public class Buffers {
      * @param length The length
      * @throws IndexOutOfBoundsException If the indices are invalid.
      */
-    public static void bufferCopy(
-            ByteBuffer src, int srcPos,
-            ByteBuffer dst, int dstPos,
+    public static void bufferCopy(ByteBuffer src, int srcPos, ByteBuffer dst, int dstPos,
             int length) {
         // This could be optimized for large lengths, by using bulk operations
         // on slices of the buffers

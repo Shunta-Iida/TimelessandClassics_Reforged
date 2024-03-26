@@ -11,8 +11,7 @@ import java.util.function.Supplier;
 
 public class MessageArmorRemove extends PlayMessage<MessageArmorRemove> {
     @Override
-    public void encode(MessageArmorRemove messageArmorRemove, FriendlyByteBuf friendlyByteBuf) {
-    }
+    public void encode(MessageArmorRemove messageArmorRemove, FriendlyByteBuf friendlyByteBuf) {}
 
     @Override
     public MessageArmorRemove decode(FriendlyByteBuf friendlyByteBuf) {
@@ -20,7 +19,8 @@ public class MessageArmorRemove extends PlayMessage<MessageArmorRemove> {
     }
 
     @Override
-    public void handle(MessageArmorRemove messageArmorRemove, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageArmorRemove messageArmorRemove,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null && !player.isSpectator()) {

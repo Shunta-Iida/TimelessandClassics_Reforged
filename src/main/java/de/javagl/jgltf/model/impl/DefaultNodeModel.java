@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.impl;
 
@@ -37,17 +29,18 @@ import java.util.function.Supplier;
 /**
  * Implementation of a {@link NodeModel}
  */
-public final class DefaultNodeModel extends AbstractNamedModelElement
-        implements NodeModel {
+public final class DefaultNodeModel extends AbstractNamedModelElement implements NodeModel {
     /**
      * A thread-local, temporary 16-element matrix
      */
-    private static final ThreadLocal<float[]> TEMP_MATRIX_4x4_IN_LOCAL = ThreadLocal.withInitial(() -> new float[16]);
+    private static final ThreadLocal<float[]> TEMP_MATRIX_4x4_IN_LOCAL =
+            ThreadLocal.withInitial(() -> new float[16]);
 
     /**
      * A thread-local, temporary 16-element matrix
      */
-    private static final ThreadLocal<float[]> TEMP_MATRIX_4x4_IN_GLOBAL = ThreadLocal.withInitial(() -> new float[16]);
+    private static final ThreadLocal<float[]> TEMP_MATRIX_4x4_IN_GLOBAL =
+            ThreadLocal.withInitial(() -> new float[16]);
 
     /**
      * The parent of this node. This is <code>null</code> for the root node.
@@ -214,14 +207,12 @@ public final class DefaultNodeModel extends AbstractNamedModelElement
 
     @Override
     public Supplier<float[]> createGlobalTransformSupplier() {
-        return Suppliers.createTransformSupplier(this,
-                NodeModel::computeGlobalTransform);
+        return Suppliers.createTransformSupplier(this, NodeModel::computeGlobalTransform);
     }
 
     @Override
     public Supplier<float[]> createLocalTransformSupplier() {
-        return Suppliers.createTransformSupplier(this,
-                NodeModel::computeLocalTransform);
+        return Suppliers.createTransformSupplier(this, NodeModel::computeLocalTransform);
     }
 
     /**
@@ -240,8 +231,7 @@ public final class DefaultNodeModel extends AbstractNamedModelElement
      * @param result    The result array
      * @return The result array
      */
-    public static float[] computeLocalTransform(
-            NodeModel nodeModel, float result[]) {
+    public static float[] computeLocalTransform(NodeModel nodeModel, float result[]) {
         float localResult[] = Utils.validate(result, 16);
         if (nodeModel.getMatrix() != null) {
             float m[] = nodeModel.getMatrix();
@@ -285,16 +275,14 @@ public final class DefaultNodeModel extends AbstractNamedModelElement
      * @param result    The result
      * @return The result
      */
-    private static float[] computeGlobalTransform(
-            NodeModel nodeModel, float result[]) {
+    private static float[] computeGlobalTransform(NodeModel nodeModel, float result[]) {
         float localResult[] = Utils.validate(result, 16);
         float tempLocalTransform[] = TEMP_MATRIX_4x4_IN_GLOBAL.get();
         NodeModel currentNode = nodeModel;
         MathUtils.setIdentity4x4(localResult);
         while (currentNode != null) {
             currentNode.computeLocalTransform(tempLocalTransform);
-            MathUtils.mul4x4(
-                    tempLocalTransform, localResult, localResult);
+            MathUtils.mul4x4(tempLocalTransform, localResult, localResult);
             currentNode = currentNode.getParent();
         }
         return localResult;
@@ -318,8 +306,8 @@ public final class DefaultNodeModel extends AbstractNamedModelElement
             return null;
         }
         if (array.length != expectedLength) {
-            throw new IllegalArgumentException("Expected " + expectedLength
-                    + " array elements, but found " + array.length);
+            throw new IllegalArgumentException(
+                    "Expected " + expectedLength + " array elements, but found " + array.length);
         }
         return array;
     }

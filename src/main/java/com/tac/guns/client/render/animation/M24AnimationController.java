@@ -15,18 +15,20 @@ public class M24AnimationController extends BoltActionAnimationController {
     public static int INDEX_BOLT = 2;
     public static int INDEX_BULLET = 3;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m24_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m24_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m24_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac", "animations/m24_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m24_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m24_inspect.gltf"));
-    public static final AnimationMeta BOLT = new AnimationMeta(new ResourceLocation("tac", "animations/m24_bolt.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_reload_empty.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_draw.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_inspect.gltf"));
+    public static final AnimationMeta BOLT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m24_bolt.gltf"));
     private static final M24AnimationController instance = new M24AnimationController();
 
     private M24AnimationController() {

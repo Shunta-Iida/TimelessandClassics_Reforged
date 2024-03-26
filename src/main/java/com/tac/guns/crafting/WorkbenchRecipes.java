@@ -27,8 +27,7 @@ public class WorkbenchRecipes {
     public static WorkbenchRecipe getRecipeById(Level world, ResourceLocation id) {
         return world.getRecipeManager().getRecipes().stream()
                 .filter(recipe -> recipe.getType() == RecipeType.WORKBENCH)
-                .map(recipe -> (WorkbenchRecipe) recipe)
-                .filter(recipe -> recipe.getId().equals(id))
+                .map(recipe -> (WorkbenchRecipe) recipe).filter(recipe -> recipe.getId().equals(id))
                 .findFirst().orElse(null);
     }
 }

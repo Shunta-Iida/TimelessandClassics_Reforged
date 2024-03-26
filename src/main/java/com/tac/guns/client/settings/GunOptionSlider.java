@@ -13,8 +13,8 @@ import java.util.List;
 public class GunOptionSlider extends SliderButton {
     private final ProgressOption option;
 
-    public GunOptionSlider(Options settings, int x, int y, int width, int height, ProgressOption option,
-            List<FormattedCharSequence> tooltip) {
+    public GunOptionSlider(Options settings, int x, int y, int width, int height,
+            ProgressOption option, List<FormattedCharSequence> tooltip) {
         super(settings, x, y, width, height, option, tooltip);
         this.option = option;
     }

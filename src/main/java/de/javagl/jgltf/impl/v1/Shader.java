@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for shader.schema.json
  * 
  */
-public class Shader
-        extends GlTFChildOfRootProperty {
+public class Shader extends GlTFChildOfRootProperty {
 
     /**
      * The uri of the GLSL source. (required)
@@ -38,7 +36,8 @@ public class Shader
      */
     public void setUri(String uri) {
         if (uri == null) {
-            throw new NullPointerException((("Invalid value for uri: " + uri) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for uri: " + uri) + ", may not be null"));
         }
         this.uri = uri;
     }
@@ -65,10 +64,12 @@ public class Shader
      */
     public void setType(Integer type) {
         if (type == null) {
-            throw new NullPointerException((("Invalid value for type: " + type) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for type: " + type) + ", may not be null"));
         }
         if ((type != 35632) && (type != 35633)) {
-            throw new IllegalArgumentException((("Invalid value for type: " + type) + ", valid: [35632, 35633]"));
+            throw new IllegalArgumentException(
+                    (("Invalid value for type: " + type) + ", valid: [35632, 35633]"));
         }
         this.type = type;
     }

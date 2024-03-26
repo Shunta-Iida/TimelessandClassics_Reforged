@@ -39,8 +39,8 @@ public class Scope extends Attachment {
 
     private String tagName;
 
-    private Scope(ScopeZoomData[] additionalZoom, double centerOffset, double stabilityOffset, String tagName,
-            IGunModifier... modifier) {
+    private Scope(ScopeZoomData[] additionalZoom, double centerOffset, double stabilityOffset,
+            String tagName, IGunModifier... modifier) {
         super(modifier);
         this.zoomData = additionalZoom;
         this.centerOffset = centerOffset;
@@ -183,13 +183,14 @@ public class Scope extends Attachment {
      * @param modifiers      an array of gun modifiers
      * @return a scope get
      */
-    public static Scope create(ScopeZoomData[] additionalZoom, double centerOffset, double stabilityOffset,
-            String tagName, IGunModifier... modifiers) {
+    public static Scope create(ScopeZoomData[] additionalZoom, double centerOffset,
+            double stabilityOffset, String tagName, IGunModifier... modifiers) {
         return new Scope(additionalZoom, centerOffset, stabilityOffset, tagName, modifiers);
     }
 
-    public static Scope create(ScopeZoomData[] additionalZoom, double centerOffset, double stabilityOffset,
-            String tagName, boolean needSqueeze, IGunModifier... modifiers) {
+    public static Scope create(ScopeZoomData[] additionalZoom, double centerOffset,
+            double stabilityOffset, String tagName, boolean needSqueeze,
+            IGunModifier... modifiers) {
         Scope scope = new Scope(additionalZoom, centerOffset, stabilityOffset, tagName, modifiers);
         scope.needSqueeze = needSqueeze;
         return scope;

@@ -33,61 +33,72 @@ public class CommandsManager {
         CommandsManager.register(commandDispatcher);
     }
 
-    public CommandsManager() {
-    }
+    public CommandsManager() {}
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        LiteralArgumentBuilder<CommandSourceStack> tacCommander = Commands.literal("tdev")
-                .requires((commandSource) -> commandSource.hasPermission(1))
+        LiteralArgumentBuilder<CommandSourceStack> tacCommander =
+                Commands.literal("tdev").requires((commandSource) -> commandSource.hasPermission(1))
 
-                .then(Commands.literal("setCat").then(Commands.argument("catToSet", MessageArgument.message())
-                        .executes(commandContext -> {
-                            Component iTextComponent = MessageArgument.getMessage(commandContext, "catToSet");
-                            int responseCat;
-                            try {
-                                responseCat = Integer.parseInt(iTextComponent.getContents());
-                                manageCat(commandContext, responseCat);
-                            } catch (Exception e) {
-                                sendMessage(commandContext, "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
-                            }
-                            return 1;
-                        })))
-
-                .then(Commands.literal("getCat").executes(commandContext -> {
-                    sendMessage(commandContext, "Current Catagory: " + CommandsHandler.get().getCatCurrentIndex());
-                    return 1;
-                }))
-
-                .then(Commands.literal("tac_weapons_category")
-                        .then(Commands.literal("setMode")
-                                .then(Commands.argument("modeName", MessageArgument.message())//
+                        .then(Commands.literal("setCat")
+                                .then(Commands.argument("catToSet", MessageArgument.message())
                                         .executes(commandContext -> {
-
-                                            CommandsHandler.get().setCatCurrentIndex(1);
-                                            GunEditor.TaCWeaponDevModes mode;
+                                            Component iTextComponent = MessageArgument
+                                                    .getMessage(commandContext, "catToSet");
+                                            int responseCat;
                                             try {
-                                                mode = GunEditor.TaCWeaponDevModes.valueOf(MessageArgument
-                                                        .getMessage(commandContext, "modeName").getContents());
+                                                responseCat = Integer
+                                                        .parseInt(iTextComponent.getContents());
+                                                manageCat(commandContext, responseCat);
                                             } catch (Exception e) {
                                                 sendMessage(commandContext,
-                                                        "FAILED TO SET MODE, PLEASE CHOOSE FROM THE FOLLOWING\n"
-                                                                + GunEditor.formattedModeContext());
-                                                return 1;
+                                                        "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
                                             }
-                                            GunEditor.get().setMode(mode);
-                                            sendMessage(commandContext, "Set Category to a TaC Default \n Weapon's ---"
-                                                    + mode.getTagName() + "--- | Editing mode");
-                                            GunEditor.get().setResetMode(true);
+                                            return 1;
+                                        })))
+
+                        .then(Commands.literal("getCat").executes(commandContext -> {
+                            sendMessage(commandContext, "Current Catagory: "
+                                    + CommandsHandler.get().getCatCurrentIndex());
+                            return 1;
+                        }))
+
+                        .then(Commands.literal("tac_weapons_category")
+                                .then(Commands.literal("setMode")
+                                        .then(Commands
+                                                .argument("modeName", MessageArgument.message())//
+                                                .executes(commandContext -> {
+
+                                                    CommandsHandler.get().setCatCurrentIndex(1);
+                                                    GunEditor.TaCWeaponDevModes mode;
+                                                    try {
+                                                        mode = GunEditor.TaCWeaponDevModes
+                                                                .valueOf(MessageArgument
+                                                                        .getMessage(commandContext,
+                                                                                "modeName")
+                                                                        .getContents());
+                                                    } catch (Exception e) {
+                                                        sendMessage(commandContext,
+                                                                "FAILED TO SET MODE, PLEASE CHOOSE FROM THE FOLLOWING\n"
+                                                                        + GunEditor
+                                                                                .formattedModeContext());
+                                                        return 1;
+                                                    }
+                                                    GunEditor.get().setMode(mode);
+                                                    sendMessage(commandContext,
+                                                            "Set Category to a TaC Default \n Weapon's ---"
+                                                                    + mode.getTagName()
+                                                                    + "--- | Editing mode");
+                                                    GunEditor.get().setResetMode(true);
+                                                    return 1;
+                                                }))
+                                        .executes(commandContext -> {
+                                            CommandsHandler.get().setCatCurrentIndex(1);
+                                            sendMessage(commandContext,
+                                                    "FAILED TO SET MODE, PLEASE CHOOSE FROM THE FOLLOWING\n"
+                                                            + GunEditor.formattedModeContext());
                                             return 1;
                                         }))
-                                .executes(commandContext -> {
-                                    CommandsHandler.get().setCatCurrentIndex(1);
-                                    sendMessage(commandContext, "FAILED TO SET MODE, PLEASE CHOOSE FROM THE FOLLOWING\n"
-                                            + GunEditor.formattedModeContext());
-                                    return 1;
-                                }))
-                        .then(Commands.literal("export")
-                                .executes(commandContext -> {
+                                .then(Commands.literal("export").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(1);
                                     try {
                                         GunEditor.get().exportData();
@@ -97,49 +108,50 @@ public class CommandsManager {
                                                         + GunEditor.formattedModeContext());
                                         return 1;
                                     }
-                                    sendMessage(commandContext, "Exported all weapon data, with adjustments!");
+                                    sendMessage(commandContext,
+                                            "Exported all weapon data, with adjustments!");
                                     return 1;
-                                }))
-                        .then(Commands.literal("reset")
-                                .executes(commandContext -> {
+                                })).then(Commands.literal("reset").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(1);
                                     GunEditor.get().resetData();
                                     sendMessage(commandContext,
                                             "Modified data within this current category, for this weapon has been reset!");
                                     return 1;
-                                }))
-                        .executes(commandContext -> {
-                            CommandsHandler.get().setCatCurrentIndex(1);
-                            sendMessage(commandContext, "Set Category to a TaC Default | Weapon |");
-                            return 1;
-                        }))
-                .then(Commands.literal("tac_gui_category")
-                        .then(Commands.literal("setElementIndex")
-                                .then(Commands.argument("modeName", MessageArgument.message())//
-                                        .executes(commandContext -> {
-                                            CommandsHandler.get().setCatCurrentIndex(3);
-                                            Component iTextComponent = MessageArgument.getMessage(commandContext,
-                                                    "modeName");
-                                            try {
-                                                GuiEditor.get().currElement = Integer
-                                                        .parseInt(iTextComponent.getContents());
-                                            } catch (Exception e) {
-                                                sendMessage(commandContext,
-                                                        "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
-                                            }
-
-                                            sendMessage(commandContext,
-                                                    "TaC GUI Editor \n Element: " + GuiEditor.get().currElement);
-                                            return 1;
-                                        }))
-                                .executes(commandContext -> {
-                                    CommandsHandler.get().setCatCurrentIndex(3);
+                                })).executes(commandContext -> {
+                                    CommandsHandler.get().setCatCurrentIndex(1);
                                     sendMessage(commandContext,
-                                            "FAILED TO SET ELEMENT, THE PARAM IS A NUMBER, INTEGERS ONLY!");
+                                            "Set Category to a TaC Default | Weapon |");
                                     return 1;
                                 }))
-                        .then(Commands.literal("export")
-                                .executes(commandContext -> {
+                        .then(Commands.literal("tac_gui_category")
+                                .then(Commands.literal("setElementIndex")
+                                        .then(Commands
+                                                .argument("modeName", MessageArgument.message())//
+                                                .executes(commandContext -> {
+                                                    CommandsHandler.get().setCatCurrentIndex(3);
+                                                    Component iTextComponent = MessageArgument
+                                                            .getMessage(commandContext, "modeName");
+                                                    try {
+                                                        GuiEditor.get().currElement =
+                                                                Integer.parseInt(iTextComponent
+                                                                        .getContents());
+                                                    } catch (Exception e) {
+                                                        sendMessage(commandContext,
+                                                                "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
+                                                    }
+
+                                                    sendMessage(commandContext,
+                                                            "TaC GUI Editor \n Element: "
+                                                                    + GuiEditor.get().currElement);
+                                                    return 1;
+                                                }))
+                                        .executes(commandContext -> {
+                                            CommandsHandler.get().setCatCurrentIndex(3);
+                                            sendMessage(commandContext,
+                                                    "FAILED TO SET ELEMENT, THE PARAM IS A NUMBER, INTEGERS ONLY!");
+                                            return 1;
+                                        }))
+                                .then(Commands.literal("export").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(3);
                                     try {
                                         GuiEditor.get().exportData();
@@ -149,42 +161,44 @@ public class CommandsManager {
                                                         + GunEditor.formattedModeContext());
                                         return 1;
                                     }
-                                    sendMessage(commandContext, "Exported all weapon data, with adjustments!");
+                                    sendMessage(commandContext,
+                                            "Exported all weapon data, with adjustments!");
                                     return 1;
-                                }))
-                        .executes(commandContext -> {
-                            CommandsHandler.get().setCatCurrentIndex(3);
-                            sendMessage(commandContext,
-                                    "Use \"/tdev tac_gui_category setElementIndex\" to select your adjusting element");
-                            return 1;
-                        }))
-                .then(Commands.literal("tac_obj_category")
-                        .then(Commands.literal("setElementIndex")
-                                .then(Commands.argument("modeName", MessageArgument.message())//
-                                        .executes(commandContext -> {
-                                            CommandsHandler.get().setCatCurrentIndex(4);
-                                            Component iTextComponent = MessageArgument.getMessage(commandContext,
-                                                    "modeName");
-                                            try {
-                                                ObjectRenderEditor.get().currElement = Integer
-                                                        .parseInt(iTextComponent.getContents());
-                                            } catch (Exception e) {
-                                                sendMessage(commandContext,
-                                                        "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
-                                            }
-
-                                            sendMessage(commandContext,
-                                                    "TaC OBJ_RENDER Editor \n Element: " + GuiEditor.get().currElement);
-                                            return 1;
-                                        }))
-                                .executes(commandContext -> {
+                                })).executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(3);
                                     sendMessage(commandContext,
-                                            "FAILED TO SET ELEMENT, THE PARAM IS A NUMBER, INTEGERS ONLY!");
+                                            "Use \"/tdev tac_gui_category setElementIndex\" to select your adjusting element");
                                     return 1;
                                 }))
-                        .then(Commands.literal("export")
-                                .executes(commandContext -> {
+                        .then(Commands.literal("tac_obj_category")
+                                .then(Commands.literal("setElementIndex")
+                                        .then(Commands
+                                                .argument("modeName", MessageArgument.message())//
+                                                .executes(commandContext -> {
+                                                    CommandsHandler.get().setCatCurrentIndex(4);
+                                                    Component iTextComponent = MessageArgument
+                                                            .getMessage(commandContext, "modeName");
+                                                    try {
+                                                        ObjectRenderEditor.get().currElement =
+                                                                Integer.parseInt(iTextComponent
+                                                                        .getContents());
+                                                    } catch (Exception e) {
+                                                        sendMessage(commandContext,
+                                                                "INPUT WAS NOT AN INTEGER, PLEASE REFER TO DOCUMENTATION");
+                                                    }
+
+                                                    sendMessage(commandContext,
+                                                            "TaC OBJ_RENDER Editor \n Element: "
+                                                                    + GuiEditor.get().currElement);
+                                                    return 1;
+                                                }))
+                                        .executes(commandContext -> {
+                                            CommandsHandler.get().setCatCurrentIndex(3);
+                                            sendMessage(commandContext,
+                                                    "FAILED TO SET ELEMENT, THE PARAM IS A NUMBER, INTEGERS ONLY!");
+                                            return 1;
+                                        }))
+                                .then(Commands.literal("export").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(4);
                                     try {
                                         ObjectRenderEditor.get().exportData();
@@ -194,18 +208,17 @@ public class CommandsManager {
                                                         + GunEditor.formattedModeContext());
                                         return 1;
                                     }
-                                    sendMessage(commandContext, "Exported all weapon data, with adjustments!");
+                                    sendMessage(commandContext,
+                                            "Exported all weapon data, with adjustments!");
+                                    return 1;
+                                })).executes(commandContext -> {
+                                    CommandsHandler.get().setCatCurrentIndex(4);
+                                    sendMessage(commandContext,
+                                            "Use \"/tdev tac_obj_category setElementIndex\" to select your adjusting element");
                                     return 1;
                                 }))
-                        .executes(commandContext -> {
-                            CommandsHandler.get().setCatCurrentIndex(4);
-                            sendMessage(commandContext,
-                                    "Use \"/tdev tac_obj_category setElementIndex\" to select your adjusting element");
-                            return 1;
-                        }))
-                .then(Commands.literal("tac_scope_category")
-                        .then(Commands.literal("export")
-                                .executes(commandContext -> {
+                        .then(Commands.literal("tac_scope_category")
+                                .then(Commands.literal("export").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(2);
                                     try {
                                         ScopeEditor.get().exportData();
@@ -214,47 +227,49 @@ public class CommandsManager {
                                                 "FAILED TO EXPORT SCOPE DATA, THIS IS A GENERIC ERROR, REPORT WITH A LOG PLEASE.");
                                         return 1;
                                     }
-                                    sendMessage(commandContext, "Exported all scope data, with adjustments!");
+                                    sendMessage(commandContext,
+                                            "Exported all scope data, with adjustments!");
                                     return 1;
-                                }))
-                        .then(Commands.literal("reset")
-                                .executes(commandContext -> {
+                                })).then(Commands.literal("reset").executes(commandContext -> {
                                     CommandsHandler.get().setCatCurrentIndex(2);
                                     ScopeEditor.get().resetData();
-                                    sendMessage(commandContext, "All modified data for this scope has been reset!");
+                                    sendMessage(commandContext,
+                                            "All modified data for this scope has been reset!");
+                                    return 1;
+                                })).executes(commandContext -> {
+                                    CommandsHandler.get().setCatCurrentIndex(2);
+                                    sendMessage(commandContext,
+                                            "Set Category to a TaC Default | Scope |");
                                     return 1;
                                 }))
-                        .executes(commandContext -> {
-                            CommandsHandler.get().setCatCurrentIndex(2);
-                            sendMessage(commandContext, "Set Category to a TaC Default | Scope |");
-                            return 1;
-                        }))
-                /*
-                 * .then(Commands.literal("tac_colorBench_category")
-                 * .executes(commandContext -> {
-                 * CommandsHandler.get().setCatCurrentIndex(2);
-                 * sendMessage(commandContext,
-                 * "Set Category to a TaC Default | ColorBench | Editing mode.");
-                 * return 1;
-                 * }))
-                 */
-                .executes(commandContext -> sendMessage(commandContext,
-                        "The tdev command palette is for making on the fly adjustments within the current game instance, to as many pieces as developed, this REQUIRES code dev to utilize correctly. NEVER release with code listening to this class!")); // blank:
-                                                                                                                                                                                                                                                           // didn't
-                                                                                                                                                                                                                                                           // match
-                                                                                                                                                                                                                                                           // a
-                                                                                                                                                                                                                                                           // literal
-                                                                                                                                                                                                                                                           // or
-                                                                                                                                                                                                                                                           // the
-                                                                                                                                                                                                                                                           // custommessage
-                                                                                                                                                                                                                                                           // argument
+                        /*
+                         * .then(Commands.literal("tac_colorBench_category")
+                         * .executes(commandContext -> {
+                         * CommandsHandler.get().setCatCurrentIndex(2);
+                         * sendMessage(commandContext,
+                         * "Set Category to a TaC Default | ColorBench | Editing mode.");
+                         * return 1;
+                         * }))
+                         */
+                        .executes(commandContext -> sendMessage(commandContext,
+                                "The tdev command palette is for making on the fly adjustments within the current game instance, to as many pieces as developed, this REQUIRES code dev to utilize correctly. NEVER release with code listening to this class!")); // blank:
+                                                                                                                                                                                                                                                                                                                           // didn't
+                                                                                                                                                                                                                                                                                                                           // match
+                                                                                                                                                                                                                                                                                                                           // a
+                                                                                                                                                                                                                                                                                                                           // literal
+                                                                                                                                                                                                                                                                                                                           // or
+                                                                                                                                                                                                                                                                                                                           // the
+                                                                                                                                                                                                                                                                                                                           // custommessage
+                                                                                                                                                                                                                                                                                                                           // argument
 
         dispatcher.register(tacCommander);
     }
 
-    static int manageCat(CommandContext<CommandSourceStack> commandContext, int cat) throws CommandSyntaxException {
+    static int manageCat(CommandContext<CommandSourceStack> commandContext, int cat)
+            throws CommandSyntaxException {
         TranslatableComponent finalText = new TranslatableComponent("chat.type.announcement",
-                commandContext.getSource().getDisplayName(), new TextComponent("Added Cat: " + cat));
+                commandContext.getSource().getDisplayName(),
+                new TextComponent("Added Cat: " + cat));
 
         if (CommandsHandler.get().catInGlobal(cat)) {
             CommandsHandler.get().setCatCurrentIndex(cat);
@@ -265,12 +280,12 @@ public class CommandsManager {
 
         Entity entity = commandContext.getSource().getEntity();
         if (entity != null) {
-            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText, ChatType.CHAT,
-                    entity.getUUID());
+            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText,
+                    ChatType.CHAT, entity.getUUID());
             // broadcastMessage is sendMessage()
         } else {
-            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText, ChatType.SYSTEM,
-                    Util.NIL_UUID);
+            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText,
+                    ChatType.SYSTEM, Util.NIL_UUID);
         }
         return 1;
     }
@@ -282,12 +297,12 @@ public class CommandsManager {
 
         Entity entity = commandContext.getSource().getEntity();
         if (entity != null) {
-            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText, ChatType.CHAT,
-                    entity.getUUID());
+            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText,
+                    ChatType.CHAT, entity.getUUID());
             // broadcastMessage is sendMessage()
         } else {
-            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText, ChatType.SYSTEM,
-                    Util.NIL_UUID);
+            commandContext.getSource().getServer().getPlayerList().broadcastMessage(finalText,
+                    ChatType.SYSTEM, Util.NIL_UUID);
         }
         return 1;
     }

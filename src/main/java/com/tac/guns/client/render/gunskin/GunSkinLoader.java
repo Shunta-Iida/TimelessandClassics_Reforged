@@ -56,7 +56,8 @@ public class GunSkinLoader {
      */
     public GunSkin loadGunSkin(ResourceLocation metaLocation) {
         try {
-            Resource resource = Minecraft.getInstance().getResourceManager().getResource(metaLocation);
+            Resource resource =
+                    Minecraft.getInstance().getResourceManager().getResource(metaLocation);
 
             String path = metaLocation.getPath();
             String fileName = path.substring(path.lastIndexOf("/") + 1);
@@ -70,21 +71,20 @@ public class GunSkinLoader {
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
 
-            SkinType skinType = SkinType.valueOf(
-                    json.get("type").getAsString().toUpperCase());
-            ResourceLocation gunRegistryName = ResourceLocation.tryParse(
-                    json.get("gun_registry_name").getAsString());
-            ResourceLocation icon = ResourceLocation.tryParse(
-                    json.get("icon").getAsString());
-            ResourceLocation miniIcon = ResourceLocation.tryParse(
-                    json.get("mini_icon").getAsString());
+            SkinType skinType = SkinType.valueOf(json.get("type").getAsString().toUpperCase());
+            ResourceLocation gunRegistryName =
+                    ResourceLocation.tryParse(json.get("gun_registry_name").getAsString());
+            ResourceLocation icon = ResourceLocation.tryParse(json.get("icon").getAsString());
+            ResourceLocation miniIcon =
+                    ResourceLocation.tryParse(json.get("mini_icon").getAsString());
             GunSkin gunSkin = new GunSkin(new ResourceLocation(namespace, skinId), gunRegistryName);
             gunSkin.setIcon(icon);
             gunSkin.setMiniIcon(miniIcon);
 
             switch (skinType) {
                 case CUSTOM -> {
-                    String mainPath = namespace + ":" + path.substring(0, path.length() - extension.length());
+                    String mainPath =
+                            namespace + ":" + path.substring(0, path.length() - extension.length());
 
                     JsonObject componentsJson = json.getAsJsonObject("components");
                     for (Map.Entry<String, JsonElement> entry : componentsJson.entrySet()) {
@@ -94,7 +94,8 @@ public class GunSkinLoader {
 
                         // try to load the component model
                         ResourceLocation modelRL = component.getModelLocation(mainPath);
-                        if (modelRL != null && Minecraft.getInstance().getResourceManager().hasResource(modelRL)) {
+                        if (modelRL != null && Minecraft.getInstance().getResourceManager()
+                                .hasResource(modelRL)) {
                             CacheableModel componentModel = new CacheableModel(modelRL);
                             ForgeModelBakery.addSpecialModel(modelRL);
                             gunSkin.putComponentModel(component, componentModel);
@@ -131,7 +132,6 @@ public class GunSkinLoader {
     }
 
     public enum SkinType {
-        CUSTOM,
-        TEXTURE_ONLY;
+        CUSTOM, TEXTURE_ONLY;
     }
 }

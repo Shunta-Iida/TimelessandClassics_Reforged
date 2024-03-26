@@ -9,7 +9,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT,
+        bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CacheableModel {
     private final ResourceLocation modelLocation;
     private BakedModel cachedModel;
@@ -21,7 +22,8 @@ public class CacheableModel {
     @OnlyIn(Dist.CLIENT)
     public BakedModel getModel() {
         if (this.cachedModel == null) {
-            BakedModel model = Minecraft.getInstance().getModelManager().getModel(this.modelLocation);
+            BakedModel model =
+                    Minecraft.getInstance().getModelManager().getModel(this.modelLocation);
             if (model == Minecraft.getInstance().getModelManager().getMissingModel())
                 return model;
             this.cachedModel = model;
@@ -40,7 +42,6 @@ public class CacheableModel {
         }
 
         @Override
-        public void cleanCache() {
-        }
+        public void cleanCache() {}
     };
 }

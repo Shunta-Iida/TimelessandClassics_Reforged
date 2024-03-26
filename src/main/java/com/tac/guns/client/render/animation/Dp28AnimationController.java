@@ -16,18 +16,18 @@ public class Dp28AnimationController extends GunAnimationController {
     public static int INDEX_RIGHT_HAND = 0;
     public static int INDEX_MAGAZINE = 2;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/dp28_inspect.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_reload_empty.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_draw.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/dp28_inspect.gltf"));
     private static final Dp28AnimationController instance = new Dp28AnimationController();
 
     private Dp28AnimationController() {

@@ -17,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -27,19 +27,21 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class vector45_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         Vector45AnimationController controller = Vector45AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Vector45AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    Vector45AnimationController.INDEX_BODY, transformType, matrices);
             if (Gun.getScope(stack) == null
                     && Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) == ItemStack.EMPTY) {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880,
-                        overlay);
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices,
+                        renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices,
+                        renderBuffer, light, overlay);
             }
 
             renderStock(stack, matrices, renderBuffer, light, overlay, skin);
@@ -53,9 +55,10 @@ public class vector45_animation extends SkinnedGunModel {
             if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                 renderLaser(stack, matrices, renderBuffer, light, overlay, skin);
 
-            RenderUtil.renderModel(getComponentModel(skin, BODY_LIGHT), stack, matrices, renderBuffer, 15728880,
-                    overlay);
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY_LIGHT), stack, matrices,
+                    renderBuffer, 15728880, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
@@ -69,9 +72,10 @@ public class vector45_animation extends SkinnedGunModel {
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), Vector45AnimationController.INDEX_BOLT,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    Vector45AnimationController.INDEX_BOLT, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
@@ -79,7 +83,8 @@ public class vector45_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     Vector45AnimationController.INDEX_HANDLE, transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, HANDLE), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, HANDLE), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 

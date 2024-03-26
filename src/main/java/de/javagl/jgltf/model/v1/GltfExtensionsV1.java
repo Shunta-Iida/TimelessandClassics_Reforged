@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1;
 
@@ -50,8 +42,7 @@ public class GltfExtensionsV1 {
      */
     public static void addExtensionUsed(GlTF gltf, String extensionName) {
         List<String> oldExtensionsUsed = gltf.getExtensionsUsed();
-        if (oldExtensionsUsed == null ||
-                !oldExtensionsUsed.contains(extensionName)) {
+        if (oldExtensionsUsed == null || !oldExtensionsUsed.contains(extensionName)) {
             gltf.addExtensionsUsed(extensionName);
         }
     }
@@ -67,8 +58,7 @@ public class GltfExtensionsV1 {
      */
     public static void removeExtensionUsed(GlTF gltf, String extensionName) {
         List<String> oldExtensionsUsed = gltf.getExtensionsUsed();
-        if (oldExtensionsUsed != null &&
-                oldExtensionsUsed.contains(extensionName)) {
+        if (oldExtensionsUsed != null && oldExtensionsUsed.contains(extensionName)) {
             gltf.removeExtensionsUsed(extensionName);
         }
     }
@@ -83,8 +73,8 @@ public class GltfExtensionsV1 {
      * @param extensionName The extension name
      * @return The extension property mapping, or <code>null</code>
      */
-    private static Map<String, Object> getExtensionMap(
-            GlTFProperty gltfProperty, String extensionName) {
+    private static Map<String, Object> getExtensionMap(GlTFProperty gltfProperty,
+            String extensionName) {
         Map<String, Object> extensions = gltfProperty.getExtensions();
         if (extensions == null) {
             return null;
@@ -111,8 +101,7 @@ public class GltfExtensionsV1 {
      * @param extensionName The extension name
      * @return Whether the specified extension mapping exists
      */
-    static boolean hasExtension(
-            GlTFProperty gltfProperty, String extensionName) {
+    static boolean hasExtension(GlTFProperty gltfProperty, String extensionName) {
         return getExtensionMap(gltfProperty, extensionName) != null;
     }
 
@@ -128,8 +117,8 @@ public class GltfExtensionsV1 {
      * @param propertyName  The property name
      * @return The value, as a string.
      */
-    static String getExtensionPropertyValueAsString(
-            GlTFProperty gltfProperty, String extensionName, String propertyName) {
+    static String getExtensionPropertyValueAsString(GlTFProperty gltfProperty, String extensionName,
+            String propertyName) {
         Map<String, Object> extensionMap = getExtensionMap(gltfProperty, extensionName);
         if (extensionMap == null) {
             return null;
@@ -154,8 +143,7 @@ public class GltfExtensionsV1 {
      * @param propertyName  The property name
      * @param propertyValue The value
      */
-    static void setExtensionPropertyValue(
-            GlTFProperty gltfProperty, String extensionName,
+    static void setExtensionPropertyValue(GlTFProperty gltfProperty, String extensionName,
             String propertyName, Object propertyValue) {
         Map<String, Object> extensionMap = getExtensionMap(gltfProperty, extensionName);
         if (extensionMap == null) {
@@ -179,8 +167,8 @@ public class GltfExtensionsV1 {
      *                                  cannot be converted to the desired target
      *                                  type
      */
-    static <T> T fetchExtensionObject(
-            GlTFProperty gltfProperty, String extensionName, Class<T> type) {
+    static <T> T fetchExtensionObject(GlTFProperty gltfProperty, String extensionName,
+            Class<T> type) {
         Map<String, Object> extensions = gltfProperty.getExtensions();
         if (extensions == null) {
             return null;
@@ -190,10 +178,8 @@ public class GltfExtensionsV1 {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(
-                DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        objectMapper.configure(
-                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         T extension = objectMapper.convertValue(extensionObject, type);
         return extension;
     }

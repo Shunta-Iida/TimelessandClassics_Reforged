@@ -27,10 +27,12 @@ public class LivingRendererMixin<T extends LivingEntity, M extends EntityModel<T
     private float netHeadYaw;
     private float headPitch;
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V"), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void capture(T entity, float entityYaw, float deltaTicks, PoseStack poseStack, MultiBufferSource source,
-            int light, CallbackInfo ci, boolean shouldSit, float f, float f1, float f2, float f6, float f7, float f8,
-            float f5) {
+    @Inject(method = "render", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V"),
+            locals = LocalCapture.CAPTURE_FAILHARD)
+    public void capture(T entity, float entityYaw, float deltaTicks, PoseStack poseStack,
+            MultiBufferSource source, int light, CallbackInfo ci, boolean shouldSit, float f,
+            float f1, float f2, float f6, float f7, float f8, float f5) {
         this.entity = entity;
         this.limbSwing = f5;
         this.limbSwingAmount = f8;
@@ -39,17 +41,20 @@ public class LivingRendererMixin<T extends LivingEntity, M extends EntityModel<T
         this.headPitch = f6;
     }
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V"))
-    public void fireRenderPlayer(M model, PoseStack poseStack, VertexConsumer consumer, int light, int overlay,
-            float red, float green, float blue, float alpha) {
+    @Redirect(method = "render", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V"))
+    public void fireRenderPlayer(M model, PoseStack poseStack, VertexConsumer consumer, int light,
+            int overlay, float red, float green, float blue, float alpha) {
         if (entity instanceof Player && model instanceof PlayerModel) {
-            if (!MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.Render.Pre((Player) entity, (PlayerModel) model,
-                    poseStack, consumer, light, overlay, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                    Minecraft.getInstance().getDeltaFrameTime()))) {
+            if (!MinecraftForge.EVENT_BUS.post(
+                    new PlayerModelEvent.Render.Pre((Player) entity, (PlayerModel) model, poseStack,
+                            consumer, light, overlay, limbSwing, limbSwingAmount, ageInTicks,
+                            netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()))) {
                 model.renderToBuffer(poseStack, consumer, light, overlay, red, green, blue, alpha);
-                MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.Render.Post((Player) entity, (PlayerModel) model,
-                        poseStack, consumer, light, overlay, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
-                        headPitch, Minecraft.getInstance().getDeltaFrameTime()));
+                MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.Render.Post((Player) entity,
+                        (PlayerModel) model, poseStack, consumer, light, overlay, limbSwing,
+                        limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                        Minecraft.getInstance().getDeltaFrameTime()));
             }
             return;
         }

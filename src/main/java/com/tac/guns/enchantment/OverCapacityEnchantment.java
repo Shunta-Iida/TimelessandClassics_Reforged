@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class OverCapacityEnchantment extends GunEnchantment {
     public OverCapacityEnchantment() {
-        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.WEAPON);
+        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.WEAPON);
     }
 
     @Override

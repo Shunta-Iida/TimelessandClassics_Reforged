@@ -23,8 +23,7 @@ public class ScopeJitterHandler {
         return instance == null ? instance = new ScopeJitterHandler() : instance;
     }
 
-    private ScopeJitterHandler() {
-    }
+    private ScopeJitterHandler() {}
 
     public boolean isStabilizing() {
         return isStabilizing;
@@ -78,7 +77,8 @@ public class ScopeJitterHandler {
     }
 
     public double getXOffsetRatio() {
-        double degree = ((radix % (long) (duration * component / 2)) / (duration * component / 2)) * PI;
+        double degree =
+                ((radix % (long) (duration * component / 2)) / (duration * component / 2)) * PI;
         return Math.sin(degree) * xTarget;
     }
 

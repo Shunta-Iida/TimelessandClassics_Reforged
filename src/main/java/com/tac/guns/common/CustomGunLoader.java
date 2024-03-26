@@ -45,7 +45,8 @@ public class CustomGunLoader extends SimpleJsonResourceReloadListener {
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> objects, ResourceManager manager, ProfilerFiller profiler) {
+    protected void apply(Map<ResourceLocation, JsonElement> objects, ResourceManager manager,
+            ProfilerFiller profiler) {
         ImmutableMap.Builder<ResourceLocation, CustomGun> builder = ImmutableMap.builder();
         objects.forEach((resourceLocation, object) -> {
             try {
@@ -53,7 +54,8 @@ public class CustomGunLoader extends SimpleJsonResourceReloadListener {
                 if (customGun != null && Validator.isValidObject(customGun)) {
                     builder.put(resourceLocation, customGun);
                 } else {
-                    GunMod.LOGGER.error("Couldn't load data file {} as it is missing or malformed", resourceLocation);
+                    GunMod.LOGGER.error("Couldn't load data file {} as it is missing or malformed",
+                            resourceLocation);
                 }
             } catch (InvalidObjectException e) {
                 GunMod.LOGGER.error("Missing required properties for {}", resourceLocation);

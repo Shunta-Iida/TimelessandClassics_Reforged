@@ -59,38 +59,42 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
     protected Map<GunItem, Gun> prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
         Map<GunItem, Gun> map = Maps.newHashMap();
         GunMod.LOGGER.info("YO_DATA_GUN");
-        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof GunItem).forEach(item -> {
-            ResourceLocation id = item.getRegistryName();
-            if (id != null) {
-                ResourceLocation resourceLocation = new ResourceLocation(
-                        String.format("%s:guns/%s.json", id.getNamespace(), id.getPath()));
-                try (Resource resource = resourceManager.getResource(resourceLocation);
-                        InputStream is = resource.getInputStream();
-                        Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                    Gun gun = GsonHelper.fromJson(GSON_INSTANCE, reader, Gun.class);
-                    if (gun != null && Validator.isValidObject(gun)) {
-                        map.put((GunItem) item, gun);
-                    } else {
-                        GunMod.LOGGER.error(
-                                "Couldn't load data file {} as it is missing or malformed. Using default gun data",
-                                resourceLocation);
-                        map.put((GunItem) item, new Gun());
+        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof GunItem)
+                .forEach(item -> {
+                    ResourceLocation id = item.getRegistryName();
+                    if (id != null) {
+                        ResourceLocation resourceLocation = new ResourceLocation(
+                                String.format("%s:guns/%s.json", id.getNamespace(), id.getPath()));
+                        try (Resource resource = resourceManager.getResource(resourceLocation);
+                                InputStream is = resource.getInputStream();
+                                Reader reader = new BufferedReader(
+                                        new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                            Gun gun = GsonHelper.fromJson(GSON_INSTANCE, reader, Gun.class);
+                            if (gun != null && Validator.isValidObject(gun)) {
+                                map.put((GunItem) item, gun);
+                            } else {
+                                GunMod.LOGGER.error(
+                                        "Couldn't load data file {} as it is missing or malformed. Using default gun data",
+                                        resourceLocation);
+                                map.put((GunItem) item, new Gun());
+                            }
+                        } catch (InvalidObjectException e) {
+                            GunMod.LOGGER.error("Missing required properties for {}",
+                                    resourceLocation);
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            GunMod.LOGGER.error("Couldn't parse data file {}", resourceLocation);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (InvalidObjectException e) {
-                    GunMod.LOGGER.error("Missing required properties for {}", resourceLocation);
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    GunMod.LOGGER.error("Couldn't parse data file {}", resourceLocation);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+                });
         return map;
     }
 
     @Override
-    protected void apply(Map<GunItem, Gun> objects, ResourceManager resourceManager, ProfilerFiller profiler) {
+    protected void apply(Map<GunItem, Gun> objects, ResourceManager resourceManager,
+            ProfilerFiller profiler) {
         ImmutableMap.Builder<ResourceLocation, Gun> builder = ImmutableMap.builder();
         objects.forEach((item, gun) -> {
             Validate.notNull(item.getRegistryName());
@@ -238,7 +242,8 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
 
         @Override
         public Optional<String> readData(FriendlyByteBuf buffer) {
-            Map<ResourceLocation, Gun> registeredGuns = NetworkGunManager.readRegisteredGuns(buffer);
+            Map<ResourceLocation, Gun> registeredGuns =
+                    NetworkGunManager.readRegisteredGuns(buffer);
             NetworkGunManager.updateRegisteredGuns(registeredGuns);
             return Optional.empty();
         }

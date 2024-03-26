@@ -17,7 +17,8 @@ public class GunSkinItem extends AttachmentItem<GunSkin> implements IGunSkin, IC
     }
 
     public static boolean hasCustomModifier(ItemStack stack) {
-        return stack != null && stack.getTag() != null && stack.getTag().contains(CUSTOM_MODIFIER, Tag.TAG_STRING);
+        return stack != null && stack.getTag() != null
+                && stack.getTag().contains(CUSTOM_MODIFIER, Tag.TAG_STRING);
     }
 
     public static void setCustomModifier(ItemStack stack, ResourceLocation location) {

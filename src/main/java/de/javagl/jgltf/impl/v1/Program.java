@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -18,8 +17,7 @@ import java.util.List;
  * Auto-generated for program.schema.json
  * 
  */
-public class Program
-        extends GlTFChildOfRootProperty {
+public class Program extends GlTFChildOfRootProperty {
 
     /**
      * Names of GLSL vertex shader attributes. (optional)<br>
@@ -141,8 +139,8 @@ public class Program
      */
     public void setFragmentShader(String fragmentShader) {
         if (fragmentShader == null) {
-            throw new NullPointerException(
-                    (("Invalid value for fragmentShader: " + fragmentShader) + ", may not be null"));
+            throw new NullPointerException((("Invalid value for fragmentShader: " + fragmentShader)
+                    + ", may not be null"));
         }
         this.fragmentShader = fragmentShader;
     }
@@ -166,7 +164,8 @@ public class Program
      */
     public void setVertexShader(String vertexShader) {
         if (vertexShader == null) {
-            throw new NullPointerException((("Invalid value for vertexShader: " + vertexShader) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for vertexShader: " + vertexShader) + ", may not be null"));
         }
         this.vertexShader = vertexShader;
     }

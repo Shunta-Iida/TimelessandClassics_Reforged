@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -43,8 +35,7 @@ public class IO {
      * @return The absolute URI
      * @throws IOException If the URI string is not valid
      */
-    public static URI makeAbsolute(URI baseUri, String uriString)
-            throws IOException {
+    public static URI makeAbsolute(URI baseUri, String uriString) throws IOException {
         try {
             String escapedUriString = uriString.replaceAll(" ", "%20");
             URI uri = new URI(escapedUriString);
@@ -203,8 +194,7 @@ public class IO {
      * @return The byte array
      * @throws IOException If an IO error occurs
      */
-    public static byte[] read(URI uri)
-            throws IOException {
+    public static byte[] read(URI uri) throws IOException {
         try (InputStream inputStream = createInputStream(uri)) {
             byte data[] = readStream(inputStream);
             return data;
@@ -226,13 +216,11 @@ public class IO {
         String encoding = "base64,";
         int encodingIndex = uriString.indexOf(encoding);
         if (encodingIndex < 0) {
-            throw new IllegalArgumentException(
-                    "The given URI string is not a base64 encoded "
-                            + "data URI string: " + uriString);
+            throw new IllegalArgumentException("The given URI string is not a base64 encoded "
+                    + "data URI string: " + uriString);
         }
         int contentStartIndex = encodingIndex + encoding.length();
-        byte data[] = Base64.getDecoder().decode(
-                uriString.substring(contentStartIndex));
+        byte data[] = Base64.getDecoder().decode(uriString.substring(contentStartIndex));
         return data;
     }
 
@@ -281,26 +269,22 @@ public class IO {
      *                                  of bytes to read is larger
      *                                  than the length of the given array
      */
-    static void read(InputStream inputStream, byte data[], int offset,
-            int numBytesToRead) throws IOException {
+    static void read(InputStream inputStream, byte data[], int offset, int numBytesToRead)
+            throws IOException {
         if (offset < 0) {
-            throw new IllegalArgumentException(
-                    "Array offset is negative: " + offset);
+            throw new IllegalArgumentException("Array offset is negative: " + offset);
         }
         if (offset + numBytesToRead > data.length) {
             throw new IllegalArgumentException(
-                    "Cannot write " + numBytesToRead
-                            + " bytes into an array of length " + data.length
-                            + " with an offset of " + offset);
+                    "Cannot write " + numBytesToRead + " bytes into an array of length "
+                            + data.length + " with an offset of " + offset);
         }
         int totalNumBytesRead = 0;
         while (true) {
-            int read = inputStream.read(
-                    data, offset + totalNumBytesRead,
+            int read = inputStream.read(data, offset + totalNumBytesRead,
                     numBytesToRead - totalNumBytesRead);
             if (read == -1) {
-                throw new IOException(
-                        "Could not read " + numBytesToRead + " bytes");
+                throw new IOException("Could not read " + numBytesToRead + " bytes");
             }
             totalNumBytesRead += read;
             if (totalNumBytesRead == numBytesToRead) {
@@ -320,8 +304,7 @@ public class IO {
      *                     bytes have
      *                     been read
      */
-    public static void read(InputStream inputStream, byte data[])
-            throws IOException {
+    public static void read(InputStream inputStream, byte data[]) throws IOException {
         read(inputStream, data, 0, data.length);
     }
 

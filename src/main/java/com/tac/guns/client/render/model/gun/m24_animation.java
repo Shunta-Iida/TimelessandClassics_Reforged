@@ -17,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -28,51 +28,56 @@ import static com.tac.guns.client.render.model.CommonComponents.*;
 public class m24_animation extends SkinnedGunModel {
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         M24AnimationController controller = M24AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M24AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    M24AnimationController.INDEX_BODY, transformType, matrices);
             if (Gun.getScope(stack) == null) {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880,
-                        overlay);
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices,
+                        renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices,
+                        renderBuffer, light, overlay);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M24AnimationController.INDEX_BOLT,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    M24AnimationController.INDEX_BOLT, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M24AnimationController.INDEX_MAGAZINE,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    M24AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), M24AnimationController.INDEX_BULLET,
-                    transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, BULLET_SHELL), stack, matrices, renderBuffer, light,
-                    overlay);
-            AnimationMeta bolt = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    M24AnimationController.INDEX_BULLET, transformType, matrices);
+            RenderUtil.renderModel(getComponentModel(skin, BULLET_SHELL), stack, matrices,
+                    renderBuffer, light, overlay);
+            AnimationMeta bolt = controller
+                    .getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT);
             boolean onlyShell = bolt != null && bolt.equals(controller.getPreviousAnimation())
                     && controller.isAnimationRunning();
             if (!onlyShell)
-                RenderUtil.renderModel(getComponentModel(skin, BULLET_HEAD), stack, matrices, renderBuffer, light,
-                        overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET_HEAD), stack, matrices,
+                        renderBuffer, light, overlay);
         }
         matrices.popPose();
 

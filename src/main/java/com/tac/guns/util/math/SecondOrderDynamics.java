@@ -4,7 +4,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class SecondOrderDynamics {
-    public static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(15, Thread::new);
+    public static final ScheduledExecutorService executorService =
+            Executors.newScheduledThreadPool(15, Thread::new);
     static {
         for (int i = 0; i < 15; i++)
             executorService.execute(() -> {

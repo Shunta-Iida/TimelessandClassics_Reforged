@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 public class MessageShooting extends PlayMessage<MessageShooting> {
     private boolean shooting;
 
-    public MessageShooting() {
-    }
+    public MessageShooting() {}
 
     public MessageShooting(boolean shooting) {
         this.shooting = shooting;

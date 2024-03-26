@@ -97,7 +97,8 @@ public class ReloadTracker {
                 reload = deltaTicks > interval;
             } else {
                 int deltaTicks = player.tickCount - this.startTick;
-                int interval = gun.getReloads().getReloadMagTimer() + this.gun.getReloads().getPreReloadPauseTicks();// GunEnchantmentHelper.getReloadInterval(this.stack);
+                int interval = gun.getReloads().getReloadMagTimer()
+                        + this.gun.getReloads().getPreReloadPauseTicks();// GunEnchantmentHelper.getReloadInterval(this.stack);
                 interval *= GunEnchantmentHelper.getReloadInterval(this.stack);
                 reload = deltaTicks > interval;
             }
@@ -120,16 +121,18 @@ public class ReloadTracker {
                 tag.putInt("AmmoCount", tag.getInt("AmmoCount") + amount);
             }
             // ammo.shrink(amount);
-            this.shrinkFromAmmoPool(new ItemStack[] { ammo }, player, amount);
+            this.shrinkFromAmmoPool(new ItemStack[] {ammo}, player, amount);
         }
 
         ResourceLocation reloadSound = this.gun.getSounds().getReload();
         if (reloadSound != null) {
-            MessageGunSound message = new MessageGunSound(reloadSound, SoundSource.PLAYERS, (float) player.getX(),
-                    (float) player.getY() + 1.0F, (float) player.getZ(), 1.0F, 1.0F, player.getId(), false, true);
-            PacketHandler.getPlayChannel()
-                    .send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(player.getX(),
-                            (player.getY() + 1.0), player.getZ(), 16.0, player.level.dimension())), message);
+            MessageGunSound message = new MessageGunSound(reloadSound, SoundSource.PLAYERS,
+                    (float) player.getX(), (float) player.getY() + 1.0F, (float) player.getZ(),
+                    1.0F, 1.0F, player.getId(), false, true);
+            PacketHandler.getPlayChannel().send(PacketDistributor.NEAR.with(
+                    () -> new PacketDistributor.TargetPoint(player.getX(), (player.getY() + 1.0),
+                            player.getZ(), 16.0, player.level.dimension())),
+                    message);
         }
     }
 
@@ -146,8 +149,8 @@ public class ReloadTracker {
 
         ItemStack rig = WearableHelper.PlayerWornRig(player);
         if (!rig.isEmpty() && !player.isCreative() && rig.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) rig.getCapability(ArmorRigCapabilityProvider.capability)
-                    .resolve().get();
+            RigSlotsHandler itemHandler = (RigSlotsHandler) rig
+                    .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
             for (ItemStack x : itemHandler.getStacks()) {
                 if (Gun.isAmmo(x, this.gun.getProjectile().getItem()))
                     stacks.add(x);
@@ -225,11 +228,13 @@ public class ReloadTracker {
 
         ResourceLocation reloadSound = this.gun.getSounds().getReload();
         if (reloadSound != null) {
-            MessageGunSound message = new MessageGunSound(reloadSound, SoundSource.PLAYERS, (float) player.getX(),
-                    (float) player.getY() + 1.0F, (float) player.getZ(), 1.0F, 1.0F, player.getId(), false, true);
-            PacketHandler.getPlayChannel()
-                    .send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(player.getX(),
-                            (player.getY() + 1.0), player.getZ(), 16.0, player.level.dimension())), message);
+            MessageGunSound message = new MessageGunSound(reloadSound, SoundSource.PLAYERS,
+                    (float) player.getX(), (float) player.getY() + 1.0F, (float) player.getZ(),
+                    1.0F, 1.0F, player.getId(), false, true);
+            PacketHandler.getPlayChannel().send(PacketDistributor.NEAR.with(
+                    () -> new PacketDistributor.TargetPoint(player.getX(), (player.getY() + 1.0),
+                            player.getZ(), 16.0, player.level.dimension())),
+                    message);
         }
     }
 
@@ -241,13 +246,15 @@ public class ReloadTracker {
                 if (!RELOAD_TRACKER_MAP.containsKey(player)) {
                     if (!(player.getInventory().getSelected().getItem() instanceof GunItem)) {
                         SyncedEntityData.instance().set(player, ModSyncedDataKeys.RELOADING, false);
-                        SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA, false);
+                        SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA,
+                                false);
                         return;
                     }
                     RELOAD_TRACKER_MAP.put(player, new ReloadTracker(player));
                 }
                 ReloadTracker tracker = RELOAD_TRACKER_MAP.get(player);
-                if (!tracker.isSameWeapon(player) || tracker.isWeaponFull() || tracker.hasNoAmmo(player)) {
+                if (!tracker.isSameWeapon(player) || tracker.isWeaponFull()
+                        || tracker.hasNoAmmo(player)) {
                     RELOAD_TRACKER_MAP.remove(player);
                     SyncedEntityData.instance().set(player, ModSyncedDataKeys.RELOADING, false);
                     SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA, true);
@@ -260,7 +267,8 @@ public class ReloadTracker {
                         tracker.increaseMagAmmo(player);
                         RELOAD_TRACKER_MAP.remove(player);
                         SyncedEntityData.instance().set(player, ModSyncedDataKeys.RELOADING, false);
-                        SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA, false);
+                        SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA,
+                                false);
                         /*
                          * DelayedTask.runAfter(2, () ->
                          * {
@@ -281,8 +289,10 @@ public class ReloadTracker {
                         tracker.increaseAmmo(player);
                         if (tracker.isWeaponFull() || tracker.hasNoAmmo(player)) {
                             RELOAD_TRACKER_MAP.remove(player);
-                            SyncedEntityData.instance().set(player, ModSyncedDataKeys.RELOADING, false);
-                            SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA, false);
+                            SyncedEntityData.instance().set(player, ModSyncedDataKeys.RELOADING,
+                                    false);
+                            SyncedEntityData.instance().set(player, ModSyncedDataKeys.STOP_ANIMA,
+                                    false);
                             /*
                              * DelayedTask.runAfter(4, () ->
                              * {

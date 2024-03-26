@@ -30,7 +30,8 @@ public interface IStorageBlock extends Container, MenuProvider {
 
     @Override
     default ItemStack getItem(int index) {
-        return index >= 0 && index < this.getInventory().size() ? this.getInventory().get(index) : ItemStack.EMPTY;
+        return index >= 0 && index < this.getInventory().size() ? this.getInventory().get(index)
+                : ItemStack.EMPTY;
     }
 
     @Override
@@ -73,12 +74,10 @@ public interface IStorageBlock extends Container, MenuProvider {
     }
 
     @Override
-    default void startOpen(Player player) {
-    }
+    default void startOpen(Player player) {}
 
     @Override
-    default void stopOpen(Player player) {
-    }
+    default void stopOpen(Player player) {}
 
     @Override
     default boolean canPlaceItem(int index, ItemStack stack) {

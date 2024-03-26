@@ -20,18 +20,22 @@ public enum AnimationSoundManager {
 
     private final Map<UUID, Map<ResourceLocation, SoundInstance>> soundsMap = new HashMap<>();
 
-    public void playerSound(Player player, AnimationMeta animationMeta, AnimationSoundMeta soundMeta) {
-        Map<ResourceLocation, SoundInstance> map = soundsMap.computeIfAbsent(player.getUUID(), k -> new HashMap<>());
+    public void playerSound(Player player, AnimationMeta animationMeta,
+            AnimationSoundMeta soundMeta) {
+        Map<ResourceLocation, SoundInstance> map =
+                soundsMap.computeIfAbsent(player.getUUID(), k -> new HashMap<>());
         SoundInstance sound = map.get(animationMeta.getResourceLocation());
         if (sound == null) {
             SoundEvent soundEvent = new SoundEvent(soundMeta.getResourceLocation());
-            sound = new EntityBoundSoundInstance(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F, player);
+            sound = new EntityBoundSoundInstance(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F,
+                    player);
         }
         if (sound instanceof EntityBoundSoundInstance) {
             EntityBoundSoundInstance entityTickableSound = (EntityBoundSoundInstance) sound;
             if (entityTickableSound.isStopped()) {
                 SoundEvent soundEvent = new SoundEvent(soundMeta.getResourceLocation());
-                sound = new EntityBoundSoundInstance(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F, player);
+                sound = new EntityBoundSoundInstance(soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F,
+                        player);
             }
         }
         if (Minecraft.getInstance().getSoundManager().isActive(sound))
@@ -41,7 +45,8 @@ public enum AnimationSoundManager {
     }
 
     public void onPlayerDeath(Player player) {
-        Map<ResourceLocation, SoundInstance> map = soundsMap.computeIfAbsent(player.getUUID(), k -> new HashMap<>());
+        Map<ResourceLocation, SoundInstance> map =
+                soundsMap.computeIfAbsent(player.getUUID(), k -> new HashMap<>());
         for (SoundInstance sound : map.values()) {
             Minecraft.getInstance().getSoundManager().stop(sound);
         }

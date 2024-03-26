@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.Map;
  * Auto-generated for technique.schema.json
  * 
  */
-public class Technique
-        extends GlTFChildOfRootProperty {
+public class Technique extends GlTFChildOfRootProperty {
 
     /**
      * A dictionary object of technique.parameters objects. (optional)<br>
@@ -247,7 +245,8 @@ public class Technique
      */
     public void setProgram(String program) {
         if (program == null) {
-            throw new NullPointerException((("Invalid value for program: " + program) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for program: " + program) + ", may not be null"));
         }
         this.program = program;
     }

@@ -15,7 +15,8 @@ import javax.annotation.Nullable;
 
 public class ArmorRigCapabilityProvider implements ICapabilitySerializable<ListTag> {
 
-    public static Capability<IAmmoItemHandler> capability = InventoryListener.RIG_HANDLER_CAPABILITY;
+    public static Capability<IAmmoItemHandler> capability =
+            InventoryListener.RIG_HANDLER_CAPABILITY;
     private RigSlotsHandler itemHandler = new RigSlotsHandler(9 * 6);
     private LazyOptional<IAmmoItemHandler> optionalStorage = LazyOptional.of(() -> itemHandler);
 
@@ -51,7 +52,8 @@ public class ArmorRigCapabilityProvider implements ICapabilitySerializable<ListT
     @Override
     public void deserializeNBT(ListTag nbt) {
         if (!(itemHandler instanceof IItemHandlerModifiable))
-            throw new RuntimeException("IItemHandler instance does not implement IItemHandlerModifiable");
+            throw new RuntimeException(
+                    "IItemHandler instance does not implement IItemHandlerModifiable");
         IItemHandlerModifiable itemHandlerModifiable = (IItemHandlerModifiable) itemHandler;
         ListTag tagList = nbt;
         for (int i = 0; i < tagList.size(); i++) {

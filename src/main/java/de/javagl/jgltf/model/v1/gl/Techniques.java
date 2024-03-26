@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1.gl;
 
@@ -53,18 +45,13 @@ public class Techniques {
         Technique technique = new Technique();
         technique.addAttributes("a_position", "position");
         technique.addParameters("modelViewMatrix",
-                createDefaultTechniqueParameters(
-                        "MODELVIEW", GltfConstants.GL_FLOAT_MAT4, null));
+                createDefaultTechniqueParameters("MODELVIEW", GltfConstants.GL_FLOAT_MAT4, null));
         technique.addParameters("projectionMatrix",
-                createDefaultTechniqueParameters(
-                        "PROJECTION", GltfConstants.GL_FLOAT_MAT4, null));
-        technique.addParameters("emission",
-                createDefaultTechniqueParameters(
-                        null, GltfConstants.GL_FLOAT_VEC4,
-                        Arrays.asList(0.5f, 0.5f, 0.5f, 1.0f)));
+                createDefaultTechniqueParameters("PROJECTION", GltfConstants.GL_FLOAT_MAT4, null));
+        technique.addParameters("emission", createDefaultTechniqueParameters(null,
+                GltfConstants.GL_FLOAT_VEC4, Arrays.asList(0.5f, 0.5f, 0.5f, 1.0f)));
         technique.addParameters("position",
-                createDefaultTechniqueParameters(
-                        "POSITION", GltfConstants.GL_FLOAT_VEC3, null));
+                createDefaultTechniqueParameters("POSITION", GltfConstants.GL_FLOAT_VEC3, null));
         technique.setStates(createDefaultTechniqueStates());
         technique.setProgram(programId);
 
@@ -82,8 +69,7 @@ public class Techniques {
      */
     private static TechniqueStates createDefaultTechniqueStates() {
         TechniqueStates techniqueStates = new TechniqueStates();
-        techniqueStates.setEnable(
-                new ArrayList<Integer>(techniqueStates.defaultEnable()));
+        techniqueStates.setEnable(new ArrayList<Integer>(techniqueStates.defaultEnable()));
         techniqueStates.setFunctions(createDefaultTechniqueStatesFunctions());
         return techniqueStates;
     }
@@ -95,30 +81,20 @@ public class Techniques {
      */
     public static TechniqueStatesFunctions createDefaultTechniqueStatesFunctions() {
         TechniqueStatesFunctions techniqueStatesFunctions = new TechniqueStatesFunctions();
-        techniqueStatesFunctions.setBlendColor(
-                techniqueStatesFunctions.defaultBlendColor());
-        techniqueStatesFunctions.setBlendEquationSeparate(
-                techniqueStatesFunctions.defaultBlendEquationSeparate());
-        techniqueStatesFunctions.setBlendFuncSeparate(
-                techniqueStatesFunctions.defaultBlendFuncSeparate());
-        techniqueStatesFunctions.setColorMask(
-                techniqueStatesFunctions.defaultColorMask());
-        techniqueStatesFunctions.setCullFace(
-                techniqueStatesFunctions.defaultCullFace());
-        techniqueStatesFunctions.setDepthFunc(
-                techniqueStatesFunctions.defaultDepthFunc());
-        techniqueStatesFunctions.setDepthMask(
-                techniqueStatesFunctions.defaultDepthMask());
-        techniqueStatesFunctions.setDepthRange(
-                techniqueStatesFunctions.defaultDepthRange());
-        techniqueStatesFunctions.setFrontFace(
-                techniqueStatesFunctions.defaultFrontFace());
-        techniqueStatesFunctions.setLineWidth(
-                techniqueStatesFunctions.defaultLineWidth());
-        techniqueStatesFunctions.setPolygonOffset(
-                techniqueStatesFunctions.defaultPolygonOffset());
-        techniqueStatesFunctions.setScissor(
-                techniqueStatesFunctions.defaultScissor());
+        techniqueStatesFunctions.setBlendColor(techniqueStatesFunctions.defaultBlendColor());
+        techniqueStatesFunctions
+                .setBlendEquationSeparate(techniqueStatesFunctions.defaultBlendEquationSeparate());
+        techniqueStatesFunctions
+                .setBlendFuncSeparate(techniqueStatesFunctions.defaultBlendFuncSeparate());
+        techniqueStatesFunctions.setColorMask(techniqueStatesFunctions.defaultColorMask());
+        techniqueStatesFunctions.setCullFace(techniqueStatesFunctions.defaultCullFace());
+        techniqueStatesFunctions.setDepthFunc(techniqueStatesFunctions.defaultDepthFunc());
+        techniqueStatesFunctions.setDepthMask(techniqueStatesFunctions.defaultDepthMask());
+        techniqueStatesFunctions.setDepthRange(techniqueStatesFunctions.defaultDepthRange());
+        techniqueStatesFunctions.setFrontFace(techniqueStatesFunctions.defaultFrontFace());
+        techniqueStatesFunctions.setLineWidth(techniqueStatesFunctions.defaultLineWidth());
+        techniqueStatesFunctions.setPolygonOffset(techniqueStatesFunctions.defaultPolygonOffset());
+        techniqueStatesFunctions.setScissor(techniqueStatesFunctions.defaultScissor());
         return techniqueStatesFunctions;
     }
 
@@ -131,8 +107,8 @@ public class Techniques {
      * @param value    The value
      * @return The default {@link TechniqueParameters}
      */
-    private static TechniqueParameters createDefaultTechniqueParameters(
-            String semantic, Integer type, Object value) {
+    private static TechniqueParameters createDefaultTechniqueParameters(String semantic,
+            Integer type, Object value) {
         TechniqueParameters techniqueParameters = new TechniqueParameters();
         techniqueParameters.setSemantic(semantic);
         techniqueParameters.setType(type);
@@ -185,8 +161,7 @@ public class Techniques {
      * @param technique The {@link Technique}
      * @return The {@link TechniqueStatesFunctions}
      */
-    public static TechniqueStatesFunctions obtainTechniqueStatesFunctions(
-            Technique technique) {
+    public static TechniqueStatesFunctions obtainTechniqueStatesFunctions(Technique technique) {
         TechniqueStates states = obtainTechniqueStates(technique);
         TechniqueStatesFunctions functions = states.getFunctions();
         if (functions == null) {

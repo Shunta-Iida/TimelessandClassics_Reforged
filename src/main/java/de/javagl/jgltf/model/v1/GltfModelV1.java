@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1;
 
@@ -177,8 +169,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param gltfAsset The {@link GltfAssetV1}
      */
     public GltfModelV1(GltfAssetV1 gltfAsset) {
-        this.gltfAsset = Objects.requireNonNull(gltfAsset,
-                "The gltf may not be null");
+        this.gltfAsset = Objects.requireNonNull(gltfAsset, "The gltf may not be null");
         this.gltf = gltfAsset.getGltf();
 
         ByteBuffer binaryData = gltfAsset.getBinaryData();
@@ -343,12 +334,11 @@ public final class GltfModelV1 implements GltfModel {
         ElementType elementType = ElementType.forString(accessor.getType());
         Integer byteStride = accessor.getByteStride();
         if (byteStride == null) {
-            byteStride = elementType.getNumComponents() *
-                    Accessors.getNumBytesForAccessorComponentType(
-                            componentType);
+            byteStride = elementType.getNumComponents()
+                    * Accessors.getNumBytesForAccessorComponentType(componentType);
         }
-        DefaultAccessorModel accessorModel = new DefaultAccessorModel(
-                componentType, count, elementType);
+        DefaultAccessorModel accessorModel =
+                new DefaultAccessorModel(componentType, count, elementType);
         accessorModel.setByteOffset(byteOffset);
         accessorModel.setByteStride(byteStride);
         return accessorModel;
@@ -393,8 +383,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param bufferView The {@link BufferView}
      * @return The {@link BufferViewModel}
      */
-    private static DefaultBufferViewModel createBufferViewModel(
-            BufferView bufferView) {
+    private static DefaultBufferViewModel createBufferViewModel(BufferView bufferView) {
         int byteOffset = bufferView.getByteOffset();
         Integer byteLength = bufferView.getByteLength();
         if (byteLength == null) {
@@ -484,17 +473,12 @@ public final class GltfModelV1 implements GltfModel {
             String samplerId = texture.getSampler();
             Sampler sampler = samplers.get(samplerId);
 
-            int magFilter = Optionals.of(
-                    sampler.getMagFilter(), sampler.defaultMagFilter());
-            int minFilter = Optionals.of(
-                    sampler.getMinFilter(), sampler.defaultMinFilter());
-            int wrapS = Optionals.of(
-                    sampler.getWrapS(), sampler.defaultWrapS());
-            int wrapT = Optionals.of(
-                    sampler.getWrapT(), sampler.defaultWrapT());
+            int magFilter = Optionals.of(sampler.getMagFilter(), sampler.defaultMagFilter());
+            int minFilter = Optionals.of(sampler.getMinFilter(), sampler.defaultMinFilter());
+            int wrapS = Optionals.of(sampler.getWrapS(), sampler.defaultWrapS());
+            int wrapT = Optionals.of(sampler.getWrapT(), sampler.defaultWrapT());
 
-            textureModels.add(new DefaultTextureModel(
-                    magFilter, minFilter, wrapS, wrapT));
+            textureModels.add(new DefaultTextureModel(magFilter, minFilter, wrapS, wrapT));
         }
     }
 
@@ -609,8 +593,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param animationChannel The {@link AnimationChannel}
      * @return The {@link Channel}
      */
-    private Channel createChannel(
-            Animation animation, AnimationChannel animationChannel) {
+    private Channel createChannel(Animation animation, AnimationChannel animationChannel) {
         Map<String, String> parameters = Optionals.of(animation.getParameters());
         Map<String, AnimationSampler> samplers = Optionals.of(animation.getSamplers());
 
@@ -624,8 +607,7 @@ public final class GltfModelV1 implements GltfModel {
             // called glTF 1.1. The check here is not perfectly reliable,
             // but there should be a decreasing number of glTF 1.0 models
             // out there, and even fewer glTF 1.1 ones.
-            logger.warning(
-                    "Assuming " + inputParameterId + " to be an accessor ID");
+            logger.warning("Assuming " + inputParameterId + " to be an accessor ID");
             inputAccessorId = inputParameterId;
         }
         DefaultAccessorModel inputAccessorModel = get("accessors", inputAccessorId, accessorModels);
@@ -637,18 +619,18 @@ public final class GltfModelV1 implements GltfModel {
             // called glTF 1.1. The check here is not perfectly reliable,
             // but there should be a decreasing number of glTF 1.0 models
             // out there, and even fewer glTF 1.1 ones.
-            logger.warning(
-                    "Assuming " + outputParameterId + " to be an accessor ID");
+            logger.warning("Assuming " + outputParameterId + " to be an accessor ID");
             outputAccessorId = outputParameterId;
         }
-        DefaultAccessorModel outputAccessorModel = get("accessors", outputAccessorId, accessorModels);
+        DefaultAccessorModel outputAccessorModel =
+                get("accessors", outputAccessorId, accessorModels);
 
         String interpolationString = animationSampler.getInterpolation();
         Interpolation interpolation = interpolationString == null ? Interpolation.LINEAR
                 : Interpolation.valueOf(interpolationString);
 
-        AnimationModel.Sampler sampler = new DefaultSampler(
-                inputAccessorModel, interpolation, outputAccessorModel);
+        AnimationModel.Sampler sampler =
+                new DefaultSampler(inputAccessorModel, interpolation, outputAccessorModel);
 
         AnimationChannelTarget animationChannelTarget = animationChannel.getTarget();
         String nodeId = animationChannelTarget.getId();
@@ -709,7 +691,8 @@ public final class GltfModelV1 implements GltfModel {
 
             String bufferId = bufferView.getBuffer();
             BufferModel bufferModel = get("buffers", bufferId, bufferModels);
-            DefaultBufferViewModel bufferViewModel = get("bufferViews", bufferViewId, bufferViewModels);
+            DefaultBufferViewModel bufferViewModel =
+                    get("bufferViews", bufferViewId, bufferViewModels);
             bufferViewModel.setName(bufferView.getName());
             bufferViewModel.setBufferModel(bufferModel);
         }
@@ -722,8 +705,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param bufferViewModel The {@link BufferViewModel}
      * @return The list of {@link AccessorModel} instances
      */
-    private List<DefaultAccessorModel> computeAccessorModelsOf(
-            BufferViewModel bufferViewModel) {
+    private List<DefaultAccessorModel> computeAccessorModelsOf(BufferViewModel bufferViewModel) {
         List<DefaultAccessorModel> result = new ArrayList<DefaultAccessorModel>();
         for (DefaultAccessorModel accessorModel : accessorModels) {
             BufferViewModel b = accessorModel.getBufferViewModel();
@@ -742,8 +724,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param accessorModels The {@link AccessorModel} instances
      * @return The common byte stride
      */
-    private static int computeCommonByteStride(
-            Iterable<? extends AccessorModel> accessorModels) {
+    private static int computeCommonByteStride(Iterable<? extends AccessorModel> accessorModels) {
         int commonByteStride = -1;
         for (AccessorModel accessorModel : accessorModels) {
             int byteStride = accessorModel.getByteStride();
@@ -751,9 +732,8 @@ public final class GltfModelV1 implements GltfModel {
                 commonByteStride = byteStride;
             } else {
                 if (commonByteStride != byteStride) {
-                    logger.warning("The accessor models do not have the "
-                            + "same byte stride: " + commonByteStride
-                            + " and " + byteStride);
+                    logger.warning("The accessor models do not have the " + "same byte stride: "
+                            + commonByteStride + " and " + byteStride);
                 }
             }
         }
@@ -767,7 +747,8 @@ public final class GltfModelV1 implements GltfModel {
      */
     private void assignBufferViewByteStrides() {
         for (DefaultBufferViewModel bufferViewModel : bufferViewModels) {
-            List<DefaultAccessorModel> accessorModelsOfBufferView = computeAccessorModelsOf(bufferViewModel);
+            List<DefaultAccessorModel> accessorModelsOfBufferView =
+                    computeAccessorModelsOf(bufferViewModel);
             if (accessorModelsOfBufferView.size() > 1) {
                 int byteStride = computeCommonByteStride(accessorModelsOfBufferView);
                 bufferViewModel.setByteStride(byteStride);
@@ -800,8 +781,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param meshPrimitive The {@link MeshPrimitive}
      * @return The {@link MeshPrimitiveModel}
      */
-    private DefaultMeshPrimitiveModel createMeshPrimitiveModel(
-            MeshPrimitive meshPrimitive) {
+    private DefaultMeshPrimitiveModel createMeshPrimitiveModel(MeshPrimitive meshPrimitive) {
         Integer mode = meshPrimitive.getMode();
         if (mode == null) {
             mode = meshPrimitive.defaultMode();
@@ -823,10 +803,8 @@ public final class GltfModelV1 implements GltfModel {
         }
 
         String materialId = meshPrimitive.getMaterial();
-        if (materialId == null ||
-                GltfDefaults.isDefaultMaterialId(materialId)) {
-            meshPrimitiveModel.setMaterialModel(
-                    DefaultModels.getDefaultMaterialModel());
+        if (materialId == null || GltfDefaults.isDefaultMaterialId(materialId)) {
+            meshPrimitiveModel.setMaterialModel(DefaultModels.getDefaultMaterialModel());
         } else {
             MaterialModel materialModel = get("materials", materialId, materialModels);
             meshPrimitiveModel.setMaterialModel(materialModel);
@@ -911,8 +889,7 @@ public final class GltfModelV1 implements GltfModel {
                 String oldNodeId = map.put(node.getJointName(), nodeId);
                 if (oldNodeId != null) {
                     logger.warning("Joint name " + node.getJointName()
-                            + " is mapped to nodes with IDs " + nodeId + " and "
-                            + oldNodeId);
+                            + " is mapped to nodes with IDs " + nodeId + " and " + oldNodeId);
                 }
             }
         }
@@ -939,7 +916,8 @@ public final class GltfModelV1 implements GltfModel {
             }
 
             String inverseBindMatricesId = skin.getInverseBindMatrices();
-            DefaultAccessorModel inverseBindMatrices = get("accessors", inverseBindMatricesId, accessorModels);
+            DefaultAccessorModel inverseBindMatrices =
+                    get("accessors", inverseBindMatricesId, accessorModels);
             skinModel.setInverseBindMatrices(inverseBindMatrices);
         }
     }
@@ -1019,8 +997,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private void addParameters(Technique technique,
-            DefaultTechniqueModel techniqueModel) {
+    private void addParameters(Technique technique, DefaultTechniqueModel techniqueModel) {
         Map<String, TechniqueParameters> parameters = Optionals.of(technique.getParameters());
         for (Entry<String, TechniqueParameters> entry : parameters.entrySet()) {
             String parameterName = entry.getKey();
@@ -1036,10 +1013,9 @@ public final class GltfModelV1 implements GltfModel {
                 nodeModel = get("nodes", nodeId, nodeModels);
             }
 
-            TechniqueParametersModel techniqueParametersModel = new DefaultTechniqueParametersModel(
-                    type, count, semantic, value, nodeModel);
-            techniqueModel.addParameter(
-                    parameterName, techniqueParametersModel);
+            TechniqueParametersModel techniqueParametersModel =
+                    new DefaultTechniqueParametersModel(type, count, semantic, value, nodeModel);
+            techniqueModel.addParameter(parameterName, techniqueParametersModel);
         }
     }
 
@@ -1050,8 +1026,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private static void addAttributes(Technique technique,
-            DefaultTechniqueModel techniqueModel) {
+    private static void addAttributes(Technique technique, DefaultTechniqueModel techniqueModel) {
         Map<String, String> attributes = Optionals.of(technique.getAttributes());
         for (Entry<String, String> entry : attributes.entrySet()) {
             String attributeName = entry.getKey();
@@ -1067,8 +1042,7 @@ public final class GltfModelV1 implements GltfModel {
      * @param technique      The {@link Technique}
      * @param techniqueModel The {@link TechniqueModel}
      */
-    private static void addUniforms(Technique technique,
-            DefaultTechniqueModel techniqueModel) {
+    private static void addUniforms(Technique technique, DefaultTechniqueModel techniqueModel) {
         Map<String, String> uniforms = Optionals.of(technique.getUniforms());
         for (Entry<String, String> entry : uniforms.entrySet()) {
             String uniformName = entry.getKey();
@@ -1097,12 +1071,13 @@ public final class GltfModelV1 implements GltfModel {
             addUniforms(technique, techniqueModel);
 
             List<Integer> enable = Techniques.obtainEnabledStates(technique);
-            TechniqueStatesFunctions functions = Techniques.obtainTechniqueStatesFunctions(technique);
+            TechniqueStatesFunctions functions =
+                    Techniques.obtainTechniqueStatesFunctions(technique);
 
-            TechniqueStatesFunctionsModel techniqueStatesFunctionsModel = new DefaultTechniqueStatesFunctionsModelV1(
-                    functions);
-            TechniqueStatesModel techniqueStatesModel = new DefaultTechniqueStatesModel(
-                    enable, techniqueStatesFunctionsModel);
+            TechniqueStatesFunctionsModel techniqueStatesFunctionsModel =
+                    new DefaultTechniqueStatesFunctionsModelV1(functions);
+            TechniqueStatesModel techniqueStatesModel =
+                    new DefaultTechniqueStatesModel(enable, techniqueStatesFunctionsModel);
             techniqueModel.setTechniqueStatesModel(techniqueStatesModel);
         }
     }
@@ -1121,12 +1096,11 @@ public final class GltfModelV1 implements GltfModel {
             materialModel.setName(material.getName());
 
             String techniqueId = material.getTechnique();
-            if (techniqueId == null ||
-                    GltfDefaults.isDefaultTechniqueId(techniqueId)) {
-                materialModel.setTechniqueModel(
-                        DefaultModels.getDefaultTechniqueModel());
+            if (techniqueId == null || GltfDefaults.isDefaultTechniqueId(techniqueId)) {
+                materialModel.setTechniqueModel(DefaultModels.getDefaultTechniqueModel());
             } else {
-                DefaultTechniqueModel techniqueModel = get("techniques", techniqueId, techniqueModels);
+                DefaultTechniqueModel techniqueModel =
+                        get("techniques", techniqueId, techniqueModels);
                 materialModel.setTechniqueModel(techniqueModel);
             }
         }
@@ -1156,14 +1130,14 @@ public final class GltfModelV1 implements GltfModel {
                     MathUtils.invert4x4(localResult, localResult);
                     return localResult;
                 };
-                BiFunction<float[], Float, float[]> projectionMatrixComputer = (result, aspectRatio) -> {
-                    float localResult[] = Utils.validate(result, 16);
-                    CamerasV1.computeProjectionMatrix(
-                            camera, aspectRatio, localResult);
-                    return localResult;
-                };
-                DefaultCameraModel cameraModel = new DefaultCameraModel(
-                        viewMatrixComputer, projectionMatrixComputer);
+                BiFunction<float[], Float, float[]> projectionMatrixComputer =
+                        (result, aspectRatio) -> {
+                            float localResult[] = Utils.validate(result, 16);
+                            CamerasV1.computeProjectionMatrix(camera, aspectRatio, localResult);
+                            return localResult;
+                        };
+                DefaultCameraModel cameraModel =
+                        new DefaultCameraModel(viewMatrixComputer, projectionMatrixComputer);
                 cameraModel.setName(camera.getName());
 
                 cameraModel.setNodeModel(nodeModel);

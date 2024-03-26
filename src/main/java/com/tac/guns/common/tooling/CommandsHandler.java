@@ -27,8 +27,7 @@ public class CommandsHandler {
         return instance;
     }
 
-    private CommandsHandler() {
-    }
+    private CommandsHandler() {}
 
     private HashMap<Integer, Boolean> catGlobals = new HashMap<>(); // NEED A BETTER SOLUTION THEN JUST OBJECT, DIRTY!
     private int catCurrentIndex = 0;

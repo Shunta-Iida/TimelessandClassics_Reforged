@@ -17,8 +17,8 @@ public class Ppsh41AnimationController extends GunAnimationController {
     public static int INDEX_RIGHT_HAND = 2;
     public static int INDEX_MAGAZINE = 4;
     // public static int INDEX_BOLT = 5;
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/ppsh_41.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/ppsh_41.gltf"));
 
     private static final Ppsh41AnimationController instance = new Ppsh41AnimationController();
 

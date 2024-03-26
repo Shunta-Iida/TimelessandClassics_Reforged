@@ -17,8 +17,8 @@ public class WeaponColorSegmentSlot extends Slot {
     private Player player;
 
     // Segment handling with these slots will be based on index
-    public WeaponColorSegmentSlot(ColorBenchContainer container, Container weaponInventory, ItemStack weapon,
-            Player player, int index, int x, int y) {
+    public WeaponColorSegmentSlot(ColorBenchContainer container, Container weaponInventory,
+            ItemStack weapon, Player player, int index, int x, int y) {
         super(weaponInventory, index, x, y);
         this.container = container;
         this.weapon = weapon;

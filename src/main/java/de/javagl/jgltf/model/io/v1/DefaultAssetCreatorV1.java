@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io.v1;
 
@@ -97,24 +89,23 @@ final class DefaultAssetCreatorV1 {
         GlTF outputGltf = GltfUtilsV1.copy(inputGltf);
 
         // Remove the binary glTF extension, if it was used
-        GltfExtensionsV1.removeExtensionUsed(outputGltf,
-                BinaryGltfV1.getBinaryGltfExtensionName());
+        GltfExtensionsV1.removeExtensionUsed(outputGltf, BinaryGltfV1.getBinaryGltfExtensionName());
 
-        existingBufferUriStrings = collectUriStrings(
-                Optionals.of(inputGltf.getBuffers()).values(),
-                Buffer::getUri);
-        existingImageUriStrings = collectUriStrings(
-                Optionals.of(inputGltf.getImages()).values(),
-                Image::getUri);
-        existingShaderUriStrings = collectUriStrings(
-                Optionals.of(inputGltf.getShaders()).values(),
-                Shader::getUri);
+        existingBufferUriStrings =
+                collectUriStrings(Optionals.of(inputGltf.getBuffers()).values(), Buffer::getUri);
+        existingImageUriStrings =
+                collectUriStrings(Optionals.of(inputGltf.getImages()).values(), Image::getUri);
+        existingShaderUriStrings =
+                collectUriStrings(Optionals.of(inputGltf.getShaders()).values(), Shader::getUri);
 
         this.gltfAsset = new GltfAssetV1(outputGltf, null);
 
-        Optionals.of(outputGltf.getBuffers()).forEach((id, value) -> storeBufferAsDefault(gltfModel, id, value));
-        Optionals.of(outputGltf.getImages()).forEach((id, value) -> storeImageAsDefault(gltfModel, id, value));
-        Optionals.of(outputGltf.getShaders()).forEach((id, value) -> storeShaderAsDefault(gltfModel, id, value));
+        Optionals.of(outputGltf.getBuffers())
+                .forEach((id, value) -> storeBufferAsDefault(gltfModel, id, value));
+        Optionals.of(outputGltf.getImages())
+                .forEach((id, value) -> storeImageAsDefault(gltfModel, id, value));
+        Optionals.of(outputGltf.getShaders())
+                .forEach((id, value) -> storeShaderAsDefault(gltfModel, id, value));
 
         return gltfAsset;
     }
@@ -130,11 +121,8 @@ final class DefaultAssetCreatorV1 {
      */
     private static <T> Set<String> collectUriStrings(Collection<T> elements,
             Function<? super T, ? extends String> uriFunction) {
-        return elements.stream()
-                .map(uriFunction)
-                .filter(Objects::nonNull)
-                .filter(uriString -> !IO.isDataUriString(uriString))
-                .collect(Collectors.toSet());
+        return elements.stream().map(uriFunction).filter(Objects::nonNull)
+                .filter(uriString -> !IO.isDataUriString(uriString)).collect(Collectors.toSet());
     }
 
     /**
@@ -156,18 +144,15 @@ final class DefaultAssetCreatorV1 {
      * @param id        The ID of the {@link Buffer}
      * @param buffer    The {@link Buffer}
      */
-    private void storeBufferAsDefault(
-            GltfModelV1 gltfModel, String id, Buffer buffer) {
+    private void storeBufferAsDefault(GltfModelV1 gltfModel, String id, Buffer buffer) {
         BufferModel bufferModel = gltfModel.getBufferModelById(id);
         ByteBuffer bufferData = bufferModel.getBufferData();
 
         String oldUriString = buffer.getUri();
         String newUriString = oldUriString;
-        if (oldUriString == null ||
-                IO.isDataUriString(oldUriString) ||
-                BinaryGltfV1.isBinaryGltfBufferId(id)) {
-            newUriString = UriStrings.createBufferUriString(
-                    existingBufferUriStrings);
+        if (oldUriString == null || IO.isDataUriString(oldUriString)
+                || BinaryGltfV1.isBinaryGltfBufferId(id)) {
+            newUriString = UriStrings.createBufferUriString(existingBufferUriStrings);
             buffer.setUri(newUriString);
             existingBufferUriStrings.add(newUriString);
         }
@@ -194,18 +179,15 @@ final class DefaultAssetCreatorV1 {
      * @throws GltfException If the image format (and thus, the MIME type)
      *                       can not be determined from the image data
      */
-    private void storeImageAsDefault(
-            GltfModelV1 gltfModel, String id, Image image) {
+    private void storeImageAsDefault(GltfModelV1 gltfModel, String id, Image image) {
         ImageModel imageModel = gltfModel.getImageModelById(id);
         ByteBuffer imageData = imageModel.getImageData();
 
         String oldUriString = image.getUri();
         String newUriString = oldUriString;
-        if (oldUriString == null ||
-                IO.isDataUriString(oldUriString) ||
-                BinaryGltfV1.hasBinaryGltfExtension(image)) {
-            newUriString = UriStrings.createImageUriString(
-                    imageModel, existingImageUriStrings);
+        if (oldUriString == null || IO.isDataUriString(oldUriString)
+                || BinaryGltfV1.hasBinaryGltfExtension(image)) {
+            newUriString = UriStrings.createImageUriString(imageModel, existingImageUriStrings);
             image.setUri(newUriString);
             existingImageUriStrings.add(newUriString);
 
@@ -233,18 +215,15 @@ final class DefaultAssetCreatorV1 {
      * @param id        The id of the {@link Shader}
      * @param shader    The {@link Shader}
      */
-    private void storeShaderAsDefault(
-            GltfModelV1 gltfModel, String id, Shader shader) {
+    private void storeShaderAsDefault(GltfModelV1 gltfModel, String id, Shader shader) {
         ShaderModel shaderModel = gltfModel.getShaderModelById(id);
         ByteBuffer shaderData = shaderModel.getShaderData();
 
         String oldUriString = shader.getUri();
         String newUriString = oldUriString;
-        if (oldUriString == null ||
-                IO.isDataUriString(oldUriString) ||
-                BinaryGltfV1.hasBinaryGltfExtension(shader)) {
-            newUriString = UriStrings.createShaderUriString(
-                    shaderModel, existingShaderUriStrings);
+        if (oldUriString == null || IO.isDataUriString(oldUriString)
+                || BinaryGltfV1.hasBinaryGltfExtension(shader)) {
+            newUriString = UriStrings.createShaderUriString(shaderModel, existingShaderUriStrings);
             shader.setUri(newUriString);
             existingShaderUriStrings.add(newUriString);
 

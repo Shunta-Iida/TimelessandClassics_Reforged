@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for camera.orthographic.schema.json
  * 
  */
-public class CameraOrthographic
-        extends GlTFProperty {
+public class CameraOrthographic extends GlTFProperty {
 
     /**
      * The floating-point horizontal magnification of the view. (required)
@@ -50,7 +48,8 @@ public class CameraOrthographic
      */
     public void setXmag(Float xmag) {
         if (xmag == null) {
-            throw new NullPointerException((("Invalid value for xmag: " + xmag) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for xmag: " + xmag) + ", may not be null"));
         }
         this.xmag = xmag;
     }
@@ -74,7 +73,8 @@ public class CameraOrthographic
      */
     public void setYmag(Float ymag) {
         if (ymag == null) {
-            throw new NullPointerException((("Invalid value for ymag: " + ymag) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for ymag: " + ymag) + ", may not be null"));
         }
         this.ymag = ymag;
     }
@@ -101,7 +101,8 @@ public class CameraOrthographic
      */
     public void setZfar(Float zfar) {
         if (zfar == null) {
-            throw new NullPointerException((("Invalid value for zfar: " + zfar) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for zfar: " + zfar) + ", may not be null"));
         }
         if (zfar < 0.0D) {
             throw new IllegalArgumentException("zfar < 0.0");
@@ -132,7 +133,8 @@ public class CameraOrthographic
      */
     public void setZnear(Float znear) {
         if (znear == null) {
-            throw new NullPointerException((("Invalid value for znear: " + znear) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for znear: " + znear) + ", may not be null"));
         }
         if (znear < 0.0D) {
             throw new IllegalArgumentException("znear < 0.0");

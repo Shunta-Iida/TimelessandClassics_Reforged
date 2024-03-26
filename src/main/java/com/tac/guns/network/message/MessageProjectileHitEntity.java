@@ -17,8 +17,7 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
     private int type;
     private boolean player;
 
-    public MessageProjectileHitEntity() {
-    }
+    public MessageProjectileHitEntity() {}
 
     public MessageProjectileHitEntity(double x, double y, double z, int type, boolean player) {
         this.x = x;
@@ -29,7 +28,8 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
     }
 
     @Override
-    public void encode(MessageProjectileHitEntity messageProjectileHitEntity, FriendlyByteBuf buffer) {
+    public void encode(MessageProjectileHitEntity messageProjectileHitEntity,
+            FriendlyByteBuf buffer) {
         buffer.writeDouble(messageProjectileHitEntity.x);
         buffer.writeDouble(messageProjectileHitEntity.y);
         buffer.writeDouble(messageProjectileHitEntity.z);
@@ -39,17 +39,15 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
 
     @Override
     public MessageProjectileHitEntity decode(FriendlyByteBuf buffer) {
-        return new MessageProjectileHitEntity(
-                buffer.readDouble(),
-                buffer.readDouble(),
-                buffer.readDouble(),
-                buffer.readByte(),
-                buffer.readBoolean());
+        return new MessageProjectileHitEntity(buffer.readDouble(), buffer.readDouble(),
+                buffer.readDouble(), buffer.readByte(), buffer.readBoolean());
     }
 
     @Override
-    public void handle(MessageProjectileHitEntity messageProjectileHitEntity, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleProjectileHitEntity(messageProjectileHitEntity));
+    public void handle(MessageProjectileHitEntity messageProjectileHitEntity,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(
+                () -> ClientPlayHandler.handleProjectileHitEntity(messageProjectileHitEntity));
         supplier.get().setPacketHandled(true);
     }
 

@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.impl;
 
@@ -38,8 +30,7 @@ import java.util.Objects;
 /**
  * Implementation of an {@link AnimationModel}
  */
-public class DefaultAnimationModel extends AbstractNamedModelElement
-        implements AnimationModel {
+public class DefaultAnimationModel extends AbstractNamedModelElement implements AnimationModel {
     /**
      * Default implementation of a
      * {@link Sampler}
@@ -67,16 +58,12 @@ public class DefaultAnimationModel extends AbstractNamedModelElement
          * @param interpolation The interpolation
          * @param output        The output
          */
-        public DefaultSampler(
-                AccessorModel input,
-                Interpolation interpolation,
+        public DefaultSampler(AccessorModel input, Interpolation interpolation,
                 AccessorModel output) {
-            this.input = Objects.requireNonNull(
-                    input, "The input may not be null");
-            this.interpolation = Objects.requireNonNull(
-                    interpolation, "The interpolation may not be null");
-            this.output = Objects.requireNonNull(
-                    output, "The output may not be null");
+            this.input = Objects.requireNonNull(input, "The input may not be null");
+            this.interpolation =
+                    Objects.requireNonNull(interpolation, "The interpolation may not be null");
+            this.output = Objects.requireNonNull(output, "The output may not be null");
         }
 
         @Override
@@ -122,15 +109,10 @@ public class DefaultAnimationModel extends AbstractNamedModelElement
          * @param nodeModel The node model
          * @param path      The path
          */
-        public DefaultChannel(
-                Sampler sampler,
-                NodeModel nodeModel,
-                String path) {
-            this.sampler = Objects.requireNonNull(
-                    sampler, "The sampler may not be null");
+        public DefaultChannel(Sampler sampler, NodeModel nodeModel, String path) {
+            this.sampler = Objects.requireNonNull(sampler, "The sampler may not be null");
             this.nodeModel = nodeModel;
-            this.path = Objects.requireNonNull(
-                    path, "The path may not be null");
+            this.path = Objects.requireNonNull(path, "The path may not be null");
 
         }
 

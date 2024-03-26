@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -75,8 +67,7 @@ public final class GltfAssetReader {
      * 
      * @param jsonErrorConsumer The {@link JsonError} consumer
      */
-    public void setJsonErrorConsumer(
-            Consumer<? super JsonError> jsonErrorConsumer) {
+    public void setJsonErrorConsumer(Consumer<? super JsonError> jsonErrorConsumer) {
         this.jsonErrorConsumer = jsonErrorConsumer;
     }
 
@@ -91,8 +82,7 @@ public final class GltfAssetReader {
         try (InputStream inputStream = uri.toURL().openStream()) {
             GltfAsset gltfAsset = readWithoutReferences(inputStream);
             URI baseUri = IO.getParent(uri);
-            GltfReferenceResolver.resolveAll(
-                    gltfAsset.getReferences(), baseUri);
+            GltfReferenceResolver.resolveAll(gltfAsset.getReferences(), baseUri);
             return gltfAsset;
         }
     }
@@ -131,8 +121,7 @@ public final class GltfAssetReader {
      * @return The {@link GltfAsset}
      * @throws IOException If an IO error occurred
      */
-    public GltfAsset readWithoutReferences(InputStream inputStream)
-            throws IOException {
+    public GltfAsset readWithoutReferences(InputStream inputStream) throws IOException {
         RawGltfData rawGltfData = RawGltfDataReader.read(inputStream);
         return read(rawGltfData);
     }
@@ -153,15 +142,12 @@ public final class GltfAssetReader {
             int majorVersion = gltfReader.getMajorVersion();
             if (majorVersion == 1) {
                 de.javagl.jgltf.impl.v1.GlTF gltfV1 = gltfReader.getAsGltfV1();
-                return new GltfAssetV1(gltfV1,
-                        rawGltfData.getBinaryData());
+                return new GltfAssetV1(gltfV1, rawGltfData.getBinaryData());
             } else if (majorVersion == 2) {
                 de.javagl.jgltf.impl.v2.GlTF gltfV2 = gltfReader.getAsGltfV2();
-                return new GltfAssetV2(gltfV2,
-                        rawGltfData.getBinaryData());
+                return new GltfAssetV2(gltfV2, rawGltfData.getBinaryData());
             } else {
-                throw new IOException(
-                        "Unsupported major version: " + majorVersion);
+                throw new IOException("Unsupported major version: " + majorVersion);
             }
         }
     }

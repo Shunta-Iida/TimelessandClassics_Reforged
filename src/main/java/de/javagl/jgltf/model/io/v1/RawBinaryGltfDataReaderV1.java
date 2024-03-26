@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io.v1;
 
@@ -56,34 +48,30 @@ public class RawBinaryGltfDataReaderV1 {
      * @return The {@link RawGltfData}
      * @throws IOException If an IO error occurs
      */
-    public static RawGltfData readBinaryGltf(ByteBuffer data)
-            throws IOException {
+    public static RawGltfData readBinaryGltf(ByteBuffer data) throws IOException {
         int headerLength = BINARY_GLTF_VERSION_1_HEADER_LENGTH_IN_BYTES;
         if (data.capacity() < headerLength) {
-            throw new IOException("Expected header of size " + headerLength
-                    + ", but only found " + data.capacity() + " bytes");
+            throw new IOException("Expected header of size " + headerLength + ", but only found "
+                    + data.capacity() + " bytes");
         }
         IntBuffer intData = data.asIntBuffer();
         int length = intData.get(2);
         if (length != data.capacity()) {
-            throw new IOException(
-                    "Data length is " + data.capacity() + ", expected " + length);
+            throw new IOException("Data length is " + data.capacity() + ", expected " + length);
         }
 
         int contentLength = intData.get(3);
         int contentFormat = intData.get(4);
         if (contentFormat != CONTENT_FORMAT_JSON) {
-            throw new IOException("Expected content format to be JSON ("
-                    + CONTENT_FORMAT_JSON + "), but found " + contentFormat);
+            throw new IOException("Expected content format to be JSON (" + CONTENT_FORMAT_JSON
+                    + "), but found " + contentFormat);
         }
-        ByteBuffer contentData = Buffers.createSlice(
-                data, headerLength, contentLength);
+        ByteBuffer contentData = Buffers.createSlice(data, headerLength, contentLength);
         int bodyByteOffset = headerLength + contentLength;
         int bodyByteLength = length - bodyByteOffset;
         ByteBuffer bodyData = null;
         if (bodyByteLength > 0) {
-            bodyData = Buffers.createSlice(
-                    data, bodyByteOffset, bodyByteLength);
+            bodyData = Buffers.createSlice(data, bodyByteOffset, bodyByteLength);
         }
 
         return new RawGltfData(contentData, bodyData);

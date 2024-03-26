@@ -89,7 +89,8 @@ public class DyeItemRecipe extends CustomRecipe {
 
     @Override
     public NonNullList<ItemStack> getRemainingItems(CraftingContainer inventory) {
-        NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventory.getContainerSize(), ItemStack.EMPTY);
+        NonNullList<ItemStack> remainingItems =
+                NonNullList.withSize(inventory.getContainerSize(), ItemStack.EMPTY);
         for (int i = 0; i < remainingItems.size(); ++i) {
             ItemStack stack = inventory.getItem(i);
             remainingItems.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(stack));

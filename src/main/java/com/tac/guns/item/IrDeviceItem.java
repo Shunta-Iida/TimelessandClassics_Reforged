@@ -12,7 +12,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
  *
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class IrDeviceItem extends AttachmentItem<IrDevice> implements IirDevice, IColored, IEasyColor {
+public class IrDeviceItem extends AttachmentItem<IrDevice>
+        implements IirDevice, IColored, IEasyColor {
     private final boolean colored;
 
     public IrDeviceItem(IrDevice underBarrel, Properties properties) {

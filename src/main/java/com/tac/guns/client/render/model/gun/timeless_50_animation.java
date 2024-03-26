@@ -23,8 +23,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -34,13 +34,15 @@ public class timeless_50_animation extends SkinnedGunModel {
 
     // The render method, similar to what is in DartEntity. We can render the item
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         Timeless50AnimationController controller = Timeless50AnimationController.getInstance();
 
-        boolean renderClumsy = Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.MUZZLE_BRAKE
-                .get() ||
-                Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.MUZZLE_COMPENSATOR.get();
+        boolean renderClumsy = Gun.getAttachment(IAttachment.Type.BARREL, stack)
+                .getItem() == ModItems.MUZZLE_BRAKE.get()
+                || Gun.getAttachment(IAttachment.Type.BARREL, stack)
+                        .getItem() == ModItems.MUZZLE_COMPENSATOR.get();
         double yAdjust = 0; // Neko accidently made the .50 slightly too high in model space compared to the
                             // STI
 
@@ -50,26 +52,28 @@ public class timeless_50_animation extends SkinnedGunModel {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     Timeless50AnimationController.INDEX_BODY, transformType, matrices);
             if (renderClumsy) {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_EXTENDED), stack, matrices,
-                        renderBuffer, light, overlay);
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.CLUMSYYY), stack, matrices,
-                        renderBuffer, 15728880, overlay);
-            } else if (Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.SILENCER.get()) {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_STANDARD), stack, matrices,
-                        renderBuffer, light, overlay);
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.NEKOOO), stack, matrices, renderBuffer,
-                        15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_EXTENDED),
+                        stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.CLUMSYYY), stack,
+                        matrices, renderBuffer, 15728880, overlay);
+            } else if (Gun.getAttachment(IAttachment.Type.BARREL, stack)
+                    .getItem() == ModItems.SILENCER.get()) {
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_STANDARD),
+                        stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.NEKOOO), stack,
+                        matrices, renderBuffer, 15728880, overlay);
                 matrices.translate(0, 0, -0.3125);
-                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices, renderBuffer, light,
-                        overlay);
+                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices,
+                        renderBuffer, light, overlay);
                 matrices.translate(0, 0, 0.3125);
             } else {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_STANDARD), stack, matrices,
-                        renderBuffer, light, overlay);
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.NEKOOO), stack, matrices, renderBuffer,
-                        15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_STANDARD),
+                        stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.NEKOOO), stack,
+                        matrices, renderBuffer, 15728880, overlay);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
@@ -82,12 +86,13 @@ public class timeless_50_animation extends SkinnedGunModel {
                 Gun gun = ((GunItem) stack.getItem()).getGun();
                 float cooldownOg = ShootingHandler.get().getshootMsGap()
                         / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
-                                : ShootingHandler.get().getshootMsGap()
-                                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                                : ShootingHandler.get().getshootMsGap() / ShootingHandler
+                                        .calcShootTickGap(gun.getGeneral().getRate());
                 AnimationMeta reloadEmpty = controller
                         .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
-                        && controller.isAnimationRunning();
+                boolean shouldOffset =
+                        reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                                && controller.isAnimationRunning();
 
                 // matrices.translate(0.00, 0.0, 0.035); // Issues with the slide starting out
                 // further forward, seems to be ~ a 0.035 movement
@@ -102,14 +107,16 @@ public class timeless_50_animation extends SkinnedGunModel {
                 matrices.translate(0, 0, 0.025F);
             }
             if (renderClumsy) {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.SLIDE_EXTENDED_LIGHT), stack, matrices,
-                        renderBuffer, 15728880, overlay);
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.SLIDE_EXTENDED), stack, matrices,
-                        renderBuffer, light, overlay);
+                RenderUtil.renderModel(
+                        getComponentModel(skin, TacGunComponents.SLIDE_EXTENDED_LIGHT), stack,
+                        matrices, renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.SLIDE_EXTENDED),
+                        stack, matrices, renderBuffer, light, overlay);
             } else {
-                RenderUtil.renderModel(getComponentModel(skin, SLIDE_LIGHT), stack, matrices, renderBuffer, 15728880,
-                        overlay);
-                RenderUtil.renderModel(getComponentModel(skin, SLIDE), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SLIDE_LIGHT), stack, matrices,
+                        renderBuffer, 15728880, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SLIDE), stack, matrices,
+                        renderBuffer, light, overlay);
             }
         }
         matrices.popPose();
@@ -118,8 +125,8 @@ public class timeless_50_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     Timeless50AnimationController.INDEX_HAMMER, transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.HAMMER), stack, matrices, renderBuffer,
-                    light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.HAMMER), stack,
+                    matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
@@ -128,7 +135,9 @@ public class timeless_50_animation extends SkinnedGunModel {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     Timeless50AnimationController.INDEX_MAG, transformType, matrices);
             if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
-                    || controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
+                    || controller
+                            .getAnimationFromLabel(
+                                    GunAnimationController.AnimationLabel.RELOAD_EMPTY)
                             .equals(controller.getPreviousAnimation()))
                 matrices.translate(-0.00175, 0, 0); // -0.02, 0.05);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
@@ -154,18 +163,23 @@ public class timeless_50_animation extends SkinnedGunModel {
             {
                 controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                         Timeless50AnimationController.INDEX_BULLET1, transformType, matrices);
-                if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
-                        || controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
+                if (controller
+                        .isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY)
+                        || controller
+                                .getAnimationFromLabel(
+                                        GunAnimationController.AnimationLabel.RELOAD_EMPTY)
                                 .equals(controller.getPreviousAnimation()))
                     matrices.translate(-0.00175, 0, 0);
-                RenderUtil.renderModel(getComponentModel(skin, BULLET1), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET1), stack, matrices,
+                        renderBuffer, light, overlay);
             }
             matrices.popPose();
         }
 
         if (controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL)
                 .equals(controller.getPreviousAnimation())
-                && !controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)
+                && !controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)
                         .equals(controller.getPreviousAnimation())
                 && transformType.firstPerson()) {
             matrices.pushPose();
@@ -173,7 +187,8 @@ public class timeless_50_animation extends SkinnedGunModel {
                 controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                         Timeless50AnimationController.INDEX_BULLET2, transformType, matrices);
                 matrices.translate(0, -0.1, 2.2);
-                RenderUtil.renderModel(getComponentModel(skin, BULLET2), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET2), stack, matrices,
+                        renderBuffer, light, overlay);
                 matrices.translate(0, 0.1, -2.2);
             }
             matrices.popPose();

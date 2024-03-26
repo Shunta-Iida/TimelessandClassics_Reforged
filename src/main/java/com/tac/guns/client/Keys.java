@@ -34,48 +34,48 @@ import net.minecraftforge.network.simple.SimpleChannel;
 public final class Keys {
     private static class MouseKeyBinding extends KeyMapping {
         private MouseKeyBinding(String description, Key mouse_button) {
-            super(
-                    description,
-                    GunConflictContext.IN_GAME_HOLDING_WEAPON,
-                    KeyModifier.NONE,
-                    mouse_button,
-                    "key.categories.tac");
+            super(description, GunConflictContext.IN_GAME_HOLDING_WEAPON, KeyModifier.NONE,
+                    mouse_button, "key.categories.tac");
         }
 
         @Override
         public boolean same(KeyMapping mapping) {
             // No conflict with vanilla attack and item use key binding.
             final Options settings = Minecraft.getInstance().options;
-            return (mapping != settings.keyAttack
-                    && mapping != settings.keyUse
+            return (mapping != settings.keyAttack && mapping != settings.keyUse
                     && super.same(mapping));
         }
     }
 
-    public static final KeyMapping PULL_TRIGGER = new TacKeyBuilder("key.tac.shoot")
-            .withKeyboardKey(InputConstants.MOUSE_BUTTON_LEFT).buildAndRegis(),
-            AIM_HOLD = new TacKeyBuilder("key.tac.ads").withKeyboardKey(InputConstants.MOUSE_BUTTON_RIGHT)
+    public static final KeyMapping PULL_TRIGGER =
+            new TacKeyBuilder("key.tac.shoot").withKeyboardKey(InputConstants.MOUSE_BUTTON_LEFT)
                     .buildAndRegis(),
+            AIM_HOLD = new TacKeyBuilder("key.tac.ads")
+                    .withKeyboardKey(InputConstants.MOUSE_BUTTON_RIGHT).buildAndRegis(),
             AIM_TOGGLE = AIM_HOLD;
 
-    public static final TacKeyMapping RELOAD = new TacKeyBuilder("key.tac.reload").withKeyboardKey(InputConstants.KEY_R)
-            .buildAndRegis(),
+    public static final TacKeyMapping RELOAD =
+            new TacKeyBuilder("key.tac.reload").withKeyboardKey(InputConstants.KEY_R)
+                    .buildAndRegis(),
             UNLOAD = new TacKeyBuilder("key.tac.unload").withKeyboardKey(InputConstants.KEY_R)
                     .withKeyModifier(KeyModifier.ALT).buildAndRegis(),
-            ATTACHMENTS = new TacKeyBuilder("key.tac.attachments").withKeyboardKey(InputConstants.KEY_Z)
+            ATTACHMENTS = new TacKeyBuilder("key.tac.attachments")
+                    .withKeyboardKey(InputConstants.KEY_Z).buildAndRegis(),
+            FIRE_SELECT = new TacKeyBuilder("key.tac.fireSelect")
+                    .withKeyboardKey(InputConstants.KEY_G).buildAndRegis(),
+            INSPECT = new TacKeyBuilder("key.tac.inspect").withKeyboardKey(InputConstants.KEY_H)
                     .buildAndRegis(),
-            FIRE_SELECT = new TacKeyBuilder("key.tac.fireSelect").withKeyboardKey(InputConstants.KEY_G).buildAndRegis(),
-            INSPECT = new TacKeyBuilder("key.tac.inspect").withKeyboardKey(InputConstants.KEY_H).buildAndRegis(),
-            SIGHT_SWITCH = new TacKeyBuilder("key.tac.sight_switch").withKeyboardKey(InputConstants.KEY_V)
-                    .buildAndRegis(),
-            ACTIVATE_SIDE_RAIL = new TacKeyBuilder("key.tac.activateSideRail").withKeyboardKey(InputConstants.KEY_B)
-                    .buildAndRegis(),
-            EQUIP_ARMOR = new TacKeyBuilder("key.tac.equipArmor").withKeyboardKey(InputConstants.KEY_O).buildAndRegis(),
-            OPEN_ARMOR_AMMO_PACK = new TacKeyBuilder("key.tac.openArmorAmmoPack").withKeyboardKey(InputConstants.KEY_B)
-                    .buildAndRegis(),
+            SIGHT_SWITCH = new TacKeyBuilder("key.tac.sight_switch")
+                    .withKeyboardKey(InputConstants.KEY_V).buildAndRegis(),
+            ACTIVATE_SIDE_RAIL = new TacKeyBuilder("key.tac.activateSideRail")
+                    .withKeyboardKey(InputConstants.KEY_B).buildAndRegis(),
+            EQUIP_ARMOR = new TacKeyBuilder("key.tac.equipArmor")
+                    .withKeyboardKey(InputConstants.KEY_O).buildAndRegis(),
+            OPEN_ARMOR_AMMO_PACK = new TacKeyBuilder("key.tac.openArmorAmmoPack")
+                    .withKeyboardKey(InputConstants.KEY_B).buildAndRegis(),
 
-            ARMOR_REPAIRING = new TacKeyBuilder("key.tac.armor_repairing").withKeyboardKey(InputConstants.KEY_K)
-                    .buildAndRegis();
+            ARMOR_REPAIRING = new TacKeyBuilder("key.tac.armor_repairing")
+                    .withKeyboardKey(InputConstants.KEY_K).buildAndRegis();
 
     static {
         EQUIP_ARMOR.addPressCallback(() -> {
@@ -110,7 +110,8 @@ public final class Keys {
                 if (!SyncedEntityData.instance().get(player, ModSyncedDataKeys.RELOADING)) {
                     ShootingHandler.get().burstTracker = 0;
                     ReloadHandler.get().setReloading(true);
-                } else if (GunAnimationController.fromItem(stack.getItem()) instanceof PumpShotgunAnimationController) {
+                } else if (GunAnimationController
+                        .fromItem(stack.getItem()) instanceof PumpShotgunAnimationController) {
                     ReloadHandler.get().setReloading(false);
                 }
             }
@@ -128,8 +129,9 @@ public final class Keys {
             }
         });
     }
-    public static final TacKeyMapping[] KEYS_VALUE = { RELOAD, UNLOAD, ATTACHMENTS, FIRE_SELECT, INSPECT, SIGHT_SWITCH,
-            ACTIVATE_SIDE_RAIL, ARMOR_REPAIRING, EQUIP_ARMOR, OPEN_ARMOR_AMMO_PACK };
+    public static final TacKeyMapping[] KEYS_VALUE =
+            {RELOAD, UNLOAD, ATTACHMENTS, FIRE_SELECT, INSPECT, SIGHT_SWITCH, ACTIVATE_SIDE_RAIL,
+                    ARMOR_REPAIRING, EQUIP_ARMOR, OPEN_ARMOR_AMMO_PACK};
 
     public static boolean noConflict(TacKeyMapping key) {
         for (TacKeyMapping k : KEYS_VALUE) {
@@ -144,29 +146,13 @@ public final class Keys {
         return true;
     }
 
-    public static final TacKeyMapping MORE_INFO_HOLD = new TacKeyBuilder("key.tac.moreInfoHold")
-            .withKeyboardKey(InputConstants.KEY_LSHIFT)
-            .withConflictContext(KeyConflictContext.GUI)
-            .buildAndRegis();
+    public static final TacKeyMapping MORE_INFO_HOLD =
+            new TacKeyBuilder("key.tac.moreInfoHold").withKeyboardKey(InputConstants.KEY_LSHIFT)
+                    .withConflictContext(KeyConflictContext.GUI).buildAndRegis();
 
-    public static KeyMapping SHIFTY = null,
-            CONTROLLY = null,
-            ALTY = null,
-            SHIFTYR = null,
-            CONTROLLYR = null,
-            ALTYR = null,
-            SIZE_OPT = null,
-            P = null,
-            L = null,
-            O = null,
-            K = null,
-            M = null,
-            I = null,
-            J = null,
-            N = null,
-            UP = null,
-            RIGHT = null,
-            LEFT = null,
+    public static KeyMapping SHIFTY = null, CONTROLLY = null, ALTY = null, SHIFTYR = null,
+            CONTROLLYR = null, ALTYR = null, SIZE_OPT = null, P = null, L = null, O = null,
+            K = null, M = null, I = null, J = null, N = null, UP = null, RIGHT = null, LEFT = null,
             DOWN = null;
 
     static {
@@ -213,6 +199,5 @@ public final class Keys {
          */
     }
 
-    private Keys() {
-    }
+    private Keys() {}
 }

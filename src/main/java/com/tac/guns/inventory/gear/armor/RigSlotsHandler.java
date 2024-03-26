@@ -15,7 +15,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class RigSlotsHandler implements IAmmoItemHandler, IItemHandlerModifiable, INBTSerializable<CompoundTag> {
+public class RigSlotsHandler
+        implements IAmmoItemHandler, IItemHandlerModifiable, INBTSerializable<CompoundTag> {
     protected NonNullList<ItemStack> stacks;
 
     // TODO: Simplify and add unlimited system with generic containers, will be
@@ -84,14 +85,16 @@ public class RigSlotsHandler implements IAmmoItemHandler, IItemHandlerModifiable
 
         if (!simulate) {
             if (existing.isEmpty()) {
-                this.stacks.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
+                this.stacks.set(slot,
+                        reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
             } else {
                 existing.grow(reachedLimit ? limit : stack.getCount());
             }
             onContentsChanged(slot);
         }
 
-        return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+        return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit)
+                : ItemStack.EMPTY;
     }
 
     @Override
@@ -119,7 +122,8 @@ public class RigSlotsHandler implements IAmmoItemHandler, IItemHandlerModifiable
             }
         } else {
             if (!simulate) {
-                this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
+                this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(existing,
+                        existing.getCount() - toExtract));
                 onContentsChanged(slot);
             }
 
@@ -175,7 +179,8 @@ public class RigSlotsHandler implements IAmmoItemHandler, IItemHandlerModifiable
 
     protected void validateSlotIndex(int slot) {
         if (slot < 0 || slot >= stacks.size())
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + stacks.size() + ")");
+            throw new RuntimeException(
+                    "Slot " + slot + " not in valid range - [0," + stacks.size() + ")");
     }
 
     protected void onLoad() {

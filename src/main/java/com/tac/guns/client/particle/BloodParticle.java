@@ -63,12 +63,9 @@ public class BloodParticle extends TextureSheetParticle {
             rotation.mul(Vector3f.ZP.rotation(angle));
         }
 
-        Vector3f[] vertices = new Vector3f[] {
-                new Vector3f(-1.0F, -1.0F, 0.0F),
-                new Vector3f(-1.0F, 1.0F, 0.0F),
-                new Vector3f(1.0F, 1.0F, 0.0F),
-                new Vector3f(1.0F, -1.0F, 0.0F)
-        };
+        Vector3f[] vertices =
+                new Vector3f[] {new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F),
+                        new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 
         float scale = this.getQuadSize(partialTicks);
         for (int i = 0; i < 4; ++i) {
@@ -101,8 +98,8 @@ public class BloodParticle extends TextureSheetParticle {
             this.spriteSet = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z,
-                double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x,
+                double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             BloodParticle particle = new BloodParticle(worldIn, x, y, z);
             particle.pickSprite(this.spriteSet);
             return particle;

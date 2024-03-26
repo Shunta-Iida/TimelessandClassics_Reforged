@@ -63,11 +63,13 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
     }
 
     @Override
-    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float partialTicks) {
+    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight,
+            float partialTicks) {
         LocalPlayer playerEntity = mc.player;
         if (playerEntity == null)
             return;
-        if (playerEntity.getMainHandItem().getItem() == null || playerEntity.getMainHandItem().getItem() == Items.AIR)
+        if (playerEntity.getMainHandItem().getItem() == null
+                || playerEntity.getMainHandItem().getItem() == Items.AIR)
             return;
         if (playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem) {
             TimelessGunItem gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
@@ -77,8 +79,8 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
 
                 RenderSystem.enableBlend();
                 RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR,
-                        GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE,
-                        GlStateManager.DestFactor.ZERO);
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR,
+                        GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
                 BufferBuilder buffer = Tesselator.getInstance().getBuilder();
 
                 stack.pushPose();
@@ -97,10 +99,14 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
                             stack.mulPose(Vector3f.ZP.rotationDegrees(360F * f / getFractal()));
                             stack.translate(-size * scale / 2F, -size / 2F, 0);
                             Matrix4f matrix = stack.last().pose();
-                            buffer.vertex(matrix, 0, size, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, alpha).endVertex();
-                            buffer.vertex(matrix, size, size, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, alpha).endVertex();
-                            buffer.vertex(matrix, size, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, alpha).endVertex();
-                            buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, alpha).endVertex();
+                            buffer.vertex(matrix, 0, size, 0).uv(0, 1)
+                                    .color(1.0F, 1.0F, 1.0F, alpha).endVertex();
+                            buffer.vertex(matrix, size, size, 0).uv(1, 1)
+                                    .color(1.0F, 1.0F, 1.0F, alpha).endVertex();
+                            buffer.vertex(matrix, size, 0, 0).uv(1, 0)
+                                    .color(1.0F, 1.0F, 1.0F, alpha).endVertex();
+                            buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, alpha)
+                                    .endVertex();
 
                         }
                         stack.popPose();
@@ -128,14 +134,17 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
             gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
 
             if (playerEntity.getX() != playerEntity.xo || playerEntity.getZ() != playerEntity.zo)
-                scale += this.getHorizontalMovementScale() * gunItem.getGun().getDisplay().getHipfireMoveScale();
+                scale += this.getHorizontalMovementScale()
+                        * gunItem.getGun().getDisplay().getHipfireMoveScale();
             if (playerEntity.getY() != playerEntity.yo)
-                scale += this.getVerticalMovementScale() * gunItem.getGun().getDisplay().getHipfireMoveScale();
+                scale += this.getVerticalMovementScale()
+                        * gunItem.getGun().getDisplay().getHipfireMoveScale();
 
             this.scale(scale * (gunItem.getGun().getDisplay().getHipfireScale())
                     * (GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(),
                             gunItem.getGun().getGeneral().getSpread())
-                            * GunEnchantmentHelper.getSpreadModifier(playerEntity.getMainHandItem())));
+                            * GunEnchantmentHelper
+                                    .getSpreadModifier(playerEntity.getMainHandItem())));
             // this.scale *=
             // GunModifierHelper.getModifiedSpread(playerEntity.getMainHandItem(),
             // gunItem.getGun().getGeneral().getSpread());

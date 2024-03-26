@@ -20,8 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -34,58 +34,64 @@ public class aa_12_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         AA12AnimationController controller = AA12AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AA12AnimationController.INDEX_BODY,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    AA12AnimationController.INDEX_BODY, transformType, matrices);
             if (Gun.getScope(stack) == null) {
-                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices,
+                        renderBuffer, light, overlay);
             }
-            RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, RAIL_SCOPE), stack, matrices,
+                    renderBuffer, light, overlay);
 
             renderBarrelWithDefault(stack, matrices, renderBuffer, light, overlay, skin);
 
             renderGrip(stack, matrices, renderBuffer, light, overlay, skin);
 
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.BASIC_LASER
-                    .orElse(ItemStack.EMPTY.getItem())) {
+            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+                    .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, light, overlay);
+                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        renderBuffer, light, overlay);
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, 15728880,
-                        overlay); // 15728880 For fixed max light
+                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        renderBuffer, 15728880, overlay); // 15728880 For fixed max light
             }
 
             if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) != ItemStack.EMPTY
                     || Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) != ItemStack.EMPTY
                     || Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) != ItemStack.EMPTY) {
-                RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_EXTENDED), stack, matrices, renderBuffer,
-                        light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_EXTENDED), stack,
+                        matrices, renderBuffer, light, overlay);
             }
 
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
-            RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices, renderBuffer, 15728880,
-                    overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices,
+                    renderBuffer, 15728880, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), AA12AnimationController.INDEX_MAGAZINE,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    AA12AnimationController.INDEX_MAGAZINE, transformType, matrices);
             renderDrumMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
 
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), AA12AnimationController.INDEX_BOLT,
-                transformType, matrices);
-        RenderUtil.renderModel(getComponentModel(skin, BOLT_HANDLE), stack, matrices, renderBuffer, light, overlay);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                AA12AnimationController.INDEX_BOLT, transformType, matrices);
+        RenderUtil.renderModel(getComponentModel(skin, BOLT_HANDLE), stack, matrices, renderBuffer,
+                light, overlay);
 
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap()
@@ -103,7 +109,8 @@ public class aa_12_animation extends SkinnedGunModel {
                 }
             }
         }
-        RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+        RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light,
+                overlay);
         matrices.popPose();
 
         PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);

@@ -19,8 +19,7 @@ public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitB
     private BlockPos pos;
     private Direction face;
 
-    public MessageProjectileHitBlock() {
-    }
+    public MessageProjectileHitBlock() {}
 
     public MessageProjectileHitBlock(double x, double y, double z, BlockPos pos, Direction face) {
         this.x = x;
@@ -31,7 +30,8 @@ public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitB
     }
 
     @Override
-    public void encode(MessageProjectileHitBlock messageProjectileHitBlock, FriendlyByteBuf buffer) {
+    public void encode(MessageProjectileHitBlock messageProjectileHitBlock,
+            FriendlyByteBuf buffer) {
         buffer.writeDouble(messageProjectileHitBlock.x);
         buffer.writeDouble(messageProjectileHitBlock.y);
         buffer.writeDouble(messageProjectileHitBlock.z);
@@ -41,17 +41,15 @@ public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitB
 
     @Override
     public MessageProjectileHitBlock decode(FriendlyByteBuf buffer) {
-        return new MessageProjectileHitBlock(
-                buffer.readDouble(),
-                buffer.readDouble(),
-                buffer.readDouble(),
-                buffer.readBlockPos(),
-                buffer.readEnum(Direction.class));
+        return new MessageProjectileHitBlock(buffer.readDouble(), buffer.readDouble(),
+                buffer.readDouble(), buffer.readBlockPos(), buffer.readEnum(Direction.class));
     }
 
     @Override
-    public void handle(MessageProjectileHitBlock messageProjectileHitBlock, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleProjectileHitBlock(messageProjectileHitBlock));
+    public void handle(MessageProjectileHitBlock messageProjectileHitBlock,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(
+                () -> ClientPlayHandler.handleProjectileHitBlock(messageProjectileHitBlock));
         supplier.get().setPacketHandled(true);
     }
 

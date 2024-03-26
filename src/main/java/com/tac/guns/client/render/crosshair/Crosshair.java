@@ -10,8 +10,7 @@ import net.minecraft.resources.ResourceLocation;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public abstract class Crosshair implements IResourceLocation {
-    public static final Crosshair DEFAULT = new Crosshair(new ResourceLocation("default")) {
-    };
+    public static final Crosshair DEFAULT = new Crosshair(new ResourceLocation("default")) {};
 
     static {
         CrosshairHandler.get().register(DEFAULT);
@@ -41,20 +40,18 @@ public abstract class Crosshair implements IResourceLocation {
      * @param windowHeight the scaled height of the window
      * @param partialTicks
      */
-    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float partialTicks) {
-    }
+    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight,
+            float partialTicks) {}
 
     /**
      * Ticks the crosshair for any logic
      */
-    public void tick() {
-    }
+    public void tick() {}
 
     /**
      * Called when the held gun is fired
      */
-    public void onGunFired() {
-    }
+    public void onGunFired() {}
 
     /**
      * Gets the id of the crosshair

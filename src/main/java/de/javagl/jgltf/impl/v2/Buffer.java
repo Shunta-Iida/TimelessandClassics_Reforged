@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for buffer.schema.json
  * 
  */
-public class Buffer
-        extends GlTFChildOfRootProperty {
+public class Buffer extends GlTFChildOfRootProperty {
 
     /**
      * The URI (or IRI) of the buffer. (optional)
@@ -65,7 +63,8 @@ public class Buffer
      */
     public void setByteLength(Integer byteLength) {
         if (byteLength == null) {
-            throw new NullPointerException((("Invalid value for byteLength: " + byteLength) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for byteLength: " + byteLength) + ", may not be null"));
         }
         if (byteLength < 1) {
             throw new IllegalArgumentException("byteLength < 1");

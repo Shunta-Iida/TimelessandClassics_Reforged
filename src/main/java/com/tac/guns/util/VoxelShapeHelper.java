@@ -24,17 +24,19 @@ public class VoxelShapeHelper {
         VoxelShape shapeEast = rotate(source, Direction.EAST);
         VoxelShape shapeSouth = rotate(source, Direction.SOUTH);
         VoxelShape shapeWest = rotate(source, Direction.WEST);
-        return new VoxelShape[] { shapeSouth, shapeWest, shapeNorth, shapeEast };
+        return new VoxelShape[] {shapeSouth, shapeWest, shapeNorth, shapeEast};
     }
 
     public static VoxelShape rotate(VoxelShape source, Direction direction) {
-        double[] adjustedValues = adjustValues(direction, source.min(Direction.Axis.X), source.min(Direction.Axis.Z),
-                source.max(Direction.Axis.X), source.max(Direction.Axis.Z));
-        return Shapes.box(adjustedValues[0], source.min(Direction.Axis.Y), adjustedValues[1], adjustedValues[2],
-                source.max(Direction.Axis.Y), adjustedValues[3]);
+        double[] adjustedValues =
+                adjustValues(direction, source.min(Direction.Axis.X), source.min(Direction.Axis.Z),
+                        source.max(Direction.Axis.X), source.max(Direction.Axis.Z));
+        return Shapes.box(adjustedValues[0], source.min(Direction.Axis.Y), adjustedValues[1],
+                adjustedValues[2], source.max(Direction.Axis.Y), adjustedValues[3]);
     }
 
-    private static double[] adjustValues(Direction direction, double var1, double var2, double var3, double var4) {
+    private static double[] adjustValues(Direction direction, double var1, double var2, double var3,
+            double var4) {
         switch (direction) {
             case WEST:
                 double var_temp_1 = var1;
@@ -63,7 +65,7 @@ public class VoxelShapeHelper {
             default:
                 break;
         }
-        return new double[] { var1, var2, var3, var4 };
+        return new double[] {var1, var2, var3, var4};
     }
 
     private static double limit(double value) {

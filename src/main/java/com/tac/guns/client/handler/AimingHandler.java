@@ -77,9 +77,8 @@ public class AimingHandler {
                 return;
 
             final Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null
-                    && (mc.player.getMainHandItem().getItem() instanceof GunItem
-                            || Gun.getScope(mc.player.getMainHandItem()) != null))
+            if (mc.player != null && (mc.player.getMainHandItem().getItem() instanceof GunItem
+                    || Gun.getScope(mc.player.getMainHandItem()) != null))
                 this.currentScopeZoomIndex++;
         });
     }
@@ -189,8 +188,10 @@ public class AimingHandler {
                 this.aiming = true;
 
                 final ItemStack stack = player.getInventory().getSelected();
-                final GunAnimationController controller = GunAnimationController.fromItem(stack.getItem());
-                if (controller != null && controller.isAnimationRunning(GunAnimationController.AnimationLabel.INSPECT))
+                final GunAnimationController controller =
+                        GunAnimationController.fromItem(stack.getItem());
+                if (controller != null && controller
+                        .isAnimationRunning(GunAnimationController.AnimationLabel.INSPECT))
                     controller.stopAnimation();
             }
             this.localTracker.handleAiming(player.getItemInHand(InteractionHand.MAIN_HAND), true);
@@ -216,8 +217,8 @@ public class AimingHandler {
             ItemStack heldItem = mc.player.getMainHandItem();
             if (heldItem.getItem() instanceof TimelessGunItem) {
                 TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
-                if (AimingHandler.get().normalisedAdsProgress != 0
-                        && !SyncedEntityData.instance().get(mc.player, ModSyncedDataKeys.RELOADING)) {
+                if (AimingHandler.get().normalisedAdsProgress != 0 && !SyncedEntityData.instance()
+                        .get(mc.player, ModSyncedDataKeys.RELOADING)) {
                     Gun modifiedGun = gunItem.getModifiedGun(heldItem);
                     if (modifiedGun.getModules().getZoom() != null) {
                         float newFov = modifiedGun.getModules().getZoom().getFovModifier();
@@ -225,18 +226,21 @@ public class AimingHandler {
                         if (scope != null) {
                             if (!Config.COMMON.gameplay.realisticLowPowerFovHandling.get()
                                     || (scope.getAdditionalZoom().getZoomMultiple() > 1
-                                            && Config.COMMON.gameplay.realisticLowPowerFovHandling.get())
+                                            && Config.COMMON.gameplay.realisticLowPowerFovHandling
+                                                    .get())
                                     || gunItem.isIntegratedOptic()) {
                                 newFov = (float) MathUtil.magnificationToFovMultiplier(
                                         scope.getAdditionalZoom().getZoomMultiple(),
                                         Minecraft.getInstance().options.fov);
                                 if (newFov >= 1)
                                     newFov = modifiedGun.getModules().getZoom().getFovModifier();
-                                event.setNewfov(newFov + (1.0F - newFov) * (1.0F - (float) this.normalisedAdsProgress));
+                                event.setNewfov(newFov + (1.0F - newFov)
+                                        * (1.0F - (float) this.normalisedAdsProgress));
                             }
                         } else if (!Config.COMMON.gameplay.realisticIronSightFovHandling.get()
                                 || gunItem.isIntegratedOptic())
-                            event.setNewfov(newFov + (1.0F - newFov) * (1.0F - (float) this.normalisedAdsProgress));
+                            event.setNewfov(newFov + (1.0F - newFov)
+                                    * (1.0F - (float) this.normalisedAdsProgress));
                     }
                 }
             }
@@ -248,7 +252,8 @@ public class AimingHandler {
         if (!isRenderingHand) {
             Minecraft mc = Minecraft.getInstance();
             double modifier = MathUtil.fovToMagnification(event.getFOV(), mc.options.fov);
-            ((MouseSensitivityModifier) mc.mouseHandler).setSensitivity(mc.options.sensitivity / modifier);
+            ((MouseSensitivityModifier) mc.mouseHandler)
+                    .setSensitivity(mc.options.sensitivity / modifier);
         }
     }
 
@@ -291,9 +296,11 @@ public class AimingHandler {
         }
 
         ItemCooldowns tracker = Minecraft.getInstance().player.getCooldowns();
-        float cooldown = tracker.getCooldownPercent(heldItem.getItem(), Minecraft.getInstance().getFrameTime());
+        float cooldown = tracker.getCooldownPercent(heldItem.getItem(),
+                Minecraft.getInstance().getFrameTime());
 
-        if (gun.getGeneral().isBoltAction() && (cooldown < 0.8 && cooldown > 0) && Gun.getScope(heldItem) != null) {
+        if (gun.getGeneral().isBoltAction() && (cooldown < 0.8 && cooldown > 0)
+                && Gun.getScope(heldItem) != null) {
             return false;
         }
 

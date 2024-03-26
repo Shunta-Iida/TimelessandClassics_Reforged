@@ -117,15 +117,20 @@ public enum AnimationHandler {
             if (controller.getPreviousAnimation() != null
                     && !controller.getPreviousAnimation().equals(reloadNormalMeta))
                 controller.stopAnimation();
-            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL, reloadSpeed);
+            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL,
+                    reloadSpeed);
         } else {
-            if (controller.getPreviousAnimation() != null && !controller.getPreviousAnimation().equals(reloadEmptyMeta))
+            if (controller.getPreviousAnimation() != null
+                    && !controller.getPreviousAnimation().equals(reloadEmptyMeta))
                 controller.stopAnimation();
 
-            if (GunAnimationController.fromItem(itemStack.getItem()) instanceof PumpShotgunAnimationController)
-                ((PumpShotgunAnimationController) GunAnimationController.fromItem(itemStack.getItem())).setEmpty(true);
+            if (GunAnimationController
+                    .fromItem(itemStack.getItem()) instanceof PumpShotgunAnimationController)
+                ((PumpShotgunAnimationController) GunAnimationController
+                        .fromItem(itemStack.getItem())).setEmpty(true);
 
-            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_EMPTY, reloadSpeed);
+            controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_EMPTY,
+                    reloadSpeed);
         }
     }
 
@@ -137,15 +142,18 @@ public enum AnimationHandler {
             return;
         if (!event.getPlayer().getUUID().equals(Minecraft.getInstance().player.getUUID()))
             return;
-        GunAnimationController controller = GunAnimationController.fromItem(event.getStack().getItem());
+        GunAnimationController controller =
+                GunAnimationController.fromItem(event.getStack().getItem());
         if (controller == null)
             return;
         if (controller.isAnimationRunning()) {
             AnimationMeta meta = controller.getPreviousAnimation();
             if (meta == null)
                 return;
-            if (meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT)) || meta
-                    .equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)))
+            if (meta.equals(
+                    controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT))
+                    || meta.equals(controller.getAnimationFromLabel(
+                            GunAnimationController.AnimationLabel.INSPECT_EMPTY)))
                 controller.stopAnimation();
             else {
                 AnimationRunner runner = Animations.getAnimationRunner(meta.getResourceLocation());
@@ -153,8 +161,11 @@ public enum AnimationHandler {
                     return;
                 float current = runner.getAnimationManager().getCurrentTimeS();
                 float max = runner.getAnimationManager().getMaxEndTimeS();
-                if (!(meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PUMP)) ||
-                        meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT))))
+                if (!(meta
+                        .equals(controller
+                                .getAnimationFromLabel(GunAnimationController.AnimationLabel.PUMP))
+                        || meta.equals(controller.getAnimationFromLabel(
+                                GunAnimationController.AnimationLabel.PULL_BOLT))))
                     if (max - current <= 0.25f)
                         return;
                 event.setCanceled(true);
@@ -170,7 +181,8 @@ public enum AnimationHandler {
             return;
         if (!event.getPlayer().getUUID().equals(Minecraft.getInstance().player.getUUID()))
             return;
-        GunAnimationController controller = GunAnimationController.fromItem(event.getStack().getItem());
+        GunAnimationController controller =
+                GunAnimationController.fromItem(event.getStack().getItem());
         if (controller instanceof PumpShotgunAnimationController) {
             controller.runAnimation(GunAnimationController.AnimationLabel.PUMP);
         }
@@ -184,7 +196,8 @@ public enum AnimationHandler {
             return;
         if (!event.getPlayer().getUUID().equals(Minecraft.getInstance().player.getUUID()))
             return;
-        GunAnimationController controller = GunAnimationController.fromItem(event.getStack().getItem());
+        GunAnimationController controller =
+                GunAnimationController.fromItem(event.getStack().getItem());
         if (controller instanceof BoltActionAnimationController) {
             controller.runAnimation(GunAnimationController.AnimationLabel.PULL_BOLT);
         }
@@ -203,7 +216,8 @@ public enum AnimationHandler {
                 return;
 
             final ItemStack stack = player.getInventory().getSelected();
-            final GunAnimationController controller = GunAnimationController.fromItem(stack.getItem());
+            final GunAnimationController controller =
+                    GunAnimationController.fromItem(stack.getItem());
             if (controller != null && !controller.isAnimationRunning()) {
                 controller.stopAnimation();
                 if (Gun.hasAmmo(stack)) {
@@ -223,10 +237,12 @@ public enum AnimationHandler {
     @SubscribeEvent
     public void onClientPlayerReload(GunReloadEvent.Pre event) {
         if (event.isClient()) {
-            GunAnimationController controller = GunAnimationController.fromItem(event.getStack().getItem());
+            GunAnimationController controller =
+                    GunAnimationController.fromItem(event.getStack().getItem());
             if (controller != null) {
-                if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.DRAW) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.PUMP))
+                if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.DRAW)
+                        || controller
+                                .isAnimationRunning(GunAnimationController.AnimationLabel.PUMP))
                     event.setCanceled(true);
             }
         }
@@ -266,13 +282,16 @@ public enum AnimationHandler {
         if (controller == null)
             return;
         if (controller instanceof PumpShotgunAnimationController) {
-            if (controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) != null) {
-                if (SyncedEntityData.instance().get(Minecraft.getInstance().player, ModSyncedDataKeys.STOP_ANIMA))
+            if (controller.getAnimationFromLabel(
+                    GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) != null) {
+                if (SyncedEntityData.instance().get(Minecraft.getInstance().player,
+                        ModSyncedDataKeys.STOP_ANIMA))
                     controller.stopAnimation();
                 // controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END);
             }
         } else {
-            if (SyncedEntityData.instance().get(Minecraft.getInstance().player, ModSyncedDataKeys.STOP_ANIMA)) {
+            if (SyncedEntityData.instance().get(Minecraft.getInstance().player,
+                    ModSyncedDataKeys.STOP_ANIMA)) {
                 controller.stopAnimation();
                 controller.runAnimation(GunAnimationController.AnimationLabel.STATIC);
                 controller.stopAnimation();
@@ -289,14 +308,17 @@ public enum AnimationHandler {
         if (controller instanceof PumpShotgunAnimationController) {
             if (controller.getPreviousAnimation() != null
                     && controller.getPreviousAnimation()
-                            .equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_LOOP))
+                            .equals(controller.getAnimationFromLabel(
+                                    GunAnimationController.AnimationLabel.RELOAD_LOOP))
                     && !ReloadHandler.get().isReloading()) {
                 if (!controller.isAnimationRunning()) {
                     if (((PumpShotgunAnimationController) controller).isEmpty()) {
-                        controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_EMPTY_END);
+                        controller.runAnimation(
+                                GunAnimationController.AnimationLabel.RELOAD_EMPTY_END);
                         ((PumpShotgunAnimationController) controller).setEmpty(false);
                     } else
-                        controller.runAnimation(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END);
+                        controller.runAnimation(
+                                GunAnimationController.AnimationLabel.RELOAD_NORMAL_END);
                 }
             }
         }

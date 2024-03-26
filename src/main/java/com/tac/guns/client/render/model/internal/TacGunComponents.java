@@ -31,9 +31,10 @@ public class TacGunComponents {
     public static final GunComponent LIGHT = new GunComponent("tac", "light");
     public static final GunComponent SAFETY = new GunComponent("tac", "safety");
     public static final GunComponent BIPOD = new GunComponent("tac", "bipod"); // the tactical bipod
-    public static final GunComponent BULLET_CHAIN_COVER = new GunComponent("tac", "bullet_chain_cover"); // the clip on
-                                                                                                         // bullet chain
-                                                                                                         // (like m249)
+    public static final GunComponent BULLET_CHAIN_COVER =
+            new GunComponent("tac", "bullet_chain_cover"); // the clip on
+                                                                                                                 // bullet chain
+                                                                                                                 // (like m249)
     public static final GunComponent HAMMER = new GunComponent("tac", "hammer"); // the hammer to fire
     public static final GunComponent HANDLE_EXTRA = new GunComponent("tac", "handle_extra"); // extra handle
     public static final GunComponent RELEASE = new GunComponent("tac", "release"); // release mag clip
@@ -42,12 +43,13 @@ public class TacGunComponents {
                                                                                              // render if there is no
                                                                                              // stock attachment
     public static final GunComponent SLIDE_EXTENDED = new GunComponent("tac", "slide_extended"); // long pistol slide
-    public static final GunComponent SLIDE_EXTENDED_LIGHT = new GunComponent("tac", "slide_extended_light"); // the
-                                                                                                             // light
-                                                                                                             // part
-                                                                                                             // move
-                                                                                                             // with
-                                                                                                             // slide
+    public static final GunComponent SLIDE_EXTENDED_LIGHT =
+            new GunComponent("tac", "slide_extended_light"); // the
+                                                                                                                     // light
+                                                                                                                     // part
+                                                                                                                     // move
+                                                                                                                     // with
+                                                                                                                     // slide
     public static final GunComponent PULL = new GunComponent("tac", "pull"); // something in barrel connect to bolt
                                                                              // handle
 

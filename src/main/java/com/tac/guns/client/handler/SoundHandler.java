@@ -61,15 +61,16 @@ public class SoundHandler {
         }
 
         /* If deafened, play ringing sound if not already playing, otherwise return */
-        MobEffectInstance effect = Minecraft.getInstance().player.getEffect(ModEffects.DEAFENED.get());
+        MobEffectInstance effect =
+                Minecraft.getInstance().player.getEffect(ModEffects.DEAFENED.get());
         if (effect == null) {
             if (!this.isDeafened) {
                 return;
             }
         }
 
-        if (Config.SERVER.ringVolume.get() > 0
-                && (this.ringing == null || !Minecraft.getInstance().getSoundManager().isActive(this.ringing))) {
+        if (Config.SERVER.ringVolume.get() > 0 && (this.ringing == null
+                || !Minecraft.getInstance().getSoundManager().isActive(this.ringing))) {
             this.ringing = new StunRingingSound();
             Minecraft.getInstance().getSoundManager().play(this.ringing);
             return; // Return after playing sound, as doing so in the tame tick that sounds are
@@ -79,7 +80,8 @@ public class SoundHandler {
         // Access the sound manager's sound system and list of playing sounds
         Map<SoundInstance, ChannelAccess.ChannelHandle> playingSounds;
         try {
-            playingSounds = (Map<SoundInstance, ChannelAccess.ChannelHandle>) this.playingSounds.get(this.soundEngine);
+            playingSounds = (Map<SoundInstance, ChannelAccess.ChannelHandle>) this.playingSounds
+                    .get(this.soundEngine);
         } catch (IllegalArgumentException | IllegalAccessException e) {
             return;
         }
@@ -93,8 +95,9 @@ public class SoundHandler {
                         return;
                     }
 
-                    float volume = sound instanceof SoundMuted ? ((SoundMuted) sound).getVolumeInitial()
-                            : sound.getVolume();
+                    float volume =
+                            sound instanceof SoundMuted ? ((SoundMuted) sound).getVolumeInitial()
+                                    : sound.getVolume();
                     this.soundVolumes.put(sound, volume);
                     entry.execute(soundSource -> {
                         soundSource.setVolume(getMutedVolume(effect.getDuration(), volume));
@@ -132,7 +135,8 @@ public class SoundHandler {
 
         // Exempt initial explosion from muting
         ResourceLocation loc = event.getSound().getLocation();
-        MobEffectInstance effect = Minecraft.getInstance().player.getEffect(ModEffects.DEAFENED.get());
+        MobEffectInstance effect =
+                Minecraft.getInstance().player.getEffect(ModEffects.DEAFENED.get());
         int duration = effect != null ? effect.getDuration() : 0;
         boolean isStunGrenade = isStunGrenade(loc);
         if (duration == 0 && isStunGrenade)

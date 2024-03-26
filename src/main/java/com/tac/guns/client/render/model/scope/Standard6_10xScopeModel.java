@@ -39,15 +39,18 @@ public class Standard6_10xScopeModel implements IOverrideModel {
             "textures/items/timeless_scopes/hit_marker/standard_8x_scope_reticle.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            ItemStack parent, LivingEntity entity, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light,
-            int overlay) {
+    public void render(float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
+            MultiBufferSource renderTypeBuffer, int light, int overlay) {
         matrixStack.pushPose();
         matrixStack.translate(0, -0.15, -0.38);
         matrixStack.translate(0, 0, 0.0015);
-        if (AimingHandler.get().getNormalisedAdsProgress() < 0.525 || Config.CLIENT.display.scopeDoubleRender.get())
-            RenderUtil.renderModel(Sx8_FRONT.getModel(), stack, matrixStack, renderTypeBuffer, light, overlay);
-        RenderUtil.renderModel(Sx8_BODY.getModel(), stack, matrixStack, renderTypeBuffer, light, overlay);
+        if (AimingHandler.get().getNormalisedAdsProgress() < 0.525
+                || Config.CLIENT.display.scopeDoubleRender.get())
+            RenderUtil.renderModel(Sx8_FRONT.getModel(), stack, matrixStack, renderTypeBuffer,
+                    light, overlay);
+        RenderUtil.renderModel(Sx8_BODY.getModel(), stack, matrixStack, renderTypeBuffer, light,
+                overlay);
 
         matrixStack.translate(0, 0.15, 0.42);
 
@@ -59,7 +62,8 @@ public class Standard6_10xScopeModel implements IOverrideModel {
             }
 
             ScopeData scopeData = ScopeEditor.get().getScopeData() == null
-                    || ScopeEditor.get().getScopeData().getTagName() != "gener8x" ? new ScopeData("")
+                    || ScopeEditor.get().getScopeData().getTagName() != "gener8x"
+                            ? new ScopeData("")
                             : ScopeEditor.get().getScopeData();
             ScopeItem scopeItem = (ScopeItem) stack.getItem();
             float scopeSize = 1.085F + 0.24375f + 0.03f + 0.3945f + scopeData.getDrZoomSizeMod();
@@ -68,14 +72,15 @@ public class Standard6_10xScopeModel implements IOverrideModel {
             float reticleSize = scopePrevSize / 16.0F;
 
             float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom() + scopeData.getDrZoomCropMod();// scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
-                                                                                                                   // +
-            // scopeData.getDrZoomCropMod();
+                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                            + scopeData.getDrZoomCropMod();// scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                                                                                                                                                                                                 // +
+                                                                                                                                                                                                 // scopeData.getDrZoomCropMod();
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
 
-            float texU = ((window.getScreenWidth() - window.getScreenHeight() + window.getScreenHeight() * crop * 2.0F)
-                    / 2.0F) / window.getScreenWidth();
+            float texU = ((window.getScreenWidth() - window.getScreenHeight()
+                    + window.getScreenHeight() * crop * 2.0F) / 2.0F) / window.getScreenWidth();
 
             matrixStack.pushPose();
             {
@@ -93,14 +98,18 @@ public class Standard6_10xScopeModel implements IOverrideModel {
 
                 if (Config.CLIENT.display.scopeDoubleRender.get()) {
                     builder = renderTypeBuffer.getBuffer(GunRenderType.getScreen());
-                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F).uv(texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F)
+                            .uv(texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                     builder.vertex(matrix, 0, 0, 0).color(color, color, color, 1.0F).uv(texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F).uv(1.0F - texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F).uv(1.0F - texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                            .endVertex();
+                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                 }
 
                 matrixStack.translate(0, 0, 0.0001);
@@ -113,8 +122,8 @@ public class Standard6_10xScopeModel implements IOverrideModel {
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
 
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
-                        1);
+                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
 
                 float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
@@ -133,34 +142,36 @@ public class Standard6_10xScopeModel implements IOverrideModel {
                 if (AimingHandler.get().isAiming())
                     aimed = true;
 
-                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack, Minecraft.getInstance().player,
-                        partialTicks, -0.0225f);
+                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack,
+                        Minecraft.getInstance().player, partialTicks, -0.0225f);
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true, 0.035f);
                 GunRenderingHandler.get().applyNoiseMovementTransform(matrixStack, -0.06f);
                 GunRenderingHandler.get().applyJumpingTransforms(matrixStack, partialTicks, -0.06f);
 
                 float recoilReversedMod = 0.15f;
                 matrixStack.translate(0, 0, -0.35);
-                matrixStack.mulPose(
-                        Vector3f.YP.rotationDegrees(GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.2f));
-                matrixStack.mulPose(
-                        Vector3f.ZN.rotationDegrees(GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.2f));
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(
-                        (GunRenderingHandler.get().recoilLift * 0.02f * GunRenderingHandler.get().recoilReduction)
-                                * 0.25F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(
+                        GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.2f));
+                matrixStack.mulPose(Vector3f.ZN.rotationDegrees(
+                        GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.2f));
+                matrixStack
+                        .mulPose(Vector3f.XP.rotationDegrees((GunRenderingHandler.get().recoilLift
+                                * 0.02f * GunRenderingHandler.get().recoilReduction) * 0.25F));
                 matrixStack.translate(0, 0, 0.35);
 
-                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
-                        .uv(0.0F, 0.9375F).overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
-                        .endVertex();
-                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F).overlayCoords(overlay)
+                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0)
+                        .color(red, green, blue, alpha).uv(0.0F, 0.9375F).overlayCoords(overlay)
                         .uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0).color(red, green, blue, alpha)
-                        .uv(0.9375F, 0.0F).overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F)
+                        .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
                         .endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale), 0)
-                        .color(red, green, blue, alpha).uv(0.9375F, 0.9375F).overlayCoords(overlay).uv2(15728880)
-                        .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0)
+                        .color(red, green, blue, alpha).uv(0.9375F, 0.0F).overlayCoords(overlay)
+                        .uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale),
+                        0).color(red, green, blue, alpha).uv(0.9375F, 0.9375F)
+                        .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                        .endVertex();
 
             }
             matrixStack.popPose();

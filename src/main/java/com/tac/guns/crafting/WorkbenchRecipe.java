@@ -21,8 +21,8 @@ public class WorkbenchRecipe implements Recipe<WorkbenchTileEntity> {
     private final ImmutableList<Pair<Ingredient, Integer>> materials;
     private final String group;
 
-    public WorkbenchRecipe(ResourceLocation id, ItemStack item, ImmutableList<Pair<Ingredient, Integer>> materials,
-            String group) {
+    public WorkbenchRecipe(ResourceLocation id, ItemStack item,
+            ImmutableList<Pair<Ingredient, Integer>> materials, String group) {
         this.id = id;
         this.item = item;
         this.materials = materials;

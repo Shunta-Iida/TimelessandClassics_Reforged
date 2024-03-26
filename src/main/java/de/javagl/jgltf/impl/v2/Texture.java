@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for texture.schema.json
  * 
  */
-public class Texture
-        extends GlTFChildOfRootProperty {
+public class Texture extends GlTFChildOfRootProperty {
 
     /**
      * The index of the sampler used by this texture. When undefined, a

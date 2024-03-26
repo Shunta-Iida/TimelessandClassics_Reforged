@@ -31,7 +31,8 @@ import java.util.Map;
  * models...
  */
 @OnlyIn(Dist.CLIENT)
-public class VestLayerRender<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
+public class VestLayerRender<T extends Player, M extends HumanoidModel<T>>
+        extends RenderLayer<T, M> {
     public VestLayerRender(RenderLayerParent<T, M> renderer) {
         super(renderer);
     }
@@ -43,10 +44,11 @@ public class VestLayerRender<T extends Player, M extends HumanoidModel<T>> exten
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource renderTypeBuffer, int p_225628_3_, T player,
-            float p_225628_5_, float p_225628_6_, float partialTick, float p_225628_8_, float p_225628_9_,
-            float p_225628_10_) {
-        if (!WearableHelper.PlayerWornRig(player).isEmpty() && Config.COMMON.gameplay.renderTaCArmor.get()) {
+    public void render(PoseStack stack, MultiBufferSource renderTypeBuffer, int p_225628_3_,
+            T player, float p_225628_5_, float p_225628_6_, float partialTick, float p_225628_8_,
+            float p_225628_9_, float p_225628_10_) {
+        if (!WearableHelper.PlayerWornRig(player).isEmpty()
+                && Config.COMMON.gameplay.renderTaCArmor.get()) {
             ItemStack armor = WearableHelper.PlayerWornRig(player);
             stack.pushPose();
             {
@@ -60,7 +62,8 @@ public class VestLayerRender<T extends Player, M extends HumanoidModel<T>> exten
                                                                       // implementation side rather then core?
                 VertexConsumer builder = ItemRenderer.getFoilBuffer(renderTypeBuffer,
                         model.renderType(model.getTexture()), false, false);
-                model.renderToBuffer(stack, builder, p_225628_3_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+                model.renderToBuffer(stack, builder, p_225628_3_, OverlayTexture.NO_OVERLAY, 1.0F,
+                        1.0F, 1.0F, 1.0F);
             }
             stack.popPose();
         }

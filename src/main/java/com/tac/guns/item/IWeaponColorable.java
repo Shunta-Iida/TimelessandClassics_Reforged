@@ -15,14 +15,10 @@ public interface IWeaponColorable {
     WeaponColorSegment getColorSegment();
 
     enum WeaponColorSegment {
-        BARREL_COLOR("barrel_color"),
-        IRON_SIGHTS_COLOR("iron_sights_color"),
-        HANDGUARD_COLOR("handguard_color"),
-        BODY_COLOR("body_color"),
-        MAGAZINE_COLOR("magazine_color"),
-        GRIP_COLOR("grip_color"),
-        STOCK_COLOR("stock_color"),
-        EXTRA_PIECES_COLOR("extra_color");
+        BARREL_COLOR("barrel_color"), IRON_SIGHTS_COLOR("iron_sights_color"), HANDGUARD_COLOR(
+                "handguard_color"), BODY_COLOR("body_color"), MAGAZINE_COLOR(
+                        "magazine_color"), GRIP_COLOR("grip_color"), STOCK_COLOR(
+                                "stock_color"), EXTRA_PIECES_COLOR("extra_color");
 
         private String colorTranslationKey;
 
@@ -93,7 +89,8 @@ public interface IWeaponColorable {
      * @param stack the ItemStack of the colored item
      * @param color the color in rgba integer format
      */
-    default void setWeaponColor(ItemStack stack, IWeaponColorable.WeaponColorSegment segment, int color) {
+    default void setWeaponColor(ItemStack stack, IWeaponColorable.WeaponColorSegment segment,
+            int color) {
         CompoundTag tagCompound = stack.getOrCreateTag();
         tagCompound.putInt(segment.colorTranslationKey, color);
     }
@@ -114,7 +111,8 @@ public interface IWeaponColorable {
      * @param stack the ItemStack of the colored item
      * @return the color in rgba integer format
      */
-    default int getWeaponColorBySegment(ItemStack stack, IWeaponColorable.WeaponColorSegment segment) {
+    default int getWeaponColorBySegment(ItemStack stack,
+            IWeaponColorable.WeaponColorSegment segment) {
         CompoundTag tagCompound = stack.getOrCreateTag();
         return tagCompound.getInt(segment.colorTranslationKey);
     }
@@ -129,13 +127,15 @@ public interface IWeaponColorable {
      * @param dyes  a list of {@link DyeItem}
      * @return a new ItemStack with the combined color
      */
-    static ItemStack dye(ItemStack stack, IWeaponColorable.WeaponColorSegment colorSegment, List<DyeItem> dyes) {
+    static ItemStack dye(ItemStack stack, IWeaponColorable.WeaponColorSegment colorSegment,
+            List<DyeItem> dyes) {
         ItemStack resultStack = ItemStack.EMPTY;
         int[] combinedColors = new int[3];
         int maxColor = 0;
         int colorCount = 0;
         IWeaponColorable coloredItem = null;
-        if (stack.getItem() instanceof IWeaponColorable && ((IWeaponColorable) stack.getItem()).canWeaponColor(stack)) {
+        if (stack.getItem() instanceof IWeaponColorable
+                && ((IWeaponColorable) stack.getItem()).canWeaponColor(stack)) {
             coloredItem = (IWeaponColorable) stack.getItem();
             resultStack = stack.copy();
             resultStack.setCount(1);

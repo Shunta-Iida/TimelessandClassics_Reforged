@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for sampler.schema.json
  * 
  */
-public class Sampler
-        extends GlTFChildOfRootProperty {
+public class Sampler extends GlTFChildOfRootProperty {
 
     /**
      * Magnification filter. (optional)<br>
@@ -107,10 +105,10 @@ public class Sampler
             this.minFilter = minFilter;
             return;
         }
-        if ((((((minFilter != 9728) && (minFilter != 9729)) && (minFilter != 9984)) && (minFilter != 9985))
-                && (minFilter != 9986)) && (minFilter != 9987)) {
-            throw new IllegalArgumentException(
-                    (("Invalid value for minFilter: " + minFilter) + ", valid: [9728, 9729, 9984, 9985, 9986, 9987]"));
+        if ((((((minFilter != 9728) && (minFilter != 9729)) && (minFilter != 9984))
+                && (minFilter != 9985)) && (minFilter != 9986)) && (minFilter != 9987)) {
+            throw new IllegalArgumentException((("Invalid value for minFilter: " + minFilter)
+                    + ", valid: [9728, 9729, 9984, 9985, 9986, 9987]"));
         }
         this.minFilter = minFilter;
     }

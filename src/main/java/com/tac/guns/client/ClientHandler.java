@@ -1,8 +1,25 @@
 package com.tac.guns.client;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
-import com.tac.guns.client.handler.*;
+import com.tac.guns.client.handler.AimingHandler;
+import com.tac.guns.client.handler.AnimationHandler;
+import com.tac.guns.client.handler.ArmorInteractionHandler;
+import com.tac.guns.client.handler.BulletTrailRenderingHandler;
+import com.tac.guns.client.handler.CrosshairHandler;
+import com.tac.guns.client.handler.FireModeSwitchEvent;
+import com.tac.guns.client.handler.GunRenderingHandler;
+import com.tac.guns.client.handler.HUDRenderingHandler;
+import com.tac.guns.client.handler.MovementAdaptationsHandler;
+import com.tac.guns.client.handler.RecoilHandler;
+import com.tac.guns.client.handler.ReloadHandler;
+import com.tac.guns.client.handler.ScopeJitterHandler;
+import com.tac.guns.client.handler.ShootingHandler;
+import com.tac.guns.client.handler.SightSwitchEvent;
+import com.tac.guns.client.handler.SoundHandler;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.armor.models.ArmorRig1;
 import com.tac.guns.client.render.armor.models.MediumArmor;
@@ -12,22 +29,46 @@ import com.tac.guns.client.render.entity.GrenadeRenderer;
 import com.tac.guns.client.render.entity.MissileRenderer;
 import com.tac.guns.client.render.entity.ProjectileRenderer;
 import com.tac.guns.client.render.entity.ThrowableGrenadeRenderer;
-import com.tac.guns.client.render.model.scope.*;
 import com.tac.guns.client.render.model.OverrideModelManager;
-import com.tac.guns.client.screen.*;
+import com.tac.guns.client.render.model.scope.ACOG_4x_ScopeModel;
+import com.tac.guns.client.render.model.scope.AimpointT1SightModel;
+import com.tac.guns.client.render.model.scope.AimpointT2SightModel;
+import com.tac.guns.client.render.model.scope.CoyoteSightModel;
+import com.tac.guns.client.render.model.scope.EotechNSightModel;
+import com.tac.guns.client.render.model.scope.EotechShortSightModel;
+import com.tac.guns.client.render.model.scope.MiniDotSightModel;
+import com.tac.guns.client.render.model.scope.OldLongRange4xScopeModel;
+import com.tac.guns.client.render.model.scope.OldLongRange8xScopeModel;
+import com.tac.guns.client.render.model.scope.Qmk152ScopeModel;
+import com.tac.guns.client.render.model.scope.SroDotSightModel;
+import com.tac.guns.client.render.model.scope.SrsRedDotSightModel;
+import com.tac.guns.client.render.model.scope.Standard6_10xScopeModel;
+import com.tac.guns.client.render.model.scope.VortexLPVO_3_6xScopeModel;
+import com.tac.guns.client.render.model.scope.VortexUh1SightModel;
+import com.tac.guns.client.render.model.scope.elcan_14x_ScopeModel;
 import com.tac.guns.client.screen.AmmoScreen;
+import com.tac.guns.client.screen.AttachmentScreen;
+import com.tac.guns.client.screen.InspectScreen;
+import com.tac.guns.client.screen.TaCSettingsScreen;
+import com.tac.guns.client.screen.UpgradeBenchScreen;
+import com.tac.guns.client.screen.WorkbenchScreen;
 import com.tac.guns.client.settings.GunOptions;
 import com.tac.guns.init.ModBlocks;
 import com.tac.guns.init.ModContainers;
 import com.tac.guns.init.ModEntities;
 import com.tac.guns.init.ModItems;
-import com.tac.guns.inventory.gear.armor.implementations.*;
+import com.tac.guns.inventory.gear.armor.implementations.R1_RigContainer;
+import com.tac.guns.inventory.gear.armor.implementations.R2_RigContainer;
+import com.tac.guns.inventory.gear.armor.implementations.R3_RigContainer;
+import com.tac.guns.inventory.gear.armor.implementations.R4_RigContainer;
+import com.tac.guns.inventory.gear.armor.implementations.R5_RigContainer;
 import com.tac.guns.item.IColored;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAttachments;
 import com.tac.guns.network.message.MessageInspection;
 import com.tac.guns.util.IDLNBTUtil;
 import com.tac.guns.util.math.SecondOrderDynamics;
+
 import de.javagl.jgltf.model.animation.AnimationRunner;
 import net.minecraft.client.CycleOption;
 import net.minecraft.client.Minecraft;
@@ -52,9 +93,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -111,13 +149,14 @@ public class ClientHandler {
         new AnimationRunner(); // preload thread pool
         new SecondOrderDynamics(1f, 1f, 1f, 1f); // preload thread pool
 
-        Map<String, EntityRenderer<? extends Player>> skins = Minecraft.getInstance().getEntityRenderDispatcher()
-                .getSkinMap();
+        Map<String, EntityRenderer<? extends Player>> skins =
+                Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         // addVestLayer(skins.get("default"));
         // addVestLayer(skins.get("slim"));
     }
 
-    private static void addVestLayer(LivingEntityRenderer<? extends Player, HumanoidModel<Player>> renderer) {
+    private static void addVestLayer(
+            LivingEntityRenderer<? extends Player, HumanoidModel<Player>> renderer) {
         // renderer.addLayer(new VestLayerRender<>(RenderLayerParent));
     }
 
@@ -130,8 +169,10 @@ public class ClientHandler {
     private static void registerEntityRenders() {
         EntityRenderers.register(ModEntities.PROJECTILE.get(), ProjectileRenderer::new);
         EntityRenderers.register(ModEntities.GRENADE.get(), GrenadeRenderer::new);
-        EntityRenderers.register(ModEntities.THROWABLE_GRENADE.get(), ThrowableGrenadeRenderer::new);
-        EntityRenderers.register(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new);
+        EntityRenderers.register(ModEntities.THROWABLE_GRENADE.get(),
+                ThrowableGrenadeRenderer::new);
+        EntityRenderers.register(ModEntities.THROWABLE_STUN_GRENADE.get(),
+                ThrowableGrenadeRenderer::new);
         // EntityRenderers.register(ModEntities.MISSILE.get(), MissileRenderer::new);
         EntityRenderers.register(ModEntities.RPG7_MISSILE.get(), MissileRenderer::new);
     }
@@ -155,8 +196,10 @@ public class ClientHandler {
 
     private static void registerModelOverrides() {
         OverrideModelManager.register(ModItems.COYOTE_SIGHT.get(), new CoyoteSightModel());
-        OverrideModelManager.register(ModItems.STANDARD_6_10x_SCOPE.get(), new Standard6_10xScopeModel());
-        OverrideModelManager.register(ModItems.VORTEX_LPVO_3_6.get(), new VortexLPVO_3_6xScopeModel());
+        OverrideModelManager.register(ModItems.STANDARD_6_10x_SCOPE.get(),
+                new Standard6_10xScopeModel());
+        OverrideModelManager.register(ModItems.VORTEX_LPVO_3_6.get(),
+                new VortexLPVO_3_6xScopeModel());
         // TODO: Fix up the SLX 2x, give a new reticle, new scope data, new mount and
         // eye pos, pretty much remake the code end.
         // ModelOverrides.register(ModItems.SLX_2X.get(), new SLX_2X_ScopeModel());
@@ -168,12 +211,15 @@ public class ClientHandler {
 
         OverrideModelManager.register(ModItems.EOTECH_N_SIGHT.get(), new EotechNSightModel());
         OverrideModelManager.register(ModItems.VORTEX_UH_1.get(), new VortexUh1SightModel());
-        OverrideModelManager.register(ModItems.EOTECH_SHORT_SIGHT.get(), new EotechShortSightModel());
+        OverrideModelManager.register(ModItems.EOTECH_SHORT_SIGHT.get(),
+                new EotechShortSightModel());
         OverrideModelManager.register(ModItems.SRS_RED_DOT_SIGHT.get(), new SrsRedDotSightModel());
         OverrideModelManager.register(ModItems.QMK152.get(), new Qmk152ScopeModel());
 
-        OverrideModelManager.register(ModItems.OLD_LONGRANGE_8x_SCOPE.get(), new OldLongRange8xScopeModel());
-        OverrideModelManager.register(ModItems.OLD_LONGRANGE_4x_SCOPE.get(), new OldLongRange4xScopeModel());
+        OverrideModelManager.register(ModItems.OLD_LONGRANGE_8x_SCOPE.get(),
+                new OldLongRange8xScopeModel());
+        OverrideModelManager.register(ModItems.OLD_LONGRANGE_4x_SCOPE.get(),
+                new OldLongRange4xScopeModel());
 
         OverrideModelManager.register(ModItems.MINI_DOT.get(), new MiniDotSightModel());
         // ModelOverrides.register(ModItems.MICRO_HOLO_SIGHT.get(), new
@@ -209,16 +255,18 @@ public class ClientHandler {
         if (event.getScreen() instanceof MouseSettingsScreen) {
             MouseSettingsScreen screen = (MouseSettingsScreen) event.getScreen();
             if (mouseOptionsField == null) {
-                mouseOptionsField = ObfuscationReflectionHelper.findField(MouseSettingsScreen.class, "f_96218_");
+                mouseOptionsField = ObfuscationReflectionHelper.findField(MouseSettingsScreen.class,
+                        "f_96218_");
                 mouseOptionsField.setAccessible(true);
             }
             try {
                 OptionsList list = (OptionsList) mouseOptionsField.get(screen);
-                list.addSmall(GunOptions.ADS_SENSITIVITY, GunOptions.HOLD_TO_AIM/* , GunOptions.CROSSHAIR */);
+                list.addSmall(GunOptions.ADS_SENSITIVITY,
+                        GunOptions.HOLD_TO_AIM/* , GunOptions.CROSSHAIR */);
                 list.addSmall(GunOptions.ALLOW_CHESTS, GunOptions.ALLOW_FENCE_GATES);
                 list.addSmall(GunOptions.ALLOW_LEVER, GunOptions.ALLOW_BUTTON);
                 list.addSmall(GunOptions.ALLOW_DOORS, GunOptions.ALLOW_TRAP_DOORS);
-                list.addSmall(new CycleOption[] { GunOptions.ALLOW_CRAFTING_TABLE });
+                list.addSmall(new CycleOption[] {GunOptions.ALLOW_CRAFTING_TABLE});
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -228,8 +276,8 @@ public class ClientHandler {
 
             event.addListener((new Button(screen.width / 2 - 215, 10, 75, 20,
                     new TranslatableComponent("tac.options.gui_settings"), (p_213126_1_) -> {
-                        Minecraft.getInstance()
-                                .setScreen(new TaCSettingsScreen(screen, Minecraft.getInstance().options));
+                        Minecraft.getInstance().setScreen(
+                                new TaCSettingsScreen(screen, Minecraft.getInstance().options));
                     })));
         }
     }
@@ -249,10 +297,8 @@ public class ClientHandler {
                 return;
 
             final Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null
-                    && mc.screen == null
-                    && GunAnimationController.fromItem(
-                            Minecraft.getInstance().player.getInventory().getSelected().getItem()) == null)
+            if (mc.player != null && mc.screen == null && GunAnimationController.fromItem(
+                    Minecraft.getInstance().player.getInventory().getSelected().getItem()) == null)
                 PacketHandler.getPlayChannel().sendToServer(new MessageInspection());
         });
     }

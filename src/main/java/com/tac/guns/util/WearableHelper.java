@@ -32,7 +32,8 @@ public class WearableHelper {
     }
 
     public static void FillDefaults(ItemStack item, Rig rig) {
-        item.getOrCreateTag().putFloat("RigDurability", RigEnchantmentHelper.getModifiedDurability(item, rig));
+        item.getOrCreateTag().putFloat("RigDurability",
+                RigEnchantmentHelper.getModifiedDurability(item, rig));
     }
 
     /**
@@ -64,13 +65,14 @@ public class WearableHelper {
             rig.getOrCreateTag().putFloat("RigDurability", og - proj.getDamage());
             ((PlayerWithSynData) player).updateRig();
         } else if (og - proj.getDamage() < 0) {
-            ResourceLocation brokenSound = ((ArmorRigItem) rig.getItem()).getRig().getSounds().getBroken();
+            ResourceLocation brokenSound =
+                    ((ArmorRigItem) rig.getItem()).getRig().getSounds().getBroken();
             if (brokenSound != null) {
                 MessageGunSound messageSound = new MessageGunSound(brokenSound, SoundSource.PLAYERS,
-                        (float) player.getX(), (float) (player.getY() + 1.0), (float) player.getZ(), 1.5F, 1F,
-                        player.getId(), false, false);
-                PacketHandler.getPlayChannel().send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                        messageSound);
+                        (float) player.getX(), (float) (player.getY() + 1.0), (float) player.getZ(),
+                        1.5F, 1F, player.getId(), false, false);
+                PacketHandler.getPlayChannel().send(
+                        PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), messageSound);
             }
             rig.getOrCreateTag().putFloat("RigDurability", 0);
             ((PlayerWithSynData) player).updateRig();
@@ -135,10 +137,12 @@ public class WearableHelper {
     }
 
     public static boolean consumeRepairItem(Player player, ItemStack rig) {
-        Item repairItem = ForgeRegistries.ITEMS.getValue(((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem());
+        Item repairItem = ForgeRegistries.ITEMS
+                .getValue(((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem());
         if (repairItem == null) {
-            GunMod.LOGGER.log(Level.ERROR, ((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem()
-                    + " | Is not a real / registered item.");
+            GunMod.LOGGER.log(Level.ERROR,
+                    ((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem()
+                            + " | Is not a real / registered item.");
             return false;
         }
         int loc = -1;
@@ -153,8 +157,10 @@ public class WearableHelper {
             player.getInventory().removeItem(loc, 1);
             return true;
         } else {
-            GunMod.LOGGER.log(Level.WARN, ((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem()
-                    + " | Not found anymore in {" + player.getDisplayName().getString() + "} inventory");
+            GunMod.LOGGER.log(Level.WARN,
+                    ((ArmorRigItem) rig.getItem()).getRig().getRepair().getItem()
+                            + " | Not found anymore in {" + player.getDisplayName().getString()
+                            + "} inventory");
             return false;
         }
 

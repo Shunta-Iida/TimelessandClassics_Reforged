@@ -15,7 +15,8 @@ public class ThrowableGrenadeEntity extends ThrowableItemEntity {
     public float prevRotation;
     public float power;
 
-    public ThrowableGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType, Level worldIn) {
+    public ThrowableGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType,
+            Level worldIn) {
         super(entityType, worldIn);
     }
 
@@ -38,8 +39,7 @@ public class ThrowableGrenadeEntity extends ThrowableItemEntity {
     }
 
     @Override
-    protected void defineSynchedData() {
-    }
+    protected void defineSynchedData() {}
 
     @Override
     public void tick() {
@@ -50,13 +50,14 @@ public class ThrowableGrenadeEntity extends ThrowableItemEntity {
             this.rotation += speed * 50;
         }
         if (this.level.isClientSide) {
-            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25, this.getZ(), 0, 0.1, 0);
+            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25,
+                    this.getZ(), 0, 0.1, 0);
         }
     }
 
     @Override
     public void onDeath() {
-        GrenadeEntity.createExplosion(this, this.power * Config.COMMON.grenades.explosionRadius.get().floatValue(),
-                true);
+        GrenadeEntity.createExplosion(this,
+                this.power * Config.COMMON.grenades.explosionRadius.get().floatValue(), true);
     }
 }

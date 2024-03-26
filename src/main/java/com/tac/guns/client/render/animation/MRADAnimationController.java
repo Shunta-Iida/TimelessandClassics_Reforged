@@ -16,20 +16,20 @@ public class MRADAnimationController extends BoltActionAnimationController {
     public static int INDEX_HANDLE = 5;
     public static int INDEX_BULLET = 2;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_inspect_empty.gltf"));
-    public static final AnimationMeta BOLT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/mrad_bolt.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_reload_empty.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_draw.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_inspect_empty.gltf"));
+    public static final AnimationMeta BOLT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/mrad_bolt.gltf"));
     private static final MRADAnimationController instance = new MRADAnimationController();
 
     private MRADAnimationController() {

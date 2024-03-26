@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.Map;
  * Auto-generated for mesh.primitive.schema.json
  * 
  */
-public class MeshPrimitive
-        extends GlTFProperty {
+public class MeshPrimitive extends GlTFProperty {
 
     /**
      * A dictionary object of strings, where each string is the ID of the
@@ -174,7 +172,8 @@ public class MeshPrimitive
      */
     public void setMaterial(String material) {
         if (material == null) {
-            throw new NullPointerException((("Invalid value for material: " + material) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for material: " + material) + ", may not be null"));
         }
         this.material = material;
     }
@@ -205,8 +204,8 @@ public class MeshPrimitive
             this.mode = mode;
             return;
         }
-        if (((((((mode != 0) && (mode != 1)) && (mode != 2)) && (mode != 3)) && (mode != 4)) && (mode != 5))
-                && (mode != 6)) {
+        if (((((((mode != 0) && (mode != 1)) && (mode != 2)) && (mode != 3)) && (mode != 4))
+                && (mode != 5)) && (mode != 6)) {
             throw new IllegalArgumentException(
                     (("Invalid value for mode: " + mode) + ", valid: [0, 1, 2, 3, 4, 5, 6]"));
         }

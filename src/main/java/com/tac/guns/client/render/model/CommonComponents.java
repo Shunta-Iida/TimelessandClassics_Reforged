@@ -4,8 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class CommonComponents {
-    private CommonComponents() {
-    }
+    private CommonComponents() {}
 
     // main
     public static final GunComponent BODY = new GunComponent(null); // gun body

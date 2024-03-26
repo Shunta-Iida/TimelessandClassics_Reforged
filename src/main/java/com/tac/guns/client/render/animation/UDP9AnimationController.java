@@ -19,18 +19,18 @@ public class UDP9AnimationController extends GunAnimationController {
     public static int INDEX_HANDLE = 2;
     public static int INDEX_BULLET = 4;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/udp_9_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_reload_norm.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_inspect.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/udp_9_static.gltf"));
     private static final UDP9AnimationController instance = new UDP9AnimationController();
 
     private UDP9AnimationController() {

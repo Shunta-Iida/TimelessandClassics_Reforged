@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for asset.profile.schema.json
  * 
  */
-public class AssetProfile
-        extends GlTFProperty {
+public class AssetProfile extends GlTFProperty {
 
     /**
      * Specifies the target rendering API. (optional)<br>

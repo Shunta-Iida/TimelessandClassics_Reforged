@@ -37,8 +37,10 @@ import java.util.List;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchContainer> {
-    private static final ResourceLocation GUI_BASE = new ResourceLocation("tac:textures/gui/upgrade_table.png");
-    private static final ResourceLocation GUI_PARTS = new ResourceLocation("tac:textures/gui/upgrade_table_parts.png");
+    private static final ResourceLocation GUI_BASE =
+            new ResourceLocation("tac:textures/gui/upgrade_table.png");
+    private static final ResourceLocation GUI_PARTS =
+            new ResourceLocation("tac:textures/gui/upgrade_table_parts.png");
     private List<RequirementItem> requirements;
     private Inventory playerInventory;
     private UpgradeBenchTileEntity workbench;
@@ -48,7 +50,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
 
     private int lmbdaItor = 0;
 
-    public UpgradeBenchScreen(UpgradeBenchContainer container, Inventory playerInventory, Component title) {
+    public UpgradeBenchScreen(UpgradeBenchContainer container, Inventory playerInventory,
+            Component title) {
         super(container, playerInventory, title);
         this.playerInventory = playerInventory;
         this.workbench = container.getBench();
@@ -68,10 +71,10 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
         }
 
         this.addWidget(new GuiEnchantmentApplyButton(this.leftPos + 9 + data.getxMod() + 152 + 74,
-                this.topPos + 18 + data.getyMod() + 96 + 50, 23 + data.getSizeXMod(), 15 + data.getSizeYMod(), 44, 15,
-                button -> {
-                    PacketHandler.getPlayChannel()
-                            .sendToServer(new MessageUpgradeBenchApply(this.workbench.getBlockPos(), this.btnSelected));
+                this.topPos + 18 + data.getyMod() + 96 + 50, 23 + data.getSizeXMod(),
+                15 + data.getSizeYMod(), 44, 15, button -> {
+                    PacketHandler.getPlayChannel().sendToServer(new MessageUpgradeBenchApply(
+                            this.workbench.getBlockPos(), this.btnSelected));
                 }));
 
         GunEnchantmentHelper.upgradeableEnchs.forEach((key, value) -> {
@@ -90,11 +93,9 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             }
             this.addWidget(new GuiEnchantmentOptionButton(this.leftPos + 9 + 152 + 74 - 170,
                     this.topPos + 18 + 96 + 20 - 100 + ((lmbdaTmp + scroll) * 34),
-                    this.leftPos + 9 + 152 + 74, this.topPos + 18 + 96 + 20,
-                    76 * 2, 16 * 2,
-                    value,
-                    3, lmbdaTmp, key,
-                    EnchantmentHelper.getItemEnchantmentLevel(value.enchantment, this.workbench.getInventory().get(0)),
+                    this.leftPos + 9 + 152 + 74, this.topPos + 18 + 96 + 20, 76 * 2, 16 * 2, value,
+                    3, lmbdaTmp, key, EnchantmentHelper.getItemEnchantmentLevel(value.enchantment,
+                            this.workbench.getInventory().get(0)),
                     button -> {
                         this.setSelectedBtn(key);
                     }));
@@ -188,8 +189,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
          * "xMod": -225.0,
          * "yMod": 40.5,
          */
-        blit(matrixStack, startX + data.getxMod() - 224 + 112, startY + data.getyMod() + 39 - 30, 496, 175, 0,
-                0, 496, 175, 1024, 1024);
+        blit(matrixStack, startX + data.getxMod() - 224 + 112, startY + data.getyMod() + 39 - 30,
+                496, 175, 0, 0, 496, 175, 1024, 1024);
         // this.blit(matrixStack, startX-112, startY-30, 0, 0, 496, 175);
         // matrixStack.pop();
 
@@ -208,7 +209,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             stack.translate(startX + 88 - 118, startY + 60 - 10, 100);
             stack.scale(50F, -50F, 50F);
             stack.mulPose(Vector3f.XP.rotationDegrees(5F));
-            stack.mulPose(Vector3f.YP.rotationDegrees(Minecraft.getInstance().player.tickCount + partialTicks));
+            stack.mulPose(Vector3f.YP
+                    .rotationDegrees(Minecraft.getInstance().player.tickCount + partialTicks));
             RenderSystem.applyModelViewMatrix();
 
             RenderSystem.enableBlend();
@@ -218,7 +220,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             buffer = this.minecraft.renderBuffers().bufferSource();
 
             GunRenderingHandler.get().renderWeapon(Minecraft.getInstance().player, currentItem,
-                    ItemTransforms.TransformType.FIXED, matrixStack, buffer, 15728880, OverlayTexture.NO_OVERLAY);
+                    ItemTransforms.TransformType.FIXED, matrixStack, buffer, 15728880,
+                    OverlayTexture.NO_OVERLAY);
             // Minecraft.getInstance().getItemRenderer().renderItem(currentItem,
             // ItemTransforms.TransformType.FIXED, false, matrixStack, buffer, 15728880,
             // OverlayTexture.NO_OVERLAY, RenderUtil.getModel(currentItem));
@@ -230,13 +233,15 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
 
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
 
-        RequirementItem requirementItem = GunEnchantmentHelper.upgradeableEnchs.get(this.btnSelected);
+        RequirementItem requirementItem =
+                GunEnchantmentHelper.upgradeableEnchs.get(this.btnSelected);
         if (requirementItem == null)
             return;
         {
             RenderSystem.setShaderTexture(0, GUI_PARTS);
 
-            int currLevel = EnchantmentHelper.getItemEnchantmentLevel(requirementItem.enchantment, currentItem);
+            int currLevel = EnchantmentHelper.getItemEnchantmentLevel(requirementItem.enchantment,
+                    currentItem);
             int moduleCount = requirementItem.moduleCounts.length - 1;
             int levelReq = requirementItem.moduleCounts.length - 1;
             if (currLevel != requirementItem.enchantment.getMaxLevel()) {
@@ -261,9 +266,10 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
                 if (moduleRender == null || moduleRender.isEmpty())
                     moduleRender = new ItemStack(ModItems.MODULE.get());
                 moduleRender.setCount(moduleCount);
-                Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(moduleRender, startX, startY);
-                Minecraft.getInstance().getItemRenderer().renderGuiItemDecorations(this.font, moduleRender, startX,
-                        startY, null);
+                Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(moduleRender,
+                        startX, startY);
+                Minecraft.getInstance().getItemRenderer().renderGuiItemDecorations(this.font,
+                        moduleRender, startX, startY, null);
             }
 
             // Handle Levels
@@ -277,7 +283,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
                     blit(matrixStack, startX, startY - 10, 128, 20, 0, 288, 118, 20, 512, 512);
                 }
 
-                this.font.draw(matrixStack, "Required level " + levelReq, startX, startY, Color.WHITE.getRGB());
+                this.font.draw(matrixStack, "Required level " + levelReq, startX, startY,
+                        Color.WHITE.getRGB());
 
             }
         }
@@ -325,8 +332,7 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
     protected void drawText(PoseStack matrixStack, int x, int y, Component text) {
         int startX = this.leftPos;
         int startY = this.topPos;
-        this.font.draw(matrixStack, text.getString(), startX + x, startY + y,
-                Color.WHITE.getRGB());
+        this.font.draw(matrixStack, text.getString(), startX + x, startY + y, Color.WHITE.getRGB());
         // What in the hell? Not scalable, how to make this scale on gui scale?
 
     }
@@ -348,7 +354,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
         }
 
         public GuiEnchantmentOptionButton(int x, int y, int u, int v, int widthIn, int heightIn,
-                RequirementItem requirement, int maxEnchLevel, int itor, String name, int enchLevel, OnPress onPress) {
+                RequirementItem requirement, int maxEnchLevel, int itor, String name, int enchLevel,
+                OnPress onPress) {
             super(x, y, u, v, widthIn, heightIn, onPress);
             this.itorInt = itor;
             this.requirement = requirement;
@@ -368,7 +375,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
          */
 
         @Override
-        public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        public void renderButton(PoseStack matrixStack, int mouseX, int mouseY,
+                float partialTicks) {
             // super.renderButton(matrixStack,mouseX,mouseY,partialTicks);
             Minecraft mc = Minecraft.getInstance();
             if (!visible/* || (this.itorInt-3 > scrollItor) */) {
@@ -385,18 +393,21 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             if (this.enchLevel == this.maxEnchLevel) {
                 // matrixStack.scale(2f, 2f, 0); //3.87
                 blit(matrixStack, this.u + data.getxMod() + 88 - 174 - 84,
-                        this.v + data.getyMod() - 4 - 10 - 50 - 34 + ((this.itorInt + scrollItor) * 33),
+                        this.v + data.getyMod() - 4 - 10 - 50 - 34
+                                + ((this.itorInt + scrollItor) * 33),
                         152, 32, 0, 112, 152, 32, 512, 512);
 
             } // MAX
             else if (this.isHovered || btnSelectedYet && btnSelected.equalsIgnoreCase(this.name)) {
                 // matrixStack.scale(2f, 2f, 0); //3.87
                 blit(matrixStack, this.u + data.getxMod() + 88 - 174 - 84,
-                        this.v + data.getyMod() - 4 - 10 - 50 - 34 + ((this.itorInt + scrollItor) * 33),
+                        this.v + data.getyMod() - 4 - 10 - 50 - 34
+                                + ((this.itorInt + scrollItor) * 33),
                         152, 32, 0, 160, 152, 32, 512, 512);
             } else {
                 blit(matrixStack, this.u + data.getxMod() + 88 - 174 - 84,
-                        this.v + data.getyMod() - 4 - 10 - 50 - 34 + ((this.itorInt + scrollItor) * 33),
+                        this.v + data.getyMod() - 4 - 10 - 50 - 34
+                                + ((this.itorInt + scrollItor) * 33),
                         152, 32, 0, 64, 152, 32, 512, 512);
             }
             GuiEditor.GUI_Element data1 = new GuiEditor.GUI_Element(0, 0, 0, 0);
@@ -409,13 +420,14 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
                 // Render blue
                 if (this.enchLevel > i) {
                     mc.gui.blit(matrixStack, this.u + data.getxMod() + 88 - 174 - 84 + (i * 12),
-                            this.v + 13 + data.getyMod() - 4 - 10 - 50 - 21 + ((this.itorInt + scrollItor) * 33), 0,
-                            101,
-                            12, 3);
+                            this.v + 13 + data.getyMod() - 4 - 10 - 50 - 21
+                                    + ((this.itorInt + scrollItor) * 33),
+                            0, 101, 12, 3);
                 } else {
                     mc.gui.blit(matrixStack, this.u + data.getxMod() + 88 - 174 - 84 + (i * 12),
-                            this.v + 13 + data.getyMod() - 4 - 10 - 50 - 21 + ((this.itorInt + scrollItor) * 33), 0, 98,
-                            12, 3);
+                            this.v + 13 + data.getyMod() - 4 - 10 - 50 - 21
+                                    + ((this.itorInt + scrollItor) * 33),
+                            0, 98, 12, 3);
                 }
             }
             drawText(matrixStack, 77 + data1.getxMod(),
@@ -430,12 +442,14 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             this.onPress.onPress(this);
         }
 
-        public GuiEnchantmentApplyButton(int x, int y, int u, int v, int widthIn, int heightIn, OnPress onPress) {
+        public GuiEnchantmentApplyButton(int x, int y, int u, int v, int widthIn, int heightIn,
+                OnPress onPress) {
             super(x, y, u, v, widthIn, heightIn, onPress);
         }
 
         @Override
-        public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        public void renderButton(PoseStack matrixStack, int mouseX, int mouseY,
+                float partialTicks) {
             Minecraft mc = Minecraft.getInstance();
             if (!visible) {
                 return;
@@ -445,11 +459,12 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             RenderSystem.setShaderTexture(0, GUI_PARTS);
             if (this.isHovered) {
                 blit(matrixStack, this.x + data.getxMod() + 173 - 74 - 26 - 74,
-                        this.y + data.getyMod() + 103 - 44 - 10 - 50, 24 * 2, 0, 23 * 2, this.height * 2,
-                        512, 512);
+                        this.y + data.getyMod() + 103 - 44 - 10 - 50, 24 * 2, 0, 23 * 2,
+                        this.height * 2, 512, 512);
             } else {
                 blit(matrixStack, this.x + data.getxMod() + 173 - 74 - 26 - 74,
-                        this.y + data.getyMod() + 103 - 44 - 10 - 50, 0, 0, 23 * 2, this.height * 2, 512, 512);
+                        this.y + data.getyMod() + 103 - 44 - 10 - 50, 0, 0, 23 * 2, this.height * 2,
+                        512, 512);
             }
         }
     }
@@ -467,7 +482,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             this.onPress.onPress(this);
         }
 
-        public UpgradeTableButton(int x, int y, int u, int v, int widthIn, int heightIn, OnPress onPress) {
+        public UpgradeTableButton(int x, int y, int u, int v, int widthIn, int heightIn,
+                OnPress onPress) {
 
             super(x, y, widthIn, heightIn, new TranslatableComponent("tac.empt"), onPress);
             this.u = u;
@@ -515,8 +531,7 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             return levelReqs;
         }
 
-        public RequirementItem() {
-        }
+        public RequirementItem() {}
 
         public RequirementItem(int[] moduleCounts, int[] levelReqs, Enchantment enchantment) {
             this.enchantment = enchantment;

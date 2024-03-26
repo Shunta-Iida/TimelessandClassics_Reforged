@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model;
 
@@ -103,8 +95,7 @@ public class MathUtils {
      * @param target The target array
      */
     static void set(float source[], float target[]) {
-        System.arraycopy(source, 0, target, 0,
-                Math.min(source.length, target.length));
+        System.arraycopy(source, 0, target, 0, Math.min(source.length, target.length));
     }
 
     /**
@@ -115,8 +106,7 @@ public class MathUtils {
      * @param sourceMatrix4x4 The source matrix
      * @param targetMatrix3x3 The target matrix
      */
-    public static void getRotationScale(
-            float sourceMatrix4x4[], float targetMatrix3x3[]) {
+    public static void getRotationScale(float sourceMatrix4x4[], float targetMatrix3x3[]) {
         targetMatrix3x3[0] = sourceMatrix4x4[0];
         targetMatrix3x3[1] = sourceMatrix4x4[1];
         targetMatrix3x3[2] = sourceMatrix4x4[2];
@@ -342,45 +332,45 @@ public class MathUtils {
         float mE = m[14];
         float mF = m[15];
 
-        inv[0] = m5 * mA * mF - m5 * mB * mE - m9 * m6 * mF +
-                m9 * m7 * mE + mD * m6 * mB - mD * m7 * mA;
-        inv[4] = -m4 * mA * mF + m4 * mB * mE + m8 * m6 * mF -
-                m8 * m7 * mE - mC * m6 * mB + mC * m7 * mA;
-        inv[8] = m4 * m9 * mF - m4 * mB * mD - m8 * m5 * mF +
-                m8 * m7 * mD + mC * m5 * mB - mC * m7 * m9;
-        inv[12] = -m4 * m9 * mE + m4 * mA * mD + m8 * m5 * mE -
-                m8 * m6 * mD - mC * m5 * mA + mC * m6 * m9;
-        inv[1] = -m1 * mA * mF + m1 * mB * mE + m9 * m2 * mF -
-                m9 * m3 * mE - mD * m2 * mB + mD * m3 * mA;
-        inv[5] = m0 * mA * mF - m0 * mB * mE - m8 * m2 * mF +
-                m8 * m3 * mE + mC * m2 * mB - mC * m3 * mA;
-        inv[9] = -m0 * m9 * mF + m0 * mB * mD + m8 * m1 * mF -
-                m8 * m3 * mD - mC * m1 * mB + mC * m3 * m9;
-        inv[13] = m0 * m9 * mE - m0 * mA * mD - m8 * m1 * mE +
-                m8 * m2 * mD + mC * m1 * mA - mC * m2 * m9;
-        inv[2] = m1 * m6 * mF - m1 * m7 * mE - m5 * m2 * mF +
-                m5 * m3 * mE + mD * m2 * m7 - mD * m3 * m6;
-        inv[6] = -m0 * m6 * mF + m0 * m7 * mE + m4 * m2 * mF -
-                m4 * m3 * mE - mC * m2 * m7 + mC * m3 * m6;
-        inv[10] = m0 * m5 * mF - m0 * m7 * mD - m4 * m1 * mF +
-                m4 * m3 * mD + mC * m1 * m7 - mC * m3 * m5;
-        inv[14] = -m0 * m5 * mE + m0 * m6 * mD + m4 * m1 * mE -
-                m4 * m2 * mD - mC * m1 * m6 + mC * m2 * m5;
-        inv[3] = -m1 * m6 * mB + m1 * m7 * mA + m5 * m2 * mB -
-                m5 * m3 * mA - m9 * m2 * m7 + m9 * m3 * m6;
-        inv[7] = m0 * m6 * mB - m0 * m7 * mA - m4 * m2 * mB +
-                m4 * m3 * mA + m8 * m2 * m7 - m8 * m3 * m6;
-        inv[11] = -m0 * m5 * mB + m0 * m7 * m9 + m4 * m1 * mB -
-                m4 * m3 * m9 - m8 * m1 * m7 + m8 * m3 * m5;
-        inv[15] = m0 * m5 * mA - m0 * m6 * m9 - m4 * m1 * mA +
-                m4 * m2 * m9 + m8 * m1 * m6 - m8 * m2 * m5;
+        inv[0] = m5 * mA * mF - m5 * mB * mE - m9 * m6 * mF + m9 * m7 * mE + mD * m6 * mB
+                - mD * m7 * mA;
+        inv[4] = -m4 * mA * mF + m4 * mB * mE + m8 * m6 * mF - m8 * m7 * mE - mC * m6 * mB
+                + mC * m7 * mA;
+        inv[8] = m4 * m9 * mF - m4 * mB * mD - m8 * m5 * mF + m8 * m7 * mD + mC * m5 * mB
+                - mC * m7 * m9;
+        inv[12] = -m4 * m9 * mE + m4 * mA * mD + m8 * m5 * mE - m8 * m6 * mD - mC * m5 * mA
+                + mC * m6 * m9;
+        inv[1] = -m1 * mA * mF + m1 * mB * mE + m9 * m2 * mF - m9 * m3 * mE - mD * m2 * mB
+                + mD * m3 * mA;
+        inv[5] = m0 * mA * mF - m0 * mB * mE - m8 * m2 * mF + m8 * m3 * mE + mC * m2 * mB
+                - mC * m3 * mA;
+        inv[9] = -m0 * m9 * mF + m0 * mB * mD + m8 * m1 * mF - m8 * m3 * mD - mC * m1 * mB
+                + mC * m3 * m9;
+        inv[13] = m0 * m9 * mE - m0 * mA * mD - m8 * m1 * mE + m8 * m2 * mD + mC * m1 * mA
+                - mC * m2 * m9;
+        inv[2] = m1 * m6 * mF - m1 * m7 * mE - m5 * m2 * mF + m5 * m3 * mE + mD * m2 * m7
+                - mD * m3 * m6;
+        inv[6] = -m0 * m6 * mF + m0 * m7 * mE + m4 * m2 * mF - m4 * m3 * mE - mC * m2 * m7
+                + mC * m3 * m6;
+        inv[10] = m0 * m5 * mF - m0 * m7 * mD - m4 * m1 * mF + m4 * m3 * mD + mC * m1 * m7
+                - mC * m3 * m5;
+        inv[14] = -m0 * m5 * mE + m0 * m6 * mD + m4 * m1 * mE - m4 * m2 * mD - mC * m1 * m6
+                + mC * m2 * m5;
+        inv[3] = -m1 * m6 * mB + m1 * m7 * mA + m5 * m2 * mB - m5 * m3 * mA - m9 * m2 * m7
+                + m9 * m3 * m6;
+        inv[7] = m0 * m6 * mB - m0 * m7 * mA - m4 * m2 * mB + m4 * m3 * mA + m8 * m2 * m7
+                - m8 * m3 * m6;
+        inv[11] = -m0 * m5 * mB + m0 * m7 * m9 + m4 * m1 * mB - m4 * m3 * m9 - m8 * m1 * m7
+                + m8 * m3 * m5;
+        inv[15] = m0 * m5 * mA - m0 * m6 * m9 - m4 * m1 * mA + m4 * m2 * m9 + m8 * m1 * m6
+                - m8 * m2 * m5;
         // (Ain't that pretty?)
 
         float det = m0 * inv[0] + m1 * inv[4] + m2 * inv[8] + m3 * inv[12];
         if (Math.abs(det) <= FLOAT_EPSILON) {
             if (logger.isLoggable(Level.FINE)) {
-                logger.fine("Matrix is not invertible, determinant is " + det
-                        + ", returning identity");
+                logger.fine(
+                        "Matrix is not invertible, determinant is " + det + ", returning identity");
             }
             setIdentity4x4(inv);
             return;
@@ -410,13 +400,11 @@ public class MathUtils {
         float m6 = m[6];
         float m7 = m[7];
         float m8 = m[8];
-        float det = m0 * (m4 * m8 - m5 * m7) -
-                m3 * (m1 * m8 - m7 * m2) +
-                m6 * (m1 * m5 - m4 * m2);
+        float det = m0 * (m4 * m8 - m5 * m7) - m3 * (m1 * m8 - m7 * m2) + m6 * (m1 * m5 - m4 * m2);
         if (Math.abs(det) <= FLOAT_EPSILON) {
             if (logger.isLoggable(Level.FINE)) {
-                logger.fine("Matrix is not invertible, determinant is " + det
-                        + ", returning identity");
+                logger.fine(
+                        "Matrix is not invertible, determinant is " + det + ", returning identity");
             }
             setIdentity3x3(inv);
             return;
@@ -443,8 +431,7 @@ public class MathUtils {
      * @param z      The z-translation
      * @param result The result matrix
      */
-    public static void translate(
-            float m[], float x, float y, float z, float result[]) {
+    public static void translate(float m[], float x, float y, float z, float result[]) {
         set(m, result);
         result[12] += x;
         result[13] += y;
@@ -460,8 +447,7 @@ public class MathUtils {
      * @param zNear   The z-value of the near clipping plane
      * @param m       The matrix to fill
      */
-    public static void infinitePerspective4x4(
-            float fovyDeg, float aspect, float zNear, float m[]) {
+    public static void infinitePerspective4x4(float fovyDeg, float aspect, float zNear, float m[]) {
         setIdentity4x4(m);
         float fovyRad = (float) Math.toRadians(fovyDeg);
         float t = (float) Math.tan(0.5 * fovyRad);
@@ -483,8 +469,8 @@ public class MathUtils {
      * @param zFar    The z-value of the far clipping plane
      * @param m       The matrix to fill
      */
-    public static void perspective4x4(
-            float fovyDeg, float aspect, float zNear, float zFar, float m[]) {
+    public static void perspective4x4(float fovyDeg, float aspect, float zNear, float zFar,
+            float m[]) {
         setIdentity4x4(m);
         float fovyRad = (float) Math.toRadians(fovyDeg);
         float t = (float) Math.tan(0.5 * fovyRad);
@@ -521,8 +507,7 @@ public class MathUtils {
      * @param point3D   The input point
      * @param result3D  The result point
      */
-    public static void transformPoint3D(
-            float matrix4x4[], float point3D[], float result3D[]) {
+    public static void transformPoint3D(float matrix4x4[], float point3D[], float result3D[]) {
         Arrays.fill(result3D, 0.0f);
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
@@ -616,13 +601,12 @@ public class MathUtils {
      * @param format The format string
      * @return The string representation
      */
-    private static String createFormattedMatrixString(
-            float array[], int rows, int cols, String format) {
+    private static String createFormattedMatrixString(float array[], int rows, int cols,
+            String format) {
         StringBuilder sb = new StringBuilder();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-                sb.append(String.format(
-                        Locale.ENGLISH, format, array[r + c * cols]));
+                sb.append(String.format(Locale.ENGLISH, format, array[r + c * cols]));
             }
             sb.append("\n");
         }

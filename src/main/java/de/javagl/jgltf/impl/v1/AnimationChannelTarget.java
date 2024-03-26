@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for animation.channel.target.schema.json
  * 
  */
-public class AnimationChannelTarget
-        extends GlTFProperty {
+public class AnimationChannelTarget extends GlTFProperty {
 
     /**
      * The ID of the node to target. (required)
@@ -65,11 +63,13 @@ public class AnimationChannelTarget
      */
     public void setPath(String path) {
         if (path == null) {
-            throw new NullPointerException((("Invalid value for path: " + path) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for path: " + path) + ", may not be null"));
         }
-        if (((!"translation".equals(path)) && (!"rotation".equals(path))) && (!"scale".equals(path))) {
-            throw new IllegalArgumentException(
-                    (("Invalid value for path: " + path) + ", valid: [\"translation\", \"rotation\", \"scale\"]"));
+        if (((!"translation".equals(path)) && (!"rotation".equals(path)))
+                && (!"scale".equals(path))) {
+            throw new IllegalArgumentException((("Invalid value for path: " + path)
+                    + ", valid: [\"translation\", \"rotation\", \"scale\"]"));
         }
         this.path = path;
     }

@@ -1,6 +1,7 @@
 package com.tac.guns.client.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -22,8 +23,9 @@ public class RenderItemEvent extends Event {
     private int light;
     private int overlay;
 
-    public RenderItemEvent(ItemStack heldItem, ItemTransforms.TransformType transformType, PoseStack poseStack,
-            MultiBufferSource bufferSource, int light, int overlay, float partialTicks) {
+    public RenderItemEvent(ItemStack heldItem, ItemTransforms.TransformType transformType,
+            PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay,
+            float partialTicks) {
         this.heldItem = heldItem;
         this.transformType = transformType;
         this.poseStack = poseStack;
@@ -66,8 +68,9 @@ public class RenderItemEvent extends Event {
         private LivingEntity entity;
         private HumanoidArm handSide;
 
-        public Held(LivingEntity entity, ItemStack heldItem, ItemTransforms.TransformType transformType,
-                PoseStack poseStack, MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
+        public Held(LivingEntity entity, ItemStack heldItem,
+                ItemTransforms.TransformType transformType, PoseStack poseStack,
+                MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
                 float partialTicks) {
             super(heldItem, transformType, poseStack, bufferSource, light, overlay, partialTicks);
             this.entity = entity;
@@ -83,10 +86,12 @@ public class RenderItemEvent extends Event {
         }
 
         public static class Post extends Held {
-            public Post(LivingEntity entity, ItemStack heldItem, ItemTransforms.TransformType transformType,
-                    PoseStack poseStack, MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
+            public Post(LivingEntity entity, ItemStack heldItem,
+                    ItemTransforms.TransformType transformType, PoseStack poseStack,
+                    MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
                     float partialTicks) {
-                super(entity, heldItem, transformType, poseStack, bufferSource, handSide, light, overlay, partialTicks);
+                super(entity, heldItem, transformType, poseStack, bufferSource, handSide, light,
+                        overlay, partialTicks);
             }
 
             public boolean isCancelable() {
@@ -95,10 +100,12 @@ public class RenderItemEvent extends Event {
         }
 
         public static class Pre extends Held {
-            public Pre(LivingEntity entity, ItemStack heldItem, ItemTransforms.TransformType transformType,
-                    PoseStack poseStack, MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
+            public Pre(LivingEntity entity, ItemStack heldItem,
+                    ItemTransforms.TransformType transformType, PoseStack poseStack,
+                    MultiBufferSource bufferSource, HumanoidArm handSide, int light, int overlay,
                     float partialTicks) {
-                super(entity, heldItem, transformType, poseStack, bufferSource, handSide, light, overlay, partialTicks);
+                super(entity, heldItem, transformType, poseStack, bufferSource, handSide, light,
+                        overlay, partialTicks);
             }
         }
     }
@@ -107,9 +114,10 @@ public class RenderItemEvent extends Event {
     public static class Entity extends RenderItemEvent {
         private final ItemEntity entity;
 
-        public Entity(ItemEntity entity, ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light,
-                int overlay, float deltaTicks) {
-            super(heldItem, ItemTransforms.TransformType.GROUND, poseStack, source, light, overlay, deltaTicks);
+        public Entity(ItemEntity entity, ItemStack heldItem, PoseStack poseStack,
+                MultiBufferSource source, int light, int overlay, float deltaTicks) {
+            super(heldItem, ItemTransforms.TransformType.GROUND, poseStack, source, light, overlay,
+                    deltaTicks);
             this.entity = entity;
         }
 
@@ -128,8 +136,8 @@ public class RenderItemEvent extends Event {
          * that cancelling this event will prevent {@link Post} from being called.
          */
         public static class Pre extends Entity {
-            public Pre(ItemEntity entity, ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light,
-                    int overlay, float deltaTicks) {
+            public Pre(ItemEntity entity, ItemStack heldItem, PoseStack poseStack,
+                    MultiBufferSource source, int light, int overlay, float deltaTicks) {
                 super(entity, heldItem, poseStack, source, light, overlay, deltaTicks);
             }
         }
@@ -140,8 +148,8 @@ public class RenderItemEvent extends Event {
          * event cannot be cancelled.
          */
         public static class Post extends Entity {
-            public Post(ItemEntity entity, ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light,
-                    int overlay, float deltaTicks) {
+            public Post(ItemEntity entity, ItemStack heldItem, PoseStack poseStack,
+                    MultiBufferSource source, int light, int overlay, float deltaTicks) {
                 super(entity, heldItem, poseStack, source, light, overlay, deltaTicks);
             }
 
@@ -154,7 +162,8 @@ public class RenderItemEvent extends Event {
 
     @Cancelable
     public static class Gui extends RenderItemEvent {
-        public Gui(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
+        public Gui(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light,
+                int overlay) {
             super(heldItem, ItemTransforms.TransformType.GUI, poseStack, source, light, overlay,
                     Minecraft.getInstance().getDeltaFrameTime());
         }
@@ -167,7 +176,8 @@ public class RenderItemEvent extends Event {
          * cancelling this event will prevent {@link Post} from being called.
          */
         public static class Pre extends Gui {
-            public Pre(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
+            public Pre(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light,
+                    int overlay) {
                 super(heldItem, poseStack, source, light, overlay);
             }
         }
@@ -178,7 +188,8 @@ public class RenderItemEvent extends Event {
          * event cannot be cancelled.
          */
         public static class Post extends Gui {
-            public Post(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
+            public Post(ItemStack heldItem, PoseStack poseStack, MultiBufferSource source,
+                    int light, int overlay) {
                 super(heldItem, poseStack, source, light, overlay);
             }
 
@@ -194,8 +205,10 @@ public class RenderItemEvent extends Event {
         private final net.minecraft.world.entity.decoration.ItemFrame entity;
 
         public ItemFrame(net.minecraft.world.entity.decoration.ItemFrame entity, ItemStack heldItem,
-                PoseStack poseStack, MultiBufferSource source, int light, int overlay, float deltaTicks) {
-            super(heldItem, ItemTransforms.TransformType.FIXED, poseStack, source, light, overlay, deltaTicks);
+                PoseStack poseStack, MultiBufferSource source, int light, int overlay,
+                float deltaTicks) {
+            super(heldItem, ItemTransforms.TransformType.FIXED, poseStack, source, light, overlay,
+                    deltaTicks);
             this.entity = entity;
         }
 
@@ -214,8 +227,9 @@ public class RenderItemEvent extends Event {
          * that cancelling this event will prevent {@link Post} from being called.
          */
         public static class Pre extends ItemFrame {
-            public Pre(net.minecraft.world.entity.decoration.ItemFrame entity, ItemStack heldItem, PoseStack poseStack,
-                    MultiBufferSource source, int light, int overlay, float deltaTicks) {
+            public Pre(net.minecraft.world.entity.decoration.ItemFrame entity, ItemStack heldItem,
+                    PoseStack poseStack, MultiBufferSource source, int light, int overlay,
+                    float deltaTicks) {
                 super(entity, heldItem, poseStack, source, light, overlay, deltaTicks);
             }
         }
@@ -226,8 +240,9 @@ public class RenderItemEvent extends Event {
          * event cannot be cancelled.
          */
         public static class Post extends ItemFrame {
-            public Post(net.minecraft.world.entity.decoration.ItemFrame entity, ItemStack heldItem, PoseStack poseStack,
-                    MultiBufferSource source, int light, int overlay, float deltaTicks) {
+            public Post(net.minecraft.world.entity.decoration.ItemFrame entity, ItemStack heldItem,
+                    PoseStack poseStack, MultiBufferSource source, int light, int overlay,
+                    float deltaTicks) {
                 super(entity, heldItem, poseStack, source, light, overlay, deltaTicks);
             }
 

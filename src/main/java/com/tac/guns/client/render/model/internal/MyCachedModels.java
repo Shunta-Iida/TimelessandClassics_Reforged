@@ -18,24 +18,23 @@ import net.minecraftforge.fml.common.Mod;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT,
+        bus = Mod.EventBusSubscriber.Bus.MOD)
 public enum MyCachedModels {
     FLAME("flame"),
     // Everything from this point on is all scope additions
 
-    MINI_DOT_BASE("optics/mini_dot_base"),
-    MICRO_HOLO_BASE("optics/micro_holo_base"),
-    LPVO_1_6_FRONT("optics/lpvo_1_6_front"),
-    LPVO_1_6("optics/lpvo_1_6"),
-    Sx8_FRONT("optics/8x_scope_front"),
-    Sx8_BODY("optics/8x_scope"),
-    ACOG_SCOPE_MIRROR("scope_mirror/acog_4x_scope_mirror"),
-    BULLET_SHELL_HIGH_CAL("shell_huge"),
-    BULLET_SHELL_RIFLE("shell_large"),
-    BULLET_SHELL_SHOTGUN("shell_shotgun"),
-    BULLET_SHELL_PISTOL("shell_small"),
-    BULLET_SHELL_PISTOL_SILVER("shell_silver"),
-    BULLET_SHELL_RIFLE_SURPLUS("shell_steel");
+    MINI_DOT_BASE("optics/mini_dot_base"), MICRO_HOLO_BASE(
+            "optics/micro_holo_base"), LPVO_1_6_FRONT("optics/lpvo_1_6_front"), LPVO_1_6(
+                    "optics/lpvo_1_6"), Sx8_FRONT("optics/8x_scope_front"), Sx8_BODY(
+                            "optics/8x_scope"), ACOG_SCOPE_MIRROR(
+                                    "scope_mirror/acog_4x_scope_mirror"), BULLET_SHELL_HIGH_CAL(
+                                            "shell_huge"), BULLET_SHELL_RIFLE(
+                                                    "shell_large"), BULLET_SHELL_SHOTGUN(
+                                                            "shell_shotgun"), BULLET_SHELL_PISTOL(
+                                                                    "shell_small"), BULLET_SHELL_PISTOL_SILVER(
+                                                                            "shell_silver"), BULLET_SHELL_RIFLE_SURPLUS(
+                                                                                    "shell_steel");
 
     private final ResourceLocation modelLocation;
 
@@ -78,8 +77,8 @@ public enum MyCachedModels {
         }
 
         ResourceManager manager = Minecraft.getInstance().getResourceManager();
-        ((ReloadableResourceManager) manager)
-                .registerReloadListener((ResourceManagerReloadListener) resourceManager -> MyCachedModels.cleanCache());
+        ((ReloadableResourceManager) manager).registerReloadListener(
+                (ResourceManagerReloadListener) resourceManager -> MyCachedModels.cleanCache());
     }
 
     public static void cleanCache() {

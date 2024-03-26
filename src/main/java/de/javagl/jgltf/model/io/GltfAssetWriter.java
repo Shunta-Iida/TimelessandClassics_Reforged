@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -63,8 +55,7 @@ public class GltfAssetWriter {
      * @param fileName  The file name for the JSON file
      * @throws IOException If an IO error occurred
      */
-    public void write(GltfAsset gltfAsset, String fileName)
-            throws IOException {
+    public void write(GltfAsset gltfAsset, String fileName) throws IOException {
         write(gltfAsset, new File(fileName));
     }
 
@@ -80,8 +71,7 @@ public class GltfAssetWriter {
      * @param file      The file for the JSON part
      * @throws IOException If an IO error occurred
      */
-    public void write(GltfAsset gltfAsset, File file)
-            throws IOException {
+    public void write(GltfAsset gltfAsset, File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             writeJson(gltfAsset, outputStream);
         }
@@ -89,9 +79,11 @@ public class GltfAssetWriter {
             String relativeUrlString = entry.getKey();
             ByteBuffer data = entry.getValue();
 
-            String referenceFileName = file.toPath().getParent().resolve(relativeUrlString).toString();
+            String referenceFileName =
+                    file.toPath().getParent().resolve(relativeUrlString).toString();
             try (@SuppressWarnings("resource")
-            WritableByteChannel writableByteChannel = Channels.newChannel(new FileOutputStream(referenceFileName))) {
+            WritableByteChannel writableByteChannel =
+                    Channels.newChannel(new FileOutputStream(referenceFileName))) {
                 writableByteChannel.write(data.slice());
             }
         }
@@ -107,8 +99,7 @@ public class GltfAssetWriter {
      * @param fileName  The file name for the JSON file
      * @throws IOException If an IO error occurred
      */
-    public void writeJson(GltfAsset gltfAsset, String fileName)
-            throws IOException {
+    public void writeJson(GltfAsset gltfAsset, String fileName) throws IOException {
         writeJson(gltfAsset, new File(fileName));
     }
 
@@ -122,8 +113,7 @@ public class GltfAssetWriter {
      * @param file      The file for the JSON part
      * @throws IOException If an IO error occurred
      */
-    public void writeJson(GltfAsset gltfAsset, File file)
-            throws IOException {
+    public void writeJson(GltfAsset gltfAsset, File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             writeJson(gltfAsset, outputStream);
         }
@@ -140,8 +130,7 @@ public class GltfAssetWriter {
      * @param outputStream The output stream
      * @throws IOException If an IO error occurred
      */
-    public void writeJson(GltfAsset gltfAsset, OutputStream outputStream)
-            throws IOException {
+    public void writeJson(GltfAsset gltfAsset, OutputStream outputStream) throws IOException {
         Object gltf = gltfAsset.getGltf();
         GltfWriter gltfWriter = new GltfWriter();
         gltfWriter.write(gltf, outputStream);
@@ -155,8 +144,7 @@ public class GltfAssetWriter {
      * @param fileName  The file name for the JSON file
      * @throws IOException If an IO error occurred
      */
-    public void writeBinary(GltfAsset gltfAsset, String fileName)
-            throws IOException {
+    public void writeBinary(GltfAsset gltfAsset, String fileName) throws IOException {
         writeBinary(gltfAsset, new File(fileName));
     }
 
@@ -168,8 +156,7 @@ public class GltfAssetWriter {
      * @param file      The file
      * @throws IOException If an IO error occurred
      */
-    public void writeBinary(GltfAsset gltfAsset, File file)
-            throws IOException {
+    public void writeBinary(GltfAsset gltfAsset, File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             writeBinary(gltfAsset, outputStream);
         }
@@ -184,8 +171,7 @@ public class GltfAssetWriter {
      * @param outputStream The output stream
      * @throws IOException If an IO error occurred
      */
-    public void writeBinary(GltfAsset gltfAsset, OutputStream outputStream)
-            throws IOException {
+    public void writeBinary(GltfAsset gltfAsset, OutputStream outputStream) throws IOException {
         if (gltfAsset instanceof GltfAssetV1) {
             GltfAssetV1 gltfAssetV1 = (GltfAssetV1) gltfAsset;
             GltfAssetWriterV1 gltfAssetWriterV1 = new GltfAssetWriterV1();
@@ -195,8 +181,7 @@ public class GltfAssetWriter {
             GltfAssetWriterV2 gltfAssetWriterV2 = new GltfAssetWriterV2();
             gltfAssetWriterV2.writeBinary(gltfAssetV2, outputStream);
         } else {
-            throw new IOException(
-                    "The gltfAsset has an unknown version: " + gltfAsset);
+            throw new IOException("The gltfAsset has an unknown version: " + gltfAsset);
         }
     }
 

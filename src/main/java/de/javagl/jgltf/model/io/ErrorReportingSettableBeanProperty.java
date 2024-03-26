@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -68,8 +60,7 @@ class ErrorReportingSettableBeanProperty extends SettableBeanProperty {
      *                          this is <code>null</code>, then errors will be
      *                          ignored.
      */
-    ErrorReportingSettableBeanProperty(
-            SettableBeanProperty delegate,
+    ErrorReportingSettableBeanProperty(SettableBeanProperty delegate,
             Consumer<? super JsonError> jsonErrorConsumer) {
         super(delegate);
         this.delegate = delegate;
@@ -78,19 +69,18 @@ class ErrorReportingSettableBeanProperty extends SettableBeanProperty {
 
     @Override
     public SettableBeanProperty withValueDeserializer(JsonDeserializer<?> deser) {
-        return new ErrorReportingSettableBeanProperty(
-                delegate.withValueDeserializer(deser), jsonErrorConsumer);
+        return new ErrorReportingSettableBeanProperty(delegate.withValueDeserializer(deser),
+                jsonErrorConsumer);
     }
 
     @Override
     public SettableBeanProperty withName(PropertyName newName) {
-        return new ErrorReportingSettableBeanProperty(
-                delegate.withName(newName), jsonErrorConsumer);
+        return new ErrorReportingSettableBeanProperty(delegate.withName(newName),
+                jsonErrorConsumer);
     }
 
     @Override
-    public Object setAndReturn(Object instance, Object value)
-            throws IOException {
+    public Object setAndReturn(Object instance, Object value) throws IOException {
         return delegate.setAndReturn(instance, value);
     }
 
@@ -110,27 +100,26 @@ class ErrorReportingSettableBeanProperty extends SettableBeanProperty {
     }
 
     @Override
-    public Object deserializeSetAndReturn(JsonParser p,
-            DeserializationContext ctxt, Object instance) throws IOException {
+    public Object deserializeSetAndReturn(JsonParser p, DeserializationContext ctxt,
+            Object instance) throws IOException {
         return delegate.deserializeSetAndReturn(p, ctxt, instance);
     }
 
     @Override
-    public void deserializeAndSet(JsonParser p, DeserializationContext ctxt,
-            Object instance) throws IOException {
+    public void deserializeAndSet(JsonParser p, DeserializationContext ctxt, Object instance)
+            throws IOException {
         try {
             delegate.deserializeAndSet(p, ctxt, instance);
         } catch (Exception e) {
             if (jsonErrorConsumer != null) {
-                jsonErrorConsumer.accept(new JsonError(
-                        e.getMessage(), p.getParsingContext(), e));
+                jsonErrorConsumer.accept(new JsonError(e.getMessage(), p.getParsingContext(), e));
             }
         }
     }
 
     @Override
     public SettableBeanProperty withNullProvider(NullValueProvider nva) {
-        return new ErrorReportingSettableBeanProperty(
-                delegate.withNullProvider(nva), jsonErrorConsumer);
+        return new ErrorReportingSettableBeanProperty(delegate.withNullProvider(nva),
+                jsonErrorConsumer);
     }
 }

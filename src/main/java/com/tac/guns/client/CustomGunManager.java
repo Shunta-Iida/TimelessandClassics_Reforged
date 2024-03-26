@@ -36,17 +36,17 @@ public class CustomGunManager {
          * "." + id.getPath() + ".name"));
          * CompoundNBT tag = stack.getOrCreateTag();
          *//*
-            * tag.put("Model", gun.getModel().serializeNBT());
-            * tag.put("Gun", gun.getGun().serializeNBT());
-            * tag.putBoolean("Custom", true);
-            * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
-            * tag.putIntArray("supportedFireModes",
-            * gun.getGun().getGeneral().getRateSelector());
-            *//*
-               * items.add(stack);
-               * });
-               * }
-               */
+              * tag.put("Model", gun.getModel().serializeNBT());
+              * tag.put("Gun", gun.getGun().serializeNBT());
+              * tag.putBoolean("Custom", true);
+              * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
+              * tag.putIntArray("supportedFireModes",
+              * gun.getGun().getGeneral().getRateSelector());
+              *//*
+                   * items.add(stack);
+                   * });
+                   * }
+                   */
     }
 
     @SubscribeEvent

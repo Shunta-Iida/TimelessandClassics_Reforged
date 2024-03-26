@@ -114,7 +114,8 @@ public class WorkbenchRecipeBuilder {
     public void build(Consumer<FinishedRecipe> consumerIn, String modid, String save) {
         ResourceLocation resourcelocation = Registry.ITEM.getKey(this.result);
         if (new ResourceLocation(Reference.MOD_ID, save).equals(resourcelocation)) {
-            throw new IllegalStateException("Workbench Recipe " + save + " should remove its 'save' argument");
+            throw new IllegalStateException(
+                    "Workbench Recipe " + save + " should remove its 'save' argument");
         } else {
             this.build(consumerIn, new ResourceLocation(modid, "craft_" + save));
         }
@@ -124,8 +125,8 @@ public class WorkbenchRecipeBuilder {
      * Builds this recipe into an {@link IFinishedRecipe}.
      */
     public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
-        consumerIn
-                .accept(new Result(id, this.result, this.count, this.group == null ? "" : this.group, this.materials));
+        consumerIn.accept(new Result(id, this.result, this.count,
+                this.group == null ? "" : this.group, this.materials));
     }
 
     public static class Result implements FinishedRecipe {

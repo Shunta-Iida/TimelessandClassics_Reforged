@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for material.schema.json
  * 
  */
-public class Material
-        extends GlTFChildOfRootProperty {
+public class Material extends GlTFChildOfRootProperty {
 
     /**
      * A set of parameter values that are used to define the
@@ -235,7 +233,7 @@ public class Material
      * 
      */
     public float[] defaultEmissiveFactor() {
-        return new float[] { 0.0F, 0.0F, 0.0F };
+        return new float[] {0.0F, 0.0F, 0.0F};
     }
 
     /**
@@ -253,9 +251,10 @@ public class Material
             this.alphaMode = alphaMode;
             return;
         }
-        if (((!"OPAQUE".equals(alphaMode)) && (!"MASK".equals(alphaMode))) && (!"BLEND".equals(alphaMode))) {
-            throw new IllegalArgumentException(
-                    (("Invalid value for alphaMode: " + alphaMode) + ", valid: [OPAQUE, MASK, BLEND]"));
+        if (((!"OPAQUE".equals(alphaMode)) && (!"MASK".equals(alphaMode)))
+                && (!"BLEND".equals(alphaMode))) {
+            throw new IllegalArgumentException((("Invalid value for alphaMode: " + alphaMode)
+                    + ", valid: [OPAQUE, MASK, BLEND]"));
         }
         this.alphaMode = alphaMode;
     }

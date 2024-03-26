@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for skin.schema.json
  * 
  */
-public class Skin
-        extends GlTFChildOfRootProperty {
+public class Skin extends GlTFChildOfRootProperty {
 
     /**
      * The index of the accessor containing the floating-point 4x4
@@ -106,7 +104,8 @@ public class Skin
      */
     public void setJoints(List<Integer> joints) {
         if (joints == null) {
-            throw new NullPointerException((("Invalid value for joints: " + joints) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for joints: " + joints) + ", may not be null"));
         }
         if (joints.size() < 1) {
             throw new IllegalArgumentException("Number of joints elements is < 1");

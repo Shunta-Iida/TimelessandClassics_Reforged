@@ -10,7 +10,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 public abstract class GunEnchantment extends Enchantment {
     private Type type;
 
-    protected GunEnchantment(Rarity rarityIn, EnchantmentCategory typeIn, EquipmentSlot[] slots, Type type) {
+    protected GunEnchantment(Rarity rarityIn, EnchantmentCategory typeIn, EquipmentSlot[] slots,
+            Type type) {
         super(rarityIn, typeIn, slots);
         this.type = type;
     }

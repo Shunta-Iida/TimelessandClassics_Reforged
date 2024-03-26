@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class QuickHandsEnchantment extends GunEnchantment {
     public QuickHandsEnchantment() {
-        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.AMMO);
+        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.AMMO);
     }
 
     @Override

@@ -31,8 +31,7 @@ public class MessagePlayerShake extends PlayMessage<MessagePlayerShake> {
 
     public float attackedAtYaw;
 
-    public MessagePlayerShake() {
-    }
+    public MessagePlayerShake() {}
 
     public MessagePlayerShake(float value) {
         this.attackedAtYaw = value;
@@ -49,7 +48,8 @@ public class MessagePlayerShake extends PlayMessage<MessagePlayerShake> {
     }
 
     @Override
-    public void handle(MessagePlayerShake messagePlayerShake, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessagePlayerShake messagePlayerShake,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().setPacketHandled(true);
         if (supplier.get().getDirection() != NetworkDirection.PLAY_TO_CLIENT)
             return;

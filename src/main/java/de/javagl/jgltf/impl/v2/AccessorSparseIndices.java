@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -16,8 +15,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for accessor.sparse.indices.schema.json
  * 
  */
-public class AccessorSparseIndices
-        extends GlTFProperty {
+public class AccessorSparseIndices extends GlTFProperty {
 
     /**
      * The index of the buffer view with sparse indices. The referenced
@@ -54,7 +52,8 @@ public class AccessorSparseIndices
      */
     public void setBufferView(Integer bufferView) {
         if (bufferView == null) {
-            throw new NullPointerException((("Invalid value for bufferView: " + bufferView) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for bufferView: " + bufferView) + ", may not be null"));
         }
         this.bufferView = bufferView;
     }
@@ -136,7 +135,8 @@ public class AccessorSparseIndices
         }
         if (((componentType != 5121) && (componentType != 5123)) && (componentType != 5125)) {
             throw new IllegalArgumentException(
-                    (("Invalid value for componentType: " + componentType) + ", valid: [5121, 5123, 5125]"));
+                    (("Invalid value for componentType: " + componentType)
+                            + ", valid: [5121, 5123, 5125]"));
         }
         this.componentType = componentType;
     }

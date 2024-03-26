@@ -32,15 +32,15 @@ import net.minecraft.world.item.ItemStack;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class elcan_14x_ScopeModel implements IOverrideModel {
-    private static final ResourceLocation RED_DOT_RETICLE = new ResourceLocation(Reference.MOD_ID,
-            "textures/items/timeless_scopes/elcan_1.png");
+    private static final ResourceLocation RED_DOT_RETICLE =
+            new ResourceLocation(Reference.MOD_ID, "textures/items/timeless_scopes/elcan_1.png");
     private static final ResourceLocation HIT_MARKER = new ResourceLocation(Reference.MOD_ID,
             "textures/items/timeless_scopes/hit_marker/razor_lpvo_reticle.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            ItemStack parent, LivingEntity entity, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light,
-            int overlay) {
+    public void render(float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
+            MultiBufferSource renderTypeBuffer, int light, int overlay) {
         matrixStack.pushPose();
 
         /*
@@ -78,7 +78,8 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
         matrixStack.translate(0, 0.017, 0);
         if (transformType.firstPerson() && entity.equals(Minecraft.getInstance().player)) {
             ScopeData scopeData = ScopeEditor.get().getScopeData() == null
-                    || ScopeEditor.get().getScopeData().getTagName() != "elcan14x" ? new ScopeData("")
+                    || ScopeEditor.get().getScopeData().getTagName() != "elcan14x"
+                            ? new ScopeData("")
                             : ScopeEditor.get().getScopeData();
             if (entity.getMainArm() == HumanoidArm.LEFT) {
                 matrixStack.scale(-1, 1, 1);
@@ -90,14 +91,15 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
             float size = scopeSize / 16.0F;
             float reticleSize = scopePrevSize / 16.0F;
             float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom() + scopeData.getDrZoomCropMod();// scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
-                                                                                                                   // +
-            // scopeData.getDrZoomCropMod();//0.43F
+                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                            + scopeData.getDrZoomCropMod();// scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                                                                                                                                                                                                 // +
+                                                                                                                                                                                                 // scopeData.getDrZoomCropMod();//0.43F
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
 
-            float texU = ((window.getScreenWidth() - window.getScreenHeight() + window.getScreenHeight() * crop * 2.0F)
-                    / 2.0F) / window.getScreenWidth();
+            float texU = ((window.getScreenWidth() - window.getScreenHeight()
+                    + window.getScreenHeight() * crop * 2.0F) / 2.0F) / window.getScreenWidth();
 
             // matrixStack.rotate(Vector3f.ZP.rotationDegrees(-GunRenderingHandler.get().immersiveWeaponRoll));
             matrixStack.pushPose();
@@ -105,8 +107,10 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
                 Matrix4f matrix = matrixStack.last().pose();
                 Matrix3f normal = matrixStack.last().normal();
 
-                matrixStack.translate((-size / 2) + scopeData.getDrXZoomMod(), 0.0846175 + scopeData.getDrYZoomMod(),
-                        Config.CLIENT.display.scopeDoubleRender.get() ? (3.115 + scopeData.getDrZZoomMod()) * 0.0625
+                matrixStack.translate((-size / 2) + scopeData.getDrXZoomMod(),
+                        0.0846175 + scopeData.getDrYZoomMod(),
+                        Config.CLIENT.display.scopeDoubleRender.get()
+                                ? (3.115 + scopeData.getDrZZoomMod()) * 0.0625
                                 : (3.115 + scopeData.getDrZZoomMod()) * 0.0625); // 3.275
 
                 float color = (float) AimingHandler.get().getNormalisedAdsProgress() * 0.8F + 0.2F;
@@ -118,14 +122,18 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
                     builder = renderTypeBuffer.getBuffer(GunRenderType.getScreen());
-                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F).uv(texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F)
+                            .uv(texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                     builder.vertex(matrix, 0, 0, 0).color(color, color, color, 1.0F).uv(texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F).uv(1.0F - texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F).uv(1.0F - texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                            .endVertex();
+                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                 }
 
                 matrixStack.translate(0, 0, 0.0001);
@@ -138,8 +146,8 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
 
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
-                        1);
+                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
 
                 float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
@@ -149,7 +157,8 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
                 matrixStack.scale(7.5f, 7.5f, 7.5f);
                 matrixStack.translate(0, 0, 0.001);
                 matrixStack.translate((-0.00335715 - 0.0033) + scopeData.getReticleXMod(),
-                        (-0.0035055 - 0.0046) + scopeData.getReticleYMod(), 0.0003 + scopeData.getReticleZMod());
+                        (-0.0035055 - 0.0046) + scopeData.getReticleYMod(),
+                        0.0003 + scopeData.getReticleZMod());
 
                 builder = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
                 // Walking bobbing
@@ -159,36 +168,39 @@ public class elcan_14x_ScopeModel implements IOverrideModel {
                     aimed = true;
                 alpha = (float) (1F * AimingHandler.get().getNormalisedAdsProgress());
 
-                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack, Minecraft.getInstance().player,
-                        partialTicks, -0.0525f);
+                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack,
+                        Minecraft.getInstance().player, partialTicks, -0.0525f);
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true, 0.085f);
                 GunRenderingHandler.get().applyNoiseMovementTransform(matrixStack, -0.11f);
-                GunRenderingHandler.get().applyJumpingTransforms(matrixStack, partialTicks, -0.0625f);
+                GunRenderingHandler.get().applyJumpingTransforms(matrixStack, partialTicks,
+                        -0.0625f);
 
                 float recoilReversedMod = 0.075f;
                 matrixStack.translate(0, 0, -0.35);
+                matrixStack.mulPose(Vector3f.YP
+                        .rotationDegrees(GunRenderingHandler.get().newSwayYaw * recoilReversedMod));
+                matrixStack.mulPose(Vector3f.ZN.rotationDegrees(
+                        GunRenderingHandler.get().newSwayPitch * recoilReversedMod));
                 matrixStack
-                        .mulPose(Vector3f.YP.rotationDegrees(GunRenderingHandler.get().newSwayYaw * recoilReversedMod));
-                matrixStack.mulPose(
-                        Vector3f.ZN.rotationDegrees(GunRenderingHandler.get().newSwayPitch * recoilReversedMod));
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(
-                        (GunRenderingHandler.get().recoilLift * 0.02f * GunRenderingHandler.get().recoilReduction)
-                                * 0.65F));
+                        .mulPose(Vector3f.XP.rotationDegrees((GunRenderingHandler.get().recoilLift
+                                * 0.02f * GunRenderingHandler.get().recoilReduction) * 0.65F));
                 matrixStack.translate(0, 0, 0.35);
 
                 int lightmapValue = 15728880;
                 // alpha *= 0.6;
-                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
-                        .uv(0.0F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
-                        .endVertex();
-                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F).overlayCoords(overlay)
+                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0)
+                        .color(red, green, blue, alpha).uv(0.0F, 0.9375F).overlayCoords(overlay)
                         .uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0).color(red, green, blue, alpha)
-                        .uv(0.9375F, 0.0F).overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
+                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F)
+                        .overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
                         .endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale), 0)
-                        .color(red, green, blue, alpha).uv(0.9375F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue)
-                        .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0)
+                        .color(red, green, blue, alpha).uv(0.9375F, 0.0F).overlayCoords(overlay)
+                        .uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale),
+                        0).color(red, green, blue, alpha).uv(0.9375F, 0.9375F)
+                        .overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
+                        .endVertex();
             }
             matrixStack.popPose();
         }

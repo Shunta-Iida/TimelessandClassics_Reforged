@@ -29,8 +29,7 @@ public class GuiEditor {
         return instance;
     }
 
-    private GuiEditor() {
-    }
+    private GuiEditor() {}
 
     public int currElement = 0;
     private HashMap<Integer, GUI_Element> elements = new HashMap<>();
@@ -75,7 +74,8 @@ public class GuiEditor {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
-        if (!Config.COMMON.development.enableTDev.get() && CommandsHandler.get().getCatCurrentIndex() == 3)
+        if (!Config.COMMON.development.enableTDev.get()
+                && CommandsHandler.get().getCatCurrentIndex() == 3)
             return;
         if (event.getKeyCode() == GLFW.GLFW_KEY_1) {
             this.currElement = 1;
@@ -123,9 +123,10 @@ public class GuiEditor {
         boolean isShiftDown = event.getKeyCode() == GLFW.GLFW_KEY_LEFT_SHIFT; // Increase Step Size
         boolean isPeriodDown = Keys.SIZE_OPT.isDown();
 
-        GUI_Element element = this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
-                ? new GUI_Element(0, 0, 0, 0)
-                : this.elements.get(this.currElement);
+        GUI_Element element =
+                this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
+                        ? new GUI_Element(0, 0, 0, 0)
+                        : this.elements.get(this.currElement);
         double xMod = element.xMod;
         double yMod = element.yMod;
         double sizeXMod = element.sizeXMod;
@@ -156,11 +157,12 @@ public class GuiEditor {
     public void exportData() {
         this.elements.forEach((name, data) -> {
             if (this.elements.get(name) == null) {
-                LOGGER.log(Level.ERROR, "GUI EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
+                LOGGER.log(Level.ERROR,
+                        "GUI EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
                 return;
             }
-            GsonBuilder gsonB = new GsonBuilder().setLenient().addSerializationExclusionStrategy(Gun.strategy)
-                    .setPrettyPrinting();
+            GsonBuilder gsonB = new GsonBuilder().setLenient()
+                    .addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();
 
             String jsonString = gsonB.create().toJson(data);// gson.toJson(ch.getCatGlobal(1).get(this.previousWeaponTag));
             this.writeExport(jsonString, "gui_" + name);
@@ -171,10 +173,12 @@ public class GuiEditor {
         try {
             File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter = new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
+            FileWriter dataWriter =
+                    new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO, "WEAPON EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
+            LOGGER.log(Level.INFO,
+                    "WEAPON EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
         } catch (IOException e) {
             LOGGER.log(Level.ERROR,
                     "WEAPON EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");

@@ -22,8 +22,7 @@ import java.util.function.Supplier;
 public class MessageReload extends PlayMessage<MessageReload> {
     private boolean reload;
 
-    public MessageReload() {
-    }
+    public MessageReload() {}
 
     public MessageReload(boolean reload) {
         this.reload = reload;
@@ -57,15 +56,19 @@ public class MessageReload extends PlayMessage<MessageReload> {
                 }
                 MinecraftForge.EVENT_BUS.post(new GunReloadEvent.Post(player, gun));
 
-                ResourceLocation reloadSound = ((GunItem) gun.getItem()).getGun().getSounds().getCock();
+                ResourceLocation reloadSound =
+                        ((GunItem) gun.getItem()).getGun().getSounds().getCock();
                 if (reloadSound != null) {
                     MessageGunSound message = new MessageGunSound(reloadSound, SoundSource.PLAYERS,
-                            (float) player.getX(), (float) player.getY() + 1.0F, (float) player.getZ(), 1.0F, 1.0F,
-                            player.getId(), false, true);
-                    PacketHandler.getPlayChannel().send(
-                            PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(player, player.getX(),
-                                    (player.getY() + 1.0), player.getZ(), 16.0, player.level.dimension())),
-                            message);
+                            (float) player.getX(), (float) player.getY() + 1.0F,
+                            (float) player.getZ(), 1.0F, 1.0F, player.getId(), false, true);
+                    PacketHandler
+                            .getPlayChannel().send(
+                                    PacketDistributor.NEAR
+                                            .with(() -> new PacketDistributor.TargetPoint(player,
+                                                    player.getX(), (player.getY() + 1.0),
+                                                    player.getZ(), 16.0, player.level.dimension())),
+                                    message);
                 }
             }
         });

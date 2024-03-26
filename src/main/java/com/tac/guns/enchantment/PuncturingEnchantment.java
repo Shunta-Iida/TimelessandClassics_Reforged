@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class PuncturingEnchantment extends GunEnchantment {
     public PuncturingEnchantment() {
-        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.PROJECTILE);
+        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.PROJECTILE);
     }
 
     @Override

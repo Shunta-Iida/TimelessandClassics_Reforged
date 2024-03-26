@@ -24,18 +24,7 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public abstract class GunAnimationController {
     public enum AnimationLabel {
-        RELOAD_NORMAL,
-        RELOAD_EMPTY,
-        RELOAD_INTRO,
-        RELOAD_LOOP,
-        RELOAD_NORMAL_END,
-        RELOAD_EMPTY_END,
-        PUMP,
-        PULL_BOLT,
-        INSPECT,
-        INSPECT_EMPTY,
-        DRAW,
-        STATIC,
+        RELOAD_NORMAL, RELOAD_EMPTY, RELOAD_INTRO, RELOAD_LOOP, RELOAD_NORMAL_END, RELOAD_EMPTY_END, PUMP, PULL_BOLT, INSPECT, INSPECT_EMPTY, DRAW, STATIC,
     }
 
     private AnimationMeta previousAnimation;
@@ -46,7 +35,8 @@ public abstract class GunAnimationController {
      * A map to obtain AnimationController through Item, the key value should put
      * the RegistryName of the Item.
      */
-    private static final Map<ResourceLocation, GunAnimationController> animationControllerMap = new HashMap<>();
+    private static final Map<ResourceLocation, GunAnimationController> animationControllerMap =
+            new HashMap<>();
 
     protected void enableStaticState() {
         AnimationMeta staticMeta = getAnimationFromLabel(AnimationLabel.STATIC);
@@ -63,12 +53,13 @@ public abstract class GunAnimationController {
         }
     }
 
-    private void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta, Runnable callback) {
+    private void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta,
+            Runnable callback) {
         runAnimation(animationMeta, soundMeta, callback, 1.0f);
     }
 
-    public void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta, Runnable callback,
-            float speed) {
+    public void runAnimation(AnimationMeta animationMeta, AnimationSoundMeta soundMeta,
+            Runnable callback, float speed) {
         if (animationMeta != null) {
             Animations.runAnimation(animationMeta, callback, speed);
             previousAnimation = animationMeta;
@@ -77,13 +68,12 @@ public abstract class GunAnimationController {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player == null)
                 return;
-            if (animationMeta.getResourceLocation() == null || soundMeta.getResourceLocation() == null)
+            if (animationMeta.getResourceLocation() == null
+                    || soundMeta.getResourceLocation() == null)
                 return;
-            MessageAnimationRun message = new MessageAnimationRun(
-                    animationMeta.getResourceLocation(),
-                    soundMeta.getResourceLocation(),
-                    true,
-                    player.getUUID());
+            MessageAnimationRun message =
+                    new MessageAnimationRun(animationMeta.getResourceLocation(),
+                            soundMeta.getResourceLocation(), true, player.getUUID());
             PacketHandler.getPlayChannel().sendToServer(message);
             previousSound = soundMeta;
         }
@@ -105,11 +95,9 @@ public abstract class GunAnimationController {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player == null)
                 return;
-            MessageAnimationRun message = new MessageAnimationRun(
-                    previousAnimation.getResourceLocation(),
-                    previousSound.getResourceLocation(),
-                    false,
-                    player.getUUID());
+            MessageAnimationRun message =
+                    new MessageAnimationRun(previousAnimation.getResourceLocation(),
+                            previousSound.getResourceLocation(), false, player.getUUID());
             PacketHandler.getPlayChannel().sendToServer(message);
         }
     }
@@ -164,18 +152,20 @@ public abstract class GunAnimationController {
         return null;
     }
 
-    public void applyAttachmentsTransform(ItemStack itemStack, ItemTransforms.TransformType transformType,
-            LivingEntity entity, PoseStack matrixStack) {
+    public void applyAttachmentsTransform(ItemStack itemStack,
+            ItemTransforms.TransformType transformType, LivingEntity entity,
+            PoseStack matrixStack) {
         boolean isFirstPerson = transformType.firstPerson();
         if (isFirstPerson)
             Animations.pushNode(previousAnimation, getAttachmentsNodeIndex());
-        Animations.applyAnimationTransform(itemStack, ItemTransforms.TransformType.NONE, entity, matrixStack);
+        Animations.applyAnimationTransform(itemStack, ItemTransforms.TransformType.NONE, entity,
+                matrixStack);
         if (isFirstPerson)
             Animations.popNode();
     }
 
-    public void applySpecialModelTransform(BakedModel model, int index, ItemTransforms.TransformType transformType,
-            PoseStack matrixStack) {
+    public void applySpecialModelTransform(BakedModel model, int index,
+            ItemTransforms.TransformType transformType, PoseStack matrixStack) {
         boolean isFirstPerson = transformType.firstPerson();
         if (isFirstPerson)
             Animations.pushNode(previousAnimation, index);
@@ -184,12 +174,14 @@ public abstract class GunAnimationController {
             Animations.popNode();
     }
 
-    public void applyTransform(ItemStack itemStack, int index, ItemTransforms.TransformType transformType,
-            LivingEntity entity, PoseStack matrixStack) {
+    public void applyTransform(ItemStack itemStack, int index,
+            ItemTransforms.TransformType transformType, LivingEntity entity,
+            PoseStack matrixStack) {
         boolean isFirstPerson = transformType.firstPerson();
         if (isFirstPerson)
             Animations.pushNode(previousAnimation, index);
-        Animations.applyAnimationTransform(itemStack, ItemTransforms.TransformType.NONE, entity, matrixStack);
+        Animations.applyAnimationTransform(itemStack, ItemTransforms.TransformType.NONE, entity,
+                matrixStack);
         if (isFirstPerson)
             Animations.popNode();
     }
@@ -198,7 +190,8 @@ public abstract class GunAnimationController {
         if (previousAnimation != null) {
             Animations.pushNode(previousAnimation, getRightHandNodeIndex());
             matrixStack.translate(-0.5, -0.5, -0.5);
-            Matrix4f animationTransition = new Matrix4f(Animations.peekNodeModel().computeGlobalTransform(null));
+            Matrix4f animationTransition =
+                    new Matrix4f(Animations.peekNodeModel().computeGlobalTransform(null));
             animationTransition.transpose();
             matrixStack.last().pose().multiply(animationTransition);
             Animations.popNode();
@@ -209,7 +202,8 @@ public abstract class GunAnimationController {
         if (previousAnimation != null) {
             Animations.pushNode(previousAnimation, getLeftHandNodeIndex());
             matrixStack.translate(-0.5, -0.5, -0.5);
-            Matrix4f animationTransition = new Matrix4f(Animations.peekNodeModel().computeGlobalTransform(null));
+            Matrix4f animationTransition =
+                    new Matrix4f(Animations.peekNodeModel().computeGlobalTransform(null));
             animationTransition.transpose();
             matrixStack.last().pose().multiply(animationTransition);
             Animations.popNode();

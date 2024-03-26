@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -51,12 +43,11 @@ public class GltfReferenceResolver {
      * @param references The {@link GltfReference} objects
      * @param baseUri    The base URI that references will be resolved against
      */
-    public static void resolveAll(
-            Iterable<? extends GltfReference> references, URI baseUri) {
+    public static void resolveAll(final Iterable<? extends GltfReference> references, final URI baseUri) {
         Objects.requireNonNull(references, "The references may not be null");
         Objects.requireNonNull(baseUri, "The baseUri may not be null");
-        Function<String, ByteBuffer> uriResolver = UriResolvers.createBaseUriResolver(baseUri);
-        resolveAll(references, uriResolver);
+        final Function<String, ByteBuffer> uriResolver = UriResolvers.createBaseUriResolver(baseUri);
+        GltfReferenceResolver.resolveAll(references, uriResolver);
     }
 
     /**
@@ -67,14 +58,13 @@ public class GltfReferenceResolver {
      * @param uriResolver The function for resolving a URI string
      *                    into a byte buffer
      */
-    public static void resolveAll(
-            Iterable<? extends GltfReference> references,
-            Function<? super String, ? extends ByteBuffer> uriResolver) {
+    public static void resolveAll(final Iterable<? extends GltfReference> references,
+            final Function<? super String, ? extends ByteBuffer> uriResolver) {
         Objects.requireNonNull(references, "The references may not be null");
         Objects.requireNonNull(uriResolver, "The uriResolver may not be null");
 
-        for (GltfReference reference : references) {
-            resolve(reference, uriResolver);
+        for (final GltfReference reference : references) {
+            GltfReferenceResolver.resolve(reference, uriResolver);
         }
     }
 
@@ -89,17 +79,17 @@ public class GltfReferenceResolver {
      * @param uriResolver The function for resolving a URI string
      *                    into an byte buffer
      */
-    public static void resolve(GltfReference reference,
-            Function<? super String, ? extends ByteBuffer> uriResolver) {
+    public static void resolve(final GltfReference reference,
+            final Function<? super String, ? extends ByteBuffer> uriResolver) {
         Objects.requireNonNull(reference, "The reference may not be null");
         Objects.requireNonNull(uriResolver, "The uriResolver may not be null");
 
-        String uri = reference.getUri();
-        ByteBuffer byteBuffer = uriResolver.apply(uri);
+        final String uri = reference.getUri();
+        final ByteBuffer byteBuffer = uriResolver.apply(uri);
         if (byteBuffer == null) {
-            logger.warning("Could not resolve URI " + uri);
+            GltfReferenceResolver.logger.warning("Could not resolve URI " + uri);
         }
-        Consumer<ByteBuffer> target = reference.getTarget();
+        final Consumer<ByteBuffer> target = reference.getTarget();
         target.accept(byteBuffer);
     }
 

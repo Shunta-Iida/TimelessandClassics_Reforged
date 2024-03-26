@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for accessor.schema.json
  * 
  */
-public class Accessor
-        extends GlTFChildOfRootProperty {
+public class Accessor extends GlTFChildOfRootProperty {
 
     /**
      * The ID of the bufferView. (required)
@@ -89,7 +87,8 @@ public class Accessor
      */
     public void setBufferView(String bufferView) {
         if (bufferView == null) {
-            throw new NullPointerException((("Invalid value for bufferView: " + bufferView) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for bufferView: " + bufferView) + ", may not be null"));
         }
         this.bufferView = bufferView;
     }
@@ -117,7 +116,8 @@ public class Accessor
      */
     public void setByteOffset(Integer byteOffset) {
         if (byteOffset == null) {
-            throw new NullPointerException((("Invalid value for byteOffset: " + byteOffset) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for byteOffset: " + byteOffset) + ", may not be null"));
         }
         if (byteOffset < 0) {
             throw new IllegalArgumentException("byteOffset < 0");
@@ -206,8 +206,9 @@ public class Accessor
         }
         if (((((componentType != 5120) && (componentType != 5121)) && (componentType != 5122))
                 && (componentType != 5123)) && (componentType != 5126)) {
-            throw new IllegalArgumentException((("Invalid value for componentType: " + componentType)
-                    + ", valid: [5120, 5121, 5122, 5123, 5126]"));
+            throw new IllegalArgumentException(
+                    (("Invalid value for componentType: " + componentType)
+                            + ", valid: [5120, 5121, 5122, 5123, 5126]"));
         }
         this.componentType = componentType;
     }
@@ -235,7 +236,8 @@ public class Accessor
      */
     public void setCount(Integer count) {
         if (count == null) {
-            throw new NullPointerException((("Invalid value for count: " + count) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for count: " + count) + ", may not be null"));
         }
         if (count < 1) {
             throw new IllegalArgumentException("count < 1");
@@ -268,7 +270,8 @@ public class Accessor
      */
     public void setType(String type) {
         if (type == null) {
-            throw new NullPointerException((("Invalid value for type: " + type) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for type: " + type) + ", may not be null"));
         }
         if (((((((!"SCALAR".equals(type)) && (!"VEC2".equals(type))) && (!"VEC3".equals(type)))
                 && (!"VEC4".equals(type))) && (!"MAT2".equals(type))) && (!"MAT3".equals(type)))

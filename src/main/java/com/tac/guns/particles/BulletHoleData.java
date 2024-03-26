@@ -24,22 +24,24 @@ public class BulletHoleData implements ParticleOptions {
         })).apply(builder, BulletHoleData::new);
     });
 
-    public static final ParticleOptions.Deserializer<BulletHoleData> DESERIALIZER = new ParticleOptions.Deserializer<BulletHoleData>() {
-        @Override
-        public BulletHoleData fromCommand(ParticleType<BulletHoleData> particleType, StringReader reader)
-                throws CommandSyntaxException {
-            reader.expect(' ');
-            int dir = reader.readInt();
-            reader.expect(' ');
-            long pos = reader.readLong();
-            return new BulletHoleData(dir, pos);
-        }
+    public static final ParticleOptions.Deserializer<BulletHoleData> DESERIALIZER =
+            new ParticleOptions.Deserializer<BulletHoleData>() {
+                @Override
+                public BulletHoleData fromCommand(ParticleType<BulletHoleData> particleType,
+                        StringReader reader) throws CommandSyntaxException {
+                    reader.expect(' ');
+                    int dir = reader.readInt();
+                    reader.expect(' ');
+                    long pos = reader.readLong();
+                    return new BulletHoleData(dir, pos);
+                }
 
-        @Override
-        public BulletHoleData fromNetwork(ParticleType<BulletHoleData> particleType, FriendlyByteBuf buffer) {
-            return new BulletHoleData(buffer.readInt(), buffer.readLong());
-        }
-    };
+                @Override
+                public BulletHoleData fromNetwork(ParticleType<BulletHoleData> particleType,
+                        FriendlyByteBuf buffer) {
+                    return new BulletHoleData(buffer.readInt(), buffer.readLong());
+                }
+            };
 
     private final Direction direction;
     private final BlockPos pos;
@@ -75,7 +77,8 @@ public class BulletHoleData implements ParticleOptions {
 
     @Override
     public String writeToString() {
-        return ForgeRegistries.PARTICLE_TYPES.getKey(this.getType()) + " " + this.direction.getName();
+        return ForgeRegistries.PARTICLE_TYPES.getKey(this.getType()) + " "
+                + this.direction.getName();
     }
 
     public static Codec<BulletHoleData> codec(ParticleType<BulletHoleData> type) {

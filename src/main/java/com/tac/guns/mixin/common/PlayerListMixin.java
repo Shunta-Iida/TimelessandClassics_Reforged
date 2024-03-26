@@ -21,11 +21,13 @@ public class PlayerListMixin {
     private void onReload(CallbackInfo ci) {
         NetworkGunManager manager = NetworkGunManager.get();
         if (manager != null) {
-            PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(), new MessageUpdateGuns());
+            PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(),
+                    new MessageUpdateGuns());
         }
         NetworkRigManager manager2 = NetworkRigManager.get();
         if (manager2 != null) {
-            PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(), new MessageUpdateRigs());
+            PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(),
+                    new MessageUpdateRigs());
         }
     }
 }

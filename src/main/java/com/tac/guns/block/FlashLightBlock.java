@@ -1,6 +1,7 @@
 package com.tac.guns.block;
 
 import com.tac.guns.tileentity.FlashLightSource;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.AirBlock;
@@ -15,9 +16,10 @@ public class FlashLightBlock extends AirBlock implements EntityBlock {
     public static final Material flashLightBlock;
 
     public FlashLightBlock() {
-        super(Properties.of(flashLightBlock).noCollission().noDrops().air().instabreak().lightLevel((p_235470_0_) -> {
-            return 15;
-        }));
+        super(Properties.of(flashLightBlock).noCollission().noDrops().air().instabreak()
+                .lightLevel((p_235470_0_) -> {
+                    return 15;
+                }));
     }
 
     public int getLightValue(BlockState state, BlockGetter world, BlockPos pos) {

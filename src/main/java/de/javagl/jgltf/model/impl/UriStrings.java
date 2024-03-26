@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.impl;
 
@@ -53,8 +45,7 @@ public class UriStrings {
      * @param existingUriStrings The existing URI strings
      * @return The new URI string
      */
-    public static String createBufferUriString(
-            Collection<? extends String> existingUriStrings) {
+    public static String createBufferUriString(Collection<? extends String> existingUriStrings) {
         int counter = 0;
         while (true) {
             String uri = "buffer" + counter + "." + "bin";
@@ -91,8 +82,7 @@ public class UriStrings {
      * @param imageModel The {@link ImageModel}
      * @return The file extension
      */
-    private static String determineImageFileNameExtension(
-            ImageModel imageModel) {
+    private static String determineImageFileNameExtension(ImageModel imageModel) {
         // Try to figure out the MIME type
         String mimeTypeString = imageModel.getMimeType();
         if (mimeTypeString == null) {
@@ -102,8 +92,8 @@ public class UriStrings {
 
         // Try to figure out the extension based on the MIME type
         if (mimeTypeString != null) {
-            String extensionWithoutDot = MimeTypes.imageFileNameExtensionForMimeTypeString(
-                    mimeTypeString);
+            String extensionWithoutDot =
+                    MimeTypes.imageFileNameExtensionForMimeTypeString(mimeTypeString);
             if (extensionWithoutDot != null) {
                 return extensionWithoutDot;
             }
@@ -139,8 +129,7 @@ public class UriStrings {
      * @param shaderModel The {@link ShaderModel}
      * @return The file extension
      */
-    private static String determineShaderFileNameExtension(
-            ShaderModel shaderModel) {
+    private static String determineShaderFileNameExtension(ShaderModel shaderModel) {
         if (shaderModel.getShaderType() == ShaderType.VERTEX_SHADER) {
             return "vert";
         }

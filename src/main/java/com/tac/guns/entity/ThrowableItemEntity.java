@@ -22,7 +22,8 @@ import net.minecraftforge.network.NetworkHooks;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public abstract class ThrowableItemEntity extends ThrowableProjectile implements IEntityAdditionalSpawnData {
+public abstract class ThrowableItemEntity extends ThrowableProjectile
+        implements IEntityAdditionalSpawnData {
     private ItemStack item = ItemStack.EMPTY;
     private boolean shouldBounce;
     private float gravityVelocity = 0.03F;
@@ -33,16 +34,18 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
      */
     private int maxLife = 20 * 10;
 
-    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level worldIn) {
+    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType,
+            Level worldIn) {
         super(entityType, worldIn);
     }
 
-    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world, LivingEntity player) {
+    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world,
+            LivingEntity player) {
         super(entityType, player, world);
     }
 
-    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world, double x, double y,
-            double z) {
+    public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world,
+            double x, double y, double z) {
         super(entityType, x, y, z, world);
     }
 
@@ -80,8 +83,7 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
         }
     }
 
-    public void onDeath() {
-    }
+    public void onDeath() {}
 
     @Override
     protected void onHit(HitResult result) {
@@ -91,7 +93,8 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
                 if (this.shouldBounce) {
                     BlockPos resultPos = blockResult.getBlockPos();
                     BlockState state = this.level.getBlockState(resultPos);
-                    SoundEvent event = state.getBlock().getSoundType(state, this.level, resultPos, this).getStepSound();
+                    SoundEvent event = state.getBlock()
+                            .getSoundType(state, this.level, resultPos, this).getStepSound();
                     double speed = this.getDeltaMovement().length();
                     if (speed > 0.1) {
                         this.level.playSound(null, result.getLocation().x, result.getLocation().y,
@@ -100,16 +103,19 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile implements
                     Direction direction = blockResult.getDirection();
                     switch (direction.getAxis()) {
                         case X:
-                            this.setDeltaMovement(this.getDeltaMovement().multiply(-0.5, 0.75, 0.75));
+                            this.setDeltaMovement(
+                                    this.getDeltaMovement().multiply(-0.5, 0.75, 0.75));
                             break;
                         case Y:
-                            this.setDeltaMovement(this.getDeltaMovement().multiply(0.75, -0.25, 0.75));
+                            this.setDeltaMovement(
+                                    this.getDeltaMovement().multiply(0.75, -0.25, 0.75));
                             if (this.getDeltaMovement().y() < this.getGravity()) {
                                 this.setDeltaMovement(this.getDeltaMovement().multiply(1, 0, 1));
                             }
                             break;
                         case Z:
-                            this.setDeltaMovement(this.getDeltaMovement().multiply(0.75, 0.75, -0.5));
+                            this.setDeltaMovement(
+                                    this.getDeltaMovement().multiply(0.75, 0.75, -0.5));
                             break;
                     }
                 } else {

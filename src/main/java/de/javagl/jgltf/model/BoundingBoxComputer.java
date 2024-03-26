@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model;
 
@@ -80,8 +72,8 @@ class BoundingBoxComputer {
      * @param boundingBox The optional bounding box that will store the result
      * @return The result
      */
-    private BoundingBox computeSceneBoundingBox(
-            SceneModel sceneModel, float transform[], BoundingBox boundingBox) {
+    private BoundingBox computeSceneBoundingBox(SceneModel sceneModel, float transform[],
+            BoundingBox boundingBox) {
         BoundingBox localResult = boundingBox;
         if (localResult == null) {
             localResult = new BoundingBox();
@@ -105,8 +97,8 @@ class BoundingBoxComputer {
      * @param boundingBox     The optional bounding box that will store the result
      * @return The result
      */
-    private BoundingBox computeNodeBoundingBox(
-            NodeModel nodeModel, float parentTransform[], BoundingBox boundingBox) {
+    private BoundingBox computeNodeBoundingBox(NodeModel nodeModel, float parentTransform[],
+            BoundingBox boundingBox) {
         BoundingBox result = boundingBox;
         if (result == null) {
             result = new BoundingBox();
@@ -118,8 +110,7 @@ class BoundingBoxComputer {
 
         List<MeshModel> meshModels = nodeModel.getMeshModels();
         for (MeshModel meshModel : meshModels) {
-            BoundingBox meshBoundingBox = computeMeshBoundingBox(
-                    meshModel, transform, result);
+            BoundingBox meshBoundingBox = computeMeshBoundingBox(meshModel, transform, result);
             result.combine(meshBoundingBox);
         }
 
@@ -142,8 +133,8 @@ class BoundingBoxComputer {
      * @param boundingBox The optional bounding box that will store the result
      * @return The result
      */
-    private BoundingBox computeMeshBoundingBox(
-            MeshModel meshModel, float transform[], BoundingBox boundingBox) {
+    private BoundingBox computeMeshBoundingBox(MeshModel meshModel, float transform[],
+            BoundingBox boundingBox) {
         BoundingBox result = boundingBox;
         if (result == null) {
             result = new BoundingBox();
@@ -151,7 +142,8 @@ class BoundingBoxComputer {
 
         List<MeshPrimitiveModel> primitives = meshModel.getMeshPrimitiveModels();
         for (MeshPrimitiveModel meshPrimitiveModel : primitives) {
-            BoundingBox meshPrimitiveBoundingBox = computeBoundingBox(meshPrimitiveModel, transform);
+            BoundingBox meshPrimitiveBoundingBox =
+                    computeBoundingBox(meshPrimitiveModel, transform);
             if (meshPrimitiveBoundingBox != null) {
                 result.combine(meshPrimitiveBoundingBox);
             }
@@ -174,8 +166,8 @@ class BoundingBoxComputer {
      *         then a warning will be printed and <code>null</code> will be
      *         returned.
      */
-    private BoundingBox computeBoundingBox(
-            MeshPrimitiveModel meshPrimitiveModel, float transform[]) {
+    private BoundingBox computeBoundingBox(MeshPrimitiveModel meshPrimitiveModel,
+            float transform[]) {
         Map<String, AccessorModel> attributes = meshPrimitiveModel.getAttributes();
         String positionsAttributeName = "POSITION";
         AccessorModel accessorModel = attributes.get(positionsAttributeName);
@@ -186,17 +178,17 @@ class BoundingBoxComputer {
         ElementType accessorType = accessorModel.getElementType();
         int numComponents = accessorType.getNumComponents();
         if (numComponents < 3) {
-            logger.warning("Mesh primitive " + positionsAttributeName +
-                    " attribute refers to an accessor with type " + accessorType +
-                    " - expected \"VEC3\" or \"VEC4\"");
+            logger.warning("Mesh primitive " + positionsAttributeName
+                    + " attribute refers to an accessor with type " + accessorType
+                    + " - expected \"VEC3\" or \"VEC4\"");
             return null;
         }
         Class<?> componentDataType = accessorModel.getComponentDataType();
         if (!componentDataType.equals(float.class)) {
-            logger.warning("Mesh primitive " + positionsAttributeName +
-                    " attribute refers to an accessor with component type " +
-                    GltfConstants.stringFor(accessorModel.getComponentType()) +
-                    " - expected GL_FLOAT");
+            logger.warning("Mesh primitive " + positionsAttributeName
+                    + " attribute refers to an accessor with component type "
+                    + GltfConstants.stringFor(accessorModel.getComponentType())
+                    + " - expected GL_FLOAT");
         }
 
         AccessorData accessorData = accessorModel.getAccessorData();
@@ -218,10 +210,7 @@ class BoundingBoxComputer {
             if (transform != null) {
                 MathUtils.transformPoint3D(transform, point, transformedPoint);
             }
-            boundingBox.combine(
-                    transformedPoint[0],
-                    transformedPoint[1],
-                    transformedPoint[2]);
+            boundingBox.combine(transformedPoint[0], transformedPoint[1], transformedPoint[2]);
         }
         return boundingBox;
     }

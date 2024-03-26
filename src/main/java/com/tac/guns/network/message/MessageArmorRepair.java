@@ -17,28 +17,27 @@ import org.apache.logging.log4j.Level;
 import java.util.function.Supplier;
 
 public class MessageArmorRepair extends PlayMessage<MessageArmorRepair> {
-	public MessageArmorRepair() {
-	}
+    public MessageArmorRepair() {}
 
-	@Override
-	public void encode(MessageArmorRepair messageColorBench, FriendlyByteBuf buffer) {
-	}
+    @Override
+    public void encode(MessageArmorRepair messageColorBench, FriendlyByteBuf buffer) {}
 
-	@Override
-	public MessageArmorRepair decode(FriendlyByteBuf buffer) {
-		return new MessageArmorRepair();
-	}
+    @Override
+    public MessageArmorRepair decode(FriendlyByteBuf buffer) {
+        return new MessageArmorRepair();
+    }
 
-	@Override
-	public void handle(MessageArmorRepair messageArmorRepair, Supplier<NetworkEvent.Context> supplier) {
-		supplier.get().enqueueWork(() -> {
-			ServerPlayer player = supplier.get().getSender();
-			if (player != null && !player.isSpectator()) {
-				ServerPlayHandler.handleArmorFixApplication(player);
-				SyncedEntityData.instance().set(player, ModSyncedDataKeys.QREPAIRING, false);
-			}
-		});
+    @Override
+    public void handle(MessageArmorRepair messageArmorRepair,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(() -> {
+            ServerPlayer player = supplier.get().getSender();
+            if (player != null && !player.isSpectator()) {
+                ServerPlayHandler.handleArmorFixApplication(player);
+                SyncedEntityData.instance().set(player, ModSyncedDataKeys.QREPAIRING, false);
+            }
+        });
 
-		supplier.get().setPacketHandled(true);
-	}
+        supplier.get().setPacketHandled(true);
+    }
 }

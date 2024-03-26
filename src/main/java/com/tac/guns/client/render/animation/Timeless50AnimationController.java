@@ -23,17 +23,18 @@ public class Timeless50AnimationController extends PistalAnimationController {
 
     public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
             new ResourceLocation("tac", "animations/timeless_50_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/timeless_50_draw.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/timeless_50_draw.gltf"));
     public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
             new ResourceLocation("tac", "animations/timeless_50_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/timeless_50_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/timeless_50_inspect.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/timeless_50_static.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/timeless_50_inspect.gltf"));
     public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
             new ResourceLocation("tac", "animations/timeless_50_inspect_empty.gltf"));
-    private static final Timeless50AnimationController instance = new Timeless50AnimationController();
+    private static final Timeless50AnimationController instance =
+            new Timeless50AnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {

@@ -1,7 +1,13 @@
 package com.tac.guns.block;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.tac.guns.tileentity.WorkbenchTileEntity;
 import com.tac.guns.util.VoxelShapeHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,11 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -44,14 +45,16 @@ public class WorkbenchBlock extends RotatedObjectBlock implements EntityBlock {
         shapes.add(Block.box(0.5, 0, 0.5, 15.5, 13, 15.5));
         shapes.add(Block.box(0, 13, 0, 16, 15, 16));
         shapes.add(VoxelShapeHelper.getRotatedShapes(
-                VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction.get2DDataValue()]);
+                VoxelShapeHelper.rotate(Block.box(0, 15, 0, 16, 16, 2), Direction.SOUTH))[direction
+                        .get2DDataValue()]);
         VoxelShape shape = VoxelShapeHelper.combineAll(shapes);
         SHAPES.put(state, shape);
         return shape;
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos,
+            CollisionContext context) {
         return this.getShape(state);
     }
 
@@ -61,8 +64,8 @@ public class WorkbenchBlock extends RotatedObjectBlock implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand,
-            BlockHitResult result) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity,
+            InteractionHand hand, BlockHitResult result) {
         if (!world.isClientSide()) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof MenuProvider) {

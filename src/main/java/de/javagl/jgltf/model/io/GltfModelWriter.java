@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -62,8 +54,7 @@ public class GltfModelWriter {
      * @param fileName  The file name
      * @throws IOException If an IO error occurs
      */
-    public void write(GltfModel gltfModel, String fileName)
-            throws IOException {
+    public void write(GltfModel gltfModel, String fileName) throws IOException {
         write(gltfModel, new File(fileName));
     }
 
@@ -78,8 +69,7 @@ public class GltfModelWriter {
      * @param file      The file
      * @throws IOException If an IO error occurs
      */
-    public void write(GltfModel gltfModel, File file)
-            throws IOException {
+    public void write(GltfModel gltfModel, File file) throws IOException {
         if (gltfModel instanceof GltfModelV1) {
             GltfModelV1 gltfModelV1 = (GltfModelV1) gltfModel;
             GltfModelWriterV1 gltfModelWriterV1 = new GltfModelWriterV1();
@@ -101,8 +91,7 @@ public class GltfModelWriter {
      * @param file      The file
      * @throws IOException If an IO error occurs
      */
-    public void writeBinary(GltfModel gltfModel, File file)
-            throws IOException {
+    public void writeBinary(GltfModel gltfModel, File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             writeBinary(gltfModel, outputStream);
         }
@@ -117,8 +106,7 @@ public class GltfModelWriter {
      * @param outputStream The output stream
      * @throws IOException If an IO error occurs
      */
-    public void writeBinary(GltfModel gltfModel, OutputStream outputStream)
-            throws IOException {
+    public void writeBinary(GltfModel gltfModel, OutputStream outputStream) throws IOException {
         if (gltfModel instanceof GltfModelV1) {
             GltfModelV1 gltfModelV1 = (GltfModelV1) gltfModel;
             GltfModelWriterV1 gltfModelWriterV1 = new GltfModelWriterV1();
@@ -140,8 +128,7 @@ public class GltfModelWriter {
      * @param file      The file
      * @throws IOException If an IO error occurs
      */
-    public void writeEmbedded(GltfModel gltfModel, File file)
-            throws IOException {
+    public void writeEmbedded(GltfModel gltfModel, File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             writeEmbedded(gltfModel, outputStream);
         }
@@ -156,8 +143,7 @@ public class GltfModelWriter {
      * @param outputStream The output stream
      * @throws IOException If an IO error occurs
      */
-    public void writeEmbedded(GltfModel gltfModel, OutputStream outputStream)
-            throws IOException {
+    public void writeEmbedded(GltfModel gltfModel, OutputStream outputStream) throws IOException {
         if (gltfModel instanceof GltfModelV1) {
             GltfModelV1 gltfModelV1 = (GltfModelV1) gltfModel;
             GltfModelWriterV1 gltfModelWriterV1 = new GltfModelWriterV1();

@@ -10,8 +10,7 @@ import java.util.function.Supplier;
 public class MessageStunGrenade extends PlayMessage<MessageStunGrenade> {
     private double x, y, z;
 
-    public MessageStunGrenade() {
-    }
+    public MessageStunGrenade() {}
 
     public MessageStunGrenade(double x, double y, double z) {
         this.z = z;
@@ -28,12 +27,15 @@ public class MessageStunGrenade extends PlayMessage<MessageStunGrenade> {
 
     @Override
     public MessageStunGrenade decode(FriendlyByteBuf buffer) {
-        return new MessageStunGrenade(buffer.readDouble(), buffer.readDouble(), buffer.readDouble());
+        return new MessageStunGrenade(buffer.readDouble(), buffer.readDouble(),
+                buffer.readDouble());
     }
 
     @Override
-    public void handle(MessageStunGrenade messageStunGrenade, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleExplosionStunGrenade(messageStunGrenade));
+    public void handle(MessageStunGrenade messageStunGrenade,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(
+                () -> ClientPlayHandler.handleExplosionStunGrenade(messageStunGrenade));
         supplier.get().setPacketHandled(true);
     }
 

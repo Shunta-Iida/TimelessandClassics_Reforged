@@ -1,12 +1,12 @@
 package com.tac.guns.util;
 
-//import org.apache.commons.beanutils.PropertyUtils;
+// import org.apache.commons.beanutils.PropertyUtils;
 
 import com.tac.guns.GunMod;
-//import net.optifine.shaders.DrawBuffers;
-//import net.optifine.shaders.Program;
-//import net.optifine.shaders.Shaders;
-//import net.optifine.shaders.ShadersFramebuffer;
+// import net.optifine.shaders.DrawBuffers;
+// import net.optifine.shaders.Program;
+// import net.optifine.shaders.Shaders;
+// import net.optifine.shaders.ShadersFramebuffer;
 import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;

@@ -17,9 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(LevelRenderer.class)
 public class WorldRendererMixin {
-    @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;checkPoseStack(Lcom/mojang/blaze3d/vertex/PoseStack;)V", ordinal = 0))
-    private void renderBullets(PoseStack p_109600_, float p_109601_, long p_109602_, boolean p_109603_,
-            Camera p_109604_, GameRenderer p_109605_, LightTexture p_109606_, Matrix4f p_109607_, CallbackInfo ci) {
+    @Inject(method = "renderLevel", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/LevelRenderer;checkPoseStack(Lcom/mojang/blaze3d/vertex/PoseStack;)V",
+            ordinal = 0))
+    private void renderBullets(PoseStack p_109600_, float p_109601_, long p_109602_,
+            boolean p_109603_, Camera p_109604_, GameRenderer p_109605_, LightTexture p_109606_,
+            Matrix4f p_109607_, CallbackInfo ci) {
         // TODO: FIX TRAILS AND ADJUST FOR BULLET SPEED
         if (BulletTrailRenderingHandler.get() != null)
             BulletTrailRenderingHandler.get().render(p_109600_, p_109601_);

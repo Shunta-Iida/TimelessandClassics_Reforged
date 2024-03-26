@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -26,8 +25,7 @@ import java.util.List;
  * Auto-generated for node.schema.json
  * 
  */
-public class Node
-        extends GlTFChildOfRootProperty {
+public class Node extends GlTFChildOfRootProperty {
 
     /**
      * The index of the camera referenced by this node. (optional)
@@ -299,8 +297,8 @@ public class Node
      * 
      */
     public float[] defaultMatrix() {
-        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-                1.0F };
+        return new float[] {1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F,
+                0.0F, 0.0F, 0.0F, 1.0F};
     }
 
     /**
@@ -390,7 +388,7 @@ public class Node
      * 
      */
     public float[] defaultRotation() {
-        return new float[] { 0.0F, 0.0F, 0.0F, 1.0F };
+        return new float[] {0.0F, 0.0F, 0.0F, 1.0F};
     }
 
     /**
@@ -444,7 +442,7 @@ public class Node
      * 
      */
     public float[] defaultScale() {
-        return new float[] { 1.0F, 1.0F, 1.0F };
+        return new float[] {1.0F, 1.0F, 1.0F};
     }
 
     /**
@@ -496,7 +494,7 @@ public class Node
      * 
      */
     public float[] defaultTranslation() {
-        return new float[] { 0.0F, 0.0F, 0.0F };
+        return new float[] {0.0F, 0.0F, 0.0F};
     }
 
     /**

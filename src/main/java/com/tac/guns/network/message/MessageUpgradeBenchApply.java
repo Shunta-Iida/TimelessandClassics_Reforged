@@ -17,8 +17,7 @@ public class MessageUpgradeBenchApply extends PlayMessage<MessageUpgradeBenchApp
     public BlockPos pos;
     public String reqKey;
 
-    public MessageUpgradeBenchApply() {
-    }
+    public MessageUpgradeBenchApply() {}
 
     public MessageUpgradeBenchApply(BlockPos pos, String reqKey) {
         this.pos = pos;
@@ -38,7 +37,8 @@ public class MessageUpgradeBenchApply extends PlayMessage<MessageUpgradeBenchApp
     }
 
     @Override
-    public void handle(MessageUpgradeBenchApply messageUpgradeBenchApply, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageUpgradeBenchApply messageUpgradeBenchApply,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {

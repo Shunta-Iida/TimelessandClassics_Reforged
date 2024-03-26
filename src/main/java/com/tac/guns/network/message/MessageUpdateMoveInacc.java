@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 public class MessageUpdateMoveInacc extends PlayMessage<MessageUpdateMoveInacc> {
     private float dist = 0;
 
-    public MessageUpdateMoveInacc() {
-    }
+    public MessageUpdateMoveInacc() {}
 
     public MessageUpdateMoveInacc(float dist) {
         this.dist = dist;
@@ -32,7 +31,8 @@ public class MessageUpdateMoveInacc extends PlayMessage<MessageUpdateMoveInacc> 
     }
 
     @Override
-    public void handle(MessageUpdateMoveInacc messageUpdateMoveInacc, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageUpdateMoveInacc messageUpdateMoveInacc,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {

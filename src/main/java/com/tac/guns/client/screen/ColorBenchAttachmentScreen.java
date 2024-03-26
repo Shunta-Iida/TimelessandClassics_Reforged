@@ -20,7 +20,8 @@ import org.lwjgl.opengl.GL11;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ColorBenchAttachmentScreen extends Screen {
-    private static final ResourceLocation GUI_TEXTURES = new ResourceLocation("tac:textures/gui/painter.png");
+    private static final ResourceLocation GUI_TEXTURES =
+            new ResourceLocation("tac:textures/gui/painter.png");
 
     // Color bench data
     private int colorTableSize = 8; // -1 in actual use (0-7 = 8) slots in total
@@ -168,8 +169,9 @@ public class ColorBenchAttachmentScreen extends Screen {
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
             MultiBufferSource.BufferSource buffer = this.minecraft.renderBuffers().bufferSource();
-            GunRenderingHandler.get().renderWeapon(this.minecraft.player, this.minecraft.player.getMainHandItem(),
-                    ItemTransforms.TransformType.GROUND, matrixStack, buffer, 15728880, 0F);
+            GunRenderingHandler.get().renderWeapon(this.minecraft.player,
+                    this.minecraft.player.getMainHandItem(), ItemTransforms.TransformType.GROUND,
+                    matrixStack, buffer, 15728880, 0F);
             buffer.endBatch();
         }
         stack.popPose();

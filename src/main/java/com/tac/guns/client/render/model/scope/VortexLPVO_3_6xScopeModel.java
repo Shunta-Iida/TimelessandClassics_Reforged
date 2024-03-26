@@ -41,16 +41,19 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
             "textures/items/timeless_scopes/hit_marker/razor_lpvo_reticle.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            ItemStack parent, LivingEntity entity, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light,
-            int overlay) {
+    public void render(float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
+            MultiBufferSource renderTypeBuffer, int light, int overlay) {
         matrixStack.pushPose();
 
         matrixStack.translate(0, 0.074, 0);
 
-        if (AimingHandler.get().getNormalisedAdsProgress() < 0.525 || Config.CLIENT.display.scopeDoubleRender.get())
-            RenderUtil.renderModel(LPVO_1_6_FRONT.getModel(), stack, matrixStack, renderTypeBuffer, light, overlay);
-        RenderUtil.renderModel(LPVO_1_6.getModel(), stack, matrixStack, renderTypeBuffer, light, overlay);
+        if (AimingHandler.get().getNormalisedAdsProgress() < 0.525
+                || Config.CLIENT.display.scopeDoubleRender.get())
+            RenderUtil.renderModel(LPVO_1_6_FRONT.getModel(), stack, matrixStack, renderTypeBuffer,
+                    light, overlay);
+        RenderUtil.renderModel(LPVO_1_6.getModel(), stack, matrixStack, renderTypeBuffer, light,
+                overlay);
 
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
@@ -73,12 +76,13 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
             // float crop = scopeItem.getProperties().getAdditionalZoom().getDrCropZoom() +
             // scopeData.getDrZoomCropMod();
             float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom() + scopeData.getDrZoomCropMod();
+                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                            + scopeData.getDrZoomCropMod();
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
 
-            float texU = ((window.getScreenWidth() - window.getScreenHeight() + window.getScreenHeight() * crop * 2.0F)
-                    / 2.0F) / window.getScreenWidth();
+            float texU = ((window.getScreenWidth() - window.getScreenHeight()
+                    + window.getScreenHeight() * crop * 2.0F) / 2.0F) / window.getScreenWidth();
 
             matrixStack.pushPose();
             {
@@ -120,14 +124,18 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
                     builder = renderTypeBuffer.getBuffer(GunRenderType.getScreen());
-                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F).uv(texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F)
+                            .uv(texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                     builder.vertex(matrix, 0, 0, 0).color(color, color, color, 1.0F).uv(texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F).uv(1.0F - texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F).uv(1.0F - texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                            .endVertex();
+                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
 
                     // RenderSystem.disableTexture();
 
@@ -163,8 +171,8 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
 
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
-                        1);
+                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
 
                 float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
@@ -174,7 +182,8 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
                 alpha = (float) (1F * AimingHandler.get().getNormalisedAdsProgress());
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true);
                 matrixStack.scale(6f, 6f, 6f);
-                matrixStack.translate((-0.00327715 - 0.0063525 + 0.000215) + scopeData.getReticleXMod(),
+                matrixStack.translate(
+                        (-0.00327715 - 0.0063525 + 0.000215) + scopeData.getReticleXMod(),
                         (-0.003385 - 0.00847125 + 0.0008 - 0.000575) + scopeData.getReticleYMod(),
                         (0.001) + scopeData.getReticleZMod());
                 builder = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
@@ -188,34 +197,36 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
                                                                    // 0.94;//aimed ? 1.0 -
                                                                    // AimingHandler.get().getNormalisedRepairProgress()
                                                                    // : ;
-                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack, Minecraft.getInstance().player,
-                        partialTicks, -0.045f);
+                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack,
+                        Minecraft.getInstance().player, partialTicks, -0.045f);
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true, 0.085f);
                 GunRenderingHandler.get().applyNoiseMovementTransform(matrixStack, -0.11f);
                 GunRenderingHandler.get().applyJumpingTransforms(matrixStack, partialTicks, -0.11f);
 
                 float recoilReversedMod = 0.2f;
                 matrixStack.translate(0, 0, -0.35);
-                matrixStack.mulPose(
-                        Vector3f.YP.rotationDegrees(GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.4f));
-                matrixStack.mulPose(
-                        Vector3f.ZN.rotationDegrees(GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.5f));
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(
-                        (GunRenderingHandler.get().recoilLift * 0.02f * GunRenderingHandler.get().recoilReduction)
-                                * 0.65F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(
+                        GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.4f));
+                matrixStack.mulPose(Vector3f.ZN.rotationDegrees(
+                        GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.5f));
+                matrixStack
+                        .mulPose(Vector3f.XP.rotationDegrees((GunRenderingHandler.get().recoilLift
+                                * 0.02f * GunRenderingHandler.get().recoilReduction) * 0.65F));
                 matrixStack.translate(0, 0, 0.35);
 
-                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
-                        .uv(0.0F, 0.9375F).overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
-                        .endVertex();
-                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F).overlayCoords(overlay)
+                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0)
+                        .color(red, green, blue, alpha).uv(0.0F, 0.9375F).overlayCoords(overlay)
                         .uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0).color(red, green, blue, alpha)
-                        .uv(0.9375F, 0.0F).overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F)
+                        .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
                         .endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale), 0)
-                        .color(red, green, blue, alpha).uv(0.9375F, 0.9375F).overlayCoords(overlay).uv2(15728880)
-                        .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0)
+                        .color(red, green, blue, alpha).uv(0.9375F, 0.0F).overlayCoords(overlay)
+                        .uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale),
+                        0).color(red, green, blue, alpha).uv(0.9375F, 0.9375F)
+                        .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                        .endVertex();
 
             }
             matrixStack.popPose();

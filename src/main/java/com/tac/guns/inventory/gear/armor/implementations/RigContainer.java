@@ -19,8 +19,8 @@ public class RigContainer extends AbstractContainerMenu implements IRigContainer
         super(ModContainers.ARMOR_RIG.get(), windowId); // Swap per row count
         this.rows = rows;
 
-        RigSlotsHandler itemHandler = (RigSlotsHandler) item.getCapability(ArmorRigCapabilityProvider.capability)
-                .resolve().get();
+        RigSlotsHandler itemHandler = (RigSlotsHandler) item
+                .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
         int i = (this.getNumRows() - 4) * 18;
 
         for (int j = 0; j < this.getNumRows(); ++j) {
@@ -89,7 +89,8 @@ public class RigContainer extends AbstractContainerMenu implements IRigContainer
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index < this.getNumRows() * 9) {
-                if (!this.moveItemStackTo(itemstack1, this.getNumRows() * 9, this.slots.size(), true)) {
+                if (!this.moveItemStackTo(itemstack1, this.getNumRows() * 9, this.slots.size(),
+                        true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (!this.moveItemStackTo(itemstack1, 0, this.getNumRows() * 9, false)) {

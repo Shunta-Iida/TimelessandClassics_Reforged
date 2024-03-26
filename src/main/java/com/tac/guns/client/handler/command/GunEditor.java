@@ -36,8 +36,7 @@ public class GunEditor {
         return instance;
     }
 
-    private GunEditor() {
-    }
+    private GunEditor() {}
 
     private String previousWeaponTag = "";
     private TaCWeaponDevModes prevMode;
@@ -76,7 +75,8 @@ public class GunEditor {
         else if (this.prevMode != this.mode && this.resetMode) {
             this.resetMode = false;
             resetData();
-            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()), gunItem.getGun().copy());
+            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
+                    gunItem.getGun().copy());
             this.prevMode = this.mode;
         }
         if (this.previousWeaponTag == "")
@@ -89,7 +89,8 @@ public class GunEditor {
              * ensureData(this.map.get(gunItem.getTranslationKey()),
              * gunItem.getGun().copy());
              */
-            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()), gunItem.getGun().copy());
+            ensureData(getMapItem(gunItem.getDescriptionId(), gunItem.getGun()),
+                    gunItem.getGun().copy());
         }
     }
 
@@ -238,111 +239,115 @@ public class GunEditor {
                 stepModifier *= 10;
             if (isControlDown)
                 stepModifier /= 10;
-            player.displayClientMessage(
-                    new TranslatableComponent("VerticalRecoilAngle: " + gunTmp.getGeneral().getRecoilAngle()
-                            + " | HorizontalRecoilAngle: " + gunTmp.getGeneral().getHorizontalRecoilAngle()
-                            + " | RecoilKick: " + gunTmp.getGeneral().getRecoilKick()),
-                    true);
+            player.displayClientMessage(new TranslatableComponent("VerticalRecoilAngle: "
+                    + gunTmp.getGeneral().getRecoilAngle() + " | HorizontalRecoilAngle: "
+                    + gunTmp.getGeneral().getHorizontalRecoilAngle() + " | RecoilKick: "
+                    + gunTmp.getGeneral().getRecoilKick()), true);
             if (isLeft) {
                 this.horizontalRecoilAngleMod += 0.025 * stepModifier;
                 player.displayClientMessage(new TranslatableComponent(
                         "HorizontalRecoilAngle: " + gunTmp.getGeneral().getHorizontalRecoilAngle())
-                        .withStyle(ChatFormatting.GREEN), true);
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isRight) {
                 this.horizontalRecoilAngleMod -= 0.025 * stepModifier;
                 player.displayClientMessage(new TranslatableComponent(
                         "HorizontalRecoilAngle: " + gunTmp.getGeneral().getHorizontalRecoilAngle())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             } else if (isUp && isAltDown) {
                 this.recoilKickMod += 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilKick: " + gunTmp.getGeneral().getRecoilKick())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilKick: " + gunTmp.getGeneral().getRecoilKick())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown && isAltDown) {
                 this.recoilKickMod -= 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilKick: " + gunTmp.getGeneral().getRecoilKick())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilKick: " + gunTmp.getGeneral().getRecoilKick())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             } else if (isUp) {
                 this.recoilAngleMod += 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("VerticalRecoilAngle: " + gunTmp.getGeneral().getRecoilAngle())
+                player.displayClientMessage(new TranslatableComponent(
+                        "VerticalRecoilAngle: " + gunTmp.getGeneral().getRecoilAngle())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.recoilAngleMod -= 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("VerticalRecoilAngle: " + gunTmp.getGeneral().getRecoilAngle())
+                player.displayClientMessage(new TranslatableComponent(
+                        "VerticalRecoilAngle: " + gunTmp.getGeneral().getRecoilAngle())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.L.isDown()) {
             if (isShiftDown)
                 stepModifier *= 5;
-            player.displayClientMessage(
-                    new TranslatableComponent("weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset()
+            player.displayClientMessage(new TranslatableComponent(
+                    "weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset()
                             + " | RecoilDuration: " + gunTmp.getGeneral().getRecoilDuration()),
                     true);
             if (isLeft) {
                 this.weaponRecoilDurationMod += 0.0025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset())
+                player.displayClientMessage(new TranslatableComponent(
+                        "weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isRight) {
                 this.weaponRecoilDurationMod -= 0.0025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset())
+                player.displayClientMessage(new TranslatableComponent(
+                        "weaponRecoilOffset: " + gunTmp.getGeneral().getWeaponRecoilOffset())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             } else if (isUp) {
                 this.recoilDurationMod += 0.0025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilDuration: " + gunTmp.getGeneral().getRecoilDuration())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilDuration: " + gunTmp.getGeneral().getRecoilDuration())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.recoilDurationMod -= 0.0025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilDuration: " + gunTmp.getGeneral().getRecoilDuration())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilDuration: " + gunTmp.getGeneral().getRecoilDuration())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.O.isDown()) {
             if (isShiftDown)
                 stepModifier *= 5;
-            player.displayClientMessage(
-                    new TranslatableComponent("CameraRecoilModifier: " + gunTmp.getGeneral().getCameraRecoilModifier()),
+            player.displayClientMessage(new TranslatableComponent(
+                    "CameraRecoilModifier: " + gunTmp.getGeneral().getCameraRecoilModifier()),
                     true);
             if (isUp) {
                 this.cameraRecoilModifierMod += 0.0025 * stepModifier;
                 player.displayClientMessage(new TranslatableComponent(
                         "CameraRecoilModifier: " + gunTmp.getGeneral().getCameraRecoilModifier())
-                        .withStyle(ChatFormatting.GREEN), true);
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.cameraRecoilModifierMod -= 0.0025 * stepModifier;
                 player.displayClientMessage(new TranslatableComponent(
                         "CameraRecoilModifier: " + gunTmp.getGeneral().getCameraRecoilModifier())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         } else if (Keys.K.isDown()) {
             if (isShiftDown)
                 stepModifier *= 5;
             player.displayClientMessage(
-                    new TranslatableComponent("RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction()),
+                    new TranslatableComponent(
+                            "RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction()),
                     true);
             if (isUp) {
                 this.recoilAdsReductionMod += 0.001 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.recoilAdsReductionMod -= 0.001 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction())
+                player.displayClientMessage(new TranslatableComponent(
+                        "RecoilAdsReduction: " + gunTmp.getGeneral().getRecoilAdsReduction())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
@@ -351,18 +356,18 @@ public class GunEditor {
                 stepModifier *= 10;
             if (isControlDown)
                 stepModifier /= 10;
-            player.displayClientMessage(
-                    new TranslatableComponent("Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread()), true);
             if (isUp) {
                 this.spreadMod += 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.spreadMod -= 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Inaccuracy in Degrees: " + gunTmp.getGeneral().getSpread())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
@@ -371,58 +376,66 @@ public class GunEditor {
                 stepModifier *= 10;
             if (isControlDown)
                 stepModifier /= 10;
-            player.displayClientMessage(
-                    new TranslatableComponent("Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo()), true);
             if (isUp) {
                 this.weightKiloMod += 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.weightKiloMod -= 0.025 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Weight in Kilograms: " + gunTmp.getGeneral().getWeightKilo())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.J.isDown()) {
-            player.displayClientMessage(new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate()
-                    + " | Burst Rate in Ticks:: " + gunTmp.getGeneral().getBurstRate()), true);
+            player.displayClientMessage(
+                    new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate()
+                            + " | Burst Rate in Ticks:: " + gunTmp.getGeneral().getBurstRate()),
+                    true);
             if (isLeft) {
                 this.burstRateMod += 0.5 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Burst Rate in Ticks: " + gunTmp.getGeneral().getBurstRate())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Burst Rate in Ticks: " + gunTmp.getGeneral().getBurstRate())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isRight) {
                 this.burstRateMod -= 0.5 * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Burst Rate in Ticks: " + gunTmp.getGeneral().getBurstRate())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Burst Rate in Ticks: " + gunTmp.getGeneral().getBurstRate())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             } else if (isUp) {
                 this.rateMod += 0.5;
-                player.displayClientMessage(new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate())
-                        .withStyle(ChatFormatting.GREEN), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate())
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.rateMod -= 0.5;
-                player.displayClientMessage(new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("Rate in Ticks: " + gunTmp.getGeneral().getRate())
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         } else if (Keys.N.isDown()) {
             player.displayClientMessage(
-                    new TranslatableComponent("Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount()), true);
+                    new TranslatableComponent(
+                            "Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount()),
+                    true);
             if (isUp) {
                 this.projectileAmountMod += 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.projectileAmountMod -= 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Projectile Amount: " + gunTmp.getGeneral().getProjectileAmount())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
@@ -445,20 +458,25 @@ public class GunEditor {
         gun.getCompound("General").remove("Spread");
         gun.getCompound("General").remove("WeightKilo");
         gun.getCompound("General").putDouble("Rate", gunItem.getGun().getGeneral().getRate());
-        gun.getCompound("General").putDouble("RecoilAngle", gunItem.getGun().getGeneral().getRecoilAngle());
-        gun.getCompound("General").putDouble("RecoilKick", gunItem.getGun().getGeneral().getRecoilKick());
+        gun.getCompound("General").putDouble("RecoilAngle",
+                gunItem.getGun().getGeneral().getRecoilAngle());
+        gun.getCompound("General").putDouble("RecoilKick",
+                gunItem.getGun().getGeneral().getRecoilKick());
         gun.getCompound("General").putDouble("HorizontalRecoilAngle",
                 gunItem.getGun().getGeneral().getHorizontalRecoilAngle());
         gun.getCompound("General").putDouble("CameraRecoilModifier",
                 gunItem.getGun().getGeneral().getCameraRecoilModifier());
-        gun.getCompound("General").putDouble("RecoilDurationOffset", gunItem.getGun().getGeneral().getRecoilDuration());
+        gun.getCompound("General").putDouble("RecoilDurationOffset",
+                gunItem.getGun().getGeneral().getRecoilDuration());
         gun.getCompound("General").putDouble("weaponRecoilOffset",
                 gunItem.getGun().getGeneral().getWeaponRecoilOffset());
         gun.getCompound("General").putDouble("RecoilAdsReduction",
                 gunItem.getGun().getGeneral().getRecoilAdsReduction());
-        gun.getCompound("General").putDouble("ProjectileAmount", gunItem.getGun().getGeneral().getProjectileAmount());
+        gun.getCompound("General").putDouble("ProjectileAmount",
+                gunItem.getGun().getGeneral().getProjectileAmount());
         gun.getCompound("General").putDouble("Spread", gunItem.getGun().getGeneral().getSpread());
-        gun.getCompound("General").putDouble("WeightKilo", gunItem.getGun().getGeneral().getWeightKilo());
+        gun.getCompound("General").putDouble("WeightKilo",
+                gunItem.getGun().getGeneral().getWeightKilo());
         /*
          * gunItem.getGun().getGeneral().deserializeNBT(gun);
          * this.map.put(gunItem.getTranslationKey(), gunItem.getGun());
@@ -540,94 +558,99 @@ public class GunEditor {
                 stepModifier *= 10;
             if (isControlDown)
                 stepModifier /= 10;
-            player.displayClientMessage(new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage()),
+            player.displayClientMessage(
+                    new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage()),
                     true);
             if (isUp) {
                 this.damageMod += 0.025f * stepModifier;
-                player.displayClientMessage(new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage())
-                        .withStyle(ChatFormatting.GREEN), true);
-                this.criticalMod += 0.025f * stepModifier;
                 player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCritical())
+                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage())
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
+                this.criticalMod += 0.025f * stepModifier;
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCritical())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.armorIgnoreMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunArmorIgnore())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunArmorIgnore())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.criticalDamageMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCriticalDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCriticalDamage())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.headDamageMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunHeadDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunHeadDamage())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.closeDamageMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCloseDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCloseDamage())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.decayStartMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunDecayStart())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunDecayStart())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.minDecayMultiplierMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunMinDecayMultiplier())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunMinDecayMultiplier())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
                 this.decayEndMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunDecayEnd())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunDecayEnd())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.damageMod -= 0.025f * stepModifier;
-                player.displayClientMessage(new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage())
-                        .withStyle(ChatFormatting.DARK_RED), true);
-                this.criticalMod -= 0.025f * stepModifier;
                 player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCritical())
+                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getDamage())
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
+                this.criticalMod -= 0.025f * stepModifier;
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCritical())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.armorIgnoreMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunArmorIgnore())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunArmorIgnore())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.criticalDamageMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCriticalDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCriticalDamage())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.headDamageMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunHeadDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunHeadDamage())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.closeDamageMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunCloseDamage())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunCloseDamage())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.decayStartMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunDecayStart())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunDecayStart())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.minDecayMultiplierMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunMinDecayMultiplier())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunMinDecayMultiplier())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
                 this.decayEndMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Damage: " + gunTmp.getProjectile().getGunDecayEnd())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Damage: " + gunTmp.getProjectile().getGunDecayEnd())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
@@ -636,47 +659,52 @@ public class GunEditor {
                 stepModifier *= 10;
             if (isControlDown)
                 stepModifier /= 10;
-            player.displayClientMessage(
-                    new TranslatableComponent("Projectile size: " + gunTmp.getProjectile().getSize()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "Projectile size: " + gunTmp.getProjectile().getSize()), true);
             if (isUp) {
                 this.sizePrjMod += 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Projectile size: " + gunTmp.getProjectile().getSize())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Projectile size: " + gunTmp.getProjectile().getSize())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.sizePrjMod -= 0.025f * stepModifier;
-                player.displayClientMessage(
-                        new TranslatableComponent("Projectile size: " + gunTmp.getProjectile().getSize())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Projectile size: " + gunTmp.getProjectile().getSize())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.O.isDown()) {
             if (isShiftDown)
                 stepModifier *= 10;
-            player.displayClientMessage(new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed()), true);
+            player.displayClientMessage(
+                    new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed()), true);
             if (isUp) {
                 this.speedMod += 0.025 * stepModifier;
-                player.displayClientMessage(new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed())
-                        .withStyle(ChatFormatting.GREEN), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed())
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.speedMod -= 0.025 * stepModifier;
-                player.displayClientMessage(new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("Speed: " + gunTmp.getProjectile().getSpeed())
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         } else if (Keys.K.isDown()) {
-            player.displayClientMessage(
-                    new TranslatableComponent("Ticks bullet Exists for: " + gunTmp.getProjectile().getLife()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "Ticks bullet Exists for: " + gunTmp.getProjectile().getLife()), true);
             if (isUp) {
                 this.lifeMod += 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("Ticks bullet Exists for: " + gunTmp.getProjectile().getLife())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Ticks bullet Exists for: " + gunTmp.getProjectile().getLife())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.lifeMod -= 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("Ticks bullet Exists for: " + gunTmp.getProjectile().getLife())
+                player.displayClientMessage(new TranslatableComponent(
+                        "Ticks bullet Exists for: " + gunTmp.getProjectile().getLife())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
@@ -695,14 +723,19 @@ public class GunEditor {
         gun.getCompound("Projectile").remove("Size");
         gun.getCompound("Projectile").remove("Speed");
         gun.getCompound("Projectile").remove("Life");
-        gun.getCompound("Projectile").putDouble("Damage", gunItem.getGun().getProjectile().getDamage());
-        gun.getCompound("Projectile").putDouble("ArmorIgnore", gunItem.getGun().getProjectile().getGunArmorIgnore());
-        gun.getCompound("Projectile").putDouble("Critical", gunItem.getGun().getProjectile().getGunCritical());
+        gun.getCompound("Projectile").putDouble("Damage",
+                gunItem.getGun().getProjectile().getDamage());
+        gun.getCompound("Projectile").putDouble("ArmorIgnore",
+                gunItem.getGun().getProjectile().getGunArmorIgnore());
+        gun.getCompound("Projectile").putDouble("Critical",
+                gunItem.getGun().getProjectile().getGunCritical());
         gun.getCompound("Projectile").putDouble("CriticalDamage",
                 gunItem.getGun().getProjectile().getGunCriticalDamage());
-        gun.getCompound("Projectile").putDouble("HeadDamage", gunItem.getGun().getProjectile().getGunHeadDamage());
+        gun.getCompound("Projectile").putDouble("HeadDamage",
+                gunItem.getGun().getProjectile().getGunHeadDamage());
         gun.getCompound("Projectile").putDouble("Size", gunItem.getGun().getProjectile().getSize());
-        gun.getCompound("Projectile").putDouble("Speed", gunItem.getGun().getProjectile().getSpeed());
+        gun.getCompound("Projectile").putDouble("Speed",
+                gunItem.getGun().getProjectile().getSpeed());
         gun.getCompound("Projectile").putDouble("Life", gunItem.getGun().getProjectile().getLife());
         /*
          * gunItem.getGun().getGeneral().deserializeNBT(gun);
@@ -744,81 +777,89 @@ public class GunEditor {
         Player player = Minecraft.getInstance().player;
         Gun gunTmp = gunItem.getGun();
         if (Keys.P.isDown()) {
-            player.displayClientMessage(
-                    new TranslatableComponent("ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer()), true);
             if (isUp) {
                 this.reloadMagTimerMod += 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer())
+                player.displayClientMessage(new TranslatableComponent(
+                        "ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.reloadMagTimerMod -= 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer())
+                player.displayClientMessage(new TranslatableComponent(
+                        "ReloadMagTimer: " + gunTmp.getReloads().getReloadMagTimer())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.L.isDown()) {
-            player.displayClientMessage(
-                    new TranslatableComponent(
-                            "AdditionalReloadEmptyMagTimer: " + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer()),
-                    true);
+            player.displayClientMessage(new TranslatableComponent("AdditionalReloadEmptyMagTimer: "
+                    + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer()), true);
             if (isUp) {
                 this.additionalReloadEmptyMagTimerMod += 0.5;
-                player.displayClientMessage(new TranslatableComponent(
-                        "AdditionalReloadEmptyMagTimer: " + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer())
-                        .withStyle(ChatFormatting.GREEN), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("AdditionalReloadEmptyMagTimer: "
+                                + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer())
+                                        .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.additionalReloadEmptyMagTimerMod -= 0.5;
-                player.displayClientMessage(new TranslatableComponent(
-                        "AdditionalReloadEmptyMagTimer: " + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                player.displayClientMessage(
+                        new TranslatableComponent("AdditionalReloadEmptyMagTimer: "
+                                + gunTmp.getReloads().getAdditionalReloadEmptyMagTimer())
+                                        .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         } else if (Keys.O.isDown()) {
-            player.displayClientMessage(
-                    new TranslatableComponent("ReloadAmount: " + gunTmp.getReloads().getReloadAmount()), true);
+            player.displayClientMessage(new TranslatableComponent(
+                    "ReloadAmount: " + gunTmp.getReloads().getReloadAmount()), true);
             if (isUp) {
                 this.reloadAmountMod += 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("ReloadAmount: " + gunTmp.getReloads().getReloadAmount())
+                player.displayClientMessage(new TranslatableComponent(
+                        "ReloadAmount: " + gunTmp.getReloads().getReloadAmount())
                                 .withStyle(ChatFormatting.GREEN),
                         true);
             } else if (isDown) {
                 this.reloadAmountMod -= 0.5;
-                player.displayClientMessage(
-                        new TranslatableComponent("ReloadAmount: " + gunTmp.getReloads().getReloadAmount())
+                player.displayClientMessage(new TranslatableComponent(
+                        "ReloadAmount: " + gunTmp.getReloads().getReloadAmount())
                                 .withStyle(ChatFormatting.DARK_RED),
                         true);
             }
         } else if (Keys.K.isDown()) {
             player.displayClientMessage(
-                    new TranslatableComponent("PreReloadPauseTicks: " + gunTmp.getReloads().getPreReloadPauseTicks()),
+                    new TranslatableComponent(
+                            "PreReloadPauseTicks: " + gunTmp.getReloads().getPreReloadPauseTicks()),
                     true);
             if (isUp) {
                 this.preReloadPauseTicksMod += 0.5;
                 player.displayClientMessage(new TranslatableComponent(
                         "PreReloadPauseTicks: " + gunTmp.getReloads().getPreReloadPauseTicks())
-                        .withStyle(ChatFormatting.GREEN), true);
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.preReloadPauseTicksMod -= 0.5;
                 player.displayClientMessage(new TranslatableComponent(
                         "PreReloadPauseTicks: " + gunTmp.getReloads().getPreReloadPauseTicks())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         } else if (Keys.M.isDown()) {
             player.displayClientMessage(new TranslatableComponent(
-                    "InterReloadPauseTicks: " + gunTmp.getReloads().getinterReloadPauseTicks()), true);
+                    "InterReloadPauseTicks: " + gunTmp.getReloads().getinterReloadPauseTicks()),
+                    true);
             if (isUp) {
                 this.interReloadPauseTicksMod += 0.5;
                 player.displayClientMessage(new TranslatableComponent(
                         "InterReloadPauseTicks: " + gunTmp.getReloads().getinterReloadPauseTicks())
-                        .withStyle(ChatFormatting.GREEN), true);
+                                .withStyle(ChatFormatting.GREEN),
+                        true);
             } else if (isDown) {
                 this.interReloadPauseTicksMod -= 0.5;
                 player.displayClientMessage(new TranslatableComponent(
                         "InterReloadPauseTicks: " + gunTmp.getReloads().getinterReloadPauseTicks())
-                        .withStyle(ChatFormatting.DARK_RED), true);
+                                .withStyle(ChatFormatting.DARK_RED),
+                        true);
             }
         }
         CompoundTag gun = getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to ensure we
@@ -831,8 +872,10 @@ public class GunEditor {
         gun.getCompound("Reloads").remove("AdditionalReloadEmptyMagTimer");
         gun.getCompound("Reloads").remove("ReloadPauseTicks");
         gun.getCompound("Reloads").remove("InterReloadPauseTicks");
-        gun.getCompound("Reloads").putDouble("ReloadSpeed", gunItem.getGun().getReloads().getReloadAmount());
-        gun.getCompound("Reloads").putDouble("ReloadMagTimer", gunItem.getGun().getReloads().getReloadMagTimer());
+        gun.getCompound("Reloads").putDouble("ReloadSpeed",
+                gunItem.getGun().getReloads().getReloadAmount());
+        gun.getCompound("Reloads").putDouble("ReloadMagTimer",
+                gunItem.getGun().getReloads().getReloadMagTimer());
         gun.getCompound("Reloads").putDouble("AdditionalReloadEmptyMagTimer",
                 gunItem.getGun().getReloads().getAdditionalReloadEmptyMagTimer());
         gun.getCompound("Reloads").putDouble("ReloadPauseTicks",
@@ -928,21 +971,25 @@ public class GunEditor {
         else if (isDown)
             this.yMod -= 0.1 * stepModifier;
 
-        CompoundTag gun = this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to
-                                                                                                        // ensure we are
-                                                                                                        // grabbing a
-                                                                                                        // copy of this
-                                                                                                        // data. new
-                                                                                                        // CompoundNBT();//
+        CompoundTag gun =
+                this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).serializeNBT(); // Copy to
+                                                                                                                // ensure we are
+                                                                                                                // grabbing a
+                                                                                                                // copy of this
+                                                                                                                // data. new
+                                                                                                                // CompoundNBT();//
         if (this.mode == TaCWeaponDevModes.flash) // Flash was apparently brought out of Display, I don't wish to break
                                                   // every gun at this point in time.
         {
             gun.getCompound("Display").getCompound(this.mode.tagName).remove("XOffset");
             gun.getCompound("Display").getCompound(this.mode.tagName).remove("YOffset");
             gun.getCompound("Display").getCompound(this.mode.tagName).remove("ZOffset");
-            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("XOffset", this.casedGetX());
-            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("YOffset", this.casedGetY());
-            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("ZOffset", this.casedGetZ());
+            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("XOffset",
+                    this.casedGetX());
+            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("YOffset",
+                    this.casedGetY());
+            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("ZOffset",
+                    this.casedGetZ());
         }
         if (this.mode == TaCWeaponDevModes.zoom) // Flash was apparently brought out of Display, I don't wish to break
                                                  // every gun at this point in time.
@@ -957,29 +1004,35 @@ public class GunEditor {
             // gunItem.getGun()).getModules().getAttachments().getScope().deserializeNBT(gun.getCompound("Modules").getCompound("Zoom"));
         }
         if (this.mode == TaCWeaponDevModes.scope) {
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").remove("XOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").remove("YOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").remove("ZOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").putDouble("XOffset",
-                    this.casedGetX());
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").putDouble("YOffset",
-                    this.casedGetY());
-            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").putDouble("ZOffset",
-                    this.casedGetZ());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .remove("XOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .remove("YOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .remove("ZOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .putDouble("XOffset", this.casedGetX());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .putDouble("YOffset", this.casedGetY());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope")
+                    .putDouble("ZOffset", this.casedGetZ());
             // LOGGER.log(Level.FATAL,
             // gun.getCompound("Modules").getCompound("Attachments").getCompound("Scope").toString());
             // LOGGER.log(Level.FATAL,
             // gun.getCompound("Modules").getCompound("Attachments").toString());
         } else {
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).remove("XOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).remove("YOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).remove("ZOffset");
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).putDouble("XOffset",
-                    this.casedGetX());
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).putDouble("YOffset",
-                    this.casedGetY());
-            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName).putDouble("ZOffset",
-                    this.casedGetZ());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .remove("XOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .remove("YOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .remove("ZOffset");
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .putDouble("XOffset", this.casedGetX());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .putDouble("YOffset", this.casedGetY());
+            gun.getCompound("Modules").getCompound("Attachments").getCompound(this.mode.tagName)
+                    .putDouble("ZOffset", this.casedGetZ());
 
         }
         // gunItem.getGun().deserializeNBT(gun);
@@ -997,7 +1050,8 @@ public class GunEditor {
         return this.sizeMod;
     }
 
-    private void handleScaledPositionedMod(InputEvent.KeyInputEvent event, TimelessGunItem gunItem) {
+    private void handleScaledPositionedMod(InputEvent.KeyInputEvent event,
+            TimelessGunItem gunItem) {
         this.handlePositionedMod(event, gunItem);
         boolean isPeriodDown = Keys.SIZE_OPT.isDown(); // Increase Step Size
 
@@ -1021,10 +1075,12 @@ public class GunEditor {
                                                   // every gun at this point in time.
         {
             gun.getCompound("Display").getCompound(this.mode.tagName).remove("Scale");
-            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("Scale", this.casedGetScale());
+            gun.getCompound("Display").getCompound(this.mode.tagName).putDouble("Scale",
+                    this.casedGetScale());
         } else {
             gun.getCompound("Modules").getCompound(this.mode.tagName).remove("Scale");
-            gun.getCompound("Modules").getCompound(this.mode.tagName).putDouble("Scale", this.casedGetScale());
+            gun.getCompound("Modules").getCompound(this.mode.tagName).putDouble("Scale",
+                    this.casedGetScale());
         }
         /*
          * gunItem.getGun().deserializeNBT(gun);
@@ -1043,7 +1099,8 @@ public class GunEditor {
     }
 
     private double casedGetScale() {
-        TimelessGunItem gunItem = (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        TimelessGunItem gunItem =
+                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getSize();
@@ -1065,14 +1122,16 @@ public class GunEditor {
                         : 0;
             case pistolBarrel:
                 return gunItem.getGun().canAttachType(IAttachment.Type.PISTOL_BARREL)
-                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel().getScale()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
+                                .getScale()
                         : 0;
         }
         return 0;
     }
 
     private double casedGetX() {
-        TimelessGunItem gunItem = (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        TimelessGunItem gunItem =
+                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getXOffset();
@@ -1092,18 +1151,21 @@ public class GunEditor {
                         : 0;
             case pistolScope:
                 return gunItem.getGun().getModules().getAttachments().getPistolScope() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolScope().getXOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolScope()
+                                .getXOffset()
                         : 0;
             case pistolBarrel:
                 return gunItem.getGun().getModules().getAttachments().getPistolBarrel() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel().getXOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
+                                .getXOffset()
                         : 0;
         }
         return 0;
     }
 
     private double casedGetY() {
-        TimelessGunItem gunItem = (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        TimelessGunItem gunItem =
+                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getYOffset();
@@ -1123,18 +1185,21 @@ public class GunEditor {
                         : 0;
             case pistolScope:
                 return gunItem.getGun().getModules().getAttachments().getPistolScope() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolScope().getYOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolScope()
+                                .getYOffset()
                         : 0;
             case pistolBarrel:
                 return gunItem.getGun().getModules().getAttachments().getPistolBarrel() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel().getYOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
+                                .getYOffset()
                         : 0;
         }
         return 0;
     }
 
     private double casedGetZ() {
-        TimelessGunItem gunItem = (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        TimelessGunItem gunItem =
+                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getZOffset();
@@ -1154,11 +1219,13 @@ public class GunEditor {
                         : 0;
             case pistolScope:
                 return gunItem.getGun().getModules().getAttachments().getPistolScope() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolScope().getZOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolScope()
+                                .getZOffset()
                         : 0;
             case pistolBarrel:
                 return gunItem.getGun().getModules().getAttachments().getPistolBarrel() != null
-                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel().getZOffset()
+                        ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
+                                .getZOffset()
                         : 0;
         }
         return 0;
@@ -1255,8 +1322,10 @@ public class GunEditor {
             case general:
                 if (gun.getGeneral() != null) {
                     this.rateMod = gun.getGeneral().getRate() - toUpdate.getGeneral().getRate();
-                    this.recoilAngleMod = gun.getGeneral().getRecoilAngle() - toUpdate.getGeneral().getRecoilAngle();
-                    this.recoilKickMod = gun.getGeneral().getRecoilKick() - toUpdate.getGeneral().getRecoilKick();
+                    this.recoilAngleMod = gun.getGeneral().getRecoilAngle()
+                            - toUpdate.getGeneral().getRecoilAngle();
+                    this.recoilKickMod = gun.getGeneral().getRecoilKick()
+                            - toUpdate.getGeneral().getRecoilKick();
                     this.horizontalRecoilAngleMod = gun.getGeneral().getHorizontalRecoilAngle()
                             - toUpdate.getGeneral().getHorizontalRecoilAngle();
                     this.cameraRecoilModifierMod = gun.getGeneral().getCameraRecoilModifier()
@@ -1269,8 +1338,10 @@ public class GunEditor {
                             - toUpdate.getGeneral().getRecoilAdsReduction();
                     this.projectileAmountMod = gun.getGeneral().getProjectileAmount()
                             - toUpdate.getGeneral().getProjectileAmount();
-                    this.spreadMod = gun.getGeneral().getSpread() - toUpdate.getGeneral().getSpread();
-                    this.weightKiloMod = gun.getGeneral().getWeightKilo() - toUpdate.getGeneral().getWeightKilo();
+                    this.spreadMod =
+                            gun.getGeneral().getSpread() - toUpdate.getGeneral().getSpread();
+                    this.weightKiloMod = gun.getGeneral().getWeightKilo()
+                            - toUpdate.getGeneral().getWeightKilo();
                 }
                 break;
             case reloads:
@@ -1280,22 +1351,27 @@ public class GunEditor {
             case display:
                 break;
             case flash:
-                if (toUpdate.getDisplay().getFlash() != null && gun.getDisplay().getFlash() != null) {
+                if (toUpdate.getDisplay().getFlash() != null
+                        && gun.getDisplay().getFlash() != null) {
                     this.xMod = gun.getDisplay().getFlash().getXOffset()
                             - toUpdate.getDisplay().getFlash().getXOffset();
                     this.yMod = gun.getDisplay().getFlash().getYOffset()
                             - toUpdate.getDisplay().getFlash().getYOffset();
                     this.zMod = gun.getDisplay().getFlash().getZOffset()
                             - toUpdate.getDisplay().getFlash().getZOffset();
-                    this.sizeMod = gun.getDisplay().getFlash().getSize() - toUpdate.getDisplay().getFlash().getSize();
+                    this.sizeMod = gun.getDisplay().getFlash().getSize()
+                            - toUpdate.getDisplay().getFlash().getSize();
                 }
 
                 break;
             case zoom:
                 if (toUpdate.getModules().getZoom() != null && gun.getModules().getZoom() != null) {
-                    this.xMod = gun.getModules().getZoom().getXOffset() - toUpdate.getModules().getZoom().getXOffset();
-                    this.yMod = gun.getModules().getZoom().getYOffset() - toUpdate.getModules().getZoom().getYOffset();
-                    this.zMod = gun.getModules().getZoom().getZOffset() - toUpdate.getModules().getZoom().getZOffset();
+                    this.xMod = gun.getModules().getZoom().getXOffset()
+                            - toUpdate.getModules().getZoom().getXOffset();
+                    this.yMod = gun.getModules().getZoom().getYOffset()
+                            - toUpdate.getModules().getZoom().getYOffset();
+                    this.zMod = gun.getModules().getZoom().getZOffset()
+                            - toUpdate.getModules().getZoom().getZOffset();
                 }
                 break;
             case scope:
@@ -1367,25 +1443,32 @@ public class GunEditor {
     public void exportData() {
         this.map.forEach((name, gun) -> {
             if (this.map.get(name) == null) {
-                LOGGER.log(Level.ERROR, "WEAPON EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
+                LOGGER.log(Level.ERROR,
+                        "WEAPON EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
                 return;
             }
-            LOGGER.log(Level.FATAL, gun.serializeNBT().getCompound("Modules").getCompound("Attachments").toString());
-            GsonBuilder gsonB = new GsonBuilder().setLenient().addSerializationExclusionStrategy(Gun.strategy)
-                    .setPrettyPrinting();// .setNumberToNumberStrategy(ToNumberPolicy.DOUBLE).setObjectToNumberStrategy(ToNumberPolicy.DOUBLE).serializeSpecialFloatingPointValues();;
+            LOGGER.log(Level.FATAL, gun.serializeNBT().getCompound("Modules")
+                    .getCompound("Attachments").toString());
+            GsonBuilder gsonB = new GsonBuilder().setLenient()
+                    .addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();// .setNumberToNumberStrategy(ToNumberPolicy.DOUBLE).setObjectToNumberStrategy(ToNumberPolicy.DOUBLE).serializeSpecialFloatingPointValues();;
 
             String jsonString = gsonB.create().toJson(gun);// gson.toJson(ch.getCatGlobal(1).get(this.previousWeaponTag));
             jsonString += "\nTRAIL_ADJUST___" + gsonB.create().toJson(this.sizeMod);
-            jsonString += "\nSCOPE" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
-                    .getCompound("Attachments").getCompound("Scope").toString());
-            jsonString += "\nBARREL" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
-                    .getCompound("Attachments").getCompound("Barrel").toString());
-            jsonString += "\nOLD_SCOPE" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
-                    .getCompound("Attachments").getCompound("OldScope").toString());
-            jsonString += "\nPISTOL_SCOPE" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
-                    .getCompound("Attachments").getCompound("PistolScope").toString());
-            jsonString += "\nPISTOL_BARREL" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
-                    .getCompound("Attachments").getCompound("PistolBarrel").toString());
+            jsonString +=
+                    "\nSCOPE" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
+                            .getCompound("Attachments").getCompound("Scope").toString());
+            jsonString +=
+                    "\nBARREL" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
+                            .getCompound("Attachments").getCompound("Barrel").toString());
+            jsonString +=
+                    "\nOLD_SCOPE" + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
+                            .getCompound("Attachments").getCompound("OldScope").toString());
+            jsonString += "\nPISTOL_SCOPE"
+                    + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
+                            .getCompound("Attachments").getCompound("PistolScope").toString());
+            jsonString += "\nPISTOL_BARREL"
+                    + gsonB.create().toJson(gun.serializeNBT().getCompound("Modules")
+                            .getCompound("Attachments").getCompound("PistolBarrel").toString());
             this.writeExport(jsonString, name);
         });
     }
@@ -1394,10 +1477,12 @@ public class GunEditor {
         try {
             File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter = new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
+            FileWriter dataWriter =
+                    new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO, "WEAPON EDITOR EXPORTED FILE ( " + name + "_export.txt ). BE PROUD!");
+            LOGGER.log(Level.INFO,
+                    "WEAPON EDITOR EXPORTED FILE ( " + name + "_export.txt ). BE PROUD!");
         } catch (IOException e) {
             LOGGER.log(Level.ERROR,
                     "WEAPON EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");
@@ -1407,18 +1492,11 @@ public class GunEditor {
     // This is built manually, ensuring that I have both tested and built the new
     // system around any new category.
     public enum TaCWeaponDevModes {
-        general("General"),
-        reloads("Reloads"),
-        projectile("Projectile"),
+        general("General"), reloads("Reloads"), projectile("Projectile"),
         /* SOUNDS(""), */
-        display("Display"),
-        flash("Flash"),
-        zoom("Zoom"),
-        scope("Scope"),
-        barrel("Barrel"),
-        oldScope("OldScope"),
-        pistolScope("PistolScope"),
-        pistolBarrel("PistolBarrel");
+        display("Display"), flash("Flash"), zoom("Zoom"), scope("Scope"), barrel(
+                "Barrel"), oldScope(
+                        "OldScope"), pistolScope("PistolScope"), pistolBarrel("PistolBarrel");
 
         public String getTagName() {
             return tagName;

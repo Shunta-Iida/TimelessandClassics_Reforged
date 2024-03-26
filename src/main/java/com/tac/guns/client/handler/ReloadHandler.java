@@ -207,8 +207,7 @@ public class ReloadHandler {
 
     public int rigAmmoCount = 0;
 
-    private ReloadHandler() {
-    }
+    private ReloadHandler() {}
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
@@ -262,12 +261,14 @@ public class ReloadHandler {
                     CompoundTag tag = stack.getTag();
                     if (tag != null && !tag.contains("IgnoreAmmo", Tag.TAG_BYTE)) {
                         Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack);
-                        if (tag.getInt("AmmoCount") >= GunModifierHelper.getAmmoCapacity(stack, gun)) {
+                        if (tag.getInt("AmmoCount") >= GunModifierHelper.getAmmoCapacity(stack,
+                                gun)) {
                             return;
                         }
                         ItemStack rig = WearableHelper.PlayerWornRig(player);
                         if (!player.isCreative() && !rig.isEmpty()) {
-                            if (Gun.findAmmo(player, gun.getProjectile().getItem()).length < 1 && rigAmmoCount < 1) {
+                            if (Gun.findAmmo(player, gun.getProjectile().getItem()).length < 1
+                                    && rigAmmoCount < 1) {
                                 return;
                             }
                         } else if (!player.isCreative()
@@ -327,7 +328,8 @@ public class ReloadHandler {
                                 this.startReloadTick = player.tickCount + 5;
                             }
                             if (this.reloadTimer < gun.getReloads().getinterReloadPauseTicks()) {
-                                if (!AnimationHandler.INSTANCE.isReloadingIntro(prevItemStack.getItem()))
+                                if (!AnimationHandler.INSTANCE
+                                        .isReloadingIntro(prevItemStack.getItem()))
                                     this.reloadTimer++;
                             }
                             if (this.reloadTimer == gun.getReloads().getinterReloadPauseTicks()) {
@@ -396,18 +398,18 @@ public class ReloadHandler {
         if (tag != null) {
             isEmpty = tag.getInt("AmmoCount") <= 0;
         }
-        return this.startUpReloadTimer == 0
-                ? (gunItem.getGun().getReloads().isMagFed()
-                        ? (isEmpty
-                                ? ((this.prevReloadTimer + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
-                                        + this.startUpReloadTimer)
-                                        / ((float) gunItem.getGun().getReloads().getReloadMagTimer()
-                                                + gunItem.getGun().getReloads().getAdditionalReloadEmptyMagTimer()))
-                                : ((this.prevReloadTimer + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
-                                        + this.startUpReloadTimer)
-                                        / (float) gunItem.getGun().getReloads().getReloadMagTimer()))
-                        : ((this.reloadTimer + ((this.reloadTimer - this.prevReloadTimer) * partialTicks))
-                                / ((float) gunItem.getGun().getReloads().getinterReloadPauseTicks())))
+        return this.startUpReloadTimer == 0 ? (gunItem.getGun().getReloads().isMagFed()
+                ? (isEmpty ? ((this.prevReloadTimer
+                        + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
+                        + this.startUpReloadTimer)
+                        / ((float) gunItem.getGun().getReloads().getReloadMagTimer()
+                                + gunItem.getGun().getReloads().getAdditionalReloadEmptyMagTimer()))
+                        : ((this.prevReloadTimer
+                                + ((this.reloadTimer - this.prevReloadTimer) * partialTicks)
+                                + this.startUpReloadTimer)
+                                / (float) gunItem.getGun().getReloads().getReloadMagTimer()))
+                : ((this.reloadTimer + ((this.reloadTimer - this.prevReloadTimer) * partialTicks))
+                        / ((float) gunItem.getGun().getReloads().getinterReloadPauseTicks())))
                 : 1F;
     }
 
@@ -420,12 +422,14 @@ public class ReloadHandler {
         if (!(stack.getItem() instanceof GunItem))
             return; // Fails on server instances where all plays must be holding a gun
         Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack);
-        if (GunAnimationController.fromItem(stack.getItem()) instanceof PumpShotgunAnimationController && isReloading())
+        if (GunAnimationController
+                .fromItem(stack.getItem()) instanceof PumpShotgunAnimationController
+                && isReloading())
             event.setCanceled(true);
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.getInt("AmmoCount") <= 0) {
-            if (gun.getReloads().getReloadMagTimer() + gun.getReloads().getAdditionalReloadEmptyMagTimer()
-                    - reloadTimer > 5) {
+            if (gun.getReloads().getReloadMagTimer()
+                    + gun.getReloads().getAdditionalReloadEmptyMagTimer() - reloadTimer > 5) {
                 if (isReloading())
                     event.setCanceled(true);
             }

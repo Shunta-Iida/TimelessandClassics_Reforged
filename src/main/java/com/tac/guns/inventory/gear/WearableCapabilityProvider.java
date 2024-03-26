@@ -14,7 +14,8 @@ import javax.annotation.Nullable;
 
 public class WearableCapabilityProvider implements ICapabilitySerializable<ListTag> {
 
-    public static Capability<IWearableItemHandler> capability = InventoryListener.ITEM_HANDLER_CAPABILITY;
+    public static Capability<IWearableItemHandler> capability =
+            InventoryListener.ITEM_HANDLER_CAPABILITY;
     private GearSlotsHandler itemHandler = new GearSlotsHandler(2);
     private LazyOptional<IWearableItemHandler> optionalStorage = LazyOptional.of(() -> itemHandler);
 
@@ -72,7 +73,8 @@ public class WearableCapabilityProvider implements ICapabilitySerializable<ListT
     @Override
     public void deserializeNBT(ListTag nbt) {
         if (itemHandler == null)
-            throw new RuntimeException("IItemHandler instance does not implement IItemHandlerModifiable");
+            throw new RuntimeException(
+                    "IItemHandler instance does not implement IItemHandlerModifiable");
         IItemHandlerModifiable itemHandlerModifiable = (IItemHandlerModifiable) itemHandler;
         ListTag tagList = nbt;
         for (int i = 0; i < tagList.size(); i++) {

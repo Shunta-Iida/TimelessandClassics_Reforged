@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -18,8 +17,7 @@ import java.util.List;
  * Auto-generated for mesh.schema.json
  * 
  */
-public class Mesh
-        extends GlTFChildOfRootProperty {
+public class Mesh extends GlTFChildOfRootProperty {
 
     /**
      * An array of primitives, each defining geometry to be rendered.
@@ -58,7 +56,8 @@ public class Mesh
      */
     public void setPrimitives(List<MeshPrimitive> primitives) {
         if (primitives == null) {
-            throw new NullPointerException((("Invalid value for primitives: " + primitives) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for primitives: " + primitives) + ", may not be null"));
         }
         if (primitives.size() < 1) {
             throw new IllegalArgumentException("Number of primitives elements is < 1");

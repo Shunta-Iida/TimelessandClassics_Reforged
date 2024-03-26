@@ -9,13 +9,13 @@ import javax.annotation.Nullable;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class NoChildRotatedHeadshotBox<T extends LivingEntity> extends RotatedHeadshotBox<T> {
-    public NoChildRotatedHeadshotBox(double headSize, double headYOffset, double headZOffset, boolean rotatePitch,
-            boolean rotateYaw) {
+    public NoChildRotatedHeadshotBox(double headSize, double headYOffset, double headZOffset,
+            boolean rotatePitch, boolean rotateYaw) {
         super(headSize, headYOffset, headZOffset, rotatePitch, rotateYaw);
     }
 
-    public NoChildRotatedHeadshotBox(double headWidth, double headHeight, double headYOffset, double headZOffset,
-            boolean rotatePitch, boolean rotateYaw) {
+    public NoChildRotatedHeadshotBox(double headWidth, double headHeight, double headYOffset,
+            double headZOffset, boolean rotatePitch, boolean rotateYaw) {
         super(headWidth, headHeight, headYOffset, headZOffset, rotatePitch, rotateYaw);
     }
 

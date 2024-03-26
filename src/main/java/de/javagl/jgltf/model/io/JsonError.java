@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -58,11 +50,9 @@ public final class JsonError {
      * @param jsonStreamContext The JSON stream context
      * @param throwable         An optional throwable associated with the error
      */
-    JsonError(String message, JsonStreamContext jsonStreamContext,
-            Throwable throwable) {
+    JsonError(String message, JsonStreamContext jsonStreamContext, Throwable throwable) {
         this.message = message;
-        this.jsonPath = Collections.unmodifiableList(
-                createJsonPath(jsonStreamContext));
+        this.jsonPath = Collections.unmodifiableList(createJsonPath(jsonStreamContext));
         this.throwable = throwable;
     }
 
@@ -113,8 +103,7 @@ public final class JsonError {
      */
     private static List<String> createJsonPath(JsonStreamContext streamContext) {
         Collection<JsonStreamContext> list = expand(streamContext);
-        return list.stream()
-                .map(c -> c.getCurrentName() == null ? "" : c.getCurrentName())
+        return list.stream().map(c -> c.getCurrentName() == null ? "" : c.getCurrentName())
                 .collect(Collectors.toList());
     }
 
@@ -125,8 +114,7 @@ public final class JsonError {
      * @param streamContext The stream context
      * @return The collection
      */
-    private static Collection<JsonStreamContext> expand(
-            JsonStreamContext streamContext) {
+    private static Collection<JsonStreamContext> expand(JsonStreamContext streamContext) {
         Deque<JsonStreamContext> collection = new LinkedList<JsonStreamContext>();
         JsonStreamContext current = streamContext;
         while (current != null) {

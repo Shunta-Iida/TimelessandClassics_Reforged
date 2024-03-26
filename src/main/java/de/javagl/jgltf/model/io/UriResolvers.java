@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -56,8 +48,7 @@ public class UriResolvers {
      * @param baseUri The base URI to resolve against
      * @return The function
      */
-    public static Function<String, ByteBuffer> createBaseUriResolver(
-            URI baseUri) {
+    public static Function<String, ByteBuffer> createBaseUriResolver(URI baseUri) {
         Objects.requireNonNull(baseUri, "The baseUri may not be null");
         Function<String, InputStream> inputStreamFunction = new Function<String, InputStream>() {
             @Override
@@ -66,8 +57,8 @@ public class UriResolvers {
                     URI absoluteUri = IO.makeAbsolute(baseUri, uriString);
                     return IO.createInputStream(absoluteUri);
                 } catch (IOException e) {
-                    logger.warning("Could not open input stream for URI "
-                            + uriString + ":  " + e.getMessage());
+                    logger.warning("Could not open input stream for URI " + uriString + ":  "
+                            + e.getMessage());
                     return null;
                 }
             }
@@ -82,17 +73,15 @@ public class UriResolvers {
      * @param c The class
      * @return The resolving function
      */
-    public static Function<String, ByteBuffer> createResourceUriResolver(
-            Class<?> c) {
+    public static Function<String, ByteBuffer> createResourceUriResolver(Class<?> c) {
         Objects.requireNonNull(c, "The class may not be null");
         Function<String, InputStream> inputStreamFunction = new Function<String, InputStream>() {
             @Override
             public InputStream apply(String uriString) {
                 InputStream inputStream = c.getResourceAsStream("/" + uriString);
                 if (inputStream == null) {
-                    logger.warning(
-                            "Could not obtain input stream for resource "
-                                    + "with URI " + uriString);
+                    logger.warning("Could not obtain input stream for resource " + "with URI "
+                            + uriString);
                 }
                 return inputStream;
             }
@@ -125,8 +114,7 @@ public class UriResolvers {
                     byte data[] = IO.readStream(inputStream);
                     return Buffers.create(data);
                 } catch (IOException e) {
-                    logger.warning("Could not read from input stream: "
-                            + e.getMessage());
+                    logger.warning("Could not read from input stream: " + e.getMessage());
                     return null;
                 }
             }

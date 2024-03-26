@@ -19,8 +19,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
-    public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS,
-            Reference.MOD_ID);
+    public static final DeferredRegister<Item> REGISTER =
+            DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
 
     public static final RegistryObject<GunItem> M1911 = REGISTER.register("m1911",
             () -> new TimelessPistolGunItem(properties -> properties.tab(GunMod.PISTOL),
@@ -33,7 +33,8 @@ public class ModItems {
     // public static final RegistryObject<Item> MOSIN = REGISTER.register("mosin",
     // () -> new TimelessGunItem(properties -> propertiestab(GunMod.SNIPER)));
     public static final RegistryObject<GunItem> AK47 = REGISTER.register("ak47",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.AK47_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.AK47_MOD));
     public static final RegistryObject<GunItem> M60 = REGISTER.register("m60",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.HEAVY_MATERIAL),
                     GunModifiers.M60_MOD));
@@ -54,11 +55,13 @@ public class ModItems {
     // REGISTER.register("ar_15_hellmouth", () -> new TimelessGunItem(properties ->
     // propertiestab(GunMod.RIFLE)));
     public static final RegistryObject<GunItem> VECTOR45 = REGISTER.register("vector45",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.VECTOR_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.VECTOR_MOD));
     public static final RegistryObject<Item> MICRO_UZI = REGISTER.register("micro_uzi",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG)));
     public static final RegistryObject<Item> M4 = REGISTER.register("m4",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.M4A1_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.M4A1_MOD));
     // public static final RegistryObject<GunItem> MOSBERG590 =
     // REGISTER.register("mosberg590", () -> new TimelessGunItem(properties ->
     // propertiestab(GunMod.SHOTGUN)));
@@ -91,7 +94,8 @@ public class ModItems {
     // REGISTER.register("smle_iii", () -> new TimelessOldRifleGunItem(properties ->
     // propertiestab(GunMod.SNIPER)));
     public static final RegistryObject<Item> M870_CLASSIC = REGISTER.register("m870_classic",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SHOTGUN), GunModifiers.M870_MOD));// propertiestab(GunMod.SHOTGUN)));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SHOTGUN),
+                    GunModifiers.M870_MOD));// propertiestab(GunMod.SHOTGUN)));
     // public static final RegistryObject<Item> MG3 = REGISTER.register("mg3", () ->
     // new TimelessGunItem(properties -> propertiestab(GunMod.HEAVY_MATERIAL)));
     // public static final RegistryObject<Item> MG42 = REGISTER.register("mg42", ()
@@ -109,7 +113,8 @@ public class ModItems {
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.PISTOL),
                     GunModifiers.DEAGLE50_MOD));
     public static final RegistryObject<Item> HK_MP5A5 = REGISTER.register("hk_mp5a5",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.MP5A5_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.MP5A5_MOD));
     // public static final RegistryObject<Item> STEN_MK_II =
     // REGISTER.register("sten_mk_ii", () -> new TimelessGunItem(properties ->
     // propertiestab(GunMod.SMG)));
@@ -130,7 +135,8 @@ public class ModItems {
     // () -> new TimelessOldRifleGunItem(properties ->
     // propertiestab(GunMod.SNIPER)));
     public static final RegistryObject<Item> HK416_A5 = REGISTER.register("hk416_a5",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.HK416_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.HK416_MOD));
     public static final RegistryObject<Item> TYPE81_X = REGISTER.register("type81_x",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
                     GunModifiers.TYPE81x_MOD));
@@ -138,11 +144,14 @@ public class ModItems {
     // REGISTER.register("pkp_penchenberg", () -> new TimelessGunItem(properties ->
     // propertiestab(GunMod.HEAVY_MATERIAL)));
     public static final RegistryObject<Item> MP7 = REGISTER.register("mp7",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.MP7_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.MP7_MOD));
     public static final RegistryObject<Item> M82A2 = REGISTER.register("m82a2",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER), GunModifiers.M82A2_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER),
+                    GunModifiers.M82A2_MOD));
     public static final RegistryObject<Item> AI_AWP = REGISTER.register("ai_awp",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER), GunModifiers.AIAWP_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER),
+                    GunModifiers.AIAWP_MOD));
     public static final RegistryObject<GunItem> RPG7 = REGISTER.register("rpg7",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.HEAVY_MATERIAL),
                     GunModifiers.RPG7_MOD));
@@ -163,7 +172,8 @@ public class ModItems {
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
                     GunModifiers.SIG_MCX_SPEAR_MOD));
     public static final RegistryObject<Item> MP9 = REGISTER.register("mp9",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.MP9_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.MP9_MOD));
     // public static final RegistryObject<Item> SKS = REGISTER.register("sks", () ->
     // new TimelessGunItem(properties -> propertiestab(GunMod.RIFLE),
     // GunModifiers.SKS_MOD));
@@ -196,15 +206,20 @@ public class ModItems {
     // REGISTER.register("espadon", () -> new TimelessGunItem(properties ->
     // propertiestab(GunMod.SNIPER), GunModifiers.ESPADON_MOD));
     public static final RegistryObject<Item> M16A4 = REGISTER.register("m16a4",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.M16A4_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.M16A4_MOD));
     public static final RegistryObject<Item> SCAR_H = REGISTER.register("scar_h",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.SCAR_H_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.SCAR_H_MOD));
     public static final RegistryObject<Item> SCAR_L = REGISTER.register("scar_l",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.SCAR_L_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.SCAR_L_MOD));
     public static final RegistryObject<Item> MK47 = REGISTER.register("mk47",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.MK47_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.MK47_MOD));
     public static final RegistryObject<Item> SPR_15 = REGISTER.register("spr15",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.SPR_15_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.SPR_15_MOD));
     public static final RegistryObject<Item> TTI_G34 = REGISTER.register("tti_g34",
             () -> new TimelessPistolGunItem(properties -> properties.tab(GunMod.PISTOL),
                     GunModifiers.TTI34_MOD));
@@ -212,14 +227,16 @@ public class ModItems {
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
                     GunModifiers.MK18_MOD1_MOD));
     public static final RegistryObject<Item> UDP_9 = REGISTER.register("udp_9",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.UDP_9_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.UDP_9_MOD));
 
     public static final RegistryObject<Item> SCAR_MK20 = REGISTER.register("scar_mk20",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER),
                     GunModifiers.SCAR_MK20_MOD));
 
     public static final RegistryObject<Item> HK_G3 = REGISTER.register("hk_g3",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE), GunModifiers.HK_G3_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE),
+                    GunModifiers.HK_G3_MOD));
 
     public static final RegistryObject<Item> TIMELESS_50 = REGISTER.register("timeless_50",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.PISTOL),
@@ -230,7 +247,8 @@ public class ModItems {
                     GunModifiers.COLT_PYTHON_MOD));
 
     public static final RegistryObject<Item> P90 = REGISTER.register("p90",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG), GunModifiers.P90_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SMG),
+                    GunModifiers.P90_MOD));
 
     public static final RegistryObject<Item> TEC_9 = REGISTER.register("tec_9",
             () -> new TimelessPistolGunItem(properties -> properties.tab(GunMod.PISTOL),
@@ -241,7 +259,8 @@ public class ModItems {
                     GunModifiers.UZI_MOD));
 
     public static final RegistryObject<Item> MRAD = REGISTER.register("mrad",
-            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER), GunModifiers.MRAD_MOD));
+            () -> new TimelessGunItem(properties -> properties.tab(GunMod.SNIPER),
+                    GunModifiers.MRAD_MOD));
 
     public static final RegistryObject<Item> DEVELOPMENT_SLOW_BULLET = REGISTER.register("devgun1",
             () -> new TimelessGunItem(properties -> properties.tab(GunMod.RIFLE)));
@@ -249,171 +268,192 @@ public class ModItems {
     /* Ammunition */
     // public static final RegistryObject<Item> MAGNUM_BULLET =
     // REGISTER.register("magnumround", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_MAGNUM = REGISTER.register("b_magnum", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_45 = REGISTER.register("round45", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_46 = REGISTER.register("46x30", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_50AE = REGISTER.register("ae50", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_30_WIN = REGISTER.register("win_30-30",
-            TimelessLRFAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_308 = REGISTER.register("bullet_308", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_556 = REGISTER.register("nato_556_bullet",
-            TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_9 = REGISTER.register("9mm_round", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_10g = REGISTER.register("10_gauge_round",
-            TimelessSGAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_58x42 = REGISTER.register("58x42", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_762x25 = REGISTER.register("762x25", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_762x54 = REGISTER.register("762x54", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_762x39 = REGISTER.register("762x39", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_50_BMG = REGISTER.register("50bmg", TimelessRFAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_MAGNUM =
+            REGISTER.register("b_magnum", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_45 =
+            REGISTER.register("round45", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_46 =
+            REGISTER.register("46x30", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_50AE =
+            REGISTER.register("ae50", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_30_WIN =
+            REGISTER.register("win_30-30", TimelessLRFAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_308 =
+            REGISTER.register("bullet_308", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_556 =
+            REGISTER.register("nato_556_bullet", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_9 =
+            REGISTER.register("9mm_round", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_10g =
+            REGISTER.register("10_gauge_round", TimelessSGAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_58x42 =
+            REGISTER.register("58x42", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_762x25 =
+            REGISTER.register("762x25", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_762x54 =
+            REGISTER.register("762x54", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_762x39 =
+            REGISTER.register("762x39", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_50_BMG =
+            REGISTER.register("50bmg", TimelessRFAmmoItem::new);
     // public static final RegistryObject<Item> BULLET_300MAG =
     // REGISTER.register("762x39", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_LAPUA338 = REGISTER.register("lapua338",
-            TimelessRFAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_LAPUA338 =
+            REGISTER.register("lapua338", TimelessRFAmmoItem::new);
     // public static final RegistryObject<Item> GRENADE_40MM =
     // REGISTER.register("grenade40mm", Timeless40AmmoItem::new);
-    public static final RegistryObject<Item> BULLET_68 = REGISTER.register("bullet68", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_57 = REGISTER.register("57x28", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_68 =
+            REGISTER.register("bullet68", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_57 =
+            REGISTER.register("57x28", TimelessAmmoItem::new);
 
     /* Explosives */
     public static final RegistryObject<Item> RPG7_MISSILE = REGISTER.register("rpg7_missile",
             () -> new AmmoItem(new Item.Properties().stacksTo(6).tab(GunMod.AMMO)));
 
     public static final RegistryObject<Item> LIGHT_GRENADE = REGISTER.register("light_grenade",
-            () -> new LightGrenadeItem(new Item.Properties().stacksTo(8).tab(GunMod.EXPLOSIVES), 25 * 4,
-                    0.95f, 1.35f));
-    public static final RegistryObject<Item> BASEBALL_GRENADE = REGISTER.register("baseball_grenade",
-            () -> new BaseballGrenadeItem(new Item.Properties().stacksTo(4).tab(GunMod.EXPLOSIVES), 20 * 7,
-                    1.425f, 1.135f));
+            () -> new LightGrenadeItem(new Item.Properties().stacksTo(8).tab(GunMod.EXPLOSIVES),
+                    25 * 4, 0.95f, 1.35f));
+    public static final RegistryObject<Item> BASEBALL_GRENADE =
+            REGISTER.register("baseball_grenade",
+                    () -> new BaseballGrenadeItem(
+                            new Item.Properties().stacksTo(4).tab(GunMod.EXPLOSIVES), 20 * 7,
+                            1.425f, 1.135f));
 
     /* Scope Attachments */
     public static final RegistryObject<Item> COYOTE_SIGHT = REGISTER.register("coyote_sight",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.15F,
-                            0.325, "coyote", GunModifiers.COYOTE_SIGHT_ADS)
-                            .viewFinderOffset(0.415).viewFinderOffsetSpecial(0.415),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.15F, 0.325,
+                            "coyote", GunModifiers.COYOTE_SIGHT_ADS).viewFinderOffset(0.415)
+                            .viewFinderOffsetSpecial(0.415),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> AIMPOINT_T2_SIGHT = REGISTER.register("aimpoint_t2",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.635F,
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.635F,
                             0.325, "aimpoint2", GunModifiers.AIMPOINT_T1_SIGHT_ADS)
                             .viewFinderOffset(0.39).viewFinderOffsetSpecial(0.39),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> AIMPOINT_T1_SIGHT = REGISTER.register("aimpoint_t1",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 1.3F,
-                            0.325, "aimpoint1", GunModifiers.AIMPOINT_T1_SIGHT_ADS)
-                            .viewFinderOffset(0.45).viewFinderOffsetSpecial(0.45),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 1.3F, 0.325,
+                            "aimpoint1", GunModifiers.AIMPOINT_T1_SIGHT_ADS).viewFinderOffset(0.45)
+                            .viewFinderOffsetSpecial(0.45),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> EOTECH_N_SIGHT = REGISTER.register("eotech_n",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.225F,
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.225F,
                             0.325, "eotechn", GunModifiers.EOTECH_N_SIGHT_ADS)
                             .viewFinderOffset(0.415).viewFinderOffsetSpecial(0.415),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> VORTEX_UH_1 = REGISTER.register("vortex_uh_1",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.525F,
-                            0.325, "vortex1", GunModifiers.VORTEX_UH_1_ADS)
-                            .viewFinderOffset(0.3725).viewFinderOffsetSpecial(0.3725),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.525F,
+                            0.325, "vortex1", GunModifiers.VORTEX_UH_1_ADS).viewFinderOffset(0.3725)
+                            .viewFinderOffsetSpecial(0.3725),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> EOTECH_SHORT_SIGHT = REGISTER.register("eotech_short",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.71F,
-                            0.325, "eotechshort",
-                            GunModifiers.EOTECH_SHORT_SIGHT_ADS).viewFinderOffset(0.455)
-                            .viewFinderOffsetSpecial(0.455),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.71F, 0.325,
+                            "eotechshort", GunModifiers.EOTECH_SHORT_SIGHT_ADS)
+                            .viewFinderOffset(0.455).viewFinderOffsetSpecial(0.455),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> SRS_RED_DOT_SIGHT = REGISTER.register("srs_red_dot",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 2.2675F,
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 2.2675F,
                             0.325, "srsdot", GunModifiers.SRS_RED_DOT_SIGHT_ADS)
                             .viewFinderOffset(0.355).viewFinderOffsetSpecial(0.355),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
-    public static final RegistryObject<Item> ACOG_4 = REGISTER.register("acog_4x_scope", () -> new ScopeItem(
-            Scope.create(new ScopeZoomData[] { new ScopeZoomData(4f, 0.4F, 1.5f),
-                    new ScopeZoomData(2f, 0.4F, 1.5f) }, 2.325F, 0.21, "acog4x", true,
-                    GunModifiers.ACOG_4_ADS).viewFinderOffset(0.45).viewFinderOffsetDR(0.40)
-                    .viewFinderOffsetSpecial(0.425).viewFinderOffsetSpecialDR(0.35),
-            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ACOG_4 = REGISTER.register("acog_4x_scope",
+            () -> new ScopeItem(
+                    Scope.create(
+                            new ScopeZoomData[] {new ScopeZoomData(4f, 0.4F, 1.5f),
+                                    new ScopeZoomData(2f, 0.4F, 1.5f)},
+                            2.325F, 0.21, "acog4x", true, GunModifiers.ACOG_4_ADS)
+                            .viewFinderOffset(0.45).viewFinderOffsetDR(0.40)
+                            .viewFinderOffsetSpecial(0.425).viewFinderOffsetSpecialDR(0.35),
+                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> QMK152 = REGISTER.register("qmk152",
             () -> new ScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(3F, 0.4F, -0.4f) }, 2.39F,
-                            0.11, "qmk152", true, GunModifiers.QMK152_ADS)
-                            .viewFinderOffset(0.45).viewFinderOffsetDR(0.315)
-                            .viewFinderOffsetSpecial(0.34).viewFinderOffsetSpecialDR(0.238),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(3F, 0.4F, -0.4f)}, 2.39F,
+                            0.11, "qmk152", true, GunModifiers.QMK152_ADS).viewFinderOffset(0.45)
+                            .viewFinderOffsetDR(0.315).viewFinderOffsetSpecial(0.34)
+                            .viewFinderOffsetSpecialDR(0.238),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> ELCAN_DR_14X = REGISTER
-            .register("elcan_14x",
-                    () -> new ScopeItem(Scope.create(
-                            new ScopeZoomData[] { new ScopeZoomData(4f, 0.4225F, 2.0f),
-                                    new ScopeZoomData(1.2f, 0.333F + 0.016F,
-                                            2.0f) },
-                            2.45F, 0.23, "elcan14x", true,
-                            GunModifiers.ELCAN_DR_14X_ADS).viewFinderOffset(0.515)
-                            .viewFinderOffsetDR(0.46).viewFinderOffsetSpecial(0.435)
-                            .viewFinderOffsetSpecialDR(0.38),
-                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ELCAN_DR_14X = REGISTER.register("elcan_14x",
+            () -> new ScopeItem(
+                    Scope.create(
+                            new ScopeZoomData[] {new ScopeZoomData(4f, 0.4225F, 2.0f),
+                                    new ScopeZoomData(1.2f, 0.333F + 0.016F, 2.0f)},
+                            2.45F, 0.23, "elcan14x", true, GunModifiers.ELCAN_DR_14X_ADS)
+                            .viewFinderOffset(0.515).viewFinderOffsetDR(0.46)
+                            .viewFinderOffsetSpecial(0.435).viewFinderOffsetSpecialDR(0.38),
+                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     public static final RegistryObject<Item> VORTEX_LPVO_3_6 = REGISTER.register("lpvo_1_6",
-            () -> new ScopeItem(Scope
-                    .create(new ScopeZoomData[] { new ScopeZoomData(6f, 0.4175F, 2.6f),
-                            new ScopeZoomData(3f, 0.365F, 2.6f) }, 2.2625F, 0.1725,
-                            "vlpvo6", true, GunModifiers.VORTEX_LPVO_1_6_ADS)
-                    .viewFinderOffset(0.475).viewFinderOffsetDR(0.375)
-                    .viewFinderOffsetSpecial(0.505).viewFinderOffsetSpecialDR(0.355),
+            () -> new ScopeItem(
+                    Scope.create(
+                            new ScopeZoomData[] {new ScopeZoomData(6f, 0.4175F, 2.6f),
+                                    new ScopeZoomData(3f, 0.365F, 2.6f)},
+                            2.2625F, 0.1725, "vlpvo6", true, GunModifiers.VORTEX_LPVO_1_6_ADS)
+                            .viewFinderOffset(
+                                    0.475)
+                            .viewFinderOffsetDR(0.375).viewFinderOffsetSpecial(0.505)
+                            .viewFinderOffsetSpecialDR(0.355),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));// .viewFinderOffset(0.475),
-                                                                          // new
-                                                                          // Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
-    /*
-     * 
-     * public static final RegistryObject<Item> SLX_2X = REGISTER.register("slx_2x",
-     * () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new
-     * ScopeZoomData(0.0165F,0.4185F)}, 2.25F,0.1725, "slx2x",
-     * GunModifiers.ACOG_4_ADS).viewFinderOffset(0.425).viewFinderOffsetDR(0.4).
-     * viewFinderOffsetSpecial(0.375).viewFinderOffsetSpecialDR(0.35), new
-     * Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));//.viewFinderOffset(0.
-     * 475), new Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
-     */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           // new
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           // Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * public static final RegistryObject<Item> SLX_2X = REGISTER.register("slx_2x",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * ScopeZoomData(0.0165F,0.4185F)}, 2.25F,0.1725, "slx2x",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * GunModifiers.ACOG_4_ADS).viewFinderOffset(0.425).viewFinderOffsetDR(0.4).
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * viewFinderOffsetSpecial(0.375).viewFinderOffsetSpecialDR(0.35), new
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));//.viewFinderOffset(0.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 475), new Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
 
     public static final RegistryObject<Item> STANDARD_6_10x_SCOPE = REGISTER.register("8x_scope",
-            () -> new ScopeItem(Scope
-                    .create(new ScopeZoomData[] { new ScopeZoomData(10f, 0.395F, 4.2f),
-                            new ScopeZoomData(6f, 0.4225F, 4.2f) }, 2.45F, 0.2125,
-                            "gener8x", true, GunModifiers.LONGRANGE_6_10_SCOPE_ADS)
-                    .viewFinderOffset(0.595).viewFinderOffsetDR(0.3925)
-                    .viewFinderOffsetSpecial(0.465).viewFinderOffsetSpecialDR(0.415),
+            () -> new ScopeItem(
+                    Scope.create(
+                            new ScopeZoomData[] {new ScopeZoomData(10f, 0.395F, 4.2f),
+                                    new ScopeZoomData(6f, 0.4225F, 4.2f)},
+                            2.45F, 0.2125, "gener8x", true, GunModifiers.LONGRANGE_6_10_SCOPE_ADS)
+                            .viewFinderOffset(0.595).viewFinderOffsetDR(0.3925)
+                            .viewFinderOffsetSpecial(0.465).viewFinderOffsetSpecialDR(0.415),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     /* Old Scopes */
-    public static final RegistryObject<Item> OLD_LONGRANGE_8x_SCOPE = REGISTER.register("old_8x_scope",
-            () -> new OldScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(8F, 0.00F) }, 1.930F, 0.14,
-                            "old8x", true, GunModifiers.OLD_LONGRANGE_8x_SCOPE_ADS)
-                            .viewFinderOffset(0.51).viewFinderOffsetDR(0.36)
-                            .viewFinderOffsetSpecial(0.42).viewFinderOffsetSpecialDR(0.3),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> OLD_LONGRANGE_4x_SCOPE = REGISTER.register("old_4x_scope",
-            () -> new OldScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(4F, 0.00F) }, 1.930F, 0.21,
-                            "old4x", true, GunModifiers.OLD_LONGRANGE_4x_SCOPE_ADS)
-                            .viewFinderOffset(0.5).viewFinderOffsetDR(0.35)
-                            .viewFinderOffsetSpecial(0.4).viewFinderOffsetSpecialDR(0.28),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> OLD_LONGRANGE_8x_SCOPE =
+            REGISTER.register("old_8x_scope",
+                    () -> new OldScopeItem(
+                            Scope.create(new ScopeZoomData[] {new ScopeZoomData(8F, 0.00F)}, 1.930F,
+                                    0.14, "old8x", true, GunModifiers.OLD_LONGRANGE_8x_SCOPE_ADS)
+                                    .viewFinderOffset(0.51).viewFinderOffsetDR(0.36)
+                                    .viewFinderOffsetSpecial(0.42).viewFinderOffsetSpecialDR(0.3),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> OLD_LONGRANGE_4x_SCOPE =
+            REGISTER.register("old_4x_scope",
+                    () -> new OldScopeItem(
+                            Scope.create(new ScopeZoomData[] {new ScopeZoomData(4F, 0.00F)}, 1.930F,
+                                    0.21, "old4x", true, GunModifiers.OLD_LONGRANGE_4x_SCOPE_ADS)
+                                    .viewFinderOffset(0.5).viewFinderOffsetDR(0.35)
+                                    .viewFinderOffsetSpecial(0.4).viewFinderOffsetSpecialDR(0.28),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     /* Pistol-Scopes */
     public static final RegistryObject<Item> MINI_DOT = REGISTER.register("mini_dot",
             () -> new PistolScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 1.475F,
-                            0.325, "minidot", GunModifiers.MINI_DOT_ADS)
-                            .viewFinderOffset(0.685).viewFinderOffsetSpecial(0.685),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 1.475F,
+                            0.325, "minidot", GunModifiers.MINI_DOT_ADS).viewFinderOffset(0.685)
+                            .viewFinderOffsetSpecial(0.685),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> SRO_DOT = REGISTER.register("sro_dot",
             () -> new PistolScopeItem(
-                    Scope.create(new ScopeZoomData[] { new ScopeZoomData(1.0F, 0.00F) }, 1.615F,
-                            0.325, "sro_dot", GunModifiers.MINI_DOT_ADS)
-                            .viewFinderOffset(0.685).viewFinderOffsetSpecial(0.685),
+                    Scope.create(new ScopeZoomData[] {new ScopeZoomData(1.0F, 0.00F)}, 1.615F,
+                            0.325, "sro_dot", GunModifiers.MINI_DOT_ADS).viewFinderOffset(0.685)
+                            .viewFinderOffsetSpecial(0.685),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     // public static final RegistryObject<Item> MICRO_HOLO_SIGHT =
     // REGISTER.register("micro_holo_sight", () -> new
@@ -429,9 +469,11 @@ public class ModItems {
     public static final RegistryObject<Item> MUZZLE_BRAKE = REGISTER.register("muzzle_brake",
             () -> new BarrelItem(Barrel.create(2.0F, GunModifiers.MUZZLE_BRAKE_MODIFIER),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> MUZZLE_COMPENSATOR = REGISTER.register("muzzle_compensator",
-            () -> new BarrelItem(Barrel.create(2.0F, GunModifiers.MUZZLE_COMPENSATOR_MODIFIER),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> MUZZLE_COMPENSATOR =
+            REGISTER.register("muzzle_compensator",
+                    () -> new BarrelItem(
+                            Barrel.create(2.0F, GunModifiers.MUZZLE_COMPENSATOR_MODIFIER),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     /* Pistol-Barrel Attachments */
     public static final RegistryObject<Item> PISTOL_SILENCER = REGISTER.register("pistol_silencer",
@@ -453,9 +495,11 @@ public class ModItems {
     public static final RegistryObject<Item> LIGHT_GRIP = REGISTER.register("light_grip",
             () -> new UnderBarrelItem(UnderBarrel.create(GunModifiers.LIGHT_GRIP_MODIFIER),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> SPECIALISED_GRIP = REGISTER.register("specialised_grip",
-            () -> new UnderBarrelItem(UnderBarrel.create(GunModifiers.TACTICAL_GRIP_MODIFIER),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> SPECIALISED_GRIP =
+            REGISTER.register("specialised_grip",
+                    () -> new UnderBarrelItem(
+                            UnderBarrel.create(GunModifiers.TACTICAL_GRIP_MODIFIER),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     /* Side rail Attachments */
     public static final RegistryObject<Item> BASIC_LASER = REGISTER.register("basic_laser",
             () -> new SideRailItem(SideRail.create(GunModifiers.BASIC_LASER),
@@ -464,15 +508,18 @@ public class ModItems {
             () -> new IrDeviceItem(IrDevice.create(GunModifiers.IR_LASER),
                     new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
-    public static final RegistryObject<Item> SMALL_EXTENDED_MAG = REGISTER.register("small_extended_mag",
-            () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.SMALL_EXTENDED_MAG),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> MEDIUM_EXTENDED_MAG = REGISTER.register("medium_extended_mag",
-            () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.MEDIUM_EXTENDED_MAG),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> LARGE_EXTENDED_MAG = REGISTER.register("large_extended_mag",
-            () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.LARGE_EXTENDED_MAG),
-                    new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> SMALL_EXTENDED_MAG =
+            REGISTER.register("small_extended_mag",
+                    () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.SMALL_EXTENDED_MAG),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> MEDIUM_EXTENDED_MAG =
+            REGISTER.register("medium_extended_mag",
+                    () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.MEDIUM_EXTENDED_MAG),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> LARGE_EXTENDED_MAG =
+            REGISTER.register("large_extended_mag",
+                    () -> new ExtendedMagItem(ExtendedMag.create(GunModifiers.LARGE_EXTENDED_MAG),
+                            new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     // public static final RegistryObject<Item> LIGHT_GRENADE =
     // REGISTER.register("light_grenade", () -> new GrenadeItem(new
@@ -481,8 +528,7 @@ public class ModItems {
     /* Misc */
     public static final RegistryObject<Item> ARMOR_RIG = REGISTER.register("armor_rig",
             () -> (new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)))
-                    .setRigRows(3)
-                    .setDamageRate(0.6F));
+                    .setRigRows(3).setDamageRate(0.6F));
 
     public static final RegistryObject<Item> ARMOR_R1 = REGISTER.register("armor_r1",
             () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
@@ -499,33 +545,39 @@ public class ModItems {
     // Item.Properties().maxStackSize(4)tab(GunMod.GROUP)));
 
     public static final RegistryObject<Item> LIGHT_ARMOR = REGISTER.register("light_armor",
-            () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
-                    .setDamageRate(0.4F));
-    public static final RegistryObject<Item> MEDIUM_STEEL_ARMOR = REGISTER.register("medium_steel_armor",
-            () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)).setRigRows(1)
-                    .setDamageRate(0.2F));
+            () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP))
+                    .setRigRows(1).setDamageRate(0.4F));
+    public static final RegistryObject<Item> MEDIUM_STEEL_ARMOR =
+            REGISTER.register("medium_steel_armor",
+                    () -> new ArmorRigItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP))
+                            .setRigRows(1).setDamageRate(0.2F));
     // public static final RegistryObject<Item> CARDBOARD_ARMOR_FUN =
     // REGISTER.register("cardboard_armor", () -> new ArmorRigItem(2, new
     // Item.Properties().maxStackSize(1)tab(GunMod.GROUP)));
 
-    public static final RegistryObject<Item> LIGHT_ARMOR_REPAIR_PLATE = REGISTER.register("light_armor_plate",
-            () -> new ArmorPlateItem(new Item.Properties().stacksTo(12).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> LIGHT_ARMOR_REPAIR_PLATE =
+            REGISTER.register("light_armor_plate",
+                    () -> new ArmorPlateItem(new Item.Properties().stacksTo(12).tab(GunMod.GROUP)));
 
     public static final RegistryObject<Item> MODULE = REGISTER.register("module_item",
             () -> new Item(new Item.Properties().stacksTo(3).tab(GunMod.GROUP)));
 
-    public static final RegistryObject<Item> BLANK_SKIN_MOD_LVL1 = REGISTER.register("blank_skin_mod_lvl1",
-            () -> new Item(new Item.Properties().stacksTo(64).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> UNCOMMON_MATERIAL = REGISTER.register("uncommon_material",
-            () -> new Item(new Item.Properties().stacksTo(64).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> BLANK_SKIN_MOD_LVL1 =
+            REGISTER.register("blank_skin_mod_lvl1",
+                    () -> new Item(new Item.Properties().stacksTo(64).tab(GunMod.SKINS)));
+    public static final RegistryObject<Item> UNCOMMON_MATERIAL =
+            REGISTER.register("uncommon_material",
+                    () -> new Item(new Item.Properties().stacksTo(64).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> RARE_MATERIAL = REGISTER.register("rare_material",
             () -> new Item(new Item.Properties().stacksTo(48).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> EPIC_MATERIAL = REGISTER.register("epic_material",
             () -> new Item(new Item.Properties().stacksTo(32).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> LEGENDARY_MATERIAL = REGISTER.register("legendary_material",
-            () -> new Item(new Item.Properties().stacksTo(24).tab(GunMod.GROUP)));
-    public static final RegistryObject<Item> ULTIMATE_MATERIAL = REGISTER.register("ultimate_material",
-            () -> new Item(new Item.Properties().stacksTo(16).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> LEGENDARY_MATERIAL =
+            REGISTER.register("legendary_material",
+                    () -> new Item(new Item.Properties().stacksTo(24).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ULTIMATE_MATERIAL =
+            REGISTER.register("ultimate_material",
+                    () -> new Item(new Item.Properties().stacksTo(16).tab(GunMod.GROUP)));
     // public static final RegistryObject<Item> LEGENDARY_CERTIFICATE =
     // REGISTER.register("legendary_certificate",() -> new Item(new
     // Item.Properties().maxStackSize(32)tab(GunMod.GROUP)));
@@ -538,60 +590,63 @@ public class ModItems {
     // () -> new GunSkinItem(GunSkin.create((ResourceLocation) null),new
     // Item.Properties().maxStackSize(1).group(GunMod.SKINS)));
     /*** Skin ***/
-    public static final RegistryObject<Item> SKIN_AK_SPENT_BULLET = REGISTER.register("skin_ak_spent_bullet",
-            () -> new GunSkinItem(GunSkin.create(new ResourceLocation("skin_ak_spent_bullet")),
-                    new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_MP9_THUNDER = REGISTER.register("skin_mp9_thunder",
-            () -> new GunSkinItem(GunSkin.create(new ResourceLocation("skin_mp9_thunder")),
-                    new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
+    public static final RegistryObject<Item> SKIN_AK_SPENT_BULLET =
+            REGISTER.register("skin_ak_spent_bullet",
+                    () -> new GunSkinItem(
+                            GunSkin.create(new ResourceLocation("skin_ak_spent_bullet")),
+                            new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
+    public static final RegistryObject<Item> SKIN_MP9_THUNDER =
+            REGISTER.register("skin_mp9_thunder",
+                    () -> new GunSkinItem(GunSkin.create(new ResourceLocation("skin_mp9_thunder")),
+                            new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
 
     /* Common Skin */
-    public static final RegistryObject<Item> SKIN_BLACK = REGISTER.register("skin_black",
-            () -> new GunSkinItem(GunSkin.create("black"),
+    public static final RegistryObject<Item> SKIN_BLACK =
+            REGISTER.register("skin_black", () -> new GunSkinItem(GunSkin.create("black"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_BLUE = REGISTER.register("skin_blue",
-            () -> new GunSkinItem(GunSkin.create("blue"),
+    public static final RegistryObject<Item> SKIN_BLUE =
+            REGISTER.register("skin_blue", () -> new GunSkinItem(GunSkin.create("blue"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_BROWN = REGISTER.register("skin_brown",
-            () -> new GunSkinItem(GunSkin.create("brown"),
+    public static final RegistryObject<Item> SKIN_BROWN =
+            REGISTER.register("skin_brown", () -> new GunSkinItem(GunSkin.create("brown"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_DARK_BLUE = REGISTER.register("skin_dark_blue",
-            () -> new GunSkinItem(GunSkin.create("dark_blue"),
+    public static final RegistryObject<Item> SKIN_DARK_BLUE =
+            REGISTER.register("skin_dark_blue", () -> new GunSkinItem(GunSkin.create("dark_blue"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_DARK_GREEN = REGISTER.register("skin_dark_green",
-            () -> new GunSkinItem(GunSkin.create("dark_green"),
+    public static final RegistryObject<Item> SKIN_DARK_GREEN =
+            REGISTER.register("skin_dark_green", () -> new GunSkinItem(GunSkin.create("dark_green"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_GRAY = REGISTER.register("skin_gray",
-            () -> new GunSkinItem(GunSkin.create("gray"),
+    public static final RegistryObject<Item> SKIN_GRAY =
+            REGISTER.register("skin_gray", () -> new GunSkinItem(GunSkin.create("gray"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_GREEN = REGISTER.register("skin_green",
-            () -> new GunSkinItem(GunSkin.create("green"),
+    public static final RegistryObject<Item> SKIN_GREEN =
+            REGISTER.register("skin_green", () -> new GunSkinItem(GunSkin.create("green"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_JADE = REGISTER.register("skin_jade",
-            () -> new GunSkinItem(GunSkin.create("jade"),
+    public static final RegistryObject<Item> SKIN_JADE =
+            REGISTER.register("skin_jade", () -> new GunSkinItem(GunSkin.create("jade"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_LIGHT_GRAY = REGISTER.register("skin_light_gray",
-            () -> new GunSkinItem(GunSkin.create("light_gray"),
+    public static final RegistryObject<Item> SKIN_LIGHT_GRAY =
+            REGISTER.register("skin_light_gray", () -> new GunSkinItem(GunSkin.create("light_gray"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_MAGENTA = REGISTER.register("skin_magenta",
-            () -> new GunSkinItem(GunSkin.create("magenta"),
+    public static final RegistryObject<Item> SKIN_MAGENTA =
+            REGISTER.register("skin_magenta", () -> new GunSkinItem(GunSkin.create("magenta"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_ORANGE = REGISTER.register("skin_orange",
-            () -> new GunSkinItem(GunSkin.create("orange"),
+    public static final RegistryObject<Item> SKIN_ORANGE =
+            REGISTER.register("skin_orange", () -> new GunSkinItem(GunSkin.create("orange"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_PINK = REGISTER.register("skin_pink",
-            () -> new GunSkinItem(GunSkin.create("pink"),
+    public static final RegistryObject<Item> SKIN_PINK =
+            REGISTER.register("skin_pink", () -> new GunSkinItem(GunSkin.create("pink"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_PURPLE = REGISTER.register("skin_purple",
-            () -> new GunSkinItem(GunSkin.create("purple"),
+    public static final RegistryObject<Item> SKIN_PURPLE =
+            REGISTER.register("skin_purple", () -> new GunSkinItem(GunSkin.create("purple"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_RAD = REGISTER.register("skin_red",
-            () -> new GunSkinItem(GunSkin.create("red"),
+    public static final RegistryObject<Item> SKIN_RAD =
+            REGISTER.register("skin_red", () -> new GunSkinItem(GunSkin.create("red"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_SAND = REGISTER.register("skin_sand",
-            () -> new GunSkinItem(GunSkin.create("sand"),
+    public static final RegistryObject<Item> SKIN_SAND =
+            REGISTER.register("skin_sand", () -> new GunSkinItem(GunSkin.create("sand"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
-    public static final RegistryObject<Item> SKIN_WHITE = REGISTER.register("skin_white",
-            () -> new GunSkinItem(GunSkin.create("white"),
+    public static final RegistryObject<Item> SKIN_WHITE =
+            REGISTER.register("skin_white", () -> new GunSkinItem(GunSkin.create("white"),
                     new Item.Properties().stacksTo(1).tab(GunMod.SKINS)));
 }

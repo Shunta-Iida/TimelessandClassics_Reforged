@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class BufferedEnchantment extends GunEnchantment {
     public BufferedEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.WEAPON);
+        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.WEAPON);
     }
 
     @Override

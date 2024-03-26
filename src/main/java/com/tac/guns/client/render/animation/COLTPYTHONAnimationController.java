@@ -7,7 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.io.IOException;
 
-public class COLTPYTHONAnimationController extends PistalAnimationController implements CameraAnimated {
+public class COLTPYTHONAnimationController extends PistalAnimationController
+        implements CameraAnimated {
     public static int INDEX_BODY = 10;
     public static int INDEX_LOADER = 6;
     public static int INDEX_MAG = 8;
@@ -17,19 +18,20 @@ public class COLTPYTHONAnimationController extends PistalAnimationController imp
     public static int INDEX_RIGHT_HAND = 2;
     public static int CAMERA_INDEX = 13;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
-    private static final COLTPYTHONAnimationController instance = new COLTPYTHONAnimationController();
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_reload.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_static.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/colt_python_inspect.gltf"));
+    private static final COLTPYTHONAnimationController instance =
+            new COLTPYTHONAnimationController();
 
     @Override
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {

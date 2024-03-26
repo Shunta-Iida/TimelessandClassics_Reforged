@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.impl.creation;
 
@@ -123,8 +115,7 @@ public final class BufferStructure {
      *                        the
      *                        given collection will be stored internally.
      */
-    void addBufferViewModel(
-            BufferViewModel bufferViewModel, String bufferViewId,
+    void addBufferViewModel(BufferViewModel bufferViewModel, String bufferViewId,
             Collection<? extends AccessorModel> accessorModels) {
         this.bufferViewModels.add(bufferViewModel);
         this.bufferViewIds.put(bufferViewModel, bufferViewId);
@@ -158,8 +149,8 @@ public final class BufferStructure {
      * @param index       The index
      */
     private void addPaddingByteIndex(BufferModel bufferModel, int index) {
-        this.paddingByteIndices.computeIfAbsent(bufferModel,
-                bm -> new LinkedHashSet<Integer>()).add(index);
+        this.paddingByteIndices.computeIfAbsent(bufferModel, bm -> new LinkedHashSet<Integer>())
+                .add(index);
     }
 
     /**
@@ -170,8 +161,7 @@ public final class BufferStructure {
      * @param startIndex  The start index
      * @param count       The number of bytes
      */
-    void addPaddingByteIndices(
-            BufferModel bufferModel, int startIndex, int count) {
+    void addPaddingByteIndices(BufferModel bufferModel, int startIndex, int count) {
         for (int index = startIndex; index < startIndex + count; index++) {
             addPaddingByteIndex(bufferModel, index);
         }
@@ -241,8 +231,7 @@ public final class BufferStructure {
      * @param bufferViewModel The {@link BufferViewModel}
      * @return The list
      */
-    public List<AccessorModel> getAccessorModels(
-            BufferViewModel bufferViewModel) {
+    public List<AccessorModel> getAccessorModels(BufferViewModel bufferViewModel) {
         List<AccessorModel> accessorModels = bufferViewAccessorModels.get(bufferViewModel);
         if (accessorModels == null) {
             return Collections.emptyList();

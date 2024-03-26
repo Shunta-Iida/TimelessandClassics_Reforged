@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-@Mixin({ ModelBakery.class })
+@Mixin({ModelBakery.class})
 public abstract class ModelBakeryMixin implements CacheableModelBakery {
     @Shadow
     public abstract UnbakedModel getModel(ResourceLocation modelLocation);
@@ -36,7 +36,9 @@ public abstract class ModelBakeryMixin implements CacheableModelBakery {
     @Final
     public static ModelResourceLocation MISSING_MODEL_LOCATION;
 
-    @Inject(method = "processLoading", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V", ordinal = 0), remap = true)
+    @Inject(method = "processLoading", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V",
+            ordinal = 0), remap = true)
     public void onBakeryLoading(ProfilerFiller p_119249_, int p_119250_, CallbackInfo ci) {
 
         // init

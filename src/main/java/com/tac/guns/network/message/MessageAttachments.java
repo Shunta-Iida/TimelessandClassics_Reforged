@@ -12,12 +12,10 @@ import java.util.function.Supplier;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class MessageAttachments extends PlayMessage<MessageAttachments> {
-    public MessageAttachments() {
-    }
+    public MessageAttachments() {}
 
     @Override
-    public void encode(MessageAttachments messageAttachments, FriendlyByteBuf buffer) {
-    }
+    public void encode(MessageAttachments messageAttachments, FriendlyByteBuf buffer) {}
 
     @Override
     public MessageAttachments decode(FriendlyByteBuf buffer) {
@@ -25,7 +23,8 @@ public class MessageAttachments extends PlayMessage<MessageAttachments> {
     }
 
     @Override
-    public void handle(MessageAttachments messageAttachments, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageAttachments messageAttachments,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {

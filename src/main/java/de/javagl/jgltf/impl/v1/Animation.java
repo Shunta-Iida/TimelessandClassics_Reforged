@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -19,8 +18,7 @@ import java.util.Map;
  * Auto-generated for animation.schema.json
  * 
  */
-public class Animation
-        extends GlTFChildOfRootProperty {
+public class Animation extends GlTFChildOfRootProperty {
 
     /**
      * An array of channels, each of which targets an animation's sampler at

@@ -19,17 +19,18 @@ public class MK18MOD1AnimationController extends GunAnimationController {
     public static int INDEX_RIGHT_HAND = 0;
     public static int INDEX_MAGAZINE = 4;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m4_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m4_reload_empty.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(new ResourceLocation("tac", "animations/m4_draw.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m4_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m4_inspect.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m4_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_reload_empty.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_draw.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_inspect.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m4_static.gltf"));
     private static final MK18MOD1AnimationController instance = new MK18MOD1AnimationController();
 
     private MK18MOD1AnimationController() {

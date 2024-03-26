@@ -41,9 +41,11 @@ public class CrosshairHandler {
     private Crosshair currentCrosshair = null;
 
     private CrosshairHandler() {
-        this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "better_default")));
+        this.register(
+                new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "better_default")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "circle")));
-        this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "filled_circle"), false));
+        this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "filled_circle"),
+                false));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "square")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "round")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "arrow")));
@@ -54,9 +56,10 @@ public class CrosshairHandler {
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "line")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "t")));
         this.register(new TexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "smiley")));
-        this.register(new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "dynamic_default")));
-        this.register(
-                new DynamicScalingTexturedCrosshair(new ResourceLocation(Reference.MOD_ID, "clean_no_crosshair")));
+        this.register(new DynamicScalingTexturedCrosshair(
+                new ResourceLocation(Reference.MOD_ID, "dynamic_default")));
+        this.register(new DynamicScalingTexturedCrosshair(
+                new ResourceLocation(Reference.MOD_ID, "clean_no_crosshair")));
         this.register(new TechCrosshair());
     }
 
@@ -89,8 +92,9 @@ public class CrosshairHandler {
     public Crosshair getCurrentCrosshair() {
         if (this.currentCrosshair == null && this.registeredCrosshairs.size() > 0) {
             ResourceLocation id = ResourceLocation.tryParse(Config.CLIENT.display.crosshair.get());
-            this.currentCrosshair = id != null ? this.idToCrosshair.getOrDefault(id, Crosshair.DEFAULT)
-                    : Crosshair.DEFAULT;
+            this.currentCrosshair =
+                    id != null ? this.idToCrosshair.getOrDefault(id, Crosshair.DEFAULT)
+                            : Crosshair.DEFAULT;
         }
         return this.currentCrosshair;
     }

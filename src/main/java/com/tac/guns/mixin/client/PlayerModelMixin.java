@@ -49,29 +49,31 @@ public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T> {
     }
 
     @Inject(method = "setupAnim", at = @At(value = "HEAD"), cancellable = true)
-    private void setRotationAnglesHead(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-            float netHeadYaw, float headPitch, CallbackInfo ci) {
+    private void setRotationAnglesHead(T entityIn, float limbSwing, float limbSwingAmount,
+            float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         if (!(entityIn instanceof Player))
             return;
 
         PlayerModel model = (PlayerModel) (Object) this;
         this.resetRotationAngles();
-        if (MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Pre((Player) entityIn, model, limbSwing,
-                limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()))) {
+        if (MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Pre((Player) entityIn,
+                model, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                Minecraft.getInstance().getDeltaFrameTime()))) {
             this.setupRotationAngles();
             ci.cancel();
         }
     }
 
     @Inject(method = "setupAnim", at = @At(value = "TAIL"))
-    private void setRotationAnglesTail(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-            float netHeadYaw, float headPitch, CallbackInfo ci) {
+    private void setRotationAnglesTail(T entityIn, float limbSwing, float limbSwingAmount,
+            float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         if (!(entityIn instanceof Player))
             return;
 
         PlayerModel model = (PlayerModel) (Object) this;
-        MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Post((Player) entityIn, model, limbSwing,
-                limbSwingAmount, ageInTicks, netHeadYaw, headPitch, Minecraft.getInstance().getDeltaFrameTime()));
+        MinecraftForge.EVENT_BUS.post(new PlayerModelEvent.SetupAngles.Post((Player) entityIn,
+                model, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                Minecraft.getInstance().getDeltaFrameTime()));
         this.setupRotationAngles();
     }
 

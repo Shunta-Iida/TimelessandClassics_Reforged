@@ -24,8 +24,8 @@ public class ProjectileRenderer extends EntityRenderer<ProjectileEntity> {
     }
 
     @Override
-    public void render(ProjectileEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light) {
+    public void render(ProjectileEntity entity, float entityYaw, float partialTicks,
+            PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light) {
         if (!entity.getProjectile().isVisible() || entity.tickCount <= 1) {
             return;
         }
@@ -36,14 +36,15 @@ public class ProjectileRenderer extends EntityRenderer<ProjectileEntity> {
             matrixStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
             matrixStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
             Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(),
-                    ItemTransforms.TransformType.GROUND, light, OverlayTexture.NO_OVERLAY, matrixStack,
-                    renderTypeBuffer, entity.getId());
+                    ItemTransforms.TransformType.GROUND, light, OverlayTexture.NO_OVERLAY,
+                    matrixStack, renderTypeBuffer, entity.getId());
         } else {
             matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
             matrixStack.mulPose(Vector3f.YP.rotationDegrees(entityYaw));
             matrixStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
-            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE,
-                    light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
+            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(),
+                    ItemTransforms.TransformType.NONE, light, OverlayTexture.NO_OVERLAY,
+                    matrixStack, renderTypeBuffer, entity.getId());
         }
 
         matrixStack.popPose();

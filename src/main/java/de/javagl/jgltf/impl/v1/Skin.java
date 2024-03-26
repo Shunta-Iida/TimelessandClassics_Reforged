@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for skin.schema.json
  * 
  */
-public class Skin
-        extends GlTFChildOfRootProperty {
+public class Skin extends GlTFChildOfRootProperty {
 
     /**
      * Floating-point 4x4 transformation matrix stored in column-major order.
@@ -99,8 +97,8 @@ public class Skin
      * 
      */
     public float[] defaultBindShapeMatrix() {
-        return new float[] { 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-                1.0F };
+        return new float[] {1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F,
+                0.0F, 0.0F, 0.0F, 1.0F};
     }
 
     /**
@@ -114,7 +112,8 @@ public class Skin
     public void setInverseBindMatrices(String inverseBindMatrices) {
         if (inverseBindMatrices == null) {
             throw new NullPointerException(
-                    (("Invalid value for inverseBindMatrices: " + inverseBindMatrices) + ", may not be null"));
+                    (("Invalid value for inverseBindMatrices: " + inverseBindMatrices)
+                            + ", may not be null"));
         }
         this.inverseBindMatrices = inverseBindMatrices;
     }
@@ -142,7 +141,8 @@ public class Skin
      */
     public void setJointNames(List<String> jointNames) {
         if (jointNames == null) {
-            throw new NullPointerException((("Invalid value for jointNames: " + jointNames) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for jointNames: " + jointNames) + ", may not be null"));
         }
         this.jointNames = jointNames;
     }

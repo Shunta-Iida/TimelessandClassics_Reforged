@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for image.schema.json
  * 
  */
-public class Image
-        extends GlTFChildOfRootProperty {
+public class Image extends GlTFChildOfRootProperty {
 
     /**
      * The uri of the image. (required)
@@ -32,7 +30,8 @@ public class Image
      */
     public void setUri(String uri) {
         if (uri == null) {
-            throw new NullPointerException((("Invalid value for uri: " + uri) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for uri: " + uri) + ", may not be null"));
         }
         this.uri = uri;
     }

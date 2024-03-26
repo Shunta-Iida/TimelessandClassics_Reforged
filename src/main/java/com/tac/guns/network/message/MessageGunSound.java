@@ -24,11 +24,10 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
     private boolean muzzle;
     private boolean reload;
 
-    public MessageGunSound() {
-    }
+    public MessageGunSound() {}
 
-    public MessageGunSound(ResourceLocation id, SoundSource category, float x, float y, float z, float volume,
-            float pitch, int shooterId, boolean muzzle, boolean reload) {
+    public MessageGunSound(ResourceLocation id, SoundSource category, float x, float y, float z,
+            float volume, float pitch, int shooterId, boolean muzzle, boolean reload) {
         this.id = id;
         this.category = category;
         this.x = x;
@@ -57,17 +56,10 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
 
     @Override
     public MessageGunSound decode(FriendlyByteBuf buffer) {
-        return new MessageGunSound(
-                ResourceLocation.tryParse(buffer.readUtf()),
-                buffer.readEnum(SoundSource.class),
-                buffer.readFloat(),
-                buffer.readFloat(),
-                buffer.readFloat(),
-                buffer.readFloat(),
-                buffer.readFloat(),
-                buffer.readInt(),
-                buffer.readBoolean(),
-                buffer.readBoolean());
+        return new MessageGunSound(ResourceLocation.tryParse(buffer.readUtf()),
+                buffer.readEnum(SoundSource.class), buffer.readFloat(), buffer.readFloat(),
+                buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readInt(),
+                buffer.readBoolean(), buffer.readBoolean());
     }
 
     @Override

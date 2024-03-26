@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model;
 
@@ -39,9 +31,7 @@ import java.util.Locale;
  * This data consists of several elements (for example, 3D short vectors),
  * which consist of several components (for example, the 3 short values).
  */
-public final class AccessorShortData
-        extends AbstractAccessorData
-        implements AccessorData {
+public final class AccessorShortData extends AbstractAccessorData implements AccessorData {
     /**
      * Whether the data should be interpreted as unsigned values
      */
@@ -71,16 +61,15 @@ public final class AccessorShortData
      *                                  have a sufficient capacity to provide the
      *                                  data for the accessor
      */
-    public AccessorShortData(int componentType,
-            ByteBuffer bufferViewByteBuffer, int byteOffset, int numElements,
-            int numComponentsPerElement, Integer byteStride) {
-        super(short.class, bufferViewByteBuffer, byteOffset, numElements,
-                numComponentsPerElement, Short.BYTES, byteStride);
+    public AccessorShortData(int componentType, ByteBuffer bufferViewByteBuffer, int byteOffset,
+            int numElements, int numComponentsPerElement, Integer byteStride) {
+        super(short.class, bufferViewByteBuffer, byteOffset, numElements, numComponentsPerElement,
+                Short.BYTES, byteStride);
         AccessorDatas.validateShortType(componentType);
 
         this.unsigned = AccessorDatas.isUnsignedType(componentType);
-        AccessorDatas.validateCapacity(byteOffset, getNumElements(),
-                getByteStridePerElement(), bufferViewByteBuffer.capacity());
+        AccessorDatas.validateCapacity(byteOffset, getNumElements(), getByteStridePerElement(),
+                bufferViewByteBuffer.capacity());
     }
 
     /**
@@ -265,8 +254,7 @@ public final class AccessorShortData
     public ByteBuffer createByteBuffer() {
         int totalNumComponents = getTotalNumComponents();
         int totalBytes = totalNumComponents * getNumBytesPerComponent();
-        ByteBuffer result = ByteBuffer.allocateDirect(totalBytes)
-                .order(ByteOrder.nativeOrder());
+        ByteBuffer result = ByteBuffer.allocateDirect(totalBytes).order(ByteOrder.nativeOrder());
         for (int i = 0; i < totalNumComponents; i++) {
             short component = get(i);
             result.putShort(component);
@@ -285,8 +273,7 @@ public final class AccessorShortData
      *                       single row.
      * @return The data string
      */
-    public String createString(
-            Locale locale, String format, int elementsPerRow) {
+    public String createString(Locale locale, String format, int elementsPerRow) {
         StringBuilder sb = new StringBuilder();
         int nc = getNumComponentsPerElement();
         sb.append("[");

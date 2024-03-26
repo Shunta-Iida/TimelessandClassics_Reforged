@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for animation.channel.schema.json
  * 
  */
-public class AnimationChannel
-        extends GlTFProperty {
+public class AnimationChannel extends GlTFProperty {
 
     /**
      * The ID of a sampler in this animation used to compute the value for
@@ -39,7 +37,8 @@ public class AnimationChannel
      */
     public void setSampler(String sampler) {
         if (sampler == null) {
-            throw new NullPointerException((("Invalid value for sampler: " + sampler) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for sampler: " + sampler) + ", may not be null"));
         }
         this.sampler = sampler;
     }
@@ -64,7 +63,8 @@ public class AnimationChannel
      */
     public void setTarget(AnimationChannelTarget target) {
         if (target == null) {
-            throw new NullPointerException((("Invalid value for target: " + target) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for target: " + target) + ", may not be null"));
         }
         this.target = target;
     }

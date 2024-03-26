@@ -21,12 +21,11 @@ import java.lang.reflect.InvocationTargetException;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class InventoryListener {
 
-    public static Capability<IWearableItemHandler> ITEM_HANDLER_CAPABILITY = CapabilityManager
-            .get(new CapabilityToken<>() {
-            });;
+    public static Capability<IWearableItemHandler> ITEM_HANDLER_CAPABILITY =
+            CapabilityManager.get(new CapabilityToken<>() {});;
 
-    public static Capability<IAmmoItemHandler> RIG_HANDLER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-    });;
+    public static Capability<IAmmoItemHandler> RIG_HANDLER_CAPABILITY =
+            CapabilityManager.get(new CapabilityToken<>() {});;
     /*
      * public static Method addSlotMethod;
      * 
@@ -69,7 +68,8 @@ public class InventoryListener {
         if (!(event.getObject().getItem() instanceof IArmoredRigItem))
             return;
         if (!event.getCapabilities().containsKey(new ResourceLocation("tac", "rig"))) {
-            ArmorRigCapabilityProvider armorRigInventoryCapability = new ArmorRigCapabilityProvider();
+            ArmorRigCapabilityProvider armorRigInventoryCapability =
+                    new ArmorRigCapabilityProvider();
             event.addCapability(new ResourceLocation("tac", "rig"), armorRigInventoryCapability);
             event.addListener(armorRigInventoryCapability.getOptionalStorage()::invalidate);
         }

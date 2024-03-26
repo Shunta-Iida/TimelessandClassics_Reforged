@@ -13,7 +13,8 @@ import net.minecraftforge.network.simple.SimpleChannel;
 public class PacketHandler {
     public static final String PROTOCOL_VERSION = "1";
     private static SimpleChannel handshakeChannel;
-    private static SimpleChannel playChannel = FrameworkChannelBuilder.create(Reference.MOD_ID, "play", 1)
+    private static SimpleChannel playChannel = FrameworkChannelBuilder
+            .create(Reference.MOD_ID, "play", 1)
 
             .registerPlayMessage(MessageAim.class, NetworkDirection.PLAY_TO_SERVER)
             .registerPlayMessage(MessageReload.class, NetworkDirection.PLAY_TO_SERVER)
@@ -53,9 +54,11 @@ public class PacketHandler {
     private static int nextMessageId = 0;
 
     public static void init() {
-        FrameworkAPI.registerLoginData(new ResourceLocation(Reference.MOD_ID, "network_gun_manager"),
+        FrameworkAPI.registerLoginData(
+                new ResourceLocation(Reference.MOD_ID, "network_gun_manager"),
                 NetworkGunManager.LoginData::new);
-        FrameworkAPI.registerLoginData(new ResourceLocation(Reference.MOD_ID, "network_rig_manager"),
+        FrameworkAPI.registerLoginData(
+                new ResourceLocation(Reference.MOD_ID, "network_rig_manager"),
                 NetworkRigManager.LoginData::new);
 
     }

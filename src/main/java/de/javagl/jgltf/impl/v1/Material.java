@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.Map;
  * Auto-generated for material.schema.json
  * 
  */
-public class Material
-        extends GlTFChildOfRootProperty {
+public class Material extends GlTFChildOfRootProperty {
 
     /**
      * The ID of the technique. (optional)

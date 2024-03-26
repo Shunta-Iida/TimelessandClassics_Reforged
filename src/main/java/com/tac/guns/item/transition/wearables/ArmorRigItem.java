@@ -41,9 +41,11 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     private ArmorRigContainerProvider containerProvider;
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player,
+            InteractionHand hand) {
         if (player.getItemInHand(hand).getOrCreateTag().get("rig_rows") == null)
-            player.getItemInHand(hand).getOrCreateTag().putInt("rig_rows", rig.getGeneral().getInventoryRows());
+            player.getItemInHand(hand).getOrCreateTag().putInt("rig_rows",
+                    rig.getGeneral().getInventoryRows());
         if (world.isClientSide)
             return super.use(world, player, hand);
         if (hand != InteractionHand.MAIN_HAND)
@@ -107,8 +109,8 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
         stack.getOrCreateTag();
         CompoundTag nbt = super.getShareTag(stack);
         if (stack.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) stack.getCapability(ArmorRigCapabilityProvider.capability)
-                    .resolve().get();
+            RigSlotsHandler itemHandler = (RigSlotsHandler) stack
+                    .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
             nbt.put("storage", itemHandler.serializeNBT());
         }
 

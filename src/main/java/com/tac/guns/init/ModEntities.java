@@ -16,36 +16,32 @@ import java.util.function.BiFunction;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ModEntities {
-    public static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITIES,
-            Reference.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> REGISTER =
+            DeferredRegister.create(ForgeRegistries.ENTITIES, Reference.MOD_ID);
 
-    public static final RegistryObject<EntityType<ProjectileEntity>> PROJECTILE = registerProjectile("projectile",
-            ProjectileEntity::new);
-    public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE = registerBasic("grenade",
-            GrenadeEntity::new);
-    public static final RegistryObject<EntityType<MissileEntity>> MISSILE = registerBasic("missile",
-            MissileEntity::new);
-    public static final RegistryObject<EntityType<ThrowableGrenadeEntity>> THROWABLE_GRENADE = registerBasic(
-            "throwable_grenade", ThrowableGrenadeEntity::new);
-    public static final RegistryObject<EntityType<ThrowableStunGrenadeEntity>> THROWABLE_STUN_GRENADE = registerBasic(
-            "throwable_stun_grenade", ThrowableStunGrenadeEntity::new);
+    public static final RegistryObject<EntityType<ProjectileEntity>> PROJECTILE =
+            registerProjectile("projectile", ProjectileEntity::new);
+    public static final RegistryObject<EntityType<GrenadeEntity>> GRENADE =
+            registerBasic("grenade", GrenadeEntity::new);
+    public static final RegistryObject<EntityType<MissileEntity>> MISSILE =
+            registerBasic("missile", MissileEntity::new);
+    public static final RegistryObject<EntityType<ThrowableGrenadeEntity>> THROWABLE_GRENADE =
+            registerBasic("throwable_grenade", ThrowableGrenadeEntity::new);
+    public static final RegistryObject<EntityType<ThrowableStunGrenadeEntity>> THROWABLE_STUN_GRENADE =
+            registerBasic("throwable_stun_grenade", ThrowableStunGrenadeEntity::new);
 
-    public static final RegistryObject<EntityType<MissileEntity>> RPG7_MISSILE = registerBasic("rpg7_missile",
-            MissileEntity::new);
+    public static final RegistryObject<EntityType<MissileEntity>> RPG7_MISSILE =
+            registerBasic("rpg7_missile", MissileEntity::new);
 
     private static <T extends Entity> RegistryObject<EntityType<T>> registerBasic(String id,
             BiFunction<EntityType<T>, Level, T> function) {
-        return REGISTER.register(id, () -> EntityType.Builder.of(function::apply, MobCategory.MISC)
-                .sized(0.25F, 0.25F)
-                .setTrackingRange(100)
-                .setUpdateInterval(1)
-                .noSummon()
-                .fireImmune()
-                .setShouldReceiveVelocityUpdates(true).build(id));
+        return REGISTER.register(id,
+                () -> EntityType.Builder.of(function::apply, MobCategory.MISC).sized(0.25F, 0.25F)
+                        .setTrackingRange(100).setUpdateInterval(1).noSummon().fireImmune()
+                        .setShouldReceiveVelocityUpdates(true).build(id));
     }
 
-    public static void init() {
-    };
+    public static void init() {};
 
     /**
      * Entity registration that prevents the entity from being sent and tracked by
@@ -63,15 +59,12 @@ public class ModEntities {
      * @param <T>      an entity that is a projectile entity
      * @return A registry object containing the new entity type
      */
-    private static <T extends ProjectileEntity> RegistryObject<EntityType<T>> registerProjectile(String id,
-            BiFunction<EntityType<T>, Level, T> function) {
-        return REGISTER.register(id, () -> EntityType.Builder.of(function::apply, MobCategory.MISC)
-                .sized(0.25F, 0.25F)
-                .setTrackingRange(0)
-                .noSummon()
-                .fireImmune()
-                .setShouldReceiveVelocityUpdates(false)
-                .setCustomClientFactory((spawnEntity, world) -> null)
-                .build(id));
+    private static <T extends ProjectileEntity> RegistryObject<EntityType<T>> registerProjectile(
+            String id, BiFunction<EntityType<T>, Level, T> function) {
+        return REGISTER.register(id,
+                () -> EntityType.Builder.of(function::apply, MobCategory.MISC).sized(0.25F, 0.25F)
+                        .setTrackingRange(0).noSummon().fireImmune()
+                        .setShouldReceiveVelocityUpdates(false)
+                        .setCustomClientFactory((spawnEntity, world) -> null).build(id));
     }
 }

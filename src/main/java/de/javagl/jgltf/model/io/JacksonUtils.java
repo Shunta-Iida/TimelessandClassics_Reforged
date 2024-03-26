@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io;
 
@@ -57,8 +49,8 @@ public class JacksonUtils {
     private static final Consumer<JsonError> LOG_JSON_ERROR_CONSUMER = new Consumer<JsonError>() {
         @Override
         public void accept(JsonError jsonError) {
-            logger.warning("Error: " + jsonError.getMessage() +
-                    ", JSON path " + jsonError.getJsonPathString());
+            logger.warning("Error: " + jsonError.getMessage() + ", JSON path "
+                    + jsonError.getJsonPathString());
         }
     };
 
@@ -75,18 +67,15 @@ public class JacksonUtils {
             Consumer<? super JsonError> jsonErrorConsumer) {
         return new DeserializationProblemHandler() {
             @Override
-            public boolean handleUnknownProperty(
-                    DeserializationContext ctxt, JsonParser jp,
-                    JsonDeserializer<?> deserializer, Object beanOrClass,
-                    String propertyName)
+            public boolean handleUnknownProperty(DeserializationContext ctxt, JsonParser jp,
+                    JsonDeserializer<?> deserializer, Object beanOrClass, String propertyName)
                     throws IOException, JsonProcessingException {
                 if (jsonErrorConsumer != null) {
-                    jsonErrorConsumer.accept(new JsonError(
-                            "Unknown property: " + propertyName,
+                    jsonErrorConsumer.accept(new JsonError("Unknown property: " + propertyName,
                             jp.getParsingContext(), null));
                 }
-                return super.handleUnknownProperty(
-                        ctxt, jp, deserializer, beanOrClass, propertyName);
+                return super.handleUnknownProperty(ctxt, jp, deserializer, beanOrClass,
+                        propertyName);
             }
         };
     }
@@ -107,15 +96,13 @@ public class JacksonUtils {
             Consumer<? super JsonError> jsonErrorConsumer) {
         return new BeanDeserializerModifier() {
             @Override
-            public BeanDeserializerBuilder updateBuilder(
-                    DeserializationConfig config,
-                    BeanDescription beanDesc,
-                    BeanDeserializerBuilder builder) {
+            public BeanDeserializerBuilder updateBuilder(DeserializationConfig config,
+                    BeanDescription beanDesc, BeanDeserializerBuilder builder) {
                 Iterator<SettableBeanProperty> propertiesIterator = builder.getProperties();
                 while (propertiesIterator.hasNext()) {
                     SettableBeanProperty property = propertiesIterator.next();
-                    SettableBeanProperty wrappedProperty = new ErrorReportingSettableBeanProperty(
-                            property, jsonErrorConsumer);
+                    SettableBeanProperty wrappedProperty =
+                            new ErrorReportingSettableBeanProperty(property, jsonErrorConsumer);
                     builder.addOrReplaceProperty(wrappedProperty, true);
                 }
                 return builder;
@@ -142,19 +129,15 @@ public class JacksonUtils {
      *                          is <code>null</code>, then the errors will not be
      *                          handled.
      */
-    public static void configure(
-            ObjectMapper objectMapper,
+    public static void configure(ObjectMapper objectMapper,
             Consumer<? super JsonError> jsonErrorConsumer) {
         // Some glTF files have single values instead of arrays,
         // so accept this for compatibility reasons
-        objectMapper.configure(
-                DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
-        objectMapper.configure(
-                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        objectMapper.addHandler(
-                createDeserializationProblemHandler(jsonErrorConsumer));
+        objectMapper.addHandler(createDeserializationProblemHandler(jsonErrorConsumer));
 
         // Register the module that will initialize the setup context
         // with the error handling bean deserializer modifier
@@ -168,8 +151,7 @@ public class JacksonUtils {
             public void setupModule(SetupContext context) {
                 super.setupModule(context);
                 context.addBeanDeserializerModifier(
-                        createErrorHandlingBeanDeserializerModifier(
-                                jsonErrorConsumer));
+                        createErrorHandlingBeanDeserializerModifier(jsonErrorConsumer));
             }
         });
 

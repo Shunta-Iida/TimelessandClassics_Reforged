@@ -47,9 +47,9 @@ public class UpgradeBenchRenderUtil implements BlockEntityRenderer<UpgradeBenchT
      *                        CreeperRenderer.getOverlayProgress()
      */
     @Override
-    public void render(UpgradeBenchTileEntity tileEntityMBE21, float partialTicks, PoseStack matrixStack,
-            MultiBufferSource renderBuffers,
-            int combinedLight, int combinedOverlay) {
+    public void render(UpgradeBenchTileEntity tileEntityMBE21, float partialTicks,
+            PoseStack matrixStack, MultiBufferSource renderBuffers, int combinedLight,
+            int combinedOverlay) {
         // ItemTransforms.TransformType.GROUND,
         matrixStack.pushPose();
         matrixStack.translate(0.5, 1.05, 0.5);
@@ -59,10 +59,12 @@ public class UpgradeBenchRenderUtil implements BlockEntityRenderer<UpgradeBenchT
         if (!(tileEntityMBE21.getItem(0).getItem() instanceof TimelessGunItem))
             GunRenderingHandler.get().renderWeapon(Minecraft.getInstance().player,
                     ItemStack.of(tileEntityMBE21.getUpdateTag().getCompound("weapon")),
-                    ItemTransforms.TransformType.GROUND, matrixStack, renderBuffers, combinedLight, combinedOverlay);
+                    ItemTransforms.TransformType.GROUND, matrixStack, renderBuffers, combinedLight,
+                    combinedOverlay);
         else
-            GunRenderingHandler.get().renderWeapon(Minecraft.getInstance().player, tileEntityMBE21.getItem(0),
-                    ItemTransforms.TransformType.GROUND, matrixStack, renderBuffers, combinedLight, combinedOverlay);
+            GunRenderingHandler.get().renderWeapon(Minecraft.getInstance().player,
+                    tileEntityMBE21.getItem(0), ItemTransforms.TransformType.GROUND, matrixStack,
+                    renderBuffers, combinedLight, combinedOverlay);
         matrixStack.popPose();
 
         matrixStack.pushPose();
@@ -81,20 +83,20 @@ public class UpgradeBenchRenderUtil implements BlockEntityRenderer<UpgradeBenchT
         if (tileEntityMBE21.getItem(1).getItem() == ModItems.MODULE.get()) {
             if (tileEntityMBE21.getItem(1).getCount() > 0) {
                 Minecraft.getInstance().getItemRenderer().renderStatic(tileEntityMBE21.getItem(1),
-                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay, matrixStack, renderBuffers,
-                        0);
+                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay,
+                        matrixStack, renderBuffers, 0);
             }
             if (tileEntityMBE21.getItem(1).getCount() > 1) {
                 matrixStack.translate(0.12, 0, 0);
                 Minecraft.getInstance().getItemRenderer().renderStatic(tileEntityMBE21.getItem(1),
-                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay, matrixStack, renderBuffers,
-                        0);
+                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay,
+                        matrixStack, renderBuffers, 0);
             }
             if (tileEntityMBE21.getItem(1).getCount() > 2) {
                 matrixStack.translate(0.12, 0, 0);
                 Minecraft.getInstance().getItemRenderer().renderStatic(tileEntityMBE21.getItem(1),
-                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay, matrixStack, renderBuffers,
-                        0);
+                        ItemTransforms.TransformType.GROUND, combinedLight, combinedOverlay,
+                        matrixStack, renderBuffers, 0);
             }
         }
 

@@ -31,8 +31,8 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
     }
 
     @Override
-    public void render(ThrowableGrenadeEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light) {
+    public void render(ThrowableGrenadeEntity entity, float entityYaw, float partialTicks,
+            PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light) {
         matrixStack.pushPose();
 
         /* Makes the grenade face in the direction of travel */
@@ -40,7 +40,8 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(entityYaw));
 
         /* Offsets to the center of the grenade before applying rotation */
-        float rotation = entity.prevRotation + (entity.rotation - entity.prevRotation) * partialTicks;
+        float rotation =
+                entity.prevRotation + (entity.rotation - entity.prevRotation) * partialTicks;
         matrixStack.translate(0, 0.15, 0);
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(-rotation));
         matrixStack.translate(0, -0.15, 0);
@@ -54,8 +55,9 @@ public class ThrowableGrenadeRenderer extends EntityRenderer<ThrowableGrenadeEnt
         /* */
         matrixStack.translate(0.0, 0.5, 0.0);
 
-        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE,
-                light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
+        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(),
+                ItemTransforms.TransformType.NONE, light, OverlayTexture.NO_OVERLAY, matrixStack,
+                renderTypeBuffer, entity.getId());
 
         matrixStack.popPose();
     }

@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class TriggerFingerEnchantment extends GunEnchantment {
     public TriggerFingerEnchantment() {
-        super(Rarity.RARE, EnchantmentTypes.SEMI_AUTO_GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.WEAPON);
+        super(Rarity.RARE, EnchantmentTypes.SEMI_AUTO_GUN,
+                new EquipmentSlot[] {EquipmentSlot.MAINHAND}, Type.WEAPON);
     }
 
     @Override

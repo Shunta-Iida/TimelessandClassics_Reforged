@@ -26,7 +26,8 @@ import java.util.Set;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ProjectileExplosion extends Explosion {
-    private static final ExplosionDamageCalculator DEFAULT_CONTEXT = new ExplosionDamageCalculator();
+    private static final ExplosionDamageCalculator DEFAULT_CONTEXT =
+            new ExplosionDamageCalculator();
 
     private final Level world;
     private final double x;
@@ -37,8 +38,8 @@ public class ProjectileExplosion extends Explosion {
     private final ExplosionDamageCalculator context;
 
     public ProjectileExplosion(Level world, Entity exploder, @Nullable DamageSource source,
-            @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size, boolean causesFire,
-            BlockInteraction mode) {
+            @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size,
+            boolean causesFire, BlockInteraction mode) {
         super(world, exploder, source, context, x, y, z, size, causesFire, mode);
         this.world = world;
         this.x = x;
@@ -72,13 +73,14 @@ public class ProjectileExplosion extends Explosion {
                             BlockPos pos = new BlockPos(blockX, blockY, blockZ);
                             BlockState blockState = this.world.getBlockState(pos);
                             FluidState fluidState = this.world.getFluidState(pos);
-                            Optional<Float> optional = this.context.getBlockExplosionResistance(this, this.world, pos,
-                                    blockState, fluidState);
+                            Optional<Float> optional = this.context.getBlockExplosionResistance(
+                                    this, this.world, pos, blockState, fluidState);
                             if (optional.isPresent()) {
                                 f -= (optional.get() + 0.3F) * 0.3F;
                             }
 
-                            if (f > 0.0F && this.context.shouldBlockExplode(this, this.world, pos, blockState, f)) {
+                            if (f > 0.0F && this.context.shouldBlockExplode(this, this.world, pos,
+                                    blockState, f)) {
                                 set.add(pos);
                             }
 
@@ -101,10 +103,11 @@ public class ProjectileExplosion extends Explosion {
         int minZ = Mth.floor(this.z - (double) radius - 1.0D);
         int maxZ = Mth.floor(this.z + (double) radius + 1.0D);
 
-        List<Entity> entities = this.world.getEntities(this.exploder,
-                new AABB((double) minX, (double) minY, (double) minZ, (double) maxX, (double) maxY, (double) maxZ));
+        List<Entity> entities = this.world.getEntities(this.exploder, new AABB((double) minX,
+                (double) minY, (double) minZ, (double) maxX, (double) maxY, (double) maxZ));
 
-        net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.world, this, entities, radius);
+        net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.world, this, entities,
+                radius);
 
         Vec3 explosionPos = new Vec3(this.x, this.y, this.z);
         for (Entity entity : entities) {
@@ -116,9 +119,11 @@ public class ProjectileExplosion extends Explosion {
                 continue;
 
             double deltaX = entity.getX() - this.x;
-            double deltaY = (entity instanceof PrimedTnt ? entity.getY() : entity.getEyeY()) - this.y;
+            double deltaY =
+                    (entity instanceof PrimedTnt ? entity.getY() : entity.getEyeY()) - this.y;
             double deltaZ = entity.getZ() - this.z;
-            double distanceToExplosion = Mth.sqrt((float) (deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ));
+            double distanceToExplosion =
+                    Mth.sqrt((float) (deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ));
 
             if (distanceToExplosion != 0.0D) {
                 deltaX /= distanceToExplosion;
@@ -134,19 +139,23 @@ public class ProjectileExplosion extends Explosion {
             double blockDensity = (double) getSeenPercent(explosionPos, entity);
             double damage = (1.0D - strength) * blockDensity;
             entity.hurt(this.getDamageSource(),
-                    (float) ((int) ((damage * damage + damage) / 2.0D * 7.0D * (double) radius + 1.0D)));
+                    (float) ((int) ((damage * damage + damage) / 2.0D * 7.0D * (double) radius
+                            + 1.0D)));
 
             double blastDamage = damage;
             if (entity instanceof LivingEntity) {
-                blastDamage = ProtectionEnchantment.getExplosionKnockbackAfterDampener((LivingEntity) entity, damage);
+                blastDamage = ProtectionEnchantment
+                        .getExplosionKnockbackAfterDampener((LivingEntity) entity, damage);
             }
-            entity.setDeltaMovement(
-                    entity.getDeltaMovement().add(deltaX * blastDamage, deltaY * blastDamage, deltaZ * blastDamage));
+            entity.setDeltaMovement(entity.getDeltaMovement().add(deltaX * blastDamage,
+                    deltaY * blastDamage, deltaZ * blastDamage));
 
             if (entity instanceof Player) {
                 Player player = (Player) entity;
-                if (!player.isSpectator() && (!player.isCreative() || !player.getAbilities().flying)) {
-                    this.getHitPlayers().put(player, new Vec3(deltaX * damage, deltaY * damage, deltaZ * damage));
+                if (!player.isSpectator()
+                        && (!player.isCreative() || !player.getAbilities().flying)) {
+                    this.getHitPlayers().put(player,
+                            new Vec3(deltaX * damage, deltaY * damage, deltaZ * damage));
                 }
             }
         }

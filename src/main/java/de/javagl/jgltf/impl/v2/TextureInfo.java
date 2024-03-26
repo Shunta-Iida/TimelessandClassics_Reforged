@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for textureInfo.schema.json
  * 
  */
-public class TextureInfo
-        extends GlTFProperty {
+public class TextureInfo extends GlTFProperty {
 
     /**
      * The index of the texture. (required)
@@ -40,7 +38,8 @@ public class TextureInfo
      */
     public void setIndex(Integer index) {
         if (index == null) {
-            throw new NullPointerException((("Invalid value for index: " + index) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for index: " + index) + ", may not be null"));
         }
         this.index = index;
     }

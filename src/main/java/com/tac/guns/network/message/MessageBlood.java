@@ -15,8 +15,7 @@ public class MessageBlood extends PlayMessage<MessageBlood> {
     private double y;
     private double z;
 
-    public MessageBlood() {
-    }
+    public MessageBlood() {}
 
     public MessageBlood(double x, double y, double z) {
         this.x = x;

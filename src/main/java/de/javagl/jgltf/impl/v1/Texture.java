@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for texture.schema.json
  * 
  */
-public class Texture
-        extends GlTFChildOfRootProperty {
+public class Texture extends GlTFChildOfRootProperty {
 
     /**
      * The texture's format. (optional)<br>
@@ -71,9 +69,10 @@ public class Texture
             this.format = format;
             return;
         }
-        if (((((format != 6406) && (format != 6407)) && (format != 6408)) && (format != 6409)) && (format != 6410)) {
-            throw new IllegalArgumentException(
-                    (("Invalid value for format: " + format) + ", valid: [6406, 6407, 6408, 6409, 6410]"));
+        if (((((format != 6406) && (format != 6407)) && (format != 6408)) && (format != 6409))
+                && (format != 6410)) {
+            throw new IllegalArgumentException((("Invalid value for format: " + format)
+                    + ", valid: [6406, 6407, 6408, 6409, 6410]"));
         }
         this.format = format;
     }
@@ -119,8 +118,9 @@ public class Texture
         }
         if (((((internalFormat != 6406) && (internalFormat != 6407)) && (internalFormat != 6408))
                 && (internalFormat != 6409)) && (internalFormat != 6410)) {
-            throw new IllegalArgumentException((("Invalid value for internalFormat: " + internalFormat)
-                    + ", valid: [6406, 6407, 6408, 6409, 6410]"));
+            throw new IllegalArgumentException(
+                    (("Invalid value for internalFormat: " + internalFormat)
+                            + ", valid: [6406, 6407, 6408, 6409, 6410]"));
         }
         this.internalFormat = internalFormat;
     }
@@ -158,7 +158,8 @@ public class Texture
      */
     public void setSampler(String sampler) {
         if (sampler == null) {
-            throw new NullPointerException((("Invalid value for sampler: " + sampler) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for sampler: " + sampler) + ", may not be null"));
         }
         this.sampler = sampler;
     }
@@ -182,7 +183,8 @@ public class Texture
      */
     public void setSource(String source) {
         if (source == null) {
-            throw new NullPointerException((("Invalid value for source: " + source) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for source: " + source) + ", may not be null"));
         }
         this.source = source;
     }
@@ -213,7 +215,8 @@ public class Texture
             return;
         }
         if (target != 3553) {
-            throw new IllegalArgumentException((("Invalid value for target: " + target) + ", valid: [3553]"));
+            throw new IllegalArgumentException(
+                    (("Invalid value for target: " + target) + ", valid: [3553]"));
         }
         this.target = target;
     }

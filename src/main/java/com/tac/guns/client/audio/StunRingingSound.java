@@ -3,6 +3,7 @@ package com.tac.guns.client.audio;
 import com.tac.guns.Config;
 import com.tac.guns.init.ModEffects;
 import com.tac.guns.init.ModSounds;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.sounds.SoundSource;
@@ -26,7 +27,8 @@ public class StunRingingSound extends AbstractTickableSoundInstance {
                 this.x = (float) player.getX();
                 this.y = (float) player.getY();
                 this.z = (float) player.getZ();
-                float percent = Math.min((effect.getDuration() / (float) Config.SERVER.soundFadeThreshold.get()), 1);
+                float percent = Math.min(
+                        (effect.getDuration() / (float) Config.SERVER.soundFadeThreshold.get()), 1);
                 this.volume = (float) (percent * Config.SERVER.ringVolume.get());
                 return;
             }

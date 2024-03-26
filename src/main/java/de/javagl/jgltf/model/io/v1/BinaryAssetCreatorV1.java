@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io.v1;
 
@@ -76,15 +68,13 @@ final class BinaryAssetCreatorV1 {
         ByteBuffer binaryGltfByteBuffer = Buffers.create(binaryGltfBufferSize);
 
         // Create the "binary_glTF" Buffer,
-        GltfExtensionsV1.addExtensionUsed(outputGltf,
-                BinaryGltfV1.getBinaryGltfExtensionName());
+        GltfExtensionsV1.addExtensionUsed(outputGltf, BinaryGltfV1.getBinaryGltfExtensionName());
         Buffer binaryGltfBuffer = new Buffer();
         binaryGltfBuffer.setType("arraybuffer");
-        binaryGltfBuffer.setUri(
-                BinaryGltfV1.getBinaryGltfBufferId() + ".bin");
+        binaryGltfBuffer.setUri(BinaryGltfV1.getBinaryGltfBufferId() + ".bin");
         binaryGltfBuffer.setByteLength(binaryGltfBufferSize);
-        Map<String, Buffer> newBuffers = Collections.singletonMap(
-                BinaryGltfV1.getBinaryGltfBufferId(), binaryGltfBuffer);
+        Map<String, Buffer> newBuffers =
+                Collections.singletonMap(BinaryGltfV1.getBinaryGltfBufferId(), binaryGltfBuffer);
 
         // Create defensive copies of the original maps, as linked maps
         // with a fixed iteration order (!). If the input maps are null,
@@ -98,18 +88,12 @@ final class BinaryAssetCreatorV1 {
         // new binary glTF buffer. The mappings from IDs to offsets
         // inside the resulting buffer will be used to compute the
         // offsets for the buffer views
-        Map<String, Integer> bufferOffsets = concatBuffers(
-                oldBuffers.keySet(),
-                id -> gltfModel.getBufferModelById(id).getBufferData(),
-                binaryGltfByteBuffer);
-        Map<String, Integer> imageOffsets = concatBuffers(
-                oldImages.keySet(),
-                id -> gltfModel.getImageModelById(id).getImageData(),
-                binaryGltfByteBuffer);
-        Map<String, Integer> shaderOffsets = concatBuffers(
-                oldShaders.keySet(),
-                id -> gltfModel.getShaderModelById(id).getShaderData(),
-                binaryGltfByteBuffer);
+        Map<String, Integer> bufferOffsets = concatBuffers(oldBuffers.keySet(),
+                id -> gltfModel.getBufferModelById(id).getBufferData(), binaryGltfByteBuffer);
+        Map<String, Integer> imageOffsets = concatBuffers(oldImages.keySet(),
+                id -> gltfModel.getImageModelById(id).getImageData(), binaryGltfByteBuffer);
+        Map<String, Integer> shaderOffsets = concatBuffers(oldShaders.keySet(),
+                id -> gltfModel.getShaderModelById(id).getShaderData(), binaryGltfByteBuffer);
         binaryGltfByteBuffer.position(0);
 
         // For all existing BufferViews, create new ones that are updated to
@@ -151,13 +135,12 @@ final class BinaryAssetCreatorV1 {
             imageBufferView.setByteLength(byteLength);
 
             // Store the BufferView under a newly generated ID
-            String generatedBufferViewId = GltfIds.generateId("bufferView_for_image_" + id,
-                    oldBufferViews.keySet());
+            String generatedBufferViewId =
+                    GltfIds.generateId("bufferView_for_image_" + id, oldBufferViews.keySet());
             newBufferViews.put(generatedBufferViewId, imageBufferView);
 
             // Let the image refer to the BufferView via its extension object
-            BinaryGltfV1.setBinaryGltfBufferViewId(
-                    newImage, generatedBufferViewId);
+            BinaryGltfV1.setBinaryGltfBufferViewId(newImage, generatedBufferViewId);
 
             // Set the width, height and mimeType properties for the
             // extension object
@@ -186,13 +169,12 @@ final class BinaryAssetCreatorV1 {
             shaderBufferView.setByteLength(byteLength);
 
             // Store the BufferView under a newly generated ID
-            String generatedBufferViewId = GltfIds.generateId("bufferView_for_shader_" + id,
-                    oldBufferViews.keySet());
+            String generatedBufferViewId =
+                    GltfIds.generateId("bufferView_for_shader_" + id, oldBufferViews.keySet());
             newBufferViews.put(generatedBufferViewId, shaderBufferView);
 
             // Let the shader refer to the BufferView via its extension object
-            BinaryGltfV1.setBinaryGltfBufferViewId(
-                    newShader, generatedBufferViewId);
+            BinaryGltfV1.setBinaryGltfBufferViewId(newShader, generatedBufferViewId);
 
             newShaders.put(id, newShader);
         }
@@ -253,10 +235,8 @@ final class BinaryAssetCreatorV1 {
      * @param targetBuffer    The target buffer
      * @return A mapping from each key to the offset inside the target buffer
      */
-    private static <K> Map<K, Integer> concatBuffers(
-            Iterable<K> keys,
-            Function<? super K, ? extends ByteBuffer> keyToByteBuffer,
-            ByteBuffer targetBuffer) {
+    private static <K> Map<K, Integer> concatBuffers(Iterable<K> keys,
+            Function<? super K, ? extends ByteBuffer> keyToByteBuffer, ByteBuffer targetBuffer) {
         Map<K, Integer> offsets = new LinkedHashMap<K, Integer>();
         for (K key : keys) {
             ByteBuffer oldByteBuffer = keyToByteBuffer.apply(key);

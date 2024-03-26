@@ -69,8 +69,7 @@ public class ShootingHandler {
 
     private int emptyCheckCountDown = 40;
 
-    private ShootingHandler() {
-    }
+    private ShootingHandler() {}
 
     @SubscribeEvent
     public void onWorldUnload(WorldEvent.Unload event) {
@@ -161,7 +160,8 @@ public class ShootingHandler {
         // TODO: Gurantee this solution is good, run a performance profile soon and
         // reduce renderTick listeners
         if (HUDRenderingHandler.get().hitMarkerTracker > 0F)
-            HUDRenderingHandler.get().hitMarkerTracker -= evt.renderTickTime * hitmarkerCooldownMultiplier();
+            HUDRenderingHandler.get().hitMarkerTracker -=
+                    evt.renderTickTime * hitmarkerCooldownMultiplier();
         else
             HUDRenderingHandler.get().hitMarkerTracker = 0;
         if (shootMsGap > 0F) {
@@ -184,7 +184,8 @@ public class ShootingHandler {
             return;
         else if (controller.isAnimationRunning() && (shootMsGap < 0F && this.burstTracker != 0)) {
             if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.PUMP)
-                    || controller.isAnimationRunning(GunAnimationController.AnimationLabel.PULL_BOLT))
+                    || controller
+                            .isAnimationRunning(GunAnimationController.AnimationLabel.PULL_BOLT))
                 return;
             if (Config.CLIENT.controls.burstPress.get())
                 this.burstTracker = 0;
@@ -207,14 +208,15 @@ public class ShootingHandler {
             shootTickGapLeft -= shootTickGapLeft > 0F ? 1F : 0F;
 
             ItemStack heldItem = player.getMainHandItem();
-            if (heldItem.getItem() instanceof GunItem && (Gun.hasAmmo(heldItem) || player.isCreative())) {
-                final float dist = Math.abs(player.zza) / 2.5F
-                        + Math.abs(player.xxa) / 1.25F
+            if (heldItem.getItem() instanceof GunItem
+                    && (Gun.hasAmmo(heldItem) || player.isCreative())) {
+                final float dist = Math.abs(player.zza) / 2.5F + Math.abs(player.xxa) / 1.25F
                         + (player.getDeltaMovement().y > 0D ? 0.5F : 0F);
                 PacketHandler.getPlayChannel().sendToServer(new MessageUpdateMoveInacc(dist));
 
                 // Update #shooting state if it has changed
-                final boolean shooting = Keys.PULL_TRIGGER.isDown() && GunRenderingHandler.get().sprintTransition == 0;
+                final boolean shooting = Keys.PULL_TRIGGER.isDown()
+                        && GunRenderingHandler.get().sprintTransition == 0;
                 // TODO: check if this is needed
                 // if(GunMod.controllableLoaded)
                 // {
@@ -261,20 +263,22 @@ public class ShootingHandler {
                 if (emptyCheckCountDown > emptyCheckCoolDown) {
                     if (magError(player, heldItem)) {
                         emptyCheckCountDown = 0;
-                        player.displayClientMessage(
-                                new TranslatableComponent("info.tac.mag_error").withStyle(ChatFormatting.UNDERLINE)
-                                        .withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED),
-                                true);
+                        player.displayClientMessage(new TranslatableComponent("info.tac.mag_error")
+                                .withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.BOLD)
+                                .withStyle(ChatFormatting.RED), true);
                         PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
                         return;
                     }
                 }
 
-                if (heldItem.getTag().getInt("CurrentFireMode") == 3 && this.burstCooldown == 0 && !this.isPressed) {
+                if (heldItem.getTag().getInt("CurrentFireMode") == 3 && this.burstCooldown == 0
+                        && !this.isPressed) {
                     this.isPressed = true;
-                    this.burstTracker = ((TimelessGunItem) heldItem.getItem()).getGun().getGeneral().getBurstCount();
+                    this.burstTracker = ((TimelessGunItem) heldItem.getItem()).getGun().getGeneral()
+                            .getBurstCount();
                     fire(player, heldItem);
-                    this.burstCooldown = ((TimelessGunItem) heldItem.getItem()).getGun().getGeneral().getBurstRate();
+                    this.burstCooldown = ((TimelessGunItem) heldItem.getItem()).getGun()
+                            .getGeneral().getBurstRate();
                 } else if (this.burstCooldown == 0 && !this.isPressed) {
                     this.isPressed = true;
                     fire(player, heldItem);
@@ -284,8 +288,10 @@ public class ShootingHandler {
                     if (!(heldItem.getTag().getInt("AmmoCount") > 0)) {
                         emptyCheckCountDown = 0;
                         player.displayClientMessage(
-                                new TranslatableComponent("info.tac.out_of_ammo").withStyle(ChatFormatting.UNDERLINE)
-                                        .withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED),
+                                new TranslatableComponent("info.tac.out_of_ammo")
+                                        .withStyle(ChatFormatting.UNDERLINE)
+                                        .withStyle(ChatFormatting.BOLD)
+                                        .withStyle(ChatFormatting.RED),
                                 true);
                         PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
                     }
@@ -315,25 +321,29 @@ public class ShootingHandler {
                     return;
                 }
                 TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
-                if (heldItem.getTag().getInt("CurrentFireMode") == 3 && Config.CLIENT.controls.burstPress.get()) {
+                if (heldItem.getTag().getInt("CurrentFireMode") == 3
+                        && Config.CLIENT.controls.burstPress.get()) {
                     if (this.burstTracker > 0)
                         fire(player, heldItem);
                     return;
                 } else if (Keys.PULL_TRIGGER.isDown()) {
                     Gun gun = ((TimelessGunItem) heldItem.getItem()).getModifiedGun(heldItem);
-                    if (gun.getGeneral().isAuto() && heldItem.getTag().getInt("CurrentFireMode") == 2) {
+                    if (gun.getGeneral().isAuto()
+                            && heldItem.getTag().getInt("CurrentFireMode") == 2) {
                         fire(player, heldItem);
                         return;
                     }
-                    if (heldItem.getTag().getInt("CurrentFireMode") == 3 && !Config.CLIENT.controls.burstPress.get()
-                            && !this.clickUp && this.burstCooldown == 0) {
+                    if (heldItem.getTag().getInt("CurrentFireMode") == 3
+                            && !Config.CLIENT.controls.burstPress.get() && !this.clickUp
+                            && this.burstCooldown == 0) {
                         if (this.burstTracker < gun.getGeneral().getBurstCount()) {
                             if (ShootingHandler.get().getshootMsGap() <= 0) {
                                 fire(player, heldItem);
                                 if (!this.shootErr)
                                     this.burstTracker++;
                             }
-                        } else if (heldItem.getTag().getInt("AmmoCount") > 0 && this.burstTracker > 0) {
+                        } else if (heldItem.getTag().getInt("AmmoCount") > 0
+                                && this.burstTracker > 0) {
                             this.burstTracker = 0;
                             this.clickUp = true;
                             this.burstCooldown = gun.getGeneral().getBurstRate();
@@ -390,8 +400,9 @@ public class ShootingHandler {
             shootMsGap = calcShootTickGap((int) rpm);
             RecoilHandler.get().lastRandPitch = RecoilHandler.get().lastRandPitch;
             RecoilHandler.get().lastRandYaw = RecoilHandler.get().lastRandYaw;
-            PacketHandler.getPlayChannel().sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1),
-                    RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));
+            PacketHandler.getPlayChannel()
+                    .sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1),
+                            RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));
 
             if (Config.CLIENT.controls.burstPress.get())
                 this.burstTracker--;
@@ -402,17 +413,21 @@ public class ShootingHandler {
     }
 
     private boolean magError(Player player, ItemStack heldItem) {
-        int[] extraAmmo = ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAdditionalAmmoPerOC();
+        int[] extraAmmo = ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
+                .getMaxAdditionalAmmoPerOC();
         int magMode = GunModifierHelper.getAmmoCapacity(heldItem);
         if (magMode < 0) {
-            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount")
-                    - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()) {
+            if (heldItem.getItem() instanceof TimelessGunItem
+                    && heldItem.getTag().getInt("AmmoCount")
+                            - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
+                                    .getMaxAmmo()) {
                 return true;
             }
         } else {
-            if (heldItem.getItem() instanceof TimelessGunItem && heldItem.getTag().getInt("AmmoCount")
-                    - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()
-                            + extraAmmo[magMode]) {
+            if (heldItem.getItem() instanceof TimelessGunItem
+                    && heldItem.getTag().getInt("AmmoCount")
+                            - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
+                                    .getMaxAmmo() + extraAmmo[magMode]) {
                 return true;
             }
         }

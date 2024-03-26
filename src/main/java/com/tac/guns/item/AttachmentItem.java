@@ -34,11 +34,13 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.BINDING_CURSE || super.canApplyAtEnchantingTable(stack, enchantment);
+        return enchantment == Enchantments.BINDING_CURSE
+                || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip,
+            TooltipFlag flag) {
 
         // add the attachment type to the tooltip
         tooltip.add(new TranslatableComponent(this.getType().getTranslationKey()));
@@ -49,8 +51,8 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
 
             // for classic attachments
             if (perks != null && perks.size() > 0) {
-                tooltip.add(new TranslatableComponent("perk.tac.title").withStyle(ChatFormatting.GOLD,
-                        ChatFormatting.BOLD));
+                tooltip.add(new TranslatableComponent("perk.tac.title")
+                        .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
                 tooltip.addAll(perks);
                 return;
             }
@@ -86,7 +88,8 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
             for (IGunModifier modifier : modifiers) {
                 if (modifier.silencedFire()) {
                     addPerkP(positivePerks, "perk.tac.silenced.positive",
-                            new TranslatableComponent("perk.tac.silencedv2").withStyle(ChatFormatting.GREEN));
+                            new TranslatableComponent("perk.tac.silencedv2")
+                                    .withStyle(ChatFormatting.GREEN));
                     break;
                 }
             }
@@ -98,11 +101,11 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
                 outputRadius = modifier.modifyFireSoundRadius(outputRadius);
             }
             if (outputRadius > inputRadius) {
-                addPerkN(negativePerks, "perk.tac.sound_radius.negative",
-                        new TranslatableComponent("perk.tac.sound_radiusv2", "+" + Math.round(outputRadius)));
+                addPerkN(negativePerks, "perk.tac.sound_radius.negative", new TranslatableComponent(
+                        "perk.tac.sound_radiusv2", "+" + Math.round(outputRadius)));
             } else if (outputRadius < inputRadius) {
-                addPerkP(positivePerks, "perk.tac.sound_radius.positive",
-                        new TranslatableComponent("perk.tac.sound_radiusv2", "-" + Math.round(outputRadius)));
+                addPerkP(positivePerks, "perk.tac.sound_radius.positive", new TranslatableComponent(
+                        "perk.tac.sound_radiusv2", "-" + Math.round(outputRadius)));
             }
 
             /* Test for additional damage */
@@ -139,12 +142,12 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
             }
             if (outputDamage > inputDamage) {
                 addPerkP(positivePerks, "perk.tac.modified_damage.positive",
-                        new TranslatableComponent("perk.tac.modified_damage.positivev2", outputDamage)
-                                .withStyle(ChatFormatting.GREEN));
+                        new TranslatableComponent("perk.tac.modified_damage.positivev2",
+                                outputDamage).withStyle(ChatFormatting.GREEN));
             } else if (outputDamage < inputDamage) {
                 addPerkN(positivePerks, "perk.tac.modified_damage.negative",
-                        new TranslatableComponent("perk.tac.modified_damage.negativev2", outputDamage)
-                                .withStyle(ChatFormatting.RED));
+                        new TranslatableComponent("perk.tac.modified_damage.negativev2",
+                                outputDamage).withStyle(ChatFormatting.RED));
             }
 
             /* Test for modified damage */
@@ -154,11 +157,13 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
                 outputSpeed = modifier.modifyProjectileSpeed(outputSpeed);
             }
             if (outputSpeed > inputSpeed) {
-                addPerkP(positivePerks, "perk.tac.projectile_speed.positive", new TranslatableComponent(
-                        "perk.tac.projectile_speed.positivev2", Math.round((10.0F - outputSpeed) * 10) + "%"));
+                addPerkP(positivePerks, "perk.tac.projectile_speed.positive",
+                        new TranslatableComponent("perk.tac.projectile_speed.positivev2",
+                                Math.round((10.0F - outputSpeed) * 10) + "%"));
             } else if (outputSpeed < inputSpeed) {
-                addPerkN(negativePerks, "perk.tac.projectile_speed.negative", new TranslatableComponent(
-                        "perk.tac.projectile_speed.negativev2", Math.round((10.0F - outputSpeed) * 10) + "%"));
+                addPerkN(negativePerks, "perk.tac.projectile_speed.negative",
+                        new TranslatableComponent("perk.tac.projectile_speed.negativev2",
+                                Math.round((10.0F - outputSpeed) * 10) + "%"));
             }
 
             /* Test for modified projectile spread */
@@ -170,11 +175,13 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
             if (outputSpread > inputSpread) {
                 addPerkN(negativePerks, "perk.tac.projectile_spread.negative",
                         new TranslatableComponent("perk.tac.projectile_spread.negativev2",
-                                Math.round((10.0F - outputSpread) * 10) + "%").withStyle(ChatFormatting.RED));
+                                Math.round((10.0F - outputSpread) * 10) + "%")
+                                        .withStyle(ChatFormatting.RED));
             } else if (outputSpread < inputSpread) {
                 addPerkP(positivePerks, "perk.tac.projectile_spread.positive",
                         new TranslatableComponent("perk.tac.projectile_spread.positivev2",
-                                Math.round((10.0F - outputSpread) * 10) + "%").withStyle(ChatFormatting.GREEN));
+                                Math.round((10.0F - outputSpread) * 10) + "%")
+                                        .withStyle(ChatFormatting.GREEN));
             }
 
             /* Test for modified projectile spread */
@@ -201,8 +208,8 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
                 addPerkN(negativePerks, "perk.tac.projectile_spread_hip.negativev2",
                         String.valueOf(Math.round((10.0F - outputHipFireSpread) * 10f)) + "%");
             } else if (outputHipFireSpread < inputHipFireSpread) {
-                addPerkP(positivePerks, "perk.tac.projectile_spread_hip.positivev2",
-                        "+" + String.valueOf(Math.round((10.0F - outputHipFireSpread) * 10f)) + "%");
+                addPerkP(positivePerks, "perk.tac.projectile_spread_hip.positivev2", "+"
+                        + String.valueOf(Math.round((10.0F - outputHipFireSpread) * 10f)) + "%");
             }
 
             /* Test for modified projectile life */
@@ -212,9 +219,11 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
                 outputLife = modifier.modifyProjectileLife(outputLife);
             }
             if (outputLife > inputLife) {
-                addPerkP(positivePerks, "perk.tac.projectile_life.positivev2", String.valueOf(outputLife));
+                addPerkP(positivePerks, "perk.tac.projectile_life.positivev2",
+                        String.valueOf(outputLife));
             } else if (outputLife < inputLife) {
-                addPerkN(positivePerks, "perk.tac.projectile_life.negativev2", String.valueOf(outputLife));
+                addPerkN(positivePerks, "perk.tac.projectile_life.negativev2",
+                        String.valueOf(outputLife));
             }
 
             /* Test for modified recoil */

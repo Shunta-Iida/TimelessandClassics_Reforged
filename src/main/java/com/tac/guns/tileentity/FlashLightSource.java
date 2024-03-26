@@ -14,10 +14,12 @@ public class FlashLightSource extends BlockEntity {
 
     public static int ticks;
 
-    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state,
+            T blockEntity) {
         ticks++;
         if (ticks > 4) {
-            blockEntity.getLevel().setBlock(blockEntity.getBlockPos(), Blocks.AIR.defaultBlockState(), 3);
+            blockEntity.getLevel().setBlock(blockEntity.getBlockPos(),
+                    Blocks.AIR.defaultBlockState(), 3);
             blockEntity.getLevel().removeBlockEntity(blockEntity.getBlockPos());
         }
     }

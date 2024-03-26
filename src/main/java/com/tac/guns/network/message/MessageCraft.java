@@ -17,8 +17,7 @@ public class MessageCraft extends PlayMessage<MessageCraft> {
     private ResourceLocation id;
     private BlockPos pos;
 
-    public MessageCraft() {
-    }
+    public MessageCraft() {}
 
     public MessageCraft(ResourceLocation id, BlockPos pos) {
         this.id = id;

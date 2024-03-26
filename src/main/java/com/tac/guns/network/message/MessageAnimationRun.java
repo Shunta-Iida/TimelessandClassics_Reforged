@@ -16,13 +16,10 @@ public class MessageAnimationRun extends PlayMessage<MessageAnimationRun> {
     private boolean play;
     private UUID fromWho;
 
-    public MessageAnimationRun() {
-    }
+    public MessageAnimationRun() {}
 
-    public MessageAnimationRun(ResourceLocation animationResource,
-            ResourceLocation soundResource,
-            boolean play,
-            UUID fromWho) {
+    public MessageAnimationRun(ResourceLocation animationResource, ResourceLocation soundResource,
+            boolean play, UUID fromWho) {
         this.animationResource = animationResource;
         this.soundResource = soundResource;
         this.play = play;
@@ -44,10 +41,12 @@ public class MessageAnimationRun extends PlayMessage<MessageAnimationRun> {
     }
 
     @Override
-    public void handle(MessageAnimationRun messageAnimationRun, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageAnimationRun messageAnimationRun,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
-            MessageAnimationSound message = new MessageAnimationSound(messageAnimationRun.animationResource,
-                    messageAnimationRun.soundResource, messageAnimationRun.play, messageAnimationRun.fromWho);
+            MessageAnimationSound message = new MessageAnimationSound(
+                    messageAnimationRun.animationResource, messageAnimationRun.soundResource,
+                    messageAnimationRun.play, messageAnimationRun.fromWho);
             // TODO: Send to ALL? Is this not why we hear animations across the world?
             PacketHandler.getPlayChannel().send(PacketDistributor.ALL.noArg(), message);
         });

@@ -39,7 +39,8 @@ public class Program {
         }
     }
 
-    public Program(ResourceLocation vertexShader, ResourceLocation fragmentShader) throws Exception {
+    public Program(ResourceLocation vertexShader, ResourceLocation fragmentShader)
+            throws Exception {
         int vertShader = createShader(vertexShader, ARBVertexShader.GL_VERTEX_SHADER_ARB);
         int fragShader = createShader(fragmentShader, ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
 
@@ -70,7 +71,8 @@ public class Program {
             if (shader == 0)
                 throw new Exception("glCreateShaderObjectARB failed");
 
-            Resource resource = Minecraft.getInstance().getResourceManager().getResource(resourceLocation);
+            Resource resource =
+                    Minecraft.getInstance().getResourceManager().getResource(resourceLocation);
             try (InputStream is = resource.getInputStream()) {
                 glShaderSourceARB(shader, IOUtils.toString(is));
             }

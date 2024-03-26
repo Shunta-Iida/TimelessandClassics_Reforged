@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io.v2;
 
@@ -118,11 +110,8 @@ final class DefaultAssetCreatorV2 {
      */
     private static <T> Set<String> collectUriStrings(Collection<T> elements,
             Function<? super T, ? extends String> uriFunction) {
-        return elements.stream()
-                .map(uriFunction)
-                .filter(Objects::nonNull)
-                .filter(uriString -> !IO.isDataUriString(uriString))
-                .collect(Collectors.toSet());
+        return elements.stream().map(uriFunction).filter(Objects::nonNull)
+                .filter(uriString -> !IO.isDataUriString(uriString)).collect(Collectors.toSet());
     }
 
     /**
@@ -141,16 +130,14 @@ final class DefaultAssetCreatorV2 {
      * @param index     The index of the {@link Buffer}
      * @param buffer    The {@link Buffer}
      */
-    private void storeBufferAsDefault(
-            GltfModelV2 gltfModel, int index, Buffer buffer) {
+    private void storeBufferAsDefault(GltfModelV2 gltfModel, int index, Buffer buffer) {
         BufferModel bufferModel = gltfModel.getBufferModels().get(index);
         ByteBuffer bufferData = bufferModel.getBufferData();
 
         String oldUriString = buffer.getUri();
         String newUriString = oldUriString;
         if (oldUriString == null || IO.isDataUriString(oldUriString)) {
-            newUriString = UriStrings.createBufferUriString(
-                    existingBufferUriStrings);
+            newUriString = UriStrings.createBufferUriString(existingBufferUriStrings);
             buffer.setUri(newUriString);
             existingBufferUriStrings.add(newUriString);
         }
@@ -176,16 +163,14 @@ final class DefaultAssetCreatorV2 {
      * @param index     The index of the {@link Image}
      * @param image     The {@link Image}
      */
-    private void storeImageAsDefault(
-            GltfModelV2 gltfModel, int index, Image image) {
+    private void storeImageAsDefault(GltfModelV2 gltfModel, int index, Image image) {
         ImageModel imageModel = gltfModel.getImageModels().get(index);
         ByteBuffer imageData = imageModel.getImageData();
 
         String oldUriString = image.getUri();
         String newUriString = oldUriString;
         if (oldUriString == null || IO.isDataUriString(oldUriString)) {
-            newUriString = UriStrings.createImageUriString(
-                    imageModel, existingImageUriStrings);
+            newUriString = UriStrings.createImageUriString(imageModel, existingImageUriStrings);
             image.setUri(newUriString);
             existingImageUriStrings.add(newUriString);
         }

@@ -65,14 +65,14 @@ public class MovementAdaptationsHandler {
         return instance == null ? instance = new MovementAdaptationsHandler() : instance;
     }
 
-    private MovementAdaptationsHandler() {
-    }
+    private MovementAdaptationsHandler() {}
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onFovUpdate(FOVModifierEvent event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null && !mc.player.getMainHandItem().isEmpty()
-                && mc.options.getCameraType() == CameraType.FIRST_PERSON && mc.options.fovEffectScale > 0) {
+                && mc.options.getCameraType() == CameraType.FIRST_PERSON
+                && mc.options.fovEffectScale > 0) {
             ItemStack heldItem = mc.player.getMainHandItem();
             if (heldItem.getItem() instanceof TimelessGunItem) {
                 if (event.getEntity().isSprinting())
@@ -88,15 +88,18 @@ public class MovementAdaptationsHandler {
         if (!(event.getEntityLiving().getMainHandItem().getItem() instanceof TimelessGunItem))
             return;
         if (speed < 0.0875f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 2.25,
+            event.getEntityLiving().setDeltaMovement(
+                    event.getEntityLiving().getDeltaMovement().x() / 2.25,
                     event.getEntityLiving().getDeltaMovement().y() / 1.125,
                     event.getEntityLiving().getDeltaMovement().z() / 2.25);
         else if (speed < 0.9f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 1.75,
+            event.getEntityLiving().setDeltaMovement(
+                    event.getEntityLiving().getDeltaMovement().x() / 1.75,
                     event.getEntityLiving().getDeltaMovement().y(),
                     event.getEntityLiving().getDeltaMovement().z() / 1.75);
         else if (speed < 0.95f)
-            event.getEntityLiving().setDeltaMovement(event.getEntityLiving().getDeltaMovement().x() / 1.25,
+            event.getEntityLiving().setDeltaMovement(
+                    event.getEntityLiving().getDeltaMovement().x() / 1.25,
                     event.getEntityLiving().getDeltaMovement().y(),
                     event.getEntityLiving().getDeltaMovement().z() / 1.25);
     }

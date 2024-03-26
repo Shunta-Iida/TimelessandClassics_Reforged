@@ -1,25 +1,55 @@
 package com.tac.guns;
 
+import java.lang.reflect.Field;
+import java.util.Locale;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+
 import com.tac.guns.client.ClientHandler;
 import com.tac.guns.client.CustomGunManager;
 import com.tac.guns.client.CustomRigManager;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.render.model.OverrideModelManager;
-import com.tac.guns.client.render.pose.*;
+import com.tac.guns.client.render.pose.OneHandedPoseHighRes_m1851;
+import com.tac.guns.client.render.pose.OneHandedPoseHighRes_m1873;
+import com.tac.guns.client.render.pose.OneHandedPoseHighRes_m1911;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_ak47;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_m1894;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_m1928;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_m60;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_mosin;
+import com.tac.guns.client.render.pose.TwoHandedPoseHighRes_vector;
 import com.tac.guns.common.BoundingBoxManager;
 import com.tac.guns.common.GripType;
 import com.tac.guns.common.ProjectileManager;
 import com.tac.guns.common.tooling.CommandsHandler;
 import com.tac.guns.common.tooling.CommandsManager;
 import com.tac.guns.crafting.RecipeType;
-import com.tac.guns.datagen.*;
+import com.tac.guns.datagen.BlockTagGen;
+import com.tac.guns.datagen.ItemTagGen;
+import com.tac.guns.datagen.LanguageGen;
+import com.tac.guns.datagen.LootTableGen;
+import com.tac.guns.datagen.RecipeGen;
 import com.tac.guns.enchantment.EnchantmentTypes;
 import com.tac.guns.entity.MissileEntity;
-import com.tac.guns.init.*;
+import com.tac.guns.init.ModBlocks;
+import com.tac.guns.init.ModContainers;
+import com.tac.guns.init.ModEffects;
+import com.tac.guns.init.ModEnchantments;
+import com.tac.guns.init.ModEntities;
+import com.tac.guns.init.ModItems;
+import com.tac.guns.init.ModParticleTypes;
+import com.tac.guns.init.ModRecipeSerializers;
+import com.tac.guns.init.ModSounds;
+import com.tac.guns.init.ModSyncedDataKeys;
+import com.tac.guns.init.ModTileEntities;
 import com.tac.guns.inventory.gear.IWearableItemHandler;
 import com.tac.guns.inventory.gear.armor.IAmmoItemHandler;
 import com.tac.guns.item.transition.TimelessGunItem;
 import com.tac.guns.network.PacketHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.DataGenerator;
@@ -42,12 +72,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.forgespi.language.IModInfo;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Field;
-import java.util.Locale;
 
 @Mod(Reference.MOD_ID)
 public class GunMod {
@@ -92,7 +116,8 @@ public class GunMod {
         @Override
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.VECTOR45.get());
-            stack.getOrCreateTag().putInt("AmmoCount", ModItems.VECTOR45.get().getGun().getReloads().getMaxAmmo());
+            stack.getOrCreateTag().putInt("AmmoCount",
+                    ModItems.VECTOR45.get().getGun().getReloads().getMaxAmmo());
             return stack;
         }
 
@@ -106,7 +131,8 @@ public class GunMod {
         @Override
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.AK47.get());
-            stack.getOrCreateTag().putInt("AmmoCount", ModItems.AK47.get().getGun().getReloads().getMaxAmmo());
+            stack.getOrCreateTag().putInt("AmmoCount",
+                    ModItems.AK47.get().getGun().getReloads().getMaxAmmo());
             return stack;
         }
 
@@ -150,7 +176,8 @@ public class GunMod {
         @Override
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.M60.get());
-            stack.getOrCreateTag().putInt("AmmoCount", ModItems.M60.get().getGun().getReloads().getMaxAmmo());
+            stack.getOrCreateTag().putInt("AmmoCount",
+                    ModItems.M60.get().getGun().getReloads().getMaxAmmo());
             return stack;
         }
 
@@ -240,7 +267,8 @@ public class GunMod {
         // disabled for these as well, aka requiring reimplementation
         ProjectileManager.getInstance().registerFactory(ModItems.RPG7_MISSILE.get(),
                 (worldIn, entity, weapon, item, modifiedGun, randP, randY) -> new MissileEntity(
-                        ModEntities.RPG7_MISSILE.get(), worldIn, entity, weapon, item, modifiedGun, 1.5F));
+                        ModEntities.RPG7_MISSILE.get(), worldIn, entity, weapon, item, modifiedGun,
+                        1.5F));
         // ProjectileManager.getInstance().registerFactory(ModItems.GRENADE_40MM.get(),
         // (worldIn, entity, weapon, item, modifiedGun, randP, randY) -> new
         // GrenadeEntity(ModEntities.GRENADE.get(), worldIn, entity, weapon, item,
@@ -255,24 +283,24 @@ public class GunMod {
             MinecraftForge.EVENT_BUS.register(new BoundingBoxManager());
         }
 
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "one_handed_m1911"), new OneHandedPoseHighRes_m1911()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "one_handed_m1851"), new OneHandedPoseHighRes_m1851()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_m1894"), new TwoHandedPoseHighRes_m1894()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_m1928"), new TwoHandedPoseHighRes_m1928()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_mosin"), new TwoHandedPoseHighRes_mosin()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_ak47"), new TwoHandedPoseHighRes_ak47()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_m60"), new TwoHandedPoseHighRes_m60()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "two_handed_vector"), new TwoHandedPoseHighRes_vector()));
-        GripType.registerType(
-                new GripType(new ResourceLocation("tac", "one_handed_m1873"), new OneHandedPoseHighRes_m1873()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1911"),
+                new OneHandedPoseHighRes_m1911()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1851"),
+                new OneHandedPoseHighRes_m1851()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m1894"),
+                new TwoHandedPoseHighRes_m1894()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m1928"),
+                new TwoHandedPoseHighRes_m1928()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_mosin"),
+                new TwoHandedPoseHighRes_mosin()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_ak47"),
+                new TwoHandedPoseHighRes_ak47()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m60"),
+                new TwoHandedPoseHighRes_m60()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_vector"),
+                new TwoHandedPoseHighRes_vector()));
+        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1873"),
+                new OneHandedPoseHighRes_m1873()));
 
         // Custom commands handlers, called in common so any future server side command
         // registry would be useable
@@ -306,11 +334,9 @@ public class GunMod {
             }
             if (TimelessGunItem.class.isAssignableFrom(object.get().getClass())) {
                 try {
-                    OverrideModelManager.register(
-                            (Item) object.get(),
-                            (IOverrideModel) Class
-                                    .forName("com.tac.guns.client.render.model.gun."
-                                            + field.getName().toLowerCase(Locale.ENGLISH) + "_animation")
+                    OverrideModelManager.register((Item) object.get(),
+                            (IOverrideModel) Class.forName("com.tac.guns.client.render.model.gun."
+                                    + field.getName().toLowerCase(Locale.ENGLISH) + "_animation")
                                     .newInstance());
                 } catch (ClassNotFoundException e) {
                     LOGGER.warn("Could not load animations for gun - " + field.getName());

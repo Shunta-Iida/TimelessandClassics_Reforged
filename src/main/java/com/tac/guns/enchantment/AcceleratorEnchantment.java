@@ -8,7 +8,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class AcceleratorEnchantment extends GunEnchantment {
     public AcceleratorEnchantment() {
-        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.PROJECTILE);
+        super(Rarity.RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.PROJECTILE);
     }
 
     @Override

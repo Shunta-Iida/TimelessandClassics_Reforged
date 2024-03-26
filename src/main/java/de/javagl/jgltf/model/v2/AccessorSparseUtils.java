@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v2;
 
@@ -118,52 +110,41 @@ class AccessorSparseUtils {
      *                                  not contain data with an integral type
      *                                  (byte, short, int).
      */
-    static void substituteAccessorData(
-            AccessorData denseAccessorData,
-            AccessorData baseAccessorData,
-            AccessorData sparseIndicesAccessorData,
+    static void substituteAccessorData(AccessorData denseAccessorData,
+            AccessorData baseAccessorData, AccessorData sparseIndicesAccessorData,
             AccessorData sparseValuesAccessorData) {
         Class<?> componentType = denseAccessorData.getComponentType();
         if (componentType == byte.class) {
-            AccessorByteData sparseValuesAccessorByteData = (AccessorByteData) sparseValuesAccessorData;
+            AccessorByteData sparseValuesAccessorByteData =
+                    (AccessorByteData) sparseValuesAccessorData;
             AccessorByteData baseAccessorByteData = (AccessorByteData) baseAccessorData;
             AccessorByteData denseAccessorByteData = (AccessorByteData) denseAccessorData;
-            substituteByteAccessorData(
-                    denseAccessorByteData,
-                    baseAccessorByteData,
-                    sparseIndicesAccessorData,
-                    sparseValuesAccessorByteData);
+            substituteByteAccessorData(denseAccessorByteData, baseAccessorByteData,
+                    sparseIndicesAccessorData, sparseValuesAccessorByteData);
         } else if (componentType == short.class) {
-            AccessorShortData sparseValuesAccessorShortData = (AccessorShortData) sparseValuesAccessorData;
+            AccessorShortData sparseValuesAccessorShortData =
+                    (AccessorShortData) sparseValuesAccessorData;
             AccessorShortData baseAccessorShortData = (AccessorShortData) baseAccessorData;
             AccessorShortData denseAccessorShortData = (AccessorShortData) denseAccessorData;
-            substituteShortAccessorData(
-                    denseAccessorShortData,
-                    baseAccessorShortData,
-                    sparseIndicesAccessorData,
-                    sparseValuesAccessorShortData);
+            substituteShortAccessorData(denseAccessorShortData, baseAccessorShortData,
+                    sparseIndicesAccessorData, sparseValuesAccessorShortData);
         } else if (componentType == int.class) {
-            AccessorIntData sparseValuesAccessorIntData = (AccessorIntData) sparseValuesAccessorData;
+            AccessorIntData sparseValuesAccessorIntData =
+                    (AccessorIntData) sparseValuesAccessorData;
             AccessorIntData baseAccessorIntData = (AccessorIntData) baseAccessorData;
             AccessorIntData denseAccessorIntData = (AccessorIntData) denseAccessorData;
-            substituteIntAccessorData(
-                    denseAccessorIntData,
-                    baseAccessorIntData,
-                    sparseIndicesAccessorData,
-                    sparseValuesAccessorIntData);
+            substituteIntAccessorData(denseAccessorIntData, baseAccessorIntData,
+                    sparseIndicesAccessorData, sparseValuesAccessorIntData);
         } else if (componentType == float.class) {
-            AccessorFloatData sparseValuesAccessorFloatData = (AccessorFloatData) sparseValuesAccessorData;
+            AccessorFloatData sparseValuesAccessorFloatData =
+                    (AccessorFloatData) sparseValuesAccessorData;
             AccessorFloatData baseAccessorFloatData = (AccessorFloatData) baseAccessorData;
             AccessorFloatData denseAccessorFloatData = (AccessorFloatData) denseAccessorData;
 
-            substituteFloatAccessorData(
-                    denseAccessorFloatData,
-                    baseAccessorFloatData,
-                    sparseIndicesAccessorData,
-                    sparseValuesAccessorFloatData);
+            substituteFloatAccessorData(denseAccessorFloatData, baseAccessorFloatData,
+                    sparseIndicesAccessorData, sparseValuesAccessorFloatData);
         } else {
-            logger.warning("Invalid component type for accessor: "
-                    + componentType);
+            logger.warning("Invalid component type for accessor: " + componentType);
         }
     }
 
@@ -178,10 +159,8 @@ class AccessorSparseUtils {
      *                                  not contain data with an integral type
      *                                  (byte, short, int).
      */
-    private static void substituteByteAccessorData(
-            AccessorByteData denseAccessorData,
-            AccessorByteData baseAccessorData,
-            AccessorData sparseIndicesAccessorData,
+    private static void substituteByteAccessorData(AccessorByteData denseAccessorData,
+            AccessorByteData baseAccessorData, AccessorData sparseIndicesAccessorData,
             AccessorByteData sparseValuesAccessorData) {
         int numElements = denseAccessorData.getNumElements();
         int numComponentsPerElement = denseAccessorData.getNumComponentsPerElement();
@@ -218,10 +197,8 @@ class AccessorSparseUtils {
      *                                  not contain data with an integral type
      *                                  (byte, short, int).
      */
-    private static void substituteShortAccessorData(
-            AccessorShortData denseAccessorData,
-            AccessorShortData baseAccessorData,
-            AccessorData sparseIndicesAccessorData,
+    private static void substituteShortAccessorData(AccessorShortData denseAccessorData,
+            AccessorShortData baseAccessorData, AccessorData sparseIndicesAccessorData,
             AccessorShortData sparseValuesAccessorData) {
         int numElements = denseAccessorData.getNumElements();
         int numComponentsPerElement = denseAccessorData.getNumComponentsPerElement();
@@ -258,10 +235,8 @@ class AccessorSparseUtils {
      *                                  not contain data with an integral type
      *                                  (byte, short, int).
      */
-    private static void substituteIntAccessorData(
-            AccessorIntData denseAccessorData,
-            AccessorIntData baseAccessorData,
-            AccessorData sparseIndicesAccessorData,
+    private static void substituteIntAccessorData(AccessorIntData denseAccessorData,
+            AccessorIntData baseAccessorData, AccessorData sparseIndicesAccessorData,
             AccessorIntData sparseValuesAccessorData) {
         int numElements = denseAccessorData.getNumElements();
         int numComponentsPerElement = denseAccessorData.getNumComponentsPerElement();
@@ -298,10 +273,8 @@ class AccessorSparseUtils {
      *                                  not contain data with an integral type
      *                                  (byte, short, int).
      */
-    private static void substituteFloatAccessorData(
-            AccessorFloatData denseAccessorData,
-            AccessorFloatData baseAccessorData,
-            AccessorData sparseIndicesAccessorData,
+    private static void substituteFloatAccessorData(AccessorFloatData denseAccessorData,
+            AccessorFloatData baseAccessorData, AccessorData sparseIndicesAccessorData,
             AccessorFloatData sparseValuesAccessorData) {
         int numElements = denseAccessorData.getNumElements();
         int numComponentsPerElement = denseAccessorData.getNumComponentsPerElement();

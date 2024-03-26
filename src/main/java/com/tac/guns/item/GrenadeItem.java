@@ -44,12 +44,13 @@ public class GrenadeItem extends AmmoItem {
 
         int duration = this.getUseDuration(stack) - count;
         if (duration == 5)
-            player.level.playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_GRENADE_PIN.get(),
-                    SoundSource.PLAYERS, 1.0F, 1.0F, false);
+            player.level.playLocalSound(player.getX(), player.getY(), player.getZ(),
+                    ModSounds.ITEM_GRENADE_PIN.get(), SoundSource.PLAYERS, 1.0F, 1.0F, false);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn,
+            InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
         playerIn.startUsingItem(handIn);
         return InteractionResultHolder.consume(stack);
@@ -67,15 +68,18 @@ public class GrenadeItem extends AmmoItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving,
+            int timeLeft) {
         if (!worldIn.isClientSide()) {
             int duration = this.getUseDuration(stack) - timeLeft;
             if (duration >= 5) {
                 if (!(entityLiving instanceof Player) || !((Player) entityLiving).isCreative())
                     stack.shrink(1);
-                ThrowableGrenadeEntity grenade = this.create(worldIn, entityLiving, this.maxCookTime - duration);
-                grenade.shootFromRotation(entityLiving, entityLiving.getXRot(), entityLiving.getYRot(), 0.0F,
-                        Math.min(1.0F, duration / 20F) * this.speed, 1.5F);
+                ThrowableGrenadeEntity grenade =
+                        this.create(worldIn, entityLiving, this.maxCookTime - duration);
+                grenade.shootFromRotation(entityLiving, entityLiving.getXRot(),
+                        entityLiving.getYRot(), 0.0F, Math.min(1.0F, duration / 20F) * this.speed,
+                        1.5F);
                 worldIn.addFreshEntity(grenade);
                 this.onThrown(worldIn, grenade);
             }
@@ -92,6 +96,5 @@ public class GrenadeItem extends AmmoItem {
         return true;
     }
 
-    protected void onThrown(Level world, ThrowableGrenadeEntity entity) {
-    }
+    protected void onThrown(Level world, ThrowableGrenadeEntity entity) {}
 }

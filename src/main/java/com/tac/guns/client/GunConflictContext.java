@@ -1,6 +1,7 @@
 package com.tac.guns.client;
 
 import com.tac.guns.item.GunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.settings.IKeyConflictContext;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -13,7 +14,8 @@ public enum GunConflictContext implements IKeyConflictContext {
         @Override
         public boolean isActive() {
             return !KeyConflictContext.GUI.isActive() && Minecraft.getInstance().player != null
-                    && Minecraft.getInstance().player.getMainHandItem().getItem() instanceof GunItem;
+                    && Minecraft.getInstance().player.getMainHandItem()
+                            .getItem() instanceof GunItem;
         }
 
         @Override

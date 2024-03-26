@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016-2021 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v2;
  * Auto-generated for animation.sampler.schema.json
  * 
  */
-public class AnimationSampler
-        extends GlTFProperty {
+public class AnimationSampler extends GlTFProperty {
 
     /**
      * The index of an accessor containing keyframe timestamps. (required)
@@ -46,7 +44,8 @@ public class AnimationSampler
      */
     public void setInput(Integer input) {
         if (input == null) {
-            throw new NullPointerException((("Invalid value for input: " + input) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for input: " + input) + ", may not be null"));
         }
         this.input = input;
     }
@@ -79,7 +78,8 @@ public class AnimationSampler
         if (((!"LINEAR".equals(interpolation)) && (!"STEP".equals(interpolation)))
                 && (!"CUBICSPLINE".equals(interpolation))) {
             throw new IllegalArgumentException(
-                    (("Invalid value for interpolation: " + interpolation) + ", valid: [LINEAR, STEP, CUBICSPLINE]"));
+                    (("Invalid value for interpolation: " + interpolation)
+                            + ", valid: [LINEAR, STEP, CUBICSPLINE]"));
         }
         this.interpolation = interpolation;
     }
@@ -118,7 +118,8 @@ public class AnimationSampler
      */
     public void setOutput(Integer output) {
         if (output == null) {
-            throw new NullPointerException((("Invalid value for output: " + output) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for output: " + output) + ", may not be null"));
         }
         this.output = output;
     }

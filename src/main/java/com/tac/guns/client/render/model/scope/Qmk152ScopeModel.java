@@ -37,9 +37,9 @@ public class Qmk152ScopeModel implements IOverrideModel {
             "textures/items/timeless_scopes/hit_marker/acog_tinangle_optic.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            ItemStack parent, LivingEntity entity, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light,
-            int overlay) {
+    public void render(float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
+            MultiBufferSource renderTypeBuffer, int light, int overlay) {
         matrixStack.pushPose();
         /*
          * if (OptifineHelper.isShadersEnabled() ||
@@ -72,8 +72,8 @@ public class Qmk152ScopeModel implements IOverrideModel {
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
 
-            float texU = ((window.getScreenWidth() - window.getScreenHeight() + window.getScreenHeight() * crop * 2.0F)
-                    / 2.0F) / window.getScreenWidth();
+            float texU = ((window.getScreenWidth() - window.getScreenHeight()
+                    + window.getScreenHeight() * crop * 2.0F) / 2.0F) / window.getScreenWidth();
 
             // matrixStack.rotate(Vector3f.ZP.rotationDegrees(-GunRenderingHandler.get().immersiveWeaponRoll));
             matrixStack.pushPose();
@@ -82,13 +82,15 @@ public class Qmk152ScopeModel implements IOverrideModel {
                 Matrix3f normal = matrixStack.last().normal();
 
                 ScopeData scopeData = ScopeEditor.get().getScopeData() == null
-                        || ScopeEditor.get().getScopeData().getTagName() != "qmk152" ? new ScopeData("")
+                        || ScopeEditor.get().getScopeData().getTagName() != "qmk152"
+                                ? new ScopeData("")
                                 : ScopeEditor.get().getScopeData();
 
                 // matrixStack.translate(-size / 2, 0.0936175 , 3.915 * 0.0625);
                 matrixStack.translate((-size / 2) + scopeData.getDrXZoomMod(),
                         0.11125 - 0.01825 + scopeData.getDrYZoomMod(),
-                        Config.CLIENT.display.scopeDoubleRender.get() ? (2.315 + scopeData.getDrZZoomMod()) * 0.0625
+                        Config.CLIENT.display.scopeDoubleRender.get()
+                                ? (2.315 + scopeData.getDrZZoomMod()) * 0.0625
                                 : (1.725 + scopeData.getDrZZoomMod()) * 0.0625);
 
                 float color = (float) AimingHandler.get().getNormalisedAdsProgress() * 0.8F + 0.2F;
@@ -100,14 +102,18 @@ public class Qmk152ScopeModel implements IOverrideModel {
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
                     builder = renderTypeBuffer.getBuffer(GunRenderType.getScreen());
-                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F).uv(texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, 0, size, 0).color(color, color, color, 1.0F)
+                            .uv(texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                     builder.vertex(matrix, 0, 0, 0).color(color, color, color, 1.0F).uv(texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F).uv(1.0F - texU, crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F).uv(1.0F - texU, 1.0F - crop)
-                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                            .overlayCoords(overlay).uv2(15728880).normal(normal, 0.0F, 1.0F, 0.0F)
+                            .endVertex();
+                    builder.vertex(matrix, size, 0, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                    builder.vertex(matrix, size, size, 0).color(color, color, color, 1.0F)
+                            .uv(1.0F - texU, 1.0F - crop).overlayCoords(overlay).uv2(15728880)
+                            .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
                 }
 
                 matrixStack.translate(0, 0, 0.0001);
@@ -120,8 +126,8 @@ public class Qmk152ScopeModel implements IOverrideModel {
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
 
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
-                        1);
+                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
 
                 float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
@@ -149,36 +155,38 @@ public class Qmk152ScopeModel implements IOverrideModel {
                                                                    // AimingHandler.get().getNormalisedRepairProgress()
                                                                    // : ;
 
-                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack, Minecraft.getInstance().player,
-                        partialTicks, -0.0325f);
+                GunRenderingHandler.get().applyDelayedSwayTransforms(matrixStack,
+                        Minecraft.getInstance().player, partialTicks, -0.0325f);
                 GunRenderingHandler.get().applyBobbingTransforms(matrixStack, true, 0.035f);
                 GunRenderingHandler.get().applyNoiseMovementTransform(matrixStack, -0.11f);
                 GunRenderingHandler.get().applyJumpingTransforms(matrixStack, partialTicks, -0.04f);
 
                 float recoilReversedMod = 0.15f;
                 matrixStack.translate(0, 0, -0.35);
-                matrixStack.mulPose(
-                        Vector3f.YP.rotationDegrees(GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.4f));
-                matrixStack.mulPose(
-                        Vector3f.ZN.rotationDegrees(GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.5f));
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(
-                        (GunRenderingHandler.get().recoilLift * 0.02f * GunRenderingHandler.get().recoilReduction)
-                                * 0.65F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(
+                        GunRenderingHandler.get().newSwayYaw * recoilReversedMod * 0.4f));
+                matrixStack.mulPose(Vector3f.ZN.rotationDegrees(
+                        GunRenderingHandler.get().newSwayPitch * recoilReversedMod * 0.5f));
+                matrixStack
+                        .mulPose(Vector3f.XP.rotationDegrees((GunRenderingHandler.get().recoilLift
+                                * 0.02f * GunRenderingHandler.get().recoilReduction) * 0.65F));
                 matrixStack.translate(0, 0, 0.35);
 
                 int lightmapValue = 15728880;
                 // alpha *= 0.6;
-                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0).color(red, green, blue, alpha)
-                        .uv(0.0F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
-                        .endVertex();
-                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F).overlayCoords(overlay)
+                builder.vertex(matrix, 0, (float) (reticleSize / scale), 0)
+                        .color(red, green, blue, alpha).uv(0.0F, 0.9375F).overlayCoords(overlay)
                         .uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0).color(red, green, blue, alpha)
-                        .uv(0.9375F, 0.0F).overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
+                builder.vertex(matrix, 0, 0, 0).color(red, green, blue, alpha).uv(0.0F, 0.0F)
+                        .overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
                         .endVertex();
-                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale), 0)
-                        .color(red, green, blue, alpha).uv(0.9375F, 0.9375F).overlayCoords(overlay).uv2(lightmapValue)
-                        .normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), 0, 0)
+                        .color(red, green, blue, alpha).uv(0.9375F, 0.0F).overlayCoords(overlay)
+                        .uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F).endVertex();
+                builder.vertex(matrix, (float) (reticleSize / scale), (float) (reticleSize / scale),
+                        0).color(red, green, blue, alpha).uv(0.9375F, 0.9375F)
+                        .overlayCoords(overlay).uv2(lightmapValue).normal(normal, 0.0F, 1.0F, 0.0F)
+                        .endVertex();
 
             }
             matrixStack.popPose();

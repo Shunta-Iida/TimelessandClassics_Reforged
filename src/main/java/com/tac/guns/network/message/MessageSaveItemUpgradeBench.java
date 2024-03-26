@@ -15,15 +15,15 @@ import java.util.function.Supplier;
 public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgradeBench> {
     private BlockPos pos;
 
-    public MessageSaveItemUpgradeBench() {
-    }
+    public MessageSaveItemUpgradeBench() {}
 
     public MessageSaveItemUpgradeBench(BlockPos pos) {
         this.pos = pos;
     }
 
     @Override
-    public void encode(MessageSaveItemUpgradeBench messageSaveItemUpgradeBench, FriendlyByteBuf buffer) {
+    public void encode(MessageSaveItemUpgradeBench messageSaveItemUpgradeBench,
+            FriendlyByteBuf buffer) {
         buffer.writeBlockPos(messageSaveItemUpgradeBench.pos);
     }
 
@@ -39,8 +39,8 @@ public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgr
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {
-                supplier.get().enqueueWork(
-                        () -> ServerPlayHandler.handleUpgradeBenchItem(messageSaveItemUpgradeBench, player));
+                supplier.get().enqueueWork(() -> ServerPlayHandler
+                        .handleUpgradeBenchItem(messageSaveItemUpgradeBench, player));
             }
         });
         supplier.get().setPacketHandled(true);

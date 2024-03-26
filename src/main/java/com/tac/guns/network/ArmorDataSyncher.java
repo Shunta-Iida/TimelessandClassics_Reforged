@@ -9,8 +9,8 @@ import net.minecraft.world.item.ItemStack;
 public class ArmorDataSyncher {
     private static ArmorDataSyncher instance;
 
-    private static final EntityDataAccessor<ItemStack> ARMOR_ID = SynchedEntityData.defineId(Player.class,
-            EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> ARMOR_ID =
+            SynchedEntityData.defineId(Player.class, EntityDataSerializers.ITEM_STACK);
 
     protected ArmorDataSyncher() {
 

@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2017 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.v1;
 
@@ -43,7 +35,7 @@ final class IndexMappingSet {
      * Default constructor
      */
     IndexMappingSet() {
-        indexMappings = new LinkedHashMap<Object, Map<String, Integer>>();
+        this.indexMappings = new LinkedHashMap<Object, Map<String, Integer>>();
     }
 
     /**
@@ -52,9 +44,9 @@ final class IndexMappingSet {
      * @param name The name
      * @return The index mapping
      */
-    private Map<String, Integer> get(Object name) {
-        Map<String, Integer> indexMapping = indexMappings.computeIfAbsent(name,
-                n -> new LinkedHashMap<String, Integer>());
+    private Map<String, Integer> get(final Object name) {
+        final Map<String, Integer> indexMapping =
+                this.indexMappings.computeIfAbsent(name, n -> new LinkedHashMap<String, Integer>());
         return indexMapping;
     }
 
@@ -66,9 +58,9 @@ final class IndexMappingSet {
      * @param name The name
      * @param map  The map to initialize the mapping from
      */
-    void generate(Object name, Map<String, ?> map) {
+    void generate(final Object name, final Map<String, ?> map) {
         if (map != null) {
-            get(name).putAll(IndexMappings.computeIndexMapping(map));
+            this.get(name).putAll(IndexMappings.computeIndexMapping(map));
         }
     }
 
@@ -81,11 +73,11 @@ final class IndexMappingSet {
      * @param key  The key to look up in the index mapping
      * @return The index
      */
-    Integer getIndex(String name, String key) {
+    Integer getIndex(final String name, final String key) {
         if (key == null) {
             return null;
         }
-        return get(name).get(key);
+        return this.get(name).get(key);
     }
 
 }

@@ -18,7 +18,8 @@ public class LightGrenadeEntity extends ThrowableGrenadeEntity {
         super(entityType, worldIn);
     }
 
-    public LightGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world, LivingEntity entity) {
+    public LightGrenadeEntity(EntityType<? extends ThrowableItemEntity> entityType, Level world,
+            LivingEntity entity) {
         super(entityType, world, entity);
         this.setShouldBounce(true);
         this.setGravityVelocity(0.03F);
@@ -44,8 +45,8 @@ public class LightGrenadeEntity extends ThrowableGrenadeEntity {
             this.rotation += speed * 325;
         }
         if (this.level.isClientSide) {
-            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25, this.getZ(), 0, 0.135,
-                    0);
+            this.level.addParticle(ParticleTypes.SMOKE, true, this.getX(), this.getY() + 0.25,
+                    this.getZ(), 0, 0.135, 0);
         }
     }
 }

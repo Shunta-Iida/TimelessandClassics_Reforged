@@ -30,7 +30,8 @@ public class InventoryUtil {
         return pair.getSecond() <= count;
     }
 
-    public static boolean removeItemStackFromIngredient(Player player, Pair<Ingredient, Integer> pair) {
+    public static boolean removeItemStackFromIngredient(Player player,
+            Pair<Ingredient, Integer> pair) {
         int amount = pair.getSecond();
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);

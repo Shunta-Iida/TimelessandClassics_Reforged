@@ -66,7 +66,8 @@ public class SpreadTracker {
         if (entry != null) {
             if (entry.getRight().getValue() == 1)
                 return 0f; // Will apply first shot accuracy if 0
-            return (float) entry.getRight().getValue() / (float) gun.getGeneral().getProjCountAccuracy();
+            return (float) entry.getRight().getValue()
+                    / (float) gun.getGeneral().getProjCountAccuracy();
         }
         return 0f;
     }

@@ -28,8 +28,8 @@ public interface IHeldAnimation {
      *                    sight
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand, float aimProgress) {
-    }
+    default void applyPlayerModelRotation(Player player, PlayerModel model, InteractionHand hand,
+            float aimProgress) {}
 
     /**
      * Allows for transformations of the player model. This is where the entire
@@ -44,9 +44,8 @@ public interface IHeldAnimation {
      * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
-    }
+    default void applyPlayerPreRender(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {}
 
     /**
      * Allows for transformations of the weapon before rendering. This is where
@@ -60,9 +59,8 @@ public interface IHeldAnimation {
      * @param buffer      a render type buffer get
      */
     @OnlyIn(Dist.CLIENT)
-    default void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress, PoseStack matrixStack,
-            MultiBufferSource buffer) {
-    }
+    default void applyHeldItemTransforms(Player player, InteractionHand hand, float aimProgress,
+            PoseStack matrixStack, MultiBufferSource buffer) {}
 
     /**
      *
@@ -74,9 +72,8 @@ public interface IHeldAnimation {
      * @param light
      * @param partialTicks
      */
-    default void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
-            MultiBufferSource buffer, int light, float partialTicks) {
-    }
+    default void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {}
 
     /**
      *
@@ -85,8 +82,8 @@ public interface IHeldAnimation {
      * @param stack
      * @param partialTicks
      */
-    default boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack, PoseStack matrixStack,
-            float partialTicks) {
+    default boolean applyOffhandTransforms(Player player, PlayerModel model, ItemStack stack,
+            PoseStack matrixStack, float partialTicks) {
         return false;
     }
 

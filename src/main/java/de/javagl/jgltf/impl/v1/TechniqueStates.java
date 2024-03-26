@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for technique.states.schema.json
  * 
  */
-public class TechniqueStates
-        extends GlTFProperty {
+public class TechniqueStates extends GlTFProperty {
 
     /**
      * WebGL states to enable. (optional)<br>
@@ -55,9 +53,11 @@ public class TechniqueStates
         }
         for (Integer enableElement : enable) {
             if ((((((enableElement != 3042) && (enableElement != 2884)) && (enableElement != 2929))
-                    && (enableElement != 32823)) && (enableElement != 32926)) && (enableElement != 3089)) {
-                throw new IllegalArgumentException((("Invalid value for enableElement: " + enableElement)
-                        + ", valid: [3042, 2884, 2929, 32823, 32926, 3089]"));
+                    && (enableElement != 32823)) && (enableElement != 32926))
+                    && (enableElement != 3089)) {
+                throw new IllegalArgumentException(
+                        (("Invalid value for enableElement: " + enableElement)
+                                + ", valid: [3042, 2884, 2929, 32823, 32926, 3089]"));
             }
         }
         this.enable = enable;

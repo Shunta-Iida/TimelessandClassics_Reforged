@@ -18,8 +18,7 @@ public class MessageShoot extends PlayMessage<MessageShoot> {
     private float randP;
     private float randY;
 
-    public MessageShoot() {
-    }
+    public MessageShoot() {}
 
     public MessageShoot(float yaw, float pitch, float randP, float randY) {
         this.rotationPitch = pitch;
@@ -38,7 +37,8 @@ public class MessageShoot extends PlayMessage<MessageShoot> {
 
     @Override
     public MessageShoot decode(FriendlyByteBuf buffer) {
-        return new MessageShoot(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
+        return new MessageShoot(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(),
+                buffer.readFloat());
     }
 
     @Override
@@ -46,7 +46,8 @@ public class MessageShoot extends PlayMessage<MessageShoot> {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {
-                ServerPlayHandler.handleShoot(messageShoot, player, messageShoot.randP, messageShoot.randY);
+                ServerPlayHandler.handleShoot(messageShoot, player, messageShoot.randP,
+                        messageShoot.randY);
             }
         });
         supplier.get().setPacketHandled(true);

@@ -23,9 +23,10 @@ import java.util.Objects;
  * regarded as the same.
  */
 public class GunComponent implements Comparable<GunComponent> {
-    private static final HashMap<String, HashMap<String, GunComponent>> componentMap = new HashMap<>(); // namespace ->
-                                                                                                        // (key ->
-                                                                                                        // GunComponent)
+    private static final HashMap<String, HashMap<String, GunComponent>> componentMap =
+            new HashMap<>(); // namespace ->
+                                                                                                                // (key ->
+                                                                                                                // GunComponent)
 
     public final String key;
     public final String namespace;
@@ -64,15 +65,16 @@ public class GunComponent implements Comparable<GunComponent> {
     @Override
     public boolean equals(Object o) {
         if (o instanceof GunComponent component) {
-            return Objects.equals(this.key, component.key) &&
-                    Objects.equals(this.namespace, component.namespace);
+            return Objects.equals(this.key, component.key)
+                    && Objects.equals(this.namespace, component.namespace);
         } else
             return false;
     }
 
     @Override
     public int hashCode() {
-        return (namespace == null ? 0 : namespace.hashCode()) * 31 + (key == null ? 0 : key.hashCode());
+        return (namespace == null ? 0 : namespace.hashCode()) * 31
+                + (key == null ? 0 : key.hashCode());
     }
 
     @Override

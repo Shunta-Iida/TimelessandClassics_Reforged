@@ -49,24 +49,20 @@ public class HUDRenderingHandler extends GuiComponent {
             new ResourceLocation(Reference.MOD_ID, "textures/gui/counterpistol.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/countershotgun.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/countersmg.png"),
-            new ResourceLocation(Reference.MOD_ID, "textures/gui/countersniper.png")
-    };
+            new ResourceLocation(Reference.MOD_ID, "textures/gui/countersniper.png")};
 
     private static final ResourceLocation[] FIREMODE_ICONS_OLD = new ResourceLocation[] {
             new ResourceLocation(Reference.MOD_ID, "textures/gui/safety.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/semi.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/full.png"),
-            new ResourceLocation(Reference.MOD_ID, "textures/gui/burst.png"),
-    };
+            new ResourceLocation(Reference.MOD_ID, "textures/gui/burst.png"),};
     private static final ResourceLocation[] FIREMODE_ICONS = new ResourceLocation[] {
             new ResourceLocation(Reference.MOD_ID, "textures/gui/firemode_safety.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/firemode_semi.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/gui/firemode_auto.png"),
-            new ResourceLocation(Reference.MOD_ID, "textures/gui/firemode_burst.png"),
-    };
+            new ResourceLocation(Reference.MOD_ID, "textures/gui/firemode_burst.png"),};
     private static final ResourceLocation[] RELOAD_ICONS = new ResourceLocation[] {
-            new ResourceLocation(Reference.MOD_ID, "textures/gui/reloadbar.png")
-    };
+            new ResourceLocation(Reference.MOD_ID, "textures/gui/reloadbar.png")};
     private static final ResourceLocation[] NOISE_S = new ResourceLocation[] {
             new ResourceLocation(Reference.MOD_ID, "textures/screen_effect/noise1.png"),
             new ResourceLocation(Reference.MOD_ID, "textures/screen_effect/noise2.png")
@@ -80,8 +76,7 @@ public class HUDRenderingHandler extends GuiComponent {
         return instance == null ? instance = new HUDRenderingHandler() : instance;
     }
 
-    private HUDRenderingHandler() {
-    }
+    private HUDRenderingHandler() {}
 
     private int ammoReserveCount = 0;
     private int tickCount = 0;
@@ -141,12 +136,14 @@ public class HUDRenderingHandler extends GuiComponent {
             BufferBuilder bufferbuilder = tessellator.getBuilder();
 
             bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-            bufferbuilder.vertex(0.0D, (double) Minecraft.getInstance().getWindow().getGuiScaledHeight(), -90.0D)
+            bufferbuilder.vertex(0.0D,
+                    (double) Minecraft.getInstance().getWindow().getGuiScaledHeight(), -90.0D)
                     .endVertex();
             bufferbuilder.vertex((double) Minecraft.getInstance().getWindow().getGuiScaledWidth(),
-                    (double) Minecraft.getInstance().getWindow().getGuiScaledHeight(), -90.0D).endVertex();
-            bufferbuilder.vertex((double) Minecraft.getInstance().getWindow().getGuiScaledWidth(), 0.0D, -90.0D)
+                    (double) Minecraft.getInstance().getWindow().getGuiScaledHeight(), -90.0D)
                     .endVertex();
+            bufferbuilder.vertex((double) Minecraft.getInstance().getWindow().getGuiScaledWidth(),
+                    0.0D, -90.0D).endVertex();
             bufferbuilder.vertex(0.0D, 0.0D, -90.0D).endVertex();
             tessellator.end();
             RenderSystem.disableBlend();
@@ -174,8 +171,8 @@ public class HUDRenderingHandler extends GuiComponent {
         }
     }
 
-    private static final ResourceLocation fleshHitMarker = new ResourceLocation(Reference.MOD_ID,
-            "textures/crosshair_hit/hit_marker_no_opac.png");
+    private static final ResourceLocation fleshHitMarker =
+            new ResourceLocation(Reference.MOD_ID, "textures/crosshair_hit/hit_marker_no_opac.png");
     public boolean hitMarkerHeadshot = false;
     public static final float hitMarkerRatio = 14f;
     public float hitMarkerTracker = 0;
@@ -195,11 +192,12 @@ public class HUDRenderingHandler extends GuiComponent {
         float anchorPointX = event.getWindow().getGuiScaledWidth() / 12F * 11F;
         float anchorPointY = event.getWindow().getGuiScaledHeight() / 10F * 9F;
 
-        float configScaleWeaponCounter = Config.CLIENT.weaponGUI.weaponAmmoCounter.weaponAmmoCounterSize.get()
-                .floatValue();
-        float configScaleWeaponFireMode = Config.CLIENT.weaponGUI.weaponFireMode.weaponFireModeSize.get().floatValue();
-        float configScaleWeaponReloadBar = Config.CLIENT.weaponGUI.weaponReloadTimer.weaponReloadTimerSize.get()
-                .floatValue();
+        float configScaleWeaponCounter =
+                Config.CLIENT.weaponGUI.weaponAmmoCounter.weaponAmmoCounterSize.get().floatValue();
+        float configScaleWeaponFireMode =
+                Config.CLIENT.weaponGUI.weaponFireMode.weaponFireModeSize.get().floatValue();
+        float configScaleWeaponReloadBar =
+                Config.CLIENT.weaponGUI.weaponReloadTimer.weaponReloadTimerSize.get().floatValue();
 
         float counterSize = 1.8F * configScaleWeaponCounter;
         float fireModeSize = 32.0F * configScaleWeaponFireMode;
@@ -223,7 +221,8 @@ public class HUDRenderingHandler extends GuiComponent {
                     RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                     RenderSystem.setShaderTexture(0, fleshHitMarker); // Future options to render bar types
 
-                    float opac = Math.max(Math.min(this.hitMarkerTracker / hitMarkerRatio, 100f), 0.20f);
+                    float opac =
+                            Math.max(Math.min(this.hitMarkerTracker / hitMarkerRatio, 100f), 0.20f);
                     if (hitMarkerHeadshot)
                         RenderSystem.setShaderColor(1.0f, 0.075f, 0.075f, opac); // Only render red
                     else
@@ -250,10 +249,14 @@ public class HUDRenderingHandler extends GuiComponent {
                 float opacity = 0.25f;// 0.125f;// EnchancedVisuals-1.16.5 helped with this one, instead have a fading
                                       // opacity visual.getOpacity();
                 Matrix4f matrix = stack.last().pose();
-                buffer.vertex(matrix, 0, width, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, opacity).endVertex();
-                buffer.vertex(matrix, width, height, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, opacity).endVertex();
-                buffer.vertex(matrix, width, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, opacity).endVertex();
-                buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, opacity).endVertex();
+                buffer.vertex(matrix, 0, width, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, opacity)
+                        .endVertex();
+                buffer.vertex(matrix, width, height, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, opacity)
+                        .endVertex();
+                buffer.vertex(matrix, width, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, opacity)
+                        .endVertex();
+                buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, opacity)
+                        .endVertex();
 
                 buffer.end();
                 BufferUploader.end(buffer);
@@ -351,10 +354,14 @@ public class HUDRenderingHandler extends GuiComponent {
             buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
             stack.pushPose();
             {
-                stack.translate(anchorPointX - (fireModeSize * 2) / 4F, anchorPointY - (fireModeSize * 2) / 5F * 3F, 0);
+                stack.translate(anchorPointX - (fireModeSize * 2) / 4F,
+                        anchorPointY - (fireModeSize * 2) / 5F * 3F, 0);
                 stack.translate(
-                        -fireModeSize + (-62.7) + (-Config.CLIENT.weaponGUI.weaponFireMode.x.get().floatValue()),
-                        -fireModeSize + 52.98 + (-Config.CLIENT.weaponGUI.weaponFireMode.y.get().floatValue()), 0);
+                        -fireModeSize + (-62.7)
+                                + (-Config.CLIENT.weaponGUI.weaponFireMode.x.get().floatValue()),
+                        -fireModeSize + 52.98
+                                + (-Config.CLIENT.weaponGUI.weaponFireMode.y.get().floatValue()),
+                        0);
 
                 stack.translate(20, 5, 0);
                 int fireMode = 0;
@@ -364,19 +371,23 @@ public class HUDRenderingHandler extends GuiComponent {
                         if (heldItem.getTag() == null) {
                             heldItem.getOrCreateTag();
                         }
-                        int[] gunItemFireModes = heldItem.getTag().getIntArray("supportedFireModes");
+                        int[] gunItemFireModes =
+                                heldItem.getTag().getIntArray("supportedFireModes");
                         if (ArrayUtils.isEmpty(gunItemFireModes)) {
                             gunItemFireModes = gun.getGeneral().getRateSelector();
                             heldItem.getTag().putIntArray("supportedFireModes", gunItemFireModes);
                             heldItem.getTag().putInt("CurrentFireMode", gunItemFireModes[0]);
-                        } else if (!Arrays.equals(gunItemFireModes, gun.getGeneral().getRateSelector())) {
-                            heldItem.getTag().putIntArray("supportedFireModes", gun.getGeneral().getRateSelector());
+                        } else if (!Arrays.equals(gunItemFireModes,
+                                gun.getGeneral().getRateSelector())) {
+                            heldItem.getTag().putIntArray("supportedFireModes",
+                                    gun.getGeneral().getRateSelector());
                             if (!heldItem.getTag().contains("CurrentFireMode"))
                                 heldItem.getTag().putInt("CurrentFireMode", gunItemFireModes[0]);
                         }
                         if (player.getMainHandItem().getTag() == null)
-                            if (!Config.COMMON.gameplay.safetyExistence.get() && Objects
-                                    .requireNonNull(player.getMainHandItem().getTag()).getInt("CurrentFireMode") == 0
+                            if (!Config.COMMON.gameplay.safetyExistence.get()
+                                    && Objects.requireNonNull(player.getMainHandItem().getTag())
+                                            .getInt("CurrentFireMode") == 0
                                     && gunItemFireModes.length > 1)
                                 fireMode = gunItemFireModes[1];
                             else
@@ -403,16 +414,20 @@ public class HUDRenderingHandler extends GuiComponent {
                         fireMode = gun.getGeneral().getRateSelector()[0];
                     } catch (Exception e) {
                         fireMode = 0;
-                        GunMod.LOGGER.log(Level.ERROR, "TaC HUD_RENDERER has failed obtaining the fire mode");
+                        GunMod.LOGGER.log(Level.ERROR,
+                                "TaC HUD_RENDERER has failed obtaining the fire mode");
                     }
                     RenderSystem.setShaderTexture(0, FIREMODE_ICONS[fireMode]); // Render true firemode
 
                     Matrix4f matrix = stack.last().pose();
-                    buffer.vertex(matrix, 0, fireModeSize / 2, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-                    buffer.vertex(matrix, fireModeSize / 2, fireModeSize / 2, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
+                    buffer.vertex(matrix, 0, fireModeSize / 2, 0).uv(0, 1)
+                            .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+                    buffer.vertex(matrix, fireModeSize / 2, fireModeSize / 2, 0).uv(1, 1)
+                            .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+                    buffer.vertex(matrix, fireModeSize / 2, 0, 0).uv(1, 0)
+                            .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.99F)
                             .endVertex();
-                    buffer.vertex(matrix, fireModeSize / 2, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
                 }
             }
             stack.popPose();
@@ -438,38 +453,41 @@ public class HUDRenderingHandler extends GuiComponent {
                         currentAmmo = byPaddingZeros(ammo).append(new TextComponent("" + ammo))
                                 .withStyle(ChatFormatting.RED);
                     } else {
-                        currentAmmo = byPaddingZeros(ammo)
-                                .append(new TextComponent("" + ammo).withStyle(ChatFormatting.WHITE));
+                        currentAmmo = byPaddingZeros(ammo).append(
+                                new TextComponent("" + ammo).withStyle(ChatFormatting.WHITE));
                     }
 
                     if (this.ammoReserveCount <= gun.getReloads().getMaxAmmo()) {
-                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                .append(new TranslatableComponent(
-                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
-                                .withStyle(ChatFormatting.RED);
+                        reserveAmmo = byPaddingZeros(
+                                this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
+                                        .append(new TranslatableComponent(
+                                                "" + (this.ammoReserveCount > 10000 ? 9999
+                                                        : this.ammoReserveCount)))
+                                        .withStyle(ChatFormatting.RED);
                     } else {
-                        reserveAmmo = byPaddingZeros(this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
-                                .append(new TranslatableComponent(
-                                        "" + (this.ammoReserveCount > 10000 ? 9999 : this.ammoReserveCount)))
-                                .withStyle(ChatFormatting.GRAY);
+                        reserveAmmo = byPaddingZeros(
+                                this.ammoReserveCount > 10000 ? 10000 : this.ammoReserveCount)
+                                        .append(new TranslatableComponent(
+                                                "" + (this.ammoReserveCount > 10000 ? 9999
+                                                        : this.ammoReserveCount)))
+                                        .withStyle(ChatFormatting.GRAY);
                     }
 
                     stack.scale(counterSize, counterSize, counterSize);
                     stack.pushPose();
                     {
                         stack.translate(-21.15, 0, 0);
-                        drawString(stack, Minecraft.getInstance().font, currentAmmo, 0, 0, 0xffffff); // Gun ammo
+                        drawString(stack, Minecraft.getInstance().font, currentAmmo, 0, 0,
+                                0xffffff); // Gun ammo
                     }
                     stack.popPose();
 
                     stack.pushPose();
                     {
                         stack.scale(0.7f, 0.7f, 0.7f);
-                        stack.translate(
-                                (3.7),
-                                (3.4),
-                                0);
-                        drawString(stack, Minecraft.getInstance().font, reserveAmmo, 0, 0, 0xffffff); // Reserve ammo
+                        stack.translate((3.7), (3.4), 0);
+                        drawString(stack, Minecraft.getInstance().font, reserveAmmo, 0, 0,
+                                0xffffff); // Reserve ammo
                     }
                     stack.popPose();
                 }
@@ -484,9 +502,11 @@ public class HUDRenderingHandler extends GuiComponent {
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
                 stack.pushPose();
                 {
-                    MultiBufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+                    MultiBufferSource bufferSource =
+                            Minecraft.getInstance().renderBuffers().bufferSource();
                     float iconAnchorX = (anchorPointX - (counterSize * 32) / 2)
-                            + (-Config.CLIENT.weaponGUI.weaponAmmoCounter.x.get().floatValue()) + 38;
+                            + (-Config.CLIENT.weaponGUI.weaponAmmoCounter.x.get().floatValue())
+                            + 38;
                     float iconAnchorY = (anchorPointY - 3.5f
                             + (-Config.CLIENT.weaponGUI.weaponAmmoCounter.y.get().floatValue()));
                     itemRenderer.renderGuiItem(rig, (int) iconAnchorX, (int) iconAnchorY);
@@ -501,9 +521,9 @@ public class HUDRenderingHandler extends GuiComponent {
 
             stack.translate(anchorPointX - (ReloadBarSize * 4.35) / 4F,
                     anchorPointY + (ReloadBarSize * 1.625F) / 5F * 3F, 0);// stack.translate(anchorPointX -
-                                                                          // (fireModeSize*6) / 4F, anchorPointY -
-                                                                          // (fireModeSize*1F) / 5F * 3F, 0); //
-                                                                          // *68for21F
+                                                                                                                                      // (fireModeSize*6) / 4F, anchorPointY -
+                                                                                                                                      // (fireModeSize*1F) / 5F * 3F, 0); //
+                                                                                                                                      // *68for21F
             stack.translate(-ReloadBarSize, -ReloadBarSize, 0);
 
             stack.translate(-16.25 - 7.3, 0.15 + 1.6, 0);
@@ -511,18 +531,24 @@ public class HUDRenderingHandler extends GuiComponent {
             RenderSystem.setShaderTexture(0, RELOAD_ICONS[0]); // Future options to render bar types
 
             Matrix4f matrix = stack.last().pose();
-            buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-            buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-            buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+            buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
+                    .endVertex();
+            buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1)
+                    .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+            buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F)
+                    .endVertex();
             buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
 
             stack.translate(19.25, (1.5 + (-63.4)) * 10, 0);
             // stack.translate(0, 0, );
             stack.scale(0.0095F, 20.028F, 0); // *21F
 
-            buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-            buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-            buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+            buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
+                    .endVertex();
+            buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1)
+                    .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+            buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F)
+                    .endVertex();
             buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
 
             buffer.end();
@@ -538,20 +564,23 @@ public class HUDRenderingHandler extends GuiComponent {
 
                 stack.translate(anchorPointX - (ReloadBarSize * 4.35) / 4F,
                         anchorPointY + (ReloadBarSize * 1.625F) / 5F * 3F, 0);// stack.translate(anchorPointX -
-                                                                              // (fireModeSize*6) / 4F, anchorPointY -
-                                                                              // (fireModeSize*1F) / 5F * 3F, 0); //
-                                                                              // *68for21F
+                                                                                                                                          // (fireModeSize*6) / 4F, anchorPointY -
+                                                                                                                                          // (fireModeSize*1F) / 5F * 3F, 0); //
+                                                                                                                                          // *68for21F
                 stack.translate(-ReloadBarSize, -ReloadBarSize, 0);
 
                 stack.translate(-16.25 - 7.3, 7.25, 0);
-                stack.scale(3.05F * (1 - ArmorInteractionHandler.get().getRepairProgress(player)), 0.1F, 0); // *21F
+                stack.scale(3.05F * (1 - ArmorInteractionHandler.get().getRepairProgress(player)),
+                        0.1F, 0); // *21F
                 RenderSystem.setShaderTexture(0, RELOAD_ICONS[0]); // Future options to render bar types
 
                 matrix = stack.last().pose();
-                buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
-                buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
+                buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.99F)
                         .endVertex();
-                buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+                buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1)
+                        .color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
+                buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.99F)
+                        .endVertex();
                 buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.99F).endVertex();
                 buffer.end();
                 BufferUploader.end(buffer);
@@ -580,13 +609,14 @@ public class HUDRenderingHandler extends GuiComponent {
 
                     matrix = stack.last().pose();
 
-                    buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(0.0F, 0.0F, 0.0F, blackBarAlpha)
-                            .endVertex();
+                    buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1)
+                            .color(0.0F, 0.0F, 0.0F, blackBarAlpha).endVertex();
                     buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1)
                             .color(0.0F, 0.0F, 0.0F, blackBarAlpha).endVertex();
-                    buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(0.0F, 0.0F, 0.0F, blackBarAlpha)
+                    buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0)
+                            .color(0.0F, 0.0F, 0.0F, blackBarAlpha).endVertex();
+                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(0.0F, 0.0F, 0.0F, blackBarAlpha)
                             .endVertex();
-                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(0.0F, 0.0F, 0.0F, blackBarAlpha).endVertex();
                     buffer.end();
                     BufferUploader.end(buffer);
                 }
@@ -609,11 +639,14 @@ public class HUDRenderingHandler extends GuiComponent {
                     stack.scale(2.925F * healthPercentage, 0.16F, 0);
 
                     matrix = stack.last().pose();
-                    buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1).color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
-                    buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1).color(1.0F, 1.0F, 1.0F, 0.8F)
+                    buffer.vertex(matrix, 0, ReloadBarSize, 0).uv(0, 1)
+                            .color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
+                    buffer.vertex(matrix, ReloadBarSize, ReloadBarSize, 0).uv(1, 1)
+                            .color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
+                    buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0)
+                            .color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
+                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.8F)
                             .endVertex();
-                    buffer.vertex(matrix, ReloadBarSize, 0, 0).uv(1, 0).color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
-                    buffer.vertex(matrix, 0, 0, 0).uv(0, 0).color(1.0F, 1.0F, 1.0F, 0.8F).endVertex();
                     buffer.end();
                     BufferUploader.end(buffer);
                 }

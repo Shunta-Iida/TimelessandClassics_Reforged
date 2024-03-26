@@ -14,22 +14,22 @@ public class M1014AnimationController extends PumpShotgunAnimationController {
     public static final int INDEX_RIGHT_HAND = 3;
     public static final int INDEX_LEFT_HAND = 6;
 
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_static.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_draw.gltf"));
-    public static final AnimationMeta INTRO = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_reload_intro.gltf"));
-    public static final AnimationMeta LOOP = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_reload_loop.gltf"));
-    public static final AnimationMeta NORMAL_END = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_reload_norm_end.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_static.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_draw.gltf"));
+    public static final AnimationMeta INTRO =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_reload_intro.gltf"));
+    public static final AnimationMeta LOOP =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_reload_loop.gltf"));
+    public static final AnimationMeta NORMAL_END =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_reload_norm_end.gltf"));
     public static final AnimationMeta EMPTY_END = new AnimationMeta(
             new ResourceLocation("tac", "animations/m1014_reload_empty_end.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m1014_inspect_empty.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/m1014_inspect_empty.gltf"));
     private static final M1014AnimationController instance = new M1014AnimationController();
 
     public static M1014AnimationController getInstance() {

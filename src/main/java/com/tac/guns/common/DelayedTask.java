@@ -38,7 +38,8 @@ public class DelayedTask {
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) {
-            MinecraftServer server = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+            MinecraftServer server =
+                    (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
             Iterator<Impl> it = tasks.iterator();
             while (it.hasNext()) {
                 Impl impl = it.next();
@@ -57,7 +58,8 @@ public class DelayedTask {
      * @param run   a runnable get with the code to run
      */
     public static void runAfter(int ticks, Runnable run) {
-        MinecraftServer server = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+        MinecraftServer server =
+                (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
         if (!server.isSameThread()) {
             throw new IllegalStateException("Tried to add a delayed task off the main thread");
         }

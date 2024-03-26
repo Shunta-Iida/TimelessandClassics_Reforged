@@ -19,7 +19,8 @@ public class TexturedCrosshair extends Crosshair {
 
     public TexturedCrosshair(ResourceLocation id, boolean blend, boolean isHitMarker) {
         super(id);
-        this.texture = new ResourceLocation(id.getNamespace(), "textures/crosshair_hit/" + id.getPath() + ".png");
+        this.texture = new ResourceLocation(id.getNamespace(),
+                "textures/crosshair_hit/" + id.getPath() + ".png");
         this.isHitMarker = isHitMarker;
         this.blend = blend;
     }
@@ -30,11 +31,13 @@ public class TexturedCrosshair extends Crosshair {
 
     public TexturedCrosshair(ResourceLocation id, boolean blend) {
         super(id);
-        this.texture = new ResourceLocation(id.getNamespace(), "textures/crosshair/" + id.getPath() + ".png");
+        this.texture = new ResourceLocation(id.getNamespace(),
+                "textures/crosshair/" + id.getPath() + ".png");
         this.blend = blend;
     }
 
-    public void renderHitMarker(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float alpha) {
+    public void renderHitMarker(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight,
+            float alpha) {
         // float alpha = 1.0F * Math.abs((stepping-1)*0.5f) ;
         float size = 8.0F;
         stack.translate((windowWidth - size) / 2F, (windowHeight - size) / 2F, 0);
@@ -63,7 +66,8 @@ public class TexturedCrosshair extends Crosshair {
     }
 
     @Override
-    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight, float partialTicks) {
+    public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight,
+            float partialTicks) {
         float alpha = 1.0F - (float) AimingHandler.get().getNormalisedAdsProgress();
         float size = 8.0F;
         stack.translate((windowWidth - size) / 2F, (windowHeight - size) / 2F, 0);

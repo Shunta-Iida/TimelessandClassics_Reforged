@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractDragonSittingPhase.class)
 public class SittingPhaseMixin {
     @Inject(method = "onHurt", at = @At(value = "HEAD"), cancellable = true)
-    public void sittingPhaseMixin(DamageSource source, float damage, CallbackInfoReturnable<Float> cir) {
+    public void sittingPhaseMixin(DamageSource source, float damage,
+            CallbackInfoReturnable<Float> cir) {
         if (source.getDirectEntity() instanceof ProjectileEntity) {
             cir.setReturnValue(0.0F);
         }

@@ -16,67 +16,68 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * concept
  */
 public class TwoHandedPoseHighRes_ak47 extends TwoHandedPose {
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack, PoseStack matrixStack,
-			MultiBufferSource buffer, int light, float partialTicks) {
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void renderFirstPersonArms(LocalPlayer player, HumanoidArm hand, ItemStack stack,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, float partialTicks) {
 
-		matrixStack.pushPose();
-		matrixStack.translate(0, 0, -1);
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
+        matrixStack.pushPose();
+        matrixStack.translate(0, 0, -1);
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
-		// float reloadProgress = ReloadHandler.get().getRepairProgress(partialTicks,
-		// stack);
-		// extraMatrixStack.translate(reloadProgress * 1.25, -reloadProgress,
-		// -reloadProgress * 1.5);
+        // float reloadProgress = ReloadHandler.get().getRepairProgress(partialTicks,
+        // stack);
+        // extraMatrixStack.translate(reloadProgress * 1.25, -reloadProgress,
+        // -reloadProgress * 1.5);
 
-		/*
-		 * int side = hand.opposite() == HandSide.RIGHT ? -1 : 1;
-		 * double sideFloat = hand.opposite() == HandSide.RIGHT ? -1F : -1;
-		 * double x = hand.opposite() == HandSide.RIGHT ? 1 : 1;
-		 * double y = hand.opposite() == HandSide.RIGHT ? -0.905 : -1.015;
-		 * double z = hand.opposite() == HandSide.RIGHT ? 0.04 : -0.04;
-		 * matrixStack.translate(8.5 * sideFloat * 0.0625, y, z);
-		 */
-		int side = hand.getOpposite() == HumanoidArm.RIGHT ? -1 : 1;
-		double translationSide = hand.getOpposite() == HumanoidArm.RIGHT ? -1 : -1;
-		// matrixStack.translate(8.5 * translationSide * 0.0625, -1.015, -0.04);
-		matrixStack.translate(6.875 * translationSide * 0.0625, -1.015, -0.04);
+        /*
+         * int side = hand.opposite() == HandSide.RIGHT ? -1 : 1;
+         * double sideFloat = hand.opposite() == HandSide.RIGHT ? -1F : -1;
+         * double x = hand.opposite() == HandSide.RIGHT ? 1 : 1;
+         * double y = hand.opposite() == HandSide.RIGHT ? -0.905 : -1.015;
+         * double z = hand.opposite() == HandSide.RIGHT ? 0.04 : -0.04;
+         * matrixStack.translate(8.5 * sideFloat * 0.0625, y, z);
+         */
+        int side = hand.getOpposite() == HumanoidArm.RIGHT ? -1 : 1;
+        double translationSide = hand.getOpposite() == HumanoidArm.RIGHT ? -1 : -1;
+        // matrixStack.translate(8.5 * translationSide * 0.0625, -1.015, -0.04);
+        matrixStack.translate(6.875 * translationSide * 0.0625, -1.015, -0.04);
 
-		if (Minecraft.getInstance().player.getModelName().equals("slim") && hand.getOpposite() == HumanoidArm.LEFT) {
-			matrixStack.translate(0.03125F * -side, 0, 0);
-		}
+        if (Minecraft.getInstance().player.getModelName().equals("slim")
+                && hand.getOpposite() == HumanoidArm.LEFT) {
+            matrixStack.translate(0.03125F * -side, 0, 0);
+        }
 
-		/* matrixStack.rotate(Vector3f.XP.rotationDegrees(side == -1 ? 80F : 80F)); */
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(80F));
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(15F * side));
-		matrixStack.mulPose(Vector3f.ZP.rotationDegrees(15F * side));
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(-35F));
-		matrixStack.scale(1.0F, 1.0F, 1.0F);
+        /* matrixStack.rotate(Vector3f.XP.rotationDegrees(side == -1 ? 80F : 80F)); */
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(80F));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(15F * side));
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(15F * side));
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(-35F));
+        matrixStack.scale(1.0F, 1.0F, 1.0F);
 
-		RenderUtil.renderFirstPersonArm(player, hand.getOpposite(), matrixStack, buffer, light);
-		matrixStack.popPose();
+        RenderUtil.renderFirstPersonArm(player, hand.getOpposite(), matrixStack, buffer, light);
+        matrixStack.popPose();
 
-		matrixStack.pushPose();
-		matrixStack.translate(0, 0, -1);
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
+        matrixStack.pushPose();
+        matrixStack.translate(0, 0, -1);
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
 
-		double centerOffset = 2.5;
-		if (Minecraft.getInstance().player.getModelName().equals("slim")) {
-			centerOffset += hand == HumanoidArm.RIGHT ? 0.2 : 0.8;
-		}
-		/*
-		 * int side = hand.opposite() == HandSide.RIGHT ? -1 : 1;
-		 * double translationSide = hand.opposite() == HandSide.RIGHT ? -1 : -1;
-		 */
-		centerOffset = hand == HumanoidArm.RIGHT ? -centerOffset : centerOffset * -10.5;
-		matrixStack.translate(centerOffset * 0.0135, -0.745, -1.075);
+        double centerOffset = 2.5;
+        if (Minecraft.getInstance().player.getModelName().equals("slim")) {
+            centerOffset += hand == HumanoidArm.RIGHT ? 0.2 : 0.8;
+        }
+        /*
+         * int side = hand.opposite() == HandSide.RIGHT ? -1 : 1;
+         * double translationSide = hand.opposite() == HandSide.RIGHT ? -1 : -1;
+         */
+        centerOffset = hand == HumanoidArm.RIGHT ? -centerOffset : centerOffset * -10.5;
+        matrixStack.translate(centerOffset * 0.0135, -0.745, -1.075);
 
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(80F));
-		matrixStack.scale(1F, 1F, 1F);
-		RenderUtil.renderFirstPersonArm(player, hand, matrixStack, buffer, light);
-		matrixStack.popPose();
-	}
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(80F));
+        matrixStack.scale(1F, 1F, 1F);
+        RenderUtil.renderFirstPersonArm(player, hand, matrixStack, buffer, light);
+        matrixStack.popPose();
+    }
 }
 /*
  * 
@@ -127,45 +128,45 @@ public class TwoHandedPoseHighRes_ak47 extends TwoHandedPose {
  * if(sideFloat == 1)
  * matrixStack.translate(3.5 * sideFloat * 0.0625, 0, 0);
  *//*
-	 * 
-	 * 
-	 * double y = sideFloat == -0.25 ? -0.905 : -1.015;
-	 * double z = sideFloat == -0.25 ? 0.04 : -0.04;
-	 * matrixStack.translate(8.5 * sideFloat * 0.0625, y, z);
-	 * 
-	 * if (Minecraft.getInstance().player.getSkinType().equals("slim") &&
-	 * hand.opposite() == HandSide.LEFT) {
-	 * matrixStack.translate(0.03125F * -sideFloat, 0, 0);
-	 * }
-	 * 
-	 * matrixStack.rotate(Vector3f.XP.rotationDegrees(80F));
-	 * matrixStack.rotate(Vector3f.YP.rotationDegrees(15F * -side));
-	 * matrixStack.rotate(Vector3f.ZP.rotationDegrees(15F * -side));
-	 * matrixStack.rotate(Vector3f.XP.rotationDegrees(-35F));
-	 * matrixStack.scale(1.0F, 1.0F, 1.0F);
-	 * 
-	 * RenderUtil.renderFirstPersonArm(player, hand.opposite(), matrixStack, buffer,
-	 * light);
-	 * matrixStack.pop();
-	 * 
-	 * matrixStack.push();
-	 * if(controller != null) controller.applyRightHandTransform(stack, player,
-	 * matrixStack);
-	 * matrixStack.translate(0, 0, -1);
-	 * matrixStack.rotate(Vector3f.YP.rotationDegrees(180F));
-	 * 
-	 * double centerOffset = 2.5;
-	 * if (Minecraft.getInstance().player.getSkinType().equals("slim")) {
-	 * centerOffset += hand == HandSide.RIGHT ? 0.2 : 0.8;
-	 * }
-	 * centerOffset = hand == HandSide.RIGHT ? -centerOffset : centerOffset;
-	 * matrixStack.translate(centerOffset * 0.0405, -0.745, -1.075);
-	 * 
-	 * matrixStack.rotate(Vector3f.XP.rotationDegrees(80F));
-	 * matrixStack.scale(1F, 1F, 1F);
-	 * RenderUtil.renderFirstPersonArm(player, hand, matrixStack, buffer, light);
-	 * matrixStack.pop();
-	 * 
-	 * }
-	 * }
-	 */
+      * 
+      * 
+      * double y = sideFloat == -0.25 ? -0.905 : -1.015;
+      * double z = sideFloat == -0.25 ? 0.04 : -0.04;
+      * matrixStack.translate(8.5 * sideFloat * 0.0625, y, z);
+      * 
+      * if (Minecraft.getInstance().player.getSkinType().equals("slim") &&
+      * hand.opposite() == HandSide.LEFT) {
+      * matrixStack.translate(0.03125F * -sideFloat, 0, 0);
+      * }
+      * 
+      * matrixStack.rotate(Vector3f.XP.rotationDegrees(80F));
+      * matrixStack.rotate(Vector3f.YP.rotationDegrees(15F * -side));
+      * matrixStack.rotate(Vector3f.ZP.rotationDegrees(15F * -side));
+      * matrixStack.rotate(Vector3f.XP.rotationDegrees(-35F));
+      * matrixStack.scale(1.0F, 1.0F, 1.0F);
+      * 
+      * RenderUtil.renderFirstPersonArm(player, hand.opposite(), matrixStack, buffer,
+      * light);
+      * matrixStack.pop();
+      * 
+      * matrixStack.push();
+      * if(controller != null) controller.applyRightHandTransform(stack, player,
+      * matrixStack);
+      * matrixStack.translate(0, 0, -1);
+      * matrixStack.rotate(Vector3f.YP.rotationDegrees(180F));
+      * 
+      * double centerOffset = 2.5;
+      * if (Minecraft.getInstance().player.getSkinType().equals("slim")) {
+      * centerOffset += hand == HandSide.RIGHT ? 0.2 : 0.8;
+      * }
+      * centerOffset = hand == HandSide.RIGHT ? -centerOffset : centerOffset;
+      * matrixStack.translate(centerOffset * 0.0405, -0.745, -1.075);
+      * 
+      * matrixStack.rotate(Vector3f.XP.rotationDegrees(80F));
+      * matrixStack.scale(1F, 1F, 1F);
+      * RenderUtil.renderFirstPersonArm(player, hand, matrixStack, buffer, light);
+      * matrixStack.pop();
+      * 
+      * }
+      * }
+      */

@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model.io.v1;
 
@@ -78,9 +70,12 @@ final class EmbeddedAssetCreatorV1 {
         GlTF inputGltf = gltfModel.getGltf();
         GlTF outputGltf = GltfUtilsV1.copy(inputGltf);
 
-        Optionals.of(outputGltf.getBuffers()).forEach((id, value) -> convertBufferToEmbedded(gltfModel, id, value));
-        Optionals.of(outputGltf.getImages()).forEach((id, value) -> convertImageToEmbedded(gltfModel, id, value));
-        Optionals.of(outputGltf.getShaders()).forEach((id, value) -> convertShaderToEmbedded(gltfModel, id, value));
+        Optionals.of(outputGltf.getBuffers())
+                .forEach((id, value) -> convertBufferToEmbedded(gltfModel, id, value));
+        Optionals.of(outputGltf.getImages())
+                .forEach((id, value) -> convertImageToEmbedded(gltfModel, id, value));
+        Optionals.of(outputGltf.getShaders())
+                .forEach((id, value) -> convertShaderToEmbedded(gltfModel, id, value));
 
         return new GltfAssetV1(outputGltf, null);
     }
@@ -93,8 +88,7 @@ final class EmbeddedAssetCreatorV1 {
      * @param id        The ID of the {@link Buffer}
      * @param buffer    The {@link Buffer}
      */
-    private static void convertBufferToEmbedded(
-            GltfModelV1 gltfModel, String id, Buffer buffer) {
+    private static void convertBufferToEmbedded(GltfModelV1 gltfModel, String id, Buffer buffer) {
         String uriString = buffer.getUri();
         if (IO.isDataUriString(uriString)) {
             return;
@@ -120,8 +114,7 @@ final class EmbeddedAssetCreatorV1 {
      * @throws GltfException If the image format (and thus, the MIME type)
      *                       can not be determined from the image data
      */
-    private static void convertImageToEmbedded(
-            GltfModelV1 gltfModel, String id, Image image) {
+    private static void convertImageToEmbedded(GltfModelV1 gltfModel, String id, Image image) {
         String uriString = image.getUri();
         if (IO.isDataUriString(uriString)) {
             return;
@@ -132,8 +125,7 @@ final class EmbeddedAssetCreatorV1 {
         String uri = image.getUri();
         String imageMimeTypeString = MimeTypes.guessImageMimeTypeString(uri, imageData);
         if (imageMimeTypeString == null) {
-            throw new GltfException(
-                    "Could not detect MIME type of image " + id);
+            throw new GltfException("Could not detect MIME type of image " + id);
         }
 
         byte data[] = new byte[imageData.capacity()];
@@ -153,8 +145,7 @@ final class EmbeddedAssetCreatorV1 {
      * @param id        The ID of the {@link Shader}
      * @param shader    The {@link Shader}
      */
-    private static void convertShaderToEmbedded(
-            GltfModelV1 gltfModel, String id, Shader shader) {
+    private static void convertShaderToEmbedded(GltfModelV1 gltfModel, String id, Shader shader) {
         String uriString = shader.getUri();
         if (IO.isDataUriString(uriString)) {
             return;

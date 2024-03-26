@@ -26,9 +26,10 @@ import org.lwjgl.opengl.GL11;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class AttachmentScreen extends AbstractContainerScreen<AttachmentContainer> {
-    private static final ResourceLocation GUN_GUI_TEXTURES = new ResourceLocation("tac:textures/gui/attachments.png");
-    private static final ResourceLocation SCOPE_GUI_TEXTURES = new ResourceLocation(
-            "tac:textures/gui/scope_attachments.png");
+    private static final ResourceLocation GUN_GUI_TEXTURES =
+            new ResourceLocation("tac:textures/gui/attachments.png");
+    private static final ResourceLocation SCOPE_GUI_TEXTURES =
+            new ResourceLocation("tac:textures/gui/scope_attachments.png");
 
     private final Inventory playerInventory;
     private final Container weaponInventory;
@@ -41,7 +42,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     private int mouseGrabbedButton;
     private int mouseClickedX, mouseClickedY;
 
-    public AttachmentScreen(AttachmentContainer screenContainer, Inventory playerInventory, Component titleIn) {
+    public AttachmentScreen(AttachmentContainer screenContainer, Inventory playerInventory,
+            Component titleIn) {
         super(screenContainer, playerInventory, titleIn);
         this.playerInventory = playerInventory;
         this.weaponInventory = screenContainer.getWeaponInventory();
@@ -52,10 +54,11 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     public void containerTick() {
         super.containerTick();
         if (this.minecraft != null && this.minecraft.player != null) {
-            if (!(this.minecraft.player.getMainHandItem().getItem() instanceof GunItem) &&
-                    !(this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem) &&
-                    !(this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem) &&
-                    !(this.minecraft.player.getMainHandItem().getItem() instanceof IrDeviceItem)) {
+            if (!(this.minecraft.player.getMainHandItem().getItem() instanceof GunItem)
+                    && !(this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)
+                    && !(this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem)
+                    && !(this.minecraft.player.getMainHandItem()
+                            .getItem() instanceof IrDeviceItem)) {
                 Minecraft.getInstance().setScreen(null);
             }
         }
@@ -71,14 +74,15 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
         Minecraft minecraft = Minecraft.getInstance();
-        this.font.draw(matrixStack, this.title, (float) this.titleLabelX + 30, (float) this.titleLabelY, 4210752);
+        this.font.draw(matrixStack, this.title, (float) this.titleLabelX + 30,
+                (float) this.titleLabelY, 4210752);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         int left = (this.width - this.imageWidth) / 2;
         int top = (this.height - this.imageHeight) / 2;
-        if ((this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem) ||
-                (this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem) ||
-                (this.minecraft.player.getMainHandItem().getItem() instanceof IrDeviceItem))
+        if ((this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)
+                || (this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem)
+                || (this.minecraft.player.getMainHandItem().getItem() instanceof IrDeviceItem))
             RenderUtil.scissor(left + 97, top + 17, 67, 67);
         else
             RenderUtil.scissor(left + 26, top + 17, 123, 70);
@@ -87,17 +91,23 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
         stack.pushPose();
         {
             stack.translate(96, 50, 100);
-            stack.translate(
-                    this.windowX
-                            + (this.mouseGrabbed && this.mouseGrabbedButton == 0 ? mouseX - this.mouseClickedX : 0),
-                    0, 0);
-            stack.translate(0, this.windowY
-                    + (this.mouseGrabbed && this.mouseGrabbedButton == 0 ? mouseY - this.mouseClickedY : 0), 0);
+            stack.translate(this.windowX + (this.mouseGrabbed && this.mouseGrabbedButton == 0
+                    ? mouseX - this.mouseClickedX
+                    : 0), 0, 0);
+            stack.translate(0,
+                    this.windowY + (this.mouseGrabbed && this.mouseGrabbedButton == 0
+                            ? mouseY - this.mouseClickedY
+                            : 0),
+                    0);
             stack.mulPose(Vector3f.XP.rotationDegrees(-30F));
-            stack.mulPose(Vector3f.XP.rotationDegrees(this.windowRotationY
-                    - (this.mouseGrabbed && this.mouseGrabbedButton == 1 ? mouseY - this.mouseClickedY : 0)));
-            stack.mulPose(Vector3f.YP.rotationDegrees(this.windowRotationX
-                    + (this.mouseGrabbed && this.mouseGrabbedButton == 1 ? mouseX - this.mouseClickedX : 0)));
+            stack.mulPose(Vector3f.XP.rotationDegrees(
+                    this.windowRotationY - (this.mouseGrabbed && this.mouseGrabbedButton == 1
+                            ? mouseY - this.mouseClickedY
+                            : 0)));
+            stack.mulPose(Vector3f.YP.rotationDegrees(
+                    this.windowRotationX + (this.mouseGrabbed && this.mouseGrabbedButton == 1
+                            ? mouseX - this.mouseClickedX
+                            : 0)));
             stack.mulPose(Vector3f.YP.rotationDegrees(150F));
             stack.scale(this.windowZoom / 10F, this.windowZoom / 10F, this.windowZoom / 10F);
             stack.scale(90F, -90F, 90F);
@@ -113,15 +123,17 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
             MultiBufferSource.BufferSource buffer = this.minecraft.renderBuffers().bufferSource();
             if (!(this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)) {
                 matrixStack.translate(0.0, 0.0, -0.4);
-                GunRenderingHandler.get().renderWeapon(this.minecraft.player, this.minecraft.player.getMainHandItem(),
+                GunRenderingHandler.get().renderWeapon(this.minecraft.player,
+                        this.minecraft.player.getMainHandItem(),
                         ItemTransforms.TransformType.GROUND, matrixStack, buffer, 15728880, 0F);
             } else {
                 matrixStack.pushPose();
                 matrixStack.scale(1.25f, 1.25f, 1.25f);
-                GunRenderingHandler.get().renderScope(this.minecraft.player, this.minecraft.player.getMainHandItem(),
-                        ItemTransforms.TransformType.FIXED, matrixStack, buffer, 15728880, 0F); // GROUND, matrixStack,
-                                                                                                // buffer, 15728880,
-                                                                                                // 0F);
+                GunRenderingHandler.get().renderScope(this.minecraft.player,
+                        this.minecraft.player.getMainHandItem(), ItemTransforms.TransformType.FIXED,
+                        matrixStack, buffer, 15728880, 0F); // GROUND, matrixStack,
+                                                                                                                                                                                                      // buffer, 15728880,
+                                                                                                                                                                                                      // 0F);
                 matrixStack.popPose();
             }
             buffer.endBatch();
@@ -134,7 +146,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
         if (this.showHelp) {
             matrixStack.pushPose();
             matrixStack.scale(0.5F, 0.5F, 0.5F);
-            minecraft.font.draw(matrixStack, I18n.get("container.tac.attachments.window_help"), 56, 38, 0xFFFFFF);
+            minecraft.font.draw(matrixStack, I18n.get("container.tac.attachments.window_help"), 56,
+                    38, 0xFFFFFF);
             matrixStack.popPose();
         }
     }
@@ -249,7 +262,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
                     else
                         this.blit(matrixStack, left + 5, top + 17 + i * 18, 176, 0, 16, 16);
                 } else if (i > 3) {
-                    this.blit(matrixStack, left + 155, top + 17 + (i - 4) * 18, 176, 16 + i * 16, 16, 16);
+                    this.blit(matrixStack, left + 155, top + 17 + (i - 4) * 18, 176, 16 + i * 16,
+                            16, 16);
                 } else if (this.weaponInventory.getItem(i).isEmpty()) {
                     this.blit(matrixStack, left + 5, top + 17 + i * 18, 176, 16 + i * 16, 16, 16);
                 }
@@ -279,7 +293,8 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
         int startX = (this.width - this.imageWidth) / 2;
         int startY = (this.height - this.imageHeight) / 2;
-        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142, 70)) {
+        if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 142,
+                70)) {
             if (scroll < 0 && this.windowZoom > 0) {
                 this.showHelp = false;
                 this.windowZoom--;
@@ -297,9 +312,10 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
         int startY = (this.height - this.imageHeight) / 2;
         if ((this.minecraft.player.getMainHandItem().getItem() instanceof ScopeItem)
                 || (this.minecraft.player.getMainHandItem().getItem() instanceof SideRailItem)) {
-            if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 93, startY + 18, 65, 67)) {
-                if (!this.mouseGrabbed
-                        && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
+            if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 93, startY + 18, 65,
+                    67)) {
+                if (!this.mouseGrabbed && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT
+                        || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
                     this.mouseGrabbed = true;
                     this.mouseGrabbedButton = button == GLFW.GLFW_MOUSE_BUTTON_RIGHT ? 1 : 0;
                     this.mouseClickedX = (int) mouseX;
@@ -309,9 +325,10 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
                 }
             }
         } else {
-            if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 126, 70)) {
-                if (!this.mouseGrabbed
-                        && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
+            if (RenderUtil.isMouseWithin((int) mouseX, (int) mouseY, startX + 26, startY + 17, 126,
+                    70)) {
+                if (!this.mouseGrabbed && (button == GLFW.GLFW_MOUSE_BUTTON_LEFT
+                        || button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)) {
                     this.mouseGrabbed = true;
                     this.mouseGrabbedButton = button == GLFW.GLFW_MOUSE_BUTTON_RIGHT ? 1 : 0;
                     this.mouseClickedX = (int) mouseX;

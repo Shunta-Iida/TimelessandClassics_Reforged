@@ -7,7 +7,8 @@ import net.minecraft.world.entity.EquipmentSlot;
  */
 public class ReclaimedEnchantment extends GunEnchantment {
     public ReclaimedEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] { EquipmentSlot.MAINHAND }, Type.AMMO);
+        super(Rarity.VERY_RARE, EnchantmentTypes.GUN, new EquipmentSlot[] {EquipmentSlot.MAINHAND},
+                Type.AMMO);
     }
 
     @Override

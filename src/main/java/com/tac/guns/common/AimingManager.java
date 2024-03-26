@@ -122,7 +122,8 @@ public class AimingManager {
 
         public double getNormalProgress(float partialTicks) {
             return (this.previousAim + (this.currentAim - this.previousAim)
-                    * (this.previousAim == 0 || this.previousAim == MAX_AIM_PROGRESS ? 0 : partialTicks))
+                    * (this.previousAim == 0 || this.previousAim == MAX_AIM_PROGRESS ? 0
+                            : partialTicks))
                     / (float) MAX_AIM_PROGRESS;
         }
     }

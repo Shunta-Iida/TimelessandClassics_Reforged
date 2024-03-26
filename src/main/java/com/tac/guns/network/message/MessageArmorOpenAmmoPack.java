@@ -17,8 +17,8 @@ import java.util.function.Supplier;
 
 public class MessageArmorOpenAmmoPack extends PlayMessage<MessageArmorOpenAmmoPack> {
     @Override
-    public void encode(MessageArmorOpenAmmoPack messageArmorOpenAmmoPack, FriendlyByteBuf friendlyByteBuf) {
-    }
+    public void encode(MessageArmorOpenAmmoPack messageArmorOpenAmmoPack,
+            FriendlyByteBuf friendlyByteBuf) {}
 
     @Override
     public MessageArmorOpenAmmoPack decode(FriendlyByteBuf friendlyByteBuf) {
@@ -26,13 +26,15 @@ public class MessageArmorOpenAmmoPack extends PlayMessage<MessageArmorOpenAmmoPa
     }
 
     @Override
-    public void handle(MessageArmorOpenAmmoPack messageArmorOpenAmmoPack, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageArmorOpenAmmoPack messageArmorOpenAmmoPack,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null && !player.isSpectator()) {
                 ItemStack rig = ((PlayerWithSynData) player).getRig();
                 if (!rig.isEmpty()) {
-                    ArmorRigContainerProvider containerProvider = new ArmorRigContainerProvider(rig);
+                    ArmorRigContainerProvider containerProvider =
+                            new ArmorRigContainerProvider(rig);
                     NetworkHooks.openGui(player, containerProvider);
                 }
             }

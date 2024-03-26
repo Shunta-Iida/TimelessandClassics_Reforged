@@ -21,8 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -38,8 +38,9 @@ public class scar_mk20_animation extends SkinnedGunModel {
     }
 
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         SCAR_MK20AnimationController controller = SCAR_MK20AnimationController.getInstance();
 
         matrices.pushPose();
@@ -60,7 +61,8 @@ public class scar_mk20_animation extends SkinnedGunModel {
 
             renderBarrelWithDefault(stack, matrices, renderBuffer, light, overlay, skin);
 
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
@@ -90,13 +92,14 @@ public class scar_mk20_animation extends SkinnedGunModel {
                 Gun gun = ((GunItem) stack.getItem()).getGun();
                 float cooldownOg = ShootingHandler.get().getshootMsGap()
                         / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
-                                : ShootingHandler.get().getshootMsGap()
-                                        / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
+                                : ShootingHandler.get().getshootMsGap() / ShootingHandler
+                                        .calcShootTickGap(gun.getGeneral().getRate());
 
                 AnimationMeta reloadEmpty = controller
                         .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
-                        && controller.isAnimationRunning();
+                boolean shouldOffset =
+                        reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                                && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
@@ -107,7 +110,8 @@ public class scar_mk20_animation extends SkinnedGunModel {
                 }
                 matrices.translate(0, 0, 0.025F);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
         PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);

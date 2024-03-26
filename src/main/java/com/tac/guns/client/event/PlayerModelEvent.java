@@ -2,6 +2,7 @@ package com.tac.guns.client.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -17,8 +18,9 @@ public abstract class PlayerModelEvent extends PlayerEvent {
     private final float netHeadYaw;
     private final float headPitch;
 
-    private PlayerModelEvent(Player player, PlayerModel modelPlayer, float limbSwing, float limbSwingAmount,
-            float ageInTicks, float netHeadYaw, float headPitch, float deltaTicks) {
+    private PlayerModelEvent(Player player, PlayerModel modelPlayer, float limbSwing,
+            float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+            float deltaTicks) {
         super(player);
         this.modelPlayer = modelPlayer;
         this.limbSwing = limbSwing;
@@ -89,9 +91,11 @@ public abstract class PlayerModelEvent extends PlayerEvent {
      */
     @Cancelable
     public static class SetupAngles extends PlayerModelEvent {
-        private SetupAngles(Player player, PlayerModel modelPlayer, float limbSwing, float limbSwingAmount,
-                float ageInTicks, float netHeadYaw, float headPitch, float deltaTicks) {
-            super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
+        private SetupAngles(Player player, PlayerModel modelPlayer, float limbSwing,
+                float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                float deltaTicks) {
+            super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+                    headPitch, deltaTicks);
         }
 
         /**
@@ -106,9 +110,11 @@ public abstract class PlayerModelEvent extends PlayerEvent {
          * modify the rotations if you aren't doing a complete custom implementation.
          */
         public static class Pre extends SetupAngles {
-            public Pre(Player player, PlayerModel modelPlayer, float limbSwing, float limbSwingAmount, float ageInTicks,
-                    float netHeadYaw, float headPitch, float deltaTicks) {
-                super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
+            public Pre(Player player, PlayerModel modelPlayer, float limbSwing,
+                    float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                    float deltaTicks) {
+                super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+                        headPitch, deltaTicks);
             }
         }
 
@@ -124,9 +130,11 @@ public abstract class PlayerModelEvent extends PlayerEvent {
          * event cannot be cancelled.
          */
         public static class Post extends SetupAngles {
-            public Post(Player player, PlayerModel modelPlayer, float limbSwing, float limbSwingAmount,
-                    float ageInTicks, float netHeadYaw, float headPitch, float deltaTicks) {
-                super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
+            public Post(Player player, PlayerModel modelPlayer, float limbSwing,
+                    float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                    float deltaTicks) {
+                super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+                        headPitch, deltaTicks);
             }
 
             @Override
@@ -149,10 +157,12 @@ public abstract class PlayerModelEvent extends PlayerEvent {
         private final int light;
         private final int overlay;
 
-        private Render(Player player, PlayerModel modelPlayer, PoseStack poseStack, VertexConsumer consumer, int light,
-                int overlay, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-                float headPitch, float deltaTicks) {
-            super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
+        private Render(Player player, PlayerModel modelPlayer, PoseStack poseStack,
+                VertexConsumer consumer, int light, int overlay, float limbSwing,
+                float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                float deltaTicks) {
+            super(player, modelPlayer, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+                    headPitch, deltaTicks);
             this.poseStack = poseStack;
             this.consumer = consumer;
             this.light = light;
@@ -167,11 +177,12 @@ public abstract class PlayerModelEvent extends PlayerEvent {
          * player model from being rendered.
          */
         public static class Pre extends Render {
-            public Pre(Player player, PlayerModel modelPlayer, PoseStack poseStack, VertexConsumer consumer, int light,
-                    int overlay, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-                    float headPitch, float deltaTicks) {
-                super(player, modelPlayer, poseStack, consumer, light, overlay, limbSwing, limbSwingAmount, ageInTicks,
-                        netHeadYaw, headPitch, deltaTicks);
+            public Pre(Player player, PlayerModel modelPlayer, PoseStack poseStack,
+                    VertexConsumer consumer, int light, int overlay, float limbSwing,
+                    float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                    float deltaTicks) {
+                super(player, modelPlayer, poseStack, consumer, light, overlay, limbSwing,
+                        limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
             }
         }
 
@@ -183,11 +194,12 @@ public abstract class PlayerModelEvent extends PlayerEvent {
          * not cancelled.
          */
         public static class Post extends Render {
-            public Post(Player player, PlayerModel modelPlayer, PoseStack poseStack, VertexConsumer consumer, int light,
-                    int overlay, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-                    float headPitch, float deltaTicks) {
-                super(player, modelPlayer, poseStack, consumer, light, overlay, limbSwing, limbSwingAmount, ageInTicks,
-                        netHeadYaw, headPitch, deltaTicks);
+            public Post(Player player, PlayerModel modelPlayer, PoseStack poseStack,
+                    VertexConsumer consumer, int light, int overlay, float limbSwing,
+                    float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+                    float deltaTicks) {
+                super(player, modelPlayer, poseStack, consumer, light, overlay, limbSwing,
+                        limbSwingAmount, ageInTicks, netHeadYaw, headPitch, deltaTicks);
             }
 
             @Override

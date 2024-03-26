@@ -13,8 +13,7 @@ import java.util.function.Supplier;
 public class MessageRemoveProjectile extends PlayMessage<MessageRemoveProjectile> {
     private int entityId;
 
-    public MessageRemoveProjectile() {
-    }
+    public MessageRemoveProjectile() {}
 
     public MessageRemoveProjectile(int entityId) {
         this.entityId = entityId;
@@ -31,8 +30,10 @@ public class MessageRemoveProjectile extends PlayMessage<MessageRemoveProjectile
     }
 
     @Override
-    public void handle(MessageRemoveProjectile messageRemoveProjectile, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleRemoveProjectile(messageRemoveProjectile));
+    public void handle(MessageRemoveProjectile messageRemoveProjectile,
+            Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(
+                () -> ClientPlayHandler.handleRemoveProjectile(messageRemoveProjectile));
         supplier.get().setPacketHandled(true);
     }
 

@@ -26,25 +26,22 @@ import java.util.Locale;
 
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class TacShootingEvent
-{
+public class TacShootingEvent {
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void preShoot(GunFireEvent.Pre event)
-    {
-        if(!(event.getStack().getItem() instanceof TimelessGunItem))
+    public static void preShoot(GunFireEvent.Pre event) {
+        if (!(event.getStack().getItem() instanceof TimelessGunItem))
             return;
         HandleFireMode(event);
     }
-    private static void HandleFireMode(GunFireEvent.Pre event)
-    {
+
+    private static void HandleFireMode(GunFireEvent.Pre event) {
         ItemStack gunItem = event.getStack();
         int[] gunItemFireModes = gunItem.getTag().getIntArray("supportedFireModes");
         Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem); // Quick patch up, will create static method for handling null supported modes
 
-        if(gunItem.getTag().get("CurrentFireMode") == null) // If user has not checked fire modes yet, default to first mode
+        if (gunItem.getTag().get("CurrentFireMode") == null) // If user has not checked fire modes yet, default to first mode
         {
-            if(ArrayUtils.isEmpty(gunItemFireModes) || gunItemFireModes == null)
-            {
+            if (ArrayUtils.isEmpty(gunItemFireModes) || gunItemFireModes == null) {
                 gunItemFireModes = gun.getGeneral().getRateSelector();
                 gunItem.getTag().putIntArray("supportedFireModes", gunItemFireModes);
             }
@@ -52,22 +49,24 @@ public class TacShootingEvent
         }
 
         int currentFireMode = gunItem.getTag().getInt("CurrentFireMode");
-        if(currentFireMode == 0)
-        {
-            if(!Config.COMMON.gameplay.safetyExistence.get())
-            {
+        if (currentFireMode == 0) {
+            if (!Config.COMMON.gameplay.safetyExistence.get()) {
                 gunItem.getTag().remove("CurrentFireMode");
-                gunItem.getTag().putInt("CurrentFireMode", gunItemFireModes[currentFireMode+1]);
-            }
-            else // Safety clicks
+                gunItem.getTag().putInt("CurrentFireMode", gunItemFireModes[currentFireMode + 1]);
+            } else // Safety clicks
             {
-                event.getPlayer().displayClientMessage(new TranslatableComponent("info." + Reference.MOD_ID + ".gun_safety_lock", new KeybindComponent("key.tac.fireSelect").getString().toUpperCase(Locale.ENGLISH)).withStyle(ChatFormatting.GREEN) ,true);
+                event.getPlayer()
+                        .displayClientMessage(new TranslatableComponent(
+                                "info." + Reference.MOD_ID + ".gun_safety_lock",
+                                new KeybindComponent("key.tac.fireSelect").getString()
+                                        .toUpperCase(Locale.ENGLISH))
+                                                .withStyle(ChatFormatting.GREEN),
+                                true);
                 event.setCanceled(true);
             }
 
             ResourceLocation fireModeSound = gun.getSounds().getCock(); // Use cocking sound for now
-            if(fireModeSound != null && event.getPlayer().isAlive())
-            {
+            if (fireModeSound != null && event.getPlayer().isAlive()) {
                 event.getPlayer().playSound(new SoundEvent(fireModeSound), 1.0F, 1.0F);
             }
         }

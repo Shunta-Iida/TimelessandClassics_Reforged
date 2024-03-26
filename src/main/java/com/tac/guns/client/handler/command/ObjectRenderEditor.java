@@ -29,8 +29,7 @@ public class ObjectRenderEditor {
         return instance;
     }
 
-    private ObjectRenderEditor() {
-    }
+    private ObjectRenderEditor() {}
 
     public int currElement = 0;
     private HashMap<Integer, RENDER_Element> elements = new HashMap<>();
@@ -75,7 +74,8 @@ public class ObjectRenderEditor {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
-        if (!Config.COMMON.development.enableTDev.get() && CommandsHandler.get().getCatCurrentIndex() == 4)
+        if (!Config.COMMON.development.enableTDev.get()
+                && CommandsHandler.get().getCatCurrentIndex() == 4)
             return;
         if (event.getKey() == GLFW.GLFW_KEY_1) {
             this.currElement = 1;
@@ -125,9 +125,10 @@ public class ObjectRenderEditor {
         boolean isAltDown = Keys.ALTY.isDown() || Keys.ALTYR.isDown(); // Swap X -> Z modify
         boolean isPeriodDown = Keys.SIZE_OPT.isDown();
 
-        RENDER_Element element = this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
-                ? new RENDER_Element(0, 0, 0, 0)
-                : this.elements.get(this.currElement);
+        RENDER_Element element =
+                this.elements.size() == 0 || !this.elements.containsKey(this.currElement)
+                        ? new RENDER_Element(0, 0, 0, 0)
+                        : this.elements.get(this.currElement);
         float xMod = element.xMod;
         float yMod = element.yMod;
         float zMod = element.zMod;
@@ -164,11 +165,12 @@ public class ObjectRenderEditor {
     public void exportData() {
         this.elements.forEach((name, data) -> {
             if (this.elements.get(name) == null) {
-                LOGGER.log(Level.ERROR, "OBJ_RENDER EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
+                LOGGER.log(Level.ERROR,
+                        "OBJ_RENDER EDITOR FAILED TO EXPORT THIS BROKEN DATA. CONTACT CLUMSYALIEN.");
                 return;
             }
-            GsonBuilder gsonB = new GsonBuilder().setLenient().addSerializationExclusionStrategy(Gun.strategy)
-                    .setPrettyPrinting();
+            GsonBuilder gsonB = new GsonBuilder().setLenient()
+                    .addSerializationExclusionStrategy(Gun.strategy).setPrettyPrinting();
 
             String jsonString = gsonB.create().toJson(data);
             this.writeExport(jsonString, "OBJ_RENDER" + name);
@@ -179,10 +181,12 @@ public class ObjectRenderEditor {
         try {
             File dir = new File(Config.COMMON.development.TDevPath.get() + "\\tac_export\\");
             dir.mkdir();
-            FileWriter dataWriter = new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
+            FileWriter dataWriter =
+                    new FileWriter(dir.getAbsolutePath() + "\\" + name + "_export.json");
             dataWriter.write(jsonString);
             dataWriter.close();
-            LOGGER.log(Level.INFO, "OBJ_RENDER EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
+            LOGGER.log(Level.INFO,
+                    "OBJ_RENDER EDITOR EXPORTED FILE ( " + name + "export.txt ). BE PROUD!");
         } catch (IOException e) {
             LOGGER.log(Level.ERROR,
                     "OBJ_RENDER EDITOR FAILED TO EXPORT, NO FILE CREATED!!! NO ACCESS IN PATH?. CONTACT CLUMSYALIEN.");

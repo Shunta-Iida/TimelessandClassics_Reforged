@@ -57,15 +57,15 @@ public class ClientPlayHandler {
         }
 
         if (message.getShooterId() == mc.player.getId()) {
-            Minecraft.getInstance().getSoundManager()
-                    .play(new SimpleSoundInstance(message.getId(), SoundSource.PLAYERS,
-                            (float) (message.getVolume() * Config.CLIENT.sounds.weaponsVolume.get()),
-                            message.getPitch(), false, 0, SoundInstance.Attenuation.NONE, 0, 0, 0,
-                            true));
+            Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(message.getId(),
+                    SoundSource.PLAYERS,
+                    (float) (message.getVolume() * Config.CLIENT.sounds.weaponsVolume.get()),
+                    message.getPitch(), false, 0, SoundInstance.Attenuation.NONE, 0, 0, 0, true));
         } else {
             Minecraft.getInstance().getSoundManager()
-                    .play(new GunShotSound(message.getId(), SoundSource.PLAYERS, message.getX(), message.getY(),
-                            message.getZ(), message.getVolume(), message.getPitch(), message.isReload()));
+                    .play(new GunShotSound(message.getId(), SoundSource.PLAYERS, message.getX(),
+                            message.getY(), message.getZ(), message.getVolume(), message.getPitch(),
+                            message.isReload()));
         }
     }
 
@@ -94,8 +94,8 @@ public class ClientPlayHandler {
         Level world = Minecraft.getInstance().level;
         if (world != null) {
             for (int i = 0; i < 10; i++) {
-                world.addParticle(ModParticleTypes.BLOOD.get(), true, message.getX(), message.getY(), message.getZ(),
-                        0.5, 0, 0.5);
+                world.addParticle(ModParticleTypes.BLOOD.get(), true, message.getX(),
+                        message.getY(), message.getZ(), 0.5, 0, 0.5);
             }
         }
     }
@@ -117,8 +117,9 @@ public class ClientPlayHandler {
             int shooterId = message.getShooterId();
             for (int i = 0; i < message.getCount(); i++) {
                 BulletTrailRenderingHandler.get()
-                        .add(new BulletTrail(entityIds[i], positions[i], motions[i], shooterYaws[i], shooterPitch[i],
-                                item, trailColor, trailLengthMultiplier, life, gravity, shooterId, message.getCount()));
+                        .add(new BulletTrail(entityIds[i], positions[i], motions[i], shooterYaws[i],
+                                shooterPitch[i], item, trailColor, trailLengthMultiplier, life,
+                                gravity, shooterId, message.getCount()));
             }
         }
     }
@@ -138,18 +139,20 @@ public class ClientPlayHandler {
 
         /* Spawn fast moving smoke/spark particles */
         for (int i = 0; i < 30; i++) {
-            Particle smoke = spawnParticle(particleManager, ParticleTypes.SMOKE, x, y, z, world.random, 4.0);
+            Particle smoke =
+                    spawnParticle(particleManager, ParticleTypes.SMOKE, x, y, z, world.random, 4.0);
             smoke.setLifetime((int) ((8 / (Math.random() * 0.1 + 0.4)) * 0.5));
             spawnParticle(particleManager, ParticleTypes.CRIT, x, y, z, world.random, 4.0);
         }
     }
 
-    private static Particle spawnParticle(ParticleEngine manager, ParticleOptions data, double x, double y, double z,
-            Random rand, double velocityMultiplier) {
+    private static Particle spawnParticle(ParticleEngine manager, ParticleOptions data, double x,
+            double y, double z, Random rand, double velocityMultiplier) {
         // if(GunMod.cabLoaded)
         // deleteBitOnHit();
         return manager.createParticle(data, x, y, z, (rand.nextDouble() - 0.5) * velocityMultiplier,
-                (rand.nextDouble() - 0.5) * velocityMultiplier, (rand.nextDouble() - 0.5) * velocityMultiplier);
+                (rand.nextDouble() - 0.5) * velocityMultiplier,
+                (rand.nextDouble() - 0.5) * velocityMultiplier);
     }
 
     /*
@@ -176,21 +179,24 @@ public class ClientPlayHandler {
             double holeX = message.getX() + 0.005 * message.getFace().getStepX();
             double holeY = message.getY() + 0.005 * message.getFace().getStepY();
             double holeZ = message.getZ() + 0.005 * message.getFace().getStepZ();
-            double distance = Math.sqrt(mc.player.distanceToSqr(message.getX(), message.getY(), message.getZ()));
-            world.addParticle(new BulletHoleData(message.getFace(), message.getPos()), false, holeX, holeY, holeZ, 0, 0,
-                    0);
+            double distance = Math
+                    .sqrt(mc.player.distanceToSqr(message.getX(), message.getY(), message.getZ()));
+            world.addParticle(new BulletHoleData(message.getFace(), message.getPos()), false, holeX,
+                    holeY, holeZ, 0, 0, 0);
             if (distance < 16.0) {
                 for (int i = 0; i < 3; i++) {
                     Vec3i normal = message.getFace().getNormal();
                     Vec3 motion = new Vec3(normal.getX(), normal.getY(), normal.getZ());
-                    motion.add(getRandomDir(world.random), getRandomDir(world.random), getRandomDir(world.random));
-                    world.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), false, message.getX(),
-                            message.getY(), message.getZ(), 0, 0, 0);
+                    motion.add(getRandomDir(world.random), getRandomDir(world.random),
+                            getRandomDir(world.random));
+                    world.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), false,
+                            message.getX(), message.getY(), message.getZ(), 0, 0, 0);
                 }
             }
             if (distance < 32.0) {
                 world.playLocalSound(message.getX(), message.getY(), message.getZ(),
-                        state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 0.75F, 2.0F, false);
+                        state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 0.75F, 2.0F,
+                        false);
             }
         }
     }
@@ -208,21 +214,23 @@ public class ClientPlayHandler {
         HUDRenderingHandler.get().hitMarkerTracker = (int) HUDRenderingHandler.hitMarkerRatio;
         HUDRenderingHandler.get().hitMarkerHeadshot = message.isHeadshot();
 
-        SoundEvent event = getHitSound(message.isCritical(), message.isHeadshot(), message.isPlayer()); // Hit marker
-                                                                                                        // sound, after
-                                                                                                        // sound set HuD
-                                                                                                        // renderder
-                                                                                                        // hitmarker
-                                                                                                        // ticker to 3
-                                                                                                        // fade in and
-                                                                                                        // out quick,
-                                                                                                        // use textured
-                                                                                                        // crosshair as
-                                                                                                        // a base
+        SoundEvent event =
+                getHitSound(message.isCritical(), message.isHeadshot(), message.isPlayer()); // Hit marker
+                                                                                                                // sound, after
+                                                                                                                // sound set HuD
+                                                                                                                // renderder
+                                                                                                                // hitmarker
+                                                                                                                // ticker to 3
+                                                                                                                // fade in and
+                                                                                                                // out quick,
+                                                                                                                // use textured
+                                                                                                                // crosshair as
+                                                                                                                // a base
         if (event == null)
             return;
 
-        mc.getSoundManager().play(SimpleSoundInstance.forUI(event, 1.0F, 1.0F + world.random.nextFloat() * 0.2F));
+        mc.getSoundManager().play(
+                SimpleSoundInstance.forUI(event, 1.0F, 1.0F + world.random.nextFloat() * 0.2F));
     }
 
     @Nullable

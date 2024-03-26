@@ -26,6 +26,5 @@ public class BaseballGrenadeItem extends GrenadeItem {
         return true;
     }
 
-    protected void onThrown(Level world, ThrowableGrenadeEntity entity) {
-    }
+    protected void onThrown(Level world, ThrowableGrenadeEntity entity) {}
 }

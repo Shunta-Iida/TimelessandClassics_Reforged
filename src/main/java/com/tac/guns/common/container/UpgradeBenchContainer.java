@@ -18,7 +18,8 @@ public class UpgradeBenchContainer extends AbstractContainerMenu {
     private UpgradeBenchTileEntity upgradeBench;
     private BlockPos pos;
 
-    public UpgradeBenchContainer(int windowId, Container playerInventory, UpgradeBenchTileEntity workbench) {
+    public UpgradeBenchContainer(int windowId, Container playerInventory,
+            UpgradeBenchTileEntity workbench) {
         super(ModContainers.UPGRADE_BENCH.get(), windowId);
         this.upgradeBench = workbench;
         this.pos = workbench.getBlockPos();
@@ -50,7 +51,8 @@ public class UpgradeBenchContainer extends AbstractContainerMenu {
 
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 9; x++) {
-                this.addSlot(new Slot(playerInventory, x + y * 9 + 9, -112 + 8 + x * 18, 103 + y * 18)); // 102
+                this.addSlot(
+                        new Slot(playerInventory, x + y * 9 + 9, -112 + 8 + x * 18, 103 + y * 18)); // 102
             }
         }
 

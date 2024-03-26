@@ -17,12 +17,12 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns> implements NetworkGunManager.IGunProvider {
+public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns>
+        implements NetworkGunManager.IGunProvider {
     private ImmutableMap<ResourceLocation, Gun> registeredGuns;
     private ImmutableMap<ResourceLocation, CustomGun> customGuns;
 
-    public MessageUpdateGuns() {
-    }
+    public MessageUpdateGuns() {}
 
     public MessageUpdateGuns(ImmutableMap<ResourceLocation, Gun> readRegisteredGuns,
             ImmutableMap<ResourceLocation, CustomGun> readCustomGuns) {
@@ -45,7 +45,8 @@ public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns> implements
     }
 
     @Override
-    public void handle(MessageUpdateGuns messageUpdateGuns, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageUpdateGuns messageUpdateGuns,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleUpdateGuns(messageUpdateGuns));
         supplier.get().setPacketHandled(true);
     }

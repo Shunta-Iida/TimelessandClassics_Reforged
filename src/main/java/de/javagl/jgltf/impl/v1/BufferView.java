@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -14,8 +13,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for bufferView.schema.json
  * 
  */
-public class BufferView
-        extends GlTFChildOfRootProperty {
+public class BufferView extends GlTFChildOfRootProperty {
 
     /**
      * The ID of the buffer. (required)
@@ -51,7 +49,8 @@ public class BufferView
      */
     public void setBuffer(String buffer) {
         if (buffer == null) {
-            throw new NullPointerException((("Invalid value for buffer: " + buffer) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for buffer: " + buffer) + ", may not be null"));
         }
         this.buffer = buffer;
     }
@@ -78,7 +77,8 @@ public class BufferView
      */
     public void setByteOffset(Integer byteOffset) {
         if (byteOffset == null) {
-            throw new NullPointerException((("Invalid value for byteOffset: " + byteOffset) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for byteOffset: " + byteOffset) + ", may not be null"));
         }
         if (byteOffset < 0) {
             throw new IllegalArgumentException("byteOffset < 0");
@@ -157,7 +157,8 @@ public class BufferView
             return;
         }
         if ((target != 34962) && (target != 34963)) {
-            throw new IllegalArgumentException((("Invalid value for target: " + target) + ", valid: [34962, 34963]"));
+            throw new IllegalArgumentException(
+                    (("Invalid value for target: " + target) + ", valid: [34962, 34963]"));
         }
         this.target = target;
     }

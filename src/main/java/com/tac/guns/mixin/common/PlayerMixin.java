@@ -29,8 +29,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity
         implements net.minecraftforge.common.extensions.IForgePlayer, PlayerWithSynData {
-    private static final EntityDataAccessor<ItemStackWrapper> RIG_ID = SynchedEntityData.defineId(Player.class,
-            RigItemStackDataSerializer.INSTANCE);
+    private static final EntityDataAccessor<ItemStackWrapper> RIG_ID =
+            SynchedEntityData.defineId(Player.class, RigItemStackDataSerializer.INSTANCE);
 
     @Shadow
     private Inventory inventory;
@@ -39,9 +39,10 @@ public abstract class PlayerMixin extends LivingEntity
         super(p_20966_, p_20967_);
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;FLcom/mojang/authlib/GameProfile;)V", at = @At("RETURN"))
-    public void defineSynData(Level p_36114_, BlockPos p_36115_, float p_36116_, GameProfile p_36117_,
-            CallbackInfo ci) {
+    @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;FLcom/mojang/authlib/GameProfile;)V",
+            at = @At("RETURN"))
+    public void defineSynData(Level p_36114_, BlockPos p_36115_, float p_36116_,
+            GameProfile p_36117_, CallbackInfo ci) {
         this.entityData.define(RIG_ID, new ItemStackWrapper(ItemStack.EMPTY));
     }
 
@@ -61,7 +62,8 @@ public abstract class PlayerMixin extends LivingEntity
         }
     }
 
-    @Inject(method = "dropEquipment()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
+    @Inject(method = "dropEquipment()V", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"))
     public void dropRig(CallbackInfo ci) {
         ItemStack rig = this.entityData.get(RIG_ID).itemStack();
         if (!rig.isEmpty()) {
@@ -84,8 +86,8 @@ public abstract class PlayerMixin extends LivingEntity
     public void updateRig() {
         ItemStack rig = getRig();
         if (rig.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) rig.getCapability(ArmorRigCapabilityProvider.capability)
-                    .resolve().get();
+            RigSlotsHandler itemHandler = (RigSlotsHandler) rig
+                    .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
             if (rig.getTag() != null)
                 rig.getTag().put("storage", itemHandler.serializeNBT());
             this.getEntityData().set(RIG_ID, new ItemStackWrapper(rig));

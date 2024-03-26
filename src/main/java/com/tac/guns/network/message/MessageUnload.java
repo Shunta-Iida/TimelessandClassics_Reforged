@@ -13,8 +13,7 @@ import java.util.function.Supplier;
  */
 public class MessageUnload extends PlayMessage<MessageUnload> {
     @Override
-    public void encode(MessageUnload messageUnload, FriendlyByteBuf buffer) {
-    }
+    public void encode(MessageUnload messageUnload, FriendlyByteBuf buffer) {}
 
     @Override
     public MessageUnload decode(FriendlyByteBuf buffer) {

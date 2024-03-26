@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -15,8 +14,7 @@ package de.javagl.jgltf.impl.v1;
  * Auto-generated for camera.perspective.schema.json
  * 
  */
-public class CameraPerspective
-        extends GlTFProperty {
+public class CameraPerspective extends GlTFProperty {
 
     /**
      * The floating-point aspect ratio of the field of view. (optional)<br>
@@ -86,7 +84,8 @@ public class CameraPerspective
      */
     public void setYfov(Float yfov) {
         if (yfov == null) {
-            throw new NullPointerException((("Invalid value for yfov: " + yfov) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for yfov: " + yfov) + ", may not be null"));
         }
         if (yfov < 0.0D) {
             throw new IllegalArgumentException("yfov < 0.0");
@@ -117,7 +116,8 @@ public class CameraPerspective
      */
     public void setZfar(Float zfar) {
         if (zfar == null) {
-            throw new NullPointerException((("Invalid value for zfar: " + zfar) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for zfar: " + zfar) + ", may not be null"));
         }
         if (zfar <= 0.0D) {
             throw new IllegalArgumentException("zfar <= 0.0");
@@ -148,7 +148,8 @@ public class CameraPerspective
      */
     public void setZnear(Float znear) {
         if (znear == null) {
-            throw new NullPointerException((("Invalid value for znear: " + znear) + ", may not be null"));
+            throw new NullPointerException(
+                    (("Invalid value for znear: " + znear) + ", may not be null"));
         }
         if (znear <= 0.0D) {
             throw new IllegalArgumentException("znear <= 0.0");

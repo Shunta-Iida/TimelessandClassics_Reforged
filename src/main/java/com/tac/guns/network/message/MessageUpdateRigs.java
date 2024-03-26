@@ -17,12 +17,12 @@ import java.util.function.Supplier;
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements NetworkRigManager.IRigProvider {
+public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs>
+        implements NetworkRigManager.IRigProvider {
     private ImmutableMap<ResourceLocation, Rig> registeredRigs;
     private ImmutableMap<ResourceLocation, CustomRig> customRigs;
 
-    public MessageUpdateRigs() {
-    }
+    public MessageUpdateRigs() {}
 
     public MessageUpdateRigs(ImmutableMap<ResourceLocation, Rig> registeredRigs,
             ImmutableMap<ResourceLocation, CustomRig> customRigs) {
@@ -40,13 +40,16 @@ public class MessageUpdateRigs extends PlayMessage<MessageUpdateRigs> implements
 
     @Override
     public MessageUpdateRigs decode(FriendlyByteBuf buffer) {
-        ImmutableMap<ResourceLocation, Rig> registeredRigs = NetworkRigManager.readRegisteredRigs(buffer);
-        ImmutableMap<ResourceLocation, CustomRig> customrig = CustomRigLoader.readCustomRigs(buffer);
+        ImmutableMap<ResourceLocation, Rig> registeredRigs =
+                NetworkRigManager.readRegisteredRigs(buffer);
+        ImmutableMap<ResourceLocation, CustomRig> customrig =
+                CustomRigLoader.readCustomRigs(buffer);
         return new MessageUpdateRigs(registeredRigs, customrig);
     }
 
     @Override
-    public void handle(MessageUpdateRigs messageUpdateRigs, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageUpdateRigs messageUpdateRigs,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> ClientPlayHandler.handleUpdateRigs(this));
         supplier.get().setPacketHandled(true);
     }

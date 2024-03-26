@@ -2,26 +2,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model;
 
@@ -63,8 +55,7 @@ public class AccessorDatas {
      * @param byteBuffer    The byte buffer containing the data
      * @return The {@link AccessorData}
      */
-    public static AccessorData create(
-            AccessorModel accessorModel, ByteBuffer byteBuffer) {
+    public static AccessorData create(AccessorModel accessorModel, ByteBuffer byteBuffer) {
         if (accessorModel.getComponentDataType() == byte.class) {
             return createByte(accessorModel, byteBuffer);
         }
@@ -78,8 +69,7 @@ public class AccessorDatas {
             return createFloat(accessorModel, byteBuffer);
         }
         // Should never happen
-        logger.severe("Invalid component data type: "
-                + accessorModel.getComponentDataType());
+        logger.severe("Invalid component data type: " + accessorModel.getComponentDataType());
         return null;
     }
 
@@ -106,31 +96,25 @@ public class AccessorDatas {
      * @throws IllegalArgumentException If the given component type is
      *                                  not a valid GL constant
      */
-    public static AccessorData create(
-            int componentType, ByteBuffer bufferViewData, int byteOffset,
+    public static AccessorData create(int componentType, ByteBuffer bufferViewData, int byteOffset,
             int count, int numComponentsPerElement, Integer byteStride) {
         if (isByteType(componentType)) {
-            return new AccessorByteData(
-                    componentType, bufferViewData, byteOffset, count,
+            return new AccessorByteData(componentType, bufferViewData, byteOffset, count,
                     numComponentsPerElement, byteStride);
         }
         if (isShortType(componentType)) {
-            return new AccessorShortData(
-                    componentType, bufferViewData, byteOffset, count,
+            return new AccessorShortData(componentType, bufferViewData, byteOffset, count,
                     numComponentsPerElement, byteStride);
         }
         if (isIntType(componentType)) {
-            return new AccessorIntData(
-                    componentType, bufferViewData, byteOffset, count,
+            return new AccessorIntData(componentType, bufferViewData, byteOffset, count,
                     numComponentsPerElement, byteStride);
         }
         if (isFloatType(componentType)) {
-            return new AccessorFloatData(
-                    componentType, bufferViewData, byteOffset, count,
+            return new AccessorFloatData(componentType, bufferViewData, byteOffset, count,
                     numComponentsPerElement, byteStride);
         }
-        throw new IllegalArgumentException(
-                "Not a valid component type: " + componentType);
+        throw new IllegalArgumentException("Not a valid component type: " + componentType);
     }
 
     /**
@@ -141,8 +125,7 @@ public class AccessorDatas {
      * @return Whether the type is a <code>byte</code> type
      */
     public static boolean isByteType(int type) {
-        return type == GltfConstants.GL_BYTE ||
-                type == GltfConstants.GL_UNSIGNED_BYTE;
+        return type == GltfConstants.GL_BYTE || type == GltfConstants.GL_UNSIGNED_BYTE;
     }
 
     /**
@@ -153,8 +136,7 @@ public class AccessorDatas {
      * @return Whether the type is a <code>short</code> type
      */
     public static boolean isShortType(int type) {
-        return type == GltfConstants.GL_SHORT ||
-                type == GltfConstants.GL_UNSIGNED_SHORT;
+        return type == GltfConstants.GL_SHORT || type == GltfConstants.GL_UNSIGNED_SHORT;
     }
 
     /**
@@ -165,8 +147,7 @@ public class AccessorDatas {
      * @return Whether the type is an <code>int</code> type
      */
     public static boolean isIntType(int type) {
-        return type == GltfConstants.GL_INT ||
-                type == GltfConstants.GL_UNSIGNED_INT;
+        return type == GltfConstants.GL_INT || type == GltfConstants.GL_UNSIGNED_INT;
     }
 
     /**
@@ -187,9 +168,8 @@ public class AccessorDatas {
      * @return Whether the type is an unsigned type
      */
     static boolean isUnsignedType(int type) {
-        return type == GltfConstants.GL_UNSIGNED_BYTE ||
-                type == GltfConstants.GL_UNSIGNED_SHORT ||
-                type == GltfConstants.GL_UNSIGNED_INT;
+        return type == GltfConstants.GL_UNSIGNED_BYTE || type == GltfConstants.GL_UNSIGNED_SHORT
+                || type == GltfConstants.GL_UNSIGNED_INT;
     }
 
     /**
@@ -204,9 +184,8 @@ public class AccessorDatas {
      */
     static void validateByteType(int type) {
         if (!isByteType(type)) {
-            throw new IllegalArgumentException(
-                    "The type is not GL_BYTE or GL_UNSIGNED_BYTE, but " +
-                            GltfConstants.stringFor(type));
+            throw new IllegalArgumentException("The type is not GL_BYTE or GL_UNSIGNED_BYTE, but "
+                    + GltfConstants.stringFor(type));
         }
     }
 
@@ -222,9 +201,8 @@ public class AccessorDatas {
      */
     static void validateShortType(int type) {
         if (!isShortType(type)) {
-            throw new IllegalArgumentException(
-                    "The type is not GL_SHORT or GL_UNSIGNED_SHORT, but " +
-                            GltfConstants.stringFor(type));
+            throw new IllegalArgumentException("The type is not GL_SHORT or GL_UNSIGNED_SHORT, but "
+                    + GltfConstants.stringFor(type));
         }
     }
 
@@ -240,9 +218,8 @@ public class AccessorDatas {
      */
     static void validateIntType(int type) {
         if (!isIntType(type)) {
-            throw new IllegalArgumentException(
-                    "The type is not GL_INT or GL_UNSIGNED_INT, but " +
-                            GltfConstants.stringFor(type));
+            throw new IllegalArgumentException("The type is not GL_INT or GL_UNSIGNED_INT, but "
+                    + GltfConstants.stringFor(type));
         }
     }
 
@@ -257,8 +234,7 @@ public class AccessorDatas {
     static void validateFloatType(int type) {
         if (!isFloatType(type)) {
             throw new IllegalArgumentException(
-                    "The type is not GL_FLOAT, but " +
-                            GltfConstants.stringFor(type));
+                    "The type is not GL_FLOAT, but " + GltfConstants.stringFor(type));
         }
     }
 
@@ -293,14 +269,11 @@ public class AccessorDatas {
      *                                  accessorModel is not <code>GL_BYTE</code> or
      *                                  <code>GL_UNSIGNED_BYTE</code>
      */
-    private static AccessorByteData createByte(
-            AccessorModel accessorModel, ByteBuffer bufferViewByteBuffer) {
-        return new AccessorByteData(accessorModel.getComponentType(),
-                bufferViewByteBuffer,
-                accessorModel.getByteOffset(),
-                accessorModel.getCount(),
-                accessorModel.getElementType().getNumComponents(),
-                accessorModel.getByteStride());
+    private static AccessorByteData createByte(AccessorModel accessorModel,
+            ByteBuffer bufferViewByteBuffer) {
+        return new AccessorByteData(accessorModel.getComponentType(), bufferViewByteBuffer,
+                accessorModel.getByteOffset(), accessorModel.getCount(),
+                accessorModel.getElementType().getNumComponents(), accessorModel.getByteStride());
     }
 
     /**
@@ -336,14 +309,11 @@ public class AccessorDatas {
      *                                  or
      *                                  <code>GL_UNSIGNED_SHORT</code>
      */
-    private static AccessorShortData createShort(
-            AccessorModel accessorModel, ByteBuffer bufferViewByteBuffer) {
-        return new AccessorShortData(accessorModel.getComponentType(),
-                bufferViewByteBuffer,
-                accessorModel.getByteOffset(),
-                accessorModel.getCount(),
-                accessorModel.getElementType().getNumComponents(),
-                accessorModel.getByteStride());
+    private static AccessorShortData createShort(AccessorModel accessorModel,
+            ByteBuffer bufferViewByteBuffer) {
+        return new AccessorShortData(accessorModel.getComponentType(), bufferViewByteBuffer,
+                accessorModel.getByteOffset(), accessorModel.getCount(),
+                accessorModel.getElementType().getNumComponents(), accessorModel.getByteStride());
     }
 
     /**
@@ -377,14 +347,11 @@ public class AccessorDatas {
      *                                  accessorModel is not <code>GL_INT</code> or
      *                                  <code>GL_UNSIGNED_INT</code>
      */
-    private static AccessorIntData createInt(
-            AccessorModel accessorModel, ByteBuffer bufferViewByteBuffer) {
-        return new AccessorIntData(accessorModel.getComponentType(),
-                bufferViewByteBuffer,
-                accessorModel.getByteOffset(),
-                accessorModel.getCount(),
-                accessorModel.getElementType().getNumComponents(),
-                accessorModel.getByteStride());
+    private static AccessorIntData createInt(AccessorModel accessorModel,
+            ByteBuffer bufferViewByteBuffer) {
+        return new AccessorIntData(accessorModel.getComponentType(), bufferViewByteBuffer,
+                accessorModel.getByteOffset(), accessorModel.getCount(),
+                accessorModel.getElementType().getNumComponents(), accessorModel.getByteStride());
     }
 
     /**
@@ -413,14 +380,11 @@ public class AccessorDatas {
      * @throws NullPointerException     If any argument is <code>null</code>
      * @throws IllegalArgumentException If the
      */
-    private static AccessorFloatData createFloat(
-            AccessorModel accessorModel, ByteBuffer bufferViewByteBuffer) {
-        return new AccessorFloatData(accessorModel.getComponentType(),
-                bufferViewByteBuffer,
-                accessorModel.getByteOffset(),
-                accessorModel.getCount(),
-                accessorModel.getElementType().getNumComponents(),
-                accessorModel.getByteStride());
+    private static AccessorFloatData createFloat(AccessorModel accessorModel,
+            ByteBuffer bufferViewByteBuffer) {
+        return new AccessorFloatData(accessorModel.getComponentType(), bufferViewByteBuffer,
+                accessorModel.getByteOffset(), accessorModel.getCount(),
+                accessorModel.getElementType().getNumComponents(), accessorModel.getByteStride());
     }
 
     /**
@@ -434,16 +398,14 @@ public class AccessorDatas {
      * @throws IllegalArgumentException If the given byte buffer does not
      *                                  have a sufficient capacity
      */
-    static void validateCapacity(int byteOffset, int numElements,
-            int byteStridePerElement, int bufferCapacity) {
+    static void validateCapacity(int byteOffset, int numElements, int byteStridePerElement,
+            int bufferCapacity) {
         int expectedCapacity = numElements * byteStridePerElement;
         if (expectedCapacity > bufferCapacity) {
-            throw new IllegalArgumentException(
-                    "The accessorModel has an offset of " + byteOffset + " and " +
-                            numElements + " elements with a byte stride of " +
-                            byteStridePerElement + ", requiring " + expectedCapacity +
-                            " bytes, but the buffer view has only " +
-                            bufferCapacity + " bytes");
+            throw new IllegalArgumentException("The accessorModel has an offset of " + byteOffset
+                    + " and " + numElements + " elements with a byte stride of "
+                    + byteStridePerElement + ", requiring " + expectedCapacity
+                    + " bytes, but the buffer view has only " + bufferCapacity + " bytes");
         }
     }
 
@@ -458,26 +420,21 @@ public class AccessorDatas {
     public static Number[] computeMin(AccessorData accessorData) {
         if (accessorData instanceof AccessorByteData) {
             AccessorByteData accessorByteData = (AccessorByteData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorByteData.computeMinInt());
+            return NumberArrays.asNumbers(accessorByteData.computeMinInt());
         }
         if (accessorData instanceof AccessorShortData) {
             AccessorShortData accessorShortData = (AccessorShortData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorShortData.computeMinInt());
+            return NumberArrays.asNumbers(accessorShortData.computeMinInt());
         }
         if (accessorData instanceof AccessorIntData) {
             AccessorIntData accessorIntData = (AccessorIntData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorIntData.computeMinLong());
+            return NumberArrays.asNumbers(accessorIntData.computeMinLong());
         }
         if (accessorData instanceof AccessorFloatData) {
             AccessorFloatData accessorFloatData = (AccessorFloatData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorFloatData.computeMin());
+            return NumberArrays.asNumbers(accessorFloatData.computeMin());
         }
-        throw new IllegalArgumentException(
-                "Invalid data type: " + accessorData);
+        throw new IllegalArgumentException("Invalid data type: " + accessorData);
     }
 
     /**
@@ -491,26 +448,21 @@ public class AccessorDatas {
     public static Number[] computeMax(AccessorData accessorData) {
         if (accessorData instanceof AccessorByteData) {
             AccessorByteData accessorByteData = (AccessorByteData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorByteData.computeMaxInt());
+            return NumberArrays.asNumbers(accessorByteData.computeMaxInt());
         }
         if (accessorData instanceof AccessorShortData) {
             AccessorShortData accessorShortData = (AccessorShortData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorShortData.computeMaxInt());
+            return NumberArrays.asNumbers(accessorShortData.computeMaxInt());
         }
         if (accessorData instanceof AccessorIntData) {
             AccessorIntData accessorIntData = (AccessorIntData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorIntData.computeMaxLong());
+            return NumberArrays.asNumbers(accessorIntData.computeMaxLong());
         }
         if (accessorData instanceof AccessorFloatData) {
             AccessorFloatData accessorFloatData = (AccessorFloatData) accessorData;
-            return NumberArrays.asNumbers(
-                    accessorFloatData.computeMax());
+            return NumberArrays.asNumbers(accessorFloatData.computeMax());
         }
-        throw new IllegalArgumentException(
-                "Invalid data type: " + accessorData);
+        throw new IllegalArgumentException("Invalid data type: " + accessorData);
     }
 
     /**
@@ -527,30 +479,29 @@ public class AccessorDatas {
      * @param elementsPerRow The number of elements per row
      * @return The string
      */
-    public static String createString(
-            AccessorData accessorData, int elementsPerRow) {
+    public static String createString(AccessorData accessorData, int elementsPerRow) {
         if (accessorData instanceof AccessorByteData) {
             AccessorByteData accessorByteData = (AccessorByteData) accessorData;
-            String accessorDataString = accessorByteData.createString(
-                    Locale.ENGLISH, "%4d", elementsPerRow);
+            String accessorDataString =
+                    accessorByteData.createString(Locale.ENGLISH, "%4d", elementsPerRow);
             return accessorDataString;
         }
         if (accessorData instanceof AccessorShortData) {
             AccessorShortData accessorShortData = (AccessorShortData) accessorData;
-            String accessorDataString = accessorShortData.createString(
-                    Locale.ENGLISH, "%6d", elementsPerRow);
+            String accessorDataString =
+                    accessorShortData.createString(Locale.ENGLISH, "%6d", elementsPerRow);
             return accessorDataString;
         }
         if (accessorData instanceof AccessorIntData) {
             AccessorIntData accessorIntData = (AccessorIntData) accessorData;
-            String accessorDataString = accessorIntData.createString(
-                    Locale.ENGLISH, "%11d", elementsPerRow);
+            String accessorDataString =
+                    accessorIntData.createString(Locale.ENGLISH, "%11d", elementsPerRow);
             return accessorDataString;
         }
         if (accessorData instanceof AccessorFloatData) {
             AccessorFloatData accessorFloatData = (AccessorFloatData) accessorData;
-            String accessorDataString = accessorFloatData.createString(
-                    Locale.ENGLISH, "%10.5f", elementsPerRow);
+            String accessorDataString =
+                    accessorFloatData.createString(Locale.ENGLISH, "%10.5f", elementsPerRow);
             return accessorDataString;
         }
         return "Unknown accessor data type: " + accessorData;

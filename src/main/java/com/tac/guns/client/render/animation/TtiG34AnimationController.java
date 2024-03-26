@@ -18,18 +18,18 @@ public class TtiG34AnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 20;
     public static int INDEX_RIGHT_HAND = 17;
 
-    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/glock_tac_reload_norm.gltf"));
-    public static final AnimationMeta DRAW = new AnimationMeta(
-            new ResourceLocation("tac", "animations/glock_tac_draw.gltf"));
+    public static final AnimationMeta RELOAD_NORM =
+            new AnimationMeta(new ResourceLocation("tac", "animations/glock_tac_reload_norm.gltf"));
+    public static final AnimationMeta DRAW =
+            new AnimationMeta(new ResourceLocation("tac", "animations/glock_tac_draw.gltf"));
     public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
             new ResourceLocation("tac", "animations/glock_tac_reload_empty.gltf"));
-    public static final AnimationMeta STATIC = new AnimationMeta(
-            new ResourceLocation("tac", "animations/glock_tac_static.gltf"));
-    public static final AnimationMeta INSPECT = new AnimationMeta(
-            new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
+    public static final AnimationMeta STATIC =
+            new AnimationMeta(new ResourceLocation("tac", "animations/glock_tac_static.gltf"));
+    public static final AnimationMeta INSPECT =
+            new AnimationMeta(new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY =
+            new AnimationMeta(new ResourceLocation("tac", "animations/glock_tac_inspect.gltf"));
     private static final TtiG34AnimationController instance = new TtiG34AnimationController();
 
     @Override

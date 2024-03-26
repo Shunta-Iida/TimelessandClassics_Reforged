@@ -1,8 +1,7 @@
 /*
  * glTF JSON model
  * 
- * Do not modify this class. It is automatically generated
- * with JsonModelGen (https://github.com/javagl/JsonModelGen)
+ * Do not modify this class. It is automatically generated with JsonModelGen (https://github.com/javagl/JsonModelGen)
  * Copyright (c) 2016 Marco Hutter - http://www.javagl.de
  */
 
@@ -17,8 +16,7 @@ import java.util.List;
  * Auto-generated for scene.schema.json
  * 
  */
-public class Scene
-        extends GlTFChildOfRootProperty {
+public class Scene extends GlTFChildOfRootProperty {
 
     /**
      * The IDs of each root node. (optional)<br>

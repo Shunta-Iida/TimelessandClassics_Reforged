@@ -18,7 +18,8 @@ public class WorkbenchContainer extends AbstractContainerMenu {
     private WorkbenchTileEntity workbench;
     private BlockPos pos;
 
-    public WorkbenchContainer(int windowId, Container playerInventory, WorkbenchTileEntity workbench) {
+    public WorkbenchContainer(int windowId, Container playerInventory,
+            WorkbenchTileEntity workbench) {
         super(ModContainers.WORKBENCH.get(), windowId);
         this.workbench = workbench;
         this.pos = workbench.getBlockPos();

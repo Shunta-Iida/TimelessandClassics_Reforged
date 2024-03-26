@@ -15,13 +15,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerRendererMixin
         extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
 
-    public PlayerRendererMixin(EntityRendererProvider.Context p_174289_, PlayerModel<AbstractClientPlayer> p_174290_,
-            float p_174291_) {
+    public PlayerRendererMixin(EntityRendererProvider.Context p_174289_,
+            PlayerModel<AbstractClientPlayer> p_174290_, float p_174291_) {
         super(p_174289_, p_174290_, p_174291_);
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Z)V", at = @At("RETURN"))
-    public void addArmorLayer(EntityRendererProvider.Context p_174557_, boolean p_174558_, CallbackInfo ci) {
+    @Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Z)V",
+            at = @At("RETURN"))
+    public void addArmorLayer(EntityRendererProvider.Context p_174557_, boolean p_174558_,
+            CallbackInfo ci) {
         this.addLayer(new VestLayerRender<>(this));
     }
 }

@@ -24,8 +24,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
- * Because the revolver has a rotating chamber, we need to render it in a
- * different way than normal items. In this case we are overriding the model.
+ * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
+ * we are overriding the model.
  */
 
 /**
@@ -35,36 +35,41 @@ public class sti2011_animation extends SkinnedGunModel {
 
     // The render method, similar to what is in DartEntity. We can render the item
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType, ItemStack stack,
-            LivingEntity entity, PoseStack matrices, MultiBufferSource renderBuffer, int light, int overlay) {
+    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
+            ItemStack stack, LivingEntity entity, PoseStack matrices,
+            MultiBufferSource renderBuffer, int light, int overlay) {
         STI2011AnimationController controller = STI2011AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), STI2011AnimationController.INDEX_BODY,
-                    transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack).getItem() == ModItems.BASIC_LASER
-                    .orElse(ItemStack.EMPTY.getItem())) {
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    STI2011AnimationController.INDEX_BODY, transformType, matrices);
+            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+                    .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, light, overlay);
-                if (transformType.firstPerson() || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
+                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        renderBuffer, light, overlay);
+                if (transformType.firstPerson()
+                        || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                     RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices, renderBuffer, 15728880,
-                            overlay); // 15728880 For fixed max light
+                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                            renderBuffer, 15728880, overlay); // 15728880 For fixed max light
             }
-            if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack).getItem() == ModItems.PISTOL_SILENCER.get()) {
+            if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack)
+                    .getItem() == ModItems.PISTOL_SILENCER.get()) {
                 matrices.translate(0, 0, -0.105);
-                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices, renderBuffer, light,
-                        overlay);
+                RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices,
+                        renderBuffer, light, overlay);
                 matrices.translate(0, 0, 0.105);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer, light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
+                    light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
-        controller.applySpecialModelTransform(getComponentModel(skin, BODY), STI2011AnimationController.INDEX_SLIDE,
-                transformType, matrices);
+        controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                STI2011AnimationController.INDEX_SLIDE, transformType, matrices);
         if (transformType.firstPerson()) {
             Gun gun = ((GunItem) stack.getItem()).getGun();
             float cooldownOg = ShootingHandler.get().getshootMsGap()
@@ -74,8 +79,9 @@ public class sti2011_animation extends SkinnedGunModel {
 
             AnimationMeta reloadEmpty = controller
                     .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-            boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
-                    && controller.isAnimationRunning();
+            boolean shouldOffset =
+                    reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
+                            && controller.isAnimationRunning();
             // matrices.translate(0.00, 0.0, 0.035); // Issues with the slide starting out
             // further forward, seems to be ~ a 0.035 movement
             if (Gun.hasAmmo(stack) || shouldOffset) {
@@ -90,23 +96,25 @@ public class sti2011_animation extends SkinnedGunModel {
             }
             matrices.translate(0, 0, 0.025F);
         }
-        RenderUtil.renderModel(getComponentModel(skin, SLIDE), stack, matrices, renderBuffer, light, overlay);
-        RenderUtil.renderModel(getComponentModel(skin, SLIDE_LIGHT), stack, matrices, renderBuffer, 15728880, overlay);
+        RenderUtil.renderModel(getComponentModel(skin, SLIDE), stack, matrices, renderBuffer, light,
+                overlay);
+        RenderUtil.renderModel(getComponentModel(skin, SLIDE_LIGHT), stack, matrices, renderBuffer,
+                15728880, overlay);
         matrices.popPose();
 
         matrices.pushPose();
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     STI2011AnimationController.INDEX_HAMMER, transformType, matrices);
-            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.HAMMER), stack, matrices, renderBuffer,
-                    light, overlay);
+            RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.HAMMER), stack,
+                    matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY), STI2011AnimationController.INDEX_MAG,
-                    transformType, matrices);
+            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+                    STI2011AnimationController.INDEX_MAG, transformType, matrices);
             renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
@@ -130,14 +138,16 @@ public class sti2011_animation extends SkinnedGunModel {
             {
                 controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                         STI2011AnimationController.INDEX_BULLET1, transformType, matrices);
-                RenderUtil.renderModel(getComponentModel(skin, BULLET1), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET1), stack, matrices,
+                        renderBuffer, light, overlay);
             }
             matrices.popPose();
         }
 
         if (controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL)
                 .equals(controller.getPreviousAnimation())
-                && !controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)
+                && !controller
+                        .getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)
                         .equals(controller.getPreviousAnimation())
                 && transformType.firstPerson()) {
             matrices.pushPose();
@@ -145,7 +155,8 @@ public class sti2011_animation extends SkinnedGunModel {
                 controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                         STI2011AnimationController.INDEX_BULLET2, transformType, matrices);
                 matrices.translate(0, -0.1, 2.2);
-                RenderUtil.renderModel(getComponentModel(skin, BULLET2), stack, matrices, renderBuffer, light, overlay);
+                RenderUtil.renderModel(getComponentModel(skin, BULLET2), stack, matrices,
+                        renderBuffer, light, overlay);
                 matrices.translate(0, 0.1, -2.2);
             }
             matrices.popPose();

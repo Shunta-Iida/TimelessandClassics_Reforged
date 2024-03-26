@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
-public class AmmoScreen<T extends AbstractContainerMenu & IRigContainer> extends AbstractContainerScreen<T>
-        implements MenuAccess<T> {
-    private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(
-            "textures/gui/container/generic_54.png");
+public class AmmoScreen<T extends AbstractContainerMenu & IRigContainer>
+        extends AbstractContainerScreen<T> implements MenuAccess<T> {
+    private static final ResourceLocation CHEST_GUI_TEXTURE =
+            new ResourceLocation("textures/gui/container/generic_54.png");
     private final int rows;
 
     public AmmoScreen(T container, Inventory playerInventory, Component title) {

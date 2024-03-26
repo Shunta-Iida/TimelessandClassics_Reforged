@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 
 public class MessageFireMode extends PlayMessage<MessageFireMode> {
     @Override
-    public void encode(MessageFireMode messageFireMode, FriendlyByteBuf buffer) {
-    }
+    public void encode(MessageFireMode messageFireMode, FriendlyByteBuf buffer) {}
 
     @Override
     public MessageFireMode decode(FriendlyByteBuf buffer) {

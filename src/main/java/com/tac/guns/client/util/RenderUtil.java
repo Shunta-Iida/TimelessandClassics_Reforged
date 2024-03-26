@@ -50,65 +50,79 @@ public class RenderUtil {
     }
 
     public static BakedModel getModel(Item item) {
-        return Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(new ItemStack(item));
+        return Minecraft.getInstance().getItemRenderer().getItemModelShaper()
+                .getItemModel(new ItemStack(item));
     }
 
     public static BakedModel getModel(ItemStack item) {
         return Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(item);
     }
 
-    public static void rotateZ(PoseStack matrixStack, float xOffset, float yOffset, float rotation) {
+    public static void rotateZ(PoseStack matrixStack, float xOffset, float yOffset,
+            float rotation) {
         matrixStack.translate(xOffset, yOffset, 0);
         matrixStack.mulPose(Vector3f.ZN.rotationDegrees(rotation));
         matrixStack.translate(-xOffset, -yOffset, 0);
     }
 
-    public static void renderModel(ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer, int light,
-            int overlay, @Nullable LivingEntity entity) {
-        renderModel(stack, ItemTransforms.TransformType.NONE, matrixStack, buffer, light, overlay, entity);
+    public static void renderModel(ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer,
+            int light, int overlay, @Nullable LivingEntity entity) {
+        renderModel(stack, ItemTransforms.TransformType.NONE, matrixStack, buffer, light, overlay,
+                entity);
     }
 
-    public static void renderModel(ItemStack child, ItemStack parent, PoseStack matrixStack, MultiBufferSource buffer,
-            int light, int overlay) {
-        BakedModel model = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(child);
-        renderModel(model, ItemTransforms.TransformType.NONE, null, child, parent, matrixStack, buffer, light, overlay,
-                false);
+    public static void renderModel(ItemStack child, ItemStack parent, PoseStack matrixStack,
+            MultiBufferSource buffer, int light, int overlay) {
+        BakedModel model =
+                Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(child);
+        renderModel(model, ItemTransforms.TransformType.NONE, null, child, parent, matrixStack,
+                buffer, light, overlay, false);
     }
 
-    public static void renderModel(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack matrixStack,
-            MultiBufferSource buffer, int light, int overlay, @Nullable LivingEntity entity) {
-        BakedModel model = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(stack);
+    public static void renderModel(ItemStack stack, ItemTransforms.TransformType transformType,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, int overlay,
+            @Nullable LivingEntity entity) {
+        BakedModel model =
+                Minecraft.getInstance().getItemRenderer().getItemModelShaper().getItemModel(stack);
         if (entity != null) {
-            model = Minecraft.getInstance().getItemRenderer().getModel(stack, entity.level, entity, entity.getId());
+            model = Minecraft.getInstance().getItemRenderer().getModel(stack, entity.level, entity,
+                    entity.getId());
         }
         renderModel(model, transformType, stack, matrixStack, buffer, light, overlay);
     }
 
-    public static void renderModel(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack matrixStack,
-            MultiBufferSource buffer, int light, int overlay, @Nullable Level world, @Nullable LivingEntity entity) {
+    public static void renderModel(ItemStack stack, ItemTransforms.TransformType transformType,
+            PoseStack matrixStack, MultiBufferSource buffer, int light, int overlay,
+            @Nullable Level world, @Nullable LivingEntity entity) {
         BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, world, entity,
                 entity == null ? 0 : entity.getId());
         renderModel(model, transformType, stack, matrixStack, buffer, light, overlay);
     }
 
-    public static void renderModel(BakedModel model, ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer,
-            int light, int overlay) {
-        renderModel(model, ItemTransforms.TransformType.NONE, stack, matrixStack, buffer, light, overlay);
-    }
-
-    public static void renderLaserModuleModel(BakedModel model, ItemStack stack, PoseStack matrixStack,
+    public static void renderModel(BakedModel model, ItemStack stack, PoseStack matrixStack,
             MultiBufferSource buffer, int light, int overlay) {
-        renderLaserModuleModel(model, ItemTransforms.TransformType.NONE, stack, matrixStack, buffer, light, overlay);
+        renderModel(model, ItemTransforms.TransformType.NONE, stack, matrixStack, buffer, light,
+                overlay);
     }
 
-    public static void renderLaserModuleModel(BakedModel model, ItemTransforms.TransformType transformType,
-            ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer, int light, int overlay) {
-        renderModel(model, transformType, null, stack, ItemStack.EMPTY, matrixStack, buffer, light, overlay, true);
-    }
-
-    public static void renderModel(BakedModel model, ItemTransforms.TransformType transformType, ItemStack stack,
+    public static void renderLaserModuleModel(BakedModel model, ItemStack stack,
             PoseStack matrixStack, MultiBufferSource buffer, int light, int overlay) {
-        renderModel(model, transformType, null, stack, ItemStack.EMPTY, matrixStack, buffer, light, overlay, false);
+        renderLaserModuleModel(model, ItemTransforms.TransformType.NONE, stack, matrixStack, buffer,
+                light, overlay);
+    }
+
+    public static void renderLaserModuleModel(BakedModel model,
+            ItemTransforms.TransformType transformType, ItemStack stack, PoseStack matrixStack,
+            MultiBufferSource buffer, int light, int overlay) {
+        renderModel(model, transformType, null, stack, ItemStack.EMPTY, matrixStack, buffer, light,
+                overlay, true);
+    }
+
+    public static void renderModel(BakedModel model, ItemTransforms.TransformType transformType,
+            ItemStack stack, PoseStack matrixStack, MultiBufferSource buffer, int light,
+            int overlay) {
+        renderModel(model, transformType, null, stack, ItemStack.EMPTY, matrixStack, buffer, light,
+                overlay, false);
     }
 
     public static void renderModel(BakedModel model, ItemTransforms.TransformType transformType,
@@ -124,23 +138,24 @@ public class RenderUtil {
                         .getModel(new ModelResourceLocation("minecraft:trident#inventory"));
             }
 
-            model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack, model, transformType,
-                    false);
+            model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack,
+                    model, transformType, false);
             matrixStack.translate(-0.5D, -0.5D, -0.5D);
             if (!model.isCustomRenderer() && (stack.getItem() != Items.TRIDENT || flag)) {
                 boolean flag1;
-                if (transformType != ItemTransforms.TransformType.GUI && !transformType.firstPerson()
-                        && stack.getItem() instanceof BlockItem) {
+                if (transformType != ItemTransforms.TransformType.GUI
+                        && !transformType.firstPerson() && stack.getItem() instanceof BlockItem) {
                     Block block = ((BlockItem) stack.getItem()).getBlock();
-                    flag1 = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
+                    flag1 = !(block instanceof HalfTransparentBlock)
+                            && !(block instanceof StainedGlassPaneBlock);
                 } else {
                     flag1 = true;
                 }
 
                 if (model.isLayered()) {
                     net.minecraftforge.client.ForgeHooksClient.drawItemLayered(
-                            Minecraft.getInstance().getItemRenderer(), model, stack, matrixStack, buffer, light,
-                            overlay, flag1);
+                            Minecraft.getInstance().getItemRenderer(), model, stack, matrixStack,
+                            buffer, light, overlay, flag1);
                 } else {
                     RenderType renderType = getRenderType(stack, !flag1);
                     VertexConsumer builder;
@@ -154,7 +169,8 @@ public class RenderUtil {
                         }
 
                         if (flag1) {
-                            builder = ItemRenderer.getCompassFoilBufferDirect(buffer, renderType, entry);
+                            builder = ItemRenderer.getCompassFoilBufferDirect(buffer, renderType,
+                                    entry);
                         } else {
                             builder = ItemRenderer.getCompassFoilBuffer(buffer, renderType, entry);
                         }
@@ -168,14 +184,15 @@ public class RenderUtil {
                                 stack.hasFoil() || parent.hasFoil());
                     }
                     if (renderWithPersonalColor) {
-                        renderModelPersonallyColored(model, stack, parent, transform, matrixStack, builder, light,
-                                overlay);
+                        renderModelPersonallyColored(model, stack, parent, transform, matrixStack,
+                                builder, light, overlay);
                     } else
-                        renderModel(model, stack, parent, transform, matrixStack, builder, light, overlay);
+                        renderModel(model, stack, parent, transform, matrixStack, builder, light,
+                                overlay);
                 }
             } else {
-                RenderProperties.get(stack.getItem()).getItemStackRenderer().renderByItem(stack, transformType,
-                        matrixStack, buffer, light, overlay);
+                RenderProperties.get(stack.getItem()).getItemStackRenderer().renderByItem(stack,
+                        transformType, matrixStack, buffer, light, overlay);
             }
 
             matrixStack.popPose();
@@ -192,19 +209,21 @@ public class RenderUtil {
      * @param light
      * @param overlay
      */
-    private static void renderModelPersonallyColored(BakedModel model, ItemStack stack, ItemStack parent,
-            @Nullable Transform transform, PoseStack matrixStack, VertexConsumer buffer, int light, int overlay) {
+    private static void renderModelPersonallyColored(BakedModel model, ItemStack stack,
+            ItemStack parent, @Nullable Transform transform, PoseStack matrixStack,
+            VertexConsumer buffer, int light, int overlay) {
         if (transform != null) {
             transform.apply();
         }
         Random random = new Random();
         for (Direction direction : Direction.values()) {
             random.setSeed(42L);
-            renderPersonalizedQuads(matrixStack, buffer, model.getQuads(null, direction, random), stack, parent, light,
-                    overlay);
+            renderPersonalizedQuads(matrixStack, buffer, model.getQuads(null, direction, random),
+                    stack, parent, light, overlay);
         }
         random.setSeed(42L);
-        renderPersonalizedQuads(matrixStack, buffer, model.getQuads(null, null, random), stack, parent, light, overlay);
+        renderPersonalizedQuads(matrixStack, buffer, model.getQuads(null, null, random), stack,
+                parent, light, overlay);
     }
 
     /**
@@ -217,18 +236,21 @@ public class RenderUtil {
      * @param light
      * @param overlay
      */
-    private static void renderModel(BakedModel model, ItemStack stack, ItemStack parent, @Nullable Transform transform,
-            PoseStack matrixStack, VertexConsumer buffer, int light, int overlay) {
+    private static void renderModel(BakedModel model, ItemStack stack, ItemStack parent,
+            @Nullable Transform transform, PoseStack matrixStack, VertexConsumer buffer, int light,
+            int overlay) {
         if (transform != null) {
             transform.apply();
         }
         Random random = new Random();
         for (Direction direction : Direction.values()) {
             random.setSeed(42L);
-            renderQuads(matrixStack, buffer, model.getQuads(null, direction, random), stack, parent, light, overlay);
+            renderQuads(matrixStack, buffer, model.getQuads(null, direction, random), stack, parent,
+                    light, overlay);
         }
         random.setSeed(42L);
-        renderQuads(matrixStack, buffer, model.getQuads(null, null, random), stack, parent, light, overlay);
+        renderQuads(matrixStack, buffer, model.getQuads(null, null, random), stack, parent, light,
+                overlay);
     }
 
     // TODO: Rewrite the current scope color renderer with this new refined system
@@ -242,28 +264,33 @@ public class RenderUtil {
      * @param light
      * @param overlay
      */
-    private static void renderPersonalizedQuads(PoseStack matrixStack, VertexConsumer buffer, List<BakedQuad> quads,
-            ItemStack stack, ItemStack parent, int light, int overlay) {
+    private static void renderPersonalizedQuads(PoseStack matrixStack, VertexConsumer buffer,
+            List<BakedQuad> quads, ItemStack stack, ItemStack parent, int light, int overlay) {
         PoseStack.Pose entry = matrixStack.last();
         for (BakedQuad quad : quads) {
             float alpha = 1f;
             boolean keepColor = true;
             int color = -1;
-            if (stack.getItem() instanceof SideRailItem || stack.getItem() instanceof IrDeviceItem) {
+            if (stack.getItem() instanceof SideRailItem
+                    || stack.getItem() instanceof IrDeviceItem) {
                 if (quad.isTinted() && quad.getTintIndex() == 1) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR, quad.getTintIndex());
+                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
+                            quad.getTintIndex());
                     keepColor = true;
                 } else if (quad.isTinted() && quad.getTintIndex() == 0) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR, quad.getTintIndex());
+                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                            quad.getTintIndex());
                     keepColor = true;
                 }
             } else {
                 if (quad.isTinted()) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR, quad.getTintIndex());
+                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                            quad.getTintIndex());
                     keepColor = true;
                 }
                 if (quad.isTinted() || quad.getTintIndex() == 1) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR, quad.getTintIndex());
+                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR,
+                            quad.getTintIndex());
                     alpha = 2f;
                     keepColor = false;
                 }
@@ -319,19 +346,22 @@ public class RenderUtil {
      * @param light
      * @param overlay
      */
-    private static void renderQuads(PoseStack matrixStack, VertexConsumer buffer, List<BakedQuad> quads,
-            ItemStack stack, ItemStack parent, int light, int overlay) {
+    private static void renderQuads(PoseStack matrixStack, VertexConsumer buffer,
+            List<BakedQuad> quads, ItemStack stack, ItemStack parent, int light, int overlay) {
         PoseStack.Pose entry = matrixStack.last();
         for (BakedQuad quad : quads) {
             float alpha = 1f;
             boolean keepColor = true;
             int color = -1;
             if (quad.isTinted()) {
-                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR, quad.getTintIndex());
+                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                        quad.getTintIndex());
                 keepColor = true;
             }
-            if (quad.isTinted() && stack.getItem() instanceof ScopeItem && quad.getTintIndex() == 1) {
-                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR, quad.getTintIndex());
+            if (quad.isTinted() && stack.getItem() instanceof ScopeItem
+                    && quad.getTintIndex() == 1) {
+                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR,
+                        quad.getTintIndex());
                 alpha = 2f;
                 keepColor = false;
             }
@@ -350,28 +380,30 @@ public class RenderUtil {
                 return getItemStackColor(parent, ItemStack.EMPTY, tintIndex);
             }
         }
-        if (stack != null && !Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack).isEmpty()) {
-            color = ((DyeItem) Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack).getItem()).getDyeColor()
-                    .getTextColor();
+        if (stack != null
+                && !Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack).isEmpty()) {
+            color = ((DyeItem) Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack)
+                    .getItem()).getDyeColor().getTextColor();
         }
         return color;
     }
 
-    public static int getItemStackColor(ItemStack stack, ItemStack parent, IAttachment.Type attachmentType,
-            int tintIndex) {
+    public static int getItemStackColor(ItemStack stack, ItemStack parent,
+            IAttachment.Type attachmentType, int tintIndex) {
         int color = getItemStackColor(stack, parent, tintIndex);
 
         if (stack != null && !Gun.getAttachment(attachmentType, stack).isEmpty()) {
             if (Gun.getAttachment(attachmentType, stack).getItem() instanceof DyeItem)
-                color = ((DyeItem) Gun.getAttachment(attachmentType, stack).getItem()).getDyeColor().getTextColor();
+                color = ((DyeItem) Gun.getAttachment(attachmentType, stack).getItem()).getDyeColor()
+                        .getTextColor();
         }
         return color;
     }
 
     public static void applyTransformType(ItemStack stack, PoseStack matrixStack,
             ItemTransforms.TransformType transformType, LivingEntity entity) {
-        BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, entity.level, entity,
-                entity.getId());
+        BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, entity.level,
+                entity, entity.getId());
         boolean leftHanded = transformType == ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND
                 || transformType == ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND;
         ForgeHooksClient.handleCameraTransforms(matrixStack, model, transformType, leftHanded);
@@ -409,12 +441,13 @@ public class RenderUtil {
         void apply();
     }
 
-    public static boolean isMouseWithin(int mouseX, int mouseY, int x, int y, int width, int height) {
+    public static boolean isMouseWithin(int mouseX, int mouseY, int x, int y, int width,
+            int height) {
         return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 
-    public static void renderFirstPersonArm(LocalPlayer player, HumanoidArm hand, PoseStack matrixStack,
-            MultiBufferSource buffer, int combinedLight) {
+    public static void renderFirstPersonArm(LocalPlayer player, HumanoidArm hand,
+            PoseStack matrixStack, MultiBufferSource buffer, int combinedLight) {
         Minecraft mc = Minecraft.getInstance();
         EntityRenderDispatcher renderManager = mc.getEntityRenderDispatcher();
         PlayerRenderer renderer = (PlayerRenderer) renderManager.getRenderer(player);
@@ -433,6 +466,7 @@ public class RenderUtil {
             Block block = ((BlockItem) item).getBlock();
             return ItemBlockRenderTypes.getRenderType(block.defaultBlockState(), !entity);
         }
-        return entity ? Sheets.translucentItemSheet() : RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS);
+        return entity ? Sheets.translucentItemSheet()
+                : RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS);
     }
 }

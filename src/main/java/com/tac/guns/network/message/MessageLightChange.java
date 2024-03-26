@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 public class MessageLightChange extends PlayMessage<MessageLightChange> {
     private int[] range;
 
-    public MessageLightChange() {
-    }
+    public MessageLightChange() {}
 
     public MessageLightChange(int[] range) {
         this.range = range;
@@ -32,7 +31,8 @@ public class MessageLightChange extends PlayMessage<MessageLightChange> {
     }
 
     @Override
-    public void handle(MessageLightChange messageLightChange, Supplier<NetworkEvent.Context> supplier) {
+    public void handle(MessageLightChange messageLightChange,
+            Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             ServerPlayer player = supplier.get().getSender();
             if (player != null) {

@@ -27,8 +27,8 @@ public class MissileRenderer extends EntityRenderer<MissileEntity> {
     }
 
     @Override
-    public void render(MissileEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light) {
+    public void render(MissileEntity entity, float entityYaw, float partialTicks,
+            PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int light) {
         if (!entity.getProjectile().isVisible() || entity.tickCount <= 1) {
             return;
         }
@@ -37,11 +37,12 @@ public class MissileRenderer extends EntityRenderer<MissileEntity> {
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(180F));
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(entityYaw));
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot() - 90));
-        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE,
-                light, OverlayTexture.NO_OVERLAY, matrixStack, renderTypeBuffer, entity.getId());
+        Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(),
+                ItemTransforms.TransformType.NONE, light, OverlayTexture.NO_OVERLAY, matrixStack,
+                renderTypeBuffer, entity.getId());
         matrixStack.translate(0, -1, 0);
-        RenderUtil.renderModel(MyCachedModels.FLAME.getModel(), entity.getItem(), matrixStack, renderTypeBuffer,
-                15728880, OverlayTexture.NO_OVERLAY);
+        RenderUtil.renderModel(MyCachedModels.FLAME.getModel(), entity.getItem(), matrixStack,
+                renderTypeBuffer, 15728880, OverlayTexture.NO_OVERLAY);
         matrixStack.popPose();
     }
 }

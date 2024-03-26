@@ -53,40 +53,45 @@ public class NetworkRigManager extends SimplePreparableReloadListener<Map<ArmorR
     public HashSet<UUID> Ids = new HashSet<>();
 
     @Override
-    protected Map<ArmorRigItem, Rig> prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
+    protected Map<ArmorRigItem, Rig> prepare(ResourceManager resourceManager,
+            ProfilerFiller profiler) {
         Map<ArmorRigItem, Rig> map = Maps.newHashMap();
-        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof ArmorRigItem).forEach(item -> {
-            ResourceLocation id = item.getRegistryName();
-            if (id != null) {
-                ResourceLocation resourceLocation = new ResourceLocation(
-                        String.format("%s:rigs/%s.json", id.getNamespace(), id.getPath()));
-                try (Resource resource = resourceManager.getResource(resourceLocation);
-                        InputStream is = resource.getInputStream();
-                        Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                    Rig rig = GsonHelper.fromJson(GSON_INSTANCE, reader, Rig.class);
-                    if (rig != null && Validator.isValidObject(rig)) {
-                        map.put((ArmorRigItem) item, rig);
-                    } else {
-                        GunMod.LOGGER.error(
-                                "Couldn't load data file {} as it is missing or malformed. Using default rig data",
-                                resourceLocation);
-                        map.put((ArmorRigItem) item, new Rig());
+        ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof ArmorRigItem)
+                .forEach(item -> {
+                    ResourceLocation id = item.getRegistryName();
+                    if (id != null) {
+                        ResourceLocation resourceLocation = new ResourceLocation(
+                                String.format("%s:rigs/%s.json", id.getNamespace(), id.getPath()));
+                        try (Resource resource = resourceManager.getResource(resourceLocation);
+                                InputStream is = resource.getInputStream();
+                                Reader reader = new BufferedReader(
+                                        new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                            Rig rig = GsonHelper.fromJson(GSON_INSTANCE, reader, Rig.class);
+                            if (rig != null && Validator.isValidObject(rig)) {
+                                map.put((ArmorRigItem) item, rig);
+                            } else {
+                                GunMod.LOGGER.error(
+                                        "Couldn't load data file {} as it is missing or malformed. Using default rig data",
+                                        resourceLocation);
+                                map.put((ArmorRigItem) item, new Rig());
+                            }
+                        } catch (InvalidObjectException e) {
+                            GunMod.LOGGER.error("Missing required properties for {}",
+                                    resourceLocation);
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            GunMod.LOGGER.error("Couldn't parse data file {}", resourceLocation);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (InvalidObjectException e) {
-                    GunMod.LOGGER.error("Missing required properties for {}", resourceLocation);
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    GunMod.LOGGER.error("Couldn't parse data file {}", resourceLocation);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+                });
         return map;
     }
 
     @Override
-    protected void apply(Map<ArmorRigItem, Rig> objects, ResourceManager resourceManager, ProfilerFiller profiler) {
+    protected void apply(Map<ArmorRigItem, Rig> objects, ResourceManager resourceManager,
+            ProfilerFiller profiler) {
         ImmutableMap.Builder<ResourceLocation, Rig> builder = ImmutableMap.builder();
         objects.forEach((item, rig) -> {
             Validate.notNull(item.getRegistryName());
@@ -235,7 +240,8 @@ public class NetworkRigManager extends SimplePreparableReloadListener<Map<ArmorR
 
         @Override
         public Optional<String> readData(FriendlyByteBuf buffer) {
-            Map<ResourceLocation, Rig> registeredGuns = NetworkRigManager.readRegisteredRigs(buffer);
+            Map<ResourceLocation, Rig> registeredGuns =
+                    NetworkRigManager.readRegisteredRigs(buffer);
             NetworkRigManager.updateRegisteredRigs(registeredGuns);
             return Optional.empty();
         }

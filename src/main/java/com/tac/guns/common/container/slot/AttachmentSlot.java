@@ -28,8 +28,8 @@ public class AttachmentSlot extends Slot {
     private Player player;
     private IAttachment.Type[] types;
 
-    public AttachmentSlot(AttachmentContainer container, Container weaponInventory, ItemStack weapon,
-            IAttachment.Type type, Player player, int index, int x, int y) {
+    public AttachmentSlot(AttachmentContainer container, Container weaponInventory,
+            ItemStack weapon, IAttachment.Type type, Player player, int index, int x, int y) {
         super(weaponInventory, index, x, y);
         this.container = container;
         this.weapon = weapon;
@@ -37,8 +37,8 @@ public class AttachmentSlot extends Slot {
         this.player = player;
     }
 
-    public AttachmentSlot(AttachmentContainer container, Container weaponInventory, ItemStack weapon,
-            IAttachment.Type[] types, Player player, int index, int x, int y) {
+    public AttachmentSlot(AttachmentContainer container, Container weaponInventory,
+            ItemStack weapon, IAttachment.Type[] types, Player player, int index, int x, int y) {
         super(weaponInventory, index, x, y);
         this.container = container;
         this.weapon = weapon;
@@ -49,7 +49,8 @@ public class AttachmentSlot extends Slot {
     @Override
     public boolean isActive() {
         if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag()
-                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun().getReloads().getMaxAmmo())
+                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun()
+                        .getReloads().getMaxAmmo())
                 || SyncedEntityData.instance().get(player, ModSyncedDataKeys.RELOADING)) {
             return false;
         }
@@ -73,16 +74,19 @@ public class AttachmentSlot extends Slot {
     @Override
     public boolean mayPlace(ItemStack stack) {
         if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag()
-                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun().getReloads().getMaxAmmo())
+                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun()
+                        .getReloads().getMaxAmmo())
                 || SyncedEntityData.instance().get(player, ModSyncedDataKeys.RELOADING)) {
             return false;
         }
-        if ((this.player.getMainHandItem().getItem() instanceof IEasyColor) && stack.getItem() instanceof DyeItem)
+        if ((this.player.getMainHandItem().getItem() instanceof IEasyColor)
+                && stack.getItem() instanceof DyeItem)
             return true;
         else {
             GunItem item = (GunItem) this.weapon.getItem();
             Gun modifiedGun = item.getModifiedGun(this.weapon);
-            if (stack.getItem() instanceof IAttachment && ((IAttachment) stack.getItem()).getType() == this.type
+            if (stack.getItem() instanceof IAttachment
+                    && ((IAttachment) stack.getItem()).getType() == this.type
                     && modifiedGun.canAttachType(this.type))
                 return true;
             else if (types != null && stack.getItem() instanceof IAttachment) {
@@ -98,8 +102,9 @@ public class AttachmentSlot extends Slot {
     @Override
     public void setChanged() {
         if (this.container.isLoaded()) {
-            this.player.level.playSound(null, this.player.getX(), this.player.getY() + 1.0, this.player.getZ(),
-                    ModSounds.UI_WEAPON_ATTACH.get(), SoundSource.PLAYERS, 0.5F, this.hasItem() ? 1.0F : 0.75F);
+            this.player.level.playSound(null, this.player.getX(), this.player.getY() + 1.0,
+                    this.player.getZ(), ModSounds.UI_WEAPON_ATTACH.get(), SoundSource.PLAYERS, 0.5F,
+                    this.hasItem() ? 1.0F : 0.75F);
         }
     }
 

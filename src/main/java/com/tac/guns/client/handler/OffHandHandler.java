@@ -32,14 +32,21 @@ public class OffHandHandler {
             ItemStack offHand = event.getItemStack();
 
             if (mainHand.getItem() instanceof GunItem) {
-                GunAnimationController controller = GunAnimationController.fromItem(mainHand.getItem());
+                GunAnimationController controller =
+                        GunAnimationController.fromItem(mainHand.getItem());
                 if (!isSingleHanded(mainHand)
-                        || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY_END) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY))
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_INTRO)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_LOOP)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_NORMAL_END)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_EMPTY_END)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_NORMAL)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_EMPTY))
                     if (!(offHand.getItem() instanceof GunItem) && !offHand.isEmpty())
                         event.setCanceled(true);// Turn off rendering.
             }
@@ -57,14 +64,21 @@ public class OffHandHandler {
             ItemStack offHand = player.getOffhandItem();
 
             if (mainHand.getItem() instanceof GunItem) {
-                GunAnimationController controller = GunAnimationController.fromItem(mainHand.getItem());
+                GunAnimationController controller =
+                        GunAnimationController.fromItem(mainHand.getItem());
                 if (!isSingleHanded(mainHand)
-                        || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_INTRO) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL_END) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY_END) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL) ||
-                        controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY))
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_INTRO)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_LOOP)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_NORMAL_END)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_EMPTY_END)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_NORMAL)
+                        || controller.isAnimationRunning(
+                                GunAnimationController.AnimationLabel.RELOAD_EMPTY))
                     if (!(offHand.getItem() instanceof GunItem) && !offHand.isEmpty()) {
                         event.setSwingHand(false);// Close arm swing
                         event.setCanceled(true);// Disable deputies

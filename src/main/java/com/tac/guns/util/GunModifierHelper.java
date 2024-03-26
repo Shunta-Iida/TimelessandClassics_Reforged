@@ -435,13 +435,15 @@ public class GunModifierHelper {
         for (int i = 0; i < IAttachment.Type.values().length; i++) {
             IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
-                modifierWeight = modifier.additionalAmmunition() > modifierWeight ? modifier.additionalAmmunition()
+                modifierWeight = modifier.additionalAmmunition() > modifierWeight
+                        ? modifier.additionalAmmunition()
                         : modifierWeight;
             }
         }
         IGunModifier[] modifiers = getModifiers(weapon);
         for (IGunModifier modifier : modifiers) {
-            modifierWeight = modifier.additionalAmmunition() > modifierWeight ? modifier.additionalAmmunition()
+            modifierWeight = modifier.additionalAmmunition() > modifierWeight
+                    ? modifier.additionalAmmunition()
                     : modifierWeight;
         }
         return modifierWeight;

@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 
 public class MessageUpdatePlayerMovement extends PlayMessage<MessageUpdatePlayerMovement> {
     @Override
-    public void encode(MessageUpdatePlayerMovement messageUpdatePlayerMovement, FriendlyByteBuf buffer) {
+    public void encode(MessageUpdatePlayerMovement messageUpdatePlayerMovement,
+            FriendlyByteBuf buffer) {
         buffer.writeBoolean(messageUpdatePlayerMovement.handle);
     }
 
@@ -22,8 +23,7 @@ public class MessageUpdatePlayerMovement extends PlayMessage<MessageUpdatePlayer
         return new MessageUpdatePlayerMovement(buffer.readBoolean());
     }
 
-    public MessageUpdatePlayerMovement() {
-    }
+    public MessageUpdatePlayerMovement() {}
 
     private boolean handle;
 
@@ -34,8 +34,8 @@ public class MessageUpdatePlayerMovement extends PlayMessage<MessageUpdatePlayer
     @Override
     public void handle(MessageUpdatePlayerMovement messageUpdatePlayerMovement,
             Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ServerPlayHandler.handleMovementUpdate(supplier.get().getSender(),
-                messageUpdatePlayerMovement.handle));
+        supplier.get().enqueueWork(() -> ServerPlayHandler.handleMovementUpdate(
+                supplier.get().getSender(), messageUpdatePlayerMovement.handle));
         // supplier.get().enqueueWork(() ->
         // {ServerPlayHandler.handleMovementUpdateLow(supplier.get().getSender());});
         supplier.get().setPacketHandled(true);

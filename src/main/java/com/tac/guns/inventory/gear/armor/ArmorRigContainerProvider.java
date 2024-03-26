@@ -57,8 +57,8 @@ public class ArmorRigContainerProvider implements MenuProvider {
                     break;
                 default: {
                     this.container = new R1_RigContainer(windowId, inv, this.item);
-                    GunMod.LOGGER.log(Level.ERROR,
-                            item.getDisplayName().getString() + " | Row could is out of bounds 1-5");
+                    GunMod.LOGGER.log(Level.ERROR, item.getDisplayName().getString()
+                            + " | Row could is out of bounds 1-5");
                     break;
                 }
             }

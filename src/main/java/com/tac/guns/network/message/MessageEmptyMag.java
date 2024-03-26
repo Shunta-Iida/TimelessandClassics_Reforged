@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 
 public class MessageEmptyMag extends PlayMessage<MessageEmptyMag> {
     @Override
-    public void encode(MessageEmptyMag messageEmptyMag, FriendlyByteBuf buffer) {
-    }
+    public void encode(MessageEmptyMag messageEmptyMag, FriendlyByteBuf buffer) {}
 
     @Override
     public MessageEmptyMag decode(FriendlyByteBuf buffer) {

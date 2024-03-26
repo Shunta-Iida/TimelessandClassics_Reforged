@@ -1,8 +1,6 @@
 {
   "java.compile.nullAnalysis.mode": "disabled",
   "java.configuration.updateBuildConfiguration": "automatic",
-  "editor.tabSize": 4,
-  "editor.indentSize": "tabSize",
   "editor.formatOnSave": true,
   "java.saveActions.organizeImports": true,
   "java.format.comments.enabled": false,
@@ -21,8 +19,8 @@
     "lambdaExpressionFromAnonymousClass",
     "lambdaExpression"
   ],
-"java.saveActions.cleanup": true,
-"mcmodel-viewer.assetsRoots": [
+  "java.saveActions.cleanup": true,
+  "mcmodel-viewer.assetsRoots": [
     "/workspaces/TimelessandClassics_Reforged/src/main/resources/assets"
-]
+  ],
 }

@@ -3,26 +3,18 @@
  *
  * Copyright 2015-2016 Marco Hutter - http://www.javagl.de
  *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.javagl.jgltf.model;
 
@@ -58,8 +50,7 @@ public class GltfAnimations {
      * @param animationPolicy The {@link AnimationPolicy}
      * @return The {@link AnimationManager}
      */
-    public static AnimationManager createAnimationManager(
-            AnimationPolicy animationPolicy) {
+    public static AnimationManager createAnimationManager(AnimationPolicy animationPolicy) {
         AnimationManager animationManager = new AnimationManager(animationPolicy);
         return animationManager;
     }
@@ -73,8 +64,7 @@ public class GltfAnimations {
      */
     public static List<Animation> createModelAnimations(
             Iterable<? extends AnimationModel> animationModels) {
-        Objects.requireNonNull(animationModels,
-                "The animationModels may not be null");
+        Objects.requireNonNull(animationModels, "The animationModels may not be null");
         List<Animation> allModelAnimations = new ArrayList<Animation>();
         for (AnimationModel animationModel : animationModels) {
             List<Channel> channels = animationModel.getChannels();
@@ -130,8 +120,7 @@ public class GltfAnimations {
         AccessorModel input = sampler.getInput();
         AccessorData inputData = input.getAccessorData();
         if (!(inputData instanceof AccessorFloatData)) {
-            logger.warning("Input data is not an AccessorFloatData, but "
-                    + inputData.getClass());
+            logger.warning("Input data is not an AccessorFloatData, but " + inputData.getClass());
             return null;
         }
         AccessorFloatData inputFloatData = (AccessorFloatData) inputData;
@@ -139,13 +128,13 @@ public class GltfAnimations {
         AccessorModel output = sampler.getOutput();
         AccessorData outputData = output.getAccessorData();
         if (!(outputData instanceof AccessorFloatData)) {
-            logger.warning("Output data is not an AccessorFloatData, but "
-                    + outputData.getClass());
+            logger.warning("Output data is not an AccessorFloatData, but " + outputData.getClass());
             return null;
         }
         AccessorFloatData outputFloatData = (AccessorFloatData) outputData;
 
-        Animation modelAnimation = createAnimation(inputFloatData, outputFloatData, interpolatorType);
+        Animation modelAnimation =
+                createAnimation(inputFloatData, outputFloatData, interpolatorType);
         modelAnimation.addAnimationListener(animationListener);
         return modelAnimation;
     }
@@ -158,8 +147,7 @@ public class GltfAnimations {
      * @param path          The path
      * @return The {@link InterpolatorType}
      */
-    private static InterpolatorType typeForInterpolation(
-            Interpolation interpolation, String path) {
+    private static InterpolatorType typeForInterpolation(Interpolation interpolation, String path) {
         switch (interpolation) {
             case LINEAR: {
                 if (path.equals("rotation")) {
@@ -177,8 +165,7 @@ public class GltfAnimations {
                 logger.warning("This interpolation type is not supported yet");
                 break;
         }
-        logger.warning(
-                "Interpolation type not supported: " + interpolation);
+        logger.warning("Interpolation type not supported: " + interpolation);
         return InterpolatorType.LINEAR;
     }
 
@@ -193,9 +180,7 @@ public class GltfAnimations {
      *                         be used
      * @return The {@link Animation}
      */
-    static Animation createAnimation(
-            AccessorFloatData timeData,
-            AccessorFloatData outputData,
+    static Animation createAnimation(AccessorFloatData timeData, AccessorFloatData outputData,
             InterpolatorType interpolatorType) {
         int numKeyElements = timeData.getNumElements();
         float keys[] = new float[numKeyElements];
@@ -222,8 +207,7 @@ public class GltfAnimations {
                 values[e][c] = outputData.get(globalIndex);
             }
         }
-        return new Animation(
-                keys, values, interpolatorType);
+        return new Animation(keys, values, interpolatorType);
     }
 
     /**
@@ -237,8 +221,7 @@ public class GltfAnimations {
      * @param path      The path
      * @return The {@link AnimationListener}
      */
-    private static AnimationListener createAnimationListener(
-            NodeModel nodeModel, String path) {
+    private static AnimationListener createAnimationListener(NodeModel nodeModel, String path) {
         switch (path) {
             case "translation":
                 return createTranslationAnimationListener(nodeModel);
@@ -256,8 +239,7 @@ public class GltfAnimations {
                 break;
         }
         logger.warning("Animation channel target path must be "
-                + "\"translation\", \"rotation\", \"scale\" or  \"weights\", "
-                + "but is " + path);
+                + "\"translation\", \"rotation\", \"scale\" or  \"weights\", " + "but is " + path);
         return null;
     }
 
@@ -269,8 +251,7 @@ public class GltfAnimations {
      * @param nodeModel The {@link NodeModel}
      * @return The {@link AnimationListener}
      */
-    private static AnimationListener createTranslationAnimationListener(
-            NodeModel nodeModel) {
+    private static AnimationListener createTranslationAnimationListener(NodeModel nodeModel) {
         return (animation, timeS, values) -> {
             float translation[] = nodeModel.getTranslation();
             if (translation == null) {
@@ -290,8 +271,7 @@ public class GltfAnimations {
      * @param nodeModel The {@link NodeModel}
      * @return The {@link AnimationListener}
      */
-    private static AnimationListener createRotationAnimationListener(
-            NodeModel nodeModel) {
+    private static AnimationListener createRotationAnimationListener(NodeModel nodeModel) {
         return (animation, timeS, values) -> {
             float rotation[] = nodeModel.getRotation();
             if (rotation == null) {
@@ -311,8 +291,7 @@ public class GltfAnimations {
      * @param nodeModel The {@link NodeModel}
      * @return The {@link AnimationListener}
      */
-    private static AnimationListener createScaleAnimationListener(
-            NodeModel nodeModel) {
+    private static AnimationListener createScaleAnimationListener(NodeModel nodeModel) {
         return (animation, timeS, values) -> {
             float scale[] = nodeModel.getScale();
             if (scale == null) {
@@ -332,8 +311,7 @@ public class GltfAnimations {
      * @param nodeModel The {@link NodeModel}
      * @return The {@link AnimationListener}
      */
-    private static AnimationListener createWeightsAnimationListener(
-            NodeModel nodeModel) {
+    private static AnimationListener createWeightsAnimationListener(NodeModel nodeModel) {
         return (animation, timeS, values) -> {
             float weights[] = nodeModel.getWeights();
             if (weights == null) {
