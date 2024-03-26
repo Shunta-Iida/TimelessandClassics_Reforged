@@ -73,7 +73,7 @@ public class GunEnchantmentHelper {
         final int level = EnchantmentHelper
                 .getItemEnchantmentLevel(ModEnchantments.LIGHTWEIGHT.get(), weapon);
         if (level > 0) {
-            return (float) (Math.pow(1.4, level) - 1f);
+            return (float) (Math.pow(1.5, level)) - 1f;
         }
         return 0f;
     }
