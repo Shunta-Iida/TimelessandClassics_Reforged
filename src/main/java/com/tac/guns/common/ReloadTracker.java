@@ -94,19 +94,19 @@ public class ReloadTracker {
                 int interval = gun.getReloads().getReloadMagTimer()
                         + gun.getReloads().getAdditionalReloadEmptyMagTimer()
                         + this.gun.getReloads().getPreReloadPauseTicks();// GunEnchantmentHelper.getReloadInterval(this.stack);
-                interval *= GunEnchantmentHelper.getReloadSpeed(this.stack);
+                interval /= GunEnchantmentHelper.getReloadSpeed(this.stack);
                 reload = deltaTicks > interval;
             } else {
                 final int deltaTicks = player.tickCount - this.startTick;
                 int interval = gun.getReloads().getReloadMagTimer()
                         + this.gun.getReloads().getPreReloadPauseTicks();// GunEnchantmentHelper.getReloadInterval(this.stack);
-                interval *= GunEnchantmentHelper.getReloadSpeed(this.stack);
+                interval /= GunEnchantmentHelper.getReloadSpeed(this.stack);
                 reload = deltaTicks > interval;
             }
         } else {
             final int deltaTicks = player.tickCount - this.startTick;
             int interval = gun.getReloads().getinterReloadPauseTicks();
-            interval *= GunEnchantmentHelper.getReloadSpeed(this.stack);
+            interval /= GunEnchantmentHelper.getReloadSpeed(this.stack);
             reload = deltaTicks > 0 && deltaTicks % interval == 0;
         }
         return reload;
