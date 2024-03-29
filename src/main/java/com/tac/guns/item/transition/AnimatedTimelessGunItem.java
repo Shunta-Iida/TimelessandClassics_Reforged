@@ -1,7 +1,7 @@
 package com.tac.guns.item.transition;
 
 /*
- * import com.tac.guns.item.GunItem;
+ * 
  * import com.tac.guns.item.TransitionalTypes.TimelessGunItem;
  * import com.tac.guns.util.Process;
  * import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;

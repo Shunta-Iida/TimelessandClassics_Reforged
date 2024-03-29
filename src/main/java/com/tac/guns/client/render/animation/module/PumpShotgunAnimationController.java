@@ -1,7 +1,8 @@
 package com.tac.guns.client.render.animation.module;
 
 import com.tac.guns.common.Gun;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -9,17 +10,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public abstract class PumpShotgunAnimationController extends GunAnimationController {
 
-    public void setEmpty(boolean empty) {
+    public void setEmpty(final boolean empty) {
         this.empty = empty;
     }
 
     private boolean empty = false;
 
     @Override
-    protected AnimationSoundMeta getSoundFromLabel(Item item, AnimationLabel label) {
-        if (item instanceof GunItem) {
-            GunItem gunItem = (GunItem) item;
-            Gun.Sounds sounds = gunItem.getGun().getSounds();
+    protected AnimationSoundMeta getSoundFromLabel(final Item item, final AnimationLabel label) {
+        if (item instanceof final GunItem gunItem) {
+            final Gun.Sounds sounds = gunItem.getGun().getSounds();
             switch (label) {
                 case PUMP:
                     return new AnimationSoundMeta(sounds.getPump());
@@ -39,8 +39,7 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
     }
 
     @Override
-    public void runAnimation(AnimationLabel label) {
-
+    public void runAnimation(final AnimationLabel label) {
         switch (label) {
             case RELOAD_EMPTY:
             case RELOAD_NORMAL:
@@ -54,7 +53,7 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
     }
 
     @Override
-    public void runAnimation(AnimationLabel label, Runnable callback) {
+    public void runAnimation(final AnimationLabel label, final Runnable callback) {
         switch (label) {
             case RELOAD_EMPTY:
             case RELOAD_NORMAL:
@@ -67,7 +66,38 @@ public abstract class PumpShotgunAnimationController extends GunAnimationControl
         }
     }
 
+    @Override
+    public void runAnimation(final AnimationLabel label, final float speed) {
+        switch (label) {
+            case RELOAD_EMPTY:
+            case RELOAD_NORMAL:
+                this.runAnimation(AnimationLabel.RELOAD_INTRO, () -> {
+                    if (this.isAnimationRunning())
+                        super.stopAnimation();
+                    this.runAnimation(AnimationLabel.RELOAD_LOOP, speed);
+                }, speed);
+            default:
+                super.runAnimation(label, speed);
+        }
+    }
+
+    @Override
+    public void runAnimation(final AnimationLabel label, final Runnable callback,
+            final float speed) {
+        switch (label) {
+            case RELOAD_EMPTY:
+            case RELOAD_NORMAL:
+                this.runAnimation(AnimationLabel.RELOAD_INTRO, () -> {
+                    if (this.isAnimationRunning())
+                        super.stopAnimation();
+                    this.runAnimation(AnimationLabel.RELOAD_LOOP, callback, speed);
+                }, speed);
+            default:
+                super.runAnimation(label, callback, speed);
+        }
+    }
+
     public boolean isEmpty() {
-        return empty;
+        return this.empty;
     }
 }

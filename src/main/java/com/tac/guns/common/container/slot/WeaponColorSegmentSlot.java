@@ -1,7 +1,8 @@
 package com.tac.guns.common.container.slot;
 
 import com.tac.guns.common.container.ColorBenchContainer;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -12,13 +13,14 @@ import net.minecraft.world.item.ItemStack;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class WeaponColorSegmentSlot extends Slot {
-    private ColorBenchContainer container;
-    private ItemStack weapon;
-    private Player player;
+    private final ColorBenchContainer container;
+    private final ItemStack weapon;
+    private final Player player;
 
     // Segment handling with these slots will be based on index
-    public WeaponColorSegmentSlot(ColorBenchContainer container, Container weaponInventory,
-            ItemStack weapon, Player player, int index, int x, int y) {
+    public WeaponColorSegmentSlot(final ColorBenchContainer container,
+            final Container weaponInventory, final ItemStack weapon, final Player player,
+            final int index, final int x, final int y) {
         super(weaponInventory, index, x, y);
         this.container = container;
         this.weapon = weapon;
@@ -34,7 +36,7 @@ public class WeaponColorSegmentSlot extends Slot {
     }
 
     @Override
-    public boolean mayPlace(ItemStack stack) {
+    public boolean mayPlace(final ItemStack stack) {
         if (this.weapon.getItem() instanceof GunItem)
             return stack.getItem() instanceof DyeItem;
         else

@@ -2,8 +2,9 @@ package com.tac.guns.util;
 
 import com.tac.guns.common.Gun;
 import com.tac.guns.interfaces.IGunModifier;
-import com.tac.guns.item.transition.TimelessGunItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -26,8 +27,8 @@ public class RigModifierHelper {
 
     private static IGunModifier[] getModifiers(ItemStack weapon) {
         if (!weapon.isEmpty()) {
-            if (weapon.getItem() instanceof TimelessGunItem) {
-                TimelessGunItem gunItem = (TimelessGunItem) weapon.getItem();
+            if (weapon.getItem() instanceof GunItem) {
+                GunItem gunItem = (GunItem) weapon.getItem();
                 return gunItem.getModifiers();
             }
         }

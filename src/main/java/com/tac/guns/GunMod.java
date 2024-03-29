@@ -47,7 +47,7 @@ import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.init.ModTileEntities;
 import com.tac.guns.inventory.gear.IWearableItemHandler;
 import com.tac.guns.inventory.gear.armor.IAmmoItemHandler;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 
 import net.minecraft.client.Minecraft;
@@ -78,7 +78,7 @@ public class GunMod {
     public static boolean controllableLoaded = false;
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
-    public static final CreativeModeTab GROUP = new CreativeModeTab(Reference.MOD_ID) {
+    public static final CreativeModeTab GENERAL = new CreativeModeTab(Reference.MOD_ID) {
         @Override
         public @NotNull ItemStack makeIcon() {
             return new ItemStack(ModItems.VORTEX_LPVO_3_6.get());
@@ -97,7 +97,7 @@ public class GunMod {
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.GLOCK_17.get());
             stack.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.GLOCK_17.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.GLOCK_17.get()).getGun().getReloads().getMaxAmmo());
             /*
              * ItemStack stack = new ItemStack(ModItems.M1911.get());
              * stack.getOrCreateTag().putInt("AmmoCount",
@@ -147,7 +147,7 @@ public class GunMod {
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.AI_AWP.get());
             stack.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.AI_AWP.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.AI_AWP.get()).getGun().getReloads().getMaxAmmo());
             return stack;
         }
 
@@ -162,7 +162,7 @@ public class GunMod {
         public ItemStack makeIcon() {
             ItemStack stack = new ItemStack(ModItems.M1014.get());
             stack.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.M1014.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.M1014.get()).getGun().getReloads().getMaxAmmo());
             return stack;
         }
 
@@ -332,7 +332,7 @@ public class GunMod {
             } catch (ClassCastException | IllegalAccessException e) {
                 continue;
             }
-            if (TimelessGunItem.class.isAssignableFrom(object.get().getClass())) {
+            if (GunItem.class.isAssignableFrom(object.get().getClass())) {
                 try {
                     OverrideModelManager.register((Item) object.get(),
                             (IOverrideModel) Class.forName("com.tac.guns.client.render.model.gun."

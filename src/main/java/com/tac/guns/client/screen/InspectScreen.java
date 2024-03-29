@@ -11,7 +11,7 @@ import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.InspectionContainer;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -57,7 +57,8 @@ public class InspectScreen extends AbstractContainerScreen<InspectionContainer> 
     }
 
     @Override
-    public void render(final PoseStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
+    public void render(final PoseStack matrixStack, final int mouseX, final int mouseY,
+            final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY); // Render tool tips
@@ -111,7 +112,8 @@ public class InspectScreen extends AbstractContainerScreen<InspectionContainer> 
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
                     GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-            final MultiBufferSource.BufferSource buffer = this.minecraft.renderBuffers().bufferSource();
+            final MultiBufferSource.BufferSource buffer =
+                    this.minecraft.renderBuffers().bufferSource();
             GunRenderingHandler.get().renderWeapon(this.minecraft.player,
                     this.minecraft.player.getMainHandItem(), ItemTransforms.TransformType.GROUND,
                     matrixStack, buffer, 15728880, 0F); // GROUND, matrixStack,
@@ -125,7 +127,8 @@ public class InspectScreen extends AbstractContainerScreen<InspectionContainer> 
     }
 
     @Override
-    protected void renderBg(final PoseStack matrixStack, final float partialTicks, final int mouseX, final int mouseY) {
+    protected void renderBg(final PoseStack matrixStack, final float partialTicks, final int mouseX,
+            final int mouseY) {
         /*
          * RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          * Minecraft minecraft = Minecraft.getInstance();
@@ -135,22 +138,22 @@ public class InspectScreen extends AbstractContainerScreen<InspectionContainer> 
          * this.blit(matrixStack, left, top, 0, 0, this.imageWidth, this.imageHeight);
          * 
          *//*
-                * Draws the icons for each attachment slot. If not applicable
-                * for the weapon, it will draw a cross instead.
-                *//*
-                       * for(int i = 0; i < IAttachment.Type.values().length; i++)
-                       * {
-                       * if(!this.menu.getSlot(i).isActive())
-                       * {
-                       * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 0, 16, 16);
-                       * }
-                       * else if(this.weaponInventory.getItem(i).isEmpty())
-                       * {
-                       * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 16 + i * 16, 16,
-                       * 16);
-                       * }
-                       * }
-                       */
+                    * Draws the icons for each attachment slot. If not applicable
+                    * for the weapon, it will draw a cross instead.
+                    *//*
+                               * for(int i = 0; i < IAttachment.Type.values().length; i++)
+                               * {
+                               * if(!this.menu.getSlot(i).isActive())
+                               * {
+                               * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 0, 16, 16);
+                               * }
+                               * else if(this.weaponInventory.getItem(i).isEmpty())
+                               * {
+                               * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 16 + i * 16, 16,
+                               * 16);
+                               * }
+                               * }
+                               */
     }
 
     @Override

@@ -1,12 +1,16 @@
 package com.tac.guns.extra_events;
 
 
+import java.util.Locale;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
 import com.tac.guns.common.Gun;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.GunItem;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.KeybindComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -16,9 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.Locale;
 
 /**
  * Author: ClumsyAlien
@@ -29,7 +30,7 @@ import java.util.Locale;
 public class TacShootingEvent {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void preShoot(GunFireEvent.Pre event) {
-        if (!(event.getStack().getItem() instanceof TimelessGunItem))
+        if (!(event.getStack().getItem() instanceof GunItem))
             return;
         HandleFireMode(event);
     }
@@ -37,7 +38,7 @@ public class TacShootingEvent {
     private static void HandleFireMode(GunFireEvent.Pre event) {
         ItemStack gunItem = event.getStack();
         int[] gunItemFireModes = gunItem.getTag().getIntArray("supportedFireModes");
-        Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem); // Quick patch up, will create static method for handling null supported modes
+        Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem.getTag()); // Quick patch up, will create static method for handling null supported modes
 
         if (gunItem.getTag().get("CurrentFireMode") == null) // If user has not checked fire modes yet, default to first mode
         {

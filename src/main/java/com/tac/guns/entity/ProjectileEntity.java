@@ -1,8 +1,17 @@
 package com.tac.guns.entity;
 
-// import com.sun.tools.jdi.Packet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
-import com.mojang.logging.LogUtils;
+import javax.annotation.Nullable;
+
 import com.mrcrayfish.framework.common.data.SyncedEntityData;
 import com.tac.guns.Config;
 import com.tac.guns.common.AimingManager;
@@ -10,25 +19,27 @@ import com.tac.guns.common.BoundingBoxManager;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.Gun.Projectile;
 import com.tac.guns.common.SpreadTracker;
-import com.tac.guns.event.GunProjectileHitEvent;
 import com.tac.guns.event.LevelUpEvent;
 import com.tac.guns.init.ModEnchantments;
 import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.interfaces.IDamageable;
 import com.tac.guns.interfaces.IExplosionDamageable;
 import com.tac.guns.interfaces.IHeadshotBox;
-import com.tac.guns.item.GunItem;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
-import com.tac.guns.network.message.*;
+import com.tac.guns.network.message.MessageBlood;
+import com.tac.guns.network.message.MessagePlayerShake;
+import com.tac.guns.network.message.MessageProjectileHitBlock;
+import com.tac.guns.network.message.MessageProjectileHitEntity;
+import com.tac.guns.network.message.MessageRemoveProjectile;
 import com.tac.guns.util.BufferUtil;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.WearableHelper;
 import com.tac.guns.util.math.ExtendedEntityRayTraceResult;
 import com.tac.guns.world.ProjectileExplosion;
-import net.minecraft.advancements.CriteriaTriggers;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -39,10 +50,13 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -50,11 +64,20 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.BellBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.*;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
@@ -62,13 +85,6 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jline.utils.Log;
-
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnData {
     private static final Predicate<Entity> PROJECTILE_TARGETS =
@@ -144,7 +160,8 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     }
 
     @Override
-    protected void defineSynchedData() {}
+    protected void defineSynchedData() {
+    }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
@@ -335,7 +352,8 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
      * is appropriate
      * for spawning particles. Override {@link #tick()} to make changes to physics
      */
-    protected void onProjectileTick() {}
+    protected void onProjectileTick() {
+    }
 
     /**
      * Called when the projectile has run out of it's life. In other words, the
@@ -343,7 +361,8 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
      * to not hit any blocks and instead aged. The grenade uses this to explode in
      * the air.
      */
-    protected void onExpired() {}
+    protected void onExpired() {
+    }
 
     @Nullable
     protected EntityResult findEntityOnPath(Vec3 startVec, Vec3 endVec) {
@@ -681,7 +700,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
             gunStack.getTag().putFloat("levelDmg", gunStack.getTag().getFloat("levelDmg") + damage);
         }
         if (gunStack.getTag().get("level") != null) {
-            TimelessGunItem gunItem = (TimelessGunItem) gunStack.getItem();
+            GunItem gunItem = (GunItem) gunStack.getItem();
             if (gunStack.getTag()
                     .getFloat("levelDmg") > (gunItem.getGun().getGeneral().getLevelReq()
                             * ((gunStack.getTag().getInt("level") * 3.0d)))) {

@@ -1,27 +1,32 @@
 package com.tac.guns.client.render.model.gun;
 
+import static com.tac.guns.client.render.model.CommonComponents.BODY;
+import static com.tac.guns.client.render.model.CommonComponents.BULLET1;
+import static com.tac.guns.client.render.model.CommonComponents.BULLET2;
+import static com.tac.guns.client.render.model.CommonComponents.MAG;
+import static com.tac.guns.client.render.model.CommonComponents.SIGHT_LIGHT;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.mrcrayfish.framework.common.data.SyncedEntityData;
-import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.COLTPYTHONAnimationController;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
+import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.render.model.internal.TacGunComponents;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.Gun;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-import static com.tac.guns.client.render.model.CommonComponents.*;
 
 public class colt_python_animation extends SkinnedGunModel {
     @Override

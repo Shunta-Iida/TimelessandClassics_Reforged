@@ -1,5 +1,24 @@
 package com.tac.guns.common;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.InvalidObjectException;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.Validate;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -9,8 +28,10 @@ import com.mrcrayfish.framework.api.data.login.ILoginData;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.annotation.Validator;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.common.NetworkGunManager.Supplier;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.message.MessageUpdateGuns;
+
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -28,12 +49,6 @@ import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.Validate;
-
-import javax.annotation.Nullable;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs

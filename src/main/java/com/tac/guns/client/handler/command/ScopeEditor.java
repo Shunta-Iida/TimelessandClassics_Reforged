@@ -1,5 +1,14 @@
 package com.tac.guns.client.handler.command;
 
+import static com.tac.guns.GunMod.LOGGER;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.apache.logging.log4j.Level;
+
 import com.google.gson.GsonBuilder;
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
@@ -7,8 +16,9 @@ import com.tac.guns.client.Keys;
 import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
-import com.tac.guns.item.transition.TimelessGunItem;
 import com.tac.guns.item.attachment.impl.Scope;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -18,14 +28,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.Level;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-
-import static com.tac.guns.GunMod.LOGGER;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Dist.CLIENT)
 public class ScopeEditor {
@@ -38,7 +40,8 @@ public class ScopeEditor {
         return instance;
     }
 
-    private ScopeEditor() {}
+    private ScopeEditor() {
+    }
 
     public HashMap<String, ScopeData> map = new HashMap<>();
     private ScopeData scopeData;
@@ -58,9 +61,9 @@ public class ScopeEditor {
         if (ch == null || ch.getCatCurrentIndex() != 2)
             return;
         if ((mc.player.getMainHandItem() == null || mc.player.getMainHandItem() == ItemStack.EMPTY
-                || !(mc.player.getMainHandItem().getItem() instanceof TimelessGunItem)))
+                || !(mc.player.getMainHandItem().getItem() instanceof GunItem)))
             return;
-        if (((TimelessGunItem) mc.player.getMainHandItem().getItem()).isIntegratedOptic()) {
+        if (((GunItem) mc.player.getMainHandItem().getItem()).isIntegratedOptic()) {
             if (!this.map.containsKey(mc.player.getMainHandItem().getItem().getDescriptionId()))
                 this.map.put(mc.player.getMainHandItem().getItem().getDescriptionId(),
                         new ScopeData(mc.player.getMainHandItem().getItem().getDescriptionId()));
@@ -262,7 +265,8 @@ public class ScopeEditor {
         // this.map.put(scope.getTagName(), data);
     }
 
-    public void resetData() {}
+    public void resetData() {
+    }
 
     public void exportData() {
         this.map.forEach((name, scope) -> {

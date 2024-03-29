@@ -1,5 +1,17 @@
 package com.tac.guns.common.network;
 
+import static net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED;
+import static org.apache.logging.log4j.Level.ERROR;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
+import java.util.function.Predicate;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.tac.guns.Config;
@@ -7,8 +19,16 @@ import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.client.handler.MovementAdaptationsHandler;
 import com.tac.guns.client.screen.UpgradeBenchScreen;
-import com.tac.guns.common.*;
-import com.tac.guns.common.container.*;
+import com.tac.guns.common.Gun;
+import com.tac.guns.common.NetworkGunManager;
+import com.tac.guns.common.ProjectileManager;
+import com.tac.guns.common.Rig;
+import com.tac.guns.common.SpreadTracker;
+import com.tac.guns.common.container.AttachmentContainer;
+import com.tac.guns.common.container.ColorBenchContainer;
+import com.tac.guns.common.container.InspectionContainer;
+import com.tac.guns.common.container.UpgradeBenchContainer;
+import com.tac.guns.common.container.WorkbenchContainer;
 import com.tac.guns.crafting.WorkbenchRecipe;
 import com.tac.guns.crafting.WorkbenchRecipes;
 import com.tac.guns.duck.PlayerWithSynData;
@@ -18,12 +38,18 @@ import com.tac.guns.init.ModBlocks;
 import com.tac.guns.init.ModEnchantments;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.interfaces.IProjectileFactory;
-import com.tac.guns.item.*;
-import com.tac.guns.item.transition.TimelessGunItem;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.IColored;
+import com.tac.guns.item.IEasyColor;
+import com.tac.guns.item.ScopeItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
-import com.tac.guns.network.message.*;
+import com.tac.guns.network.message.MessageBulletTrail;
+import com.tac.guns.network.message.MessageGunSound;
+import com.tac.guns.network.message.MessageSaveItemUpgradeBench;
+import com.tac.guns.network.message.MessageShoot;
+import com.tac.guns.network.message.MessageUpgradeBenchApply;
 import com.tac.guns.tileentity.FlashLightSource;
 import com.tac.guns.tileentity.UpgradeBenchTileEntity;
 import com.tac.guns.tileentity.WorkbenchTileEntity;
@@ -31,6 +57,7 @@ import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.InventoryUtil;
 import com.tac.guns.util.WearableHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -63,21 +90,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.UUID;
-import java.util.function.Predicate;
-
-import static net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED;
-import static org.apache.logging.log4j.Level.ERROR;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -102,7 +117,7 @@ public class ServerPlayHandler {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (heldItem.getItem() instanceof GunItem && (Gun.hasAmmo(heldItem))) {
                 GunItem item = (GunItem) heldItem.getItem();
-                Gun modifiedGun = item.getModifiedGun(heldItem);
+                Gun modifiedGun = item.getModifiedGun(heldItem.getTag());
                 if (modifiedGun != null) {
                     if (MinecraftForge.EVENT_BUS.post(new GunFireEvent.Pre(player, heldItem)))
                         return;
@@ -189,10 +204,7 @@ public class ServerPlayHandler {
                         }
                     }
 
-                    boolean silenced = GunModifierHelper.isSilencedFire(heldItem);
-                    ResourceLocation fireSound =
-                            silenced ? modifiedGun.getSounds().getSilencedFire()
-                                    : modifiedGun.getSounds().getFire();
+                    ResourceLocation fireSound = GunModifierHelper.getFireSound(heldItem);
                     if (fireSound != null) {
                         double posX = player.getX();
                         double posY = player.getY() + player.getEyeHeight();
@@ -283,12 +295,12 @@ public class ServerPlayHandler {
                         }
                     }
 
-                    if (stack.getItem() instanceof TimelessGunItem) {
+                    if (stack.getItem() instanceof GunItem) {
                         if (stack.getTag() == null) {
                             stack.getOrCreateTag();
                         }
                         GunItem gunItem = (GunItem) stack.getItem();
-                        Gun gun = gunItem.getModifiedGun(stack);
+                        Gun gun = gunItem.getModifiedGun(stack.getTag());
                         int[] gunItemFireModes = stack.getTag().getIntArray("supportedFireModes");
                         if (ArrayUtils.isEmpty(gunItemFireModes)) {
                             gunItemFireModes = gun.getGeneral().getRateSelector();
@@ -314,7 +326,7 @@ public class ServerPlayHandler {
         if (stack.getItem() instanceof GunItem) {
             CompoundTag tag = stack.getTag();
             GunItem gunItem = (GunItem) stack.getItem();
-            Gun gun = gunItem.getModifiedGun(stack);
+            Gun gun = gunItem.getModifiedGun(stack.getTag());
             if (tag != null && tag.contains("AmmoCount", Tag.TAG_INT)) {
                 int count = tag.getInt("AmmoCount");
                 tag.putInt("AmmoCount", 0);
@@ -417,7 +429,7 @@ public class ServerPlayHandler {
                     heldItem.getOrCreateTag();
                 }
                 GunItem gunItem = (GunItem) heldItem.getItem();
-                Gun gun = gunItem.getModifiedGun(heldItem);
+                Gun gun = gunItem.getModifiedGun(heldItem.getTag());
                 int[] gunItemFireModes = heldItem.getTag().getIntArray("supportedFireModes");
                 if (ArrayUtils.isEmpty(gunItemFireModes)) {
                     gunItemFireModes = gun.getGeneral().getRateSelector();
@@ -483,7 +495,7 @@ public class ServerPlayHandler {
         ItemStack heldItem = player.getMainHandItem();
         if (heldItem.getItem() instanceof GunItem) {
             GunItem gunItem = (GunItem) heldItem.getItem();
-            Gun gun = gunItem.getModifiedGun(heldItem);
+            Gun gun = gunItem.getModifiedGun(heldItem.getTag());
             ResourceLocation fireModeSound = gun.getSounds().getCock(); // Use cocking sound for now
             if (fireModeSound != null && player.isAlive()) {
                 MessageGunSound messageSound = new MessageGunSound(fireModeSound,
@@ -645,10 +657,10 @@ public class ServerPlayHandler {
         }
         player.onUpdateAbilities();
 
-        if (!(heldItem.getItem() instanceof TimelessGunItem))
+        if (!(heldItem.getItem() instanceof GunItem))
             return;
 
-        Gun gun = ((TimelessGunItem) heldItem.getItem()).getGun();
+        Gun gun = ((GunItem) heldItem.getItem()).getGun();
         // if(MovementAdaptationsHandler.get().previousGun == null ||
         // gun.serializeNBT().getId() == MovementAdaptationsHandler.get().previousGun)
         if ((MovementAdaptationsHandler.get().isReadyToUpdate()) || MovementAdaptationsHandler.get()
@@ -706,7 +718,7 @@ public class ServerPlayHandler {
         if (!player.isAlive())
             return;
         if (NetworkGunManager.get() != null && NetworkGunManager.get().StackIds != null) {
-            if (player.getMainHandItem().getItem() instanceof TimelessGunItem
+            if (player.getMainHandItem().getItem() instanceof GunItem
                     && player.getMainHandItem().getTag() != null) {
                 if (regenerate || !player.getMainHandItem().getTag().contains("ID")) {
                     UUID id;
@@ -719,7 +731,7 @@ public class ServerPlayHandler {
                     player.getMainHandItem().getTag().putUUID("ID", id);
                     NetworkGunManager.get().StackIds.put(id, player.getMainHandItem());
                 }
-                initLevelTracking(player.getMainHandItem());
+                // initLevelTracking(player.getMainHandItem());
             }
         }
     }
@@ -815,7 +827,7 @@ public class ServerPlayHandler {
                 if (toUpdate.getTag() == null)
                     return;
                 int currWeaponLevel = toUpdate.getTag().getInt("level");
-                TimelessGunItem gunItem = (TimelessGunItem) toUpdate.getItem();
+                GunItem gunItem = (GunItem) toUpdate.getItem();
                 if (workbench.getBench().getItem(1).getCount() >= req.getModuleCount()[currLevel]
                         && currWeaponLevel >= req.getLevelReq()[currLevel]
                         && gunItem.getGun().getGeneral().getUpgradeBenchMaxUses() > toUpdate

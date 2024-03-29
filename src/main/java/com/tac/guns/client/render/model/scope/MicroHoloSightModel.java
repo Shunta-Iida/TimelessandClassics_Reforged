@@ -1,5 +1,7 @@
 package com.tac.guns.client.render.model.scope;
 
+import static com.tac.guns.client.render.model.internal.MyCachedModels.MICRO_HOLO_BASE;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
@@ -9,9 +11,10 @@ import com.tac.guns.client.handler.AimingHandler;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.item.GunItem;
-import com.tac.guns.item.transition.TimelessPistolGunItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.transition.TimelessPistolGunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,8 +22,6 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-
-import static com.tac.guns.client.render.model.internal.MyCachedModels.MICRO_HOLO_BASE;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs

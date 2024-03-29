@@ -2,8 +2,11 @@ package com.tac.guns.common;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
+
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.tac.guns.Config;
@@ -19,6 +22,7 @@ import com.tac.guns.item.attachment.IScope;
 import com.tac.guns.item.attachment.impl.Scope;
 import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import com.tac.guns.util.WearableHelper;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -2251,7 +2255,8 @@ public final class Gun implements INBTSerializable<CompoundTag> {
         @Optional
         protected double scale = 1.0;
 
-        public ScaledPositioned() {}
+        public ScaledPositioned() {
+        }
 
         public ScaledPositioned(CompoundTag tag) {
             this.deserializeNBT(tag);
@@ -2294,7 +2299,8 @@ public final class Gun implements INBTSerializable<CompoundTag> {
         private boolean doOnSlideMovement;
         // private HashSet
 
-        public PistolScope() {}
+        public PistolScope() {
+        }
 
         public PistolScope(CompoundTag tag) {
             this.deserializeNBT(tag);
@@ -2413,7 +2419,8 @@ public final class Gun implements INBTSerializable<CompoundTag> {
         @Optional
         protected int tickLife = 40;
 
-        public ShellCasing() {}
+        public ShellCasing() {
+        }
 
         public ShellCasing(CompoundTag tag) {
             this.deserializeNBT(tag);
@@ -2618,8 +2625,6 @@ public final class Gun implements INBTSerializable<CompoundTag> {
                     return this.modules.attachments.irDevice != null;
                 case EXTENDED_MAG:
                     return this.modules.attachments.extendedMag != null;
-                case OLD_SCOPE:
-                    return this.modules.attachments.oldScope != null;
                 case PISTOL_SCOPE:
                     return this.modules.attachments.pistolScope != null;
                 case PISTOL_BARREL:
@@ -2651,8 +2656,6 @@ public final class Gun implements INBTSerializable<CompoundTag> {
                     return this.modules.attachments.irDevice;
                 case EXTENDED_MAG:
                     return this.modules.attachments.extendedMag;
-                case OLD_SCOPE:
-                    return this.modules.attachments.oldScope;
                 case PISTOL_SCOPE:
                     return this.modules.attachments.pistolScope;
                 case PISTOL_BARREL:
@@ -2666,7 +2669,6 @@ public final class Gun implements INBTSerializable<CompoundTag> {
 
     public boolean canAimDownSight() {
         return this.canAttachType(IAttachment.Type.SCOPE)
-                || this.canAttachType(IAttachment.Type.OLD_SCOPE)
                 || this.canAttachType(IAttachment.Type.PISTOL_SCOPE) || this.modules.zoom != null;
     }
 
@@ -2740,14 +2742,9 @@ public final class Gun implements INBTSerializable<CompoundTag> {
             if (attachment.contains(type.getTagKey(), Tag.TAG_COMPOUND)) {
                 return ItemStack.of(attachment.getCompound(type.getTagKey()));
             } else if (type == IAttachment.Type.SCOPE && (attachment
-                    .contains(IAttachment.Type.PISTOL_SCOPE.getTagKey(), Tag.TAG_COMPOUND)
-                    || attachment.contains(IAttachment.Type.OLD_SCOPE.getTagKey(),
-                            Tag.TAG_COMPOUND)))
-                return !attachment.getCompound(IAttachment.Type.PISTOL_SCOPE.getTagKey()).isEmpty()
-                        ? ItemStack.of(
-                                attachment.getCompound(IAttachment.Type.PISTOL_SCOPE.getTagKey()))
-                        : ItemStack
-                                .of(attachment.getCompound(IAttachment.Type.OLD_SCOPE.getTagKey()));
+                    .contains(IAttachment.Type.PISTOL_SCOPE.getTagKey(), Tag.TAG_COMPOUND)))
+                return ItemStack
+                        .of(attachment.getCompound(IAttachment.Type.PISTOL_SCOPE.getTagKey()));
             else if (type == IAttachment.Type.SIDE_RAIL && (attachment
                     .contains(IAttachment.Type.IR_DEVICE.getTagKey(), Tag.TAG_COMPOUND)))
                 return ItemStack.of(attachment.getCompound(IAttachment.Type.IR_DEVICE.getTagKey()));

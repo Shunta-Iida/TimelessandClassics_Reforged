@@ -4,8 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.init.ModItems;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.tileentity.UpgradeBenchTileEntity;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -56,7 +57,7 @@ public class UpgradeBenchRenderUtil implements BlockEntityRenderer<UpgradeBenchT
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90F));
 
         matrixStack.translate(-0.14, -0.4200001, 0);
-        if (!(tileEntityMBE21.getItem(0).getItem() instanceof TimelessGunItem))
+        if (!(tileEntityMBE21.getItem(0).getItem() instanceof GunItem))
             GunRenderingHandler.get().renderWeapon(Minecraft.getInstance().player,
                     ItemStack.of(tileEntityMBE21.getUpdateTag().getCompound("weapon")),
                     ItemTransforms.TransformType.GROUND, matrixStack, renderBuffers, combinedLight,

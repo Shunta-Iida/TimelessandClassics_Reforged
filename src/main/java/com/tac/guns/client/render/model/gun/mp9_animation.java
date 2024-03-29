@@ -1,27 +1,35 @@
 package com.tac.guns.client.render.model.gun;
 
+import static com.tac.guns.client.render.model.CommonComponents.BODY;
+import static com.tac.guns.client.render.model.CommonComponents.BOLT;
+import static com.tac.guns.client.render.model.CommonComponents.BULLET;
+import static com.tac.guns.client.render.model.CommonComponents.HANDLE;
+import static com.tac.guns.client.render.model.CommonComponents.LASER_BASIC;
+import static com.tac.guns.client.render.model.CommonComponents.LASER_BASIC_DEVICE;
+import static com.tac.guns.client.render.model.CommonComponents.SIGHT_LIGHT;
+import static com.tac.guns.client.render.model.CommonComponents.STOCK_DEFAULT;
+
+import java.util.Objects;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.MP9AnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
+import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.render.model.internal.TacGunComponents;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.Gun;
 import com.tac.guns.init.ModItems;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.util.GunModifierHelper;
+
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Objects;
-
-import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
  * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case

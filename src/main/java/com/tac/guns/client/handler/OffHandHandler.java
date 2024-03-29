@@ -2,7 +2,8 @@ package com.tac.guns.client.handler;
 
 import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +14,6 @@ import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static com.tac.guns.item.GunItem.isSingleHanded;
 
 /**
  * @author Arcomit
@@ -34,7 +34,7 @@ public class OffHandHandler {
             if (mainHand.getItem() instanceof GunItem) {
                 GunAnimationController controller =
                         GunAnimationController.fromItem(mainHand.getItem());
-                if (!isSingleHanded(mainHand)
+                if (!GunItem.isSingleHanded(mainHand)
                         || controller.isAnimationRunning(
                                 GunAnimationController.AnimationLabel.RELOAD_INTRO)
                         || controller.isAnimationRunning(
@@ -66,7 +66,7 @@ public class OffHandHandler {
             if (mainHand.getItem() instanceof GunItem) {
                 GunAnimationController controller =
                         GunAnimationController.fromItem(mainHand.getItem());
-                if (!isSingleHanded(mainHand)
+                if (!GunItem.isSingleHanded(mainHand)
                         || controller.isAnimationRunning(
                                 GunAnimationController.AnimationLabel.RELOAD_INTRO)
                         || controller.isAnimationRunning(

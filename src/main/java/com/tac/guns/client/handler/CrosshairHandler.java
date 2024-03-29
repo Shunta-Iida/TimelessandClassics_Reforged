@@ -1,5 +1,12 @@
 package com.tac.guns.client.handler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tac.guns.Config;
@@ -8,7 +15,8 @@ import com.tac.guns.client.render.crosshair.Crosshair;
 import com.tac.guns.client.render.crosshair.DynamicScalingTexturedCrosshair;
 import com.tac.guns.client.render.crosshair.TechCrosshair;
 import com.tac.guns.client.render.crosshair.TexturedCrosshair;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -16,12 +24,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs

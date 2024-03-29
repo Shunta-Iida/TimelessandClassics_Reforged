@@ -1,7 +1,8 @@
 package com.tac.guns.enchantment;
 
 import com.tac.guns.Reference;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 /**

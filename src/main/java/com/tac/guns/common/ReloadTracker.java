@@ -10,7 +10,7 @@ import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
 import com.tac.guns.inventory.gear.armor.RigSlotsHandler;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.item.transition.wearables.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageGunSound;
@@ -47,7 +47,7 @@ public class ReloadTracker {
         this.startTick = player.tickCount;
         this.slot = player.getInventory().selected;
         this.stack = player.getInventory().getSelected();
-        this.gun = ((GunItem) this.stack.getItem()).getModifiedGun(this.stack);
+        this.gun = ((GunItem) this.stack.getItem()).getModifiedGun(this.stack.getTag());
     }
 
     /**

@@ -11,9 +11,8 @@ import com.tac.guns.common.Gun;
 import com.tac.guns.duck.MouseSensitivityModifier;
 import com.tac.guns.init.ModBlocks;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.attachment.impl.Scope;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAim;
 import com.tac.guns.util.math.MathUtil;
@@ -98,7 +97,7 @@ public class AimingHandler {
         final Player player = mc.player;
         assert player != null;
         final ItemStack heldItem = player.getMainHandItem();
-        final boolean isGunInHand = heldItem.getItem() instanceof TimelessGunItem;
+        final boolean isGunInHand = heldItem.getItem() instanceof GunItem;
         if (!isGunInHand) {
             return;
         }
@@ -219,11 +218,11 @@ public class AimingHandler {
         if (mc.player != null && !mc.player.getMainHandItem().isEmpty()
                 && mc.options.getCameraType() == CameraType.FIRST_PERSON) {
             final ItemStack heldItem = mc.player.getMainHandItem();
-            if (heldItem.getItem() instanceof TimelessGunItem) {
-                final TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
+            if (heldItem.getItem() instanceof GunItem) {
+                final GunItem gunItem = (GunItem) heldItem.getItem();
                 if (AimingHandler.get().normalisedAdsProgress != 0 && !SyncedEntityData.instance()
                         .get(mc.player, ModSyncedDataKeys.RELOADING)) {
-                    final Gun modifiedGun = gunItem.getModifiedGun(heldItem);
+                    final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
                     if (modifiedGun.getModules().getZoom() != null) {
                         float newFov = modifiedGun.getModules().getZoom().getFovModifier();
                         final Scope scope = Gun.getScope(heldItem);
@@ -294,7 +293,7 @@ public class AimingHandler {
         if (!(heldItem.getItem() instanceof GunItem))
             return false;
 
-        final Gun gun = ((GunItem) heldItem.getItem()).getModifiedGun(heldItem);
+        final Gun gun = ((GunItem) heldItem.getItem()).getModifiedGun(heldItem.getTag());
         if (gun.getModules().getZoom() == null) {
             return false;
         }

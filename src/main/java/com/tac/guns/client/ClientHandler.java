@@ -36,8 +36,6 @@ import com.tac.guns.client.render.model.scope.CoyoteSightModel;
 import com.tac.guns.client.render.model.scope.EotechNSightModel;
 import com.tac.guns.client.render.model.scope.EotechShortSightModel;
 import com.tac.guns.client.render.model.scope.MiniDotSightModel;
-import com.tac.guns.client.render.model.scope.OldLongRange4xScopeModel;
-import com.tac.guns.client.render.model.scope.OldLongRange8xScopeModel;
 import com.tac.guns.client.render.model.scope.Qmk152ScopeModel;
 import com.tac.guns.client.render.model.scope.SroDotSightModel;
 import com.tac.guns.client.render.model.scope.SrsRedDotSightModel;
@@ -200,11 +198,6 @@ public class ClientHandler {
                 new EotechShortSightModel());
         OverrideModelManager.register(ModItems.SRS_RED_DOT_SIGHT.get(), new SrsRedDotSightModel());
         OverrideModelManager.register(ModItems.QMK152.get(), new Qmk152ScopeModel());
-
-        OverrideModelManager.register(ModItems.OLD_LONGRANGE_8x_SCOPE.get(),
-                new OldLongRange8xScopeModel());
-        OverrideModelManager.register(ModItems.OLD_LONGRANGE_4x_SCOPE.get(),
-                new OldLongRange4xScopeModel());
 
         OverrideModelManager.register(ModItems.MINI_DOT.get(), new MiniDotSightModel());
         // ModelOverrides.register(ModItems.MICRO_HOLO_SIGHT.get(), new

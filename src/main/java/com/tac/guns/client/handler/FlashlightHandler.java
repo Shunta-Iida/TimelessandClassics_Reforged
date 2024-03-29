@@ -8,9 +8,8 @@ import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.NetworkGunManager;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageLightChange;
 
@@ -68,7 +67,7 @@ public class FlashlightHandler {
             return;
 
         if (NetworkGunManager.get() != null && NetworkGunManager.get().StackIds != null) {
-            if (player.getMainHandItem().getItem() instanceof TimelessGunItem
+            if (player.getMainHandItem().getItem() instanceof GunItem
                     && player.getMainHandItem().getTag() != null) {
                 if (!player.getMainHandItem().getTag().contains("ID")) {
                     UUID id;
@@ -132,54 +131,54 @@ public class FlashlightHandler {
      * int y = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getY());
      * int z = (int)Math.ceil(this.vecLookingAt(player, lookingRange).getZ());
      *//*
-               * 
-               * boolean createLight = false;
-               * 
-               * for (int i = 0; i < 5; ++i) {
-               * tile = world.getTileEntity(new BlockPos(x, y, z));
-               * if (tile instanceof FlashLightSource) {
-               * createLight = true;
-               * break;
-               * }
-               * 
-               * if (!world.isAirBlock(new BlockPos(x, y, z))) {
-               * int pX = (int) player.getPositionVec().getX();
-               * int pY = (int) player.getPositionVec().getY();
-               * int pZ = (int) player.getPositionVec().getZ();
-               * if (pX > x) {
-               * ++x;
-               * } else if (pX < x) {
-               * --x;
-               * }
-               * if (pY > y) {
-               * ++y;
-               * } else if (pY < y) {
-               * --y;
-               * }
-               * if (pZ > z) {
-               * ++z;
-               * } else if (pZ < z) {
-               * --z;
-               * }
-               * } else if (world.isAirBlock(new BlockPos(x, y, z))) {
-               * createLight = true;
-               * break;
-               * }
-               * }
-               * 
-               * if (createLight) {
-               * tile = world.getTileEntity(new BlockPos(x, y, z));
-               * if (tile instanceof FlashLightSource) {
-               * ((FlashLightSource) tile).ticks = 0;
-               * } else if (world.getBlockState(new BlockPos(x, y, z)).getBlock() !=
-               * ModBlocks.FLASHLIGHT_BLOCK.get()) { //
-               * world.setBlockState(new BlockPos(x, y, z),
-               * (ModBlocks.FLASHLIGHT_BLOCK.get()).getDefaultState(), 1);
-               * }
-               * }
-               * }
-               * }
-               * }
-               */
+                    * 
+                    * boolean createLight = false;
+                    * 
+                    * for (int i = 0; i < 5; ++i) {
+                    * tile = world.getTileEntity(new BlockPos(x, y, z));
+                    * if (tile instanceof FlashLightSource) {
+                    * createLight = true;
+                    * break;
+                    * }
+                    * 
+                    * if (!world.isAirBlock(new BlockPos(x, y, z))) {
+                    * int pX = (int) player.getPositionVec().getX();
+                    * int pY = (int) player.getPositionVec().getY();
+                    * int pZ = (int) player.getPositionVec().getZ();
+                    * if (pX > x) {
+                    * ++x;
+                    * } else if (pX < x) {
+                    * --x;
+                    * }
+                    * if (pY > y) {
+                    * ++y;
+                    * } else if (pY < y) {
+                    * --y;
+                    * }
+                    * if (pZ > z) {
+                    * ++z;
+                    * } else if (pZ < z) {
+                    * --z;
+                    * }
+                    * } else if (world.isAirBlock(new BlockPos(x, y, z))) {
+                    * createLight = true;
+                    * break;
+                    * }
+                    * }
+                    * 
+                    * if (createLight) {
+                    * tile = world.getTileEntity(new BlockPos(x, y, z));
+                    * if (tile instanceof FlashLightSource) {
+                    * ((FlashLightSource) tile).ticks = 0;
+                    * } else if (world.getBlockState(new BlockPos(x, y, z)).getBlock() !=
+                    * ModBlocks.FLASHLIGHT_BLOCK.get()) { //
+                    * world.setBlockState(new BlockPos(x, y, z),
+                    * (ModBlocks.FLASHLIGHT_BLOCK.get()).getDefaultState(), 1);
+                    * }
+                    * }
+                    * }
+                    * }
+                    * }
+                    */
 
 }

@@ -5,10 +5,9 @@ import com.tac.guns.common.Gun;
 import com.tac.guns.common.container.AttachmentContainer;
 import com.tac.guns.init.ModSounds;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.IEasyColor;
 import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -49,9 +48,8 @@ public class AttachmentSlot extends Slot {
 
     @Override
     public boolean isActive() {
-        if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag()
-                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun()
-                        .getReloads().getMaxAmmo())
+        if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag().getInt(
+                "AmmoCount") > ((GunItem) this.weapon.getItem()).getGun().getReloads().getMaxAmmo())
                 || SyncedEntityData.instance().get(this.player, ModSyncedDataKeys.RELOADING)) {
             return false;
         }
@@ -59,7 +57,7 @@ public class AttachmentSlot extends Slot {
             return true;
         } else {
             final GunItem item = (GunItem) this.weapon.getItem();
-            final Gun modifiedGun = item.getModifiedGun(this.weapon);
+            final Gun modifiedGun = item.getModifiedGun(this.weapon.getTag());
             if (modifiedGun.canAttachType(this.type))
                 return true;
             else if (this.types != null) {
@@ -74,9 +72,8 @@ public class AttachmentSlot extends Slot {
 
     @Override
     public boolean mayPlace(final ItemStack stack) {
-        if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag()
-                .getInt("AmmoCount") > ((TimelessGunItem) this.weapon.getItem()).getGun()
-                        .getReloads().getMaxAmmo())
+        if ((this.type == IAttachment.Type.EXTENDED_MAG && this.weapon.getOrCreateTag().getInt(
+                "AmmoCount") > ((GunItem) this.weapon.getItem()).getGun().getReloads().getMaxAmmo())
                 || SyncedEntityData.instance().get(this.player, ModSyncedDataKeys.RELOADING)) {
             return false;
         }
@@ -87,7 +84,7 @@ public class AttachmentSlot extends Slot {
             if (this.weapon.isEmpty() || !(this.weapon.getItem() instanceof GunItem))
                 return false;
             final GunItem item = (GunItem) this.weapon.getItem();
-            final Gun modifiedGun = item.getModifiedGun(this.weapon);
+            final Gun modifiedGun = item.getModifiedGun(this.weapon.getTag());
             if (stack.getItem() instanceof IAttachment
                     && ((IAttachment) stack.getItem()).getType() == this.type
                     && modifiedGun.canAttachType(this.type))
@@ -105,9 +102,8 @@ public class AttachmentSlot extends Slot {
     @Override
     public void setChanged() {
         if (this.container.isLoaded()) {
-            this.player.level.playSound(null, this.player.getX(), this.player.getY() + 1.0,
-                    this.player.getZ(), ModSounds.UI_WEAPON_ATTACH.get(), SoundSource.PLAYERS, 0.5F,
-                    this.hasItem() ? 1.0F : 0.75F);
+            this.player.level.playSound(this.player, this.player, ModSounds.UI_WEAPON_ATTACH.get(),
+                    SoundSource.PLAYERS, 0.5F, this.hasItem() ? 1.0F : 0.75F);
         }
     }
 

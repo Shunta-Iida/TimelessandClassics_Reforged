@@ -1,12 +1,18 @@
 package com.tac.guns.client.screen;
 
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.lwjgl.glfw.GLFW;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.AttachmentContainer;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.ScopeItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -14,11 +20,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import org.lwjgl.glfw.GLFW;
-
-import java.util.Arrays;
-import java.util.Collections;
-import com.tac.guns.util.GunModifierHelper;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs

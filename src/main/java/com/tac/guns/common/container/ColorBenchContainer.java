@@ -2,8 +2,9 @@ package com.tac.guns.common.container;
 
 import com.tac.guns.common.container.slot.WeaponColorSegmentSlot;
 import com.tac.guns.init.ModContainers;
-import com.tac.guns.item.GunItem;
 import com.tac.guns.item.IWeaponColorable;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 public class ColorBenchContainer extends AbstractContainerMenu {
     private ItemStack weapon;
     private Container playerInventory;
-    private Container weaponInventory =
+    private final Container weaponInventory =
             new SimpleContainer(IWeaponColorable.WeaponColorSegment.values().length) {
                 @Override
                 public void setChanged() {
@@ -27,7 +28,7 @@ public class ColorBenchContainer extends AbstractContainerMenu {
                 }
             };
 
-    public ColorBenchContainer(int windowId, Inventory playerInventory) {
+    public ColorBenchContainer(final int windowId, final Inventory playerInventory) {
         super(ModContainers.COLOR_BENCH.get(), windowId);
         this.weapon = playerInventory.getSelected();
         this.playerInventory = playerInventory;
@@ -49,7 +50,7 @@ public class ColorBenchContainer extends AbstractContainerMenu {
             if (i == playerInventory.selected) {
                 this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 160) {
                     @Override
-                    public boolean mayPickup(Player playerIn) {
+                    public boolean mayPickup(final Player playerIn) {
                         return false;
                     }
                 });
@@ -60,7 +61,7 @@ public class ColorBenchContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player playerIn) {
+    public boolean stillValid(final Player playerIn) {
         return true;
     }
 
@@ -71,62 +72,62 @@ public class ColorBenchContainer extends AbstractContainerMenu {
      * CompoundNBT attachments = new CompoundNBT();
      * 
      *//*
-            * if(this.weapon.getItem() instanceof ScopeItem)
-            * {
-            * for (int i = 0; i < this.getWeaponInventory().getSizeInventory()-4; i++) {
-            * ItemStack attachment = this.getSlot(i).getStack();
-            * if (attachment.getItem() instanceof DyeItem) {
-            * attachments.put(currentStuff[i], attachment.write(new CompoundNBT()));
-            * }
-            * }
-            * 
-            *//**//*
-                       * if (scopeReticleAttachment.getItem() instanceof DyeItem) {
-                       * attachments.put(IAttachment.Type.SCOPE_RETICLE_COLOR.getTagKey(),
-                       * scopeReticleAttachment.write(new CompoundNBT()));
-                       * }
-                       * if (scopeBodyAttachment.getItem() instanceof DyeItem) {
-                       * attachments.put(IAttachment.Type.SCOPE_BODY_COLOR.getTagKey(),
-                       * scopeBodyAttachment.write(new CompoundNBT()));
-                       * }
-                       * if (scopeGlassAttachment.getItem() instanceof DyeItem) {
-                       * attachments.put(IAttachment.Type.SCOPE_GLASS_COLOR.getTagKey(),
-                       * scopeGlassAttachment.write(new CompoundNBT()));
-                       * }
-                       *//**//*
-                                  * }
-                                  * else
-                                  *//*
-                                         * for (int i = 0; i < this.getWeaponInventory().getSizeInventory(); i++) {
-                                         * ItemStack attachment = this.getSlot(i).getStack();
-                                         * if (attachment.getItem() instanceof IAttachment) {
-                                         * attachments.put(((IAttachment) attachment.getItem()).getType().getTagKey(),
-                                         * attachment.write(new CompoundNBT()));
-                                         * }
-                                         * else if(attachment.getItem() instanceof DyeItem)
-                                         * {
-                                         * if(i == 0)
-                                         * attachments.put(IAttachment.Type.SCOPE_RETICLE_COLOR.getTagKey(),
-                                         * attachment.write(new CompoundNBT()));
-                                         * if(i == 1)
-                                         * attachments.put(IAttachment.Type.SCOPE_BODY_COLOR.getTagKey(),
-                                         * attachment.write(new CompoundNBT()));
-                                         * if(i == 2)
-                                         * attachments.put(IAttachment.Type.SCOPE_GLASS_COLOR.getTagKey(),
-                                         * attachment.write(new CompoundNBT()));
-                                         * }
-                                         * }
-                                         * 
-                                         * CompoundNBT tag = this.weapon.getOrCreateTag();
-                                         * tag.put("Attachments", attachments);
-                                         * super.detectAndSendChanges();
-                                         * }
-                                         */
+               * if(this.weapon.getItem() instanceof ScopeItem)
+               * {
+               * for (int i = 0; i < this.getWeaponInventory().getSizeInventory()-4; i++) {
+               * ItemStack attachment = this.getSlot(i).getStack();
+               * if (attachment.getItem() instanceof DyeItem) {
+               * attachments.put(currentStuff[i], attachment.write(new CompoundNBT()));
+               * }
+               * }
+               * 
+               *//**//*
+                             * if (scopeReticleAttachment.getItem() instanceof DyeItem) {
+                             * attachments.put(IAttachment.Type.SCOPE_RETICLE_COLOR.getTagKey(),
+                             * scopeReticleAttachment.write(new CompoundNBT()));
+                             * }
+                             * if (scopeBodyAttachment.getItem() instanceof DyeItem) {
+                             * attachments.put(IAttachment.Type.SCOPE_BODY_COLOR.getTagKey(),
+                             * scopeBodyAttachment.write(new CompoundNBT()));
+                             * }
+                             * if (scopeGlassAttachment.getItem() instanceof DyeItem) {
+                             * attachments.put(IAttachment.Type.SCOPE_GLASS_COLOR.getTagKey(),
+                             * scopeGlassAttachment.write(new CompoundNBT()));
+                             * }
+                             *//**//*
+                                           * }
+                                           * else
+                                           *//*
+                                                     * for (int i = 0; i < this.getWeaponInventory().getSizeInventory(); i++) {
+                                                     * ItemStack attachment = this.getSlot(i).getStack();
+                                                     * if (attachment.getItem() instanceof IAttachment) {
+                                                     * attachments.put(((IAttachment) attachment.getItem()).getType().getTagKey(),
+                                                     * attachment.write(new CompoundNBT()));
+                                                     * }
+                                                     * else if(attachment.getItem() instanceof DyeItem)
+                                                     * {
+                                                     * if(i == 0)
+                                                     * attachments.put(IAttachment.Type.SCOPE_RETICLE_COLOR.getTagKey(),
+                                                     * attachment.write(new CompoundNBT()));
+                                                     * if(i == 1)
+                                                     * attachments.put(IAttachment.Type.SCOPE_BODY_COLOR.getTagKey(),
+                                                     * attachment.write(new CompoundNBT()));
+                                                     * if(i == 2)
+                                                     * attachments.put(IAttachment.Type.SCOPE_GLASS_COLOR.getTagKey(),
+                                                     * attachment.write(new CompoundNBT()));
+                                                     * }
+                                                     * }
+                                                     * 
+                                                     * CompoundNBT tag = this.weapon.getOrCreateTag();
+                                                     * tag.put("Attachments", attachments);
+                                                     * super.detectAndSendChanges();
+                                                     * }
+                                                     */
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public ItemStack quickMoveStack(final Player playerIn, final int index) {
         ItemStack copyStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
+        final Slot slot = this.slots.get(index);
 
         /*
          * if (this.weapon.getItem() instanceof ScopeItem)
@@ -169,7 +170,7 @@ public class ColorBenchContainer extends AbstractContainerMenu {
          * else {
          */
         if (slot != null && slot.hasItem()) {
-            ItemStack slotStack = slot.getItem();
+            final ItemStack slotStack = slot.getItem();
             copyStack = slotStack.copy();
             if (index < this.weaponInventory.getContainerSize()) {
                 if (!this.moveItemStackTo(slotStack, this.weaponInventory.getContainerSize(),

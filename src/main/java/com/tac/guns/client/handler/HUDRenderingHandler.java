@@ -21,8 +21,7 @@ import com.tac.guns.Reference;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.ReloadTracker;
 import com.tac.guns.duck.PlayerWithSynData;
-import com.tac.guns.item.GunItem;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.util.WearableHelper;
 
 import net.minecraft.ChatFormatting;
@@ -80,7 +79,8 @@ public class HUDRenderingHandler extends GuiComponent {
                 : HUDRenderingHandler.instance;
     }
 
-    private HUDRenderingHandler() {}
+    private HUDRenderingHandler() {
+    }
 
     private int ammoReserveCount = 0;
     private final int tickCount = 0;
@@ -341,9 +341,9 @@ public class HUDRenderingHandler extends GuiComponent {
          */
 
         if (!(Minecraft.getInstance().player.getItemInHand(InteractionHand.MAIN_HAND)
-                .getItem() instanceof TimelessGunItem))
+                .getItem() instanceof GunItem))
             return;
-        final TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
+        final GunItem gunItem = (GunItem) heldItem.getItem();
         final Gun gun = gunItem.getGun();
 
         if (!Config.CLIENT.weaponGUI.weaponGui.get()) {

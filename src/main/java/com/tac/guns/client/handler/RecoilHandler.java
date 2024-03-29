@@ -7,7 +7,7 @@ import java.util.WeakHashMap;
 import com.tac.guns.Config;
 import com.tac.guns.common.Gun;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 
@@ -56,7 +56,8 @@ public class RecoilHandler {
 
     private final int recoilDuration = 200; // 0.20s
 
-    private RecoilHandler() {}
+    private RecoilHandler() {
+    }
 
     @SubscribeEvent
     public void preShoot(final GunFireEvent.Pre event) {
@@ -75,7 +76,7 @@ public class RecoilHandler {
 
         final ItemStack heldItem = event.getStack();
         final GunItem gunItem = (GunItem) heldItem.getItem();
-        final Gun modifiedGun = gunItem.getModifiedGun(heldItem);
+        final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
 
         final float verticalRandomAmount = this.random.nextFloat() * (1.22f - 0.75f) + 0.75f;
 
@@ -197,7 +198,7 @@ public class RecoilHandler {
             return;
 
         final GunItem gunItem = (GunItem) heldItem.getItem();
-        final Gun modifiedGun = gunItem.getModifiedGun(heldItem);
+        final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
         final float cooldown = (float) this.timer / this.recoilDuration;
 
         final float recoilTimeOffset = modifiedGun.getGeneral().getWeaponRecoilOffset();

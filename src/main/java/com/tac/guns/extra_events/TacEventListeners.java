@@ -1,11 +1,12 @@
 package com.tac.guns.extra_events;
 
 import org.apache.logging.log4j.Level;
+
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.event.LevelUpEvent;
-import com.tac.guns.init.ModSounds;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -41,35 +42,37 @@ public class TacEventListeners {
     private static VersionChecker.CheckResult status;
 
     @SubscribeEvent
-    public static void InformPlayerOfUpdate(EntityJoinWorldEvent e) {
+    public static void InformPlayerOfUpdate(final EntityJoinWorldEvent e) {
         try {
             if (!(e.getEntity() instanceof Player))
                 return;
 
-            if (checked) {
+            if (TacEventListeners.checked) {
                 if (GunMod.modInfo != null) {
-                    status = VersionChecker.getResult(GunMod.modInfo);
-                    checked = false;
+                    TacEventListeners.status = VersionChecker.getResult(GunMod.modInfo);
+                    TacEventListeners.checked = false;
                 }
             }
-            if (!confirmed) {
-                if (status.status() == VersionChecker.Status.OUTDATED
-                        || status.status() == VersionChecker.Status.BETA_OUTDATED) {
+            if (!TacEventListeners.confirmed) {
+                if (TacEventListeners.status.status() == VersionChecker.Status.OUTDATED
+                        || TacEventListeners.status
+                                .status() == VersionChecker.Status.BETA_OUTDATED) {
                     ((Player) e.getEntity()).displayClientMessage(new TranslatableComponent(
-                            "updateCheck.tac", status.target(), status.url()), false);
-                    confirmed = true;
+                            "updateCheck.tac", TacEventListeners.status.target(),
+                            TacEventListeners.status.url()), false);
+                    TacEventListeners.confirmed = true;
                 }
             }
-        } catch (Exception ev) {
+        } catch (final Exception ev) {
             GunMod.LOGGER.log(Level.ERROR, ev.getMessage());
             return;
         }
-        GunMod.LOGGER.log(Level.INFO, status.status());
+        GunMod.LOGGER.log(Level.INFO, TacEventListeners.status.status());
     }
 
     @SubscribeEvent
-    public void onPartialLevel(LevelUpEvent.Post event) {
-        Player player = event.getPlayer();
+    public void onPartialLevel(final LevelUpEvent.Post event) {
+        final Player player = event.getPlayer();
         event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
                 ForgeRegistries.SOUND_EVENTS
                         .getValue(new ResourceLocation("entity.experience_orb.pickup")),
@@ -79,15 +82,21 @@ public class TacEventListeners {
     // TODO: remaster method to play empty fire sound on most-all guns
     /* BTW this was by bomb787 as a Timeless Contributor */
     @SubscribeEvent
-    public static void postShoot(GunFireEvent.Post event) {
-        Player player = event.getPlayer();
-        ItemStack heldItem = player.getMainHandItem();
-        CompoundTag tag = heldItem.getTag();
+    public static void postShoot(final GunFireEvent.Post event) {
+        final Player player = event.getPlayer();
+        final ItemStack heldItem = player.getMainHandItem();
+        final CompoundTag tag = heldItem.getTag();
         if (tag != null) {
-            if (tag.getInt("AmmoCount") == 1)
-                event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
-                        ModSounds.M1_PING.get()/* .GARAND_PING.get() */, SoundSource.MASTER, 3.0F,
-                        1.0F);
+            if (tag.getInt("AmmoCount") == 1) {
+                // only play in client side
+                // final EntityBoundSoundInstance sound = new EntityBoundSoundInstance(
+                //         ModSounds.M1_PING.get(), SoundSource.PLAYERS, 0.25F, 0.9F, player);
+                // Minecraft.getInstance().getSoundManager().play(sound);
+
+                // event.getPlayer().getCommandSenderWorld().playSound(player, player.blockPosition(),
+                //         ModSounds.M1_PING.get()/* .GARAND_PING.get() */, SoundSource.MASTER, 1.0F,
+                //         1.0F);
+            }
         }
     }
 

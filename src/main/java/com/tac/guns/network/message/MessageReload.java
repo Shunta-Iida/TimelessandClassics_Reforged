@@ -1,10 +1,13 @@
 package com.tac.guns.network.message;
 
+import java.util.function.Supplier;
+
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,15 +17,14 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 
-import java.util.function.Supplier;
-
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class MessageReload extends PlayMessage<MessageReload> {
     private boolean reload;
 
-    public MessageReload() {}
+    public MessageReload() {
+    }
 
     public MessageReload(boolean reload) {
         this.reload = reload;

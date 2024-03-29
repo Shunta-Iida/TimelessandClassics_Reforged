@@ -8,8 +8,7 @@ import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.common.Gun;
 import com.tac.guns.duck.CurrentFpsGetter;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.GunItem;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageEmptyMag;
 import com.tac.guns.network.message.MessageShoot;
@@ -69,7 +68,8 @@ public class ShootingHandler {
 
     private int emptyCheckCountDown = 40;
 
-    private ShootingHandler() {}
+    private ShootingHandler() {
+    }
 
     @SubscribeEvent
     public void onWorldUnload(final WorldEvent.Unload event) {
@@ -255,7 +255,7 @@ public class ShootingHandler {
         final Minecraft mc = Minecraft.getInstance();
         final Player player = mc.player;
         final ItemStack heldItem = player.getMainHandItem();
-        if (heldItem.getItem() instanceof TimelessGunItem) {
+        if (heldItem.getItem() instanceof GunItem) {
             if (event.getKeyMapping().same(Keys.PULL_TRIGGER)) {
                 if (event.isAttack()) {
                     event.setCanceled(true);
@@ -276,11 +276,11 @@ public class ShootingHandler {
                 if (heldItem.getTag().getInt("CurrentFireMode") == 3 && this.burstCooldown == 0
                         && !this.isPressed) {
                     this.isPressed = true;
-                    this.burstTracker = ((TimelessGunItem) heldItem.getItem()).getGun().getGeneral()
-                            .getBurstCount();
+                    this.burstTracker =
+                            ((GunItem) heldItem.getItem()).getGun().getGeneral().getBurstCount();
                     this.fire(player, heldItem);
-                    this.burstCooldown = ((TimelessGunItem) heldItem.getItem()).getGun()
-                            .getGeneral().getBurstRate();
+                    this.burstCooldown =
+                            ((GunItem) heldItem.getItem()).getGun().getGeneral().getBurstRate();
                 } else if (this.burstCooldown == 0 && !this.isPressed) {
                     this.isPressed = true;
                     this.fire(player, heldItem);
@@ -317,19 +317,20 @@ public class ShootingHandler {
         final Player player = mc.player;
         if (player != null) {
             final ItemStack heldItem = player.getMainHandItem();
-            if (heldItem.getItem() instanceof TimelessGunItem) {
+            if (heldItem.getItem() instanceof GunItem) {
                 if (heldItem.getTag() == null) {
                     heldItem.getOrCreateTag();
                     return;
                 }
-                final TimelessGunItem gunItem = (TimelessGunItem) heldItem.getItem();
+                final GunItem gunItem = (GunItem) heldItem.getItem();
                 if (heldItem.getTag().getInt("CurrentFireMode") == 3
                         && Config.CLIENT.controls.burstPress.get()) {
                     if (this.burstTracker > 0)
                         this.fire(player, heldItem);
                     return;
                 } else if (Keys.PULL_TRIGGER.isDown()) {
-                    final Gun gun = ((TimelessGunItem) heldItem.getItem()).getModifiedGun(heldItem);
+                    final Gun gun =
+                            ((GunItem) heldItem.getItem()).getModifiedGun(heldItem.getTag());
                     if (gun.getGeneral().isAuto()
                             && heldItem.getTag().getInt("CurrentFireMode") == 2) {
                         this.fire(player, heldItem);
@@ -388,7 +389,7 @@ public class ShootingHandler {
         // if(!tracker.hasCooldown(heldItem.getItem()))
         if (ShootingHandler.shootTickGapLeft <= 0F) {
             final GunItem gunItem = (GunItem) heldItem.getItem();
-            final Gun modifiedGun = gunItem.getModifiedGun(heldItem);
+            final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
 
             if (MinecraftForge.EVENT_BUS.post(new GunFireEvent.Pre(player, heldItem)))
                 return;
@@ -406,6 +407,14 @@ public class ShootingHandler {
                     .sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1),
                             RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));
 
+
+            // final SoundEvent soundEvent = new SoundEvent(GunModifierHelper.getFireSound(heldItem));
+            // Level level = Minecraft.getInstance().isLocalServer() ? player.level
+            //         : player.getServer().getLevel(player.level.dimension());
+            // float volume = GunModifierHelper.getFireSoundVolume(heldItem);
+            // final float pitch = 0.9F + level.random.nextFloat() * 0.125F;
+            // level.playSound(player, player, soundEvent, SoundSource.PLAYERS, volume, pitch);
+
             if (Config.CLIENT.controls.burstPress.get())
                 this.burstTracker--;
             else
@@ -415,21 +424,18 @@ public class ShootingHandler {
     }
 
     private boolean magError(final Player player, final ItemStack heldItem) {
-        final int[] extraAmmo = ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
-                .getMaxAdditionalAmmoPerOC();
+        final int[] extraAmmo =
+                ((GunItem) heldItem.getItem()).getGun().getReloads().getMaxAdditionalAmmoPerOC();
         final int magMode = GunModifierHelper.getAmmoCapacity(heldItem);
         if (magMode < 0) {
-            if (heldItem.getItem() instanceof TimelessGunItem
-                    && heldItem.getTag().getInt("AmmoCount")
-                            - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
-                                    .getMaxAmmo()) {
+            if (heldItem.getItem() instanceof GunItem && heldItem.getTag().getInt("AmmoCount")
+                    - 1 > ((GunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()) {
                 return true;
             }
         } else {
-            if (heldItem.getItem() instanceof TimelessGunItem
-                    && heldItem.getTag().getInt("AmmoCount")
-                            - 1 > ((TimelessGunItem) heldItem.getItem()).getGun().getReloads()
-                                    .getMaxAmmo() + extraAmmo[magMode]) {
+            if (heldItem.getItem() instanceof GunItem && heldItem.getTag().getInt("AmmoCount")
+                    - 1 > ((GunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()
+                            + extraAmmo[magMode]) {
                 return true;
             }
         }

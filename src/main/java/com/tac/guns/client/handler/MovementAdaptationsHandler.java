@@ -1,8 +1,10 @@
 package com.tac.guns.client.handler;
 
-import com.tac.guns.item.transition.TimelessGunItem;
+
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageUpdatePlayerMovement;
+
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
@@ -65,7 +67,8 @@ public class MovementAdaptationsHandler {
         return instance == null ? instance = new MovementAdaptationsHandler() : instance;
     }
 
-    private MovementAdaptationsHandler() {}
+    private MovementAdaptationsHandler() {
+    }
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onFovUpdate(FOVModifierEvent event) {
@@ -74,7 +77,7 @@ public class MovementAdaptationsHandler {
                 && mc.options.getCameraType() == CameraType.FIRST_PERSON
                 && mc.options.fovEffectScale > 0) {
             ItemStack heldItem = mc.player.getMainHandItem();
-            if (heldItem.getItem() instanceof TimelessGunItem) {
+            if (heldItem.getItem() instanceof GunItem) {
                 if (event.getEntity().isSprinting())
                     event.setNewfov(1.135f);
                 else
@@ -85,7 +88,7 @@ public class MovementAdaptationsHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onJump(LivingEvent.LivingJumpEvent event) {
-        if (!(event.getEntityLiving().getMainHandItem().getItem() instanceof TimelessGunItem))
+        if (!(event.getEntityLiving().getMainHandItem().getItem() instanceof GunItem))
             return;
         if (speed < 0.0875f)
             event.getEntityLiving().setDeltaMovement(

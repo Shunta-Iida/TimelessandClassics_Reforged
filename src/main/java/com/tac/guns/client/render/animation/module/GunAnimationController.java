@@ -1,11 +1,16 @@
 package com.tac.guns.client.render.animation.module;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 import com.tac.guns.common.Gun;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAnimationRun;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -16,10 +21,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class GunAnimationController {

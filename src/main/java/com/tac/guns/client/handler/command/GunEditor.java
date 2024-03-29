@@ -15,7 +15,7 @@ import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
 import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,8 @@ public class GunEditor {
         return GunEditor.instance;
     }
 
-    private GunEditor() {}
+    private GunEditor() {
+    }
 
     private String previousWeaponTag = "";
     private TaCWeaponDevModes prevMode;
@@ -68,9 +69,9 @@ public class GunEditor {
         if (ch == null || ch.getCatCurrentIndex() != 1)
             return;
         if ((mc.player.getMainHandItem() == null || mc.player.getMainHandItem() == ItemStack.EMPTY
-                || !(mc.player.getMainHandItem().getItem() instanceof TimelessGunItem)))
+                || !(mc.player.getMainHandItem().getItem() instanceof GunItem)))
             return;
-        final TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
+        final GunItem gunItem = (GunItem) mc.player.getMainHandItem().getItem();
         if (this.prevMode == null)
             this.prevMode = this.mode;
         else if (this.prevMode != this.mode && this.resetMode) {
@@ -103,12 +104,12 @@ public class GunEditor {
         if (mc.player == null)
             return;
         if ((mc.player.getMainHandItem() == null || mc.player.getMainHandItem() == ItemStack.EMPTY
-                || !(mc.player.getMainHandItem().getItem() instanceof TimelessGunItem)))
+                || !(mc.player.getMainHandItem().getItem() instanceof GunItem)))
             return;
         final CommandsHandler ch = CommandsHandler.get();
         if (ch == null || ch.getCatCurrentIndex() != 1)
             return;
-        final TimelessGunItem gunItem = (TimelessGunItem) mc.player.getMainHandItem().getItem();
+        final GunItem gunItem = (GunItem) mc.player.getMainHandItem().getItem();
         if (ch.catInGlobal(1) && this.mode != null) {
             // TODO: HANDLE FOR PER MODULE, BEFORE APPLICATION, SAVE DATA ON INSTANCE TO
             // SERIALIZE LATER.
@@ -224,8 +225,7 @@ public class GunEditor {
     private float spreadMod = 0;
     private float weightKiloMod = 0;
 
-    private void handleGeneralMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleGeneralMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         double stepModifier = 1;
         final boolean isLeft = event.getKey() == GLFW.GLFW_KEY_LEFT;
         final boolean isRight = event.getKey() == GLFW.GLFW_KEY_RIGHT;
@@ -548,8 +548,7 @@ public class GunEditor {
     private double speedMod = 0;
     private double lifeMod = 0;
 
-    private void handleProjectileMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleProjectileMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         double stepModifier = 1;
         final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
         final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
@@ -775,8 +774,7 @@ public class GunEditor {
     double preReloadPauseTicksMod = 0;
     double interReloadPauseTicksMod = 0;
 
-    private void handleReloadsMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleReloadsMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         final boolean isUp = event.getKey() == GLFW.GLFW_KEY_UP;
         final boolean isDown = event.getKey() == GLFW.GLFW_KEY_DOWN;
         final Player player = Minecraft.getInstance().player;
@@ -895,38 +893,32 @@ public class GunEditor {
         this.getMapItem(gunItem.getDescriptionId(), gunItem.getGun()).deserializeNBT(gun);
     }
 
-    private void handleZoomMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleZoomMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handlePositionedMod(event, gunItem);
     }
 
-    private void handleFlashMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleFlashMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleScopeMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleScopeMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleBarrelMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleBarrelMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handleOldScopeMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handleOldScopeMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
-    private void handlePistolScopeMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handlePistolScopeMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         this.handleScaledPositionedMod(event, gunItem);
     }
 
     private void handlePistolBarrelMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) { // "zoom" extends
+            final GunItem gunItem) { // "zoom" extends
         // positioned
         this.handleScaledPositionedMod(event, gunItem);
     }
@@ -952,8 +944,7 @@ public class GunEditor {
     private boolean controlToggle = false;
     private boolean altToggle = false;
 
-    private void handlePositionedMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+    private void handlePositionedMod(final InputEvent.KeyInputEvent event, final GunItem gunItem) {
         double stepModifier = 1;
         final boolean isLeft = Keys.LEFT.isDown();
         final boolean isRight = Keys.RIGHT.isDown();
@@ -1065,7 +1056,7 @@ public class GunEditor {
     }
 
     private void handleScaledPositionedMod(final InputEvent.KeyInputEvent event,
-            final TimelessGunItem gunItem) {
+            final GunItem gunItem) {
         this.handlePositionedMod(event, gunItem);
         final boolean isPeriodDown = Keys.SIZE_OPT.isDown(); // Increase Step Size
 
@@ -1114,8 +1105,8 @@ public class GunEditor {
     }
 
     private double casedGetScale() {
-        final TimelessGunItem gunItem =
-                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        final GunItem gunItem =
+                (GunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getSize();
@@ -1126,10 +1117,6 @@ public class GunEditor {
             case barrel:
                 return gunItem.getGun().canAttachType(IAttachment.Type.BARREL)
                         ? gunItem.getGun().getModules().getAttachments().getBarrel().getScale()
-                        : 0;
-            case oldScope:
-                return gunItem.getGun().canAttachType(IAttachment.Type.OLD_SCOPE)
-                        ? gunItem.getGun().getModules().getAttachments().getOldScope().getScale()
                         : 0;
             case pistolScope:
                 return gunItem.getGun().canAttachType(IAttachment.Type.PISTOL_SCOPE)
@@ -1146,8 +1133,8 @@ public class GunEditor {
     }
 
     private double casedGetX() {
-        final TimelessGunItem gunItem =
-                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        final GunItem gunItem =
+                (GunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getXOffset();
@@ -1181,8 +1168,8 @@ public class GunEditor {
     }
 
     private double casedGetY() {
-        final TimelessGunItem gunItem =
-                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        final GunItem gunItem =
+                (GunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getYOffset();
@@ -1216,8 +1203,8 @@ public class GunEditor {
     }
 
     private double casedGetZ() {
-        final TimelessGunItem gunItem =
-                (TimelessGunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
+        final GunItem gunItem =
+                (GunItem) Minecraft.getInstance().player.getMainHandItem().getItem();
         switch (this.mode) {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getZOffset();

@@ -1,7 +1,8 @@
 package com.tac.guns.client.render.animation.module;
 
 import com.tac.guns.common.Gun;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.world.item.Item;
 
 public abstract class BoltActionAnimationController extends GunAnimationController {

@@ -1,13 +1,14 @@
 package com.tac.guns.network.message;
 
+import java.util.function.Supplier;
+
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.client.network.ClientPlayHandler;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -26,8 +27,9 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
 
     public MessageGunSound() {}
 
-    public MessageGunSound(ResourceLocation id, SoundSource category, float x, float y, float z,
-            float volume, float pitch, int shooterId, boolean muzzle, boolean reload) {
+    public MessageGunSound(final ResourceLocation id, final SoundSource category, final float x,
+            final float y, final float z, final float volume, final float pitch,
+            final int shooterId, final boolean muzzle, final boolean reload) {
         this.id = id;
         this.category = category;
         this.x = x;
@@ -41,7 +43,7 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
     }
 
     @Override
-    public void encode(MessageGunSound messageGunSound, FriendlyByteBuf buffer) {
+    public void encode(final MessageGunSound messageGunSound, final FriendlyByteBuf buffer) {
         buffer.writeUtf(messageGunSound.id.toString());
         buffer.writeEnum(messageGunSound.category);
         buffer.writeFloat(messageGunSound.x);
@@ -55,7 +57,7 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
     }
 
     @Override
-    public MessageGunSound decode(FriendlyByteBuf buffer) {
+    public MessageGunSound decode(final FriendlyByteBuf buffer) {
         return new MessageGunSound(ResourceLocation.tryParse(buffer.readUtf()),
                 buffer.readEnum(SoundSource.class), buffer.readFloat(), buffer.readFloat(),
                 buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readInt(),
@@ -63,8 +65,10 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
     }
 
     @Override
-    public void handle(MessageGunSound messageGunSound, Supplier<NetworkEvent.Context> supplier) {
-        supplier.get().enqueueWork(() -> ClientPlayHandler.handleMessageGunSound(messageGunSound));
+    public void handle(final MessageGunSound messageGunSound,
+            final Supplier<NetworkEvent.Context> supplier) {
+        supplier.get().enqueueWork(
+                () -> ClientPlayHandler.handleMessageGunSound(messageGunSound, supplier.get()));
         supplier.get().setPacketHandled(true);
     }
 

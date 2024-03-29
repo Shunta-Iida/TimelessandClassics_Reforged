@@ -1,50 +1,80 @@
 package com.tac.guns.item.transition;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
+import java.util.WeakHashMap;
+
 import javax.annotation.Nullable;
+
 import com.tac.guns.Config;
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
 import com.tac.guns.common.Gun;
+import com.tac.guns.common.NetworkGunManager;
 import com.tac.guns.common.network.ServerPlayHandler;
+import com.tac.guns.init.ModItems;
 import com.tac.guns.interfaces.IGunModifier;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.IColored;
 import com.tac.guns.item.attachment.IAttachment;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.Process;
+
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.KeybindComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.LootBonusEnchantment;
+import net.minecraft.world.item.enchantment.QuickChargeEnchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class TimelessGunItem extends GunItem {
+public class GunItem extends Item implements IColored {
     private final IGunModifier[] modifiers;
     private Boolean integratedOptic = false;
+    private Gun gun = new Gun();
+    private final WeakHashMap<CompoundTag, Gun> modifiedGunCache = new WeakHashMap<>();
 
-    public TimelessGunItem(final Process<Item.Properties> properties,
-            final IGunModifier... modifiers) {
-        super(properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    class TagKeys {
+        public static final String ADDITIONAL_DAMAGE = "AdditionalDamage";
+        public static final String IGNORE_AMMO = "IgnoreAmmo";
+        public static final String AMMO_COUNT = "AmmoCount";
+        public static final String LEVEL_DMG = "levelDmg";
+        public static final String LEVEL = "level";
+        public static final String GUN = "Gun";
+    }
+
+    public GunItem(final Process<Item.Properties> properties, final IGunModifier... modifiers) {
+        super(properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GENERAL)));
         this.modifiers = modifiers;
     }
 
-    public TimelessGunItem(final Process<Item.Properties> properties, final Boolean integratedOptic,
+    public GunItem(final Process<Item.Properties> properties, final Boolean integratedOptic,
             final IGunModifier... modifiers) {
-        super(properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+        super(properties.process(new Item.Properties().stacksTo(1).tab(GunMod.GENERAL)));
         this.modifiers = modifiers;
         this.integratedOptic = integratedOptic;
     }
 
-    public TimelessGunItem() {
+    public GunItem() {
         this(properties -> properties);
+    }
+
+    public void setGun(final NetworkGunManager.Supplier supplier) {
+        this.gun = supplier.getGun();
+    }
+
+    public Gun getGun() {
+        return this.gun;
     }
 
     public Boolean isIntegratedOptic() {
@@ -52,9 +82,99 @@ public class TimelessGunItem extends GunItem {
     }
 
     @Override
+    public boolean onEntitySwing(final ItemStack stack, final LivingEntity entity) {
+        return true;
+    }
+
+    @Override
+    public void fillItemCategory(final CreativeModeTab group, final NonNullList<ItemStack> stacks) {
+        if (this.allowdedIn(group)) {
+            final ItemStack stack = new ItemStack(this);
+            stack.getOrCreateTag().putInt(TagKeys.AMMO_COUNT, this.gun.getReloads().getMaxAmmo());
+            stacks.add(stack);
+        }
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(final ItemStack oldStack, final ItemStack newStack,
+            final boolean slotChanged) {
+        return slotChanged;
+    }
+
+
+    public Gun getModifiedGun(final CompoundTag tagCompound) {
+        if (tagCompound != null && tagCompound.contains(TagKeys.GUN, Tag.TAG_COMPOUND)) {
+            return this.modifiedGunCache.computeIfAbsent(tagCompound, item -> {
+                if (tagCompound.getBoolean("Custom")) {
+                    return Gun.create(tagCompound.getCompound(TagKeys.GUN));
+                } else {
+                    final Gun gunCopy = this.gun.copy();
+                    gunCopy.deserializeNBT(tagCompound.getCompound(TagKeys.GUN));
+                    return gunCopy;
+                }
+            });
+        }
+        return this.gun;
+    }
+
+    public static boolean isSingleHanded(final ItemStack stack) {
+        final Item item = stack.getItem();
+        return item == ModItems.M1911.get() || item == ModItems.MICRO_UZI.get()
+                || item == ModItems.CZ75.get() || item == ModItems.MK23.get();
+    }
+
+    @Override
+    public boolean isBookEnchantable(final ItemStack stack, final ItemStack book) {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(final ItemStack stack, final Enchantment enchantment) {
+
+        // ドロップ増加
+        if (enchantment instanceof LootBonusEnchantment
+                && enchantment.category == EnchantmentCategory.WEAPON) {
+            return true;
+        }
+
+        // 高速装填
+        if (enchantment instanceof QuickChargeEnchantment) {
+            return true;
+        }
+
+        return super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    public IGunModifier[] getModifiers() {
+        return this.modifiers;
+    }
+
+    @Override
+    public int getBarColor(final ItemStack p_150901_) {
+        return Objects.requireNonNull(ChatFormatting.GOLD.getColor());
+    }
+
+    @Override
+    public boolean isBarVisible(final ItemStack stack) {
+        if (Config.CLIENT.display.weaponAmmoBar.get()) {
+            final CompoundTag tagCompound = stack.getOrCreateTag();
+            final Gun modifiedGun = this.getModifiedGun(stack.getTag());
+            return !tagCompound.getBoolean(TagKeys.IGNORE_AMMO)
+                    && tagCompound.getInt(TagKeys.AMMO_COUNT) != GunModifierHelper
+                            .getAmmoCapacity(stack, modifiedGun);
+        } else
+            return false;
+    }
+
+    @Override
+    public boolean isFoil(final ItemStack gunItem) {
+        return false;
+    }
+
+    @Override
     public void appendHoverText(final ItemStack stack, @Nullable final Level worldIn,
             final List<Component> tooltip, final TooltipFlag flag) {
-        final Gun modifiedGun = this.getModifiedGun(stack);
+        final Gun modifiedGun = this.getModifiedGun(stack.getTag());
         final Item ammo = ForgeRegistries.ITEMS.getValue(modifiedGun.getProjectile().getItem());
         if (ammo != null) {
             tooltip.add(
@@ -67,8 +187,9 @@ public class TimelessGunItem extends GunItem {
         String additionalDamageText = "";
         final CompoundTag tagCompound = stack.getTag();
         float additionalDamage;
-        if (tagCompound != null && tagCompound.contains("AdditionalDamage", 99)) {
-            additionalDamage = tagCompound.getFloat("AdditionalDamage");
+        if (tagCompound != null
+                && tagCompound.contains(TagKeys.ADDITIONAL_DAMAGE, Tag.TAG_ANY_NUMERIC)) {
+            additionalDamage = tagCompound.getFloat(TagKeys.ADDITIONAL_DAMAGE);
             additionalDamage += GunModifierHelper.getAdditionalDamage(stack);
             if (additionalDamage > 0.0F) {
                 additionalDamageText = ChatFormatting.GREEN + " +"
@@ -86,11 +207,11 @@ public class TimelessGunItem extends GunItem {
                 ChatFormatting.GOLD + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(additionalDamage)
                         + additionalDamageText)).withStyle(ChatFormatting.DARK_GRAY));
         if (tagCompound != null) {
-            if (tagCompound.getBoolean("IgnoreAmmo")) {
+            if (tagCompound.getBoolean(TagKeys.IGNORE_AMMO)) {
                 tooltip.add((new TranslatableComponent("info.tac.ignore_ammo"))
                         .withStyle(ChatFormatting.AQUA));
             } else {
-                final int ammoCount = tagCompound.getInt("AmmoCount");
+                final int ammoCount = tagCompound.getInt(TagKeys.AMMO_COUNT);
                 tooltip.add((new TranslatableComponent("info.tac.ammo",
                         ChatFormatting.GOLD.toString() + ammoCount + "/"
                                 + GunModifierHelper.getAmmoCapacity(stack, modifiedGun)))
@@ -103,7 +224,7 @@ public class TimelessGunItem extends GunItem {
             // String text = "SHIFT";
             // if(!InputHandler.MORE_INFO_HOLD.keyCode().equals(GLFW.GLFW_KEY_LEFT_SHIFT))
             tooltip.add((new TranslatableComponent("info.tac.more_info_gunitem",
-                    new KeybindComponent(Keys.MORE_INFO_HOLD.getKey().toString())))
+                    Keys.MORE_INFO_HOLD.getTranslatedKeyMessage()))
                             .withStyle(ChatFormatting.YELLOW));
         }
         if (isShift) {
@@ -147,21 +268,18 @@ public class TimelessGunItem extends GunItem {
                                     .withStyle(ChatFormatting.RED))
                                             .withStyle(ChatFormatting.DARK_RED)));
 
-                final float percentageToNextLevel = (tagCompound.getFloat("levelDmg") * 100)
+                final float percentageToNextLevel = (tagCompound.getFloat(TagKeys.LEVEL_DMG) * 100)
                         / (modifiedGun.getGeneral().getLevelReq()
-                                * (((tagCompound.getInt("level")) * 3.0f)));
+                                * (((tagCompound.getInt(TagKeys.LEVEL)) * 3.0f)));
                 tooltip.add((new TranslatableComponent("info.tac.current_level")
-                        .append(new TranslatableComponent(" " + tagCompound.getInt("level") + " : "
-                                + String.format("%.2f", percentageToNextLevel) + "%")))
+                        .append(new TranslatableComponent(" " + tagCompound.getInt(TagKeys.LEVEL)
+                                + " : " + String.format("%.2f", percentageToNextLevel) + "%")))
                                         .withStyle(ChatFormatting.GRAY)
                                         .withStyle(ChatFormatting.BOLD));
             }
 
-            tooltip.add(
-                    (new TranslatableComponent("info.tac.attachment_help",
-                            Keys.ATTACHMENTS.getKey().getDisplayName().getContents()
-                                    .toUpperCase(Locale.ENGLISH)))
-                                            .withStyle(ChatFormatting.YELLOW));
+            tooltip.add((new TranslatableComponent("info.tac.attachment_help",
+                    Keys.ATTACHMENTS.getTranslatedKeyMessage())).withStyle(ChatFormatting.YELLOW));
             if (gun.getGun().canAttachType(IAttachment.Type.PISTOL_SCOPE))
                 tooltip.add((new TranslatableComponent("info.tac.pistolScope",
                         new TranslatableComponent("slot.tac.attachment.pistol_scope")
@@ -182,30 +300,5 @@ public class TimelessGunItem extends GunItem {
             }
 
         }
-    }
-
-    public IGunModifier[] getModifiers() {
-        return this.modifiers;
-    }
-
-    @Override
-    public int getBarColor(final ItemStack p_150901_) {
-        return Objects.requireNonNull(ChatFormatting.GOLD.getColor());
-    }
-
-    @Override
-    public boolean isBarVisible(final ItemStack stack) {
-        if (Config.CLIENT.display.weaponAmmoBar.get()) {
-            final CompoundTag tagCompound = stack.getOrCreateTag();
-            final Gun modifiedGun = this.getModifiedGun(stack);
-            return !tagCompound.getBoolean("IgnoreAmmo") && tagCompound
-                    .getInt("AmmoCount") != GunModifierHelper.getAmmoCapacity(stack, modifiedGun);
-        } else
-            return false;
-    }
-
-    @Override
-    public boolean isFoil(final ItemStack gunItem) {
-        return false;
     }
 }

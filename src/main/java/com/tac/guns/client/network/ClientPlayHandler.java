@@ -33,8 +33,8 @@ import com.tac.guns.particles.BulletHoleData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.resources.sounds.EntityBoundSoundInstance;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -48,13 +48,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class ClientPlayHandler {
-    public static void handleMessageGunSound(final MessageGunSound message) {
+    public static void handleMessageGunSound(final MessageGunSound message, final Context context) {
         final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null)
             return;
@@ -63,16 +64,23 @@ public class ClientPlayHandler {
             GunRenderingHandler.get().showMuzzleFlashForPlayer(message.getShooterId());
         }
 
-        if (message.getShooterId() == mc.player.getId()) {
-            Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(message.getId(),
-                    SoundSource.PLAYERS,
-                    (float) (message.getVolume() * Config.CLIENT.sounds.weaponsVolume.get()),
-                    message.getPitch(), false, 0, SoundInstance.Attenuation.NONE, 0, 0, 0, true));
-        } else {
-            Minecraft.getInstance().getSoundManager()
-                    .play(new GunShotSound(message.getId(), SoundSource.PLAYERS, message.getX(),
-                            message.getY(), message.getZ(), message.getVolume(), message.getPitch(),
-                            message.isReload()));
+        // if (message.getShooterId() == mc.player.getId()) {
+        //     Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(message.getId(),
+        //             SoundSource.PLAYERS,
+        //             (float) (message.getVolume() * Config.CLIENT.sounds.weaponsVolume.get()),
+        //             message.getPitch(), false, 0, SoundInstance.Attenuation.NONE, 0, 0, 0, true));
+        // } else {
+        // Minecraft.getInstance().getSoundManager()
+        //         .play(new GunShotSound(message.getId(), SoundSource.PLAYERS, message.getX(),
+        //                 message.getY(), message.getZ(), message.getVolume(), message.getPitch(),
+        //                 message.isReload()));
+        // }
+
+        // LogUtils.getLogger().debug("Handling gun sound message, playing sound");
+        if (mc.level.getEntity(message.getShooterId()) instanceof Player player) {
+            final EntityBoundSoundInstance sound = new GunShotSound(new SoundEvent(message.getId()),
+                    SoundSource.PLAYERS, message.getVolume(), message.getPitch(), player, false);
+            mc.getSoundManager().play(sound);
         }
     }
 
@@ -207,7 +215,7 @@ public class ClientPlayHandler {
             }
             if (distance < 32.0) {
                 world.playLocalSound(message.getX(), message.getY(), message.getZ(),
-                        state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 0.75F, 2.0F,
+                        state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 0.75F, 0.5F,
                         false);
             }
         }
@@ -226,18 +234,10 @@ public class ClientPlayHandler {
         HUDRenderingHandler.get().hitMarkerTracker = (int) HUDRenderingHandler.hitMarkerRatio;
         HUDRenderingHandler.get().hitMarkerHeadshot = message.isHeadshot();
 
+        // Hit marker sound, after sound set HuD renderder hitmarker ticker to 3 fade in and out quick, use textured crosshair as a base
         final SoundEvent event = ClientPlayHandler.getHitSound(message.isCritical(),
-                message.isHeadshot(), message.isPlayer()); // Hit marker
-                                                                                                                                        // sound, after
-                                                                                                                                        // sound set HuD
-                                                                                                                                        // renderder
-                                                                                                                                        // hitmarker
-                                                                                                                                        // ticker to 3
-                                                                                                                                        // fade in and
-                                                                                                                                        // out quick,
-                                                                                                                                        // use textured
-                                                                                                                                        // crosshair as
-                                                                                                                                        // a base
+                message.isHeadshot(), message.isPlayer());
+
         if (event == null)
             return;
 

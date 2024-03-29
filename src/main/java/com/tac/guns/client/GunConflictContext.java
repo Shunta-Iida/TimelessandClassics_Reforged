@@ -1,6 +1,6 @@
 package com.tac.guns.client;
 
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.settings.IKeyConflictContext;
@@ -19,7 +19,7 @@ public enum GunConflictContext implements IKeyConflictContext {
         }
 
         @Override
-        public boolean conflicts(IKeyConflictContext other) {
+        public boolean conflicts(final IKeyConflictContext other) {
             return this == other;
         }
     }

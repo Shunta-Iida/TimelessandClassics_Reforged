@@ -1,7 +1,8 @@
 package com.tac.guns.entity;
 
 import com.tac.guns.common.Gun;
-import com.tac.guns.item.GunItem;
+import com.tac.guns.item.transition.GunItem;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;

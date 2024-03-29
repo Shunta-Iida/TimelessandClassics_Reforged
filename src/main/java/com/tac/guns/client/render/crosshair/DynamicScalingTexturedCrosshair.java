@@ -2,13 +2,19 @@ package com.tac.guns.client.render.crosshair;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.AimingHandler;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
@@ -71,8 +77,8 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
         if (playerEntity.getMainHandItem().getItem() == null
                 || playerEntity.getMainHandItem().getItem() == Items.AIR)
             return;
-        if (playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem) {
-            TimelessGunItem gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
+        if (playerEntity.getMainHandItem().getItem() instanceof GunItem) {
+            GunItem gunItem = (GunItem) playerEntity.getMainHandItem().getItem();
             if (gunItem.getGun().getDisplay().isDynamicHipfire()) {
                 float alpha = 1.0F - (float) AimingHandler.get().getNormalisedAdsProgress();
                 float size = 8.0F;
@@ -128,10 +134,10 @@ public class DynamicScalingTexturedCrosshair extends TexturedCrosshair implement
             return;
 
         float scale = this.getInitialScale();
-        TimelessGunItem gunItem;
+        GunItem gunItem;
 
-        if (playerEntity.getMainHandItem().getItem() instanceof TimelessGunItem) {
-            gunItem = (TimelessGunItem) playerEntity.getMainHandItem().getItem();
+        if (playerEntity.getMainHandItem().getItem() instanceof GunItem) {
+            gunItem = (GunItem) playerEntity.getMainHandItem().getItem();
 
             if (playerEntity.getX() != playerEntity.xo || playerEntity.getZ() != playerEntity.zo)
                 scale += this.getHorizontalMovementScale()

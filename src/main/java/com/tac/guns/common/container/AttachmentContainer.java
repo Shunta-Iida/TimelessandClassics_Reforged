@@ -1,6 +1,7 @@
 package com.tac.guns.common.container;
 
 import java.util.ArrayDeque;
+
 import com.tac.guns.common.Gun;
 import com.tac.guns.common.container.slot.AttachmentSlot;
 import com.tac.guns.init.ModContainers;
@@ -11,8 +12,9 @@ import com.tac.guns.item.PistolScopeItem;
 import com.tac.guns.item.ScopeItem;
 import com.tac.guns.item.SideRailItem;
 import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.item.transition.TimelessPistolGunItem;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -66,7 +68,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
             int i = 0;
             while (attachments.peekLast() != null)
                 this.weaponInventory.setItem(i++, attachments.pollLast());
-        } else if (this.weapon.getItem() instanceof TimelessGunItem) {
+        } else if (this.weapon.getItem() instanceof GunItem) {
             for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
                 attachments.push(Gun.getAttachment(IAttachment.Type.values()[i], stack));
             int i = 0;
@@ -133,16 +135,16 @@ public class AttachmentContainer extends AbstractContainerMenu {
                             IAttachment.Type.values()[i], playerInventory.player, i, 5,
                             17 + i * 18));
 
-        } else if (this.weapon.getItem() instanceof TimelessGunItem) {
+        } else if (this.weapon.getItem() instanceof GunItem) {
             for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
-                if (i == IAttachment.Type.SCOPE.getId() && ((TimelessGunItem) this.weapon.getItem())
+                if (i == IAttachment.Type.SCOPE.getId() && ((GunItem) this.weapon.getItem())
                         .getGun().canAttachType(IAttachment.Type.PISTOL_SCOPE))
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
                             new IAttachment.Type[] {IAttachment.Type.values()[i],
                                     IAttachment.Type.PISTOL_SCOPE},
                             playerInventory.player, 0, 5, 17 + 0 * 18));
                 else if (IAttachment.Type.values()[i] == IAttachment.Type.SIDE_RAIL
-                        && ((TimelessGunItem) this.weapon.getItem()).getGun()
+                        && ((GunItem) this.weapon.getItem()).getGun()
                                 .canAttachType(IAttachment.Type.IR_DEVICE))
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
                             new IAttachment.Type[] {IAttachment.Type.values()[i],
@@ -236,7 +238,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
                     }
                 }
             }
-        } else if (this.weapon.getItem() instanceof TimelessGunItem) {
+        } else if (this.weapon.getItem() instanceof GunItem) {
             for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++) {
                 ItemStack attachment = this.getSlot(i).getItem();
                 if (attachment.getItem() instanceof AttachmentItem<?>)

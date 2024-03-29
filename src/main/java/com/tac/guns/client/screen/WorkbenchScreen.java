@@ -1,5 +1,13 @@
 package com.tac.guns.client.screen;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import org.lwjgl.opengl.GL11;
+
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -16,15 +24,19 @@ import com.tac.guns.common.container.WorkbenchContainer;
 import com.tac.guns.crafting.WorkbenchRecipe;
 import com.tac.guns.crafting.WorkbenchRecipes;
 import com.tac.guns.init.ModItems;
-import com.tac.guns.item.*;
-import com.tac.guns.item.transition.TimelessGunItem;
+import com.tac.guns.item.IAmmo;
+import com.tac.guns.item.IColored;
+import com.tac.guns.item.ScopeItem;
 import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.transition.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageCraft;
 import com.tac.guns.tileentity.WorkbenchTileEntity;
 import com.tac.guns.util.InventoryUtil;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -43,13 +55,6 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -60,19 +65,19 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     private static boolean showRemaining = false;
 
     private Tab currentTab;
-    private List<Tab> tabs = new ArrayList<>();
-    private List<MaterialItem> materials;
+    private final List<Tab> tabs = new ArrayList<>();
+    private final List<MaterialItem> materials;
     private List<MaterialItem> filteredMaterials;
-    private Inventory playerInventory;
-    private WorkbenchTileEntity workbench;
+    private final Inventory playerInventory;
+    private final WorkbenchTileEntity workbench;
     private Button btnCraft;
     private CheckBox checkBoxMaterials;
     private ItemStack displayStack;
 
     float posDelta = 0.1f;// works for gun models, + means higher
 
-    public WorkbenchScreen(WorkbenchContainer container, Inventory playerInventory,
-            Component title) {
+    public WorkbenchScreen(final WorkbenchContainer container, final Inventory playerInventory,
+            final Component title) {
         super(container, playerInventory, title);
         this.playerInventory = playerInventory;
         this.workbench = container.getWorkbench();
@@ -85,22 +90,22 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         }
     }
 
-    private void createTabs(NonNullList<WorkbenchRecipe> recipes) {
-        List<WorkbenchRecipe> weapons_AR = new ArrayList<>();
-        List<WorkbenchRecipe> weapons_HMG = new ArrayList<>();
-        List<WorkbenchRecipe> weapons_PT = new ArrayList<>();
-        List<WorkbenchRecipe> weapons_SG = new ArrayList<>();
-        List<WorkbenchRecipe> weapons_SMG = new ArrayList<>();
-        List<WorkbenchRecipe> weapons_SR = new ArrayList<>();
-        List<WorkbenchRecipe> weapons = new ArrayList<>();
-        List<WorkbenchRecipe> attachments = new ArrayList<>();
-        List<WorkbenchRecipe> ammo = new ArrayList<>();
-        List<WorkbenchRecipe> misc = new ArrayList<>();
+    private void createTabs(final NonNullList<WorkbenchRecipe> recipes) {
+        final List<WorkbenchRecipe> weapons_AR = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons_HMG = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons_PT = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons_SG = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons_SMG = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons_SR = new ArrayList<>();
+        final List<WorkbenchRecipe> weapons = new ArrayList<>();
+        final List<WorkbenchRecipe> attachments = new ArrayList<>();
+        final List<WorkbenchRecipe> ammo = new ArrayList<>();
+        final List<WorkbenchRecipe> misc = new ArrayList<>();
 
-        for (WorkbenchRecipe recipe : recipes) {
-            ItemStack output = recipe.getItem();
+        for (final WorkbenchRecipe recipe : recipes) {
+            final ItemStack output = recipe.getItem();
             if (output.getItem() instanceof GunItem) {
-                Gun gun = ((GunItem) output.getItem()).getGun();
+                final Gun gun = ((GunItem) output.getItem()).getGun();
                 if (gun.getDisplay().getWeaponType() == WeaponType.AR)
                     weapons_AR.add(recipe);
                 else if (gun.getDisplay().getWeaponType() == WeaponType.MG
@@ -126,52 +131,51 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         }
 
         if (!weapons_AR.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.AK47.get());
+            final ItemStack icon = new ItemStack(ModItems.AK47.get());
             icon.getOrCreateTag().putInt("AmmoCount",
                     ModItems.AK47.get().getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_ar", weapons_AR));
         }
 
         if (!weapons_HMG.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.M60.get());
+            final ItemStack icon = new ItemStack(ModItems.M60.get());
             icon.getOrCreateTag().putInt("AmmoCount",
                     ModItems.M60.get().getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_hmg", weapons_HMG));
         }
 
         if (!weapons_PT.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.GLOCK_17.get());
+            final ItemStack icon = new ItemStack(ModItems.GLOCK_17.get());
             icon.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.GLOCK_17.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.GLOCK_17.get()).getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_pt", weapons_PT));
         }
 
         if (!weapons_SG.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.M870_CLASSIC.get());
+            final ItemStack icon = new ItemStack(ModItems.M870_CLASSIC.get());
             icon.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.M870_CLASSIC.get()).getGun().getReloads()
-                            .getMaxAmmo());
+                    ((GunItem) ModItems.M870_CLASSIC.get()).getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_sg", weapons_SG));
         }
 
         if (!weapons_SMG.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.VECTOR45.get());
+            final ItemStack icon = new ItemStack(ModItems.VECTOR45.get());
             icon.getOrCreateTag().putInt("AmmoCount",
                     ModItems.VECTOR45.get().getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_smg", weapons_SMG));
         }
 
         if (!weapons_SR.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.AI_AWP.get());
+            final ItemStack icon = new ItemStack(ModItems.AI_AWP.get());
             icon.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.AI_AWP.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.AI_AWP.get()).getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons_sr", weapons_SR));
         }
 
         if (!weapons.isEmpty()) {
-            ItemStack icon = new ItemStack(ModItems.HK416_A5.get());
+            final ItemStack icon = new ItemStack(ModItems.HK416_A5.get());
             icon.getOrCreateTag().putInt("AmmoCount",
-                    ((TimelessGunItem) ModItems.HK416_A5.get()).getGun().getReloads().getMaxAmmo());
+                    ((GunItem) ModItems.HK416_A5.get()).getGun().getReloads().getMaxAmmo());
             this.tabs.add(new Tab(icon, "weapons", weapons));
         }
 
@@ -193,14 +197,14 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         }
     }
 
-    private boolean isAmmo(ItemStack stack) {
+    private boolean isAmmo(final ItemStack stack) {
         if (stack.getItem() instanceof IAmmo) {
             return true;
         }
-        ResourceLocation id = stack.getItem().getRegistryName();
+        final ResourceLocation id = stack.getItem().getRegistryName();
         Objects.requireNonNull(id);
-        for (GunItem gunItem : NetworkGunManager.getClientRegisteredGuns()) {
-            if (id.equals(gunItem.getModifiedGun(stack).getProjectile().getItem())) {
+        for (final GunItem gunItem : NetworkGunManager.getClientRegisteredGuns()) {
+            if (id.equals(gunItem.getModifiedGun(stack.getTag()).getProjectile().getItem())) {
                 return true;
             }
         }
@@ -215,7 +219,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         }
         this.addRenderableWidget(new Button(this.leftPos + 9, this.topPos + 18, 15, 20,
                 new TextComponent("<"), button -> {
-                    int index = this.currentTab.getCurrentIndex();
+                    final int index = this.currentTab.getCurrentIndex();
                     if (index - 1 < 0) {
                         this.loadItem(this.currentTab.getRecipes().size() - 1);
                     } else {
@@ -224,7 +228,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
                 }));
         this.addRenderableWidget(new Button(this.leftPos + 153, this.topPos + 18, 15, 20,
                 new TextComponent(">"), button -> {
-                    int index = this.currentTab.getCurrentIndex();
+                    final int index = this.currentTab.getCurrentIndex();
                     if (index + 1 >= this.currentTab.getRecipes().size()) {
                         this.loadItem(0);
                     } else {
@@ -233,9 +237,9 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
                 }));
         this.btnCraft = this.addRenderableWidget(new Button(this.leftPos + 195, this.topPos + 16,
                 74, 20, new TranslatableComponent("gui.tac.workbench.assemble"), button -> {
-                    int index = this.currentTab.getCurrentIndex();
-                    WorkbenchRecipe recipe = this.currentTab.getRecipes().get(index);
-                    ResourceLocation registryName = recipe.getId();
+                    final int index = this.currentTab.getCurrentIndex();
+                    final WorkbenchRecipe recipe = this.currentTab.getRecipes().get(index);
+                    final ResourceLocation registryName = recipe.getId();
                     PacketHandler.getPlayChannel().sendToServer(
                             new MessageCraft(registryName, this.workbench.getBlockPos()));
                 }));
@@ -250,12 +254,12 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     protected void containerTick() {
         super.containerTick();
 
-        for (MaterialItem material : this.materials) {
+        for (final MaterialItem material : this.materials) {
             material.update();
         }
 
         boolean canCraft = true;
-        for (MaterialItem material : this.materials) {
+        for (final MaterialItem material : this.materials) {
             if (!material.isEnabled()) {
                 canCraft = false;
                 break;
@@ -268,17 +272,17 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
 
     private void updateColor() {
         if (this.currentTab != null) {
-            ItemStack item = this.displayStack;
+            final ItemStack item = this.displayStack;
             if (item.getItem() instanceof IColored && ((IColored) item.getItem()).canColor(item)) {
-                IColored colored = (IColored) item.getItem();
+                final IColored colored = (IColored) item.getItem();
                 if (!this.workbench.getItem(0).isEmpty()) {
-                    ItemStack dyeStack = this.workbench.getItem(0);
+                    final ItemStack dyeStack = this.workbench.getItem(0);
                     if (dyeStack.getItem() instanceof DyeItem) {
-                        DyeColor color = ((DyeItem) dyeStack.getItem()).getDyeColor();
-                        float[] components = color.getTextureDiffuseColors();
-                        int red = (int) (components[0] * 255F);
-                        int green = (int) (components[1] * 255F);
-                        int blue = (int) (components[2] * 255F);
+                        final DyeColor color = ((DyeItem) dyeStack.getItem()).getDyeColor();
+                        final float[] components = color.getTextureDiffuseColors();
+                        final int red = (int) (components[0] * 255F);
+                        final int green = (int) (components[1] * 255F);
+                        final int blue = (int) (components[2] * 255F);
                         colored.setColor(item,
                                 ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF)));
                     } else {
@@ -292,8 +296,8 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-        boolean result = super.mouseClicked(mouseX, mouseY, mouseButton);
+    public boolean mouseClicked(final double mouseX, final double mouseY, final int mouseButton) {
+        final boolean result = super.mouseClicked(mouseX, mouseY, mouseButton);
         WorkbenchScreen.showRemaining = this.checkBoxMaterials.isToggled();
 
         for (int i = 0; i < this.tabs.size(); i++) {
@@ -310,17 +314,18 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         return result;
     }
 
-    private void loadItem(int index) {
-        WorkbenchRecipe recipe = this.currentTab.getRecipes().get(index);
+    private void loadItem(final int index) {
+        final WorkbenchRecipe recipe = this.currentTab.getRecipes().get(index);
         this.displayStack = recipe.getItem().copy();
         this.updateColor();
 
         this.materials.clear();
 
-        List<Pair<Ingredient, Integer>> materials = recipe.getMaterials();
+        final List<Pair<Ingredient, Integer>> materials = recipe.getMaterials();
         if (materials != null) {
-            for (Pair<Ingredient, Integer> material : materials) {
-                MaterialItem item = new MaterialItem(material.getFirst(), material.getSecond());
+            for (final Pair<Ingredient, Integer> material : materials) {
+                final MaterialItem item =
+                        new MaterialItem(material.getFirst(), material.getSecond());
                 item.update();
                 this.materials.add(item);
             }
@@ -330,13 +335,14 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(final PoseStack matrixStack, final int mouseX, final int mouseY,
+            final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
 
-        int startX = this.leftPos;
-        int startY = this.topPos;
+        final int startX = this.leftPos;
+        final int startY = this.topPos;
 
         for (int i = 0; i < this.tabs.size(); i++) {
             if (RenderUtil.isMouseWithin(mouseX, mouseY, startX + 28 * i, startY - 28, 28, 28)) {
@@ -349,10 +355,10 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         if (this.filteredMaterials == null)
             return;
         for (int i = 0; i < this.filteredMaterials.size(); i++) {
-            int itemX = startX + 172;
-            int itemY = startY + i * 19 + 63;
+            final int itemX = startX + 172;
+            final int itemY = startY + i * 19 + 63;
             if (RenderUtil.isMouseWithin(mouseX, mouseY, itemX, itemY, 80, 19)) {
-                MaterialItem materialItem = this.filteredMaterials.get(i);
+                final MaterialItem materialItem = this.filteredMaterials.get(i);
                 if (!materialItem.getStack().isEmpty()) {
                     this.renderTooltip(matrixStack, materialItem.getStack(), mouseX, mouseY);
                     return;
@@ -366,28 +372,29 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-        int offset = this.tabs.isEmpty() ? 0 : 28;
+    protected void renderLabels(final PoseStack matrixStack, final int mouseX, final int mouseY) {
+        final int offset = this.tabs.isEmpty() ? 0 : 28;
         this.font.draw(matrixStack, this.title, (float) this.titleLabelX,
                 (float) this.titleLabelY - 28 + offset, 4210752);
     }
 
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(final PoseStack matrixStack, float partialTicks, final int mouseX,
+            final int mouseY) {
         /* Fixes partial ticks to use percentage from 0 to 1 */
         partialTicks = Minecraft.getInstance().getFrameTime();
 
-        int startX = this.leftPos;
-        int startY = this.topPos;
+        final int startX = this.leftPos;
+        final int startY = this.topPos;
 
         RenderSystem.enableBlend();
 
         /* Draw unselected tabs */
         for (int i = 0; i < this.tabs.size(); i++) {
-            Tab tab = this.tabs.get(i);
+            final Tab tab = this.tabs.get(i);
             if (tab != this.currentTab) {
 
-                RenderSystem.setShaderTexture(0, GUI_BASE);
+                RenderSystem.setShaderTexture(0, WorkbenchScreen.GUI_BASE);
                 this.blit(matrixStack, startX + 28 * i, startY - 28, 80, 184, 28, 32);
                 Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(tab.getIcon(),
                         startX + 28 * i + 6, startY - 28 + 8);
@@ -396,17 +403,17 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             }
         }
 
-        RenderSystem.setShaderTexture(0, GUI_BASE);
+        RenderSystem.setShaderTexture(0, WorkbenchScreen.GUI_BASE);
         this.blit(matrixStack, startX, startY, 0, 0, 173, 184);
-        blit(matrixStack, startX + 173, startY, 78, 184, 173, 0, 1, 184, 256, 256);
+        GuiComponent.blit(matrixStack, startX + 173, startY, 78, 184, 173, 0, 1, 184, 256, 256);
         this.blit(matrixStack, startX + 251, startY, 174, 0, 24, 184);
         this.blit(matrixStack, startX + 172, startY + 16, 198, 0, 20, 20);
 
         /* Draw selected tab */
         if (this.currentTab != null) {
-            int i = this.tabs.indexOf(this.currentTab);
-            int u = i == 0 ? 80 : 108;
-            RenderSystem.setShaderTexture(0, GUI_BASE);
+            final int i = this.tabs.indexOf(this.currentTab);
+            final int u = i == 0 ? 80 : 108;
+            RenderSystem.setShaderTexture(0, WorkbenchScreen.GUI_BASE);
             this.blit(matrixStack, startX + 28 * i, startY - 28, u, 214, 28, 32);
             Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(
                     this.currentTab.getIcon(), startX + 28 * i + 6, startY - 28 + 8);
@@ -414,16 +421,16 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
                     this.currentTab.getIcon(), startX + 28 * i + 6, startY - 28 + 8, null);
         }
 
-        RenderSystem.setShaderTexture(0, GUI_BASE);
+        RenderSystem.setShaderTexture(0, WorkbenchScreen.GUI_BASE);
 
         if (this.workbench.getItem(0).isEmpty()) {
             this.blit(matrixStack, startX + 174, startY + 18, 165, 199, 16, 16);
         }
 
-        ItemStack currentItem = this.displayStack;
+        final ItemStack currentItem = this.displayStack;
         if (currentItem == null)
             return;
-        StringBuilder builder = new StringBuilder(currentItem.getHoverName().getString());
+        final StringBuilder builder = new StringBuilder(currentItem.getHoverName().getString());
         if (currentItem.getCount() > 1) {
             builder.append(ChatFormatting.GOLD);
             builder.append(ChatFormatting.BOLD);
@@ -436,7 +443,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         RenderUtil.scissor(startX + 8, startY + 17, 160, 70);
 
-        PoseStack modelViewStack = RenderSystem.getModelViewStack();
+        final PoseStack modelViewStack = RenderSystem.getModelViewStack();
         modelViewStack.pushPose();
         {
             modelViewStack.translate(startX + 88, startY + 60, 100);
@@ -445,18 +452,17 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             modelViewStack.mulPose(Vector3f.YP
                     .rotationDegrees(Minecraft.getInstance().player.tickCount + partialTicks));
             RenderSystem.applyModelViewMatrix();
-            MultiBufferSource.BufferSource buffer = this.minecraft.renderBuffers().bufferSource();
+            final MultiBufferSource.BufferSource buffer =
+                    this.minecraft.renderBuffers().bufferSource();
             if (OverrideModelManager.hasModel(currentItem)
-                    && currentItem.getItem() instanceof ScopeItem
-                    || currentItem.getItem() instanceof OldScopeItem
-                    || currentItem.getItem() instanceof PistolScopeItem) {
+                    && currentItem.getItem() instanceof ScopeItem) {
                 matrixStack.scale(2, 2, 2);
                 GunRenderingHandler.get().renderScope(this.minecraft.player, currentItem,
                         ItemTransforms.TransformType.HEAD, matrixStack, buffer, 15728880, 0F); // GROUND, matrixStack,
                                                                                                                                                                          // buffer, 15728880, 0F);
                 matrixStack.scale(0.5f, 0.5f, 0.5f);
             } else if (currentItem.getItem() instanceof GunItem) {
-                matrixStack.translate(0, posDelta, 0);
+                matrixStack.translate(0, this.posDelta, 0);
                 GunRenderingHandler.get().renderWeapon(this.minecraft.player, currentItem,
                         ItemTransforms.TransformType.FIXED, matrixStack, buffer, 15728880, 0F);
                 // TransformType.GROUND with 2x size will block out the text above it.
@@ -474,9 +480,9 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         this.filteredMaterials = this.getMaterials();
         for (int i = 0; i < this.filteredMaterials.size(); i++) {
 
-            RenderSystem.setShaderTexture(0, GUI_BASE);
+            RenderSystem.setShaderTexture(0, WorkbenchScreen.GUI_BASE);
 
-            MaterialItem materialItem = this.filteredMaterials.get(i);
+            final MaterialItem materialItem = this.filteredMaterials.get(i);
             ItemStack stack = materialItem.stack;
             if (!stack.isEmpty()) {
                 Lighting.setupForFlatItems();
@@ -497,7 +503,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
                         startX + 172 + 2, startY + i * 19 + 1 + 63);
 
                 if (this.checkBoxMaterials.isToggled()) {
-                    int count =
+                    final int count =
                             InventoryUtil.getItemStackAmount(Minecraft.getInstance().player, stack);
                     stack = stack.copy();
                     stack.setCount(stack.getCount() - count);
@@ -516,8 +522,8 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
     }
 
     private List<MaterialItem> getMaterials() {
-        List<MaterialItem> materials = NonNullList.withSize(6, new MaterialItem());
-        List<MaterialItem> filteredMaterials = this.materials.stream()
+        final List<MaterialItem> materials = NonNullList.withSize(6, new MaterialItem());
+        final List<MaterialItem> filteredMaterials = this.materials.stream()
                 .filter(materialItem -> this.checkBoxMaterials.isToggled()
                         ? !materialItem.isEnabled()
                         : !materialItem.stack.isEmpty())
@@ -550,7 +556,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             this.count = 0;
         }
 
-        private MaterialItem(Ingredient ingredient, int count) {
+        private MaterialItem(final Ingredient ingredient, final int count) {
             this.ingredient = ingredient;
             this.matchingstacks = ingredient.getItems();
             this.stack = this.matchingstacks[0];
@@ -558,7 +564,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         }
 
         public ItemStack getStack() {
-            return stack;
+            return this.stack;
         }
 
         public void update() {
@@ -588,7 +594,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         private final List<WorkbenchRecipe> items;
         private int currentIndex;
 
-        public Tab(ItemStack icon, String id, List<WorkbenchRecipe> items) {
+        public Tab(final ItemStack icon, final String id, final List<WorkbenchRecipe> items) {
             this.icon = icon;
             this.id = id;
             this.items = items;
@@ -602,7 +608,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
             return "gui.tac.workbench.tab." + this.id;
         }
 
-        public void setCurrentIndex(int currentIndex) {
+        public void setCurrentIndex(final int currentIndex) {
             this.currentIndex = currentIndex;
         }
 

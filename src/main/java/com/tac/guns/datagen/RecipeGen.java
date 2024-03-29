@@ -1,8 +1,11 @@
 package com.tac.guns.datagen;
 
+import java.util.function.Consumer;
+
 import com.tac.guns.crafting.WorkbenchRecipeBuilder;
 import com.tac.guns.init.ModBlocks;
 import com.tac.guns.init.ModItems;
+
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -10,16 +13,14 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 
-import java.util.function.Consumer;
-
 // @OnlyIn(Dist.DEDICATED_SERVER)
 public class RecipeGen extends RecipeProvider {
-    public RecipeGen(DataGenerator generator) {
+    public RecipeGen(final DataGenerator generator) {
         super(generator);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(final Consumer<FinishedRecipe> consumer) {
         // Dye Item
         /*
          * if(Thread.currentThread().getThreadGroup() != SidedThreadGroups.SERVER)
@@ -59,12 +60,14 @@ public class RecipeGen extends RecipeProvider {
         ShapedRecipeBuilder.shaped(ModBlocks.WORKBENCH.get()).pattern("###").pattern("iIi")
                 .pattern("i i").define('#', ItemTags.LOGS)
                 .define('I', Tags.Items.STORAGE_BLOCKS_IRON).define('i', Tags.Items.INGOTS_IRON)
-                .unlockedBy("has_iron", has(Tags.Items.STORAGE_BLOCKS_IRON)).save(consumer);
+                .unlockedBy("has_iron", RecipeProvider.has(Tags.Items.STORAGE_BLOCKS_IRON))
+                .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.LIGHT_ARMOR_REPAIR_PLATE.get()).pattern("# #")
                 .pattern("III").pattern("iIi").define('#', Tags.Items.LEATHER)
                 .define('I', Tags.Items.NUGGETS_IRON).define('i', Tags.Items.INGOTS_IRON)
-                .unlockedBy("has_iron", has(Tags.Items.STORAGE_BLOCKS_IRON)).save(consumer);
+                .unlockedBy("has_iron", RecipeProvider.has(Tags.Items.STORAGE_BLOCKS_IRON))
+                .save(consumer);
         /*
          * ShapedRecipeBuilder.shaped(ModItems.LIGHT_ARMOR.get())
          * .pattern("# #")
@@ -89,7 +92,8 @@ public class RecipeGen extends RecipeProvider {
                 .pattern("GDG").define('#', Tags.Items.GLASS)
                 .define('I', Tags.Items.STORAGE_BLOCKS_IRON).define('D', Tags.Items.GEMS_DIAMOND)
                 .define('G', Tags.Items.INGOTS_GOLD)
-                .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).save(consumer);
+                .unlockedBy("has_diamond", RecipeProvider.has(Tags.Items.GEMS_DIAMOND))
+                .save(consumer);
 
         // Gun
         WorkbenchRecipeBuilder.workbenchRecipe(ModItems.AI_AWP.get())
@@ -353,14 +357,6 @@ public class RecipeGen extends RecipeProvider {
                 .addIngredient(Tags.Items.INGOTS_IRON, 16)
                 .addIngredient(Tags.Items.GLASS_PANES_COLORLESS, 12)
                 .addIngredient(Tags.Items.STORAGE_BLOCKS_REDSTONE, 2).build(consumer);
-
-        WorkbenchRecipeBuilder.workbenchRecipe(ModItems.OLD_LONGRANGE_4x_SCOPE.get())
-                .addIngredient(Tags.Items.INGOTS_IRON, 20)
-                .addIngredient(Tags.Items.GLASS_PANES_COLORLESS, 32).build(consumer);
-
-        WorkbenchRecipeBuilder.workbenchRecipe(ModItems.OLD_LONGRANGE_8x_SCOPE.get())
-                .addIngredient(Tags.Items.INGOTS_IRON, 24)
-                .addIngredient(Tags.Items.GLASS_PANES_COLORLESS, 48).build(consumer);
 
         WorkbenchRecipeBuilder.workbenchRecipe(ModItems.QMK152.get())
                 .addIngredient(Tags.Items.INGOTS_IRON, 24)
