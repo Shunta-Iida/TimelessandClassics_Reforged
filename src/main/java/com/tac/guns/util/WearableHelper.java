@@ -1,12 +1,13 @@
 package com.tac.guns.util;
 
 import com.tac.guns.GunMod;
-import com.tac.guns.common.Rig;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.entity.ProjectileEntity;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageGunSound;
+import com.tac.guns.weapon.Rig;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;

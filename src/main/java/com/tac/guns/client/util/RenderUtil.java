@@ -6,11 +6,12 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
-import com.tac.guns.common.Gun;
-import com.tac.guns.item.IrDeviceItem;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.SideRailItem;
-import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.attachment.IrDeviceItem;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.attachment.SideRailItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;

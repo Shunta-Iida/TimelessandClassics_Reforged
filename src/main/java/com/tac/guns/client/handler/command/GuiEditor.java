@@ -3,8 +3,9 @@ package com.tac.guns.client.handler.command;
 import com.google.gson.GsonBuilder;
 import com.tac.guns.Config;
 import com.tac.guns.client.Keys;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
+import com.tac.guns.weapon.Gun;
+
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -29,7 +30,8 @@ public class GuiEditor {
         return instance;
     }
 
-    private GuiEditor() {}
+    private GuiEditor() {
+    }
 
     public int currElement = 0;
     private HashMap<Integer, GUI_Element> elements = new HashMap<>();

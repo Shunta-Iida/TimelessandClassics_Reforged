@@ -5,11 +5,11 @@ import java.util.Random;
 import java.util.WeakHashMap;
 
 import com.tac.guns.Config;
-import com.tac.guns.common.Gun;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.util.GunEnchantmentHelper;
 import com.tac.guns.util.GunModifierHelper;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;

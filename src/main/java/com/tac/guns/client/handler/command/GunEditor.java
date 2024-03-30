@@ -12,10 +12,10 @@ import com.google.gson.GsonBuilder;
 import com.tac.guns.Config;
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

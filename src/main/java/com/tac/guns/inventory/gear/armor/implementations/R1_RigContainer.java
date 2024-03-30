@@ -2,7 +2,8 @@ package com.tac.guns.inventory.gear.armor.implementations;
 
 import com.tac.guns.init.ModContainers;
 import com.tac.guns.inventory.gear.armor.*;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

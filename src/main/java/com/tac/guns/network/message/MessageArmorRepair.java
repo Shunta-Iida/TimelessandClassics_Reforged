@@ -6,7 +6,8 @@ import com.tac.guns.GunMod;
 import com.tac.guns.common.network.ServerPlayHandler;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -17,10 +18,12 @@ import org.apache.logging.log4j.Level;
 import java.util.function.Supplier;
 
 public class MessageArmorRepair extends PlayMessage<MessageArmorRepair> {
-    public MessageArmorRepair() {}
+    public MessageArmorRepair() {
+    }
 
     @Override
-    public void encode(MessageArmorRepair messageColorBench, FriendlyByteBuf buffer) {}
+    public void encode(MessageArmorRepair messageColorBench, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageArmorRepair decode(FriendlyByteBuf buffer) {

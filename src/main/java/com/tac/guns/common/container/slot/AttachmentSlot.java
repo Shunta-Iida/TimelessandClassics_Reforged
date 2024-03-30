@@ -1,13 +1,13 @@
 package com.tac.guns.common.container.slot;
 
 import com.mrcrayfish.framework.common.data.SyncedEntityData;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.container.AttachmentContainer;
 import com.tac.guns.init.ModSounds;
 import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.item.IEasyColor;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;

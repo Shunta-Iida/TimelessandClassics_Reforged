@@ -17,9 +17,9 @@ import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.render.model.internal.TacGunComponents;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.common.Gun;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -15,7 +15,7 @@ import com.tac.guns.client.render.crosshair.Crosshair;
 import com.tac.guns.client.render.crosshair.DynamicScalingTexturedCrosshair;
 import com.tac.guns.client.render.crosshair.TechCrosshair;
 import com.tac.guns.client.render.crosshair.TexturedCrosshair;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;

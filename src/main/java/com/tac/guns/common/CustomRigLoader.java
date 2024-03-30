@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.annotation.Validator;
+import com.tac.guns.weapon.customs.CustomRig;
+
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

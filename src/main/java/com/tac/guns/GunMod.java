@@ -47,7 +47,7 @@ import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.init.ModTileEntities;
 import com.tac.guns.inventory.gear.IWearableItemHandler;
 import com.tac.guns.inventory.gear.armor.IAmmoItemHandler;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 
 import net.minecraft.client.Minecraft;

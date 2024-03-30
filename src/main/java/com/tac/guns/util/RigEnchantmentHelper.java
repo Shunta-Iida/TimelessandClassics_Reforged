@@ -1,8 +1,9 @@
 package com.tac.guns.util;
 
-import com.tac.guns.common.Gun;
-import com.tac.guns.common.Rig;
 import com.tac.guns.init.ModEnchantments;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.Rig;
+
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;

@@ -1,6 +1,7 @@
 package com.tac.guns.inventory.gear;
 
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

@@ -9,8 +9,11 @@ import com.mrcrayfish.framework.api.data.login.ILoginData;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.annotation.Validator;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
 import com.tac.guns.network.message.MessageUpdateRigs;
+import com.tac.guns.weapon.Rig;
+import com.tac.guns.weapon.customs.CustomRig;
+
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

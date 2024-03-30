@@ -14,10 +14,10 @@ import com.tac.guns.Config;
 import com.tac.guns.Reference;
 import com.tac.guns.client.Keys;
 import com.tac.guns.client.handler.command.data.ScopeData;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
-import com.tac.guns.item.attachment.impl.Scope;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.impl.Scope;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

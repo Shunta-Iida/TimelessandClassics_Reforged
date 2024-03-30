@@ -1,7 +1,7 @@
 package com.tac.guns.common.container.slot;
 
 import com.tac.guns.common.container.ColorBenchContainer;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

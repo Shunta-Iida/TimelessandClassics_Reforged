@@ -1,9 +1,9 @@
 package com.tac.guns.interfaces;
 
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.ProjectileManager;
 import com.tac.guns.entity.ProjectileEntity;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

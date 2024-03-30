@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 
 import net.minecraft.network.FriendlyByteBuf;

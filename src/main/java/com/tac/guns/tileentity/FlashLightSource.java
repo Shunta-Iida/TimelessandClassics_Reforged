@@ -1,8 +1,10 @@
 package com.tac.guns.tileentity;
 
 import com.tac.guns.init.ModTileEntities;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +21,7 @@ public class FlashLightSource extends BlockEntity {
         ticks++;
         if (ticks > 4) {
             blockEntity.getLevel().setBlock(blockEntity.getBlockPos(),
-                    Blocks.AIR.defaultBlockState(), 3);
+                    Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
             blockEntity.getLevel().removeBlockEntity(blockEntity.getBlockPos());
         }
     }

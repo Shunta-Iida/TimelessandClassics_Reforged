@@ -10,7 +10,7 @@ import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PumpShotgunAnimationController;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageArmorEquip;
 import com.tac.guns.network.message.MessageArmorOpenAmmoPack;

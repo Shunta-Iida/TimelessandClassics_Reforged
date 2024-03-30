@@ -1,6 +1,6 @@
 package com.tac.guns.client;
 
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.settings.IKeyConflictContext;

@@ -5,7 +5,8 @@ import com.tac.guns.inventory.gear.armor.AmmoSlot;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
 import com.tac.guns.inventory.gear.armor.IRigContainer;
 import com.tac.guns.inventory.gear.armor.RigSlotsHandler;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

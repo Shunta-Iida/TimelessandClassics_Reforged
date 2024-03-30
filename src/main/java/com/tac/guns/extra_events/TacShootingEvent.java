@@ -7,9 +7,9 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
-import com.tac.guns.common.Gun;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.KeybindComponent;
@@ -29,16 +29,16 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TacShootingEvent {
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void preShoot(GunFireEvent.Pre event) {
+    public static void preShoot(final GunFireEvent.Pre event) {
         if (!(event.getStack().getItem() instanceof GunItem))
             return;
-        HandleFireMode(event);
+        TacShootingEvent.HandleFireMode(event);
     }
 
-    private static void HandleFireMode(GunFireEvent.Pre event) {
-        ItemStack gunItem = event.getStack();
+    private static void HandleFireMode(final GunFireEvent.Pre event) {
+        final ItemStack gunItem = event.getStack();
         int[] gunItemFireModes = gunItem.getTag().getIntArray("supportedFireModes");
-        Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem.getTag()); // Quick patch up, will create static method for handling null supported modes
+        final Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem.getTag()); // Quick patch up, will create static method for handling null supported modes
 
         if (gunItem.getTag().get("CurrentFireMode") == null) // If user has not checked fire modes yet, default to first mode
         {
@@ -49,7 +49,7 @@ public class TacShootingEvent {
             gunItem.getTag().putInt("CurrentFireMode", gunItemFireModes[0]);
         }
 
-        int currentFireMode = gunItem.getTag().getInt("CurrentFireMode");
+        final int currentFireMode = gunItem.getTag().getInt("CurrentFireMode");
         if (currentFireMode == 0) {
             if (!Config.COMMON.gameplay.safetyExistence.get()) {
                 gunItem.getTag().remove("CurrentFireMode");
@@ -66,7 +66,7 @@ public class TacShootingEvent {
                 event.setCanceled(true);
             }
 
-            ResourceLocation fireModeSound = gun.getSounds().getCock(); // Use cocking sound for now
+            final ResourceLocation fireModeSound = gun.getSounds().getCock(); // Use cocking sound for now
             if (fireModeSound != null && event.getPlayer().isAlive()) {
                 event.getPlayer().playSound(new SoundEvent(fireModeSound), 1.0F, 1.0F);
             }

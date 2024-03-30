@@ -2,7 +2,8 @@ package com.tac.guns.network.message;
 
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.duck.PlayerWithSynData;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -13,7 +14,8 @@ import java.util.function.Supplier;
 
 public class MessageArmorEquip extends PlayMessage<MessageArmorEquip> {
     @Override
-    public void encode(MessageArmorEquip messageArmorEquip, FriendlyByteBuf friendlyByteBuf) {}
+    public void encode(MessageArmorEquip messageArmorEquip, FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public MessageArmorEquip decode(FriendlyByteBuf friendlyByteBuf) {

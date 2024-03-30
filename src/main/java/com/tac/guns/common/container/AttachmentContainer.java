@@ -2,18 +2,18 @@ package com.tac.guns.common.container;
 
 import java.util.ArrayDeque;
 
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.container.slot.AttachmentSlot;
 import com.tac.guns.init.ModContainers;
-import com.tac.guns.item.AttachmentItem;
 import com.tac.guns.item.IEasyColor;
-import com.tac.guns.item.PistolBarrelItem;
-import com.tac.guns.item.PistolScopeItem;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.SideRailItem;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
-import com.tac.guns.item.transition.TimelessPistolGunItem;
+import com.tac.guns.item.attachment.AttachmentItem;
+import com.tac.guns.item.attachment.PistolBarrelItem;
+import com.tac.guns.item.attachment.PistolScopeItem;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.attachment.SideRailItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.TimelessPistolGunItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;

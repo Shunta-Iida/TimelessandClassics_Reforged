@@ -2,8 +2,9 @@ package com.tac.guns.network.message;
 
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.client.network.ClientPlayHandler;
-import com.tac.guns.common.Gun;
 import com.tac.guns.entity.ProjectileEntity;
+import com.tac.guns.weapon.Gun;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +30,8 @@ public class MessageBulletTrail extends PlayMessage<MessageBulletTrail> {
     private int shooterId;
     private float size;
 
-    public MessageBulletTrail() {}
+    public MessageBulletTrail() {
+    }
 
     public MessageBulletTrail(ProjectileEntity[] spawnedProjectiles, Gun.Projectile projectileProps,
             int shooterId, float size) {

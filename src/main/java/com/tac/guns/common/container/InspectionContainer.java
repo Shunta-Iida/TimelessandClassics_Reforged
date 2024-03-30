@@ -1,8 +1,9 @@
 package com.tac.guns.common.container;
 
-import com.tac.guns.common.Gun;
 import com.tac.guns.init.ModContainers;
-import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
+
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

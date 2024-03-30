@@ -1,7 +1,7 @@
 package com.tac.guns.interfaces;
 
 import com.tac.guns.common.GunModifiers;
-import com.tac.guns.item.attachment.impl.Barrel;
+import com.tac.guns.weapon.attachment.impl.Barrel;
 
 /**
  * An interface that allows control over the behaviour of weapons through

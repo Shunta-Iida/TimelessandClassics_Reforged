@@ -1,7 +1,11 @@
 package com.tac.guns.crafting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tac.guns.init.ModRecipeSerializers;
 import com.tac.guns.item.IColored;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -11,24 +15,21 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class DyeItemRecipe extends CustomRecipe {
-    public DyeItemRecipe(ResourceLocation id) {
+    public DyeItemRecipe(final ResourceLocation id) {
         super(id);
     }
 
     @Override
-    public boolean matches(CraftingContainer inventory, Level worldIn) {
+    public boolean matches(final CraftingContainer inventory, final Level worldIn) {
         ItemStack item = ItemStack.EMPTY;
-        List<ItemStack> dyes = new ArrayList<>();
+        final List<ItemStack> dyes = new ArrayList<>();
 
         for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            ItemStack stack = inventory.getItem(i);
+            final ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IColored) {
                     if (!item.isEmpty()) {
@@ -48,12 +49,12 @@ public class DyeItemRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inventory) {
+    public ItemStack assemble(final CraftingContainer inventory) {
         ItemStack item = ItemStack.EMPTY;
-        List<DyeItem> dyes = new ArrayList<>();
+        final List<DyeItem> dyes = new ArrayList<>();
 
         for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            ItemStack stack = inventory.getItem(i);
+            final ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IColored) {
                     if (!item.isEmpty()) {
@@ -61,10 +62,10 @@ public class DyeItemRecipe extends CustomRecipe {
                     }
                     item = stack.copy();
                 } else {
-                    if (!(stack.getItem() instanceof DyeItem)) {
+                    if (!(stack.getItem() instanceof final DyeItem dye)) {
                         return ItemStack.EMPTY;
                     }
-                    dyes.add((DyeItem) stack.getItem());
+                    dyes.add(dye);
                 }
             }
         }
@@ -73,7 +74,7 @@ public class DyeItemRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
+    public boolean canCraftInDimensions(final int width, final int height) {
         return width * height >= 2;
     }
 
@@ -88,11 +89,11 @@ public class DyeItemRecipe extends CustomRecipe {
     }
 
     @Override
-    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inventory) {
-        NonNullList<ItemStack> remainingItems =
+    public NonNullList<ItemStack> getRemainingItems(final CraftingContainer inventory) {
+        final NonNullList<ItemStack> remainingItems =
                 NonNullList.withSize(inventory.getContainerSize(), ItemStack.EMPTY);
         for (int i = 0; i < remainingItems.size(); ++i) {
-            ItemStack stack = inventory.getItem(i);
+            final ItemStack stack = inventory.getItem(i);
             remainingItems.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(stack));
         }
         return remainingItems;

@@ -15,9 +15,10 @@ import com.tac.guns.client.handler.command.ScopeEditor;
 import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.attachment.IAttachment;
+import com.tac.guns.item.attachment.ScopeItem;
 import com.tac.guns.util.OptifineHelper;
+import com.tac.guns.weapon.attachment.IAttachment;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

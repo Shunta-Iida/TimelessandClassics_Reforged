@@ -12,8 +12,8 @@ import com.google.gson.GsonBuilder;
 import com.tac.guns.Config;
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.tooling.CommandsHandler;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.InputEvent;
@@ -30,7 +30,8 @@ public class ObjectRenderEditor {
         return ObjectRenderEditor.instance;
     }
 
-    private ObjectRenderEditor() {}
+    private ObjectRenderEditor() {
+    }
 
     public int currElement = 0;
     private final HashMap<Integer, RENDER_Element> elements = new HashMap<>();

@@ -1,9 +1,9 @@
 package com.tac.guns.util;
 
-import com.tac.guns.common.Gun;
 import com.tac.guns.interfaces.IGunModifier;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;

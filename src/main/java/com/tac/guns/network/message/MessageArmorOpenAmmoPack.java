@@ -6,7 +6,8 @@ import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
 import com.tac.guns.inventory.gear.armor.ArmorRigContainerProvider;
 import com.tac.guns.inventory.gear.armor.RigSlotsHandler;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +19,8 @@ import java.util.function.Supplier;
 public class MessageArmorOpenAmmoPack extends PlayMessage<MessageArmorOpenAmmoPack> {
     @Override
     public void encode(MessageArmorOpenAmmoPack messageArmorOpenAmmoPack,
-            FriendlyByteBuf friendlyByteBuf) {}
+            FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public MessageArmorOpenAmmoPack decode(FriendlyByteBuf friendlyByteBuf) {

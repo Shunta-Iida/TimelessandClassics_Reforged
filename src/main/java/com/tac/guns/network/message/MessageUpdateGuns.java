@@ -3,10 +3,11 @@ package com.tac.guns.network.message;
 import com.google.common.collect.ImmutableMap;
 import com.mrcrayfish.framework.api.network.PlayMessage;
 import com.tac.guns.client.network.ClientPlayHandler;
-import com.tac.guns.common.CustomGun;
 import com.tac.guns.common.CustomGunLoader;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.NetworkGunManager;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.customs.CustomGun;
+
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;
@@ -22,7 +23,8 @@ public class MessageUpdateGuns extends PlayMessage<MessageUpdateGuns>
     private ImmutableMap<ResourceLocation, Gun> registeredGuns;
     private ImmutableMap<ResourceLocation, CustomGun> customGuns;
 
-    public MessageUpdateGuns() {}
+    public MessageUpdateGuns() {
+    }
 
     public MessageUpdateGuns(ImmutableMap<ResourceLocation, Gun> readRegisteredGuns,
             ImmutableMap<ResourceLocation, CustomGun> readCustomGuns) {

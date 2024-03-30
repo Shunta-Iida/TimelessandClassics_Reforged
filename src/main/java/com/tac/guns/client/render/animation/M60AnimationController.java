@@ -2,8 +2,9 @@ package com.tac.guns.client.render.animation;
 
 import com.tac.guns.GunMod;
 import com.tac.guns.client.render.animation.module.*;
-import com.tac.guns.common.Gun;
 import com.tac.guns.init.ModItems;
+import com.tac.guns.weapon.Gun;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;

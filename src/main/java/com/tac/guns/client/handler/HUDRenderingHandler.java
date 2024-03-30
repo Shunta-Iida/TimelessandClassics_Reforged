@@ -18,11 +18,11 @@ import com.mojang.math.Matrix4f;
 import com.tac.guns.Config;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.ReloadTracker;
 import com.tac.guns.duck.PlayerWithSynData;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.util.WearableHelper;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

@@ -8,8 +8,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.gun.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

@@ -9,9 +9,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.AttachmentContainer;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

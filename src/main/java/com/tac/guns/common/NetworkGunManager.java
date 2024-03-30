@@ -28,9 +28,10 @@ import com.mrcrayfish.framework.api.data.login.ILoginData;
 import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.annotation.Validator;
-import com.tac.guns.common.NetworkGunManager.Supplier;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.message.MessageUpdateGuns;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.customs.CustomGun;
 
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;

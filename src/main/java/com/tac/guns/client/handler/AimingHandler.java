@@ -7,15 +7,15 @@ import com.tac.guns.client.Keys;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.crosshair.Crosshair;
 import com.tac.guns.common.AimingManager;
-import com.tac.guns.common.Gun;
 import com.tac.guns.duck.MouseSensitivityModifier;
 import com.tac.guns.init.ModBlocks;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.attachment.impl.Scope;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAim;
 import com.tac.guns.util.math.MathUtil;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.impl.Scope;
 
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;

@@ -3,8 +3,8 @@ package com.tac.guns.client;
 import java.util.Map;
 
 import com.tac.guns.Reference;
-import com.tac.guns.common.CustomGun;
 import com.tac.guns.common.NetworkGunManager;
+import com.tac.guns.weapon.customs.CustomGun;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -37,17 +37,17 @@ public class CustomGunManager {
          * "." + id.getPath() + ".name"));
          * CompoundNBT tag = stack.getOrCreateTag();
          *//*
-                  * tag.put("Model", gun.getModel().serializeNBT());
-                  * tag.put("Gun", gun.getGun().serializeNBT());
-                  * tag.putBoolean("Custom", true);
-                  * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
-                  * tag.putIntArray("supportedFireModes",
-                  * gun.getGun().getGeneral().getRateSelector());
-                  *//*
-                           * items.add(stack);
-                           * });
-                           * }
-                           */
+                   * tag.put("Model", gun.getModel().serializeNBT());
+                   * tag.put("Gun", gun.getGun().serializeNBT());
+                   * tag.putBoolean("Custom", true);
+                   * tag.putInt("AmmoCount", gun.getGun().getReloads().getMaxAmmo());
+                   * tag.putIntArray("supportedFireModes",
+                   * gun.getGun().getGeneral().getRateSelector());
+                   *//*
+                             * items.add(stack);
+                             * });
+                             * }
+                             */
     }
 
     @SubscribeEvent

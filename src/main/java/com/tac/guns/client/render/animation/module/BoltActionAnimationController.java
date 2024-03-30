@@ -1,7 +1,7 @@
 package com.tac.guns.client.render.animation.module;
 
-import com.tac.guns.common.Gun;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.world.item.Item;
 

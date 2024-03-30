@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Level;
 import com.mrcrayfish.framework.common.data.SyncedEntityData;
 import com.tac.guns.GunMod;
 import com.tac.guns.client.Keys;
-import com.tac.guns.common.Rig;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageArmorRepair;
 import com.tac.guns.util.WearableHelper;
+import com.tac.guns.weapon.Rig;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;

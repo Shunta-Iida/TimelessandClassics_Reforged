@@ -6,10 +6,10 @@ import java.util.Map;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
-import com.tac.guns.common.Gun;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAnimationRun;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

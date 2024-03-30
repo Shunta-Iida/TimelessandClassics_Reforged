@@ -3,7 +3,8 @@ package com.tac.guns.inventory.gear.armor;
 import com.tac.guns.GunMod;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.inventory.gear.armor.implementations.*;
-import com.tac.guns.item.transition.wearables.ArmorRigItem;
+import com.tac.guns.item.wearable.ArmorRigItem;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;

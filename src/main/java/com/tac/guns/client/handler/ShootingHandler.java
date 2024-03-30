@@ -5,16 +5,16 @@ import static net.minecraftforge.event.TickEvent.Type.RENDER;
 import com.tac.guns.Config;
 import com.tac.guns.client.Keys;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
-import com.tac.guns.common.Gun;
 import com.tac.guns.duck.CurrentFpsGetter;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageEmptyMag;
 import com.tac.guns.network.message.MessageShoot;
 import com.tac.guns.network.message.MessageShooting;
 import com.tac.guns.network.message.MessageUpdateMoveInacc;
 import com.tac.guns.util.GunModifierHelper;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

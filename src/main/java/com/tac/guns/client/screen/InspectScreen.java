@@ -11,7 +11,7 @@ import com.mojang.math.Vector3f;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.InspectionContainer;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -138,22 +138,22 @@ public class InspectScreen extends AbstractContainerScreen<InspectionContainer> 
          * this.blit(matrixStack, left, top, 0, 0, this.imageWidth, this.imageHeight);
          * 
          *//*
-                    * Draws the icons for each attachment slot. If not applicable
-                    * for the weapon, it will draw a cross instead.
-                    *//*
-                               * for(int i = 0; i < IAttachment.Type.values().length; i++)
-                               * {
-                               * if(!this.menu.getSlot(i).isActive())
-                               * {
-                               * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 0, 16, 16);
-                               * }
-                               * else if(this.weaponInventory.getItem(i).isEmpty())
-                               * {
-                               * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 16 + i * 16, 16,
-                               * 16);
-                               * }
-                               * }
-                               */
+                     * Draws the icons for each attachment slot. If not applicable
+                     * for the weapon, it will draw a cross instead.
+                     *//*
+                                 * for(int i = 0; i < IAttachment.Type.values().length; i++)
+                                 * {
+                                 * if(!this.menu.getSlot(i).isActive())
+                                 * {
+                                 * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 0, 16, 16);
+                                 * }
+                                 * else if(this.weaponInventory.getItem(i).isEmpty())
+                                 * {
+                                 * this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 16 + i * 16, 16,
+                                 * 16);
+                                 * }
+                                 * }
+                                 */
     }
 
     @Override

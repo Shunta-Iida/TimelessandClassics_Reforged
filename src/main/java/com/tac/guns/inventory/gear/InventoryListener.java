@@ -4,7 +4,8 @@ import com.mojang.logging.LogUtils;
 import com.tac.guns.Reference;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
 import com.tac.guns.inventory.gear.armor.IAmmoItemHandler;
-import com.tac.guns.item.transition.wearables.IArmoredRigItem;
+import com.tac.guns.item.wearable.IArmoredRigItem;
+
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

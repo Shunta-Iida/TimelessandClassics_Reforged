@@ -11,9 +11,9 @@ import com.tac.guns.client.handler.AimingHandler;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
-import com.tac.guns.item.transition.TimelessPistolGunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.TimelessPistolGunItem;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;

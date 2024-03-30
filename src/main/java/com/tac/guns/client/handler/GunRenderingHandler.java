@@ -34,20 +34,13 @@ import com.tac.guns.client.render.animation.module.PistalAnimationController;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.render.model.OverrideModelManager;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.common.Gun;
 import com.tac.guns.common.network.ServerPlayHandler;
 import com.tac.guns.common.tooling.CommandsHandler;
 import com.tac.guns.event.GunFireEvent;
-import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
-import com.tac.guns.item.GrenadeItem;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.attachment.IBarrel;
-import com.tac.guns.item.attachment.impl.Barrel;
-import com.tac.guns.item.attachment.impl.Scope;
-import com.tac.guns.item.transition.GunItem;
-import com.tac.guns.item.transition.ITimelessAnimated;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.grenade.GrenadeItem;
+import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessagePlayerShake;
 import com.tac.guns.util.GunModifierHelper;
@@ -56,6 +49,11 @@ import com.tac.guns.util.OptifineHelper;
 import com.tac.guns.util.math.MathUtil;
 import com.tac.guns.util.math.OneDimensionalPerlinNoise;
 import com.tac.guns.util.math.SecondOrderDynamics;
+import com.tac.guns.weapon.Gun;
+import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IBarrel;
+import com.tac.guns.weapon.attachment.impl.Barrel;
+import com.tac.guns.weapon.attachment.impl.Scope;
 
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -354,9 +352,6 @@ public class GunRenderingHandler {
         if (Minecraft.getInstance().player == null)
             return;
         final Item item = event.getStack().getItem();
-        if (item instanceof final ITimelessAnimated animated) {
-            animated.playAnimation("fire", event.getStack(), true);
-        }
         this.sprintTransition = 0;
         this.speedUpDistanceFrom = Minecraft.getInstance().player.walkDist;
         this.sprintCooldown = 8;
@@ -399,36 +394,28 @@ public class GunRenderingHandler {
         this.entityIdToRandomValue.put(entityId, this.random.nextFloat());
     }
 
-    @SubscribeEvent
-    public void onAnimatedGunReload(final GunReloadEvent.Pre event) {
-        final Item item = event.getStack().getItem();
-        if (item instanceof final ITimelessAnimated animated) {
-            animated.playAnimation("reload", event.getStack(), false);
-        }
-    }
-
     /*
      * @SubscribeEvent
      * public void onCameraSetup(EntityViewRenderEvent.CameraSetup event) // TEST
      * FROM CGM
      * {
      *//*
-                                    * if(!Config.CLIENT.experimental.immersiveCamera.get())
-                                    * return;
-                                    *//*
-                                                                   * 
-                                                                   * Minecraft mc = Minecraft.getInstance();
-                                                                   * if(mc.player == null)
-                                                                   * return;
-                                                                   * 
-                                                                   * ItemStack heldItem = mc.player.getHeldItemMainhand();
-                                                                   * float targetAngle = heldItem.getItem() instanceof GunItem ?
-                                                                   * mc.player.movementInput.moveStrafe * 1F: 0F;
-                                                                   * this.immersiveRoll = MathHelper.approach(this.immersiveRoll, targetAngle,
-                                                                   * 0.4F);
-                                                                   * event.setRoll(-this.immersiveRoll);
-                                                                   * }
-                                                                   */
+                                         * if(!Config.CLIENT.experimental.immersiveCamera.get())
+                                         * return;
+                                         *//*
+                                                                             * 
+                                                                             * Minecraft mc = Minecraft.getInstance();
+                                                                             * if(mc.player == null)
+                                                                             * return;
+                                                                             * 
+                                                                             * ItemStack heldItem = mc.player.getHeldItemMainhand();
+                                                                             * float targetAngle = heldItem.getItem() instanceof GunItem ?
+                                                                             * mc.player.movementInput.moveStrafe * 1F: 0F;
+                                                                             * this.immersiveRoll = MathHelper.approach(this.immersiveRoll, targetAngle,
+                                                                             * 0.4F);
+                                                                             * event.setRoll(-this.immersiveRoll);
+                                                                             * }
+                                                                             */
 
     public float immersiveWeaponRoll;
 
@@ -1610,9 +1597,6 @@ public class GunRenderingHandler {
             final ItemTransforms.TransformType transformType, final ItemStack stack,
             final PoseStack matrixStack, final MultiBufferSource renderTypeBuffer, final int light,
             final float partialTicks) {
-        if (stack.getItem() instanceof ITimelessAnimated)
-            RenderUtil.renderModel(stack, matrixStack, renderTypeBuffer, light,
-                    OverlayTexture.NO_OVERLAY, entity);
         if (OverrideModelManager.hasModel(stack)) {
             final IOverrideModel model = OverrideModelManager.getModel(stack);
             if (model != null) {

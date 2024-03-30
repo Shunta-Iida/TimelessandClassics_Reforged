@@ -42,7 +42,8 @@ public class BulletTrailRenderingHandler {
 
     private final Map<Integer, BulletTrail> bullets = new HashMap<>();
 
-    private BulletTrailRenderingHandler() {}
+    private BulletTrailRenderingHandler() {
+    }
 
     /**
      * Adds a bullet trail to render into the world
@@ -125,8 +126,7 @@ public class BulletTrailRenderingHandler {
         final double bulletX = position.x + motion.x * partialTicks;
         final double bulletY = position.y + motion.y * partialTicks;
         final double bulletZ = position.z + motion.z * partialTicks;
-        // TODO: Use muzzle flash location of entity render as the render position for
-        // muzzle flash start
+        // TODO: Use muzzle flash location of entity render as the render position for muzzle flash start
         final Vec3 motionVec = new Vec3(motion.x, motion.y, motion.z);
         float length = (float) motionVec.length();
 
@@ -165,24 +165,10 @@ public class BulletTrailRenderingHandler {
                         (float) Math.min(trailLength + 0.6f, shooter.getEyePosition(partialTicks)
                                 .distanceTo(new Vec3(bulletX, bulletY, bulletZ)) / 1.175f);
             } else
-                trailLength = (float) Math.min(trailLength + 0.6f, shooter
-                        .getEyePosition(partialTicks)
-                        .distanceTo(new Vec3(bulletX, bulletY, bulletZ)) / 1.0975f); /// 1.1125f
-                                                                                                                                                                            /// TODO:
-                                                                                                                                                                            /// Add
-                                                                                                                                                                            /// another
-                                                                                                                                                                            /// value
-                                                                                                                                                                            /// per
-                                                                                                                                                                            /// trail
-                                                                                                                                                                            /// to
-                                                                                                                                                                            /// help
-                                                                                                                                                                            /// give
-                                                                                                                                                                            /// a
-                                                                                                                                                                            /// maximum
-                                                                                                                                                                            /// to
-                                                                                                                                                                            /// player
-                                                                                                                                                                            /// eyes
-                                                                                                                                                                            // distance
+                trailLength =
+                        (float) Math.min(trailLength + 0.6f, shooter.getEyePosition(partialTicks)
+                                .distanceTo(new Vec3(bulletX, bulletY, bulletZ)) / 1.0975f); // 1.1125f
+            // TODO: Add another value per trail to help give a maximum to player eyes distance
         }
 
         final Matrix4f matrix4f = matrixStack.last().pose();
@@ -204,8 +190,8 @@ public class BulletTrailRenderingHandler {
 
             builder.vertex(matrix4f, 0, trailLength / 1.325f, 0).color(red, green, blue, alpha)
                     .uv2(15728880).endVertex();
-            // builder.pos(matrix4f, -posSize, 0, 0).color(red, green, blue,
-            // alpha).lightmap(15728880).endVertex();
+            // builder.pos(matrix4f, -posSize, 0, 0).color(red, green, blue, alpha).lightmap(15728880)
+            //         .endVertex();
             builder.vertex(matrix4f, 0, 0, -posSize).color(red, green, blue, alpha).uv2(15728880)
                     .endVertex();
 
@@ -213,7 +199,7 @@ public class BulletTrailRenderingHandler {
             matrixStack.translate(GunRenderingHandler.get().sizeZ / 17.25f,
                     -GunRenderingHandler.get().sizeZ / 2, 0);
             // matrixStack.translate(GunRenderingHandler.get().sizeZ / 2,
-            // GunRenderingHandler.get().sizeZ / 2, 0);
+            //         GunRenderingHandler.get().sizeZ / 2, 0);
             matrixStack.translate(GunRenderingHandler.get().displayX,
                     GunRenderingHandler.get().displayY, GunRenderingHandler.get().displayZ);
             // Make customizable?
@@ -221,8 +207,8 @@ public class BulletTrailRenderingHandler {
 
             builder.vertex(matrix4f, 0, -trailLength / 1.325f, 0).color(red, green, blue, alpha)
                     .uv2(15728880).endVertex();
-            // builder.pos(matrix4f, posSize, 0, 0).color(red, green, blue,
-            // alpha).lightmap(15728880).endVertex();
+            // builder.pos(matrix4f, posSize, 0, 0).color(red, green, blue, alpha).lightmap(15728880)
+            //         .endVertex();
             builder.vertex(matrix4f, 0, 0, posSize).color(red, green, blue, alpha).uv2(15728880)
                     .endVertex();
             Minecraft.getInstance().renderBuffers().bufferSource().endBatch(bulletType);

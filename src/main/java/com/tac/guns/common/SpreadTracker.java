@@ -9,7 +9,8 @@ import org.apache.commons.lang3.mutable.MutableLong;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.tac.guns.Reference;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.Gun;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;

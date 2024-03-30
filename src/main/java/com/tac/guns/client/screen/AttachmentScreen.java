@@ -11,11 +11,11 @@ import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.AttachmentContainer;
 import com.tac.guns.item.IEasyColor;
-import com.tac.guns.item.IrDeviceItem;
-import com.tac.guns.item.ScopeItem;
-import com.tac.guns.item.SideRailItem;
-import com.tac.guns.item.attachment.IAttachment;
-import com.tac.guns.item.transition.GunItem;
+import com.tac.guns.item.attachment.IrDeviceItem;
+import com.tac.guns.item.attachment.ScopeItem;
+import com.tac.guns.item.attachment.SideRailItem;
+import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.weapon.attachment.IAttachment;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
