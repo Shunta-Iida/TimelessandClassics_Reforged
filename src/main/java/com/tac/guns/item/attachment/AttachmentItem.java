@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.tac.guns.interfaces.IGunModifier;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 import com.tac.guns.weapon.attachment.impl.Attachment;
 
 import net.minecraft.ChatFormatting;
@@ -19,7 +19,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-public abstract class AttachmentItem<T extends Attachment> extends Item implements IAttachment<T> {
+public abstract class AttachmentItem<T extends Attachment> extends Item
+        implements IAttachmentItem<T> {
     private final T attachment;
 
     public AttachmentItem(final T attachment, final Properties properties) {
@@ -28,7 +29,7 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
     }
 
     @Override
-    public T getProperties() {
+    public T getAttachment() {
         return this.attachment;
     }
 
@@ -45,9 +46,9 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
         // add the attachment type to the tooltip
         tooltip.add(new TranslatableComponent(this.getType().getTranslationKey()));
 
-        if (stack.getItem() instanceof IAttachment<?>) {
-            final IAttachment<?> attachment = (IAttachment<?>) stack.getItem();
-            final List<Component> perks = attachment.getProperties().getPerks();
+        if (stack.getItem() instanceof IAttachmentItem<?>) {
+            final IAttachmentItem<?> attachment = (IAttachmentItem<?>) stack.getItem();
+            final List<Component> perks = attachment.getAttachment().getPerks();
 
             // for classic attachments
             if (perks != null && perks.size() > 0) {
@@ -57,32 +58,30 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
                 return;
             }
 
-            final IGunModifier[] modifiers = attachment.getProperties().getModifiers();
+            final IGunModifier[] modifiers = attachment.getAttachment().getModifiers();
             final List<Component> positivePerks = new ArrayList<>();
             final List<Component> negativePerks = new ArrayList<>();
 
             /* Test for fire sound volume */
-            /*
-             * float inputSound = 1.0F;
-             * float outputSound = inputSound;
-             * for (IGunModifier modifier : modifiers) {
-             * outputSound = modifier.modifyFireSoundVolume(outputSound);
-             * }
-             * if (outputSound > inputSound) {
-             * addPerk(negativePerks, "perk.tac.fire_volume.negative", new
-             * TranslatableComponent("+" + String.valueOf((1.0F -
-             * Math.round(outputSound)) * 100) +
-             * "% Volume").withStyle(ChatFormatting.RED));
-             * } else if (outputSound < inputSound) {
-             * addPerk(negativePerks, "perk.tac.fire_volume.negative", new
-             * TranslatableComponent("" + String.valueOf((1.0F -
-             * Math.round(outputSound)) * 100) +
-             * "% Volume").withStyle(ChatFormatting.GREEN));
-             * //addPerk(positivePerks, "perk.tac.fire_volume.positive",
-             * ChatFormatting.GREEN, "-" + String.valueOf((1.0F - outputSound) * 100) +
-             * new TranslatableComponent("perk.tac.vol"));
-             * }
-             */
+
+            // float inputSound = 1.0F;
+            // float outputSound = inputSound;
+            // for (IGunModifier modifier : modifiers) {
+            //     outputSound = modifier.modifyFireSoundVolume(outputSound);
+            // }
+            // if (outputSound > inputSound) {
+            //     addPerk(negativePerks, "perk.tac.fire_volume.negative", new TranslatableComponent(
+            //             "+" + String.valueOf((1.0F - Math.round(outputSound)) * 100) + "% Volume")
+            //                     .withStyle(ChatFormatting.RED));
+            // } else if (outputSound < inputSound) {
+            //     addPerk(negativePerks, "perk.tac.fire_volume.negative", new TranslatableComponent(
+            //             "" + String.valueOf((1.0F - Math.round(outputSound)) * 100) + "% Volume")
+            //                     .withStyle(ChatFormatting.GREEN));
+            //     addPerk(positivePerks, "perk.tac.fire_volume.positive", ChatFormatting.GREEN,
+            //             "-" + String.valueOf((1.0F - outputSound) * 100)
+            //                     + new TranslatableComponent("perk.tac.vol"));
+            // }
+
 
             /* Test for silenced */
             for (final IGunModifier modifier : modifiers) {
@@ -286,7 +285,7 @@ public abstract class AttachmentItem<T extends Attachment> extends Item implemen
 
             // merge perks
             positivePerks.addAll(negativePerks);
-            attachment.getProperties().setPerks(positivePerks);
+            attachment.getAttachment().setPerks(positivePerks);
             if (positivePerks.size() > 0) {
                 tooltip.addAll(positivePerks);
             }

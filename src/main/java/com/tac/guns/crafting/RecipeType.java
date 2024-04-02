@@ -8,5 +8,6 @@ public class RecipeType {
             net.minecraft.world.item.crafting.RecipeType.register("cgm:workbench");
 
     // Does nothing but trigger loading of static fields
-    public static void init() {}
+    public static void init() {
+    }
 }

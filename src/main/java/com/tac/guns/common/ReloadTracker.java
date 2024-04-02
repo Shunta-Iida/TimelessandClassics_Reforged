@@ -11,11 +11,11 @@ import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
 import com.tac.guns.inventory.gear.armor.RigSlotsHandler;
 import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.GunItemHelper;
 import com.tac.guns.item.wearable.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageGunSound;
 import com.tac.guns.util.GunEnchantmentHelper;
-import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.WearableHelper;
 import com.tac.guns.weapon.Gun;
 
@@ -48,7 +48,7 @@ public class ReloadTracker {
         this.startTick = player.tickCount;
         this.slot = player.getInventory().selected;
         this.stack = player.getInventory().getSelected();
-        this.gun = ((GunItem) this.stack.getItem()).getModifiedGun(this.stack.getTag());
+        this.gun = ((GunItem) this.stack.getItem()).getGun(this.stack.getTag());
     }
 
     /**
@@ -68,7 +68,7 @@ public class ReloadTracker {
      */
     private boolean isWeaponFull() {
         final CompoundTag tag = this.stack.getOrCreateTag();
-        return tag.getInt("AmmoCount") >= GunModifierHelper.getAmmoCapacity(this.stack, this.gun);
+        return tag.getInt("AmmoCount") >= GunItemHelper.of(this.stack).getAmmoCapacity();
     }
 
     /**
@@ -119,7 +119,7 @@ public class ReloadTracker {
             final CompoundTag tag = this.stack.getTag();
             int amount = Math.min(ammo.getCount(), this.gun.getReloads().getReloadAmount());
             if (tag != null) {
-                final int maxAmmo = GunModifierHelper.getAmmoCapacity(this.stack, this.gun);
+                final int maxAmmo = GunItemHelper.of(this.stack).getAmmoCapacity();
                 amount = Math.min(amount, maxAmmo - tag.getInt("AmmoCount"));
                 tag.putInt("AmmoCount", tag.getInt("AmmoCount") + amount);
             }
@@ -205,10 +205,10 @@ public class ReloadTracker {
         if (ammoStacks.length > 0) {
             final CompoundTag tag = this.stack.getTag();
             final int ammoAmount = Math.min(ReloadTracker.calcMaxReserveAmmo(ammoStacks),
-                    GunModifierHelper.getAmmoCapacity(this.stack, this.gun));
+                    GunItemHelper.of(this.stack).getAmmoCapacity());
             if (tag != null) {
                 final int currentAmmo = tag.getInt("AmmoCount");
-                final int maxAmmo = GunModifierHelper.getAmmoCapacity(this.stack, this.gun);
+                final int maxAmmo = GunItemHelper.of(this.stack).getAmmoCapacity();
                 final int amount = maxAmmo - currentAmmo; // amount < maxAmmo ? maxAmmo - amount :
                 if (currentAmmo == 0 && !this.gun.getReloads().isOpenBolt()) {
                     if (ammoAmount < amount) {

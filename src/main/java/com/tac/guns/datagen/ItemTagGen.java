@@ -13,5 +13,6 @@ public class ItemTagGen extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags() {}
+    protected void addTags() {
+    }
 }

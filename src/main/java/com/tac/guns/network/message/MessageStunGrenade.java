@@ -10,7 +10,8 @@ import java.util.function.Supplier;
 public class MessageStunGrenade extends PlayMessage<MessageStunGrenade> {
     private double x, y, z;
 
-    public MessageStunGrenade() {}
+    public MessageStunGrenade() {
+    }
 
     public MessageStunGrenade(double x, double y, double z) {
         this.z = z;

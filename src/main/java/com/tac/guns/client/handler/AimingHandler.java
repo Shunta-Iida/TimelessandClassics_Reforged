@@ -222,7 +222,7 @@ public class AimingHandler {
                 final GunItem gunItem = (GunItem) heldItem.getItem();
                 if (AimingHandler.get().normalisedAdsProgress != 0 && !SyncedEntityData.instance()
                         .get(mc.player, ModSyncedDataKeys.RELOADING)) {
-                    final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
+                    final Gun modifiedGun = gunItem.getGun(heldItem.getTag());
                     if (modifiedGun.getModules().getZoom() != null) {
                         float newFov = modifiedGun.getModules().getZoom().getFovModifier();
                         final Scope scope = Gun.getScope(heldItem);
@@ -293,7 +293,7 @@ public class AimingHandler {
         if (!(heldItem.getItem() instanceof GunItem))
             return false;
 
-        final Gun gun = ((GunItem) heldItem.getItem()).getModifiedGun(heldItem.getTag());
+        final Gun gun = ((GunItem) heldItem.getItem()).getGun(heldItem.getTag());
         if (gun.getModules().getZoom() == null) {
             return false;
         }

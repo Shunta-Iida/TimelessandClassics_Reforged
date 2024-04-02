@@ -30,7 +30,8 @@ public interface IHeldAnimation {
      */
     @OnlyIn(Dist.CLIENT)
     default void applyPlayerModelRotation(final Player player, final PlayerModel<?> model,
-            final InteractionHand hand, final float aimProgress) {}
+            final InteractionHand hand, final float aimProgress) {
+    }
 
     /**
      * Allows for transformations of the player model. This is where the entire
@@ -46,7 +47,8 @@ public interface IHeldAnimation {
      */
     @OnlyIn(Dist.CLIENT)
     default void applyPlayerPreRender(final Player player, final InteractionHand hand,
-            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {}
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
+    }
 
     /**
      * Allows for transformations of the weapon before rendering. This is where
@@ -61,7 +63,8 @@ public interface IHeldAnimation {
      */
     @OnlyIn(Dist.CLIENT)
     default void applyHeldItemTransforms(final Player player, final InteractionHand hand,
-            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {}
+            final float aimProgress, final PoseStack matrixStack, final MultiBufferSource buffer) {
+    }
 
     /**
      *
@@ -75,7 +78,8 @@ public interface IHeldAnimation {
      */
     default void renderFirstPersonArms(final LocalPlayer player, final HumanoidArm hand,
             final ItemStack stack, final PoseStack matrixStack, final MultiBufferSource buffer,
-            final int light, final float partialTicks) {}
+            final int light, final float partialTicks) {
+    }
 
     /**
      *

@@ -83,7 +83,8 @@ public abstract class ThrowableItemEntity extends ThrowableProjectile
         }
     }
 
-    public void onDeath() {}
+    public void onDeath() {
+    }
 
     @Override
     protected void onHit(HitResult result) {

@@ -237,12 +237,12 @@ public class GunMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         // Do so right away, I want to make sure I hit this during Curios load
         ModBlocks.init();
+        ModItems.REGISTER.register(bus);
         ModBlocks.REGISTER.register(bus);
         ModContainers.REGISTER.register(bus);
         ModEffects.REGISTER.register(bus);
         ModEnchantments.REGISTER.register(bus);
         ModEntities.REGISTER.register(bus);
-        ModItems.REGISTER.register(bus);
         ModParticleTypes.REGISTER.register(bus);
         ModRecipeSerializers.REGISTER.register(bus);
         ModSounds.REGISTER.register(bus);

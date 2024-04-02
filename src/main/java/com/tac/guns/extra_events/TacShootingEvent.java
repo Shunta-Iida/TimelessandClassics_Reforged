@@ -38,7 +38,7 @@ public class TacShootingEvent {
     private static void HandleFireMode(final GunFireEvent.Pre event) {
         final ItemStack gunItem = event.getStack();
         int[] gunItemFireModes = gunItem.getTag().getIntArray("supportedFireModes");
-        final Gun gun = ((GunItem) gunItem.getItem()).getModifiedGun(gunItem.getTag()); // Quick patch up, will create static method for handling null supported modes
+        final Gun gun = ((GunItem) gunItem.getItem()).getGun(gunItem.getTag()); // Quick patch up, will create static method for handling null supported modes
 
         if (gunItem.getTag().get("CurrentFireMode") == null) // If user has not checked fire modes yet, default to first mode
         {

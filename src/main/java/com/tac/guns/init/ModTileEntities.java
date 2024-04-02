@@ -1,17 +1,16 @@
 package com.tac.guns.init;
 
+import java.util.function.Supplier;
+
 import com.tac.guns.Reference;
-import com.tac.guns.tileentity.FlashLightSource;
-import com.tac.guns.tileentity.UpgradeBenchTileEntity;
 import com.tac.guns.tileentity.WorkbenchTileEntity;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Supplier;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -26,9 +25,9 @@ public class ModTileEntities {
     // public static final RegistryObject<BlockEntityType<UpgradeBenchTileEntity>>
     // UPGRADE_BENCH = registers("upgrade_benchy", UpgradeBenchTileEntity::new, ()
     // -> ModBlocks.UPGRADE_BENCH.get());
-    public static final RegistryObject<BlockEntityType<FlashLightSource>> LIGHT_SOURCE =
-            register("flashlight", FlashLightSource::new,
-                    () -> new Block[] {ModBlocks.FLASHLIGHT_BLOCK.get()});
+    // public static final RegistryObject<BlockEntityType<FlashLightSource>> LIGHT_SOURCE =
+    //         register("flashlight", FlashLightSource::new,
+    //                 () -> new Block[] {ModBlocks.FLASHLIGHT_BLOCK.get()});
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registers(String id,
             BlockEntityType.BlockEntitySupplier<T> factoryIn, Supplier<Block> validBlocksSupplier) {

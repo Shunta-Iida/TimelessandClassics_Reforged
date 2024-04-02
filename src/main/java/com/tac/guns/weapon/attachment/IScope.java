@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.Scope;
  * <p>
  * Author: Ocelot
  */
-public interface IScope extends IAttachment<Scope> {
+public interface IScope extends IAttachmentItem<Scope> {
     /**
      * @return The type of this attachment
      */

@@ -31,7 +31,8 @@ public class MessagePlayerShake extends PlayMessage<MessagePlayerShake> {
 
     public float attackedAtYaw;
 
-    public MessagePlayerShake() {}
+    public MessagePlayerShake() {
+    }
 
     public MessagePlayerShake(float value) {
         this.attackedAtYaw = value;

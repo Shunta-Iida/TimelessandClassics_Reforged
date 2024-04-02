@@ -22,7 +22,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -49,18 +49,18 @@ public class mk23_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     MK23AnimationController.INDEX_BODY, transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack)
                     .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                         renderBuffer, light, overlay);
                 if (transformType.firstPerson()
                         || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                     RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                            Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                             renderBuffer, 15728880, overlay); // 15728880 For fixed max light
             }
-            if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.PISTOL_BARREL, stack)
                     .getItem() == ModItems.PISTOL_SILENCER.get()) {
                 RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices,
                         renderBuffer, light, overlay);

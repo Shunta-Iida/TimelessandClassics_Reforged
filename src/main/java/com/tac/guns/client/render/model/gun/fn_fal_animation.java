@@ -24,7 +24,7 @@ import com.tac.guns.init.ModEnchantments;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -63,9 +63,9 @@ public class fn_fal_animation extends SkinnedGunModel {
                         renderBuffer, light, overlay);
             }
 
-            if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) != ItemStack.EMPTY
-                    || Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) != ItemStack.EMPTY
-                    || Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.UNDER_BARREL, stack) != ItemStack.EMPTY
+                    || Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack) != ItemStack.EMPTY
+                    || Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE, stack)
                             .getItem() == ModItems.IR_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_EXTENDED), stack,
                         matrices, renderBuffer, light, overlay);

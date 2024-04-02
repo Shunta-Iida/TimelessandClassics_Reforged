@@ -19,7 +19,8 @@ public class MessageProjectileHitBlock extends PlayMessage<MessageProjectileHitB
     private BlockPos pos;
     private Direction face;
 
-    public MessageProjectileHitBlock() {}
+    public MessageProjectileHitBlock() {
+    }
 
     public MessageProjectileHitBlock(double x, double y, double z, BlockPos pos, Direction face) {
         this.x = x;

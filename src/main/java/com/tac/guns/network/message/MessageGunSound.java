@@ -25,7 +25,8 @@ public class MessageGunSound extends PlayMessage<MessageGunSound> {
     private boolean muzzle;
     private boolean reload;
 
-    public MessageGunSound() {}
+    public MessageGunSound() {
+    }
 
     public MessageGunSound(final ResourceLocation id, final SoundSource category, final float x,
             final float y, final float z, final float volume, final float pitch,

@@ -12,7 +12,7 @@ import com.tac.guns.client.handler.command.ScopeEditor;
 import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -109,7 +109,7 @@ public class VortexUh1SightModel implements IOverrideModel {
                 matrixStack.translate(0, 0, 0.0001);
 
                 final int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
-                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
+                        IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
                 final float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 final float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;

@@ -74,10 +74,12 @@ public interface IStorageBlock extends Container, MenuProvider {
     }
 
     @Override
-    default void startOpen(Player player) {}
+    default void startOpen(Player player) {
+    }
 
     @Override
-    default void stopOpen(Player player) {}
+    default void stopOpen(Player player) {
+    }
 
     @Override
     default boolean canPlaceItem(int index, ItemStack stack) {

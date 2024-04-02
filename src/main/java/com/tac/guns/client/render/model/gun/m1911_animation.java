@@ -17,7 +17,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -44,7 +44,7 @@ public class m1911_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     M1911AnimationController.INDEX_BODY, transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.PISTOL_BARREL, stack)
                     .getItem() == ModItems.PISTOL_SILENCER.get()) {
                 matrices.translate(0, 0, -0.0475);
                 RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices,

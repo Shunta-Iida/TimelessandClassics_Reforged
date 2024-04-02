@@ -1,5 +1,12 @@
 package com.tac.guns.client.util;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -10,7 +17,7 @@ import com.tac.guns.item.attachment.IrDeviceItem;
 import com.tac.guns.item.attachment.ScopeItem;
 import com.tac.guns.item.attachment.SideRailItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -29,18 +36,17 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.RenderProperties;
-import org.lwjgl.opengl.GL11;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
 
 public class RenderUtil {
     public static void scissor(int x, int y, int width, int height) {
@@ -275,22 +281,22 @@ public class RenderUtil {
             if (stack.getItem() instanceof SideRailItem
                     || stack.getItem() instanceof IrDeviceItem) {
                 if (quad.isTinted() && quad.getTintIndex() == 1) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_RETICLE_COLOR,
-                            quad.getTintIndex());
+                    color = getItemStackColor(stack, parent,
+                            IAttachmentItem.Type.SCOPE_RETICLE_COLOR, quad.getTintIndex());
                     keepColor = true;
                 } else if (quad.isTinted() && quad.getTintIndex() == 0) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                    color = getItemStackColor(stack, parent, IAttachmentItem.Type.SCOPE_BODY_COLOR,
                             quad.getTintIndex());
                     keepColor = true;
                 }
             } else {
                 if (quad.isTinted()) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                    color = getItemStackColor(stack, parent, IAttachmentItem.Type.SCOPE_BODY_COLOR,
                             quad.getTintIndex());
                     keepColor = true;
                 }
                 if (quad.isTinted() || quad.getTintIndex() == 1) {
-                    color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR,
+                    color = getItemStackColor(stack, parent, IAttachmentItem.Type.SCOPE_GLASS_COLOR,
                             quad.getTintIndex());
                     alpha = 2f;
                     keepColor = false;
@@ -355,13 +361,13 @@ public class RenderUtil {
             boolean keepColor = true;
             int color = -1;
             if (quad.isTinted()) {
-                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_BODY_COLOR,
+                color = getItemStackColor(stack, parent, IAttachmentItem.Type.SCOPE_BODY_COLOR,
                         quad.getTintIndex());
                 keepColor = true;
             }
             if (quad.isTinted() && stack.getItem() instanceof ScopeItem
                     && quad.getTintIndex() == 1) {
-                color = getItemStackColor(stack, parent, IAttachment.Type.SCOPE_GLASS_COLOR,
+                color = getItemStackColor(stack, parent, IAttachmentItem.Type.SCOPE_GLASS_COLOR,
                         quad.getTintIndex());
                 alpha = 2f;
                 keepColor = false;
@@ -382,15 +388,15 @@ public class RenderUtil {
             }
         }
         if (stack != null
-                && !Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack).isEmpty()) {
-            color = ((DyeItem) Gun.getAttachment(IAttachment.Type.SCOPE_BODY_COLOR, stack)
+                && !Gun.getAttachment(IAttachmentItem.Type.SCOPE_BODY_COLOR, stack).isEmpty()) {
+            color = ((DyeItem) Gun.getAttachment(IAttachmentItem.Type.SCOPE_BODY_COLOR, stack)
                     .getItem()).getDyeColor().getTextColor();
         }
         return color;
     }
 
     public static int getItemStackColor(ItemStack stack, ItemStack parent,
-            IAttachment.Type attachmentType, int tintIndex) {
+            IAttachmentItem.Type attachmentType, int tintIndex) {
         int color = getItemStackColor(stack, parent, tintIndex);
 
         if (stack != null && !Gun.getAttachment(attachmentType, stack).isEmpty()) {

@@ -1,29 +1,30 @@
 {
-  "java.compile.nullAnalysis.mode": "disabled",
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "editor.formatOnSave": true,
-  "java.saveActions.organizeImports": true,
-  "java.format.comments.enabled": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit"
-  },
-  "java.format.settings.url": ".vscode/java-formatter.xml",
-  "java.cleanup.actions": [
-    "qualifyMembers",
-    "qualifyStaticMembers",
-    "addOverride",
-    "addDeprecated",
-    "addFinalModifier",
-    "instanceofPatternMatch",
-    "lambdaExpressionFromAnonymousClass",
-    "lambdaExpression"
-  ],
-  "java.saveActions.cleanup": true,
-  "mcmodel-viewer.assetsRoots": [
-    "/workspaces/TimelessandClassics_Reforged/src/main/resources/assets"
-  ],
-  "formatAll.includeFileExtensions": [
-    ".java"
-  ]
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "editor.formatOnSave": true,
+    "java.saveActions.organizeImports": true,
+    "java.format.comments.enabled": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "always"
+    },
+    "java.format.settings.url": ".vscode/java-formatter.xml",
+    "java.cleanup.actions": [
+        "qualifyMembers",
+        "qualifyStaticMembers",
+        "addOverride",
+        "addDeprecated",
+        "addFinalModifier",
+        "instanceofPatternMatch",
+        "lambdaExpressionFromAnonymousClass",
+        "lambdaExpression"
+    ],
+    "java.saveActions.cleanup": true,
+    "mcmodel-viewer.assetsRoots": [
+        "/workspaces/TimelessandClassics_Reforged/src/main/resources/assets"
+    ],
+    "formatAll.includeFileExtensions": [
+        ".java"
+    ],
+    "editor.codeActionWidget.includeNearbyQuickFixes": false
 }

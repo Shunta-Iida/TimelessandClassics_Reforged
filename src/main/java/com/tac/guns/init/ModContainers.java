@@ -78,7 +78,8 @@ public class ModContainers {
      * }};
      */
 
-    public static void init() {}
+    public static void init() {
+    }
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String id,
             MenuType.MenuSupplier<T> factory) {

@@ -3,7 +3,7 @@ package com.tac.guns.util;
 import com.tac.guns.interfaces.IGunModifier;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -14,12 +14,12 @@ import net.minecraft.world.item.ItemStack;
 public class RigModifierHelper {
     private static final IGunModifier[] EMPTY = {};
 
-    private static IGunModifier[] getModifiers(ItemStack weapon, IAttachment.Type type) {
+    private static IGunModifier[] getModifiers(ItemStack weapon, IAttachmentItem.Type type) {
         ItemStack stack = Gun.getAttachment(type, weapon);
         if (!stack.isEmpty()) {
-            if (stack.getItem() instanceof IAttachment) {
-                IAttachment attachment = (IAttachment) stack.getItem();
-                return attachment.getProperties().getModifiers();
+            if (stack.getItem() instanceof IAttachmentItem) {
+                IAttachmentItem attachment = (IAttachmentItem) stack.getItem();
+                return attachment.getAttachment().getModifiers();
             }
         }
         return EMPTY;
@@ -36,8 +36,8 @@ public class RigModifierHelper {
     }
 
     public static int getModifiedProjectileLife(ItemStack weapon, int life) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 life = modifier.modifyProjectileLife(life);
             }
@@ -51,8 +51,8 @@ public class RigModifierHelper {
     }
 
     public static double getModifiedProjectileGravity(ItemStack weapon, double gravity) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 gravity = modifier.modifyProjectileGravity(gravity);
             }
@@ -63,8 +63,8 @@ public class RigModifierHelper {
             gravity = modifier.modifyProjectileGravity(gravity);
         }
 
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 gravity += modifier.additionalProjectileGravity();
             }
@@ -78,8 +78,8 @@ public class RigModifierHelper {
     }
 
     public static float getModifiedSpread(ItemStack weapon, float spread) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 spread = modifier.modifyProjectileSpread(spread);
             }
@@ -92,8 +92,8 @@ public class RigModifierHelper {
     }
 
     public static double getModifiedProjectileSpeed(ItemStack weapon, double speed) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 speed = modifier.modifyProjectileSpeed(speed);
             }
@@ -107,8 +107,8 @@ public class RigModifierHelper {
 
     public static float getFireSoundVolume(ItemStack weapon) {
         float volume = 1.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 volume = modifier.modifyFireSoundVolume(volume);
             }
@@ -121,8 +121,8 @@ public class RigModifierHelper {
     }
 
     public static double getMuzzleFlashSize(ItemStack weapon, double size) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 size = modifier.modifyMuzzleFlashSize(size);
             }
@@ -136,8 +136,8 @@ public class RigModifierHelper {
 
     public static float getKickReduction(ItemStack weapon) {
         float kickReduction = 1.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 kickReduction *= Mth.clamp(modifier.kickModifier(), 0.0F, 1.0F);
             }
@@ -151,8 +151,8 @@ public class RigModifierHelper {
 
     public static float getRecoilModifier(ItemStack weapon) {
         float recoilReduction = 1.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 recoilReduction *= Mth.clamp(modifier.recoilModifier(), 0.0F, 1.0F);
             }
@@ -166,8 +166,8 @@ public class RigModifierHelper {
 
     public static float getHorizontalRecoilModifier(ItemStack weapon) {
         float reduction = 1.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 reduction *= Mth.clamp(modifier.horizontalRecoilModifier(), 0.0F, 1.0F);
             }
@@ -180,8 +180,8 @@ public class RigModifierHelper {
     }
 
     public static boolean isSilencedFire(ItemStack weapon) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 if (modifier.silencedFire()) {
                     return true;
@@ -199,8 +199,8 @@ public class RigModifierHelper {
 
     public static double getModifiedFireSoundRadius(ItemStack weapon, double radius) {
         double minRadius = radius;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 double newRadius = modifier.modifyFireSoundRadius(radius);
                 if (newRadius < minRadius) {
@@ -220,8 +220,8 @@ public class RigModifierHelper {
 
     public static float getAdditionalDamage(ItemStack weapon) {
         float additionalDamage = 0.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 additionalDamage += modifier.additionalDamage();
             }
@@ -235,8 +235,8 @@ public class RigModifierHelper {
 
     public static float getAdditionalHeadshotDamage(ItemStack weapon) {
         float additionalDamage = 0.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 additionalDamage += modifier.additionalHeadshotDamage();
             }
@@ -250,8 +250,8 @@ public class RigModifierHelper {
 
     public static float getModifiedProjectileDamage(ItemStack weapon, float damage) {
         float finalDamage = damage;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 finalDamage = modifier.modifyProjectileDamage(finalDamage);
             }
@@ -265,8 +265,8 @@ public class RigModifierHelper {
 
     public static float getModifiedDamage(ItemStack weapon, Gun modifiedGun, float damage) {
         float finalDamage = damage;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 finalDamage = modifier.modifyProjectileDamage(finalDamage);
             }
@@ -275,8 +275,8 @@ public class RigModifierHelper {
         for (IGunModifier modifier : modifiersD1) {
             finalDamage = modifier.modifyProjectileDamage(finalDamage);
         }
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 finalDamage += modifier.additionalDamage();
             }
@@ -289,8 +289,8 @@ public class RigModifierHelper {
     }
 
     public static double getModifiedAimDownSightSpeed(ItemStack weapon, double speed) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 speed = modifier.modifyAimDownSightSpeed(speed);
             }
@@ -303,8 +303,8 @@ public class RigModifierHelper {
     }
 
     public static int getModifiedRate(ItemStack weapon, int rate) {
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 rate = modifier.modifyFireRate(rate);
             }
@@ -318,8 +318,8 @@ public class RigModifierHelper {
 
     public static float getCriticalChance(ItemStack weapon) {
         float chance = 0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 chance += modifier.criticalChance();
             }
@@ -334,8 +334,8 @@ public class RigModifierHelper {
 
     public static float getAdditionalWeaponWeight(ItemStack weapon) {
         float additionalWeight = 0.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 additionalWeight += modifier.additionalWeaponWeight();
             }
@@ -349,8 +349,8 @@ public class RigModifierHelper {
 
     public static float getModifierOfWeaponWeight(ItemStack weapon) {
         float modifierWeight = 0.0F;
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
-            IGunModifier[] modifiers = getModifiers(weapon, IAttachment.Type.values()[i]);
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
+            IGunModifier[] modifiers = getModifiers(weapon, IAttachmentItem.Type.values()[i]);
             for (IGunModifier modifier : modifiers) {
                 modifierWeight += modifier.modifyWeaponWeight();
             }

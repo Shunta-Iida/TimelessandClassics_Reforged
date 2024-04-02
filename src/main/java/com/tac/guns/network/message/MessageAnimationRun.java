@@ -16,7 +16,8 @@ public class MessageAnimationRun extends PlayMessage<MessageAnimationRun> {
     private boolean play;
     private UUID fromWho;
 
-    public MessageAnimationRun() {}
+    public MessageAnimationRun() {
+    }
 
     public MessageAnimationRun(ResourceLocation animationResource, ResourceLocation soundResource,
             boolean play, UUID fromWho) {

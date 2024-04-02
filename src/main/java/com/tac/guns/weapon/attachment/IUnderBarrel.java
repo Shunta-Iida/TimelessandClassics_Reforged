@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.UnderBarrel;
  * <p>
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IUnderBarrel extends IAttachment<UnderBarrel> {
+public interface IUnderBarrel extends IAttachmentItem<UnderBarrel> {
     /**
      * @return The type of this attachment
      */

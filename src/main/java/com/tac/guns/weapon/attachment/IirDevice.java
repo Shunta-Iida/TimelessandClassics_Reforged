@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.IrDevice;
  * <p>
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IirDevice extends IAttachment<IrDevice> {
+public interface IirDevice extends IAttachmentItem<IrDevice> {
     /**
      * @return The type of this attachment
      */

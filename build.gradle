@@ -104,8 +104,8 @@ dependencies {
     implementation fg.deobf('curse.maven:footsteps-433068:4328018')
     implementation fg.deobf('curse.maven:voicechat-416089:4961311')
     implementation fg.deobf('curse.maven:clothconfig-348521:4633387')
-    // implementation fg.deobf('curse.maven:rubidium-574856:4494903')
-    // implementation fg.deobf('curse.maven:oculus-581495:4578744')
+    implementation fg.deobf('curse.maven:rubidium-574856:4494903')
+    implementation fg.deobf('curse.maven:oculus-581495:4578744')
 
     minecraftLibrary(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '[2.14.2,2.16.0)')
     minecraftLibrary(group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '[2.14.2,2.16.0)')

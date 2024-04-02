@@ -11,7 +11,8 @@ import java.util.function.Supplier;
 public class MessageAim extends PlayMessage<MessageAim> {
     private boolean aiming;
 
-    public MessageAim() {}
+    public MessageAim() {
+    }
 
     public MessageAim(boolean aiming) {
         this.aiming = aiming;

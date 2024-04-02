@@ -1,7 +1,8 @@
 package com.tac.guns.client.render.model;
 
 public class CommonComponents {
-    private CommonComponents() {}
+    private CommonComponents() {
+    }
 
     // main
     public static final GunComponent BODY = new GunComponent(null); // gun body

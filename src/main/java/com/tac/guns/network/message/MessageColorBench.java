@@ -12,10 +12,12 @@ import java.util.function.Supplier;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class MessageColorBench extends PlayMessage<MessageColorBench> {
-    public MessageColorBench() {}
+    public MessageColorBench() {
+    }
 
     @Override
-    public void encode(MessageColorBench messageColorBench, FriendlyByteBuf buffer) {}
+    public void encode(MessageColorBench messageColorBench, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageColorBench decode(FriendlyByteBuf buffer) {

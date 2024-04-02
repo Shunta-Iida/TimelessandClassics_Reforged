@@ -531,7 +531,8 @@ public class UpgradeBenchScreen extends AbstractContainerScreen<UpgradeBenchCont
             return levelReqs;
         }
 
-        public RequirementItem() {}
+        public RequirementItem() {
+        }
 
         public RequirementItem(int[] moduleCounts, int[] levelReqs, Enchantment enchantment) {
             this.enchantment = enchantment;

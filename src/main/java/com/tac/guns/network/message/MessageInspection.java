@@ -12,10 +12,12 @@ import java.util.function.Supplier;
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
 public class MessageInspection extends PlayMessage<MessageInspection> {
-    public MessageInspection() {}
+    public MessageInspection() {
+    }
 
     @Override
-    public void encode(MessageInspection messageInspection, FriendlyByteBuf buffer) {}
+    public void encode(MessageInspection messageInspection, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageInspection decode(FriendlyByteBuf buffer) {

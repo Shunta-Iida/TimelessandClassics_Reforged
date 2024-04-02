@@ -8,12 +8,12 @@ import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.duck.CurrentFpsGetter;
 import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.GunItemHelper;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageEmptyMag;
 import com.tac.guns.network.message.MessageShoot;
 import com.tac.guns.network.message.MessageShooting;
 import com.tac.guns.network.message.MessageUpdateMoveInacc;
-import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.weapon.Gun;
 
 import net.minecraft.ChatFormatting;
@@ -329,8 +329,7 @@ public class ShootingHandler {
                         this.fire(player, heldItem);
                     return;
                 } else if (Keys.PULL_TRIGGER.isDown()) {
-                    final Gun gun =
-                            ((GunItem) heldItem.getItem()).getModifiedGun(heldItem.getTag());
+                    final Gun gun = ((GunItem) heldItem.getItem()).getGun(heldItem.getTag());
                     if (gun.getGeneral().isAuto()
                             && heldItem.getTag().getInt("CurrentFireMode") == 2) {
                         this.fire(player, heldItem);
@@ -389,7 +388,7 @@ public class ShootingHandler {
         // if(!tracker.hasCooldown(heldItem.getItem()))
         if (ShootingHandler.shootTickGapLeft <= 0F) {
             final GunItem gunItem = (GunItem) heldItem.getItem();
-            final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
+            final Gun modifiedGun = gunItem.getGun(heldItem.getTag());
 
             if (MinecraftForge.EVENT_BUS.post(new GunFireEvent.Pre(player, heldItem)))
                 return;
@@ -426,7 +425,7 @@ public class ShootingHandler {
     private boolean magError(final Player player, final ItemStack heldItem) {
         final int[] extraAmmo =
                 ((GunItem) heldItem.getItem()).getGun().getReloads().getMaxAdditionalAmmoPerOC();
-        final int magMode = GunModifierHelper.getAmmoCapacity(heldItem);
+        final int magMode = GunItemHelper.of(heldItem).getAmmoCapacityWeight();
         if (magMode < 0) {
             if (heldItem.getItem() instanceof GunItem && heldItem.getTag().getInt("AmmoCount")
                     - 1 > ((GunItem) heldItem.getItem()).getGun().getReloads().getMaxAmmo()) {

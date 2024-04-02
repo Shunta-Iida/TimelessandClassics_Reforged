@@ -14,7 +14,8 @@ import java.util.function.Supplier;
 public class MessageUpdateMoveInacc extends PlayMessage<MessageUpdateMoveInacc> {
     private float dist = 0;
 
-    public MessageUpdateMoveInacc() {}
+    public MessageUpdateMoveInacc() {
+    }
 
     public MessageUpdateMoveInacc(float dist) {
         this.dist = dist;

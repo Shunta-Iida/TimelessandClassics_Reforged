@@ -10,5 +10,6 @@ public class LanguageGen extends LanguageProvider {
     }
 
     @Override
-    protected void addTranslations() {}
+    protected void addTranslations() {
+    }
 }

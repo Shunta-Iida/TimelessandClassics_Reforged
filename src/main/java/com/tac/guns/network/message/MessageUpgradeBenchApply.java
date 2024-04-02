@@ -17,7 +17,8 @@ public class MessageUpgradeBenchApply extends PlayMessage<MessageUpgradeBenchApp
     public BlockPos pos;
     public String reqKey;
 
-    public MessageUpgradeBenchApply() {}
+    public MessageUpgradeBenchApply() {
+    }
 
     public MessageUpgradeBenchApply(BlockPos pos, String reqKey) {
         this.pos = pos;

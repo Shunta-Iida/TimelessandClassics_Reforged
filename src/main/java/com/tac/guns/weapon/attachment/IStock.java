@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.Stock;
  * <p>
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IStock extends IAttachment<Stock> {
+public interface IStock extends IAttachmentItem<Stock> {
     /**
      * @return The type of this attachment
      */

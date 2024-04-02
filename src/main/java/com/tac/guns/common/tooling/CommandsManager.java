@@ -33,7 +33,8 @@ public class CommandsManager {
         CommandsManager.register(commandDispatcher);
     }
 
-    public CommandsManager() {}
+    public CommandsManager() {
+    }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> tacCommander =

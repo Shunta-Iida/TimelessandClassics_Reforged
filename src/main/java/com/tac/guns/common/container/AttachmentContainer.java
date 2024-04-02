@@ -13,7 +13,7 @@ import com.tac.guns.item.attachment.SideRailItem;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.item.gun.TimelessPistolGunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -31,46 +31,48 @@ import net.minecraft.world.item.ItemStack;
 public class AttachmentContainer extends AbstractContainerMenu {
     private ItemStack weapon;
     private Container playerInventory;
-    private Container weaponInventory = new SimpleContainer(IAttachment.Type.values().length) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            AttachmentContainer.this.slotsChanged(this);
-        }
-    };
+    private final Container weaponInventory =
+            new SimpleContainer(IAttachmentItem.Type.values().length) {
+                @Override
+                public void setChanged() {
+                    super.setChanged();
+                    AttachmentContainer.this.slotsChanged(this);
+                }
+            };
 
     private boolean loaded = false;
 
     // Range of attachments to scroll through
 
-    public AttachmentContainer(int windowId, Inventory playerInventory, ItemStack stack) // reads from attachments inv
+    public AttachmentContainer(final int windowId, final Inventory playerInventory,
+            final ItemStack stack) // reads from attachments inv
     {
         this(windowId, playerInventory);
         // Add each attachment into stack, then pop each one
-        ArrayDeque<ItemStack> attachments = new ArrayDeque<>();
+        final ArrayDeque<ItemStack> attachments = new ArrayDeque<>();
         if (this.weapon.getItem() instanceof IEasyColor) {
             // Traverse range of values, replace specific attachments per instanceof used
             // such as TimelessGunItem vs GunItem
-            for (int i = IAttachment.easyColorStart; i <= IAttachment.easyColorEnd; i++)
-                attachments.push(Gun.getAttachment(IAttachment.Type.values()[i], stack));
+            for (int i = IAttachmentItem.easyColorStart; i <= IAttachmentItem.easyColorEnd; i++)
+                attachments.push(Gun.getAttachment(IAttachmentItem.Type.values()[i], stack));
             int i = 0;
             while (attachments.peekLast() != null)
                 this.weaponInventory.setItem(i++, attachments.pollLast()); // set 0, add 1 to I, move ahead
 
         } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
-                if (i == IAttachment.Type.SCOPE.getId())
-                    attachments.push(Gun.getAttachment(IAttachment.Type.PISTOL_SCOPE, stack));
-                else if (i == IAttachment.Type.BARREL.getId())
-                    attachments.push(Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack));
+            for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
+                if (i == IAttachmentItem.Type.SCOPE.getId())
+                    attachments.push(Gun.getAttachment(IAttachmentItem.Type.PISTOL_SCOPE, stack));
+                else if (i == IAttachmentItem.Type.BARREL.getId())
+                    attachments.push(Gun.getAttachment(IAttachmentItem.Type.PISTOL_BARREL, stack));
                 else
-                    attachments.push(Gun.getAttachment(IAttachment.Type.values()[i], stack));
+                    attachments.push(Gun.getAttachment(IAttachmentItem.Type.values()[i], stack));
             int i = 0;
             while (attachments.peekLast() != null)
                 this.weaponInventory.setItem(i++, attachments.pollLast());
         } else if (this.weapon.getItem() instanceof GunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
-                attachments.push(Gun.getAttachment(IAttachment.Type.values()[i], stack));
+            for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
+                attachments.push(Gun.getAttachment(IAttachmentItem.Type.values()[i], stack));
             int i = 0;
             while (attachments.peekLast() != null)
                 this.weaponInventory.setItem(i++, attachments.pollLast());
@@ -78,85 +80,86 @@ public class AttachmentContainer extends AbstractContainerMenu {
         this.loaded = true;
     }
 
-    public AttachmentContainer(int windowId, Inventory playerInventory) {
+    public AttachmentContainer(final int windowId, final Inventory playerInventory) {
         super(ModContainers.ATTACHMENTS.get(), windowId);
         this.weapon = playerInventory.getSelected();
         this.playerInventory = playerInventory;
 
         if (this.weapon.getItem() instanceof IEasyColor) {
-            for (int i = 0; i <= (IAttachment.easyColorEnd - IAttachment.easyColorStart); i++) {
+            for (int i =
+                    0; i <= (IAttachmentItem.easyColorEnd - IAttachmentItem.easyColorStart); i++) {
                 if (i == 0) {
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.SCOPE_RETICLE_COLOR, playerInventory.player, i, 70,
+                            IAttachmentItem.Type.SCOPE_RETICLE_COLOR, playerInventory.player, i, 70,
                             32 + (2) * 18) {
                         @Override
-                        public boolean mayPickup(Player playerIn) {
+                        public boolean mayPickup(final Player playerIn) {
                             return true;
                         }
                     });
                 }
                 if (i == 1) {
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.SCOPE_BODY_COLOR, playerInventory.player, i, 40,
+                            IAttachmentItem.Type.SCOPE_BODY_COLOR, playerInventory.player, i, 40,
                             -1 + (1) * 18) {
                         @Override
-                        public boolean mayPickup(Player playerIn) {
+                        public boolean mayPickup(final Player playerIn) {
                             return true;
                         }
                     });
                 }
                 if (i == 2) {
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.SCOPE_GLASS_COLOR, playerInventory.player, i, 10,
+                            IAttachmentItem.Type.SCOPE_GLASS_COLOR, playerInventory.player, i, 10,
                             50 + (1) * 18) {
                         @Override
-                        public boolean mayPickup(Player playerIn) {
+                        public boolean mayPickup(final Player playerIn) {
                             return true;
                         }
                     });
                 }
             }
         } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
-                if (i == IAttachment.Type.SCOPE.getId())
+            for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
+                if (i == IAttachmentItem.Type.SCOPE.getId())
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.PISTOL_SCOPE, playerInventory.player, 0, 5,
+                            IAttachmentItem.Type.PISTOL_SCOPE, playerInventory.player, 0, 5,
                             17 + 0 * 18));
-                else if (i == IAttachment.Type.BARREL.getId())
+                else if (i == IAttachmentItem.Type.BARREL.getId())
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.PISTOL_BARREL, playerInventory.player, 1, 5,
+                            IAttachmentItem.Type.PISTOL_BARREL, playerInventory.player, 1, 5,
                             17 + 1 * 18));
                 else if (i > 3)
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.values()[i], playerInventory.player, i, 155,
+                            IAttachmentItem.Type.values()[i], playerInventory.player, i, 155,
                             17 + (i - 4) * 18));
                 else
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.values()[i], playerInventory.player, i, 5,
+                            IAttachmentItem.Type.values()[i], playerInventory.player, i, 5,
                             17 + i * 18));
 
         } else if (this.weapon.getItem() instanceof GunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++)
-                if (i == IAttachment.Type.SCOPE.getId() && ((GunItem) this.weapon.getItem())
-                        .getGun().canAttachType(IAttachment.Type.PISTOL_SCOPE))
+            for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
+                if (i == IAttachmentItem.Type.SCOPE.getId() && ((GunItem) this.weapon.getItem())
+                        .getGun().canAttachType(IAttachmentItem.Type.PISTOL_SCOPE))
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            new IAttachment.Type[] {IAttachment.Type.values()[i],
-                                    IAttachment.Type.PISTOL_SCOPE},
+                            new IAttachmentItem.Type[] {IAttachmentItem.Type.values()[i],
+                                    IAttachmentItem.Type.PISTOL_SCOPE},
                             playerInventory.player, 0, 5, 17 + 0 * 18));
-                else if (IAttachment.Type.values()[i] == IAttachment.Type.SIDE_RAIL
+                else if (IAttachmentItem.Type.values()[i] == IAttachmentItem.Type.SIDE_RAIL
                         && ((GunItem) this.weapon.getItem()).getGun()
-                                .canAttachType(IAttachment.Type.IR_DEVICE))
+                                .canAttachType(IAttachmentItem.Type.IR_DEVICE))
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            new IAttachment.Type[] {IAttachment.Type.values()[i],
-                                    IAttachment.Type.IR_DEVICE},
+                            new IAttachmentItem.Type[] {IAttachmentItem.Type.values()[i],
+                                    IAttachmentItem.Type.IR_DEVICE},
                             playerInventory.player, i, 155, 17 + (i - 4) * 18));
                 else if (i > 3) {
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.values()[i], playerInventory.player, i, 155,
+                            IAttachmentItem.Type.values()[i], playerInventory.player, i, 155,
                             17 + (i - 4) * 18));
                 } else
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
-                            IAttachment.Type.values()[i], playerInventory.player, i, 5,
+                            IAttachmentItem.Type.values()[i], playerInventory.player, i, 5,
                             17 + i * 18));
         }
 
@@ -170,14 +173,14 @@ public class AttachmentContainer extends AbstractContainerMenu {
             if (i == playerInventory.selected) {
                 this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 160) {
                     @Override
-                    public boolean mayPickup(Player playerIn) {
+                    public boolean mayPickup(final Player playerIn) {
                         return true;
                     }
                 });
             } else {
                 this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 160) {
                     @Override
-                    public boolean mayPickup(Player playerIn) {
+                    public boolean mayPickup(final Player playerIn) {
                         return true;
                     }
                 });;
@@ -190,47 +193,48 @@ public class AttachmentContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player playerIn) {
+    public boolean stillValid(final Player playerIn) {
         return true;
     }
 
     @Override
-    public void slotsChanged(Container inventoryIn) {
-        CompoundTag attachments = new CompoundTag();
+    public void slotsChanged(final Container inventoryIn) {
+        final CompoundTag attachments = new CompoundTag();
 
         if (this.weapon.getItem() instanceof IEasyColor) {
             for (int i = 0; i < this.getWeaponInventory().getContainerSize(); i++) {
-                ItemStack attachment = this.getSlot(i).getItem();
+                final ItemStack attachment = this.getSlot(i).getItem();
                 if (attachment.getItem() instanceof DyeItem) {
                     if (i == 0)
-                        attachments.put(IAttachment.Type.SCOPE_RETICLE_COLOR.getTagKey(),
+                        attachments.put(IAttachmentItem.Type.SCOPE_RETICLE_COLOR.getTagKey(),
                                 attachment.save(new CompoundTag()));
                     if (i == 1)
-                        attachments.put(IAttachment.Type.SCOPE_BODY_COLOR.getTagKey(),
+                        attachments.put(IAttachmentItem.Type.SCOPE_BODY_COLOR.getTagKey(),
                                 attachment.save(new CompoundTag()));
                     if (i == 2)
-                        attachments.put(IAttachment.Type.SCOPE_GLASS_COLOR.getTagKey(),
+                        attachments.put(IAttachmentItem.Type.SCOPE_GLASS_COLOR.getTagKey(),
                                 attachment.save(new CompoundTag()));
                 }
             }
         } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++) {
+            for (int i =
+                    IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++) {
                 if (i == 0) {
-                    ItemStack attachment = this.getSlot(i).getItem();
+                    final ItemStack attachment = this.getSlot(i).getItem();
                     if (attachment.getItem() instanceof PistolScopeItem) {
                         attachments.put(
                                 ((PistolScopeItem) attachment.getItem()).getType().getTagKey(),
                                 attachment.save(new CompoundTag()));
                     }
                 } else if (i == 1) {
-                    ItemStack attachment = this.getSlot(i).getItem();
+                    final ItemStack attachment = this.getSlot(i).getItem();
                     if (attachment.getItem() instanceof PistolBarrelItem) {
                         attachments.put(
                                 ((PistolBarrelItem) attachment.getItem()).getType().getTagKey(),
                                 attachment.save(new CompoundTag()));
                     }
                 } else {
-                    ItemStack attachment = this.getSlot(i).getItem();
+                    final ItemStack attachment = this.getSlot(i).getItem();
                     if (attachment.getItem() instanceof AttachmentItem<?>) {
                         attachments.put(
                                 ((AttachmentItem<?>) attachment.getItem()).getType().getTagKey(),
@@ -239,8 +243,9 @@ public class AttachmentContainer extends AbstractContainerMenu {
                 }
             }
         } else if (this.weapon.getItem() instanceof GunItem) {
-            for (int i = IAttachment.standardAttStart; i <= IAttachment.standardAttEnd; i++) {
-                ItemStack attachment = this.getSlot(i).getItem();
+            for (int i =
+                    IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++) {
+                final ItemStack attachment = this.getSlot(i).getItem();
                 if (attachment.getItem() instanceof AttachmentItem<?>)
                     attachments.put(
                             ((AttachmentItem<?>) attachment.getItem()).getType().getTagKey(),
@@ -248,20 +253,20 @@ public class AttachmentContainer extends AbstractContainerMenu {
             }
         }
 
-        CompoundTag tag = this.weapon.getOrCreateTag();
+        final CompoundTag tag = this.weapon.getOrCreateTag();
         tag.put("Attachments", attachments);
         super.broadcastChanges();
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public ItemStack quickMoveStack(final Player playerIn, final int index) {
         ItemStack copyStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
+        final Slot slot = this.slots.get(index);
 
         if (this.weapon.getItem() instanceof ScopeItem
                 || this.weapon.getItem() instanceof SideRailItem) {
             if (slot != null && slot.hasItem()) {
-                ItemStack slotStack = slot.getItem();
+                final ItemStack slotStack = slot.getItem();
                 copyStack = slotStack.copy();
 
                 if (index == 0) {
@@ -296,7 +301,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
             }
         } else {
             if (slot != null && slot.hasItem()) {
-                ItemStack slotStack = slot.getItem();
+                final ItemStack slotStack = slot.getItem();
                 copyStack = slotStack.copy();
                 if (index < this.weaponInventory.getContainerSize()) {
                     if (!this.moveItemStackTo(slotStack, this.weaponInventory.getContainerSize(),

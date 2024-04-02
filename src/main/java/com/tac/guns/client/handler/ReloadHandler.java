@@ -7,11 +7,11 @@ import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.GunItemHelper;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageReload;
 import com.tac.guns.network.message.MessageUpdateGunID;
 import com.tac.guns.util.GunEnchantmentHelper;
-import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.util.WearableHelper;
 import com.tac.guns.weapon.Gun;
 
@@ -260,9 +260,8 @@ public class ReloadHandler {
                 if (stack.getItem() instanceof GunItem) {
                     final CompoundTag tag = stack.getTag();
                     if (tag != null && !tag.contains("IgnoreAmmo", Tag.TAG_BYTE)) {
-                        final Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack.getTag());
-                        if (tag.getInt("AmmoCount") >= GunModifierHelper.getAmmoCapacity(stack,
-                                gun)) {
+                        final Gun gun = ((GunItem) stack.getItem()).getGun(stack.getTag());
+                        if (tag.getInt("AmmoCount") >= GunItemHelper.of(stack).getAmmoCapacity()) {
                             return;
                         }
                         final ItemStack rig = WearableHelper.PlayerWornRig(player);
@@ -301,7 +300,7 @@ public class ReloadHandler {
             if (stack.getItem() instanceof GunItem) {
                 final CompoundTag tag = stack.getTag();
                 if (tag != null) {
-                    final Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack.getTag());
+                    final Gun gun = ((GunItem) stack.getItem()).getGun(stack.getTag());
                     final float speed = GunEnchantmentHelper.getReloadSpeed(stack);
                     if (this.startUpReloadTimer == -1)
                         this.startUpReloadTimer = gun.getReloads().getPreReloadPauseTicks();
@@ -353,7 +352,7 @@ public class ReloadHandler {
                 AnimationHandler.INSTANCE.onReloadEnd(this.prevItemStack.getItem());
             }
             if (stack.getItem() instanceof GunItem) {
-                final Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack.getTag());
+                final Gun gun = ((GunItem) stack.getItem()).getGun(stack.getTag());
                 if (gun.getReloads().isMagFed()) {
                     if (this.startReloadTick != -1) {
                         this.startReloadTick = -1;
@@ -411,7 +410,7 @@ public class ReloadHandler {
         }
 
         float ticks = 0F;
-        final Gun gun = gunItem.getModifiedGun(stack.getTag());
+        final Gun gun = gunItem.getGun(stack.getTag());
         if (gun.getReloads().isMagFed()) {
             ticks += gun.getReloads().getReloadMagTimer();
 
@@ -432,7 +431,7 @@ public class ReloadHandler {
         final ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof GunItem))
             return; // Fails on server instances where all plays must be holding a gun
-        final Gun gun = ((GunItem) stack.getItem()).getModifiedGun(stack.getTag());
+        final Gun gun = ((GunItem) stack.getItem()).getGun(stack.getTag());
         if (GunAnimationController
                 .fromItem(stack.getItem()) instanceof PumpShotgunAnimationController
                 && this.isReloading())

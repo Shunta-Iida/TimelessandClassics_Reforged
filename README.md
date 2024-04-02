@@ -1,3 +1,7 @@
+This repository is made from
+
+- [Timeless and Classics Reforged](https://github.com/286799714/TimelessandClassics_Reforged)
+
 ## UNOFFICIAL 1.18 port of timeless and classics
 
 based on [MorningOriens](https://github.com/MorningOriens/TimelessandClassics_Reforged/tree/1.18)'s port, updated by yor42 and Spacecat

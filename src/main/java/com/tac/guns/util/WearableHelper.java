@@ -1,5 +1,9 @@
 package com.tac.guns.util;
 
+import javax.annotation.Nonnull;
+
+import org.apache.logging.log4j.Level;
+
 import com.tac.guns.GunMod;
 import com.tac.guns.duck.PlayerWithSynData;
 import com.tac.guns.entity.ProjectileEntity;
@@ -16,9 +20,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.Level;
-
-import javax.annotation.Nonnull;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -29,7 +30,12 @@ public class WearableHelper {
 
     @Nonnull
     public static ItemStack PlayerWornRig(Player player) {
-        return ((PlayerWithSynData) player).getRig();
+        ItemStack rig = ((PlayerWithSynData) player).getRig();
+        if (rig.isEmpty()) {
+            ((PlayerWithSynData) player).updateRig();
+            return ((PlayerWithSynData) player).getRig();
+        }
+        return rig;
     }
 
     public static void FillDefaults(ItemStack item, Rig rig) {

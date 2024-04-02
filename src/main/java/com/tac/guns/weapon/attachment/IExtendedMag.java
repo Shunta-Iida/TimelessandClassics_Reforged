@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.ExtendedMag;
  * <p>
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IExtendedMag extends IAttachment<ExtendedMag> {
+public interface IExtendedMag extends IAttachmentItem<ExtendedMag> {
     /**
      * @return The type of this attachment
      */

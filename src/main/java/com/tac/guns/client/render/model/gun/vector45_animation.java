@@ -1,21 +1,26 @@
 package com.tac.guns.client.render.model.gun;
 
+import static com.tac.guns.client.render.model.CommonComponents.BODY;
+import static com.tac.guns.client.render.model.CommonComponents.BODY_LIGHT;
+import static com.tac.guns.client.render.model.CommonComponents.BOLT;
+import static com.tac.guns.client.render.model.CommonComponents.HANDLE;
+import static com.tac.guns.client.render.model.CommonComponents.SIGHT;
+import static com.tac.guns.client.render.model.CommonComponents.SIGHT_LIGHT;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tac.guns.Config;
-import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.animation.Vector45AnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
+import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-
-import static com.tac.guns.client.render.model.CommonComponents.*;
 
 /*
  * Because the revolver has a rotating chamber, we need to render it in a different way than normal items. In this case
@@ -37,8 +42,8 @@ public class vector45_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     Vector45AnimationController.INDEX_BODY, transformType, matrices);
-            if (Gun.getScope(stack) == null
-                    && Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) == ItemStack.EMPTY) {
+            if (Gun.getScope(stack) == null && Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE,
+                    stack) == ItemStack.EMPTY) {
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT_LIGHT), stack, matrices,
                         renderBuffer, 15728880, overlay);
                 RenderUtil.renderModel(getComponentModel(skin, SIGHT), stack, matrices,

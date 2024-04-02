@@ -1,5 +1,10 @@
 package com.tac.guns.client.render.model.gun;
 
+import static com.tac.guns.client.render.model.CommonComponents.BODY;
+import static com.tac.guns.client.render.model.CommonComponents.LASER_BASIC;
+import static com.tac.guns.client.render.model.CommonComponents.LASER_BASIC_DEVICE;
+import static com.tac.guns.client.render.model.CommonComponents.MAG;
+
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,19 +13,19 @@ import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
-import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.handler.AimingHandler;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.handler.command.ScopeEditor;
 import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.animation.P90AnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
+import com.tac.guns.client.render.gunskin.GunSkin;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.render.model.internal.TacGunComponents;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -30,8 +35,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-
-import static com.tac.guns.client.render.model.CommonComponents.*;
 
 public class p90_animation extends SkinnedGunModel {
 
@@ -101,7 +104,7 @@ public class p90_animation extends SkinnedGunModel {
                         matrices.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
 
                         int reticleGlowColor = RenderUtil.getItemStackColor(stack, ItemStack.EMPTY,
-                                IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
+                                IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
                         float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                         float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
@@ -172,15 +175,15 @@ public class p90_animation extends SkinnedGunModel {
         {
             controller.applySpecialModelTransform(getComponentModel(skin, BODY),
                     P90AnimationController.INDEX_BODY, transformType, matrices);
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack)
                     .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                         renderBuffer, light, overlay);
                 if (transformType.firstPerson()
                         || Config.COMMON.gameplay.canSeeLaserThirdSight.get())
                     RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                            Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                            Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                             renderBuffer, 15728880, overlay); // 15728880 For fixed max light
             }
 

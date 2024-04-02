@@ -15,7 +15,8 @@ import java.util.function.Supplier;
 public class MessageSaveItemUpgradeBench extends PlayMessage<MessageSaveItemUpgradeBench> {
     private BlockPos pos;
 
-    public MessageSaveItemUpgradeBench() {}
+    public MessageSaveItemUpgradeBench() {
+    }
 
     public MessageSaveItemUpgradeBench(BlockPos pos) {
         this.pos = pos;

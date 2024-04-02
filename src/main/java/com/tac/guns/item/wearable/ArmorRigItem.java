@@ -1,5 +1,10 @@
 package com.tac.guns.item.wearable;
 
+import java.util.Objects;
+import java.util.WeakHashMap;
+
+import javax.annotation.Nullable;
+
 import com.tac.guns.Reference;
 import com.tac.guns.common.NetworkRigManager;
 import com.tac.guns.inventory.gear.armor.ArmorRigCapabilityProvider;
@@ -26,47 +31,44 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkHooks;
 
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.WeakHashMap;
-
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ArmorRigItem extends Item implements IArmoredRigItem {
     private int rows = 0;
     private float damageRate = 1.0F;
 
-    public ArmorRigItem(Properties properties) {
+    public ArmorRigItem(final Properties properties) {
         super(properties);
     }
 
     private ArmorRigContainerProvider containerProvider;
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player,
-            InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(final Level world, final Player player,
+            final InteractionHand hand) {
         if (player.getItemInHand(hand).getOrCreateTag().get("rig_rows") == null)
             player.getItemInHand(hand).getOrCreateTag().putInt("rig_rows",
-                    rig.getGeneral().getInventoryRows());
+                    this.rig.getGeneral().getInventoryRows());
         if (world.isClientSide)
             return super.use(world, player, hand);
         if (hand != InteractionHand.MAIN_HAND)
             return InteractionResultHolder.pass(player.getItemInHand(hand));
-        containerProvider = new ArmorRigContainerProvider(player.getItemInHand(hand));
-        NetworkHooks.openGui((ServerPlayer) player, containerProvider);
+        this.containerProvider = new ArmorRigContainerProvider(player.getItemInHand(hand));
+        NetworkHooks.openGui((ServerPlayer) player, this.containerProvider);
         super.use(world, player, hand);
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+    public ICapabilityProvider initCapabilities(final ItemStack stack,
+            @Nullable final CompoundTag nbt) {
         return new ArmorRigCapabilityProvider();
     }
 
-    private WeakHashMap<CompoundTag, Rig> modifiedRigCache = new WeakHashMap<>();
+    private final WeakHashMap<CompoundTag, Rig> modifiedRigCache = new WeakHashMap<>();
 
     private Rig rig = new Rig();
 
-    public void setRig(NetworkRigManager.Supplier supplier) {
+    public void setRig(final NetworkRigManager.Supplier supplier) {
         this.rig = supplier.getRig();
     }
 
@@ -106,11 +108,11 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
 
     @Nullable
     @Override
-    public CompoundTag getShareTag(ItemStack stack) {
+    public CompoundTag getShareTag(final ItemStack stack) {
         stack.getOrCreateTag();
-        CompoundTag nbt = super.getShareTag(stack);
+        final CompoundTag nbt = super.getShareTag(stack);
         if (stack.getItem() instanceof ArmorRigItem) {
-            RigSlotsHandler itemHandler = (RigSlotsHandler) stack
+            final RigSlotsHandler itemHandler = (RigSlotsHandler) stack
                     .getCapability(ArmorRigCapabilityProvider.capability).resolve().get();
             nbt.put("storage", itemHandler.serializeNBT());
         }
@@ -119,14 +121,14 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     }
 
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+    public boolean onEntitySwing(final ItemStack stack, final LivingEntity entity) {
         return true;
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
+    public void fillItemCategory(final CreativeModeTab group, final NonNullList<ItemStack> stacks) {
         if (this.allowdedIn(group)) {
-            ItemStack stack = new ItemStack(this);
+            final ItemStack stack = new ItemStack(this);
             stack.getOrCreateTag();
             WearableHelper.FillDefaults(stack, this.rig);
             stacks.add(stack);
@@ -134,31 +136,41 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
     }
 
     @Override
-    public boolean isBarVisible(ItemStack p_150899_) {
+    public int getDamage(final ItemStack stack) {
+        return (int) WearableHelper.GetCurrentDurability(stack);
+    }
+
+    @Override
+    public int getMaxDamage(final ItemStack stack) {
+        return (int) RigEnchantmentHelper.getModifiedDurability(stack, this.getModifiedRig(stack));
+    }
+
+    @Override
+    public boolean isBarVisible(final ItemStack p_150899_) {
         return true;
     }
 
     @Override
-    public int getBarWidth(ItemStack stack) {
+    public int getBarWidth(final ItemStack stack) {
         stack.getOrCreateTag();
-        Rig modifiedRig = this.getModifiedRig(stack);
-        return (int) (13 * (WearableHelper.GetCurrentDurability(stack)
-                / (double) RigEnchantmentHelper.getModifiedDurability(stack, modifiedRig)));
+        final Rig modifiedRig = this.getModifiedRig(stack);
+        return (int) (13f * (WearableHelper.GetCurrentDurability(stack)
+                / (float) RigEnchantmentHelper.getModifiedDurability(stack, modifiedRig)));
     }
 
     @Override
-    public int getBarColor(ItemStack p_150901_) {
+    public int getBarColor(final ItemStack p_150901_) {
         return Objects.requireNonNull(ChatFormatting.AQUA.getColor());
     }
 
-    public Rig getModifiedRig(ItemStack stack) {
-        CompoundTag tagCompound = stack.getTag();
+    public Rig getModifiedRig(final ItemStack stack) {
+        final CompoundTag tagCompound = stack.getTag();
         if (tagCompound != null && tagCompound.contains("Rig", Tag.TAG_COMPOUND)) {
             return this.modifiedRigCache.computeIfAbsent(tagCompound, item -> {
                 if (tagCompound.getBoolean("Custom")) {
                     return Rig.create(tagCompound.getCompound("Rig"));
                 } else {
-                    Rig gunCopy = this.rig.copy();
+                    final Rig gunCopy = this.rig.copy();
                     gunCopy.deserializeNBT(tagCompound.getCompound("Rig"));
                     return gunCopy;
                 }
@@ -167,7 +179,7 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
         return this.rig;
     }
 
-    public ArmorRigItem setRigRows(int rows) {
+    public ArmorRigItem setRigRows(final int rows) {
         this.rows = rows;
         return this;
     }
@@ -180,7 +192,7 @@ public class ArmorRigItem extends Item implements IArmoredRigItem {
         return this.damageRate;
     }
 
-    public ArmorRigItem setDamageRate(float damageAttenuationRate) {
+    public ArmorRigItem setDamageRate(final float damageAttenuationRate) {
         this.damageRate = damageAttenuationRate;
         return this;
     }

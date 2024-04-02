@@ -10,7 +10,8 @@ import java.util.function.Supplier;
 
 public class MessageArmorUpdate extends PlayMessage<MessageArmorUpdate> {
     @Override
-    public void encode(MessageArmorUpdate messageArmorUpdate, FriendlyByteBuf friendlyByteBuf) {}
+    public void encode(MessageArmorUpdate messageArmorUpdate, FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public MessageArmorUpdate decode(FriendlyByteBuf friendlyByteBuf) {

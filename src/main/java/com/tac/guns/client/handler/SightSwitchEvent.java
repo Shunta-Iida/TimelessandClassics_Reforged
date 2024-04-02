@@ -18,7 +18,8 @@ public class SightSwitchEvent {
         return instance;
     }
 
-    private SightSwitchEvent() {}
+    private SightSwitchEvent() {
+    }
 
     /*
      * @SubscribeEvent

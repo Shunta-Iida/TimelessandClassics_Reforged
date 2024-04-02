@@ -41,7 +41,8 @@ public class ModEntities {
                         .setShouldReceiveVelocityUpdates(true).build(id));
     }
 
-    public static void init() {};
+    public static void init() {
+    };
 
     /**
      * Entity registration that prevents the entity from being sent and tracked by

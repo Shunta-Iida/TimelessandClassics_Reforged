@@ -15,7 +15,7 @@ import com.tac.guns.client.Keys;
 import com.tac.guns.common.tooling.CommandsHandler;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -1111,19 +1111,19 @@ public class GunEditor {
             case flash:
                 return gunItem.getGun().getDisplay().getFlash().getSize();
             case scope:
-                return gunItem.getGun().canAttachType(IAttachment.Type.SCOPE)
+                return gunItem.getGun().canAttachType(IAttachmentItem.Type.SCOPE)
                         ? gunItem.getGun().getModules().getAttachments().getScope().getScale()
                         : 0;
             case barrel:
-                return gunItem.getGun().canAttachType(IAttachment.Type.BARREL)
+                return gunItem.getGun().canAttachType(IAttachmentItem.Type.BARREL)
                         ? gunItem.getGun().getModules().getAttachments().getBarrel().getScale()
                         : 0;
             case pistolScope:
-                return gunItem.getGun().canAttachType(IAttachment.Type.PISTOL_SCOPE)
+                return gunItem.getGun().canAttachType(IAttachmentItem.Type.PISTOL_SCOPE)
                         ? gunItem.getGun().getModules().getAttachments().getPistolScope().getScale()
                         : 0;
             case pistolBarrel:
-                return gunItem.getGun().canAttachType(IAttachment.Type.PISTOL_BARREL)
+                return gunItem.getGun().canAttachType(IAttachmentItem.Type.PISTOL_BARREL)
                         ? gunItem.getGun().getModules().getAttachments().getPistolBarrel()
                                 .getScale()
                         : 0;

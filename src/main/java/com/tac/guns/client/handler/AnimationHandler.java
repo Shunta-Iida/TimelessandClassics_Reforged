@@ -65,9 +65,10 @@ import com.tac.guns.client.render.animation.module.PumpShotgunAnimationControlle
 import com.tac.guns.event.GunFireEvent;
 import com.tac.guns.event.GunReloadEvent;
 import com.tac.guns.init.ModSyncedDataKeys;
+import com.tac.guns.item.ItemAttributeValues;
 import com.tac.guns.item.gun.GunItem;
+import com.tac.guns.item.gun.GunItemHelper;
 import com.tac.guns.util.GunEnchantmentHelper;
-import com.tac.guns.util.GunModifierHelper;
 import com.tac.guns.weapon.Gun;
 
 import de.javagl.jgltf.model.animation.AnimationRunner;
@@ -157,8 +158,7 @@ public enum AnimationHandler {
             final GunItem gunItem = (GunItem) itemStack.getItem();
             final CompoundTag tag = itemStack.getOrCreateTag();
             final int reloadingAmount =
-                    GunModifierHelper.getAmmoCapacity(itemStack, gunItem.getGun())
-                            - tag.getInt("AmmoCount");
+                    GunItemHelper.of(itemStack).getAmmoCapacity() - tag.getInt("AmmoCount");
             if (reloadingAmount <= 0)
                 return;
         }
@@ -282,11 +282,16 @@ public enum AnimationHandler {
                     GunAnimationController.fromItem(stack.getItem());
             if (controller != null && !controller.isAnimationRunning()) {
                 controller.stopAnimation();
+                final GunItemHelper helper = GunItemHelper.of(stack);
                 if (Gun.hasAmmo(stack)) {
                     controller.runAnimation(GunAnimationController.AnimationLabel.INSPECT);
                 } else {
                     controller.runAnimation(GunAnimationController.AnimationLabel.INSPECT_EMPTY);
                 }
+                helper.setGunInspectData(ItemAttributeValues.AmmoInspectType.VISUAL);
+                HUDRenderingHandler.onAmmoInspect(
+                        ItemAttributeValues.VisualAmmoInspectValues.getFromPercentage(
+                                helper.getAmmoInGun() / (float) helper.getMagAmmoCapacity()), helper.getAmmoItem());
             }
         });
     }

@@ -1,5 +1,8 @@
 package com.tac.guns.client.render.model.scope;
 
+import static com.tac.guns.client.render.model.internal.MyCachedModels.LPVO_1_6;
+import static com.tac.guns.client.render.model.internal.MyCachedModels.LPVO_1_6_FRONT;
+
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +20,7 @@ import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.attachment.ScopeItem;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -28,9 +31,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-
-import static com.tac.guns.client.render.model.internal.MyCachedModels.LPVO_1_6;
-import static com.tac.guns.client.render.model.internal.MyCachedModels.LPVO_1_6_FRONT;
 
 /**
  * Author: Forked from MrCrayfish, continued by Timeless devs
@@ -77,7 +77,7 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
             // float crop = scopeItem.getProperties().getAdditionalZoom().getDrCropZoom() +
             // scopeData.getDrZoomCropMod();
             float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                    : scopeItem.getAttachment().getAdditionalZoom().getDrCropZoom()
                             + scopeData.getDrZoomCropMod();
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
@@ -173,7 +173,7 @@ public class VortexLPVO_3_6xScopeModel implements IOverrideModel {
                 matrixStack.translate(0, 0, 0.0001);
 
                 int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
-                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
+                        IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
                 float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;

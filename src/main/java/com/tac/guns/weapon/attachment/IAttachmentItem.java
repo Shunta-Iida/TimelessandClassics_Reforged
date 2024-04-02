@@ -9,10 +9,10 @@ import com.tac.guns.weapon.attachment.impl.Attachment;
  * <p>
  * Author: Forked from MrCrayfish, continued by Timeless devs
  */
-public interface IAttachment<T extends Attachment> {
+public interface IAttachmentItem<T extends Attachment> {
     Type getType();
 
-    T getProperties();
+    T getAttachment();
 
     int easyColorStart = 11;
     int easyColorEnd = 13;

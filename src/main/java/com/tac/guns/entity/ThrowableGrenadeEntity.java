@@ -39,7 +39,8 @@ public class ThrowableGrenadeEntity extends ThrowableItemEntity {
     }
 
     @Override
-    protected void defineSynchedData() {}
+    protected void defineSynchedData() {
+    }
 
     @Override
     public void tick() {

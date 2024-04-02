@@ -32,7 +32,7 @@ import com.tac.guns.network.message.MessageCraft;
 import com.tac.guns.tileentity.WorkbenchTileEntity;
 import com.tac.guns.util.InventoryUtil;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -121,7 +121,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
                     weapons_SR.add(recipe);
                 else
                     weapons.add(recipe);
-            } else if (output.getItem() instanceof IAttachment) {
+            } else if (output.getItem() instanceof IAttachmentItem) {
                 attachments.add(recipe);
             } else if (this.isAmmo(output)) {
                 ammo.add(recipe);
@@ -204,7 +204,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchContainer>
         final ResourceLocation id = stack.getItem().getRegistryName();
         Objects.requireNonNull(id);
         for (final GunItem gunItem : NetworkGunManager.getClientRegisteredGuns()) {
-            if (id.equals(gunItem.getModifiedGun(stack.getTag()).getProjectile().getItem())) {
+            if (id.equals(gunItem.getGun(stack.getTag()).getProjectile().getItem())) {
                 return true;
             }
         }

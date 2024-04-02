@@ -22,7 +22,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -64,14 +64,14 @@ public class m4_animation extends SkinnedGunModel {
             // If niether trips, render the cover for the side or top, since only one is
             // accessible at once currently, TODO: Have a more streamlined system to handle
             // multi-accesible attachments
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack)
                     .getItem() == ModItems.BASIC_LASER.get()) {
                 RenderUtil.renderModel(getComponentModel(skin, RAIL_EXTENDED_SIDE), stack, matrices,
                         renderBuffer, light, overlay);
                 RenderUtil.renderModel(getComponentModel(skin, TOP_RAIL_COVER), stack, matrices,
                         renderBuffer, light, overlay);
-            } else if (Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) != ItemStack.EMPTY
-                    && Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack)
+            } else if (Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE, stack) != ItemStack.EMPTY
+                    && Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE, stack)
                             .getItem() == ModItems.IR_LASER.get()) {
                 RenderUtil.renderModel(getComponentModel(skin, RAIL_EXTENDED_TOP), stack, matrices,
                         renderBuffer, light, overlay);
@@ -79,14 +79,16 @@ public class m4_animation extends SkinnedGunModel {
                         renderBuffer, light, overlay);
             }
 
-            if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) == ItemStack.EMPTY
-                    && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) == ItemStack.EMPTY
-                    && Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) == ItemStack.EMPTY) {
+            if (Gun.getAttachment(IAttachmentItem.Type.UNDER_BARREL, stack) == ItemStack.EMPTY
+                    && Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack) == ItemStack.EMPTY
+                    && Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE,
+                            stack) == ItemStack.EMPTY) {
                 RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_DEFAULT), stack, matrices,
                         renderBuffer, light, overlay);
             } else {
-                if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) == ItemStack.EMPTY && Gun
-                        .getAttachment(IAttachment.Type.IR_DEVICE, stack) == ItemStack.EMPTY) {
+                if (Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack) == ItemStack.EMPTY
+                        && Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE,
+                                stack) == ItemStack.EMPTY) {
                     RenderUtil.renderModel(getComponentModel(skin, TOP_RAIL_COVER), stack, matrices,
                             renderBuffer, light, overlay);
                     RenderUtil.renderModel(getComponentModel(skin, SIDE_RAIL_COVER), stack,

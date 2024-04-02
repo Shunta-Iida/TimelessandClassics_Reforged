@@ -11,7 +11,7 @@ import com.tac.guns.weapon.attachment.impl.Barrel;
  * <p>
  * Author: Ocelot, MrCrayfish
  */
-public interface IBarrel extends IAttachment<Barrel> {
+public interface IBarrel extends IAttachmentItem<Barrel> {
     /**
      * @return The type of this attachment
      */

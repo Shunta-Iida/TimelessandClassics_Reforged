@@ -60,13 +60,14 @@ public class WorkbenchBlock extends RotatedObjectBlock implements EntityBlock {
     }
 
     @Override
-    public VoxelShape getOcclusionShape(final BlockState state, final BlockGetter reader, final BlockPos pos) {
+    public VoxelShape getOcclusionShape(final BlockState state, final BlockGetter reader,
+            final BlockPos pos) {
         return this.getShape(state);
     }
 
     @Override
-    public InteractionResult use(final BlockState state, final Level world, final BlockPos pos, final Player playerEntity,
-            final InteractionHand hand, final BlockHitResult result) {
+    public InteractionResult use(final BlockState state, final Level world, final BlockPos pos,
+            final Player playerEntity, final InteractionHand hand, final BlockHitResult result) {
         if (!world.isClientSide()) {
             final BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof MenuProvider) {

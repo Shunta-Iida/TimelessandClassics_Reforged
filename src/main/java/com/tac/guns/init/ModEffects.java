@@ -20,5 +20,6 @@ public class ModEffects {
     public static final RegistryObject<IncurableEffect> DEAFENED =
             REGISTER.register("deafened", () -> new IncurableEffect(MobEffectCategory.HARMFUL, 0));
 
-    public static void init() {};
+    public static void init() {
+    };
 }

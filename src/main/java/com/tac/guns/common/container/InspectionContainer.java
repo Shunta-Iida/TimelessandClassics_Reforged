@@ -2,7 +2,7 @@ package com.tac.guns.common.container;
 
 import com.tac.guns.init.ModContainers;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 public class InspectionContainer extends AbstractContainerMenu {
     private ItemStack weapon;
     private Container playerInventory;
-    private Container weaponInventory = new SimpleContainer(IAttachment.Type.values().length) {
+    private Container weaponInventory = new SimpleContainer(IAttachmentItem.Type.values().length) {
         @Override
         public void setChanged() {
             super.setChanged();
@@ -28,9 +28,9 @@ public class InspectionContainer extends AbstractContainerMenu {
 
     public InspectionContainer(int windowId, Inventory playerInventory, ItemStack stack) {
         this(windowId, playerInventory);
-        ItemStack[] attachments = new ItemStack[IAttachment.Type.values().length];
+        ItemStack[] attachments = new ItemStack[IAttachmentItem.Type.values().length];
         for (int i = 0; i < attachments.length; i++) {
-            attachments[i] = Gun.getAttachment(IAttachment.Type.values()[i], stack);
+            attachments[i] = Gun.getAttachment(IAttachmentItem.Type.values()[i], stack);
         }
         for (int i = 0; i < attachments.length; i++) {
             this.weaponInventory.setItem(i, attachments[i]);

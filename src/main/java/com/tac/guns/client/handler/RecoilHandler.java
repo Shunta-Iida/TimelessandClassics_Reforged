@@ -76,7 +76,7 @@ public class RecoilHandler {
 
         final ItemStack heldItem = event.getStack();
         final GunItem gunItem = (GunItem) heldItem.getItem();
-        final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
+        final Gun modifiedGun = gunItem.getGun(heldItem.getTag());
 
         final float verticalRandomAmount = this.random.nextFloat() * (1.22f - 0.75f) + 0.75f;
 
@@ -198,7 +198,7 @@ public class RecoilHandler {
             return;
 
         final GunItem gunItem = (GunItem) heldItem.getItem();
-        final Gun modifiedGun = gunItem.getModifiedGun(heldItem.getTag());
+        final Gun modifiedGun = gunItem.getGun(heldItem.getTag());
         final float cooldown = (float) this.timer / this.recoilDuration;
 
         final float recoilTimeOffset = modifiedGun.getGeneral().getWeaponRecoilOffset();

@@ -11,7 +11,8 @@ import java.util.function.Supplier;
 
 public class MessageArmorRemove extends PlayMessage<MessageArmorRemove> {
     @Override
-    public void encode(MessageArmorRemove messageArmorRemove, FriendlyByteBuf friendlyByteBuf) {}
+    public void encode(MessageArmorRemove messageArmorRemove, FriendlyByteBuf friendlyByteBuf) {
+    }
 
     @Override
     public MessageArmorRemove decode(FriendlyByteBuf friendlyByteBuf) {

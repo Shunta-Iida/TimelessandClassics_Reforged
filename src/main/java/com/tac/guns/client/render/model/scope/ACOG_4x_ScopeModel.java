@@ -2,22 +2,23 @@ package com.tac.guns.client.render.model.scope;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import com.tac.guns.Config;
 import com.tac.guns.Reference;
 import com.tac.guns.client.GunRenderType;
-import com.tac.guns.client.render.model.internal.MyCachedModels;
 import com.tac.guns.client.handler.AimingHandler;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.handler.command.ScopeEditor;
 import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
+import com.tac.guns.client.render.model.internal.MyCachedModels;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.attachment.ScopeItem;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -100,7 +101,7 @@ public class ACOG_4x_ScopeModel implements IOverrideModel {
                 float reticleSize = scopePrevSize / 16.0F;
                 ScopeItem scopeItem = (ScopeItem) stack.getItem();
                 float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                        : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                        : scopeItem.getAttachment().getAdditionalZoom().getDrCropZoom()
                                 + scopeData.getDrZoomCropMod();// 0.43F
                                                                                                                                                                                                      // 0.1f;
                 Minecraft mc = Minecraft.getInstance();
@@ -201,7 +202,7 @@ public class ACOG_4x_ScopeModel implements IOverrideModel {
                     matrixStack.translate(0, 0, 0.0001);
 
                     int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
-                            IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
+                            IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
                     float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                     float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;

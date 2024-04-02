@@ -25,7 +25,8 @@ public class MessageUpdateGunID extends PlayMessage<MessageUpdateGunID> {
     }
 
     @Override
-    public void encode(MessageUpdateGunID messageUpdateGunID, FriendlyByteBuf buffer) {}
+    public void encode(MessageUpdateGunID messageUpdateGunID, FriendlyByteBuf buffer) {
+    }
 
     @Override
     public MessageUpdateGunID decode(FriendlyByteBuf buffer) {

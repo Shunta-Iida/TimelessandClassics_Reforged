@@ -15,7 +15,7 @@ import com.tac.guns.item.attachment.IrDeviceItem;
 import com.tac.guns.item.attachment.ScopeItem;
 import com.tac.guns.item.attachment.SideRailItem;
 import com.tac.guns.item.gun.GunItem;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -175,7 +175,7 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
 
         if (this.minecraft.player.getMainHandItem().getItem() instanceof IEasyColor)
             // TODO: Sync attachment slot rendering with iteration from AttachmentContainer
-            for (int i = 9; i < IAttachment.Type.values().length; i++) {
+            for (int i = 9; i < IAttachmentItem.Type.values().length; i++) {
                 if (i == 8 && !this.menu.getSlot(i).isActive()) {
                     this.blit(matrixStack, left + 70, top + 50 + (i - 7) * 18, 176, 16, 16, 16);
                 } else if (i == 8 && this.weaponInventory.getItem(i).isEmpty()) {
@@ -263,7 +263,7 @@ public class AttachmentScreen extends AbstractContainerScreen<AttachmentContaine
          * }
          */
         else
-            for (int i = 0; i < IAttachment.Type.values().length - 7; i++) {
+            for (int i = 0; i < IAttachmentItem.Type.values().length - 7; i++) {
                 if (!this.menu.getSlot(i).isActive()) {
                     if (i > 3)
                         this.blit(matrixStack, left + 155, top + 17 + (i - 4) * 18, 176, 0, 16, 16);

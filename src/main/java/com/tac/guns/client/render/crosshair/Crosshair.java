@@ -41,17 +41,20 @@ public abstract class Crosshair implements IResourceLocation {
      * @param partialTicks
      */
     public void render(Minecraft mc, PoseStack stack, int windowWidth, int windowHeight,
-            float partialTicks) {}
+            float partialTicks) {
+    }
 
     /**
      * Ticks the crosshair for any logic
      */
-    public void tick() {}
+    public void tick() {
+    }
 
     /**
      * Called when the held gun is fired
      */
-    public void onGunFired() {}
+    public void onGunFired() {
+    }
 
     /**
      * Gets the id of the crosshair

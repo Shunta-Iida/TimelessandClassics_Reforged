@@ -57,8 +57,8 @@ public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock
     }
 
     @Override
-    public @NotNull VoxelShape getShape(final BlockState state, final BlockGetter reader, final BlockPos pos,
-            final CollisionContext context) {
+    public @NotNull VoxelShape getShape(final BlockState state, final BlockGetter reader,
+            final BlockPos pos, final CollisionContext context) {
         return this.getShape(state);
     }
 
@@ -69,8 +69,9 @@ public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock
     }
 
     @Override
-    public @NotNull InteractionResult use(final BlockState state, final Level world, final BlockPos pos,
-            final Player playerEntity, final InteractionHand hand, final BlockHitResult result) {
+    public @NotNull InteractionResult use(final BlockState state, final Level world,
+            final BlockPos pos, final Player playerEntity, final InteractionHand hand,
+            final BlockHitResult result) {
         if (!world.isClientSide()) {
             final BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof MenuProvider) {
@@ -83,8 +84,8 @@ public class UpgradeBenchBlock extends RotatedObjectBlock implements EntityBlock
     }
 
     @Override
-    public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos, final BlockState newState,
-            final boolean isMoving) {
+    public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos,
+            final BlockState newState, final boolean isMoving) {
         if (state.hasBlockEntity() && state.getBlock() != newState.getBlock()) {
             Block.popResource(worldIn, pos,
                     ((UpgradeBenchTileEntity) worldIn.getBlockEntity(pos)).getInventory().get(0));

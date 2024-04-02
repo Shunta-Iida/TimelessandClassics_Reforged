@@ -42,6 +42,7 @@ public class CacheableModel {
         }
 
         @Override
-        public void cleanCache() {}
+        public void cleanCache() {
+        }
     };
 }

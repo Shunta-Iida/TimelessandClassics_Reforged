@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 public class MessageRemoveProjectile extends PlayMessage<MessageRemoveProjectile> {
     private int entityId;
 
-    public MessageRemoveProjectile() {}
+    public MessageRemoveProjectile() {
+    }
 
     public MessageRemoveProjectile(int entityId) {
         this.entityId = entityId;

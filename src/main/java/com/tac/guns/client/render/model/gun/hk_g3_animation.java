@@ -29,7 +29,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -60,20 +60,20 @@ public class hk_g3_animation extends SkinnedGunModel {
                         renderBuffer, light, overlay);
             }
 
-            if (Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack)
                     .getItem() == ModItems.BASIC_LASER.orElse(ItemStack.EMPTY.getItem())) {
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC_DEVICE),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                         renderBuffer, light, overlay);
                 RenderUtil.renderLaserModuleModel(getComponentModel(skin, LASER_BASIC),
-                        Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack), matrices,
+                        Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack), matrices,
                         renderBuffer, 15728880, overlay); // 15728880 For fixed max light
                 RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_EXTENDED), stack,
                         matrices, renderBuffer, light, overlay);
             } else {
-                if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack)
+                if (Gun.getAttachment(IAttachmentItem.Type.UNDER_BARREL, stack)
                         .getItem() == ModItems.LIGHT_GRIP.orElse(ItemStack.EMPTY.getItem())
-                        || Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack)
+                        || Gun.getAttachment(IAttachmentItem.Type.UNDER_BARREL, stack)
                                 .getItem() == ModItems.SPECIALISED_GRIP
                                         .orElse(ItemStack.EMPTY.getItem())) {
                     RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_EXTENDED), stack,

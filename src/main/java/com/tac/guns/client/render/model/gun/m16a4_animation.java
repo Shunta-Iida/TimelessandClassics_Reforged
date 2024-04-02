@@ -20,7 +20,7 @@ import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -55,9 +55,10 @@ public class m16a4_animation extends SkinnedGunModel {
                 RenderUtil.renderModel(getComponentModel(skin, CARRY), stack, matrices,
                         renderBuffer, light, overlay);
             }
-            if (Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) == ItemStack.EMPTY
-                    && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) == ItemStack.EMPTY
-                    && Gun.getAttachment(IAttachment.Type.IR_DEVICE, stack) == ItemStack.EMPTY) {
+            if (Gun.getAttachment(IAttachmentItem.Type.UNDER_BARREL, stack) == ItemStack.EMPTY
+                    && Gun.getAttachment(IAttachmentItem.Type.SIDE_RAIL, stack) == ItemStack.EMPTY
+                    && Gun.getAttachment(IAttachmentItem.Type.IR_DEVICE,
+                            stack) == ItemStack.EMPTY) {
                 RenderUtil.renderModel(getComponentModel(skin, HAND_GUARD_DEFAULT), stack, matrices,
                         renderBuffer, light, overlay);
             } else {

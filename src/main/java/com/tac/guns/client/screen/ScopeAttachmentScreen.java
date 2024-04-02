@@ -11,7 +11,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.common.container.AttachmentContainer;
 import com.tac.guns.item.attachment.ScopeItem;
 import com.tac.guns.item.gun.GunItem;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -67,10 +67,10 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
         int startX = (this.width - this.imageWidth) / 2;
         int startY = (this.height - this.imageHeight) / 2;
 
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
             if (RenderUtil.isMouseWithin(mouseX, mouseY, startX + 7, startY + 16 + i * 18, 18,
                     18)) {
-                IAttachment.Type type = IAttachment.Type.values()[i];
+                IAttachmentItem.Type type = IAttachmentItem.Type.values()[i];
                 if (!this.menu.getSlot(i).isActive()) {
                     this.renderComponentTooltip(matrixStack, Arrays.asList(
                             new TranslatableComponent(
@@ -166,7 +166,7 @@ public class ScopeAttachmentScreen extends AbstractContainerScreen<AttachmentCon
          * Draws the icons for each attachment slot. If not applicable
          * for the weapon, it will draw a cross instead.
          */
-        for (int i = 0; i < IAttachment.Type.values().length; i++) {
+        for (int i = 0; i < IAttachmentItem.Type.values().length; i++) {
             if (!this.menu.getSlot(i).isActive()) {
                 this.blit(matrixStack, left + 8, top + 17 + i * 18, 176, 0, 16, 16);
             } else if (this.weaponInventory.getItem(i).isEmpty()) {

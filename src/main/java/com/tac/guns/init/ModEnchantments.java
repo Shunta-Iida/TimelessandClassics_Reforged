@@ -41,5 +41,6 @@ public class ModEnchantments {
     // public static final RegistryObject<Enchantment> Reliability =
     // REGISTER.register("reliability", AcceleratorEnchantment::new); // TO-RENAME
 
-    public static void init() {};
+    public static void init() {
+    };
 }

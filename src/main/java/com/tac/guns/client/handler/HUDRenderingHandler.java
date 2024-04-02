@@ -20,6 +20,8 @@ import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.common.ReloadTracker;
 import com.tac.guns.duck.PlayerWithSynData;
+import com.tac.guns.item.ItemAttributeValues;
+import com.tac.guns.item.ammo.AmmoItem;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.util.WearableHelper;
 import com.tac.guns.weapon.Gun;
@@ -30,6 +32,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -37,12 +40,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class HUDRenderingHandler extends GuiComponent {
     private static HUDRenderingHandler instance;
+    private static int ammoInspectCounter = 0;
+    private static ItemAttributeValues.VisualAmmoInspectValues ammoInspectValue = null;
+    private static AmmoItem ammoItem;
 
     private static final ResourceLocation[] AMMO_ICONS = new ResourceLocation[] {
             new ResourceLocation(Reference.MOD_ID, "textures/gui/counterassule_rifle.png"),
@@ -74,9 +82,11 @@ public class HUDRenderingHandler extends GuiComponent {
     };
 
     public static HUDRenderingHandler get() {
-        return HUDRenderingHandler.instance == null
-                ? HUDRenderingHandler.instance = new HUDRenderingHandler()
-                : HUDRenderingHandler.instance;
+        if (HUDRenderingHandler.instance == null) {
+            HUDRenderingHandler.instance = new HUDRenderingHandler();
+        }
+
+        return HUDRenderingHandler.instance;
     }
 
     private HUDRenderingHandler() {
@@ -86,12 +96,16 @@ public class HUDRenderingHandler extends GuiComponent {
     private final int tickCount = 0;
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public void tick(final TickEvent.ClientTickEvent e) {
         if (e.phase != TickEvent.Phase.END)
             return;
         final Player player = Minecraft.getInstance().player;
         if (player == null)
             return;
+        if (HUDRenderingHandler.ammoInspectCounter > 0) {
+            HUDRenderingHandler.ammoInspectCounter--;
+        }
         if (player.getMainHandItem().getItem() instanceof GunItem) {
             final GunItem gunItem = (GunItem) player.getMainHandItem().getItem();
             this.ammoReserveCount = ReloadTracker.calcMaxReserveAmmo(
@@ -104,6 +118,7 @@ public class HUDRenderingHandler extends GuiComponent {
             // if(gunItem.getGun().getProjectile().getItem().compareTo(heldAmmoID) != 0 ||
             // ammoReserveCount == 0) {
             // }
+
         }
     }
 
@@ -182,6 +197,7 @@ public class HUDRenderingHandler extends GuiComponent {
     public float hitMarkerTracker = 0;
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public void onOverlayRender(final RenderGameOverlayEvent.Post event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
@@ -202,8 +218,12 @@ public class HUDRenderingHandler extends GuiComponent {
                 Config.CLIENT.weaponGUI.weaponFireMode.weaponFireModeSize.get().floatValue();
         final float configScaleWeaponReloadBar =
                 Config.CLIENT.weaponGUI.weaponReloadTimer.weaponReloadTimerSize.get().floatValue();
+        final float configScaleWeaponAmmoInspect =
+                Config.CLIENT.weaponGUI.weaponAmmoInspectText.weaponAmmoInspectTextSize.get()
+                        .floatValue();
 
         final float counterSize = 1.8F * configScaleWeaponCounter;
+        final float ammoInspectSize = 1.5F * configScaleWeaponAmmoInspect;
         final float fireModeSize = 32.0F * configScaleWeaponFireMode;
         final float ReloadBarSize = 32.0F * configScaleWeaponReloadBar;
 
@@ -339,6 +359,42 @@ public class HUDRenderingHandler extends GuiComponent {
          * stack.pop();
          * }
          */
+
+        if (Config.CLIENT.weaponGUI.weaponAmmoInspectText.showWeaponAmmoInspectText.get()) {
+            if (HUDRenderingHandler.ammoInspectCounter > 0) {
+                final float opacity =
+                        Math.min(20f, (float) HUDRenderingHandler.ammoInspectCounter) / 20f;
+                final int alpha = (int) (opacity * 256 - 1) << 24;
+                final String label = HUDRenderingHandler.ammoInspectValue.getLabel();
+                final float x = (anchorPointX - (ammoInspectSize * 32) / 2)
+                        + (-Config.CLIENT.weaponGUI.weaponAmmoInspectText.x.get().floatValue())
+                        - 44;
+
+                stack.pushPose();
+                {
+                    stack.translate(x, (anchorPointY - (ammoInspectSize * 32) / 4)
+                            + (-Config.CLIENT.weaponGUI.weaponAmmoInspectText.y.get().floatValue()),
+                            0);
+                    stack.scale(ammoInspectSize, ammoInspectSize, ammoInspectSize);
+                    GuiComponent.drawString(stack, Minecraft.getInstance().font, label, 0, 0,
+                            0xffffff | alpha);
+                }
+                stack.popPose();
+
+                stack.pushPose();
+                {
+                    final Component component = HUDRenderingHandler.ammoItem.getName(heldItem);
+                    stack.translate(x, (anchorPointY - (ammoInspectSize * 32) / 4)
+                            + (-Config.CLIENT.weaponGUI.weaponAmmoInspectText.y.get().floatValue())
+                            + ammoInspectSize * 8 + 2, 0);
+                    stack.scale(ammoInspectSize * 0.6f, ammoInspectSize * 0.6f,
+                            ammoInspectSize * 0.6f);
+                    GuiComponent.drawString(stack, Minecraft.getInstance().font, component, 0, 0,
+                            0xaeaeae | alpha);
+                }
+                stack.popPose();
+            }
+        }
 
         if (!(Minecraft.getInstance().player.getItemInHand(InteractionHand.MAIN_HAND)
                 .getItem() instanceof GunItem))
@@ -660,6 +716,19 @@ public class HUDRenderingHandler extends GuiComponent {
                 RenderSystem.disableDepthTest();
             }
         }
+    }
+
+    public static void onAmmoInspect(
+            final ItemAttributeValues.VisualAmmoInspectValues ammoInspectValue,
+            final AmmoItem ammoItem) {
+        HUDRenderingHandler.ammoInspectCounter = 60;
+        HUDRenderingHandler.ammoInspectValue = ammoInspectValue;
+        HUDRenderingHandler.ammoItem = ammoItem;
+    }
+
+    public static void resetAmmoInspect() {
+        HUDRenderingHandler.ammoInspectCounter = 0;
+        HUDRenderingHandler.ammoInspectValue = null;
     }
     /*
      * if (Minecraft.getInstance().gameSettings.viewBobbing) {

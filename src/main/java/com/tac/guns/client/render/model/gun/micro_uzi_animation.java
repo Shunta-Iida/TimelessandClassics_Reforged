@@ -1,9 +1,5 @@
 package com.tac.guns.client.render.model.gun;
 
-import static com.tac.guns.client.render.model.CommonComponents.BODY;
-import static com.tac.guns.client.render.model.CommonComponents.BOLT;
-import static com.tac.guns.client.render.model.CommonComponents.STOCK_DEFAULT;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.MAC10AnimationController;
@@ -11,11 +7,12 @@ import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
 import com.tac.guns.client.render.gunskin.GunSkin;
+import com.tac.guns.client.render.model.CommonComponents;
 import com.tac.guns.client.render.model.SkinnedGunModel;
 import com.tac.guns.client.render.model.internal.TacGunComponents;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.gun.GunItem;
-import com.tac.guns.util.GunModifierHelper;
+import com.tac.guns.item.gun.GunItemHelper;
 import com.tac.guns.weapon.Gun;
 
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -35,50 +32,54 @@ public class micro_uzi_animation extends SkinnedGunModel {
 
     // The render method, similar to what is in DartEntity. We can render the item
     @Override
-    public void render(GunSkin skin, float partialTicks, ItemTransforms.TransformType transformType,
-            ItemStack stack, LivingEntity entity, PoseStack matrices,
-            MultiBufferSource renderBuffer, int light, int overlay) {
-        MAC10AnimationController controller = MAC10AnimationController.getInstance();
+    public void render(final GunSkin skin, final float partialTicks,
+            final ItemTransforms.TransformType transformType, final ItemStack stack,
+            final LivingEntity entity, final PoseStack matrices,
+            final MultiBufferSource renderBuffer, final int light, final int overlay) {
+        final MAC10AnimationController controller = MAC10AnimationController.getInstance();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+            controller.applySpecialModelTransform(
+                    this.getComponentModel(skin, CommonComponents.BODY),
                     MAC10AnimationController.INDEX_BODY, transformType, matrices);
-            if (GunModifierHelper.getAmmoCapacityWeight(stack) > 0) {
-                RenderUtil.renderModel(getComponentModel(skin, STOCK_DEFAULT), stack, matrices,
-                        renderBuffer, light, overlay);
+            if (GunItemHelper.of(stack).getAmmoCapacityWeight() > 0) {
+                RenderUtil.renderModel(this.getComponentModel(skin, CommonComponents.STOCK_DEFAULT),
+                        stack, matrices, renderBuffer, light, overlay);
             } else {
-                RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.STOCK_FOLDED),
+                RenderUtil.renderModel(this.getComponentModel(skin, TacGunComponents.STOCK_FOLDED),
                         stack, matrices, renderBuffer, light, overlay);
             }
-            RenderUtil.renderModel(getComponentModel(skin, BODY), stack, matrices, renderBuffer,
-                    light, overlay);
+            RenderUtil.renderModel(this.getComponentModel(skin, CommonComponents.BODY), stack,
+                    matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+            controller.applySpecialModelTransform(
+                    this.getComponentModel(skin, CommonComponents.BODY),
                     MAC10AnimationController.INDEX_MAGAZINE, transformType, matrices);
-            renderMag(stack, matrices, renderBuffer, light, overlay, skin);
+            this.renderMag(stack, matrices, renderBuffer, light, overlay, skin);
         }
         matrices.popPose();
 
         matrices.pushPose();
         {
-            controller.applySpecialModelTransform(getComponentModel(skin, BODY),
+            controller.applySpecialModelTransform(
+                    this.getComponentModel(skin, CommonComponents.BODY),
                     MAC10AnimationController.INDEX_BOLT, transformType, matrices);
 
-            Gun gun = ((GunItem) stack.getItem()).getGun();
-            float cooldownOg = ShootingHandler.get().getshootMsGap()
+            final Gun gun = ((GunItem) stack.getItem()).getGun();
+            final float cooldownOg = ShootingHandler.get().getshootMsGap()
                     / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1
                             : ShootingHandler.get().getshootMsGap()
                                     / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
 
             if (transformType.firstPerson()) {
-                AnimationMeta reloadEmpty = controller
+                final AnimationMeta reloadEmpty = controller
                         .getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-                boolean shouldOffset =
+                final boolean shouldOffset =
                         reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation())
                                 && controller.isAnimationRunning();
                 if (!shouldOffset && !Gun.hasAmmo(stack)) {
@@ -87,8 +88,8 @@ public class micro_uzi_animation extends SkinnedGunModel {
                     matrices.translate(0, 0, -0.25 + Math.pow(cooldownOg - 0.5, 2));
                 }
             }
-            RenderUtil.renderModel(getComponentModel(skin, BOLT), stack, matrices, renderBuffer,
-                    light, overlay);
+            RenderUtil.renderModel(this.getComponentModel(skin, CommonComponents.BOLT), stack,
+                    matrices, renderBuffer, light, overlay);
         }
         matrices.popPose();
 

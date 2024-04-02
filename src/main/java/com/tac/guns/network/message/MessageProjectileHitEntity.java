@@ -17,7 +17,8 @@ public class MessageProjectileHitEntity extends PlayMessage<MessageProjectileHit
     private int type;
     private boolean player;
 
-    public MessageProjectileHitEntity() {}
+    public MessageProjectileHitEntity() {
+    }
 
     public MessageProjectileHitEntity(double x, double y, double z, int type, boolean player) {
         this.x = x;

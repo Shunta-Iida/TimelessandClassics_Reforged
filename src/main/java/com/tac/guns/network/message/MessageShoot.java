@@ -18,7 +18,8 @@ public class MessageShoot extends PlayMessage<MessageShoot> {
     private float randP;
     private float randY;
 
-    public MessageShoot() {}
+    public MessageShoot() {
+    }
 
     public MessageShoot(float yaw, float pitch, float randP, float randY) {
         this.rotationPitch = pitch;

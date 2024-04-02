@@ -31,8 +31,8 @@ public class BulletHoleParticle extends TextureSheetParticle {
     private int vOffset;
     private float textureDensity;
 
-    public BulletHoleParticle(final ClientLevel world, final double x, final double y, final double z, final Direction direction,
-            final BlockPos pos) {
+    public BulletHoleParticle(final ClientLevel world, final double x, final double y,
+            final double z, final Direction direction, final BlockPos pos) {
         super(world, x, y, z);
         this.setSprite(this.getSprite(pos));
         this.direction = direction;
@@ -56,7 +56,8 @@ public class BulletHoleParticle extends TextureSheetParticle {
         this.alpha = 0.9F;
     }
 
-    private int getBlockColor(final BlockState state, final Level world, final BlockPos pos, final Direction direction) {
+    private int getBlockColor(final BlockState state, final Level world, final BlockPos pos,
+            final Direction direction) {
         // Add an exception for grass blocks
         if (state.getBlock() == Blocks.GRASS_BLOCK)
             return Integer.MAX_VALUE;
@@ -112,11 +113,15 @@ public class BulletHoleParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(final VertexConsumer buffer, final Camera renderInfo, final float partialTicks) {
+    public void render(final VertexConsumer buffer, final Camera renderInfo,
+            final float partialTicks) {
         final Vec3 view = renderInfo.getPosition();
-        final float particleX = (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - view.x());
-        final float particleY = (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - view.y());
-        final float particleZ = (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - view.z());
+        final float particleX =
+                (float) (Mth.lerp((double) partialTicks, this.xo, this.x) - view.x());
+        final float particleY =
+                (float) (Mth.lerp((double) partialTicks, this.yo, this.y) - view.y());
+        final float particleZ =
+                (float) (Mth.lerp((double) partialTicks, this.zo, this.z) - view.z());
         final Quaternion quaternion = this.direction.getRotation();
         final Vector3f[] points =
                 new Vector3f[] {new Vector3f(-1.0F, 0.0F, -1.0F), new Vector3f(-1.0F, 0.0F, 1.0F),

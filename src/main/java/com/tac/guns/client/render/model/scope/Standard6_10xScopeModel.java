@@ -19,7 +19,7 @@ import com.tac.guns.client.handler.command.data.ScopeData;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.attachment.ScopeItem;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -75,7 +75,7 @@ public class Standard6_10xScopeModel implements IOverrideModel {
             final float reticleSize = scopePrevSize / 16.0F;
 
             final float crop = Config.CLIENT.quality.worldRerenderPiPAlpha.get() ? 0.1f
-                    : scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
+                    : scopeItem.getAttachment().getAdditionalZoom().getDrCropZoom()
                             + scopeData.getDrZoomCropMod();// scopeItem.getProperties().getAdditionalZoom().getDrCropZoom()
                                                                                                                                                                                                        // +
                                                                                                                                                                                                        // scopeData.getDrZoomCropMod();
@@ -128,7 +128,7 @@ public class Standard6_10xScopeModel implements IOverrideModel {
                 matrixStack.translate(0, 0, 0.0001);
 
                 final int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
-                        IAttachment.Type.SCOPE_RETICLE_COLOR, 1);
+                        IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
                 final float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
                 final float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;

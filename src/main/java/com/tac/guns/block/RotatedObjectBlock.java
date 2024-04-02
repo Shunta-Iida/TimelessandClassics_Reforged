@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 public abstract class RotatedObjectBlock extends HorizontalDirectionalBlock {
     public RotatedObjectBlock(final Block.Properties properties) {
         super(properties);
-        this.registerDefaultState(
-                this.getStateDefinition().any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
     }
 
     @Override
@@ -27,11 +27,13 @@ public abstract class RotatedObjectBlock extends HorizontalDirectionalBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(final BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.getHorizontalDirection());
+        return this.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING,
+                context.getHorizontalDirection());
     }
 
     @Override
-    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(
+            final StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(HorizontalDirectionalBlock.FACING);
     }

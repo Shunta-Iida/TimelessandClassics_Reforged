@@ -21,7 +21,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -48,7 +48,7 @@ public class uzi_animation extends SkinnedGunModel {
                 RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.STOCK_FOLDED),
                         stack, matrices, renderBuffer, light, overlay);
             }
-            if (Gun.getAttachment(IAttachment.Type.PISTOL_BARREL, stack)
+            if (Gun.getAttachment(IAttachmentItem.Type.PISTOL_BARREL, stack)
                     .getItem() == ModItems.PISTOL_SILENCER.get()) {
                 RenderUtil.renderModel(getComponentModel(skin, MUZZLE_SILENCER), stack, matrices,
                         renderBuffer, light, overlay);

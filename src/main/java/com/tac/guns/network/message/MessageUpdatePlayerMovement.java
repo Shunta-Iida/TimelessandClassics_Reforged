@@ -23,7 +23,8 @@ public class MessageUpdatePlayerMovement extends PlayMessage<MessageUpdatePlayer
         return new MessageUpdatePlayerMovement(buffer.readBoolean());
     }
 
-    public MessageUpdatePlayerMovement() {}
+    public MessageUpdatePlayerMovement() {
+    }
 
     private boolean handle;
 

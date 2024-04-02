@@ -43,17 +43,17 @@ public class ModBlocks {
      * UpgradeBenchBlock(Block.Properties.of(Material.METAL).strength(3F))
      * {
      *//*
-              * @Override
-              * public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state)
-              * {
-              * Block.spawnAsEntity((World) worldIn,pos,
-              * this.getBlock().getItem(worldIn,pos,state));
-              * }
-              *//*
-                       * },true);
-                       */
+                       * @Override
+                       * public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state)
+                       * {
+                       * Block.spawnAsEntity((World) worldIn,pos,
+                       * this.getBlock().getItem(worldIn,pos,state));
+                       * }
+                       *//*
+                                         * },true);
+                                         */
     public static final RegistryObject<Block> FLASHLIGHT_BLOCK =
-            ModBlocks.register("flashlight", FlashLightBlock::new, false);
+            ModBlocks.register("flashlight", FlashLightBlock::new, null);
 
     private static <T extends Block> RegistryObject<T> register(final String id,
             final Supplier<T> blockSupplier, final boolean grouped) {
@@ -62,7 +62,8 @@ public class ModBlocks {
                         : new Item.Properties().tab(CreativeModeTab.TAB_SEARCH)));
     }
 
-    public static void init() {};
+    public static void init() {
+    };
 
     private static <T extends Block> RegistryObject<T> register(final String id,
             final Supplier<T> blockSupplier, @Nullable final Function<T, BlockItem> supplier) {

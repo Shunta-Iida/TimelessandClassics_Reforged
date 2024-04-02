@@ -10,7 +10,8 @@
     "common.PlayerMixin",
     "common.ServerPlayerMixin",
     "common.ServerPlayNetHandlerMixin",
-    "common.SittingPhaseMixin"
+    "common.SittingPhaseMixin",
+    "common.ItemRendererMixin"
   ],
   "client": [
     "client.FirstPersonRendererMixin",

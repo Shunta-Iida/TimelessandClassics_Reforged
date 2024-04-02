@@ -21,7 +21,7 @@ import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.item.gun.GunItem;
 import com.tac.guns.weapon.Gun;
-import com.tac.guns.weapon.attachment.IAttachment;
+import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -45,9 +45,9 @@ public class timeless_50_animation extends SkinnedGunModel {
             MultiBufferSource renderBuffer, int light, int overlay) {
         Timeless50AnimationController controller = Timeless50AnimationController.getInstance();
 
-        boolean renderClumsy = Gun.getAttachment(IAttachment.Type.BARREL, stack)
+        boolean renderClumsy = Gun.getAttachment(IAttachmentItem.Type.BARREL, stack)
                 .getItem() == ModItems.MUZZLE_BRAKE.get()
-                || Gun.getAttachment(IAttachment.Type.BARREL, stack)
+                || Gun.getAttachment(IAttachmentItem.Type.BARREL, stack)
                         .getItem() == ModItems.MUZZLE_COMPENSATOR.get();
         double yAdjust = 0; // Neko accidently made the .50 slightly too high in model space compared to the
                             // STI
@@ -62,7 +62,7 @@ public class timeless_50_animation extends SkinnedGunModel {
                         stack, matrices, renderBuffer, light, overlay);
                 RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.CLUMSYYY), stack,
                         matrices, renderBuffer, 15728880, overlay);
-            } else if (Gun.getAttachment(IAttachment.Type.BARREL, stack)
+            } else if (Gun.getAttachment(IAttachmentItem.Type.BARREL, stack)
                     .getItem() == ModItems.SILENCER.get()) {
                 RenderUtil.renderModel(getComponentModel(skin, TacGunComponents.BARREL_STANDARD),
                         stack, matrices, renderBuffer, light, overlay);
