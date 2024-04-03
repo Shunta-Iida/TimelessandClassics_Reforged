@@ -226,4 +226,21 @@ public class GunItemHelper {
         return this.gunItem.getAmmoItem();
     }
 
+    public ItemAttributeValues.FireMode getCurrentFireMode() {
+        return ItemAttributeValues.FireMode
+                .fromInt(this.gunItemStack.getTag().getInt(ItemAttributes.Gun.CURRENT_FIRE_MODE));
+    }
+
+    public ItemAttributeValues.FireMode getNextFireMode() {
+        final int[] modes = this.gunItem.getGun().getGeneral().getRateSelector();
+
+        for (int i = 0; i < modes.length; i++) {
+            if (modes[i] == this.getCurrentFireMode().ordinal()) {
+                return ItemAttributeValues.FireMode.fromInt(modes[(i + 1) % modes.length]);
+            }
+        }
+
+        return ItemAttributeValues.FireMode.SAFETY;
+    }
+
 }

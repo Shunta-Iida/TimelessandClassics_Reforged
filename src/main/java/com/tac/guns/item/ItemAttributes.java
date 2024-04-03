@@ -13,6 +13,8 @@ public interface ItemAttributes {
         public static final String GUN = "Gun";
         public static final String CUSTOM = "Custom";
         public static final String ATTACHMENTS = "Attachments";
+
+        public static final String CURRENT_FIRE_MODE = "CurrentFireMode";
     }
 
     public interface Attachment {

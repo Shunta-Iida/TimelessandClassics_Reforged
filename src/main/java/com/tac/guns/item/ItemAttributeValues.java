@@ -18,6 +18,43 @@ public interface ItemAttributeValues {
         }
     }
 
+    enum FireMode {
+        SAFETY("Safety"),
+
+        SINGLE("Single fire"),
+
+        AUTO("Full Auto"),
+
+        THREE_ROUND_BURST("Burst"),
+
+        SPECIAL_1("Special 1"),
+
+        SPECIAL_2("Special 2");
+
+        private final String label;
+
+        FireMode(final String label) {
+            this.label = label;
+        }
+
+        public static FireMode fromInt(final int value) {
+            for (final FireMode mode : FireMode.values()) {
+                if (mode.ordinal() == value) {
+                    return mode;
+                }
+            }
+            return SAFETY;
+        }
+
+        public int toInt() {
+            return this.ordinal();
+        }
+
+        public String getLabel() {
+            return this.label;
+        }
+    }
+
     enum VisualAmmoInspectValues {
 
         EMPTY(0f, "empty", "empty"),

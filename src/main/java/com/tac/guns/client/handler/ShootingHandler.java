@@ -262,17 +262,6 @@ public class ShootingHandler {
                     event.setSwingHand(false);
                 }
 
-                if (this.emptyCheckCountDown > this.emptyCheckCoolDown) {
-                    if (this.magError(player, heldItem)) {
-                        this.emptyCheckCountDown = 0;
-                        player.displayClientMessage(new TranslatableComponent("info.tac.mag_error")
-                                .withStyle(ChatFormatting.UNDERLINE).withStyle(ChatFormatting.BOLD)
-                                .withStyle(ChatFormatting.RED), true);
-                        PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
-                        return;
-                    }
-                }
-
                 if (heldItem.getTag().getInt("CurrentFireMode") == 3 && this.burstCooldown == 0
                         && !this.isPressed) {
                     this.isPressed = true;
@@ -295,6 +284,7 @@ public class ShootingHandler {
                                         .withStyle(ChatFormatting.BOLD)
                                         .withStyle(ChatFormatting.RED),
                                 true);
+
                         PacketHandler.getPlayChannel().sendToServer(new MessageEmptyMag());
                     }
                 }
@@ -402,6 +392,7 @@ public class ShootingHandler {
             ShootingHandler.shootMsGap = ShootingHandler.calcShootTickGap((int) rpm);
             RecoilHandler.get().lastRandPitch = RecoilHandler.get().lastRandPitch;
             RecoilHandler.get().lastRandYaw = RecoilHandler.get().lastRandYaw;
+            
             PacketHandler.getPlayChannel()
                     .sendToServer(new MessageShoot(player.getViewYRot(1), player.getViewXRot(1),
                             RecoilHandler.get().lastRandPitch, RecoilHandler.get().lastRandYaw));

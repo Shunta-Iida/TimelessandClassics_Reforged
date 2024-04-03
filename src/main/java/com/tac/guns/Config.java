@@ -279,6 +279,7 @@ public class Config {
 
     public static class WeaponFireMode {
         public final ForgeConfigSpec.BooleanValue showWeaponFireMode;
+        public final ForgeConfigSpec.BooleanValue showWeaponFireModeText;
         public final ForgeConfigSpec.DoubleValue weaponFireModeSize;
 
         public final ForgeConfigSpec.DoubleValue x;
@@ -290,6 +291,9 @@ public class Config {
                 this.showWeaponFireMode =
                         builder.comment("Display the weapon's fire mode on your HUD.")
                                 .define("showWeaponFireMode", true);
+                this.showWeaponFireModeText = builder.comment(
+                        "Display the weapon's fire mode text on your HUD. If false, the fire mode will be displayed as an icon.")
+                        .define("showWeaponFireModeText", true);
                 this.weaponFireModeSize =
                         builder.comment("Size of the weapon's fire mode on your HUD")
                                 .defineInRange("weaponFireModeSize", 1.0, 0.01, 4.0);
