@@ -11,11 +11,6 @@
         "linux/amd64"
     ],
     "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "none",
-            "installMaven": "true",
-            "installGradle": "true"
-        },
         "ghcr.io/devcontainers/features/git-lfs:1": {}
     },
     "customizations": {
