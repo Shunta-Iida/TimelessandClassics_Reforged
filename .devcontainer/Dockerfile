@@ -1,0 +1,1 @@
+FROM --platform=linux/amd64 openjdk:17
