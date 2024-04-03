@@ -3,14 +3,13 @@
 {
     "name": "Java",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "runArgs": [
-        "--platform",
-        "linux/amd64"
-    ],
+    "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
     "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "none",
+            "installMaven": "true",
+            "installGradle": "true"
+        },
         "ghcr.io/devcontainers/features/git-lfs:1": {}
     },
     "customizations": {
