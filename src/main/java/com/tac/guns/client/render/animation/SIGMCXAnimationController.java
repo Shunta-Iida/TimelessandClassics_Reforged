@@ -1,14 +1,16 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
 import com.tac.guns.client.render.animation.module.Animations;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
 
-import java.io.IOException;
+import net.minecraft.resources.ResourceLocation;
 
 public class SIGMCXAnimationController extends GunAnimationController {
     public static int INDEX_BODY = 5;
@@ -20,17 +22,17 @@ public class SIGMCXAnimationController extends GunAnimationController {
     public static int INDEX_HANDLE2 = 1;
 
     public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/sig_mcx_spear_reload_norm.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_reload_norm.gltf"));
     public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/sig_mcx_spear_reload_empty.gltf"));
-    public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sig_mcx_spear_draw.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sig_mcx_spear_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sig_mcx_spear_inspect.gltf"));
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sig_mcx_spear_static.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sig_mcx_spear_static.gltf"));
     private static final SIGMCXAnimationController instance = new SIGMCXAnimationController();
 
     private SIGMCXAnimationController() {

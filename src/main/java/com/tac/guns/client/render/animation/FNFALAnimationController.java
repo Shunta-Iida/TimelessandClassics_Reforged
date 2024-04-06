@@ -1,14 +1,16 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
 import com.tac.guns.client.render.animation.module.Animations;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
 
-import java.io.IOException;
+import net.minecraft.resources.ResourceLocation;
 
 public class FNFALAnimationController extends GunAnimationController {
     public static int INDEX_BODY = 4;
@@ -18,18 +20,18 @@ public class FNFALAnimationController extends GunAnimationController {
     public static int INDEX_BOLT = 2;
     public static int INDEX_HANDLE = 3;
 
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_reload_empty.gltf"));
-    public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_draw.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/fn_fal_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/fn_fal_inspect.gltf"));
     private static final FNFALAnimationController instance = new FNFALAnimationController();
 
     private FNFALAnimationController() {

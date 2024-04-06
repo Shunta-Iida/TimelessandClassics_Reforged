@@ -1,11 +1,17 @@
 package com.tac.guns.client.render.animation;
 
-import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
-import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
-
 import java.io.IOException;
+
+import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.CameraAnimated;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.init.ModItems;
+
+import net.minecraft.resources.ResourceLocation;
 
 public class P90AnimationController extends GunAnimationController implements CameraAnimated {
     public static int INDEX_BODY = 2;
@@ -16,18 +22,18 @@ public class P90AnimationController extends GunAnimationController implements Ca
     // public static int INDEX_RELEASE = -1;
     public static int CAMERA_INDEX = 9;
 
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/p90_reload_norm.gltf"));
     public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_inspect.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/p90_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/p90_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/p90_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/p90_inspect.gltf"));
     public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/p90_static.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/p90_static.gltf"));
     private static final P90AnimationController instance = new P90AnimationController();
 
     private P90AnimationController() {

@@ -1,14 +1,16 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
 import com.tac.guns.client.render.animation.module.Animations;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
 
-import java.io.IOException;
+import net.minecraft.resources.ResourceLocation;
 
 public class M82A2AnimationController extends GunAnimationController {
     public static int INDEX_BODY = 10;
@@ -19,18 +21,18 @@ public class M82A2AnimationController extends GunAnimationController {
     public static int INDEX_BULLET = 7;
     public static int INDEX_HANDLE = 2;
 
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m82a2_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m82a2_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m82a2_reload_empty.gltf"));
     public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_draw.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m82a2_inspect.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/m82a2_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m82a2_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m82a2_inspect.gltf"));
     private static final M82A2AnimationController instance = new M82A2AnimationController();
 
     private M82A2AnimationController() {

@@ -1,13 +1,19 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.animation.module.PumpShotgunAnimationController;
 import com.tac.guns.init.ModItems;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class M870AnimationController extends PumpShotgunAnimationController {
@@ -17,24 +23,24 @@ public class M870AnimationController extends PumpShotgunAnimationController {
     public static final int INDEX_RIGHT_HAND = 3;
     public static final int INDEX_LEFT_HAND = 6;
 
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_static.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_static.gltf"));
     public static final AnimationMeta PUMP =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_pump.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/m870_pump.gltf"));
     public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_draw.gltf"));
-    public static final AnimationMeta INTRO =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_reload_intro.gltf"));
-    public static final AnimationMeta LOOP =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_reload_loop.gltf"));
-    public static final AnimationMeta NORMAL_END =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_reload_norm_end.gltf"));
-    public static final AnimationMeta EMPTY_END =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_reload_empty_end.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m870_inspect.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/m870_draw.gltf"));
+    public static final AnimationMeta INTRO = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_reload_intro.gltf"));
+    public static final AnimationMeta LOOP = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_reload_loop.gltf"));
+    public static final AnimationMeta NORMAL_END = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_reload_norm_end.gltf"));
+    public static final AnimationMeta EMPTY_END = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_reload_empty_end.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m870_inspect.gltf"));
     private static final M870AnimationController instance = new M870AnimationController();
 
     public static M870AnimationController getInstance() {

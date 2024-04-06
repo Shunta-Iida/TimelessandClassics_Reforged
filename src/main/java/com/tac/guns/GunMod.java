@@ -283,24 +283,32 @@ public class GunMod {
             MinecraftForge.EVENT_BUS.register(new BoundingBoxManager());
         }
 
-        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1911"),
-                new OneHandedPoseHighRes_m1911()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1851"),
-                new OneHandedPoseHighRes_m1851()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m1894"),
-                new TwoHandedPoseHighRes_m1894()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m1928"),
-                new TwoHandedPoseHighRes_m1928()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_mosin"),
-                new TwoHandedPoseHighRes_mosin()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_ak47"),
-                new TwoHandedPoseHighRes_ak47()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_m60"),
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "one_handed_m1911"),
+                        new OneHandedPoseHighRes_m1911()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "one_handed_m1851"),
+                        new OneHandedPoseHighRes_m1851()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_m1894"),
+                        new TwoHandedPoseHighRes_m1894()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_m1928"),
+                        new TwoHandedPoseHighRes_m1928()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_mosin"),
+                        new TwoHandedPoseHighRes_mosin()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_ak47"),
+                        new TwoHandedPoseHighRes_ak47()));
+        GripType.registerType(new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_m60"),
                 new TwoHandedPoseHighRes_m60()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "two_handed_vector"),
-                new TwoHandedPoseHighRes_vector()));
-        GripType.registerType(new GripType(new ResourceLocation("tac", "one_handed_m1873"),
-                new OneHandedPoseHighRes_m1873()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "two_handed_vector"),
+                        new TwoHandedPoseHighRes_vector()));
+        GripType.registerType(
+                new GripType(new ResourceLocation(Reference.MOD_ID, "one_handed_m1873"),
+                        new OneHandedPoseHighRes_m1873()));
 
         // Custom commands handlers, called in common so any future server side command
         // registry would be useable

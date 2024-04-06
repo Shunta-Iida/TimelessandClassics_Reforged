@@ -26,7 +26,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-version = '0.0NONE'
+version = '0.3.20'
 group = 'com.tac'
 archivesBaseName = 'tac'
 

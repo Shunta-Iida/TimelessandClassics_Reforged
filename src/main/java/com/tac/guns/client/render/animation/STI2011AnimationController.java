@@ -1,13 +1,19 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.animation.module.PistalAnimationController;
 import com.tac.guns.init.ModItems;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class STI2011AnimationController extends PistalAnimationController {
@@ -21,18 +27,18 @@ public class STI2011AnimationController extends PistalAnimationController {
     public static int INDEX_BULLET2 = 0;
     public static int INDEX_HAMMER = 6;
 
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_reload_norm.gltf"));
-    public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_reload_empty.gltf"));
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_static.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sti2011_inspect_empty.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sti2011_inspect_empty.gltf"));
     private static final STI2011AnimationController instance = new STI2011AnimationController();
 
     @Override

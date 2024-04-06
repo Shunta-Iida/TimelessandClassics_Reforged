@@ -57,7 +57,7 @@ public class InventoryListener {
      * 
      * WearableCapabilityProvider wearableCapability = new
      * WearableCapabilityProvider();
-     * event.addCapability(new ResourceLocation("tac", "inventory_capability"),
+     * event.addCapability(new ResourceLocation(Reference.MOD_ID, "inventory_capability"),
      * wearableCapability);
      * event.addListener(wearableCapability. getOptionalStorage()::invalidate);
      * }
@@ -68,10 +68,11 @@ public class InventoryListener {
             throws InvocationTargetException, IllegalAccessException {
         if (!(event.getObject().getItem() instanceof IArmoredRigItem))
             return;
-        if (!event.getCapabilities().containsKey(new ResourceLocation("tac", "rig"))) {
+        if (!event.getCapabilities().containsKey(new ResourceLocation(Reference.MOD_ID, "rig"))) {
             ArmorRigCapabilityProvider armorRigInventoryCapability =
                     new ArmorRigCapabilityProvider();
-            event.addCapability(new ResourceLocation("tac", "rig"), armorRigInventoryCapability);
+            event.addCapability(new ResourceLocation(Reference.MOD_ID, "rig"),
+                    armorRigInventoryCapability);
             event.addListener(armorRigInventoryCapability.getOptionalStorage()::invalidate);
         }
     }

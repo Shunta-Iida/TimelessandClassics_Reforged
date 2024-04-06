@@ -1,14 +1,16 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
 import com.tac.guns.client.render.animation.module.Animations;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
 
-import java.io.IOException;
+import net.minecraft.resources.ResourceLocation;
 
 public class SKSTacticalAnimationController extends GunAnimationController {
     public static int INDEX_BODY = 4;
@@ -17,18 +19,18 @@ public class SKSTacticalAnimationController extends GunAnimationController {
     public static int INDEX_MAGAZINE = 3;
     public static int INDEX_BOLT = 2;
 
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sks_tactical_static.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_static.gltf"));
     public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
-            new ResourceLocation("tac", "animations/sks_tactical_reload_norm.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_reload_norm.gltf"));
     public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/sks_tactical_reload_empty.gltf"));
-    public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sks_tactical_draw.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sks_tactical_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/sks_tactical_inspect.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_reload_empty.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/sks_tactical_inspect.gltf"));
     private static final SKSTacticalAnimationController instance =
             new SKSTacticalAnimationController();
 

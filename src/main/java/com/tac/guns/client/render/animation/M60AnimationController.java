@@ -1,7 +1,14 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.animation.module.MachineGunAnimationController;
 import com.tac.guns.init.ModItems;
 import com.tac.guns.weapon.Gun;
 
@@ -9,8 +16,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-
-import java.io.IOException;
 
 public class M60AnimationController extends MachineGunAnimationController {
     public static int INDEX_BODY = 4;
@@ -22,21 +27,21 @@ public class M60AnimationController extends MachineGunAnimationController {
     public static int INDEX_HANDLE = 3;
 
     public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_static.gltf"));
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_reload_norm.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_reload_empty.gltf"));
-    public static final AnimationMeta RELOAD_NORM_SCOPE =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_reload_norm_scope.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/m60_static.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_reload_empty.gltf"));
+    public static final AnimationMeta RELOAD_NORM_SCOPE = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_reload_norm_scope.gltf"));
     public static final AnimationMeta RELOAD_EMPTY_SCOPE = new AnimationMeta(
-            new ResourceLocation("tac", "animations/m60_reload_empty_scope.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_reload_empty_scope.gltf"));
     public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_draw.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/m60_inspect.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/m60_draw.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/m60_inspect.gltf"));
     private static final M60AnimationController instance = new M60AnimationController();
 
     private M60AnimationController() {

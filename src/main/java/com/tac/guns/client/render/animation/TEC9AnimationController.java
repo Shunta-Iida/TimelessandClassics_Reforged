@@ -1,11 +1,17 @@
 package com.tac.guns.client.render.animation;
 
-import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
-import com.tac.guns.init.ModItems;
-import net.minecraft.resources.ResourceLocation;
-
 import java.io.IOException;
+
+import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.animation.module.PistalAnimationController;
+import com.tac.guns.init.ModItems;
+
+import net.minecraft.resources.ResourceLocation;
 
 public class TEC9AnimationController extends PistalAnimationController {
     public static int INDEX_BODY = 3;
@@ -15,18 +21,18 @@ public class TEC9AnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 7;
     public static int INDEX_RIGHT_HAND = 4;
 
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_reload_norm.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/tec_9_reload_norm.gltf"));
     public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_draw.gltf"));
-    public static final AnimationMeta RELOAD_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_reload_empty.gltf"));
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_static.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/tec_9_inspect.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/tec_9_draw.gltf"));
+    public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/tec_9_reload_empty.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/tec_9_static.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/tec_9_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/tec_9_inspect.gltf"));
     private static final TEC9AnimationController instance = new TEC9AnimationController();
 
     @Override

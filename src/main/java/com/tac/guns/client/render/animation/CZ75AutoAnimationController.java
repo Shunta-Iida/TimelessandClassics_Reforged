@@ -1,13 +1,19 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
-import com.tac.guns.client.render.animation.module.*;
+import com.tac.guns.Reference;
+import com.tac.guns.client.render.animation.module.AnimationMeta;
+import com.tac.guns.client.render.animation.module.AnimationSoundMeta;
+import com.tac.guns.client.render.animation.module.Animations;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
+import com.tac.guns.client.render.animation.module.PistalAnimationController;
 import com.tac.guns.init.ModItems;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class CZ75AutoAnimationController extends PistalAnimationController {
@@ -17,18 +23,18 @@ public class CZ75AutoAnimationController extends PistalAnimationController {
     public static int INDEX_LEFT_HAND = 0;
     public static int INDEX_RIGHT_HAND = 2;
 
-    public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/cz75_auto_reload_norm.gltf"));
-    public static final AnimationMeta DRAW =
-            new AnimationMeta(new ResourceLocation("tac", "animations/cz75_auto_draw.gltf"));
+    public static final AnimationMeta RELOAD_NORM = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_reload_norm.gltf"));
+    public static final AnimationMeta DRAW = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_draw.gltf"));
     public static final AnimationMeta RELOAD_EMPTY = new AnimationMeta(
-            new ResourceLocation("tac", "animations/cz75_auto_reload_empty.gltf"));
-    public static final AnimationMeta INSPECT =
-            new AnimationMeta(new ResourceLocation("tac", "animations/cz75_auto_inspect.gltf"));
-    public static final AnimationMeta INSPECT_EMPTY =
-            new AnimationMeta(new ResourceLocation("tac", "animations/cz75_auto_inspect.gltf"));
-    public static final AnimationMeta STATIC =
-            new AnimationMeta(new ResourceLocation("tac", "animations/cz75_auto_static.gltf"));
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_reload_empty.gltf"));
+    public static final AnimationMeta INSPECT = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_inspect.gltf"));
+    public static final AnimationMeta INSPECT_EMPTY = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_inspect.gltf"));
+    public static final AnimationMeta STATIC = new AnimationMeta(
+            new ResourceLocation(Reference.MOD_ID, "animations/cz75_auto_static.gltf"));
     private static final CZ75AutoAnimationController instance = new CZ75AutoAnimationController();
 
     @Override

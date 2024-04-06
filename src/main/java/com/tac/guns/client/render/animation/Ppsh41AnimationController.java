@@ -1,14 +1,16 @@
 package com.tac.guns.client.render.animation;
 
+import java.io.IOException;
+
 import com.tac.guns.GunMod;
+import com.tac.guns.Reference;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.Animations;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class Ppsh41AnimationController extends GunAnimationController {
@@ -18,7 +20,7 @@ public class Ppsh41AnimationController extends GunAnimationController {
     public static int INDEX_MAGAZINE = 4;
     // public static int INDEX_BOLT = 5;
     public static final AnimationMeta RELOAD_NORM =
-            new AnimationMeta(new ResourceLocation("tac", "animations/ppsh_41.gltf"));
+            new AnimationMeta(new ResourceLocation(Reference.MOD_ID, "animations/ppsh_41.gltf"));
 
     private static final Ppsh41AnimationController instance = new Ppsh41AnimationController();
 
