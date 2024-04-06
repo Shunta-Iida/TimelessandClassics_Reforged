@@ -1,19 +1,31 @@
+# Timeless and Classics Reforged
+
 This repository is made from
 
 - [Timeless and Classics Reforged](https://github.com/286799714/TimelessandClassics_Reforged)
 
-## UNOFFICIAL 1.18 port of timeless and classics
+Realistic and many features including guns, attachments, grenades, armor rigs.
 
-based on [MorningOriens](https://github.com/MorningOriens/TimelessandClassics_Reforged/tree/1.18)'s port, updated by yor42 and Spacecat
+## Features
+- 日本語化
+- 武器の発する音をすべてモノラルに→Sound Physics Remastaredとの連携強化
+- 個人的な用途で Escape from Tarkov ライクな要素を追加しています
+  - 弾数、射撃モード確認のUI
 
----
+## TODO
 
-Timeless and Classics has reached a new level...
+- [ ] TaC定義イベントとイベントリスナーの整理
 
-Reforged
+  いまのところ必要そうなイベント
 
-Yes Timeless and Classics is branching away from being an Add-on from CGM, we will start with using CGM as our base source code, and slowly but surely refactor as much as possible to meet more realistic standards and functions, better or even requiring much of Mr.Crayfish's original code to be changed, in order to keep the mod clean and reliable in every metric!
-
-Thank you Mr.Crayfish for the creation and openess of CGM, and the Team, I, and millions of others say thank you for your work, we wish to keep your legacy going beyond imagination! Thank you!
-
-Please be sure to take a look at the Original CGM mod, the true creator of TaC! (https://github.com/MrCrayfish/MrCrayfishGunMod)
+  - [ ] GunShotEvent
+  - [ ] GunReloadEvent
+- [ ] ゲストプレイヤー側ログイン時のRig同期
+- [ ] GunModifierHelper, GunのメソッドをGunItemHelper, GunItemに移行するなどリファクタ
+- [ ] エンチャントテーブルでのエンチャント実装
+- [ ] サバイバルインベントリにリグのタブ追加
+- [ ] フラッシュライトの実装
+  - [ ] シェーダー用のカスタムuniform実装（oculusを改造する必要あり？）
+- [ ] マガジンの追加
+  - [ ] マガジンへの弾込め
+  - [ ] 武器の耐久力
