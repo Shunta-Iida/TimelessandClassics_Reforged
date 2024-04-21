@@ -6,18 +6,18 @@ import com.tac.guns.util.Process;
 
 import net.minecraft.world.item.Item;
 
-public class TimelessPistolGunItem extends GunItem {
-    public TimelessPistolGunItem(final Process<Properties> properties) {
+public class PistolGunItem extends GunItem {
+    public PistolGunItem(final Process<Properties> properties) {
         super(properties1 -> properties.process(new Properties().stacksTo(1).tab(GunMod.GENERAL)));
     }
 
-    public TimelessPistolGunItem(final Process<Item.Properties> properties,
+    public PistolGunItem(final Process<Item.Properties> properties,
             final IGunModifier... modifiers) {
         super(properties1 -> properties
                 .process(new Item.Properties().stacksTo(1).tab(GunMod.GENERAL)), modifiers);
     }
 
-    public TimelessPistolGunItem() {
+    public PistolGunItem() {
         this(properties -> properties);
     }
 }

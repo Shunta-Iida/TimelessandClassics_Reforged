@@ -11,7 +11,7 @@ import com.tac.guns.item.attachment.PistolScopeItem;
 import com.tac.guns.item.attachment.ScopeItem;
 import com.tac.guns.item.attachment.SideRailItem;
 import com.tac.guns.item.gun.GunItem;
-import com.tac.guns.item.gun.TimelessPistolGunItem;
+import com.tac.guns.item.gun.PistolGunItem;
 import com.tac.guns.weapon.Gun;
 import com.tac.guns.weapon.attachment.IAttachmentItem;
 
@@ -59,7 +59,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
             while (attachments.peekLast() != null)
                 this.weaponInventory.setItem(i++, attachments.pollLast()); // set 0, add 1 to I, move ahead
 
-        } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
+        } else if (this.weapon.getItem() instanceof PistolGunItem) {
             for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
                 if (i == IAttachmentItem.Type.SCOPE.getId())
                     attachments.push(Gun.getAttachment(IAttachmentItem.Type.PISTOL_SCOPE, stack));
@@ -119,7 +119,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
                     });
                 }
             }
-        } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
+        } else if (this.weapon.getItem() instanceof PistolGunItem) {
             for (int i = IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++)
                 if (i == IAttachmentItem.Type.SCOPE.getId())
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon,
@@ -216,7 +216,7 @@ public class AttachmentContainer extends AbstractContainerMenu {
                                 attachment.save(new CompoundTag()));
                 }
             }
-        } else if (this.weapon.getItem() instanceof TimelessPistolGunItem) {
+        } else if (this.weapon.getItem() instanceof PistolGunItem) {
             for (int i =
                     IAttachmentItem.standardAttStart; i <= IAttachmentItem.standardAttEnd; i++) {
                 if (i == 0) {

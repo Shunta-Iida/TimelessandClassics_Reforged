@@ -607,7 +607,6 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         }
     }
 
-    // TODO: Armor Rig Damage Reduction
     protected void onHitEntity(Entity entity, Vec3 hitVec, Vec3 startVec, Vec3 endVec,
             boolean headshot) {
         float damage = this.getDamage(hitVec);

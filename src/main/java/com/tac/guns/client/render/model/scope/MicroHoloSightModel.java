@@ -12,7 +12,7 @@ import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.render.model.IOverrideModel;
 import com.tac.guns.client.util.RenderUtil;
 import com.tac.guns.item.gun.GunItem;
-import com.tac.guns.item.gun.TimelessPistolGunItem;
+import com.tac.guns.item.gun.PistolGunItem;
 import com.tac.guns.weapon.attachment.IAttachmentItem;
 
 import net.minecraft.client.Minecraft;
@@ -31,10 +31,11 @@ public class MicroHoloSightModel implements IOverrideModel {
             "textures/items/timeless_scopes/eotech_reticle.png");
 
     @Override
-    public void render(float partialTicks, ItemTransforms.TransformType transformType,
-            ItemStack stack, ItemStack parent, LivingEntity entity, PoseStack matrixStack,
-            MultiBufferSource renderTypeBuffer, int light, int overlay) {
-        if (!(parent.getItem() instanceof TimelessPistolGunItem))
+    public void render(final float partialTicks, final ItemTransforms.TransformType transformType,
+            final ItemStack stack, final ItemStack parent, final LivingEntity entity,
+            final PoseStack matrixStack, final MultiBufferSource renderTypeBuffer, final int light,
+            final int overlay) {
+        if (!(parent.getItem() instanceof PistolGunItem))
             return;
         // Micro holo crashes worlds from previous versions, soon some standard weapons
         // will be able to take micro optics as well, will handle differently if so
@@ -63,7 +64,7 @@ public class MicroHoloSightModel implements IOverrideModel {
          * }
          */
         if (!parent.isEmpty()) {
-            GunItem gunItem = ((GunItem) parent.getItem());
+            final GunItem gunItem = ((GunItem) parent.getItem());
             if (gunItem.getGun().getModules().getAttachments().getPistolScope()
                     .getDoOnSlideMovement() && transformType.firstPerson()) {
                 // matrixStack.translate(0, 0, 0.025F);
@@ -81,33 +82,35 @@ public class MicroHoloSightModel implements IOverrideModel {
         if (transformType.firstPerson() && entity.equals(Minecraft.getInstance().player)) {
             matrixStack.pushPose();
             {
-                Matrix4f matrix = matrixStack.last().pose();
-                Matrix3f normal = matrixStack.last().normal();
+                final Matrix4f matrix = matrixStack.last().pose();
+                final Matrix3f normal = matrixStack.last().normal();
 
-                float size = 1.4F / 16.0F;
+                final float size = 1.4F / 16.0F;
                 matrixStack.translate(-size / 2, 0.85 * 0.0625, 0.075 * 0.0625);
 
                 VertexConsumer builder;
 
-                double invertProgress = (1.0 - AimingHandler.get().getNormalisedAdsProgress());
+                final double invertProgress =
+                        (1.0 - AimingHandler.get().getNormalisedAdsProgress());
                 matrixStack.translate(-0.04 * invertProgress, 0.01 * invertProgress, 0);
 
-                double scale = 4.0;
+                final double scale = 4.0;
                 matrixStack.translate(size / 2, size / 2, 0);
                 matrixStack.translate(-(size / scale) / 2, -(size / scale) / 2, 0);
                 matrixStack.translate(0, 0, 0.0001);
                 matrixStack.translate(0, 0, 0.05);
-                int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
+                final int reticleGlowColor = RenderUtil.getItemStackColor(stack, parent,
                         IAttachmentItem.Type.SCOPE_RETICLE_COLOR, 1);
 
-                float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
-                float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
-                float blue = ((reticleGlowColor >> 0) & 0xFF) / 255F;
+                final float red = ((reticleGlowColor >> 16) & 0xFF) / 255F;
+                final float green = ((reticleGlowColor >> 8) & 0xFF) / 255F;
+                final float blue = ((reticleGlowColor >> 0) & 0xFF) / 255F;
                 float alpha = (float) AimingHandler.get().getNormalisedAdsProgress();
 
                 alpha = (float) (1F * AimingHandler.get().getNormalisedAdsProgress());
 
-                builder = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(RED_DOT_RETICLE));
+                builder = renderTypeBuffer.getBuffer(
+                        RenderType.entityTranslucent(MicroHoloSightModel.RED_DOT_RETICLE));
                 // Walking bobbing
                 boolean aimed = false;
                 /* The new controlled bobbing */
