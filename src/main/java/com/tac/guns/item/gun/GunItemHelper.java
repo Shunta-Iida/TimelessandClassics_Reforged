@@ -191,9 +191,9 @@ public class GunItemHelper {
                 : Math.max(0, this.getAmmoInGun() - 1);
     }
 
-    public void decreaseAmmo(final int ammount) {
+    public void decreaseAmmo(final int amount) {
         final CompoundTag tag = this.gunItemStack.getOrCreateTag();
-        tag.putInt(ItemAttributes.Gun.AMMO_COUNT, this.getAmmoInGun() - ammount);
+        tag.putInt(ItemAttributes.Gun.AMMO_COUNT, this.getAmmoInGun() - amount);
     }
 
     public int getAmmoCapacityWeight() {
